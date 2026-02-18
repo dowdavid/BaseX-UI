@@ -1,0 +1,68 @@
+{
+  "$schema": "https://basex-ui.dev/schemas/intents.json",
+  "version": "0.1.0",
+  "description": "Aggregated index of all component intents across BaseX UI. Used by the MCP server and AI agents to resolve developer intent to component recommendations.",
+  "intents": [
+    {
+      "intent": "trigger-action",
+      "component": "Button",
+      "signals": ["button", "click", "submit", "action", "trigger", "CTA", "call to action"],
+      "reasoning": "Button is the primary component for triggering user actions. Use for any clickable action that is not navigation.",
+      "composition": "<Button variant=\"solid\">Submit</Button>"
+    },
+    {
+      "intent": "confirm-action",
+      "component": "Button",
+      "signals": ["confirm", "save", "apply", "accept", "approve", "ok"],
+      "reasoning": "Confirmation actions use the default solid button to indicate the primary positive action.",
+      "composition": "<Button variant=\"solid\">Confirm</Button>"
+    },
+    {
+      "intent": "cancel-action",
+      "component": "Button",
+      "signals": ["cancel", "dismiss", "close", "back", "nevermind"],
+      "reasoning": "Cancel actions use outline or ghost to de-emphasize relative to the primary action.",
+      "composition": "<Button variant=\"outline\">Cancel</Button>"
+    },
+    {
+      "intent": "destructive-action",
+      "component": "Button",
+      "signals": ["delete", "remove", "destroy", "danger", "discard", "erase"],
+      "reasoning": "Destructive actions use the destructive color to warn users of irreversible consequences.",
+      "composition": "<Button variant=\"solid\" color=\"destructive\">Delete</Button>"
+    },
+    {
+      "intent": "secondary-action",
+      "component": "Button",
+      "signals": ["secondary", "alternative", "less important", "optional"],
+      "reasoning": "Secondary actions use outline or ghost variant to visually de-emphasize them relative to the primary action.",
+      "composition": "<Button variant=\"outline\">Details</Button>"
+    }
+  ],
+  "antiPatterns": [
+    {
+      "component": "Button",
+      "scenario": "Navigation to another page or URL",
+      "reasoning": "Use a link (<a> tag) or Link component instead. Buttons are for actions, links are for navigation.",
+      "alternative": "Use an anchor element or Link component with appropriate href."
+    },
+    {
+      "component": "Button",
+      "scenario": "Toggling a boolean state on/off",
+      "reasoning": "Use a Toggle or Switch component which communicates the on/off state to assistive technology.",
+      "alternative": "Use Toggle from @base-ui/react/toggle or a Switch component."
+    },
+    {
+      "component": "Button",
+      "scenario": "Selecting from multiple options",
+      "reasoning": "Use RadioGroup, ToggleGroup, or Select instead. Buttons don't communicate selection state.",
+      "alternative": "Use RadioGroup, ToggleGroup, or Select components."
+    },
+    {
+      "component": "Button",
+      "scenario": "Opening a dropdown menu",
+      "reasoning": "Use Menu.Trigger which handles aria-expanded, aria-haspopup, and keyboard navigation automatically.",
+      "alternative": "Use Menu.Trigger from @base-ui/react/menu."
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "name": "Button",
+  "description": "A styled button component for triggering actions. Built on Base UI Button with StyleX styling.",
+  "category": "actions",
+  "baseComponent": "@base-ui/react/button",
+
+  "parts": ["root"],
+
+  "props": {
+    "variant": {
+      "type": "'solid' | 'outline' | 'ghost'",
+      "default": "solid",
+      "description": "Visual style of the button. Solid has a filled background, outline has a border with transparent background, ghost has no border or background."
+    },
+    "color": {
+      "type": "'default' | 'secondary' | 'destructive'",
+      "default": "default",
+      "description": "Color palette applied to the button. Default uses the primary color, secondary uses the secondary palette, destructive uses the destructive/danger palette."
+    },
+    "size": {
+      "type": "'sm' | 'md' | 'lg'",
+      "default": "md",
+      "description": "Size of the button affecting height, padding, and font size."
+    },
+    "sx": {
+      "type": "StyleXStyles",
+      "description": "StyleX styles for consumer overrides. Applied last for deterministic 'last style wins' behavior."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the button is disabled. Reduces opacity and disables pointer events."
+    },
+    "focusableWhenDisabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the button remains focusable when disabled."
+    }
+  },
+
+  "variants": {
+    "variant": ["solid", "outline", "ghost"],
+    "color": ["default", "secondary", "destructive"],
+    "size": ["sm", "md", "lg"]
+  },
+
+  "dataAttributes": {
+    "data-disabled": "Present when the button is disabled."
+  },
+
+  "tokens": [
+    "colorPrimary", "colorPrimaryHover", "colorPrimaryActive", "colorPrimaryContrast",
+    "colorSecondary", "colorSecondaryHover", "colorSecondaryActive", "colorSecondaryContrast",
+    "colorDestructive", "colorDestructiveHover", "colorDestructiveActive", "colorDestructiveContrast",
+    "colorMuted", "colorText", "colorBorder", "colorFocusRing",
+    "space2", "space3", "space4", "space6",
+    "fontFamilySans", "fontSizeSm", "fontSizeMd", "fontWeightMedium",
+    "lineHeightTight", "radiusMd", "borderWidthDefault",
+    "motionDurationFast", "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "trigger-action",
+      "signals": ["button", "click", "submit", "action", "trigger", "CTA", "call to action"],
+      "reasoning": "Button is the primary component for triggering user actions. Use for any clickable action that is not navigation.",
+      "composition": "<Button variant=\"solid\">Submit</Button>"
+    },
+    {
+      "intent": "confirm-action",
+      "signals": ["confirm", "save", "apply", "accept", "approve", "ok"],
+      "reasoning": "Confirmation actions use the default solid button to indicate the primary positive action.",
+      "composition": "<Button variant=\"solid\">Confirm</Button>"
+    },
+    {
+      "intent": "cancel-action",
+      "signals": ["cancel", "dismiss", "close", "back", "nevermind"],
+      "reasoning": "Cancel actions use outline or ghost to de-emphasize relative to the primary action.",
+      "composition": "<Button variant=\"outline\">Cancel</Button>"
+    },
+    {
+      "intent": "destructive-action",
+      "signals": ["delete", "remove", "destroy", "danger", "discard", "erase"],
+      "reasoning": "Destructive actions use the destructive color to warn users of irreversible consequences.",
+      "composition": "<Button variant=\"solid\" color=\"destructive\">Delete</Button>"
+    },
+    {
+      "intent": "secondary-action",
+      "signals": ["secondary", "alternative", "less important", "optional"],
+      "reasoning": "Secondary actions use outline or ghost variant to visually de-emphasize them relative to the primary action.",
+      "composition": "<Button variant=\"outline\">Details</Button>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Navigation to another page or URL",
+      "reasoning": "Use a link (<a> tag) or Link component instead. Buttons are for actions, links are for navigation. Screen readers distinguish between these.",
+      "alternative": "Use an anchor element or Link component with appropriate href."
+    },
+    {
+      "scenario": "Toggling a boolean state on/off",
+      "reasoning": "Use a Toggle or Switch component which communicates the on/off state to assistive technology.",
+      "alternative": "Use Toggle from @base-ui/react/toggle or a Switch component."
+    },
+    {
+      "scenario": "Selecting from multiple options",
+      "reasoning": "Use RadioGroup, ToggleGroup, or Select instead. Buttons don't communicate selection state.",
+      "alternative": "Use RadioGroup, ToggleGroup, or Select components."
+    },
+    {
+      "scenario": "Opening a dropdown menu",
+      "reasoning": "Use Menu.Trigger which handles aria-expanded, aria-haspopup, and keyboard navigation automatically.",
+      "alternative": "Use Menu.Trigger from @base-ui/react/menu."
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic solid button",
+      "code": "<Button>Click me</Button>"
+    },
+    {
+      "name": "variants",
+      "description": "All three variants",
+      "code": "<>\n  <Button variant=\"solid\">Solid</Button>\n  <Button variant=\"outline\">Outline</Button>\n  <Button variant=\"ghost\">Ghost</Button>\n</>"
+    },
+    {
+      "name": "colors",
+      "description": "Color variations",
+      "code": "<>\n  <Button color=\"default\">Default</Button>\n  <Button color=\"secondary\">Secondary</Button>\n  <Button color=\"destructive\">Destructive</Button>\n</>"
+    },
+    {
+      "name": "sizes",
+      "description": "Size variations",
+      "code": "<>\n  <Button size=\"sm\">Small</Button>\n  <Button size=\"md\">Medium</Button>\n  <Button size=\"lg\">Large</Button>\n</>"
+    },
+    {
+      "name": "destructive-outline",
+      "description": "Destructive outline button for less prominent dangerous actions",
+      "code": "<Button variant=\"outline\" color=\"destructive\">Remove</Button>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled button",
+      "code": "<Button disabled>Unavailable</Button>"
+    }
+  ]
+}

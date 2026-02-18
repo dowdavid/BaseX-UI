@@ -1,0 +1,126 @@
+import * as stylex from '@stylexjs/stylex';
+
+/**
+ * BaseX UI Design Tokens
+ *
+ * All tokens defined with stylex.defineVars. Names are self-documenting
+ * so AI agents can use them correctly without additional context.
+ */
+export const tokens = stylex.defineVars({
+  // --- Colors (OKLCH-based, semantic aliases) ---
+
+  // Primary palette
+  colorPrimary: 'oklch(0.55 0.2 250)',
+  colorPrimaryHover: 'oklch(0.50 0.22 250)',
+  colorPrimaryActive: 'oklch(0.45 0.24 250)',
+  colorPrimaryContrast: 'oklch(0.98 0 0)',
+
+  // Secondary palette
+  colorSecondary: 'oklch(0.55 0.05 260)',
+  colorSecondaryHover: 'oklch(0.50 0.06 260)',
+  colorSecondaryActive: 'oklch(0.45 0.07 260)',
+  colorSecondaryContrast: 'oklch(0.98 0 0)',
+
+  // Destructive palette
+  colorDestructive: 'oklch(0.55 0.22 25)',
+  colorDestructiveHover: 'oklch(0.50 0.24 25)',
+  colorDestructiveActive: 'oklch(0.45 0.26 25)',
+  colorDestructiveContrast: 'oklch(0.98 0 0)',
+
+  // Muted
+  colorMuted: 'oklch(0.93 0.005 260)',
+  colorMutedForeground: 'oklch(0.45 0.02 260)',
+
+  // Surfaces
+  colorSurface: 'oklch(0.99 0 0)',
+  colorSurfaceRaised: 'oklch(1 0 0)',
+  colorSurfaceOverlay: 'oklch(1 0 0)',
+
+  // Overlay backdrop
+  colorOverlay: 'oklch(0.15 0 0 / 0.6)',
+
+  // Borders
+  colorBorder: 'oklch(0.85 0.01 260)',
+  colorBorderMuted: 'oklch(0.91 0.005 260)',
+
+  // Text
+  colorText: 'oklch(0.15 0.02 260)',
+  colorTextMuted: 'oklch(0.45 0.02 260)',
+  colorTextInverse: 'oklch(0.98 0 0)',
+
+  // Focus
+  colorFocusRing: 'oklch(0.55 0.2 250)',
+
+  // Background
+  colorBackground: 'oklch(0.97 0.005 260)',
+
+  // --- Spacing (consistent scale) ---
+  space1: '4px',
+  space2: '8px',
+  space3: '12px',
+  space4: '16px',
+  space5: '20px',
+  space6: '24px',
+  space8: '32px',
+  space10: '40px',
+  space12: '48px',
+
+  // --- Typography ---
+
+  // Font families
+  fontFamilySans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  fontFamilyMono: "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+
+  // Font sizes
+  fontSizeXs: '0.75rem',
+  fontSizeSm: '0.875rem',
+  fontSizeMd: '1rem',
+  fontSizeLg: '1.125rem',
+  fontSizeXl: '1.25rem',
+  fontSize2xl: '1.5rem',
+
+  // Font weights
+  fontWeightNormal: '400',
+  fontWeightMedium: '500',
+  fontWeightSemibold: '600',
+  fontWeightBold: '700',
+
+  // Line heights
+  lineHeightTight: '1.25',
+  lineHeightNormal: '1.5',
+  lineHeightRelaxed: '1.75',
+
+  // Letter spacing
+  letterSpacingTight: '-0.025em',
+  letterSpacingNormal: '0em',
+  letterSpacingWide: '0.025em',
+
+  // --- Border Radius ---
+  radiusNone: '0px',
+  radiusSm: '4px',
+  radiusMd: '8px',
+  radiusLg: '12px',
+  radiusXl: '16px',
+  radiusFull: '9999px',
+
+  // --- Border Width ---
+  borderWidthDefault: '1px',
+  borderWidthThick: '2px',
+
+  // --- Shadows ---
+  shadowNone: 'none',
+  shadowSm: '0 1px 2px 0 oklch(0.15 0 0 / 0.05)',
+  shadowMd: '0 4px 6px -1px oklch(0.15 0 0 / 0.07), 0 2px 4px -2px oklch(0.15 0 0 / 0.05)',
+  shadowLg: '0 10px 15px -3px oklch(0.15 0 0 / 0.08), 0 4px 6px -4px oklch(0.15 0 0 / 0.05)',
+  shadowXl: '0 20px 25px -5px oklch(0.15 0 0 / 0.1), 0 8px 10px -6px oklch(0.15 0 0 / 0.05)',
+
+  // --- Motion ---
+  motionDurationFast: '100ms',
+  motionDurationNormal: '200ms',
+  motionDurationSlow: '400ms',
+  motionEaseOut: 'cubic-bezier(0, 0, 0.2, 1)',
+  motionEaseInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  motionEaseSpring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+});
+
+export type TokenVars = typeof tokens;

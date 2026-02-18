@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "basex-ui": {
+      "command": "npx",
+      "args": ["basex-ui-mcp"],
+      "type": "stdio"
+    }
+  }
+}

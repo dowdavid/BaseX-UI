@@ -1,0 +1,44 @@
+# BaseX UI
+
+> An AI-first, copy-paste component library built on Base UI and StyleX.
+
+## Overview
+
+BaseX UI provides styled, accessible components using Base UI (headless) + StyleX (atomic CSS-in-JS). Components are scaffolded as source code into your project via CLI.
+
+## Quick Start
+
+- `npx basex-ui init` — interactive setup with theme builder
+- `npx basex-ui add button` — scaffold a component
+
+## MCP Server
+
+The BaseX UI MCP server provides tools for AI agents:
+
+- `resolve_intent` — describe what you need, get a component recommendation
+- `get_component` — full component manifest (props, variants, examples)
+- `check_usage` — anti-pattern detection
+- `get_tokens` — design token reference
+- `list_components` — browse available components
+
+## Components
+
+### Button
+
+A styled button for triggering actions. Variants: solid, outline, ghost. Colors: default, secondary, destructive. Sizes: sm, md, lg.
+
+```tsx
+import { Button } from '@basex-ui/components/button';
+
+<Button variant="solid" color="default" size="md">Click me</Button>
+```
+
+## Design Tokens
+
+All tokens from `@basex-ui/tokens`. Use `stylex.defineVars` references — never hardcode values.
+
+Categories: colors, spacing, typography, radius, borders, shadows, motion.
+
+## Theming
+
+Themes use `stylex.createTheme` to override token values. Light and dark themes included. Create custom themes with the OKLCH palette generator.

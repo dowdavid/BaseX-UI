@@ -1,0 +1,39 @@
+---
+description: BaseX UI component library workflow and conventions
+globs: ["**/*.tsx", "**/*.ts"]
+alwaysApply: false
+---
+
+# BaseX UI — Agent Rules
+
+## Workflow
+
+When building UI with BaseX UI components:
+
+1. **Always start with `resolve_intent`** — describe what you're building and let the MCP server recommend the right component.
+2. **Check anti-patterns with `check_usage`** — before using a component, verify it's the right choice for your context.
+3. **Use `get_component`** for full API reference — props, variants, examples.
+4. **Use `get_tokens`** for design token reference — never hardcode colors, spacing, or other design values.
+
+## Styling Convention
+
+- All styles use StyleX (`@stylexjs/stylex`)
+- Reference design tokens from `@basex-ui/tokens` — never use raw CSS values
+- Use the `sx` prop for component style overrides (applied last, deterministic)
+- For custom styles, use `stylex.create()` and pass to `sx`
+
+## Token Reference
+
+- **Colors**: `colorPrimary`, `colorSecondary`, `colorDestructive` (each with `Hover`, `Active`, `Contrast` variants)
+- **Spacing**: `space1` (4px) through `space12` (48px)
+- **Typography**: `fontSizeXs` through `fontSize2xl`, `fontWeightNormal` through `fontWeightBold`
+- **Radius**: `radiusNone` through `radiusFull`
+- **Shadows**: `shadowNone` through `shadowXl`
+- **Motion**: `motionDurationFast` (100ms), `motionDurationNormal` (200ms), `motionDurationSlow` (400ms)
+
+## Anti-Patterns
+
+- Do NOT use Button for navigation — use a Link component
+- Do NOT use Button for toggling state — use Toggle or Switch
+- Do NOT use Button for opening menus — use Menu.Trigger
+- Do NOT hardcode CSS values — use design tokens
