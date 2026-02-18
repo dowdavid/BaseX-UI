@@ -22,6 +22,7 @@ export const lightTheme = stylex.createTheme(tokens, {
   colorDestructiveHover: 'oklch(0.50 0.24 25)',
   colorDestructiveActive: 'oklch(0.45 0.26 25)',
   colorDestructiveContrast: 'oklch(0.98 0 0)',
+  colorDestructiveMuted: 'oklch(0.55 0.22 25 / 0.1)',
 
   colorMuted: 'oklch(0.93 0.005 260)',
   colorMutedForeground: 'oklch(0.45 0.02 260)',
@@ -43,8 +44,11 @@ export const lightTheme = stylex.createTheme(tokens, {
   colorBackground: 'oklch(0.97 0.005 260)',
 
   space1: '4px',
+  space1h: '6px',
   space2: '8px',
+  space2h: '10px',
   space3: '12px',
+  space3h: '14px',
   space4: '16px',
   space5: '20px',
   space6: '24px',
@@ -117,6 +121,7 @@ export const darkTheme = stylex.createTheme(tokens, {
   colorDestructiveHover: 'oklch(0.70 0.22 25)',
   colorDestructiveActive: 'oklch(0.60 0.18 25)',
   colorDestructiveContrast: 'oklch(0.15 0 0)',
+  colorDestructiveMuted: 'oklch(0.65 0.20 25 / 0.15)',
 
   // Muted
   colorMuted: 'oklch(0.25 0.01 260)',
@@ -147,8 +152,11 @@ export const darkTheme = stylex.createTheme(tokens, {
 
   // Non-color tokens stay the same
   space1: '4px',
+  space1h: '6px',
   space2: '8px',
+  space2h: '10px',
   space3: '12px',
+  space3h: '14px',
   space4: '16px',
   space5: '20px',
   space6: '24px',

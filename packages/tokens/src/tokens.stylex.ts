@@ -26,6 +26,7 @@ export const tokens = stylex.defineVars({
   colorDestructiveHover: 'oklch(0.50 0.24 25)',
   colorDestructiveActive: 'oklch(0.45 0.26 25)',
   colorDestructiveContrast: 'oklch(0.98 0 0)',
+  colorDestructiveMuted: 'oklch(0.55 0.22 25 / 0.1)',
 
   // Muted
   colorMuted: 'oklch(0.93 0.005 260)',
@@ -56,8 +57,11 @@ export const tokens = stylex.defineVars({
 
   // --- Spacing (consistent scale) ---
   space1: '4px',
+  space1h: '6px',
   space2: '8px',
+  space2h: '10px',
   space3: '12px',
+  space3h: '14px',
   space4: '16px',
   space5: '20px',
   space6: '24px',

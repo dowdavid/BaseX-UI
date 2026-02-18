@@ -21,6 +21,8 @@ const styles = stylex.create({
     borderRadius: tokens.radiusMd,
     cursor: 'pointer',
     userSelect: 'none',
+    whiteSpace: 'nowrap',
+    flexShrink: 0,
     textDecoration: 'none',
     transitionProperty: 'background-color, color, border-color, box-shadow, opacity, transform',
     transitionDuration: tokens.motionDurationFast,
@@ -83,33 +85,42 @@ const styles = stylex.create({
     color: tokens.colorDestructiveContrast,
   },
   outlineDestructive: {
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': tokens.colorDestructiveMuted,
+    },
     color: tokens.colorDestructive,
     borderColor: tokens.colorDestructive,
   },
   ghostDestructive: {
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': tokens.colorDestructiveMuted,
+    },
     color: tokens.colorDestructive,
   },
 
   // --- Size axis ---
   sizeSm: {
     height: '32px',
+    paddingInline: tokens.space2h,
+    fontSize: tokens.fontSizeSm,
+    gap: tokens.space1h,
+  },
+  sizeMd: {
+    height: '36px',
     paddingInline: tokens.space3,
     fontSize: tokens.fontSizeSm,
   },
-  sizeMd: {
-    height: '40px',
-    paddingInline: tokens.space4,
-    fontSize: tokens.fontSizeSm,
-  },
   sizeLg: {
-    height: '48px',
-    paddingInline: tokens.space6,
+    height: '40px',
+    paddingInline: tokens.space3h,
     fontSize: tokens.fontSizeMd,
   },
 
   // --- Disabled state (applied conditionally via Base UI state) ---
   disabled: {
-    opacity: 0.5,
+    opacity: 0.64,
     pointerEvents: 'none',
     cursor: 'default',
   },
