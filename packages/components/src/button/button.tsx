@@ -90,7 +90,10 @@ const styles = stylex.create({
       ':hover': tokens.colorDestructiveMuted,
     },
     color: tokens.colorDestructive,
-    borderColor: tokens.colorDestructive,
+    borderColor: {
+      default: tokens.colorBorder,
+      ':hover': tokens.colorDestructive,
+    },
   },
   ghostDestructive: {
     backgroundColor: {
