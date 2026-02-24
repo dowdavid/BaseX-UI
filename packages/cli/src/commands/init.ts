@@ -167,14 +167,10 @@ export async function runInit(args: string[]) {
     );
 
     const resolvedColor =
-      answers.primaryColor === 'custom'
-        ? (answers.customColor as string)
-        : answers.primaryColor;
+      answers.primaryColor === 'custom' ? (answers.customColor as string) : answers.primaryColor;
 
     const resolvedFont =
-      answers.fontFamily === 'custom'
-        ? (answers.customFont as string)
-        : answers.fontFamily;
+      answers.fontFamily === 'custom' ? (answers.customFont as string) : answers.fontFamily;
 
     options = {
       colorMode: answers.colorMode,
@@ -210,12 +206,7 @@ export async function runInit(args: string[]) {
 
 async function scaffold(cwd: string, options: InitOptions) {
   // Create directory structure
-  const dirs = [
-    'src/components/ui',
-    'src/tokens',
-    'src/themes',
-    '.cursor/rules',
-  ];
+  const dirs = ['src/components/ui', 'src/tokens', 'src/themes', '.cursor/rules'];
 
   for (const dir of dirs) {
     const fullPath = join(cwd, dir);
@@ -228,10 +219,7 @@ async function scaffold(cwd: string, options: InitOptions) {
   const tokenOverrides = buildTokenOverrides(options);
 
   // Write token file
-  await writeFile(
-    join(cwd, 'src/tokens/tokens.stylex.ts'),
-    generateTokensFile(tokenOverrides),
-  );
+  await writeFile(join(cwd, 'src/tokens/tokens.stylex.ts'), generateTokensFile(tokenOverrides));
 
   // Write theme file
   await writeFile(
@@ -240,28 +228,16 @@ async function scaffold(cwd: string, options: InitOptions) {
   );
 
   // Write agent config files
-  await writeFile(
-    join(cwd, '.mcp.json'),
-    getMcpConfig(),
-  );
+  await writeFile(join(cwd, '.mcp.json'), getMcpConfig());
 
   if (!existsSync(join(cwd, '.cursor/rules'))) {
     await mkdir(join(cwd, '.cursor/rules'), { recursive: true });
   }
-  await writeFile(
-    join(cwd, '.cursor/rules/basex-ui.mdc'),
-    getCursorRules(),
-  );
+  await writeFile(join(cwd, '.cursor/rules/basex-ui.mdc'), getCursorRules());
 
-  await writeFile(
-    join(cwd, 'CLAUDE.md'),
-    getClaudeMd(),
-  );
+  await writeFile(join(cwd, 'CLAUDE.md'), getClaudeMd());
 
-  await writeFile(
-    join(cwd, 'llms.txt'),
-    getLlmsTxt(),
-  );
+  await writeFile(join(cwd, 'llms.txt'), getLlmsTxt());
 
   // Write empty intents.json for the project
   await writeFile(
@@ -367,19 +343,21 @@ ${entries}
 }
 
 function getMcpConfig(): string {
-  return JSON.stringify(
-    {
-      mcpServers: {
-        'basex-ui': {
-          command: 'npx',
-          args: ['basex-ui-mcp'],
-          type: 'stdio',
+  return (
+    JSON.stringify(
+      {
+        mcpServers: {
+          'basex-ui': {
+            command: 'npx',
+            args: ['basex-ui-mcp'],
+            type: 'stdio',
+          },
         },
       },
-    },
-    null,
-    2,
-  ) + '\n';
+      null,
+      2,
+    ) + '\n'
+  );
 }
 
 function getCursorRules(): string {

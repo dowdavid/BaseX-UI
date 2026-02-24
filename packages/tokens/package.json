@@ -2,6 +2,20 @@
   "name": "@basex-ui/tokens",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
+  "description": "Design tokens as StyleX variables",
+  "keywords": [
+    "design-tokens",
+    "stylex",
+    "css-variables",
+    "basex-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daviddow/BaseX-UI.git",
+    "directory": "packages/tokens"
+  },
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -18,12 +32,15 @@
       "import": "./dist/oklch.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
     "@stylexjs/stylex": ">=0.17.0"

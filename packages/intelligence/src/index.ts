@@ -90,19 +90,59 @@ export function getAnimationPreset(name: string): AnimationPreset | undefined {
 
 export function getAnimationPresetForUseCase(useCase: string): AnimationPreset | undefined {
   const lower = useCase.toLowerCase();
-  return animationPresets.find((p) =>
-    p.useFor.some((u) => lower.includes(u.toLowerCase())),
-  );
+  return animationPresets.find((p) => p.useFor.some((u) => lower.includes(u.toLowerCase())));
 }
 
 // --- Stop words for keyword extraction ---
 
 const STOP_WORDS = new Set([
-  'a', 'an', 'the', 'is', 'are', 'was', 'were', 'be', 'been', 'being',
-  'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could',
-  'should', 'may', 'might', 'shall', 'can', 'to', 'of', 'in', 'for',
-  'on', 'with', 'at', 'by', 'from', 'or', 'and', 'not', 'no', 'but',
-  'if', 'then', 'than', 'that', 'this', 'it', 'its', 'as', 'so',
+  'a',
+  'an',
+  'the',
+  'is',
+  'are',
+  'was',
+  'were',
+  'be',
+  'been',
+  'being',
+  'have',
+  'has',
+  'had',
+  'do',
+  'does',
+  'did',
+  'will',
+  'would',
+  'could',
+  'should',
+  'may',
+  'might',
+  'shall',
+  'can',
+  'to',
+  'of',
+  'in',
+  'for',
+  'on',
+  'with',
+  'at',
+  'by',
+  'from',
+  'or',
+  'and',
+  'not',
+  'no',
+  'but',
+  'if',
+  'then',
+  'than',
+  'that',
+  'this',
+  'it',
+  'its',
+  'as',
+  'so',
 ]);
 
 /**
@@ -159,8 +199,7 @@ function scoreAntiPatternMatch(scenario: string, context: string): number {
   if (scenarioKeywords.length === 0) return 0;
 
   // Weighted score: phrases count double
-  const score =
-    (keywordMatches + phraseMatches * 2) / (scenarioKeywords.length * 2);
+  const score = (keywordMatches + phraseMatches * 2) / (scenarioKeywords.length * 2);
 
   return Math.min(score, 1);
 }
@@ -208,13 +247,8 @@ export function resolveIntent(description: string): {
  * Check if a component usage matches any anti-patterns.
  * Uses keyword + phrase matching for reliable detection.
  */
-export function checkUsage(
-  component: string,
-  context: string,
-): AntiPattern[] {
+export function checkUsage(component: string, context: string): AntiPattern[] {
   return intentsIndex.antiPatterns.filter(
-    (ap) =>
-      ap.component === component &&
-      scoreAntiPatternMatch(ap.scenario, context) > 0.2,
+    (ap) => ap.component === component && scoreAntiPatternMatch(ap.scenario, context) > 0.2,
   );
 }

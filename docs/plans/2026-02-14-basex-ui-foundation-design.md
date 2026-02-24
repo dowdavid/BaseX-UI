@@ -54,23 +54,49 @@ import { forwardRef } from 'react';
 
 // --- Styles ---
 const styles = stylex.create({
-  root: { /* base styles using tokens */ },
+  root: {
+    /* base styles using tokens */
+  },
   // variant axis (shape/fill)
-  variantSolid: { /* filled background */ },
-  variantOutline: { /* border, transparent bg */ },
-  variantGhost: { /* no border, no bg */ },
+  variantSolid: {
+    /* filled background */
+  },
+  variantOutline: {
+    /* border, transparent bg */
+  },
+  variantGhost: {
+    /* no border, no bg */
+  },
   // color axis (palette)
-  colorDefault: { /* colorPrimary-based */ },
-  colorDestructive: { /* colorDestructive-based */ },
-  colorSecondary: { /* colorSecondary-based */ },
+  colorDefault: {
+    /* colorPrimary-based */
+  },
+  colorDestructive: {
+    /* colorDestructive-based */
+  },
+  colorSecondary: {
+    /* colorSecondary-based */
+  },
   // size axis
-  sizeSm: { /* compact */ },
-  sizeMd: { /* default */ },
-  sizeLg: { /* generous */ },
+  sizeSm: {
+    /* compact */
+  },
+  sizeMd: {
+    /* default */
+  },
+  sizeLg: {
+    /* generous */
+  },
   // states (applied via className callback)
-  pressed: { /* scale/opacity shift */ },
-  disabled: { /* reduced opacity, no pointer */ },
-  focusVisible: { /* focus ring */ },
+  pressed: {
+    /* scale/opacity shift */
+  },
+  disabled: {
+    /* reduced opacity, no pointer */
+  },
+  focusVisible: {
+    /* focus ring */
+  },
 });
 
 // --- Types ---
@@ -100,11 +126,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ).className
       }
     />
-  )
+  ),
 );
 ```
 
 ### Key aspects:
+
 - `stylex.props()` inside className callback for state-based styling
 - `sx` prop goes last for deterministic "last style wins" consumer overrides
 - Style key naming convention: `variant{Value}`, `color{Value}`, `size{Value}` — predictable for agents
@@ -117,6 +144,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 All tokens defined with `stylex.defineVars`. Names must be self-documenting (pass the "would an AI use it correctly?" test).
 
 **Colors** (OKLCH-based, semantic aliases):
+
 - `colorPrimary`, `colorPrimaryHover`, `colorPrimaryActive`, `colorPrimaryContrast`
 - `colorSecondary`, `colorSecondaryHover`, `colorSecondaryActive`, `colorSecondaryContrast`
 - `colorDestructive`, `colorDestructiveHover`, `colorDestructiveActive`, `colorDestructiveContrast`
@@ -129,9 +157,11 @@ All tokens defined with `stylex.defineVars`. Names must be self-documenting (pas
 - `colorBackground`
 
 **Spacing** (consistent scale):
+
 - `space1` (4px), `space2` (8px), `space3` (12px), `space4` (16px), `space5` (20px), `space6` (24px), `space8` (32px), `space10` (40px), `space12` (48px)
 
 **Typography**:
+
 - `fontFamilySans`, `fontFamilyMono`
 - `fontSizeXs`, `fontSizeSm`, `fontSizeMd`, `fontSizeLg`, `fontSizeXl`, `fontSize2xl`
 - `fontWeightNormal`, `fontWeightMedium`, `fontWeightSemibold`, `fontWeightBold`
@@ -139,15 +169,19 @@ All tokens defined with `stylex.defineVars`. Names must be self-documenting (pas
 - `letterSpacingTight`, `letterSpacingNormal`, `letterSpacingWide`
 
 **Border Radius**:
+
 - `radiusNone`, `radiusSm`, `radiusMd`, `radiusLg`, `radiusXl`, `radiusFull`
 
 **Border Width**:
+
 - `borderWidthDefault`, `borderWidthThick`
 
 **Shadows**:
+
 - `shadowNone`, `shadowSm`, `shadowMd`, `shadowLg`, `shadowXl`
 
 **Motion**:
+
 - `motionDurationFast` (100ms), `motionDurationNormal` (200ms), `motionDurationSlow` (400ms)
 - `motionEaseOut`, `motionEaseInOut`, `motionEaseSpring`
 
@@ -167,6 +201,7 @@ Utility function: takes a hex color, converts to OKLCH, generates a full palette
 ### CSS @property Registrations
 
 Key tokens registered with `@property` so they can be animated/transitioned:
+
 - Color tokens (for smooth theme transitions)
 - Radius tokens (for morphing effects)
 - Shadow tokens (for elevation transitions)
@@ -184,19 +219,24 @@ Key tokens registered with `@property` so they can be animated/transitioned:
 Three layers, per component:
 
 ### Layer 1: Intents
+
 Map developer intent to component choice. Each intent includes signals (keywords), reasoning (why this component), and composition (blueprint).
 
 ### Layer 2: Anti-patterns (avoidWhen)
+
 Scenarios where the component should NOT be used, with reasoning and correct alternatives.
 
 ### Layer 3: Composition Guidance
+
 Concise blueprints showing how components compose for each intent.
 
 ### Per-component files:
+
 - `manifest.json` — machine-readable: parts, props, variants, data attributes, CSS variables, tokens, intents, avoidWhen, examples
 - `[component].md` — human-readable: consistent structure with "When to Use" / "When NOT to Use" sections
 
 ### Library-level index:
+
 - `intents.json` — aggregated index of all intents across all components (in `packages/intelligence`)
 
 ## MCP Server
@@ -204,6 +244,7 @@ Concise blueprints showing how components compose for each intent.
 `packages/mcp-server` — Node.js stdio server using `@modelcontextprotocol/sdk`.
 
 **Tools:**
+
 - `list_components()` — all installed components with categories and descriptions
 - `search_components({ query })` — search across names, descriptions, categories
 - `get_component({ name })` — full manifest for a component
@@ -218,7 +259,9 @@ Concise blueprints showing how components compose for each intent.
 `packages/cli` — `npx basex-ui <command>`
 
 ### `basex-ui init`
+
 Interactive 7-question theme builder + project setup:
+
 1. Color mode (Both / Light / Dark)
 2. Primary color (Default Blue / Purple / Green / Orange / Red / Custom hex)
 3. Border radius (None / Small / Default Medium / Large / Full)
@@ -234,18 +277,23 @@ Sets up: token files, named theme file, StyleX config, portal setup, component r
 `--defaults` flag skips all prompts.
 
 ### `basex-ui add [component]`
+
 Scaffolds component + manifest + docs, resolves dependencies, updates `intents.json` and `llms.txt`.
 
 ### `basex-ui theme create`
+
 Run the theme builder again for additional named themes.
 
 ### `basex-ui theme use <name>`
+
 Switch active theme.
 
 ### `basex-ui theme list`
+
 Show all saved themes.
 
 ### `basex-ui list`
+
 Show available/installed components.
 
 ## Agent Configuration Files (installed by CLI)

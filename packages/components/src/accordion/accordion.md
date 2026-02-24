@@ -64,7 +64,7 @@ import { Accordion } from '@basex-ui/components/accordion';
 ### Default Expanded
 
 ```tsx
-<Accordion.Root defaultValue={["item-1"]}>
+<Accordion.Root defaultValue={['item-1']}>
   <Accordion.Item value="item-1">
     <Accordion.Header>
       <Accordion.Trigger>Open by default</Accordion.Trigger>
@@ -95,7 +95,7 @@ const overrides = stylex.create({
     </Accordion.Header>
     <Accordion.Panel>Overridden with sx prop</Accordion.Panel>
   </Accordion.Item>
-</Accordion.Root>
+</Accordion.Root>;
 ```
 
 ## CSS Requirements
@@ -122,78 +122,78 @@ Panel height animation requires global CSS rules inside `@layer priority1`. Styl
 
 Groups all accordion items. Renders a `<div>`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `multiple` | `boolean` | `false` | Allow multiple panels open simultaneously |
-| `disabled` | `boolean` | `false` | Disable all items |
-| `value` | `any[]` | — | Controlled expanded items |
-| `defaultValue` | `any[]` | — | Initial expanded items |
-| `onValueChange` | `(value: any[]) => void` | — | Expansion change callback |
-| `sx` | `StyleXStyles` | — | Style overrides |
+| Prop            | Type                     | Default | Description                               |
+| --------------- | ------------------------ | ------- | ----------------------------------------- |
+| `multiple`      | `boolean`                | `false` | Allow multiple panels open simultaneously |
+| `disabled`      | `boolean`                | `false` | Disable all items                         |
+| `value`         | `any[]`                  | —       | Controlled expanded items                 |
+| `defaultValue`  | `any[]`                  | —       | Initial expanded items                    |
+| `onValueChange` | `(value: any[]) => void` | —       | Expansion change callback                 |
+| `sx`            | `StyleXStyles`           | —       | Style overrides                           |
 
-| Attribute | Description |
-|-----------|-------------|
+| Attribute       | Description                            |
+| --------------- | -------------------------------------- |
 | `data-disabled` | Present when the accordion is disabled |
 
 ### Item
 
 Groups a header with its collapsible panel. Renders a `<div>`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `any` | **required** | Unique value identifying this item |
-| `disabled` | `boolean` | `false` | Disable this item |
-| `sx` | `StyleXStyles` | — | Style overrides |
+| Prop       | Type           | Default      | Description                        |
+| ---------- | -------------- | ------------ | ---------------------------------- |
+| `value`    | `any`          | **required** | Unique value identifying this item |
+| `disabled` | `boolean`      | `false`      | Disable this item                  |
+| `sx`       | `StyleXStyles` | —            | Style overrides                    |
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-open` | Present when the panel is expanded |
-| `data-disabled` | Present when the item is disabled |
-| `data-index` | Position number of the item |
+| Attribute       | Description                        |
+| --------------- | ---------------------------------- |
+| `data-open`     | Present when the panel is expanded |
+| `data-disabled` | Present when the item is disabled  |
+| `data-index`    | Position number of the item        |
 
 ### Header
 
 Heading wrapper for accessibility. Renders an `<h3>`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Style overrides |
+| Prop | Type           | Default | Description     |
+| ---- | -------------- | ------- | --------------- |
+| `sx` | `StyleXStyles` | —       | Style overrides |
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-open` | Present when the parent item's panel is expanded |
-| `data-disabled` | Present when the parent item is disabled |
+| Attribute       | Description                                      |
+| --------------- | ------------------------------------------------ |
+| `data-open`     | Present when the parent item's panel is expanded |
+| `data-disabled` | Present when the parent item is disabled         |
 
 ### Trigger
 
 Button that toggles the panel. Includes a built-in chevron icon that rotates on open. Renders a `<button>`.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Style overrides |
+| Prop | Type           | Default | Description     |
+| ---- | -------------- | ------- | --------------- |
+| `sx` | `StyleXStyles` | —       | Style overrides |
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-open` | Present when the parent item's panel is expanded |
-| `data-disabled` | Present when the parent item is disabled |
+| Attribute       | Description                                      |
+| --------------- | ------------------------------------------------ |
+| `data-open`     | Present when the parent item's panel is expanded |
+| `data-disabled` | Present when the parent item is disabled         |
 
 ### Panel
 
 Collapsible content area with animated height transition. Renders a `<div>`. Uses `keepMounted` internally for smooth close animation.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `keepMounted` | `boolean` | `true` | Keep element in DOM while closed (for animation) |
-| `sx` | `StyleXStyles` | — | Style overrides |
+| Prop          | Type           | Default | Description                                      |
+| ------------- | -------------- | ------- | ------------------------------------------------ |
+| `keepMounted` | `boolean`      | `true`  | Keep element in DOM while closed (for animation) |
+| `sx`          | `StyleXStyles` | —       | Style overrides                                  |
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-open` | Present when the panel is expanded |
-| `data-starting-style` | Present when the panel is animating open |
-| `data-ending-style` | Present when the panel is animating closed |
+| Attribute             | Description                                |
+| --------------------- | ------------------------------------------ |
+| `data-open`           | Present when the panel is expanded         |
+| `data-starting-style` | Present when the panel is animating open   |
+| `data-ending-style`   | Present when the panel is animating closed |
 
-| CSS Variable | Description |
-|-------------|-------------|
+| CSS Variable               | Description                                |
+| -------------------------- | ------------------------------------------ |
 | `--accordion-panel-height` | The panel's content height, set by Base UI |
 
 ## When to Use

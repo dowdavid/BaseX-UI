@@ -4,39 +4,50 @@
   "category": "actions",
   "baseComponent": "@base-ui/react/button",
 
-  "parts": ["root"],
+  "anatomy": "<Button />",
 
-  "props": {
-    "variant": {
-      "type": "'solid' | 'outline' | 'ghost'",
-      "default": "solid",
-      "description": "Visual style of the button. Solid has a filled background, outline has a border with transparent background, ghost has no border or background."
-    },
-    "color": {
-      "type": "'default' | 'secondary' | 'destructive'",
-      "default": "default",
-      "description": "Color palette applied to the button. Default uses the primary color, secondary uses the secondary palette, destructive uses the destructive/danger palette."
-    },
-    "size": {
-      "type": "'sm' | 'md' | 'lg'",
-      "default": "md",
-      "description": "Size of the button affecting height, padding, and font size."
-    },
-    "sx": {
-      "type": "StyleXStyles",
-      "description": "StyleX styles for consumer overrides. Applied last for deterministic 'last style wins' behavior."
-    },
-    "disabled": {
-      "type": "boolean",
-      "default": false,
-      "description": "Whether the button is disabled. Reduces opacity and disables pointer events."
-    },
-    "focusableWhenDisabled": {
-      "type": "boolean",
-      "default": false,
-      "description": "Whether the button remains focusable when disabled."
+  "parts": {
+    "Root": {
+      "element": "button",
+      "description": "The button element. Renders a <button> with StyleX styling and Base UI state management.",
+      "props": {
+        "variant": {
+          "type": "'solid' | 'outline' | 'ghost'",
+          "default": "solid",
+          "description": "Visual style of the button. Solid has a filled background, outline has a border with transparent background, ghost has no border or background."
+        },
+        "color": {
+          "type": "'default' | 'secondary' | 'destructive'",
+          "default": "default",
+          "description": "Color palette applied to the button. Default uses the primary color, secondary uses the secondary palette, destructive uses the destructive/danger palette."
+        },
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Size of the button affecting height, padding, and font size."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides. Applied last for deterministic 'last style wins' behavior."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the button is disabled. Reduces opacity and disables pointer events."
+        },
+        "focusableWhenDisabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the button remains focusable when disabled."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the button is disabled."
+      }
     }
   },
+
+  "cssRequirements": null,
 
   "variants": {
     "variant": ["solid", "outline", "ghost"],
@@ -44,19 +55,36 @@
     "size": ["sm", "md", "lg"]
   },
 
-  "dataAttributes": {
-    "data-disabled": "Present when the button is disabled."
-  },
-
   "tokens": [
-    "colorPrimary", "colorPrimaryHover", "colorPrimaryActive", "colorPrimaryContrast",
-    "colorSecondary", "colorSecondaryHover", "colorSecondaryActive", "colorSecondaryContrast",
-    "colorDestructive", "colorDestructiveHover", "colorDestructiveActive", "colorDestructiveContrast",
-    "colorMuted", "colorText", "colorBorder", "colorFocusRing",
-    "space2", "space3", "space4", "space6",
-    "fontFamilySans", "fontSizeSm", "fontSizeMd", "fontWeightMedium",
-    "lineHeightTight", "radiusMd", "borderWidthDefault",
-    "motionDurationFast", "motionEaseOut"
+    "colorPrimary",
+    "colorPrimaryHover",
+    "colorPrimaryActive",
+    "colorPrimaryContrast",
+    "colorSecondary",
+    "colorSecondaryHover",
+    "colorSecondaryActive",
+    "colorSecondaryContrast",
+    "colorDestructive",
+    "colorDestructiveHover",
+    "colorDestructiveActive",
+    "colorDestructiveContrast",
+    "colorMuted",
+    "colorText",
+    "colorBorder",
+    "colorFocusRing",
+    "space2",
+    "space3",
+    "space4",
+    "space6",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontSizeMd",
+    "fontWeightMedium",
+    "lineHeightTight",
+    "radiusMd",
+    "borderWidthDefault",
+    "motionDurationFast",
+    "motionEaseOut"
   ],
 
   "intents": [

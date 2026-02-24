@@ -1,11 +1,6 @@
 export { tokens } from './tokens.stylex';
 export type { TokenVars } from './tokens.stylex';
-export {
-  radiusPresets,
-  shadowPresets,
-  borderWidthPresets,
-  spacingDensityPresets,
-} from './presets';
+export { radiusPresets, shadowPresets, borderWidthPresets, spacingDensityPresets } from './presets';
 export type {
   RadiusPreset,
   ShadowPreset,
@@ -20,7 +15,4 @@ export {
   PALETTE_STEPS,
 } from './oklch';
 export type { PaletteStep } from './oklch';
-export {
-  generatePropertyRegistrations,
-  registerProperties,
-} from './properties';
+export { generatePropertyRegistrations, registerProperties } from './properties';

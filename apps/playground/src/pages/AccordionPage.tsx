@@ -25,7 +25,8 @@ export function AccordionPage() {
               <Accordion.Trigger>What is BaseX UI?</Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Panel>
-              BaseX UI is an AI-first, copy-paste component library built on Base UI and styled with StyleX.
+              BaseX UI is an AI-first, copy-paste component library built on Base UI and styled with
+              StyleX.
             </Accordion.Panel>
           </Accordion.Item>
           <Accordion.Item value="item-2">
@@ -33,7 +34,8 @@ export function AccordionPage() {
               <Accordion.Trigger>How does theming work?</Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Panel>
-              Themes are built with stylex.createTheme, overriding design tokens defined with stylex.defineVars.
+              Themes are built with stylex.createTheme, overriding design tokens defined with
+              stylex.defineVars.
             </Accordion.Panel>
           </Accordion.Item>
           <Accordion.Item value="item-3">

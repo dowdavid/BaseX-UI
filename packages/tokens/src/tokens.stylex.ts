@@ -72,8 +72,10 @@ export const tokens = stylex.defineVars({
   // --- Typography ---
 
   // Font families
-  fontFamilySans: "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-  fontFamilyMono: "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+  fontFamilySans:
+    "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  fontFamilyMono:
+    "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
 
   // Font sizes
   fontSizeXs: '0.75rem',

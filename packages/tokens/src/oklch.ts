@@ -23,8 +23,8 @@ function srgbToLinear(c: number): number {
 // --- Linear RGB to XYZ (D65) ---
 function linearRgbToXyz(r: number, g: number, b: number): [number, number, number] {
   const x = 0.4124564 * r + 0.3575761 * g + 0.1804375 * b;
-  const y = 0.2126729 * r + 0.7151522 * g + 0.0721750 * b;
-  const z = 0.0193339 * r + 0.1191920 * g + 0.9503041 * b;
+  const y = 0.2126729 * r + 0.7151522 * g + 0.072175 * b;
+  const z = 0.0193339 * r + 0.119192 * g + 0.9503041 * b;
   return [x, y, z];
 }
 
@@ -32,15 +32,15 @@ function linearRgbToXyz(r: number, g: number, b: number): [number, number, numbe
 function xyzToOklab(x: number, y: number, z: number): [number, number, number] {
   const l_ = 0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z;
   const m_ = 0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z;
-  const s_ = 0.0482003018 * x + 0.2643662691 * y + 0.6338517070 * z;
+  const s_ = 0.0482003018 * x + 0.2643662691 * y + 0.633851707 * z;
 
   const l_c = Math.cbrt(l_);
   const m_c = Math.cbrt(m_);
   const s_c = Math.cbrt(s_);
 
-  const L = 0.2104542553 * l_c + 0.7936177850 * m_c - 0.0040720468 * s_c;
-  const a = 1.9779984951 * l_c - 2.4285922050 * m_c + 0.4505937099 * s_c;
-  const bVal = 0.0259040371 * l_c + 0.7827717662 * m_c - 0.8086757660 * s_c;
+  const L = 0.2104542553 * l_c + 0.793617785 * m_c - 0.0040720468 * s_c;
+  const a = 1.9779984951 * l_c - 2.428592205 * m_c + 0.4505937099 * s_c;
+  const bVal = 0.0259040371 * l_c + 0.7827717662 * m_c - 0.808675766 * s_c;
 
   return [L, a, bVal];
 }
@@ -84,7 +84,7 @@ const PALETTE_STEPS = {
   400: 0.68,
   500: 0.55,
   600: 0.48,
-  700: 0.40,
+  700: 0.4,
   800: 0.32,
   900: 0.25,
   950: 0.18,

@@ -117,16 +117,16 @@ After all files are in place:
 
 ## Quick Reference: File Touchpoints
 
-| Step | File(s) |
-|------|---------|
-| Component | `packages/components/src/{name}/{name}.tsx`, `index.ts` |
-| Manifest | `packages/components/src/{name}/manifest.json` |
-| Docs | `packages/components/src/{name}/{name}.md` |
-| Global CSS | `apps/playground/src/index.css` (demo) |
-| Intents | `packages/intelligence/intents.json` |
-| MCP data | `packages/mcp-server/src/data.ts` |
-| MCP tsconfig | `packages/mcp-server/tsconfig.json` |
-| Barrel | `packages/components/src/index.ts` |
-| Package exports | `packages/components/package.json` |
-| Build entry | `packages/components/tsup.config.ts` |
-| Playground | `apps/playground/src/App.tsx` |
+| Step            | File(s)                                                 |
+| --------------- | ------------------------------------------------------- |
+| Component       | `packages/components/src/{name}/{name}.tsx`, `index.ts` |
+| Manifest        | `packages/components/src/{name}/manifest.json`          |
+| Docs            | `packages/components/src/{name}/{name}.md`              |
+| Global CSS      | `apps/playground/src/index.css` (demo)                  |
+| Intents         | `packages/intelligence/intents.json`                    |
+| MCP data        | `packages/mcp-server/src/data.ts`                       |
+| MCP tsconfig    | `packages/mcp-server/tsconfig.json`                     |
+| Barrel          | `packages/components/src/index.ts`                      |
+| Package exports | `packages/components/package.json`                      |
+| Build entry     | `packages/components/tsup.config.ts`                    |
+| Playground      | `apps/playground/src/App.tsx`                           |

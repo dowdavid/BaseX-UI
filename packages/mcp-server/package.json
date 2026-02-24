@@ -2,6 +2,20 @@
   "name": "@basex-ui/mcp-server",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
+  "description": "MCP server for AI agent component discovery",
+  "keywords": [
+    "mcp",
+    "ai",
+    "component-discovery",
+    "basex-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daviddow/BaseX-UI.git",
+    "directory": "packages/mcp-server"
+  },
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -13,12 +27,15 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",

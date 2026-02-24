@@ -113,21 +113,14 @@ export function App() {
           <button
             key={page.id}
             onClick={() => setActivePage(page.id)}
-            {...stylex.props(
-              styles.navItem,
-              activePage === page.id && styles.navItemActive,
-            )}
+            {...stylex.props(styles.navItem, activePage === page.id && styles.navItemActive)}
           >
             {page.label}
           </button>
         ))}
         <div {...stylex.props(styles.spacer)} />
         <div {...stylex.props(styles.themeToggle)}>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setDark((d) => !d)}
-          >
+          <Button variant="ghost" size="sm" onClick={() => setDark((d) => !d)}>
             {dark ? 'Light mode' : 'Dark mode'}
           </Button>
         </div>

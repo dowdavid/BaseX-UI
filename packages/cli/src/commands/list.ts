@@ -5,7 +5,18 @@ import { existsSync } from 'node:fs';
 
 // All available components
 const AVAILABLE_COMPONENTS = [
-  { name: 'Button', slug: 'button', description: 'A styled button for triggering actions.', category: 'actions' },
+  {
+    name: 'Button',
+    slug: 'button',
+    description: 'A styled button for triggering actions.',
+    category: 'actions',
+  },
+  {
+    name: 'Accordion',
+    slug: 'accordion',
+    description: 'Collapsible panels for progressive content disclosure.',
+    category: 'layout',
+  },
 ];
 
 export async function runList() {
@@ -19,9 +30,7 @@ export async function runList() {
   if (existsSync(componentsDir)) {
     try {
       const dirs = await readdir(componentsDir, { withFileTypes: true });
-      installed = new Set(
-        dirs.filter((d) => d.isDirectory()).map((d) => d.name),
-      );
+      installed = new Set(dirs.filter((d) => d.isDirectory()).map((d) => d.name));
     } catch {
       // Ignore
     }

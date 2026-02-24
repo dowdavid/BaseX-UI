@@ -3,10 +3,7 @@ import { writeFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { existsSync } from 'node:fs';
 import { generateSemanticColors } from '@basex-ui/tokens/oklch';
-import {
-  radiusPresets,
-  shadowPresets,
-} from '@basex-ui/tokens/presets';
+import { radiusPresets, shadowPresets } from '@basex-ui/tokens/presets';
 
 export async function runTheme(args: string[]) {
   const subcommand = args[0];
@@ -112,9 +109,7 @@ async function createTheme() {
   const cwd = process.cwd();
   const themesDir = join(cwd, 'src/themes');
   const resolvedColor =
-    answers.primaryColor === 'custom'
-      ? (answers.customColor as string)
-      : answers.primaryColor;
+    answers.primaryColor === 'custom' ? (answers.customColor as string) : answers.primaryColor;
 
   // Build overrides
   const overrides: Record<string, string> = {};
@@ -144,12 +139,11 @@ ${entries}
     await mkdir(themesDir, { recursive: true });
   }
 
-  await writeFile(
-    join(themesDir, `${answers.themeName}.stylex.ts`),
-    themeContent,
-  );
+  await writeFile(join(themesDir, `${answers.themeName}.stylex.ts`), themeContent);
 
-  p.log.success(`Theme "${answers.themeName}" created at src/themes/${answers.themeName}.stylex.ts`);
+  p.log.success(
+    `Theme "${answers.themeName}" created at src/themes/${answers.themeName}.stylex.ts`,
+  );
   p.outro('');
 }
 

@@ -33,13 +33,11 @@ export interface ComponentNameProps {
 }
 
 // --- Component ---
-const Root = forwardRef<HTMLDivElement, ComponentNameProps>(
-  ({ children, sx, ...props }, ref) => (
-    <div ref={ref} {...props} {...stylex.props(styles.root, sx)}>
-      {children}
-    </div>
-  ),
-);
+const Root = forwardRef<HTMLDivElement, ComponentNameProps>(({ children, sx, ...props }, ref) => (
+  <div ref={ref} {...props} {...stylex.props(styles.root, sx)}>
+    {children}
+  </div>
+));
 Root.displayName = 'ComponentName.Root';
 
 // --- Compound export ---

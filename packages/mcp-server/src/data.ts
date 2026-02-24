@@ -74,14 +74,21 @@ export function getComponentSetup(name: string): ComponentSetup | null {
   const importPath = `import { ${manifest.name} } from '@basex-ui/components/${manifest.name.toLowerCase()}';`;
 
   // Extract CSS requirements (new per-part manifests have this)
-  const cssReqs = 'cssRequirements' in manifest
-    ? (manifest as Record<string, unknown>).cssRequirements as { description: string; css: string } | null
-    : null;
+  const cssReqs =
+    'cssRequirements' in manifest
+      ? ((manifest as Record<string, unknown>).cssRequirements as {
+          description: string;
+          css: string;
+        } | null)
+      : null;
 
   // Extract required props from per-part manifests
   const requiredProps: ComponentSetup['requiredProps'] = [];
   if ('parts' in manifest && typeof manifest.parts === 'object' && !Array.isArray(manifest.parts)) {
-    const parts = manifest.parts as Record<string, { props?: Record<string, { type?: string; required?: boolean; description?: string }> }>;
+    const parts = manifest.parts as Record<
+      string,
+      { props?: Record<string, { type?: string; required?: boolean; description?: string }> }
+    >;
     for (const [partName, partDef] of Object.entries(parts)) {
       if (partDef.props) {
         for (const [propName, propDef] of Object.entries(partDef.props)) {
@@ -139,29 +146,73 @@ export function getAntiPatterns(): AntiPattern[] {
 // Token metadata for get_tokens tool
 const TOKEN_CATEGORIES: Record<string, string[]> = {
   colors: [
-    'colorPrimary', 'colorPrimaryHover', 'colorPrimaryActive', 'colorPrimaryContrast',
-    'colorSecondary', 'colorSecondaryHover', 'colorSecondaryActive', 'colorSecondaryContrast',
-    'colorDestructive', 'colorDestructiveHover', 'colorDestructiveActive', 'colorDestructiveContrast',
-    'colorMuted', 'colorMutedForeground',
-    'colorSurface', 'colorSurfaceRaised', 'colorSurfaceOverlay',
-    'colorOverlay', 'colorBorder', 'colorBorderMuted',
-    'colorText', 'colorTextMuted', 'colorTextInverse',
-    'colorFocusRing', 'colorBackground',
+    'colorPrimary',
+    'colorPrimaryHover',
+    'colorPrimaryActive',
+    'colorPrimaryContrast',
+    'colorSecondary',
+    'colorSecondaryHover',
+    'colorSecondaryActive',
+    'colorSecondaryContrast',
+    'colorDestructive',
+    'colorDestructiveHover',
+    'colorDestructiveActive',
+    'colorDestructiveContrast',
+    'colorMuted',
+    'colorMutedForeground',
+    'colorSurface',
+    'colorSurfaceRaised',
+    'colorSurfaceOverlay',
+    'colorOverlay',
+    'colorBorder',
+    'colorBorderMuted',
+    'colorText',
+    'colorTextMuted',
+    'colorTextInverse',
+    'colorFocusRing',
+    'colorBackground',
   ],
-  spacing: ['space1', 'space2', 'space3', 'space4', 'space5', 'space6', 'space8', 'space10', 'space12'],
+  spacing: [
+    'space1',
+    'space2',
+    'space3',
+    'space4',
+    'space5',
+    'space6',
+    'space8',
+    'space10',
+    'space12',
+  ],
   typography: [
-    'fontFamilySans', 'fontFamilyMono',
-    'fontSizeXs', 'fontSizeSm', 'fontSizeMd', 'fontSizeLg', 'fontSizeXl', 'fontSize2xl',
-    'fontWeightNormal', 'fontWeightMedium', 'fontWeightSemibold', 'fontWeightBold',
-    'lineHeightTight', 'lineHeightNormal', 'lineHeightRelaxed',
-    'letterSpacingTight', 'letterSpacingNormal', 'letterSpacingWide',
+    'fontFamilySans',
+    'fontFamilyMono',
+    'fontSizeXs',
+    'fontSizeSm',
+    'fontSizeMd',
+    'fontSizeLg',
+    'fontSizeXl',
+    'fontSize2xl',
+    'fontWeightNormal',
+    'fontWeightMedium',
+    'fontWeightSemibold',
+    'fontWeightBold',
+    'lineHeightTight',
+    'lineHeightNormal',
+    'lineHeightRelaxed',
+    'letterSpacingTight',
+    'letterSpacingNormal',
+    'letterSpacingWide',
   ],
   radius: ['radiusNone', 'radiusSm', 'radiusMd', 'radiusLg', 'radiusXl', 'radiusFull'],
   borders: ['borderWidthDefault', 'borderWidthThick'],
   shadows: ['shadowNone', 'shadowSm', 'shadowMd', 'shadowLg', 'shadowXl'],
   motion: [
-    'motionDurationFast', 'motionDurationNormal', 'motionDurationSlow',
-    'motionEaseOut', 'motionEaseInOut', 'motionEaseSpring',
+    'motionDurationFast',
+    'motionDurationNormal',
+    'motionDurationSlow',
+    'motionEaseOut',
+    'motionEaseInOut',
+    'motionEaseSpring',
   ],
 };
 

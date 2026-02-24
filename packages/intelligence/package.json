@@ -2,6 +2,20 @@
   "name": "@basex-ui/intelligence",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
+  "description": "AI intent resolution and animation presets",
+  "keywords": [
+    "ai",
+    "intent-resolution",
+    "animation",
+    "basex-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daviddow/BaseX-UI.git",
+    "directory": "packages/intelligence"
+  },
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -10,12 +24,16 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "intents.json"],
+  "files": [
+    "dist",
+    "intents.json"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

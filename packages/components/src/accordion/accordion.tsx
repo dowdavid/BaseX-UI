@@ -101,91 +101,72 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface AccordionRootProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Root>,
-    'className'
-  > {
+export interface AccordionRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAccordion.Root>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AccordionItemProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Item>,
-    'className'
-  > {
+export interface AccordionItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAccordion.Item>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AccordionHeaderProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Header>,
-    'className'
-  > {
+export interface AccordionHeaderProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAccordion.Header>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AccordionTriggerProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Trigger>,
-    'className'
-  > {
+export interface AccordionTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAccordion.Trigger>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AccordionPanelProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Panel>,
-    'className'
-  > {
+export interface AccordionPanelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAccordion.Panel>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 // --- Components ---
 
-const Root = forwardRef<HTMLDivElement, AccordionRootProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAccordion.Root
-      ref={ref}
-      {...props}
-      className={(state) =>
-        stylex.props(
-          styles.root,
-          state.disabled && styles.disabled,
-          sx,
-        ).className ?? ''
-      }
-    />
-  ),
-);
+const Root = forwardRef<HTMLDivElement, AccordionRootProps>(({ sx, ...props }, ref) => (
+  <BaseAccordion.Root
+    ref={ref}
+    {...props}
+    className={(state) =>
+      stylex.props(styles.root, state.disabled && styles.disabled, sx).className ?? ''
+    }
+  />
+));
 Root.displayName = 'Accordion.Root';
 
-const Item = forwardRef<HTMLDivElement, AccordionItemProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAccordion.Item
-      ref={ref}
-      {...props}
-      className={(state) =>
-        stylex.props(
-          styles.item,
-          state.disabled && styles.disabled,
-          sx,
-        ).className ?? ''
-      }
-    />
-  ),
-);
+const Item = forwardRef<HTMLDivElement, AccordionItemProps>(({ sx, ...props }, ref) => (
+  <BaseAccordion.Item
+    ref={ref}
+    {...props}
+    className={(state) =>
+      stylex.props(styles.item, state.disabled && styles.disabled, sx).className ?? ''
+    }
+  />
+));
 Item.displayName = 'Accordion.Item';
 
-const Header = forwardRef<HTMLHeadingElement, AccordionHeaderProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAccordion.Header
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.header, sx).className ?? ''}
-    />
-  ),
-);
+const Header = forwardRef<HTMLHeadingElement, AccordionHeaderProps>(({ sx, ...props }, ref) => (
+  <BaseAccordion.Header
+    ref={ref}
+    {...props}
+    className={stylex.props(styles.header, sx).className ?? ''}
+  />
+));
 Header.displayName = 'Accordion.Header';
 
 const Trigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
@@ -194,15 +175,13 @@ const Trigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
       ref={ref}
       {...props}
       className={(state) =>
-        stylex.props(
-          styles.trigger,
-          state.disabled && styles.disabled,
-          sx,
-        ).className ?? ''
+        stylex.props(styles.trigger, state.disabled && styles.disabled, sx).className ?? ''
       }
-      style={(state) => ({
-        '--accordion-chevron-rotation': state.open ? '180deg' : '0deg',
-      } as React.CSSProperties)}
+      style={(state) =>
+        ({
+          '--accordion-chevron-rotation': state.open ? '180deg' : '0deg',
+        }) as React.CSSProperties
+      }
     >
       {children}
       <ChevronIcon {...stylex.props(styles.chevron)} />
@@ -211,20 +190,16 @@ const Trigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
 );
 Trigger.displayName = 'Accordion.Trigger';
 
-const Panel = forwardRef<HTMLDivElement, AccordionPanelProps>(
-  ({ children, sx, ...props }, ref) => (
-    <BaseAccordion.Panel
-      keepMounted
-      ref={ref}
-      {...props}
-      className={() =>
-        `basex-accordion-panel ${stylex.props(styles.panel, sx).className ?? ''}`
-      }
-    >
-      <div {...stylex.props(styles.panelContent)}>{children}</div>
-    </BaseAccordion.Panel>
-  ),
-);
+const Panel = forwardRef<HTMLDivElement, AccordionPanelProps>(({ children, sx, ...props }, ref) => (
+  <BaseAccordion.Panel
+    keepMounted
+    ref={ref}
+    {...props}
+    className={() => `basex-accordion-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
+  >
+    <div {...stylex.props(styles.panelContent)}>{children}</div>
+  </BaseAccordion.Panel>
+));
 Panel.displayName = 'Accordion.Panel';
 
 // --- Public API ---

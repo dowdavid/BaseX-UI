@@ -16,11 +16,7 @@ export default defineConfig({
         themeFileExtension: '',
       },
       // Ensure workspace packages get StyleX-compiled (excluded from Vite pre-bundling)
-      externalPackages: [
-        '@basex-ui/tokens',
-        '@basex-ui/styles',
-        '@basex-ui/components',
-      ],
+      externalPackages: ['@basex-ui/tokens', '@basex-ui/styles', '@basex-ui/components'],
     }),
     react(),
   ],

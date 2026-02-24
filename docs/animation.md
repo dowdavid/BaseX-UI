@@ -4,13 +4,13 @@ Every animation in BaseX UI uses one of five presets. When building a component,
 
 ## Presets
 
-| Preset | Duration | Easing | Token (duration) | Token (easing) |
-|--------|----------|--------|------------------|----------------|
-| **State** | 100ms | ease-out | `motionDurationFast` | `motionEaseOut` |
-| **Expand** | 200ms | ease-in-out | `motionDurationNormal` | `motionEaseInOut` |
-| **Move** | 200ms | ease-in-out | `motionDurationNormal` | `motionEaseInOut` |
-| **Enter** | 200ms | ease-out | `motionDurationNormal` | `motionEaseOut` |
-| **Exit** | 100ms | ease-out | `motionDurationFast` | `motionEaseOut` |
+| Preset     | Duration | Easing      | Token (duration)       | Token (easing)    |
+| ---------- | -------- | ----------- | ---------------------- | ----------------- |
+| **State**  | 100ms    | ease-out    | `motionDurationFast`   | `motionEaseOut`   |
+| **Expand** | 200ms    | ease-in-out | `motionDurationNormal` | `motionEaseInOut` |
+| **Move**   | 200ms    | ease-in-out | `motionDurationNormal` | `motionEaseInOut` |
+| **Enter**  | 200ms    | ease-out    | `motionDurationNormal` | `motionEaseOut`   |
+| **Exit**   | 100ms    | ease-out    | `motionDurationFast`   | `motionEaseOut`   |
 
 ### When to use each
 
@@ -26,10 +26,10 @@ Every animation in BaseX UI uses one of five presets. When building a component,
 
 ## Easing curves
 
-| Token | Value | Feel |
-|-------|-------|------|
-| `motionEaseOut` | `cubic-bezier(0, 0, 0.2, 1)` | Decelerates into rest. Natural for arrivals. |
-| `motionEaseInOut` | `cubic-bezier(0.4, 0, 0.2, 1)` | Accelerates then decelerates. Natural for movement with a start and end. |
+| Token              | Value                               | Feel                                                                         |
+| ------------------ | ----------------------------------- | ---------------------------------------------------------------------------- |
+| `motionEaseOut`    | `cubic-bezier(0, 0, 0.2, 1)`        | Decelerates into rest. Natural for arrivals.                                 |
+| `motionEaseInOut`  | `cubic-bezier(0.4, 0, 0.2, 1)`      | Accelerates then decelerates. Natural for movement with a start and end.     |
 | `motionEaseSpring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Overshoots then settles. Reserved for playful emphasis (not currently used). |
 
 ## In StyleX (static styles)
@@ -67,10 +67,10 @@ Height animations driven by Base UI data attributes must use global CSS. Use the
 
 ## Reference: which preset each component uses
 
-| Component | Interaction | Preset |
-|-----------|-------------|--------|
-| Button | hover/focus/active color | State |
-| Button | :active scale(0.98) | State |
-| Accordion Trigger | hover/focus | State |
-| Accordion Chevron | rotation on open | Move |
-| Accordion Panel | height expand/collapse | Expand |
+| Component         | Interaction              | Preset |
+| ----------------- | ------------------------ | ------ |
+| Button            | hover/focus/active color | State  |
+| Button            | :active scale(0.98)      | State  |
+| Accordion Trigger | hover/focus              | State  |
+| Accordion Chevron | rotation on open         | Move   |
+| Accordion Panel   | height expand/collapse   | Expand |

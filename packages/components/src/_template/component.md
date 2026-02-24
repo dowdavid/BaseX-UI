@@ -16,9 +16,7 @@ One-sentence description.
 ### Basic usage
 
 ```tsx
-<ComponentName.Root>
-  ...
-</ComponentName.Root>
+<ComponentName.Root>...</ComponentName.Root>
 ```
 
 ## CSS Requirements
@@ -39,14 +37,14 @@ One-sentence description.
 
 ### Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | StyleX overrides |
+| Prop | Type           | Default | Description      |
+| ---- | -------------- | ------- | ---------------- |
+| `sx` | `StyleXStyles` | —       | StyleX overrides |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
+| Attribute       | Description           |
+| --------------- | --------------------- |
 | `data-disabled` | Present when disabled |
 
 ## When to Use

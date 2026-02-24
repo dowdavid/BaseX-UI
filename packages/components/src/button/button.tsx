@@ -134,8 +134,10 @@ export type ButtonVariant = 'solid' | 'outline' | 'ghost';
 export type ButtonColor = 'default' | 'secondary' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
-export interface ButtonProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseButton>, 'className'> {
+export interface ButtonProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseButton>,
+  'className'
+> {
   variant?: ButtonVariant;
   color?: ButtonColor;
   size?: ButtonSize;
@@ -154,10 +156,7 @@ const compoundStyles: Partial<Record<CompoundKey, keyof typeof styles>> = {
 
 // --- Component ---
 export const Button = forwardRef<HTMLElement, ButtonProps>(
-  (
-    { variant = 'solid', color = 'default', size = 'md', sx, ...props },
-    ref,
-  ) => {
+  ({ variant = 'solid', color = 'default', size = 'md', sx, ...props }, ref) => {
     const variantKey = `variant${capitalize(variant)}` as const;
     const sizeKey = `size${capitalize(size)}` as const;
     const compoundKey: CompoundKey = `${variant}_${color}`;

@@ -56,8 +56,10 @@ export const lightTheme = stylex.createTheme(tokens, {
   space10: '40px',
   space12: '48px',
 
-  fontFamilySans: "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-  fontFamilyMono: "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+  fontFamilySans:
+    "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  fontFamilyMono:
+    "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontSizeXs: '0.75rem',
   fontSizeSm: '0.875rem',
   fontSizeMd: '1rem',
@@ -164,8 +166,10 @@ export const darkTheme = stylex.createTheme(tokens, {
   space10: '40px',
   space12: '48px',
 
-  fontFamilySans: "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-  fontFamilyMono: "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+  fontFamilySans:
+    "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  fontFamilyMono:
+    "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontSizeXs: '0.75rem',
   fontSizeSm: '0.875rem',
   fontSizeMd: '1rem',

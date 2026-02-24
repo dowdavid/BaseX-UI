@@ -12,15 +12,15 @@
       "description": "Container that groups all accordion items.",
       "props": {
         "value": {
-          "type": "any[]",
+          "type": "string[]",
           "description": "Controlled value of expanded items. Each value corresponds to an Item's value prop."
         },
         "defaultValue": {
-          "type": "any[]",
+          "type": "string[]",
           "description": "Initial expanded items for uncontrolled mode."
         },
         "onValueChange": {
-          "type": "(value: any[]) => void",
+          "type": "(value: string[]) => void",
           "description": "Callback fired when items expand or collapse."
         },
         "multiple": {
@@ -47,7 +47,7 @@
       "description": "Groups a header with its collapsible panel.",
       "props": {
         "value": {
-          "type": "any",
+          "type": "string",
           "required": true,
           "description": "Unique value identifying this item."
         },
@@ -126,12 +126,21 @@
   },
 
   "tokens": [
-    "colorBorder", "colorText", "colorTextMuted", "colorFocusRing",
+    "colorBorder",
+    "colorText",
+    "colorTextMuted",
+    "colorFocusRing",
     "space4",
-    "fontFamilySans", "fontSizeSm", "fontWeightMedium",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
     "lineHeightNormal",
-    "radiusMd", "borderWidthDefault",
-    "motionDurationFast", "motionDurationNormal", "motionEaseOut", "motionEaseInOut"
+    "radiusMd",
+    "borderWidthDefault",
+    "motionDurationFast",
+    "motionDurationNormal",
+    "motionEaseOut",
+    "motionEaseInOut"
   ],
 
   "intents": [
