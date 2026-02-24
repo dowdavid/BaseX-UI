@@ -1,12 +1,19 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { resolveIntent, checkUsage } from '@basex-ui/intelligence';
+import {
+  resolveIntent,
+  checkUsage,
+  getAnimationPreset,
+  getAnimationPresetForUseCase,
+  animationPresets as allPresets,
+} from '@basex-ui/intelligence';
 import {
   listComponents,
   getComponent,
   searchComponents,
   getTokensByCategory,
+  getComponentSetup,
 } from './data.js';
 
 const server = new McpServer({
@@ -20,16 +27,11 @@ server.registerTool('list_components', {
     'List all available BaseX UI components with their categories and descriptions.',
 }, async () => {
   const components = listComponents();
-  const result = components.map((c) => ({
-    name: c.name,
-    category: c.category,
-    description: c.description,
-  }));
   return {
     content: [
       {
         type: 'text' as const,
-        text: JSON.stringify(result, null, 2),
+        text: JSON.stringify(components, null, 2),
       },
     ],
   };
@@ -63,7 +65,7 @@ server.registerTool('search_components', {
 // --- Tool 3: get_component ---
 server.registerTool('get_component', {
   description:
-    'Get the full manifest for a BaseX UI component including props, variants, examples, intents, and anti-patterns.',
+    'Get the full manifest for a BaseX UI component including parts, props per part, data attributes, CSS variables, examples, intents, and anti-patterns.',
   inputSchema: { name: z.string().describe('Component name (e.g. "Button")') },
 }, async ({ name }) => {
   const component = getComponent(name);
@@ -97,7 +99,7 @@ server.registerTool('get_component_example', {
       .string()
       .optional()
       .describe(
-        'Example variant name (e.g. "basic", "variants", "colors", "sizes"). Omit to get all examples.',
+        'Example name (e.g. "basic", "multiple", "disabled"). Omit to get all examples.',
       ),
   },
 }, async ({ name, variant }) => {
@@ -155,12 +157,12 @@ server.registerTool('get_component_example', {
 // --- Tool 5: resolve_intent ---
 server.registerTool('resolve_intent', {
   description:
-    'Describe what you are building and get a recommended BaseX UI component with reasoning and composition blueprint.',
+    'Describe what you are building and get a recommended BaseX UI component with reasoning, composition blueprint, and any anti-pattern warnings.',
   inputSchema: {
     description: z
       .string()
       .describe(
-        'Natural language description of what you want to build (e.g. "a button to delete a user account")',
+        'Natural language description of what you want to build (e.g. "a FAQ section with expandable answers")',
       ),
   },
 }, async ({ description }) => {
@@ -183,6 +185,18 @@ server.registerTool('resolve_intent', {
     composition: result.intent.composition,
     confidence: result.score,
   };
+
+  // Include setup info so agents know about CSS requirements
+  const setup = getComponentSetup(result.intent.component);
+  if (setup) {
+    output.import = setup.import;
+    if (setup.cssRequirements) {
+      output.cssRequirements = setup.cssRequirements;
+    }
+    if (setup.requiredProps.length > 0) {
+      output.requiredProps = setup.requiredProps;
+    }
+  }
 
   if (result.warnings.length > 0) {
     output.warnings = result.warnings.map((w) => ({
@@ -211,7 +225,7 @@ server.registerTool('check_usage', {
     context: z
       .string()
       .describe(
-        'Description of how the component is being used (e.g. "navigating to another page")',
+        'Description of how the component is being used (e.g. "navigating to the settings page")',
       ),
   },
 }, async ({ component, context }) => {
@@ -363,6 +377,115 @@ function App({ children }) {
       {
         type: 'text' as const,
         text: example,
+      },
+    ],
+  };
+});
+
+// --- Tool 9: get_animation ---
+server.registerTool('get_animation', {
+  description:
+    'Get BaseX UI animation presets. Every animation uses one of five presets: State, Expand, Move, Enter, Exit. Query by preset name or by use case description.',
+  inputSchema: {
+    preset: z
+      .string()
+      .optional()
+      .describe(
+        'Preset name: "State", "Expand", "Move", "Enter", or "Exit". Omit to list all presets.',
+      ),
+    useCase: z
+      .string()
+      .optional()
+      .describe(
+        'Description of the animation use case (e.g. "hover color change", "panel expand"). Returns the matching preset.',
+      ),
+  },
+}, async ({ preset, useCase }) => {
+  if (preset) {
+    const p = getAnimationPreset(preset);
+    if (!p) {
+      return {
+        content: [
+          {
+            type: 'text' as const,
+            text: `Unknown preset "${preset}". Available: ${allPresets.map((p) => p.name).join(', ')}`,
+          },
+        ],
+        isError: true,
+      };
+    }
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: JSON.stringify(p, null, 2),
+        },
+      ],
+    };
+  }
+
+  if (useCase) {
+    const p = getAnimationPresetForUseCase(useCase);
+    if (!p) {
+      return {
+        content: [
+          {
+            type: 'text' as const,
+            text: `No preset found for "${useCase}". Describe the interaction type (e.g. "hover", "expand", "fade in").`,
+          },
+        ],
+      };
+    }
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: JSON.stringify(
+            { matchedPreset: p.name, ...p },
+            null,
+            2,
+          ),
+        },
+      ],
+    };
+  }
+
+  // Return all presets
+  return {
+    content: [
+      {
+        type: 'text' as const,
+        text: JSON.stringify(allPresets, null, 2),
+      },
+    ],
+  };
+});
+
+// --- Tool 10: get_component_setup ---
+server.registerTool('get_component_setup', {
+  description:
+    'Get setup requirements for a BaseX UI component: import statement, CSS requirements (global CSS needed for animations), required props, and animation presets used. Call this BEFORE generating component code.',
+  inputSchema: {
+    name: z.string().describe('Component name (e.g. "Accordion")'),
+  },
+}, async ({ name }) => {
+  const setup = getComponentSetup(name);
+  if (!setup) {
+    return {
+      content: [
+        {
+          type: 'text' as const,
+          text: `Component "${name}" not found. Use list_components to see available components.`,
+        },
+      ],
+      isError: true,
+    };
+  }
+  return {
+    content: [
+      {
+        type: 'text' as const,
+        text: JSON.stringify(setup, null, 2),
       },
     ],
   };

@@ -3,20 +3,77 @@ import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { Button } from '@basex-ui/components';
-import type { ButtonVariant, ButtonColor, ButtonSize } from '@basex-ui/components';
+import { ButtonPage } from './pages/ButtonPage';
+import { AccordionPage } from './pages/AccordionPage';
 
-const variants: ButtonVariant[] = ['solid', 'outline', 'ghost'];
-const colors: ButtonColor[] = ['default', 'secondary', 'destructive'];
-const sizes: ButtonSize[] = ['sm', 'md', 'lg'];
+const pages = [
+  { id: 'button', label: 'Button', component: ButtonPage },
+  { id: 'accordion', label: 'Accordion', component: AccordionPage },
+] as const;
 
 const styles = stylex.create({
-  page: {
+  layout: {
+    display: 'flex',
     minHeight: '100vh',
-    padding: tokens.space8,
     backgroundColor: tokens.colorBackground,
     color: tokens.colorText,
     fontFamily: tokens.fontFamilySans,
-    transition: 'background-color 0.2s, color 0.2s',
+  },
+  sidebar: {
+    width: '220px',
+    flexShrink: 0,
+    borderRightWidth: '1px',
+    borderRightStyle: 'solid',
+    borderRightColor: tokens.colorBorderMuted,
+    padding: tokens.space4,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: tokens.space1,
+    position: 'sticky',
+    top: 0,
+    height: '100vh',
+    overflowY: 'auto',
+  },
+  sidebarHeader: {
+    fontSize: tokens.fontSizeSm,
+    fontWeight: tokens.fontWeightBold,
+    letterSpacing: tokens.letterSpacingWide,
+    color: tokens.colorTextMuted,
+    textTransform: 'uppercase',
+    paddingBlock: tokens.space2,
+    paddingInline: tokens.space2,
+    marginBottom: tokens.space2,
+  },
+  navItem: {
+    display: 'block',
+    width: '100%',
+    textAlign: 'left',
+    paddingBlock: tokens.space2,
+    paddingInline: tokens.space3,
+    borderRadius: tokens.radiusMd,
+    fontSize: tokens.fontSizeSm,
+    fontWeight: tokens.fontWeightMedium,
+    color: tokens.colorTextMuted,
+    cursor: 'pointer',
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': tokens.colorMuted,
+    },
+    transitionProperty: 'background-color, color',
+    transitionDuration: tokens.motionDurationFast,
+    transitionTimingFunction: tokens.motionEaseOut,
+  },
+  navItemActive: {
+    backgroundColor: tokens.colorMuted,
+    color: tokens.colorText,
+  },
+  main: {
+    flex: 1,
+    padding: tokens.space8,
+    overflowY: 'auto',
+  },
+  content: {
+    maxWidth: '640px',
   },
   header: {
     display: 'flex',
@@ -28,87 +85,62 @@ const styles = stylex.create({
     fontSize: tokens.fontSize2xl,
     fontWeight: tokens.fontWeightBold,
   },
-  section: {
-    marginBottom: tokens.space8,
+  spacer: {
+    flex: 1,
   },
-  sectionTitle: {
-    fontSize: tokens.fontSizeLg,
-    fontWeight: tokens.fontWeightSemibold,
-    marginBottom: tokens.space4,
-    color: tokens.colorTextMuted,
-  },
-  row: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: tokens.space3,
-    marginBottom: tokens.space4,
-  },
-  label: {
-    fontSize: tokens.fontSizeSm,
-    color: tokens.colorTextMuted,
-    minWidth: '80px',
-    fontFamily: tokens.fontFamilyMono,
+  themeToggle: {
+    marginTop: 'auto',
+    paddingTop: tokens.space4,
+    borderTopWidth: '1px',
+    borderTopStyle: 'solid',
+    borderTopColor: tokens.colorBorderMuted,
   },
 });
 
 export function App() {
   const [dark, setDark] = useState(false);
+  const [activePage, setActivePage] = useState<string>('button');
   const theme = dark ? darkTheme : lightTheme;
 
+  const currentPage = pages.find((p) => p.id === activePage) ?? pages[0];
+  const PageComponent = currentPage.component;
+
   return (
-    <div {...stylex.props(theme, styles.page)}>
-      <header {...stylex.props(styles.header)}>
-        <h1 {...stylex.props(styles.title)}>BaseX UI Playground</h1>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setDark((d) => !d)}
-        >
-          {dark ? 'Light mode' : 'Dark mode'}
-        </Button>
-      </header>
-
-      {/* Variant × Color grid */}
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Variants &times; Colors</h2>
-        {variants.map((variant) => (
-          <div key={variant} {...stylex.props(styles.row)}>
-            <span {...stylex.props(styles.label)}>{variant}</span>
-            {colors
-              .filter((color) => variant === 'solid' || color !== 'secondary')
-              .map((color) => (
-                <Button key={`${variant}-${color}`} variant={variant} color={color}>
-                  {color}
-                </Button>
-              ))}
-          </div>
+    <div {...stylex.props(theme, styles.layout)}>
+      <nav {...stylex.props(styles.sidebar)}>
+        <div {...stylex.props(styles.sidebarHeader)}>Components</div>
+        {pages.map((page) => (
+          <button
+            key={page.id}
+            onClick={() => setActivePage(page.id)}
+            {...stylex.props(
+              styles.navItem,
+              activePage === page.id && styles.navItemActive,
+            )}
+          >
+            {page.label}
+          </button>
         ))}
-      </section>
-
-      {/* Sizes */}
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Sizes</h2>
-        <div {...stylex.props(styles.row)}>
-          {sizes.map((size) => (
-            <Button key={size} size={size}>
-              {size}
-            </Button>
-          ))}
+        <div {...stylex.props(styles.spacer)} />
+        <div {...stylex.props(styles.themeToggle)}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setDark((d) => !d)}
+          >
+            {dark ? 'Light mode' : 'Dark mode'}
+          </Button>
         </div>
-      </section>
+      </nav>
 
-      {/* Disabled */}
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Disabled</h2>
-        <div {...stylex.props(styles.row)}>
-          {variants.map((variant) => (
-            <Button key={variant} variant={variant} disabled>
-              {variant}
-            </Button>
-          ))}
+      <main {...stylex.props(styles.main)}>
+        <div {...stylex.props(styles.content)}>
+          <header {...stylex.props(styles.header)}>
+            <h1 {...stylex.props(styles.title)}>{currentPage.label}</h1>
+          </header>
+          <PageComponent />
         </div>
-      </section>
+      </main>
     </div>
   );
 }

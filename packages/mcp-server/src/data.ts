@@ -1,118 +1,50 @@
-import { intentsIndex } from '@basex-ui/intelligence';
-import type { Intent, AntiPattern } from '@basex-ui/intelligence';
+import { intentsIndex, animationPresets } from '@basex-ui/intelligence';
+import type { Intent, AntiPattern, AnimationPreset } from '@basex-ui/intelligence';
 
-/**
- * Component registry — in production, this reads from scaffolded manifests.
- * For now, it's built from the bundled Button manifest.
- */
+// ---------------------------------------------------------------------------
+// Component manifests — imported from source-of-truth manifest.json files.
+//
+// NEW COMPONENT REGISTRATION (3 steps here + 1 in tsconfig.json):
+//   1. Add import:  import fooManifest from '../../components/src/foo/manifest.json';
+//   2. Add to type: export type ComponentManifest = ... | typeof fooManifest;
+//   3. Add to Map:  ['foo', fooManifest],
+//   4. In tsconfig.json → include: add "../components/src/foo/manifest.json"
+//   5. Add animation presets in getComponentSetup() → presetMap below
+//
+// Full checklist: docs/new-component-checklist.md
+// ---------------------------------------------------------------------------
 
-// Inline the button manifest data for the MCP server
-const buttonManifest = {
-  name: 'Button',
-  description:
-    'A styled button component for triggering actions. Built on Base UI Button with StyleX styling.',
-  category: 'actions',
-  baseComponent: '@base-ui/react/button',
-  parts: ['root'],
-  props: {
-    variant: {
-      type: "'solid' | 'outline' | 'ghost'",
-      default: 'solid',
-      description:
-        'Visual style of the button. Solid has a filled background, outline has a border with transparent background, ghost has no border or background.',
-    },
-    color: {
-      type: "'default' | 'secondary' | 'destructive'",
-      default: 'default',
-      description:
-        'Color palette applied to the button. Default uses the primary color, secondary uses the secondary palette, destructive uses the destructive/danger palette.',
-    },
-    size: {
-      type: "'sm' | 'md' | 'lg'",
-      default: 'md',
-      description:
-        'Size of the button affecting height, padding, and font size.',
-    },
-    sx: {
-      type: 'StyleXStyles',
-      description:
-        "StyleX styles for consumer overrides. Applied last for deterministic 'last style wins' behavior.",
-    },
-    disabled: {
-      type: 'boolean',
-      default: false,
-      description:
-        'Whether the button is disabled. Reduces opacity and disables pointer events.',
-    },
-  },
-  variants: {
-    variant: ['solid', 'outline', 'ghost'],
-    color: ['default', 'secondary', 'destructive'],
-    size: ['sm', 'md', 'lg'],
-  },
-  dataAttributes: {
-    'data-disabled': 'Present when the button is disabled.',
-  },
-  examples: [
-    {
-      name: 'basic',
-      description: 'Basic solid button',
-      code: '<Button>Click me</Button>',
-    },
-    {
-      name: 'variants',
-      description: 'All three variants',
-      code: '<>\n  <Button variant="solid">Solid</Button>\n  <Button variant="outline">Outline</Button>\n  <Button variant="ghost">Ghost</Button>\n</>',
-    },
-    {
-      name: 'colors',
-      description: 'Color variations',
-      code: '<>\n  <Button color="default">Default</Button>\n  <Button color="secondary">Secondary</Button>\n  <Button color="destructive">Destructive</Button>\n</>',
-    },
-    {
-      name: 'sizes',
-      description: 'Size variations',
-      code: '<>\n  <Button size="sm">Small</Button>\n  <Button size="md">Medium</Button>\n  <Button size="lg">Large</Button>\n</>',
-    },
-    {
-      name: 'destructive-outline',
-      description: 'Destructive outline button for less prominent dangerous actions',
-      code: '<Button variant="outline" color="destructive">Remove</Button>',
-    },
-    {
-      name: 'disabled',
-      description: 'Disabled button',
-      code: '<Button disabled>Unavailable</Button>',
-    },
-  ],
-};
+import buttonManifest from '../../components/src/button/manifest.json';
+import accordionManifest from '../../components/src/accordion/manifest.json';
 
-export interface ComponentInfo {
+export type ComponentManifest = typeof buttonManifest | typeof accordionManifest;
+
+const components: Map<string, ComponentManifest> = new Map([
+  ['button', buttonManifest],
+  ['accordion', accordionManifest],
+]);
+
+// ---------------------------------------------------------------------------
+// Component queries
+// ---------------------------------------------------------------------------
+
+export function listComponents(): Array<{
   name: string;
   description: string;
   category: string;
-  baseComponent: string;
-  parts: string[];
-  props: Record<string, unknown>;
-  variants: Record<string, string[]>;
-  dataAttributes: Record<string, string>;
-  examples: Array<{ name: string; description: string; code: string }>;
+}> {
+  return Array.from(components.values()).map((c) => ({
+    name: c.name,
+    description: c.description,
+    category: c.category,
+  }));
 }
 
-// Component registry
-const components: Map<string, ComponentInfo> = new Map([
-  ['button', buttonManifest],
-]);
-
-export function listComponents(): ComponentInfo[] {
-  return Array.from(components.values());
-}
-
-export function getComponent(name: string): ComponentInfo | undefined {
+export function getComponent(name: string): ComponentManifest | undefined {
   return components.get(name.toLowerCase());
 }
 
-export function searchComponents(query: string): ComponentInfo[] {
+export function searchComponents(query: string): ComponentManifest[] {
   const lower = query.toLowerCase();
   return Array.from(components.values()).filter(
     (c) =>
@@ -121,6 +53,80 @@ export function searchComponents(query: string): ComponentInfo[] {
       c.category.toLowerCase().includes(lower),
   );
 }
+
+// ---------------------------------------------------------------------------
+// Component setup — surfaces CSS requirements, imports, and required props
+// ---------------------------------------------------------------------------
+
+export interface ComponentSetup {
+  name: string;
+  import: string;
+  cssRequirements: { description: string; css: string } | null;
+  requiredProps: Array<{ part: string; prop: string; type: string; description: string }>;
+  animationPresets: Array<{ interaction: string; preset: string }>;
+}
+
+export function getComponentSetup(name: string): ComponentSetup | null {
+  const manifest = getComponent(name);
+  if (!manifest) return null;
+
+  // Build import path
+  const importPath = `import { ${manifest.name} } from '@basex-ui/components/${manifest.name.toLowerCase()}';`;
+
+  // Extract CSS requirements (new per-part manifests have this)
+  const cssReqs = 'cssRequirements' in manifest
+    ? (manifest as Record<string, unknown>).cssRequirements as { description: string; css: string } | null
+    : null;
+
+  // Extract required props from per-part manifests
+  const requiredProps: ComponentSetup['requiredProps'] = [];
+  if ('parts' in manifest && typeof manifest.parts === 'object' && !Array.isArray(manifest.parts)) {
+    const parts = manifest.parts as Record<string, { props?: Record<string, { type?: string; required?: boolean; description?: string }> }>;
+    for (const [partName, partDef] of Object.entries(parts)) {
+      if (partDef.props) {
+        for (const [propName, propDef] of Object.entries(partDef.props)) {
+          if (propDef.required) {
+            requiredProps.push({
+              part: partName,
+              prop: propName,
+              type: propDef.type ?? 'unknown',
+              description: propDef.description ?? '',
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // Map component to animation presets — add entry for each new component
+  // Presets: State (100ms, hover/focus), Expand (200ms, height), Move (200ms, transform), Enter (200ms, appear), Exit (100ms, disappear)
+  const presetMap: Record<string, Array<{ interaction: string; preset: string }>> = {
+    button: [
+      { interaction: 'hover/focus/active color', preset: 'State' },
+      { interaction: ':active scale', preset: 'State' },
+    ],
+    accordion: [
+      { interaction: 'trigger hover/focus', preset: 'State' },
+      { interaction: 'chevron rotation', preset: 'Move' },
+      { interaction: 'panel expand/collapse', preset: 'Expand' },
+    ],
+  };
+
+  return {
+    name: manifest.name,
+    import: importPath,
+    cssRequirements: cssReqs,
+    requiredProps,
+    animationPresets: presetMap[name.toLowerCase()] ?? [],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Re-exports for MCP tools
+// ---------------------------------------------------------------------------
+
+export { animationPresets };
+export type { Intent, AntiPattern, AnimationPreset };
 
 export function getIntents(): Intent[] {
   return intentsIndex.intents;

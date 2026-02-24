@@ -53,7 +53,7 @@ export const tokens = stylex.defineVars({
   colorFocusRing: 'oklch(0.55 0.2 250)',
 
   // Background
-  colorBackground: 'oklch(0.97 0.005 260)',
+  colorBackground: '#ffffff',
 
   // --- Spacing (consistent scale) ---
   space1: '4px',

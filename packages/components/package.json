@@ -12,6 +12,10 @@
     "./button": {
       "types": "./dist/button/index.d.ts",
       "import": "./dist/button/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/index.d.ts",
+      "import": "./dist/accordion/index.js"
     }
   },
   "files": ["dist"],

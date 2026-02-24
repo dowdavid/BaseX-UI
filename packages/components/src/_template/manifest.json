@@ -1,0 +1,53 @@
+{
+  "name": "ComponentName",
+  "description": "One-sentence description of what this component does. Built on Base UI X with StyleX styling.",
+  "category": "actions | layout | forms | feedback | navigation | data-display",
+  "baseComponent": "@base-ui/react/component-name",
+
+  "anatomy": "<ComponentName.Root>\n  <ComponentName.PartA />\n  <ComponentName.PartB />\n</ComponentName.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Container element.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the component is disabled."
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [],
+
+  "intents": [
+    {
+      "intent": "intent-name",
+      "signals": ["keyword1", "keyword2", "phrase"],
+      "reasoning": "Why this component is the right choice for this intent.",
+      "composition": "<ComponentName.Root>\n  ...\n</ComponentName.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Describe the misuse scenario",
+      "reasoning": "Why this component is wrong here.",
+      "alternative": "ComponentToUseInstead"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic usage",
+      "code": "<ComponentName.Root>\n  ...\n</ComponentName.Root>"
+    }
+  ]
+}

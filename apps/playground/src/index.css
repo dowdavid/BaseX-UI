@@ -1,7 +1,33 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@layer priority1 {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font: inherit;
+  }
+
+  /* Accordion panel height animation */
+  .basex-accordion-panel {
+    height: var(--accordion-panel-height);
+    overflow: hidden;
+    transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .basex-accordion-panel[data-starting-style],
+  .basex-accordion-panel[data-ending-style] {
+    height: 0;
+  }
 }
 
 body {

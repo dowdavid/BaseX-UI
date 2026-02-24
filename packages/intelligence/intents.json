@@ -37,6 +37,27 @@
       "signals": ["secondary", "alternative", "less important", "optional"],
       "reasoning": "Secondary actions use outline or ghost variant to visually de-emphasize them relative to the primary action.",
       "composition": "<Button variant=\"outline\">Details</Button>"
+    },
+    {
+      "intent": "collapsible-sections",
+      "component": "Accordion",
+      "signals": ["accordion", "collapse", "expand", "sections", "FAQ", "collapsible"],
+      "reasoning": "Accordion is the primary component for organizing content into collapsible sections. Each section has a trigger heading that reveals its content panel.",
+      "composition": "<Accordion.Root>\n  <Accordion.Item value=\"section-1\">\n    <Accordion.Header>\n      <Accordion.Trigger>Section Title</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Content here</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "intent": "show-hide-content",
+      "component": "Accordion",
+      "signals": ["show more", "reveal", "toggle content", "expandable", "progressive disclosure"],
+      "reasoning": "Accordion provides progressive disclosure — content is hidden by default and revealed on demand, reducing cognitive load.",
+      "composition": "<Accordion.Root>\n  <Accordion.Item value=\"details\">\n    <Accordion.Header>\n      <Accordion.Trigger>Show details</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Hidden content revealed on click</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "intent": "faq-list",
+      "component": "Accordion",
+      "signals": ["FAQ", "questions", "answers", "help", "Q&A", "knowledge base"],
+      "reasoning": "FAQ lists are a classic accordion pattern — each question is a trigger, each answer is a panel. Use single-open mode to keep focus.",
+      "composition": "<Accordion.Root>\n  <Accordion.Item value=\"q1\">\n    <Accordion.Header>\n      <Accordion.Trigger>How do I reset my password?</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Visit the settings page and click \"Reset Password\".</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
     }
   ],
   "antiPatterns": [
@@ -63,6 +84,24 @@
       "scenario": "Opening a dropdown menu",
       "reasoning": "Use Menu.Trigger which handles aria-expanded, aria-haspopup, and keyboard navigation automatically.",
       "alternative": "Use Menu.Trigger from @base-ui/react/menu."
+    },
+    {
+      "component": "Accordion",
+      "scenario": "Switching between views or content panels",
+      "reasoning": "Use Tabs instead. Accordion reveals content in place within the same flow, while Tabs switch between distinct views.",
+      "alternative": "Use Tabs from @base-ui/react/tabs."
+    },
+    {
+      "component": "Accordion",
+      "scenario": "A single collapsible section with no siblings",
+      "reasoning": "Use Collapsible directly. Accordion is for groups of related collapsible sections. A lone collapsible section doesn't need accordion semantics.",
+      "alternative": "Use Collapsible from @base-ui/react/collapsible."
+    },
+    {
+      "component": "Accordion",
+      "scenario": "Sequential step-by-step flow or wizard",
+      "reasoning": "Accordion doesn't communicate sequential progress or completion state. Use a dedicated stepper or wizard pattern.",
+      "alternative": "Build a custom Stepper component or use a wizard flow."
     }
   ]
 }

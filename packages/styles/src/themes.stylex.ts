@@ -41,7 +41,7 @@ export const lightTheme = stylex.createTheme(tokens, {
   colorTextInverse: 'oklch(0.98 0 0)',
 
   colorFocusRing: 'oklch(0.55 0.2 250)',
-  colorBackground: 'oklch(0.97 0.005 260)',
+  colorBackground: '#ffffff',
 
   space1: '4px',
   space1h: '6px',
