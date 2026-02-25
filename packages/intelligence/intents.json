@@ -58,6 +58,27 @@
       "signals": ["FAQ", "questions", "answers", "help", "Q&A", "knowledge base"],
       "reasoning": "FAQ lists are a classic accordion pattern — each question is a trigger, each answer is a panel. Use single-open mode to keep focus.",
       "composition": "<Accordion.Root>\n  <Accordion.Item value=\"q1\">\n    <Accordion.Header>\n      <Accordion.Trigger>How do I reset my password?</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Visit the settings page and click \"Reset Password\".</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "intent": "confirm-destructive-action",
+      "component": "AlertDialog",
+      "signals": ["confirm delete", "are you sure", "destructive confirmation", "delete confirmation", "irreversible action"],
+      "reasoning": "AlertDialog is the correct component when a destructive or irreversible action requires explicit user confirmation before proceeding.",
+      "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"outline\" color=\"destructive\">Delete</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Delete this item?</AlertDialog.Title>\n      <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Delete</Button>} onClick={handleDelete} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    },
+    {
+      "intent": "blocking-confirmation",
+      "component": "AlertDialog",
+      "signals": ["confirm", "acknowledge", "consent", "agree", "terms", "accept terms"],
+      "reasoning": "AlertDialog blocks interaction until the user explicitly acknowledges or confirms. Use when skipping or ignoring the prompt is not acceptable.",
+      "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button>Continue</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Accept terms?</AlertDialog.Title>\n      <AlertDialog.Description>You must accept before continuing.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button>Accept</Button>} onClick={handleAccept} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    },
+    {
+      "intent": "discard-unsaved-changes",
+      "component": "AlertDialog",
+      "signals": ["unsaved changes", "discard", "leave page", "lose changes", "abandon"],
+      "reasoning": "AlertDialog prevents accidental data loss by forcing the user to confirm before discarding unsaved work.",
+      "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"ghost\">Leave</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Discard changes?</AlertDialog.Title>\n      <AlertDialog.Description>You have unsaved changes that will be lost.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Keep editing</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Discard</Button>} onClick={handleDiscard} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
     }
   ],
   "antiPatterns": [
@@ -102,6 +123,30 @@
       "scenario": "Sequential step-by-step flow or wizard",
       "reasoning": "Accordion doesn't communicate sequential progress or completion state. Use a dedicated stepper or wizard pattern.",
       "alternative": "Build a custom Stepper component or use a wizard flow."
+    },
+    {
+      "component": "AlertDialog",
+      "scenario": "Displaying informational content or forms",
+      "reasoning": "Use Dialog instead. AlertDialog is for confirmations requiring acknowledgment, not general content display.",
+      "alternative": "Use Dialog from @base-ui/react/dialog."
+    },
+    {
+      "component": "AlertDialog",
+      "scenario": "Non-critical notifications or status updates",
+      "reasoning": "Use Toast for transient messages. AlertDialog blocks all interaction and is too disruptive for non-critical feedback.",
+      "alternative": "Use Toast for non-blocking notifications."
+    },
+    {
+      "component": "AlertDialog",
+      "scenario": "Simple yes/no questions that are easily reversible",
+      "reasoning": "If the action is easily undone, an AlertDialog adds unnecessary friction. Prefer an inline undo pattern or a Toast with an undo button.",
+      "alternative": "Use a Toast with an undo action."
+    },
+    {
+      "component": "AlertDialog",
+      "scenario": "A dismissible overlay that can be closed by clicking outside",
+      "reasoning": "AlertDialog cannot be dismissed by clicking outside — that's by design. Use Dialog if you want backdrop dismissal.",
+      "alternative": "Use Dialog from @base-ui/react/dialog."
     }
   ]
 }

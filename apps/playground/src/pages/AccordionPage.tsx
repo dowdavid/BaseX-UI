@@ -1,24 +1,14 @@
-import * as stylex from '@stylexjs/stylex';
-import { tokens } from '@basex-ui/tokens';
 import { Accordion } from '@basex-ui/components';
-
-const styles = stylex.create({
-  section: {
-    marginBottom: tokens.space8,
-  },
-  sectionTitle: {
-    fontSize: tokens.fontSizeLg,
-    fontWeight: tokens.fontWeightSemibold,
-    marginBottom: tokens.space4,
-    color: tokens.colorTextMuted,
-  },
-});
+import { Preview } from '../components/Preview';
 
 export function AccordionPage() {
   return (
     <>
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Single open</h2>
+      <Preview
+        title="Single open"
+        description="Only one panel open at a time. Opening a new panel closes the previous."
+        constrained
+      >
         <Accordion.Root defaultValue={['item-1']}>
           <Accordion.Item value="item-1">
             <Accordion.Header>
@@ -47,10 +37,13 @@ export function AccordionPage() {
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion.Root>
-      </section>
+      </Preview>
 
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Multiple open</h2>
+      <Preview
+        title="Multiple open"
+        description="Multiple panels can be expanded simultaneously."
+        constrained
+      >
         <Accordion.Root multiple defaultValue={['item-1', 'item-2']}>
           <Accordion.Item value="item-1">
             <Accordion.Header>
@@ -65,10 +58,13 @@ export function AccordionPage() {
             <Accordion.Panel>Try closing one — the other stays open.</Accordion.Panel>
           </Accordion.Item>
         </Accordion.Root>
-      </section>
+      </Preview>
 
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Disabled item</h2>
+      <Preview
+        title="Disabled item"
+        description="Individual items can be disabled to prevent interaction."
+        constrained
+      >
         <Accordion.Root>
           <Accordion.Item value="item-1">
             <Accordion.Header>
@@ -83,7 +79,7 @@ export function AccordionPage() {
             <Accordion.Panel>You cannot open this section.</Accordion.Panel>
           </Accordion.Item>
         </Accordion.Root>
-      </section>
+      </Preview>
     </>
   );
 }

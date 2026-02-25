@@ -2,27 +2,23 @@ import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { Button } from '@basex-ui/components';
 import type { ButtonVariant, ButtonColor, ButtonSize } from '@basex-ui/components';
+import { Preview } from '../components/Preview';
 
 const variants: ButtonVariant[] = ['solid', 'outline', 'ghost'];
 const colors: ButtonColor[] = ['default', 'secondary', 'destructive'];
 const sizes: ButtonSize[] = ['sm', 'md', 'lg'];
 
 const styles = stylex.create({
-  section: {
-    marginBottom: tokens.space8,
-  },
-  sectionTitle: {
-    fontSize: tokens.fontSizeLg,
-    fontWeight: tokens.fontWeightSemibold,
-    marginBottom: tokens.space4,
-    color: tokens.colorTextMuted,
+  grid: {
+    display: 'inline-flex',
+    flexDirection: 'column',
+    gap: tokens.space4,
   },
   row: {
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
     gap: tokens.space3,
-    marginBottom: tokens.space4,
   },
   label: {
     fontSize: tokens.fontSizeSm,
@@ -35,24 +31,30 @@ const styles = stylex.create({
 export function ButtonPage() {
   return (
     <>
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Variants &times; Colors</h2>
-        {variants.map((variant) => (
-          <div key={variant} {...stylex.props(styles.row)}>
-            <span {...stylex.props(styles.label)}>{variant}</span>
-            {colors
-              .filter((color) => variant === 'solid' || color !== 'secondary')
-              .map((color) => (
-                <Button key={`${variant}-${color}`} variant={variant} color={color}>
-                  {color}
-                </Button>
-              ))}
-          </div>
-        ))}
-      </section>
+      <Preview
+        title="Variants & Colors"
+        description="Three variants (solid, outline, ghost) across three color axes."
+      >
+        <div {...stylex.props(styles.grid)}>
+          {variants.map((variant) => (
+            <div key={variant} {...stylex.props(styles.row)}>
+              <span {...stylex.props(styles.label)}>{variant}</span>
+              {colors
+                .filter((color) => variant === 'solid' || color !== 'secondary')
+                .map((color) => (
+                  <Button key={`${variant}-${color}`} variant={variant} color={color}>
+                    {color}
+                  </Button>
+                ))}
+            </div>
+          ))}
+        </div>
+      </Preview>
 
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Sizes</h2>
+      <Preview
+        title="Sizes"
+        description="Small, medium, and large."
+      >
         <div {...stylex.props(styles.row)}>
           {sizes.map((size) => (
             <Button key={size} size={size}>
@@ -60,10 +62,12 @@ export function ButtonPage() {
             </Button>
           ))}
         </div>
-      </section>
+      </Preview>
 
-      <section {...stylex.props(styles.section)}>
-        <h2 {...stylex.props(styles.sectionTitle)}>Disabled</h2>
+      <Preview
+        title="Disabled"
+        description="Reduced opacity with no pointer events."
+      >
         <div {...stylex.props(styles.row)}>
           {variants.map((variant) => (
             <Button key={variant} variant={variant} disabled>
@@ -71,7 +75,7 @@ export function ButtonPage() {
             </Button>
           ))}
         </div>
-      </section>
+      </Preview>
     </>
   );
 }

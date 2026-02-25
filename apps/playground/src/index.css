@@ -33,6 +33,28 @@
   .basex-accordion-panel[data-ending-style] {
     height: 0;
   }
+
+  /* Alert Dialog backdrop fade animation */
+  .basex-alert-dialog-backdrop {
+    opacity: 1;
+    transition: opacity 150ms ease-out;
+  }
+  .basex-alert-dialog-backdrop[data-starting-style],
+  .basex-alert-dialog-backdrop[data-ending-style] {
+    opacity: 0;
+  }
+
+  /* Alert Dialog popup scale/fade animation */
+  .basex-alert-dialog-popup {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+  }
+  .basex-alert-dialog-popup[data-starting-style],
+  .basex-alert-dialog-popup[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }
 
 body {

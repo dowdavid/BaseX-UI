@@ -16,13 +16,15 @@ import type { Intent, AntiPattern, AnimationPreset } from '@basex-ui/intelligenc
 
 import buttonManifest from '../../components/src/button/manifest.json';
 import accordionManifest from '../../components/src/accordion/manifest.json';
+import alertDialogManifest from '../../components/src/alert-dialog/manifest.json';
 
-export type ComponentManifest = typeof buttonManifest | typeof accordionManifest;
+export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest;
 
-const components: Map<string, ComponentManifest> = new Map([
+const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
   ['accordion', accordionManifest],
-]);
+  ['alert-dialog', alertDialogManifest],
+] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
 // Component queries
@@ -116,6 +118,11 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'trigger hover/focus', preset: 'State' },
       { interaction: 'chevron rotation', preset: 'Move' },
       { interaction: 'panel expand/collapse', preset: 'Expand' },
+    ],
+    'alert-dialog': [
+      { interaction: 'backdrop fade in/out', preset: 'Enter' },
+      { interaction: 'popup scale/fade in', preset: 'Enter' },
+      { interaction: 'popup scale/fade out', preset: 'Exit' },
     ],
   };
 

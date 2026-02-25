@@ -96,10 +96,13 @@ Copy from `_template/component.md` and fill in:
 
 ## 8. Playground Demo
 
-**File**: `apps/playground/src/App.tsx`
+**File**: `apps/playground/src/pages/{Name}Page.tsx`
 
-- [ ] Add import
-- [ ] Add demo section showing basic usage + key variations
+- [ ] Create page component in `apps/playground/src/pages/`
+- [ ] Use the `Preview` component from `../components/Preview` for every demo section
+  - Each `Preview` gets a `title`, `description`, and the demo as children
+  - Use `constrained` prop for full-width components (e.g. Accordion) to cap inner width
+- [ ] Register in `apps/playground/src/App.tsx`: import, add to `pages` array with `id`, `label`, `description`, `component`
 - [ ] Add any required global CSS to `apps/playground/src/index.css`
 
 ## 9. Verification

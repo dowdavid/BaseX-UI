@@ -5,10 +5,27 @@ import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { Button } from '@basex-ui/components';
 import { ButtonPage } from './pages/ButtonPage';
 import { AccordionPage } from './pages/AccordionPage';
+import { AlertDialogPage } from './pages/AlertDialogPage';
 
 const pages = [
-  { id: 'button', label: 'Button', component: ButtonPage },
-  { id: 'accordion', label: 'Accordion', component: AccordionPage },
+  {
+    id: 'button',
+    label: 'Button',
+    description: 'A clickable element for triggering actions.',
+    component: ButtonPage,
+  },
+  {
+    id: 'accordion',
+    label: 'Accordion',
+    description: 'Collapsible sections for progressive content disclosure.',
+    component: AccordionPage,
+  },
+  {
+    id: 'alert-dialog',
+    label: 'Alert Dialog',
+    description: 'A modal dialog that requires user acknowledgment to proceed.',
+    component: AlertDialogPage,
+  },
 ] as const;
 
 const styles = stylex.create({
@@ -73,17 +90,25 @@ const styles = stylex.create({
     overflowY: 'auto',
   },
   content: {
-    maxWidth: '640px',
+    maxWidth: '768px',
   },
   header: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: tokens.space8,
+    marginBottom: tokens.space10,
+    borderBottomWidth: '1px',
+    borderBottomStyle: 'solid',
+    borderBottomColor: tokens.colorBorderMuted,
+    paddingBottom: tokens.space6,
   },
   title: {
     fontSize: tokens.fontSize2xl,
     fontWeight: tokens.fontWeightBold,
+    lineHeight: tokens.lineHeightTight,
+  },
+  description: {
+    fontSize: tokens.fontSizeMd,
+    color: tokens.colorTextMuted,
+    lineHeight: tokens.lineHeightNormal,
+    marginTop: tokens.space2,
   },
   spacer: {
     flex: 1,
@@ -130,6 +155,7 @@ export function App() {
         <div {...stylex.props(styles.content)}>
           <header {...stylex.props(styles.header)}>
             <h1 {...stylex.props(styles.title)}>{currentPage.label}</h1>
+            <p {...stylex.props(styles.description)}>{currentPage.description}</p>
           </header>
           <PageComponent />
         </div>
