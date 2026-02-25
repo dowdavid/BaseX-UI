@@ -1,7 +1,7 @@
 import { Button as BaseButton } from '@base-ui/react/button';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
-import { capitalize } from '@basex-ui/styles';
+import { capitalize, focusRing } from '@basex-ui/styles';
 import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -32,12 +32,7 @@ const styles = stylex.create({
       default: 'none',
       ':active': 'scale(0.98)',
     },
-    // Focus visible via :focus-visible pseudo-class
-    outline: {
-      default: 'none',
-      ':focus-visible': `2px solid ${tokens.colorFocusRing}`,
-    },
-    outlineOffset: '2px',
+    // Focus ring applied via focusRing composition in stylex.props()
   },
 
   // --- Variant axis (shape/fill) ---
@@ -169,6 +164,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
         className={(state) =>
           stylex.props(
             styles.root,
+            focusRing,
             styles[variantKey],
             compoundStyleKey != null && styles[compoundStyleKey],
             styles[sizeKey],

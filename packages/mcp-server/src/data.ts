@@ -17,13 +17,15 @@ import type { Intent, AntiPattern, AnimationPreset } from '@basex-ui/intelligenc
 import buttonManifest from '../../components/src/button/manifest.json';
 import accordionManifest from '../../components/src/accordion/manifest.json';
 import alertDialogManifest from '../../components/src/alert-dialog/manifest.json';
+import autocompleteManifest from '../../components/src/autocomplete/manifest.json';
 
-export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest;
+export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest | typeof autocompleteManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
   ['accordion', accordionManifest],
   ['alert-dialog', alertDialogManifest],
+  ['autocomplete', autocompleteManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -123,6 +125,13 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'backdrop fade in/out', preset: 'Enter' },
       { interaction: 'popup scale/fade in', preset: 'Enter' },
       { interaction: 'popup scale/fade out', preset: 'Exit' },
+    ],
+    autocomplete: [
+      { interaction: 'input focus ring', preset: 'State' },
+      { interaction: 'clear button hover', preset: 'State' },
+      { interaction: 'popup fade/slide in', preset: 'Enter' },
+      { interaction: 'popup fade/slide out', preset: 'Exit' },
+      { interaction: 'item highlight', preset: 'State' },
     ],
   };
 

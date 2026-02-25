@@ -79,6 +79,27 @@
       "signals": ["unsaved changes", "discard", "leave page", "lose changes", "abandon"],
       "reasoning": "AlertDialog prevents accidental data loss by forcing the user to confirm before discarding unsaved work.",
       "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"ghost\">Leave</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Discard changes?</AlertDialog.Title>\n      <AlertDialog.Description>You have unsaved changes that will be lost.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Keep editing</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Discard</Button>} onClick={handleDiscard} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    },
+    {
+      "intent": "search-with-suggestions",
+      "component": "Autocomplete",
+      "signals": ["search", "autocomplete", "search input", "suggestion", "typeahead", "search box"],
+      "reasoning": "Autocomplete is the primary component for text inputs that show filtered suggestions as the user types.",
+      "composition": "<Autocomplete.Root items={items}>\n  <Autocomplete.Input placeholder=\"Search...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No results found.</Autocomplete.Empty>\n    {(item) => (\n      <Autocomplete.Item key={item.id} value={item}>\n        {item.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "intent": "command-palette",
+      "component": "Autocomplete",
+      "signals": ["command palette", "command menu", "quick actions", "spotlight", "cmd+k"],
+      "reasoning": "Autocomplete provides the text-input-with-filtered-list pattern used in command palettes. Combine with a Dialog for the overlay.",
+      "composition": "<Autocomplete.Root items={commands}>\n  <Autocomplete.Input placeholder=\"Type a command...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No commands found.</Autocomplete.Empty>\n    {(cmd) => (\n      <Autocomplete.Item key={cmd.id} value={cmd}>\n        {cmd.label}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "intent": "tag-search",
+      "component": "Autocomplete",
+      "signals": ["tag input", "label search", "category filter", "filter by tag"],
+      "reasoning": "Autocomplete works well for searching through and selecting from a list of tags or labels.",
+      "composition": "<Autocomplete.Root items={tags}>\n  <Autocomplete.Input placeholder=\"Search tags...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No tags found.</Autocomplete.Empty>\n    {(tag) => (\n      <Autocomplete.Item key={tag.id} value={tag}>\n        {tag.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
     }
   ],
   "antiPatterns": [
@@ -147,6 +168,24 @@
       "scenario": "A dismissible overlay that can be closed by clicking outside",
       "reasoning": "AlertDialog cannot be dismissed by clicking outside — that's by design. Use Dialog if you want backdrop dismissal.",
       "alternative": "Use Dialog from @base-ui/react/dialog."
+    },
+    {
+      "component": "Autocomplete",
+      "scenario": "User must select from a fixed set of options (no free text)",
+      "reasoning": "Use Select or Combobox instead. Autocomplete allows free-form text input — the value is the text itself, not a selection.",
+      "alternative": "Use Select or Combobox."
+    },
+    {
+      "component": "Autocomplete",
+      "scenario": "Multiple selections needed (tags, chips)",
+      "reasoning": "Autocomplete does not support multiple selection. Use Combobox with multiple mode which provides Chips parts.",
+      "alternative": "Use Combobox with multiple mode."
+    },
+    {
+      "component": "Autocomplete",
+      "scenario": "Simple text input without suggestions",
+      "reasoning": "Use Input directly. Autocomplete adds overhead for the popup and filtering logic that is unnecessary without suggestions.",
+      "alternative": "Use Input."
     }
   ]
 }

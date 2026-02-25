@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
@@ -6,14 +6,9 @@ import { Button } from '@basex-ui/components';
 import { ButtonPage } from './pages/ButtonPage';
 import { AccordionPage } from './pages/AccordionPage';
 import { AlertDialogPage } from './pages/AlertDialogPage';
+import { AutocompletePage } from './pages/AutocompletePage';
 
 const pages = [
-  {
-    id: 'button',
-    label: 'Button',
-    description: 'A clickable element for triggering actions.',
-    component: ButtonPage,
-  },
   {
     id: 'accordion',
     label: 'Accordion',
@@ -26,12 +21,24 @@ const pages = [
     description: 'A modal dialog that requires user acknowledgment to proceed.',
     component: AlertDialogPage,
   },
+  {
+    id: 'autocomplete',
+    label: 'Autocomplete',
+    description: 'A text input with a filterable suggestion dropdown.',
+    component: AutocompletePage,
+  },
+  {
+    id: 'button',
+    label: 'Button',
+    description: 'A clickable element for triggering actions.',
+    component: ButtonPage,
+  },
 ] as const;
 
 const styles = stylex.create({
   layout: {
     display: 'flex',
-    minHeight: '100vh',
+    height: '100vh',
     backgroundColor: tokens.colorBackground,
     color: tokens.colorText,
     fontFamily: tokens.fontFamilySans,
@@ -124,8 +131,24 @@ const styles = stylex.create({
 
 export function App() {
   const [dark, setDark] = useState(false);
-  const [activePage, setActivePage] = useState<string>('button');
+  const [activePage, setActivePage] = useState<string>('accordion');
   const theme = dark ? darkTheme : lightTheme;
+
+  // Apply theme to <html> so portaled content (dropdowns, dialogs) inherits tokens
+  useEffect(() => {
+    const themeProps = stylex.props(theme);
+    const el = document.documentElement;
+    if (themeProps.className) {
+      el.className = themeProps.className;
+    }
+    if (themeProps.style) {
+      Object.assign(el.style, themeProps.style);
+    }
+    return () => {
+      el.className = '';
+      el.style.cssText = '';
+    };
+  }, [dark]);
 
   const currentPage = pages.find((p) => p.id === activePage) ?? pages[0];
   const PageComponent = currentPage.component;

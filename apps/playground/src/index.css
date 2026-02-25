@@ -55,6 +55,18 @@
     opacity: 0;
     transform: scale(0.95);
   }
+
+  /* Autocomplete popup fade/slide animation */
+  .basex-autocomplete-popup {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+  }
+  .basex-autocomplete-popup[data-starting-style],
+  .basex-autocomplete-popup[data-ending-style] {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 }
 
 body {

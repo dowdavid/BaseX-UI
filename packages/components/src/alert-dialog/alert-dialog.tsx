@@ -107,7 +107,7 @@ const Trigger = forwardRef<HTMLButtonElement, AlertDialogTriggerProps>(
     <BaseAlertDialog.Trigger
       ref={ref}
       {...props}
-      className={sx ? (stylex.props(sx).className ?? undefined) : undefined}
+      className={sx ? (stylex.props(sx).className ?? '') : undefined}
     />
   ),
 );
@@ -174,7 +174,11 @@ Description.displayName = 'AlertDialog.Description';
 
 const Actions = forwardRef<HTMLDivElement, AlertDialogActionsProps>(
   ({ sx, ...props }, ref) => (
-    <div ref={ref} {...stylex.props(styles.actions, sx)} {...props} />
+    <div
+      ref={ref}
+      {...props}
+      className={stylex.props(styles.actions, sx).className ?? ''}
+    />
   ),
 );
 Actions.displayName = 'AlertDialog.Actions';
@@ -184,7 +188,7 @@ const Close = forwardRef<HTMLButtonElement, AlertDialogCloseProps>(
     <BaseAlertDialog.Close
       ref={ref}
       {...props}
-      className={sx ? (stylex.props(sx).className ?? undefined) : undefined}
+      className={sx ? (stylex.props(sx).className ?? '') : undefined}
     />
   ),
 );

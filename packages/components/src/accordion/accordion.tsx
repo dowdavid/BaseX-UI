@@ -1,6 +1,7 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { focusRing } from '@basex-ui/styles';
 import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -66,10 +67,7 @@ const styles = stylex.create({
     transitionProperty: 'all',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
-    outline: {
-      default: 'none',
-      ':focus-visible': `3px solid ${tokens.colorFocusRing}`,
-    },
+    // Focus ring applied via focusRing composition in stylex.props()
   },
 
   chevron: {
@@ -175,7 +173,7 @@ const Trigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
       ref={ref}
       {...props}
       className={(state) =>
-        stylex.props(styles.trigger, state.disabled && styles.disabled, sx).className ?? ''
+        stylex.props(styles.trigger, focusRing, state.disabled && styles.disabled, sx).className ?? ''
       }
       style={(state) =>
         ({

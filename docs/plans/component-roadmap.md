@@ -10,8 +10,8 @@
 |----|------------------|--------------------|-------------|------------------------------------------|
 | 1  | Accordion        | `Accordion`        | Done        |                                          |
 | 2  | Alert Dialog     | `AlertDialog`      | Done        |                                          |
-| 3  | Autocomplete     | `Autocomplete`     | **Next**    |                                          |
-| 4  | Avatar           | `Avatar`           | —           |                                          |
+| 3  | Autocomplete     | `Autocomplete`     | Done        |                                          |
+| 4  | Avatar           | `Avatar`           | **Next**    |                                          |
 | 5  | Button           | `Button`           | Done        |                                          |
 | 6  | Checkbox         | `Checkbox`         | —           |                                          |
 | 7  | Checkbox Group   | `CheckboxGroup`    | —           |                                          |
@@ -47,8 +47,8 @@
 
 ## Progress
 
-- **Done**: 3 / 36
-- **Next**: Autocomplete
+- **Done**: 4 / 36
+- **Next**: Avatar
 
 ## How to Use This File
 
