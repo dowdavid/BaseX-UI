@@ -3,14 +3,15 @@ import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { Button } from '@basex-ui/components';
-import { ButtonPage } from './pages/ButtonPage';
 import { AccordionPage } from './pages/AccordionPage';
 import { AlertDialogPage } from './pages/AlertDialogPage';
 import { AutocompletePage } from './pages/AutocompletePage';
 import { AvatarPage } from './pages/AvatarPage';
+import { ButtonPage } from './pages/ButtonPage';
 import { CheckboxPage } from './pages/CheckboxPage';
 import { CheckboxGroupPage } from './pages/CheckboxGroupPage';
 import { CollapsiblePage } from './pages/CollapsiblePage';
+import { ComboboxPage } from './pages/ComboboxPage';
 
 const pages = [
   {
@@ -38,6 +39,12 @@ const pages = [
     component: AvatarPage,
   },
   {
+    id: 'button',
+    label: 'Button',
+    description: 'A clickable element for triggering actions.',
+    component: ButtonPage,
+  },
+  {
     id: 'checkbox',
     label: 'Checkbox',
     description: 'A control for toggling between checked, unchecked, and indeterminate states.',
@@ -56,10 +63,10 @@ const pages = [
     component: CollapsiblePage,
   },
   {
-    id: 'button',
-    label: 'Button',
-    description: 'A clickable element for triggering actions.',
-    component: ButtonPage,
+    id: 'combobox',
+    label: 'Combobox',
+    description: 'A searchable select dropdown with optional multi-select.',
+    component: ComboboxPage,
   },
 ] as const;
 

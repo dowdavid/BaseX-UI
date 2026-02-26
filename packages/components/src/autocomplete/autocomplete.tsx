@@ -197,24 +197,18 @@ const styles = stylex.create({
     color: tokens.colorTextMuted,
   },
 
-  // --- Empty size axis ---
+  // --- Empty size axis (use consistent padding so text is visually centered) ---
   emptySizeSm: {
-    paddingBlock: tokens.space1,
-    paddingInline: tokens.space1h,
+    padding: tokens.space2,
     fontSize: tokens.fontSizeXs,
-    borderRadius: tokens.radiusSm,
   },
   emptySizeMd: {
-    paddingBlock: tokens.space1h,
-    paddingInline: tokens.space2,
+    padding: tokens.space2h,
     fontSize: tokens.fontSizeSm,
-    borderRadius: tokens.radiusSm,
   },
   emptySizeLg: {
-    paddingBlock: tokens.space2,
-    paddingInline: tokens.space2h,
+    padding: tokens.space3,
     fontSize: tokens.fontSizeMd,
-    borderRadius: tokens.radiusSm,
   },
 
   groupLabel: {

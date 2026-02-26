@@ -56,6 +56,10 @@
     "./autocomplete": {
       "types": "./dist/autocomplete/index.d.ts",
       "import": "./dist/autocomplete/index.js"
+    },
+    "./combobox": {
+      "types": "./dist/combobox/index.d.ts",
+      "import": "./dist/combobox/index.js"
     }
   },
   "files": [

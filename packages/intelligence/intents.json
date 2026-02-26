@@ -165,6 +165,27 @@
       "composition": "<Autocomplete.Root items={commands}>\n  <Autocomplete.Input placeholder=\"Type a command...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No commands found.</Autocomplete.Empty>\n    {(cmd) => (\n      <Autocomplete.Item key={cmd.id} value={cmd}>\n        {cmd.label}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
     },
     {
+      "intent": "searchable-select",
+      "component": "Combobox",
+      "signals": ["searchable select", "filterable select", "select with search", "searchable dropdown", "combobox", "pick from list"],
+      "reasoning": "Combobox is the primary component for selecting from a predefined list with the ability to search/filter options.",
+      "composition": "<Combobox.Root items={items}>\n  <Combobox.Input placeholder=\"Select...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results found.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    },
+    {
+      "intent": "filterable-dropdown",
+      "component": "Combobox",
+      "signals": ["filterable dropdown", "dropdown with filter", "dropdown search", "type to filter", "filter options"],
+      "reasoning": "Combobox provides a dropdown that filters options as the user types, ideal for long option lists.",
+      "composition": "<Combobox.Root items={options}>\n  <Combobox.Input placeholder=\"Choose...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No options.</Combobox.Empty>\n    {(option) => (\n      <Combobox.Item key={option.id} value={option}>\n        <Combobox.ItemIndicator />\n        {option.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    },
+    {
+      "intent": "multi-select-picker",
+      "component": "Combobox",
+      "signals": ["multi-select", "multi select dropdown", "pick multiple", "select multiple", "multi picker", "multiple selection"],
+      "reasoning": "Combobox with multiple mode allows selecting several items from a list with checkmark indicators.",
+      "composition": "<Combobox.Root items={items} multiple>\n  <Combobox.Input placeholder=\"Select items...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    },
+    {
       "intent": "tag-search",
       "component": "Autocomplete",
       "signals": ["tag input", "label search", "category filter", "filter by tag"],
@@ -298,6 +319,24 @@
       "scenario": "Switching between views or content panels",
       "reasoning": "Use Tabs instead. Collapsible reveals content in place; Tabs switch between distinct views.",
       "alternative": "Tabs"
+    },
+    {
+      "component": "Combobox",
+      "scenario": "Free-form text input with suggestions",
+      "reasoning": "Use Autocomplete instead. Combobox requires selection from a predefined list — the value is a selection, not free text.",
+      "alternative": "Autocomplete"
+    },
+    {
+      "component": "Combobox",
+      "scenario": "Short fixed list of options (5 or fewer)",
+      "reasoning": "Use Select for small lists where search is unnecessary overhead. Combobox adds complexity with its filter input.",
+      "alternative": "Select"
+    },
+    {
+      "component": "Combobox",
+      "scenario": "Simple text input without suggestions",
+      "reasoning": "Use Input directly. Combobox is for selecting from options, not free-form text entry.",
+      "alternative": "Input"
     },
     {
       "component": "Autocomplete",

@@ -79,6 +79,25 @@
     height: 0;
   }
 
+  /* Combobox popup fade/slide animation */
+  .basex-combobox-popup {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 150ms ease-out, transform 150ms ease-out;
+  }
+  .basex-combobox-popup[data-starting-style],
+  .basex-combobox-popup[data-ending-style] {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  /* Combobox group separator */
+  .basex-combobox-group + .basex-combobox-group {
+    border-top: 1px solid oklch(0.87 0 0 / 0.5);
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+
   /* Autocomplete popup fade/slide animation */
   .basex-autocomplete-popup {
     opacity: 1;
