@@ -3,29 +3,8 @@ import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { capitalize, focusRing } from '@basex-ui/styles';
 import { createContext, forwardRef, useContext } from 'react';
+import { X } from 'lucide-react';
 import type { StyleXStyles } from '@stylexjs/stylex';
-
-// --- Clear Icon ---
-function ClearIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 // --- Styles ---
 const styles = stylex.create({
@@ -367,7 +346,7 @@ const Input = forwardRef<HTMLInputElement, AutocompleteInputProps>(
         <BaseAutocomplete.Clear
           {...stylex.props(styles.clearButton, styles[clearKey])}
         >
-          <ClearIcon width={iconSize} height={iconSize} />
+          <X size={iconSize} />
         </BaseAutocomplete.Clear>
       </div>
     );
