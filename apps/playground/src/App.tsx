@@ -7,6 +7,10 @@ import { ButtonPage } from './pages/ButtonPage';
 import { AccordionPage } from './pages/AccordionPage';
 import { AlertDialogPage } from './pages/AlertDialogPage';
 import { AutocompletePage } from './pages/AutocompletePage';
+import { AvatarPage } from './pages/AvatarPage';
+import { CheckboxPage } from './pages/CheckboxPage';
+import { CheckboxGroupPage } from './pages/CheckboxGroupPage';
+import { CollapsiblePage } from './pages/CollapsiblePage';
 
 const pages = [
   {
@@ -26,6 +30,30 @@ const pages = [
     label: 'Autocomplete',
     description: 'A text input with a filterable suggestion dropdown.',
     component: AutocompletePage,
+  },
+  {
+    id: 'avatar',
+    label: 'Avatar',
+    description: 'A circular image or fallback representing a user or entity.',
+    component: AvatarPage,
+  },
+  {
+    id: 'checkbox',
+    label: 'Checkbox',
+    description: 'A control for toggling between checked, unchecked, and indeterminate states.',
+    component: CheckboxPage,
+  },
+  {
+    id: 'checkbox-group',
+    label: 'Checkbox Group',
+    description: 'A container that provides shared state to a series of checkboxes.',
+    component: CheckboxGroupPage,
+  },
+  {
+    id: 'collapsible',
+    label: 'Collapsible',
+    description: 'A single collapsible section with a trigger button and animated content panel.',
+    component: CollapsiblePage,
   },
   {
     id: 'button',

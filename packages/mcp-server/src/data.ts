@@ -18,14 +18,22 @@ import buttonManifest from '../../components/src/button/manifest.json';
 import accordionManifest from '../../components/src/accordion/manifest.json';
 import alertDialogManifest from '../../components/src/alert-dialog/manifest.json';
 import autocompleteManifest from '../../components/src/autocomplete/manifest.json';
+import avatarManifest from '../../components/src/avatar/manifest.json';
+import checkboxManifest from '../../components/src/checkbox/manifest.json';
+import checkboxGroupManifest from '../../components/src/checkbox-group/manifest.json';
+import collapsibleManifest from '../../components/src/collapsible/manifest.json';
 
-export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest | typeof autocompleteManifest;
+export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest | typeof autocompleteManifest | typeof avatarManifest | typeof checkboxManifest | typeof checkboxGroupManifest | typeof collapsibleManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
   ['accordion', accordionManifest],
   ['alert-dialog', alertDialogManifest],
   ['autocomplete', autocompleteManifest],
+  ['avatar', avatarManifest],
+  ['checkbox', checkboxManifest],
+  ['checkbox-group', checkboxGroupManifest],
+  ['collapsible', collapsibleManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -132,6 +140,16 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'popup fade/slide in', preset: 'Enter' },
       { interaction: 'popup fade/slide out', preset: 'Exit' },
       { interaction: 'item highlight', preset: 'State' },
+    ],
+    avatar: [],
+    checkbox: [
+      { interaction: 'indicator appear/disappear', preset: 'State' },
+    ],
+    'checkbox-group': [],
+    collapsible: [
+      { interaction: 'trigger hover/focus', preset: 'State' },
+      { interaction: 'chevron rotation', preset: 'Move' },
+      { interaction: 'panel expand/collapse', preset: 'Expand' },
     ],
   };
 

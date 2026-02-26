@@ -37,6 +37,22 @@
       "types": "./dist/alert-dialog/index.d.ts",
       "import": "./dist/alert-dialog/index.js"
     },
+    "./avatar": {
+      "types": "./dist/avatar/index.d.ts",
+      "import": "./dist/avatar/index.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "import": "./dist/checkbox/index.js"
+    },
+    "./checkbox-group": {
+      "types": "./dist/checkbox-group/index.d.ts",
+      "import": "./dist/checkbox-group/index.js"
+    },
+    "./collapsible": {
+      "types": "./dist/collapsible/index.d.ts",
+      "import": "./dist/collapsible/index.js"
+    },
     "./autocomplete": {
       "types": "./dist/autocomplete/index.d.ts",
       "import": "./dist/autocomplete/index.js"
@@ -53,9 +69,10 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@basex-ui/tokens": "workspace:*",
+    "@base-ui/react": "^1.2.0",
     "@basex-ui/styles": "workspace:*",
-    "@base-ui/react": "^1.2.0"
+    "@basex-ui/tokens": "workspace:*",
+    "lucide-react": "^0.575.0"
   },
   "peerDependencies": {
     "@stylexjs/stylex": ">=0.17.0",
@@ -63,11 +80,11 @@
     "react-dom": ">=18.0.0"
   },
   "devDependencies": {
-    "@stylexjs/stylex": "^0.17.5",
     "@stylexjs/babel-plugin": "^0.17.5",
+    "@stylexjs/stylex": "^0.17.5",
     "@types/react": "^19.0.0",
+    "react": "^19.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.7.0",
-    "react": "^19.0.0"
+    "typescript": "^5.7.0"
   }
 }

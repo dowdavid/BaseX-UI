@@ -23,6 +23,29 @@ export type {
   AlertDialogCloseProps,
 } from './alert-dialog';
 
+export { Avatar } from './avatar';
+export type {
+  AvatarRootProps,
+  AvatarImageProps,
+  AvatarFallbackProps,
+} from './avatar';
+
+export { Checkbox } from './checkbox';
+export type {
+  CheckboxRootProps,
+  CheckboxIndicatorProps,
+} from './checkbox';
+
+export { CheckboxGroup } from './checkbox-group';
+export type { CheckboxGroupRootProps } from './checkbox-group';
+
+export { Collapsible } from './collapsible';
+export type {
+  CollapsibleRootProps,
+  CollapsibleTriggerProps,
+  CollapsiblePanelProps,
+} from './collapsible';
+
 export { Autocomplete } from './autocomplete';
 export type {
   AutocompleteInputSize,

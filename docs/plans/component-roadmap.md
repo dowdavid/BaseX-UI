@@ -11,12 +11,12 @@
 | 1  | Accordion        | `Accordion`        | Done        |                                          |
 | 2  | Alert Dialog     | `AlertDialog`      | Done        |                                          |
 | 3  | Autocomplete     | `Autocomplete`     | Done        |                                          |
-| 4  | Avatar           | `Avatar`           | **Next**    |                                          |
+| 4  | Avatar           | `Avatar`           | Done        |                                          |
 | 5  | Button           | `Button`           | Done        |                                          |
-| 6  | Checkbox         | `Checkbox`         | —           |                                          |
-| 7  | Checkbox Group   | `CheckboxGroup`    | —           |                                          |
-| 8  | Collapsible      | `Collapsible`      | —           |                                          |
-| 9  | Combobox         | `Combobox`         | —           |                                          |
+| 6  | Checkbox         | `Checkbox`         | Done        |                                          |
+| 7  | Checkbox Group   | `CheckboxGroup`    | Done        |                                          |
+| 8  | Collapsible      | `Collapsible`      | Done        |                                          |
+| 9  | Combobox         | `Combobox`         | **Next**    |                                          |
 | 10 | Context Menu     | `ContextMenu`      | —           |                                          |
 | 11 | Dialog           | `Dialog`           | —           |                                          |
 | 12 | Drawer           | `Drawer`           | —           | Preview in Base UI                       |
@@ -47,8 +47,8 @@
 
 ## Progress
 
-- **Done**: 4 / 36
-- **Next**: Avatar
+- **Done**: 8 / 36
+- **Next**: Combobox
 
 ## How to Use This File
 

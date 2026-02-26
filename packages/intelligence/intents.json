@@ -81,6 +81,76 @@
       "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"ghost\">Leave</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Discard changes?</AlertDialog.Title>\n      <AlertDialog.Description>You have unsaved changes that will be lost.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Keep editing</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Discard</Button>} onClick={handleDiscard} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
     },
     {
+      "intent": "user-avatar",
+      "component": "Avatar",
+      "signals": ["avatar", "user photo", "profile picture", "user image", "profile pic"],
+      "reasoning": "Avatar displays a user's photo with automatic fallback to initials when the image is unavailable.",
+      "composition": "<Avatar.Root>\n  <Avatar.Image src=\"/photo.jpg\" alt=\"Jane Doe\" />\n  <Avatar.Fallback>JD</Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "intent": "initials-avatar",
+      "component": "Avatar",
+      "signals": ["initials", "name badge", "user initials", "letter avatar"],
+      "reasoning": "Avatar Fallback renders initials on a muted background when no image is available.",
+      "composition": "<Avatar.Root>\n  <Avatar.Fallback>AB</Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "intent": "icon-avatar",
+      "component": "Avatar",
+      "signals": ["icon avatar", "placeholder avatar", "default avatar", "anonymous avatar"],
+      "reasoning": "Avatar Fallback can render an icon SVG as a generic placeholder for anonymous or system users.",
+      "composition": "<Avatar.Root>\n  <Avatar.Fallback>\n    <UserIcon />\n  </Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "intent": "toggle-option",
+      "component": "Checkbox",
+      "signals": ["checkbox", "check", "tick", "toggle", "opt-in", "opt-out", "preference"],
+      "reasoning": "Checkbox is the standard control for toggling a boolean option that is saved with a form.",
+      "composition": "<label>\n  <Checkbox.Root>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Enable notifications\n</label>"
+    },
+    {
+      "intent": "agree-to-terms",
+      "component": "Checkbox",
+      "signals": ["terms", "conditions", "consent", "agree", "privacy policy", "GDPR"],
+      "reasoning": "A required checkbox is the standard UX pattern for explicit consent before form submission.",
+      "composition": "<label>\n  <Checkbox.Root required>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  I agree to the terms and conditions\n</label>"
+    },
+    {
+      "intent": "multi-select-list",
+      "component": "Checkbox",
+      "signals": ["multi-select", "bulk select", "select all", "batch", "multiple items"],
+      "reasoning": "Multiple checkboxes let users select several items from a list. Combine with an indeterminate parent for 'select all'.",
+      "composition": "<label>\n  <Checkbox.Root>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Item 1\n</label>\n<label>\n  <Checkbox.Root>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Item 2\n</label>"
+    },
+    {
+      "intent": "grouped-checkboxes",
+      "component": "CheckboxGroup",
+      "signals": ["checkbox group", "multiple checkboxes", "checkbox list", "grouped options", "multi-select form"],
+      "reasoning": "CheckboxGroup manages shared state across multiple checkboxes, tracking which items are selected via a value array.",
+      "composition": "<CheckboxGroup.Root defaultValue={['a']}>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option A\n  </label>\n  <label>\n    <Checkbox.Root name=\"b\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option B\n  </label>\n</CheckboxGroup.Root>"
+    },
+    {
+      "intent": "select-all-pattern",
+      "component": "CheckboxGroup",
+      "signals": ["select all", "check all", "parent checkbox", "indeterminate parent", "bulk select"],
+      "reasoning": "A parent checkbox inside a controlled CheckboxGroup auto-derives its checked/indeterminate state from children, providing a native select-all pattern. The group MUST be controlled (value + onValueChange) for the parent checkbox to work.",
+      "composition": "const [value, setValue] = useState<string[]>([]);\n\n<CheckboxGroup.Root allValues={['a', 'b', 'c']} value={value} onValueChange={setValue}>\n  <label>\n    <Checkbox.Root parent>\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Select all\n  </label>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option A\n  </label>\n</CheckboxGroup.Root>"
+    },
+    {
+      "intent": "collapsible-section",
+      "component": "Collapsible",
+      "signals": ["collapsible", "collapse", "expand", "toggle section", "show/hide"],
+      "reasoning": "Collapsible is the primary component for a single collapsible section with a trigger and animated panel.",
+      "composition": "<Collapsible.Root>\n  <Collapsible.Trigger>Toggle section</Collapsible.Trigger>\n  <Collapsible.Panel>Content here</Collapsible.Panel>\n</Collapsible.Root>"
+    },
+    {
+      "intent": "single-disclosure",
+      "component": "Collapsible",
+      "signals": ["show more", "reveal", "toggle content", "expandable", "disclosure"],
+      "reasoning": "Collapsible provides simple progressive disclosure — content is hidden by default and revealed on demand with an animated panel.",
+      "composition": "<Collapsible.Root>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Panel>Hidden content revealed on click</Collapsible.Panel>\n</Collapsible.Root>"
+    },
+    {
       "intent": "search-with-suggestions",
       "component": "Autocomplete",
       "signals": ["search", "autocomplete", "search input", "suggestion", "typeahead", "search box"],
@@ -168,6 +238,66 @@
       "scenario": "A dismissible overlay that can be closed by clicking outside",
       "reasoning": "AlertDialog cannot be dismissed by clicking outside — that's by design. Use Dialog if you want backdrop dismissal.",
       "alternative": "Use Dialog from @base-ui/react/dialog."
+    },
+    {
+      "component": "Avatar",
+      "scenario": "Displaying non-identity images (products, landscapes, thumbnails)",
+      "reasoning": "Avatar is semantically for identity. Use a plain <img> or a Card image for content images.",
+      "alternative": "Use a plain <img> element or a Card component."
+    },
+    {
+      "component": "Avatar",
+      "scenario": "Large hero or banner images",
+      "reasoning": "Avatar is 40px by default and circular. For large images use a dedicated hero/banner component.",
+      "alternative": "Use a plain <img> with custom styling."
+    },
+    {
+      "component": "Avatar",
+      "scenario": "Selectable user lists or user pickers",
+      "reasoning": "Avatar is presentational only. Wrap it inside a Checkbox, Radio, or Listbox item for selectable lists.",
+      "alternative": "Use Checkbox, Radio, or Listbox with Avatar inside."
+    },
+    {
+      "component": "Checkbox",
+      "scenario": "Binary on/off toggle with immediate effect (e.g., dark mode)",
+      "reasoning": "Use Switch for settings that take effect immediately without a form submission step.",
+      "alternative": "Switch"
+    },
+    {
+      "component": "Checkbox",
+      "scenario": "Single selection from a group of mutually exclusive options",
+      "reasoning": "Checkboxes allow multiple selections. Use Radio for single-select groups.",
+      "alternative": "Radio"
+    },
+    {
+      "component": "Checkbox",
+      "scenario": "Triggering an immediate action",
+      "reasoning": "Checkbox represents a state, not an action. Use Button for actions.",
+      "alternative": "Button"
+    },
+    {
+      "component": "CheckboxGroup",
+      "scenario": "A single standalone checkbox",
+      "reasoning": "Use Checkbox alone. CheckboxGroup adds overhead for managing a value array that isn't needed for a single toggle.",
+      "alternative": "Checkbox"
+    },
+    {
+      "component": "CheckboxGroup",
+      "scenario": "Mutually exclusive options where only one can be selected",
+      "reasoning": "Checkboxes allow multiple selections. Use Radio or RadioGroup for single-select.",
+      "alternative": "Radio"
+    },
+    {
+      "component": "Collapsible",
+      "scenario": "Multiple collapsible sections that belong together",
+      "reasoning": "Use Accordion instead. Accordion manages a group of collapsible sections with proper keyboard navigation and optional single-open behavior.",
+      "alternative": "Accordion"
+    },
+    {
+      "component": "Collapsible",
+      "scenario": "Switching between views or content panels",
+      "reasoning": "Use Tabs instead. Collapsible reveals content in place; Tabs switch between distinct views.",
+      "alternative": "Tabs"
     },
     {
       "component": "Autocomplete",
