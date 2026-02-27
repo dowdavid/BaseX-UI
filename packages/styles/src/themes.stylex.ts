@@ -38,6 +38,7 @@ export const lightTheme = stylex.createTheme(tokens, {
 
   colorText: 'oklch(0.15 0.02 260)',
   colorTextMuted: 'oklch(0.45 0.02 260)',
+  colorTextPlaceholder: 'oklch(0.62 0.01 260)',
   colorTextInverse: 'oklch(0.98 0 0)',
 
   colorFocusRing: 'oklch(0.7 0 0)',
@@ -144,6 +145,7 @@ export const darkTheme = stylex.createTheme(tokens, {
   // Text — light on dark
   colorText: 'oklch(0.93 0.005 260)',
   colorTextMuted: 'oklch(0.65 0.02 260)',
+  colorTextPlaceholder: 'oklch(0.48 0.01 260)',
   colorTextInverse: 'oklch(0.15 0.02 260)',
 
   // Focus — lighter neutral for dark backgrounds

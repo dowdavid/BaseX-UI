@@ -47,6 +47,7 @@ export const tokens = stylex.defineVars({
   // Text
   colorText: 'oklch(0.15 0.02 260)',
   colorTextMuted: 'oklch(0.45 0.02 260)',
+  colorTextPlaceholder: 'oklch(0.62 0.01 260)',
   colorTextInverse: 'oklch(0.98 0 0)',
 
   // Focus — neutral gray, not blue (matches COSS UI approach)

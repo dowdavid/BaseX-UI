@@ -32,6 +32,7 @@ const COLOR_PROPERTIES = [
   '--colorBorderMuted',
   '--colorText',
   '--colorTextMuted',
+  '--colorTextPlaceholder',
   '--colorTextInverse',
   '--colorFocusRing',
   '--colorBackground',

@@ -26,7 +26,7 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorder,
     '::placeholder': {
-      color: tokens.colorTextMuted,
+      color: tokens.colorTextPlaceholder,
     },
   },
 

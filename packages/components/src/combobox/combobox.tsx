@@ -40,7 +40,7 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorder,
     '::placeholder': {
-      color: tokens.colorTextMuted,
+      color: tokens.colorTextPlaceholder,
     },
   },
 
@@ -163,7 +163,7 @@ const styles = stylex.create({
     color: tokens.colorText,
     backgroundColor: 'transparent',
     '::placeholder': {
-      color: tokens.colorTextMuted,
+      color: tokens.colorTextPlaceholder,
     },
   },
 
