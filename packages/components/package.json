@@ -60,6 +60,10 @@
     "./combobox": {
       "types": "./dist/combobox/index.d.ts",
       "import": "./dist/combobox/index.js"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "import": "./dist/dialog/index.js"
     }
   },
   "files": [

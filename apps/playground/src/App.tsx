@@ -12,6 +12,7 @@ import { CheckboxPage } from './pages/CheckboxPage';
 import { CheckboxGroupPage } from './pages/CheckboxGroupPage';
 import { CollapsiblePage } from './pages/CollapsiblePage';
 import { ComboboxPage } from './pages/ComboboxPage';
+import { DialogPage } from './pages/DialogPage';
 
 const pages = [
   {
@@ -67,6 +68,12 @@ const pages = [
     label: 'Combobox',
     description: 'A searchable select dropdown with optional multi-select.',
     component: ComboboxPage,
+  },
+  {
+    id: 'dialog',
+    label: 'Dialog',
+    description: 'A general-purpose modal overlay for content, forms, or interactive flows.',
+    component: DialogPage,
   },
 ] as const;
 

@@ -39,6 +39,21 @@ export type {
 export { CheckboxGroup } from './checkbox-group';
 export type { CheckboxGroupRootProps } from './checkbox-group';
 
+export { Dialog } from './dialog';
+export type {
+  DialogRootProps,
+  DialogTriggerProps,
+  DialogPortalProps,
+  DialogBackdropProps,
+  DialogPopupProps,
+  DialogHeaderProps,
+  DialogTitleProps,
+  DialogDescriptionProps,
+  DialogPanelProps,
+  DialogFooterProps,
+  DialogCloseProps,
+} from './dialog';
+
 export { Collapsible } from './collapsible';
 export type {
   CollapsibleRootProps,

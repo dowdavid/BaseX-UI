@@ -56,6 +56,50 @@
     transform: scale(0.95);
   }
 
+  /* Dialog backdrop fade animation — Enter: 200ms ease-out */
+  .basex-dialog-backdrop {
+    opacity: 1;
+    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .basex-dialog-backdrop[data-starting-style],
+  .basex-dialog-backdrop[data-ending-style] {
+    opacity: 0;
+  }
+
+  /* Dialog popup scale/fade animation — Enter: 200ms ease-out */
+  .basex-dialog-popup {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1), transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .basex-dialog-popup[data-starting-style],
+  .basex-dialog-popup[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.95) translateY(0);
+  }
+
+  /* Nested dialog: parent recedes — Move: 200ms ease-in-out */
+  .basex-dialog-popup[data-nested-dialog-open] {
+    transform: scale(0.94) translateY(-8px);
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Dialog panel scroll indicators — State: 100ms ease-out */
+  .basex-dialog-panel {
+    --_shadow-top: inset 0 8px 6px -6px transparent;
+    --_shadow-bottom: inset 0 -8px 6px -6px transparent;
+    box-shadow: var(--_shadow-top), var(--_shadow-bottom);
+    transition: box-shadow 100ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .basex-dialog-panel[data-scroll-top] {
+    --_shadow-top: inset 0 8px 6px -6px oklch(0 0 0 / 0.08);
+  }
+  .basex-dialog-panel[data-scroll-bottom] {
+    --_shadow-bottom: inset 0 -8px 6px -6px oklch(0 0 0 / 0.08);
+  }
+
   /* Checkbox indicator enter/exit animation */
   .basex-checkbox-indicator {
     opacity: 1;

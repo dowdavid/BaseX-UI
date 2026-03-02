@@ -23,8 +23,9 @@ import checkboxManifest from '../../components/src/checkbox/manifest.json';
 import checkboxGroupManifest from '../../components/src/checkbox-group/manifest.json';
 import collapsibleManifest from '../../components/src/collapsible/manifest.json';
 import comboboxManifest from '../../components/src/combobox/manifest.json';
+import dialogManifest from '../../components/src/dialog/manifest.json';
 
-export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest | typeof autocompleteManifest | typeof avatarManifest | typeof checkboxManifest | typeof checkboxGroupManifest | typeof collapsibleManifest | typeof comboboxManifest;
+export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest | typeof autocompleteManifest | typeof avatarManifest | typeof checkboxManifest | typeof checkboxGroupManifest | typeof collapsibleManifest | typeof comboboxManifest | typeof dialogManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -36,6 +37,7 @@ const components = new Map<string, ComponentManifest>([
   ['checkbox-group', checkboxGroupManifest],
   ['collapsible', collapsibleManifest],
   ['combobox', comboboxManifest],
+  ['dialog', dialogManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -159,6 +161,14 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'popup fade/slide in', preset: 'Enter' },
       { interaction: 'popup fade/slide out', preset: 'Exit' },
       { interaction: 'item highlight', preset: 'State' },
+    ],
+    dialog: [
+      { interaction: 'backdrop fade in/out', preset: 'Enter' },
+      { interaction: 'popup scale/fade in', preset: 'Enter' },
+      { interaction: 'popup scale/fade out', preset: 'Exit' },
+      { interaction: 'nested stagger (parent recedes)', preset: 'Move' },
+      { interaction: 'close button hover', preset: 'State' },
+      { interaction: 'scroll indicators', preset: 'State' },
     ],
   };
 

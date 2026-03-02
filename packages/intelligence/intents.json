@@ -81,6 +81,27 @@
       "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"ghost\">Leave</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Discard changes?</AlertDialog.Title>\n      <AlertDialog.Description>You have unsaved changes that will be lost.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Keep editing</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Discard</Button>} onClick={handleDiscard} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
     },
     {
+      "intent": "display-detail-overlay",
+      "component": "Dialog",
+      "signals": ["view details", "show info", "more info", "detail modal", "preview", "lightbox"],
+      "reasoning": "Dialog is the right component for displaying focused informational content in an overlay that the user can easily dismiss.",
+      "composition": "<Dialog.Root>\n  <Dialog.Trigger render={<Button variant=\"outline\">View details</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <Dialog.Header>\n        <Dialog.Title>Item details</Dialog.Title>\n        <Dialog.Description>Detail content here.</Dialog.Description>\n      </Dialog.Header>\n      <Dialog.Panel>\n        {/* detail content */}\n      </Dialog.Panel>\n      <Dialog.Footer>\n        <Dialog.Close render={<Button variant=\"ghost\">Close</Button>} />\n      </Dialog.Footer>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    },
+    {
+      "intent": "modal-form",
+      "component": "Dialog",
+      "signals": ["edit", "create", "new", "form modal", "edit profile", "add item", "compose"],
+      "reasoning": "Dialog provides modal focus for form interactions, preventing accidental clicks outside while the user is editing.",
+      "composition": "<Dialog.Root open={open} onOpenChange={setOpen}>\n  <Dialog.Trigger render={<Button>Edit</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>\n        <Dialog.Header>\n          <Dialog.Title>Edit item</Dialog.Title>\n          <Dialog.Description>Update the fields below.</Dialog.Description>\n        </Dialog.Header>\n        <Dialog.Panel>\n          {/* form fields */}\n        </Dialog.Panel>\n        <Dialog.Footer>\n          <Dialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n          <Button type=\"submit\">Save</Button>\n        </Dialog.Footer>\n      </form>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    },
+    {
+      "intent": "settings-panel",
+      "component": "Dialog",
+      "signals": ["settings", "preferences", "configuration", "options modal"],
+      "reasoning": "Dialog works well for focused settings interactions that benefit from modal isolation without the forced-acknowledgment behaviour of AlertDialog.",
+      "composition": "<Dialog.Root>\n  <Dialog.Trigger render={<Button variant=\"outline\">Settings</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <Dialog.Header>\n        <Dialog.Title>Settings</Dialog.Title>\n        <Dialog.Description>Configure your preferences.</Dialog.Description>\n      </Dialog.Header>\n      <Dialog.Panel>\n        {/* settings controls */}\n      </Dialog.Panel>\n      <Dialog.Footer>\n        <Dialog.Close render={<Button>Done</Button>} />\n      </Dialog.Footer>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    },
+    {
       "intent": "user-avatar",
       "component": "Avatar",
       "signals": ["avatar", "user photo", "profile picture", "user image", "profile pic"],
@@ -259,6 +280,30 @@
       "scenario": "A dismissible overlay that can be closed by clicking outside",
       "reasoning": "AlertDialog cannot be dismissed by clicking outside — that's by design. Use Dialog if you want backdrop dismissal.",
       "alternative": "Use Dialog from @base-ui/react/dialog."
+    },
+    {
+      "component": "Dialog",
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Use AlertDialog instead. Dialog can be dismissed by clicking the backdrop, which is too easy to accidentally close for critical confirmations.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "component": "Dialog",
+      "scenario": "Non-critical transient feedback or status updates",
+      "reasoning": "Use Toast for ephemeral messages. Dialog demands too much attention for simple feedback.",
+      "alternative": "Toast"
+    },
+    {
+      "component": "Dialog",
+      "scenario": "Selecting from a list of options",
+      "reasoning": "Use Select or Combobox for option selection. Dialog is overweight for a simple pick-one interaction.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "component": "Dialog",
+      "scenario": "Content that should remain visible alongside the page",
+      "reasoning": "Dialog blocks the page behind an overlay. Use Collapsible or inline expansion for content that should coexist with the page.",
+      "alternative": "Collapsible"
     },
     {
       "component": "Avatar",
