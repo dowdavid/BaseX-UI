@@ -94,14 +94,32 @@ const styles = stylex.create({
     overflowY: 'auto',
   },
   sidebarHeader: {
-    fontSize: tokens.fontSizeSm,
-    fontWeight: tokens.fontWeightBold,
-    letterSpacing: tokens.letterSpacingWide,
-    color: tokens.colorTextMuted,
-    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
+    gap: tokens.space2,
     paddingBlock: tokens.space2,
     paddingInline: tokens.space2,
     marginBottom: tokens.space2,
+  },
+  logoMark: {
+    width: '24px',
+    height: '24px',
+    flexShrink: 0,
+    color: tokens.colorText,
+  },
+  logoInner: {
+    stroke: tokens.colorBackground,
+  },
+  logoText: {
+    fontSize: tokens.fontSizeSm,
+    fontWeight: tokens.fontWeightBold,
+    letterSpacing: tokens.letterSpacingWide,
+    color: tokens.colorText,
+    lineHeight: 1,
+  },
+  logoTextMuted: {
+    color: tokens.colorTextMuted,
+    fontWeight: tokens.fontWeightMedium,
   },
   navItem: {
     display: 'block',
@@ -191,7 +209,30 @@ export function App() {
   return (
     <div {...stylex.props(theme, styles.layout)}>
       <nav {...stylex.props(styles.sidebar)}>
-        <div {...stylex.props(styles.sidebarHeader)}>Components</div>
+        <div {...stylex.props(styles.sidebarHeader)}>
+          <svg
+            {...stylex.props(styles.logoMark)}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="24" height="24" rx="6" fill="currentColor" />
+            <path
+              d="M6 8.5L12 5L18 8.5V15.5L12 19L6 15.5V8.5Z"
+              {...stylex.props(styles.logoInner)}
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <path
+              d="M12 5V19M6 8.5L18 15.5M18 8.5L6 15.5"
+              {...stylex.props(styles.logoInner)}
+              strokeWidth="1.5"
+            />
+          </svg>
+          <div>
+            <div {...stylex.props(styles.logoText)}>Base-X UI</div>
+          </div>
+        </div>
         {pages.map((page) => (
           <button
             key={page.id}

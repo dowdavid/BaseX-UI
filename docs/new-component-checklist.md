@@ -105,7 +105,15 @@ Copy from `_template/component.md` and fill in:
 - [ ] Register in `apps/playground/src/App.tsx`: import, add to `pages` array with `id`, `label`, `description`, `component`
 - [ ] Add any required global CSS to `apps/playground/src/index.css`
 
-## 9. Verification
+## 9. Update Roadmap
+
+**File**: `docs/plans/component-roadmap.md`
+
+- [ ] Mark current component as **Done**
+- [ ] Set the next component to **Next**
+- [ ] Update the **Done** count in the Progress section
+
+## 10. Verification
 
 After all files are in place:
 

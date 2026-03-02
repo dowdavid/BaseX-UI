@@ -16,9 +16,9 @@
 | 6  | Checkbox         | `Checkbox`         | Done        |                                          |
 | 7  | Checkbox Group   | `CheckboxGroup`    | Done        |                                          |
 | 8  | Collapsible      | `Collapsible`      | Done        |                                          |
-| 9  | Combobox         | `Combobox`         | **Next**    |                                          |
+| 9  | Combobox         | `Combobox`         | Done        |                                          |
 | 10 | Context Menu     | `ContextMenu`      | —           |                                          |
-| 11 | Dialog           | `Dialog`           | —           |                                          |
+| 11 | Dialog           | `Dialog`           | **Next**    |                                          |
 | 12 | Drawer           | `Drawer`           | —           | Preview in Base UI                       |
 | 13 | Field            | `Field`            | —           |                                          |
 | 14 | Fieldset         | `Fieldset`         | —           |                                          |
@@ -47,8 +47,8 @@
 
 ## Progress
 
-- **Done**: 8 / 36
-- **Next**: Combobox
+- **Done**: 9 / 36
+- **Next**: Dialog
 
 ## How to Use This File
 
