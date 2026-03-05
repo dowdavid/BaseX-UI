@@ -1,0 +1,299 @@
+{
+  "name": "Drawer",
+  "description": "A slide-out panel anchored to a screen edge for supplementary content, navigation, or forms. Supports swipe-to-dismiss, snap points, and nested drawers. Built on Base UI Drawer with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/drawer",
+
+  "anatomy": "<Drawer.Root>\n  <Drawer.Trigger />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title />\n        <Drawer.Description />\n      </Drawer.Header>\n      <Drawer.Panel>\n        {/* scrollable content */}\n      </Drawer.Panel>\n      <Drawer.Footer>\n        <Drawer.Close />\n      </Drawer.Footer>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "State container. Renders no DOM element. Provides swipe direction context to child parts.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initial open state for uncontrolled mode."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, eventDetails: ChangeEventDetails) => void",
+          "description": "Callback fired when the drawer opens or closes."
+        },
+        "onOpenChangeComplete": {
+          "type": "(open: boolean) => void",
+          "description": "Callback fired after open/close animations complete."
+        },
+        "modal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the drawer is modal (traps focus and renders backdrop)."
+        },
+        "swipeDirection": {
+          "type": "'up' | 'down' | 'left' | 'right'",
+          "default": "down",
+          "description": "Direction to swipe to dismiss. Also determines which screen edge the drawer anchors to."
+        },
+        "snapPoints": {
+          "type": "number[]",
+          "description": "Array of snap points (0–1) the drawer can rest at when swiped."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "Button that opens the drawer. Unstyled by default — use the render prop to swap in a styled Button.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element. Use to render a styled Button."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the drawer is open.",
+        "data-disabled": "Present when the trigger is disabled."
+      }
+    },
+    "Portal": {
+      "element": "div",
+      "description": "Renders children in a React portal outside the DOM tree.",
+      "props": {
+        "keepMounted": {
+          "type": "boolean",
+          "description": "Keep in DOM when closed. Pass true if you need exit animations and handle closed-state visibility in CSS."
+        },
+        "container": {
+          "type": "HTMLElement | ShadowRoot | RefObject",
+          "description": "Target parent element for the portal."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Backdrop": {
+      "element": "div",
+      "description": "Semi-transparent overlay behind the drawer. Clicking it closes the drawer. Has fade animation via global CSS.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the drawer is open.",
+        "data-closed": "Present when the drawer is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "The drawer panel anchored to a screen edge based on swipeDirection. Positioned fixed with rounded corners on the opening side. Includes an optional close button (X icon) in the top-right corner.",
+      "props": {
+        "showCloseButton": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show the X close button in the top-right corner."
+        },
+        "initialFocus": {
+          "type": "boolean | RefObject | () => HTMLElement",
+          "description": "Element to focus when the drawer opens."
+        },
+        "finalFocus": {
+          "type": "boolean | RefObject | () => HTMLElement",
+          "description": "Element to focus when the drawer closes."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the drawer is open.",
+        "data-closed": "Present when the drawer is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation.",
+        "data-nested": "Present when nested inside another drawer.",
+        "data-nested-drawer-open": "Present when a child drawer is open.",
+        "data-swiping": "Present while the user is actively swiping.",
+        "data-swipe-direction": "The configured swipe direction (up, down, left, right).",
+        "data-expanded": "Present when the drawer is fully expanded."
+      }
+    },
+    "Header": {
+      "element": "div",
+      "description": "Container for Title and Description. Provides consistent padding above the scrollable Panel. Custom part not in Base UI.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Title": {
+      "element": "h2",
+      "description": "Drawer heading. Automatically wired to aria-labelledby.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Description": {
+      "element": "p",
+      "description": "Drawer body text below the title. Automatically wired to aria-describedby.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Panel": {
+      "element": "div",
+      "description": "Scrollable content area between Header and Footer. Uses data attributes and inset box-shadow for scroll indicators. Custom part not in Base UI.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-scroll-top": "Present when content is scrolled away from the top (more content above).",
+        "data-scroll-bottom": "Present when there is more content below the visible area."
+      }
+    },
+    "Footer": {
+      "element": "div",
+      "description": "Flex row for action buttons (Cancel/Submit/Done). Custom part not in Base UI.",
+      "props": {
+        "variant": {
+          "type": "'default' | 'bordered'",
+          "default": "default",
+          "description": "Visual style. 'default' has no top border, 'bordered' adds a separator line."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Close": {
+      "element": "button",
+      "description": "Button that closes the drawer on click. Unstyled — use the render prop to swap in a styled Button.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element. Use to render a styled Button."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when disabled."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Backdrop fade and popup slide animations require global CSS rules inside @layer priority1. StyleX cannot target data-attribute selectors, so these rules must live in the consumer's global stylesheet.",
+    "css": "@layer priority1 {\n  /* Drawer backdrop fade animation — Enter: 200ms ease-out */\n  .basex-drawer-backdrop {\n    opacity: 1;\n    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-drawer-backdrop[data-starting-style],\n  .basex-drawer-backdrop[data-ending-style] {\n    opacity: 0;\n  }\n\n  /* Drawer popup slide animation (bottom) — Enter: 200ms ease-out, Exit: 100ms ease-out */\n  .basex-drawer-popup {\n    opacity: 1;\n    transform: translate(0, 0);\n    transition:\n      opacity 200ms cubic-bezier(0, 0, 0.2, 1),\n      transform 200ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-drawer-popup[data-ending-style] {\n    transition:\n      opacity 100ms cubic-bezier(0, 0, 0.2, 1),\n      transform 100ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-drawer-popup[data-starting-style],\n  .basex-drawer-popup[data-ending-style] {\n    opacity: 0;\n  }\n  /* Bottom (default): slide up from below */\n  .basex-drawer-popup[data-swipe-direction='down'][data-starting-style],\n  .basex-drawer-popup[data-swipe-direction='down'][data-ending-style] {\n    transform: translateY(100%);\n  }\n  /* Top: slide down from above */\n  .basex-drawer-popup[data-swipe-direction='up'][data-starting-style],\n  .basex-drawer-popup[data-swipe-direction='up'][data-ending-style] {\n    transform: translateY(-100%);\n  }\n  /* Left: slide in from the left */\n  .basex-drawer-popup[data-swipe-direction='left'][data-starting-style],\n  .basex-drawer-popup[data-swipe-direction='left'][data-ending-style] {\n    transform: translateX(-100%);\n  }\n  /* Right: slide in from the right */\n  .basex-drawer-popup[data-swipe-direction='right'][data-starting-style],\n  .basex-drawer-popup[data-swipe-direction='right'][data-ending-style] {\n    transform: translateX(100%);\n  }\n\n  /* Drawer panel scroll indicators — State: 100ms ease-out */\n  .basex-drawer-panel {\n    --_shadow-top: inset 0 8px 6px -6px transparent;\n    --_shadow-bottom: inset 0 -8px 6px -6px transparent;\n    box-shadow: var(--_shadow-top), var(--_shadow-bottom);\n    transition: box-shadow 100ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-drawer-panel[data-scroll-top] {\n    --_shadow-top: inset 0 8px 6px -6px oklch(0 0 0 / 0.08);\n  }\n  .basex-drawer-panel[data-scroll-bottom] {\n    --_shadow-bottom: inset 0 -8px 6px -6px oklch(0 0 0 / 0.08);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorOverlay",
+    "colorSurface",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorBorderMuted",
+    "fontFamilySans",
+    "fontSizeLg",
+    "fontSizeSm",
+    "fontWeightSemibold",
+    "lineHeightTight",
+    "lineHeightNormal",
+    "radiusLg",
+    "radiusSm",
+    "shadowLg",
+    "motionDurationFast",
+    "motionEaseOut",
+    "space1",
+    "space3",
+    "space4",
+    "space5",
+    "space6"
+  ],
+
+  "intents": [
+    {
+      "intent": "side-panel-navigation",
+      "signals": ["menu", "navigation", "sidebar", "nav drawer", "hamburger menu", "mobile menu"],
+      "reasoning": "Drawer is ideal for navigation menus that slide in from a screen edge, especially on mobile where horizontal space is limited.",
+      "composition": "<Drawer.Root swipeDirection=\"left\">\n  <Drawer.Trigger render={<Button variant=\"ghost\">Menu</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title>Navigation</Drawer.Title>\n      </Drawer.Header>\n      <Drawer.Panel>\n        <nav>\n          {/* navigation links */}\n        </nav>\n      </Drawer.Panel>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "mobile-bottom-sheet",
+      "signals": ["bottom sheet", "action sheet", "share", "options", "mobile actions", "swipe up"],
+      "reasoning": "Drawer with default bottom positioning provides a natural mobile bottom sheet pattern with swipe-to-dismiss support.",
+      "composition": "<Drawer.Root>\n  <Drawer.Trigger render={<Button>Share</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title>Share</Drawer.Title>\n        <Drawer.Description>Choose how to share this content.</Drawer.Description>\n      </Drawer.Header>\n      <Drawer.Panel>\n        {/* share options */}\n      </Drawer.Panel>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "supplementary-form-panel",
+      "signals": ["edit panel", "side form", "detail editor", "filter panel", "create sidebar"],
+      "reasoning": "Drawer provides a non-disruptive overlay for forms and editors that supplements the main content without fully obscuring it.",
+      "composition": "<Drawer.Root swipeDirection=\"right\" open={open} onOpenChange={setOpen}>\n  <Drawer.Trigger render={<Button>Edit</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>\n        <Drawer.Header>\n          <Drawer.Title>Edit item</Drawer.Title>\n          <Drawer.Description>Update the fields below.</Drawer.Description>\n        </Drawer.Header>\n        <Drawer.Panel>\n          {/* form fields */}\n        </Drawer.Panel>\n        <Drawer.Footer>\n          <Drawer.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n          <Button type=\"submit\">Save</Button>\n        </Drawer.Footer>\n      </form>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Use AlertDialog instead. Drawer can be swiped away too easily, which is inappropriate for critical confirmations that require deliberate acknowledgement.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "scenario": "Displaying a small contextual tooltip or popover",
+      "reasoning": "Use Popover or Tooltip instead. Drawer is too heavy for a small piece of contextual information anchored to an element.",
+      "alternative": "Popover or Tooltip"
+    },
+    {
+      "scenario": "Content that requires centred modal focus with no directional anchoring",
+      "reasoning": "Use Dialog instead. Dialog centres content and provides scale/fade animations better suited for focused modal interactions.",
+      "alternative": "Dialog"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic bottom drawer with title and content",
+      "code": "<Drawer.Root>\n  <Drawer.Trigger render={<Button>Open drawer</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title>Drawer title</Drawer.Title>\n        <Drawer.Description>A simple drawer with some content.</Drawer.Description>\n      </Drawer.Header>\n      <Drawer.Panel>\n        <p>Drawer content goes here.</p>\n      </Drawer.Panel>\n      <Drawer.Footer>\n        <Drawer.Close render={<Button>Close</Button>} />\n      </Drawer.Footer>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "name": "form",
+      "description": "Form drawer with submit and cancel actions",
+      "code": "const [open, setOpen] = useState(false);\n\n<Drawer.Root open={open} onOpenChange={setOpen}>\n  <Drawer.Trigger render={<Button>Add item</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>\n        <Drawer.Header>\n          <Drawer.Title>Add item</Drawer.Title>\n          <Drawer.Description>Fill in the details below.</Drawer.Description>\n        </Drawer.Header>\n        <Drawer.Panel>\n          {/* form fields */}\n        </Drawer.Panel>\n        <Drawer.Footer>\n          <Drawer.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n          <Button type=\"submit\">Save</Button>\n        </Drawer.Footer>\n      </form>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "name": "navigation",
+      "description": "Left-anchored navigation drawer",
+      "code": "<Drawer.Root swipeDirection=\"left\">\n  <Drawer.Trigger render={<Button variant=\"ghost\">Menu</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup showCloseButton={false}>\n      <Drawer.Header>\n        <Drawer.Title>Navigation</Drawer.Title>\n      </Drawer.Header>\n      <Drawer.Panel>\n        <nav>\n          <a href=\"/home\">Home</a>\n          <a href=\"/settings\">Settings</a>\n          <a href=\"/about\">About</a>\n        </nav>\n      </Drawer.Panel>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    }
+  ]
+}
