@@ -1,0 +1,20 @@
+export { ContextMenu } from './context-menu';
+export type {
+  ContextMenuRootProps,
+  ContextMenuTriggerProps,
+  ContextMenuPortalProps,
+  ContextMenuPositionerProps,
+  ContextMenuPopupProps,
+  ContextMenuItemProps,
+  ContextMenuLinkItemProps,
+  ContextMenuCheckboxItemProps,
+  ContextMenuCheckboxItemIndicatorProps,
+  ContextMenuRadioGroupProps,
+  ContextMenuRadioItemProps,
+  ContextMenuRadioItemIndicatorProps,
+  ContextMenuSeparatorProps,
+  ContextMenuGroupProps,
+  ContextMenuGroupLabelProps,
+  ContextMenuSubmenuRootProps,
+  ContextMenuSubmenuTriggerProps,
+} from './context-menu';
