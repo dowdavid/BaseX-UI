@@ -101,15 +101,9 @@ export function FormPage() {
       >
         <Form
           errors={serverErrors}
-          onClearErrors={(names) => {
-            setServerErrors((prev) => {
-              const next = { ...prev };
-              names.forEach((n) => delete next[n]);
-              return next;
-            });
-          }}
           onSubmit={(e) => {
             e.preventDefault();
+            setServerErrors({});
             setServerSubmitting(true);
             // Simulate server response delay
             setTimeout(() => {

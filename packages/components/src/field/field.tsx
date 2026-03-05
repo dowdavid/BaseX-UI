@@ -103,7 +103,7 @@ export interface FieldErrorProps
 }
 
 export interface FieldControlProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseField.Control>, 'className'> {
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseField.Control>, 'className' | 'size'> {
   size?: FieldControlSize;
   sx?: StyleXStyles;
 }

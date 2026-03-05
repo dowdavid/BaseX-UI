@@ -212,6 +212,69 @@
       "signals": ["tag input", "label search", "category filter", "filter by tag"],
       "reasoning": "Autocomplete works well for searching through and selecting from a list of tags or labels.",
       "composition": "<Autocomplete.Root items={tags}>\n  <Autocomplete.Input placeholder=\"Search tags...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No tags found.</Autocomplete.Empty>\n    {(tag) => (\n      <Autocomplete.Item key={tag.id} value={tag}>\n        {tag.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "intent": "side-panel-navigation",
+      "component": "Drawer",
+      "signals": ["drawer", "side panel", "navigation menu", "hamburger menu", "mobile menu", "off-canvas"],
+      "reasoning": "Drawer provides a slide-out panel anchored to a screen edge, ideal for navigation menus on mobile or supplementary content.",
+      "composition": "<Drawer.Root swipeDirection=\"left\">\n  <Drawer.Trigger render={<Button variant=\"outline\">Menu</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title>Navigation</Drawer.Title>\n      </Drawer.Header>\n      <Drawer.Panel>\n        <nav>{/* nav links */}</nav>\n      </Drawer.Panel>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "mobile-bottom-sheet",
+      "component": "Drawer",
+      "signals": ["bottom sheet", "action sheet", "swipe up", "pull up", "mobile panel"],
+      "reasoning": "Drawer with default bottom swipe direction provides a mobile-native bottom sheet pattern with swipe-to-dismiss.",
+      "composition": "<Drawer.Root>\n  <Drawer.Trigger render={<Button>Open</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title>Options</Drawer.Title>\n      </Drawer.Header>\n      <Drawer.Panel>\n        {/* content */}\n      </Drawer.Panel>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "supplementary-form-panel",
+      "component": "Drawer",
+      "signals": ["form drawer", "create drawer", "add item drawer", "edit drawer", "side form"],
+      "reasoning": "Drawer provides a slide-out panel for forms that don't need the full-screen blocking of a Dialog.",
+      "composition": "<Drawer.Root>\n  <Drawer.Trigger render={<Button>Add item</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>\n        <Drawer.Header>\n          <Drawer.Title>Add item</Drawer.Title>\n        </Drawer.Header>\n        <Drawer.Panel>\n          {/* form fields */}\n        </Drawer.Panel>\n        <Drawer.Footer>\n          <Drawer.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n          <Button type=\"submit\">Save</Button>\n        </Drawer.Footer>\n      </form>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "form-field",
+      "component": "Field",
+      "signals": ["form field", "input field", "labeled input", "text field", "field wrapper"],
+      "reasoning": "Field connects a label, description, input control, and validation error with proper accessibility attributes.",
+      "composition": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Field.Control type=\"email\" placeholder=\"you@example.com\" />\n  <Field.Error />\n</Field.Root>"
+    },
+    {
+      "intent": "validated-input",
+      "component": "Field",
+      "signals": ["validation", "required field", "field error", "input validation", "form error"],
+      "reasoning": "Field automatically connects validation errors to the input control for screen readers via aria-describedby.",
+      "composition": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Field.Control type=\"email\" required />\n  <Field.Error match=\"typeMismatch\">Please enter a valid email.</Field.Error>\n  <Field.Error match=\"valueMissing\">Email is required.</Field.Error>\n</Field.Root>"
+    },
+    {
+      "intent": "group-form-fields",
+      "component": "Fieldset",
+      "signals": ["fieldset", "field group", "form section", "group fields", "related fields"],
+      "reasoning": "Fieldset semantically groups related form controls with an accessible legend, essential for screen readers.",
+      "composition": "<Fieldset.Root>\n  <Fieldset.Legend>Personal information</Fieldset.Legend>\n  <Field.Root>\n    <Field.Label>Name</Field.Label>\n    <Field.Control />\n  </Field.Root>\n</Fieldset.Root>"
+    },
+    {
+      "intent": "disabled-field-group",
+      "component": "Fieldset",
+      "signals": ["disable group", "disable section", "readonly section", "locked fields"],
+      "reasoning": "Fieldset's disabled prop cascades to all child form controls, providing a single switch to disable an entire group.",
+      "composition": "<Fieldset.Root disabled>\n  <Fieldset.Legend>Locked section</Fieldset.Legend>\n  {/* All fields within are disabled */}\n</Fieldset.Root>"
+    },
+    {
+      "intent": "form-with-validation",
+      "component": "Form",
+      "signals": ["form", "submit", "validation", "server errors", "form validation"],
+      "reasoning": "Form manages server-side validation errors and distributes them to child Field components automatically.",
+      "composition": "<Form errors={serverErrors} onClearErrors={handleClearErrors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    },
+    {
+      "intent": "server-validated-form",
+      "component": "Form",
+      "signals": ["server validation", "API errors", "backend errors", "form errors", "error display"],
+      "reasoning": "Form's errors prop accepts a record of server-side errors keyed by field name, automatically distributing them to matching Field.Error components.",
+      "composition": "<Form errors={errors} onClearErrors={handleClear} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
     }
   ],
   "antiPatterns": [
@@ -400,6 +463,60 @@
       "scenario": "Simple text input without suggestions",
       "reasoning": "Use Input directly. Autocomplete adds overhead for the popup and filtering logic that is unnecessary without suggestions.",
       "alternative": "Use Input."
+    },
+    {
+      "component": "Drawer",
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Use AlertDialog instead. Drawer is too easy to dismiss for critical confirmations.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "component": "Drawer",
+      "scenario": "Simple tooltip or hover information",
+      "reasoning": "Use Tooltip or Popover for lightweight contextual information. Drawer is overweight for a hover tip.",
+      "alternative": "Tooltip or Popover"
+    },
+    {
+      "component": "Drawer",
+      "scenario": "Full-page content that needs centered modal focus",
+      "reasoning": "Use Dialog for centered modal overlays. Drawer is anchored to an edge and slides in, which doesn't suit centered content.",
+      "alternative": "Dialog"
+    },
+    {
+      "component": "Field",
+      "scenario": "A standalone label without an input control",
+      "reasoning": "Use a plain <label> element. Field's value is in connecting label, control, and error — without a control it adds no benefit.",
+      "alternative": "Plain <label> element"
+    },
+    {
+      "component": "Field",
+      "scenario": "Complex multi-input groups (e.g., date range with two inputs)",
+      "reasoning": "Use Fieldset to group multiple related inputs. Field is for a single label-control pair.",
+      "alternative": "Fieldset"
+    },
+    {
+      "component": "Fieldset",
+      "scenario": "A single standalone form field",
+      "reasoning": "Use Field alone. Fieldset is for grouping multiple related fields.",
+      "alternative": "Field"
+    },
+    {
+      "component": "Fieldset",
+      "scenario": "Visual-only section dividers without semantic grouping",
+      "reasoning": "Use a heading or Separator for visual organization. Fieldset adds semantic grouping that affects assistive technology.",
+      "alternative": "Separator or heading element"
+    },
+    {
+      "component": "Form",
+      "scenario": "A form without server-side validation",
+      "reasoning": "If you only need client-side validation, a plain <form> element works fine. Form adds value when you need to pipe server errors to Field components.",
+      "alternative": "Plain <form> element"
+    },
+    {
+      "component": "Form",
+      "scenario": "Non-form content layout",
+      "reasoning": "Form renders a <form> element. Don't use it as a generic flex-column layout container.",
+      "alternative": "A plain <div> with flex styling"
     }
   ]
 }

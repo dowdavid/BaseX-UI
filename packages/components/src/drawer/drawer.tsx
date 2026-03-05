@@ -9,7 +9,7 @@
  * - `sx` prop on every part for consumer overrides
  * - `forwardRef` on every part
  */
-import { Drawer as BaseDrawer } from '@base-ui/react/drawer';
+import { DrawerPreview as BaseDrawer } from '@base-ui/react/drawer';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { X } from 'lucide-react';
@@ -167,8 +167,16 @@ const popupStyles: Record<SwipeDirection, keyof typeof styles> = {
 };
 
 // --- Types ---
-export interface DrawerRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseDrawer.Root> {}
+export interface DrawerRootProps {
+  open?: boolean;
+  defaultOpen?: boolean;
+  modal?: boolean | 'trap-focus';
+  onOpenChange?: (open: boolean, eventDetails: unknown) => void;
+  onOpenChangeComplete?: (open: boolean) => void;
+  swipeDirection?: SwipeDirection;
+  children?: React.ReactNode;
+  [key: string]: unknown;
+}
 
 export interface DrawerTriggerProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Trigger>, 'className'> {
