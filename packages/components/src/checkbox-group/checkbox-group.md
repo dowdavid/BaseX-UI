@@ -115,19 +115,19 @@ Set `disabled` on the Root to prevent all interaction across the group.
 
 ### CheckboxGroup.Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string[]` | — | Names of the checked checkboxes. Use for controlled mode. |
-| `defaultValue` | `string[]` | — | Names of the initially checked checkboxes. Use for uncontrolled mode. |
-| `onValueChange` | `(value: string[], eventDetails: object) => void` | — | Callback fired when a checkbox is ticked or unticked. |
-| `allValues` | `string[]` | — | All possible checkbox names. Required for the parent checkbox pattern. |
-| `disabled` | `boolean` | `false` | Whether all checkboxes should ignore user interaction. |
-| `sx` | `StyleXStyles` | — | StyleX overrides. |
+| Prop            | Type                                              | Default | Description                                                            |
+| --------------- | ------------------------------------------------- | ------- | ---------------------------------------------------------------------- |
+| `value`         | `string[]`                                        | —       | Names of the checked checkboxes. Use for controlled mode.              |
+| `defaultValue`  | `string[]`                                        | —       | Names of the initially checked checkboxes. Use for uncontrolled mode.  |
+| `onValueChange` | `(value: string[], eventDetails: object) => void` | —       | Callback fired when a checkbox is ticked or unticked.                  |
+| `allValues`     | `string[]`                                        | —       | All possible checkbox names. Required for the parent checkbox pattern. |
+| `disabled`      | `boolean`                                         | `false` | Whether all checkboxes should ignore user interaction.                 |
+| `sx`            | `StyleXStyles`                                    | —       | StyleX overrides.                                                      |
 
 ### Data Attributes (Root)
 
-| Attribute | Description |
-|-----------|-------------|
+| Attribute       | Description                         |
+| --------------- | ----------------------------------- |
 | `data-disabled` | Present when the group is disabled. |
 
 ## When to Use

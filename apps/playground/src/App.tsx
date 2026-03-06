@@ -13,6 +13,10 @@ import { CheckboxGroupPage } from './pages/CheckboxGroupPage';
 import { CollapsiblePage } from './pages/CollapsiblePage';
 import { ComboboxPage } from './pages/ComboboxPage';
 import { DialogPage } from './pages/DialogPage';
+import { DrawerPage } from './pages/DrawerPage';
+import { FieldPage } from './pages/FieldPage';
+import { FieldsetPage } from './pages/FieldsetPage';
+import { FormPage } from './pages/FormPage';
 
 const pages = [
   {
@@ -74,6 +78,30 @@ const pages = [
     label: 'Dialog',
     description: 'A general-purpose modal overlay for content, forms, or interactive flows.',
     component: DialogPage,
+  },
+  {
+    id: 'drawer',
+    label: 'Drawer',
+    description: 'A slide-out panel anchored to a screen edge for supplementary content.',
+    component: DrawerPage,
+  },
+  {
+    id: 'field',
+    label: 'Field',
+    description: 'A form field wrapper connecting label, control, description, and error.',
+    component: FieldPage,
+  },
+  {
+    id: 'fieldset',
+    label: 'Fieldset',
+    description: 'A semantic grouping container for related form fields.',
+    component: FieldsetPage,
+  },
+  {
+    id: 'form',
+    label: 'Form',
+    description: 'An enhanced form element with server-side validation error management.',
+    component: FormPage,
   },
 ] as const;
 

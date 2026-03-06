@@ -57,34 +57,42 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface AlertDialogRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Root> {}
+export type AlertDialogRootProps = React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Root>;
 
-export interface AlertDialogTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Trigger>, 'className'> {
+export interface AlertDialogTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Trigger>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AlertDialogPortalProps
-  extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Portal> {}
+export type AlertDialogPortalProps = React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Portal>;
 
-export interface AlertDialogBackdropProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Backdrop>, 'className'> {
+export interface AlertDialogBackdropProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Backdrop>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AlertDialogPopupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Popup>, 'className'> {
+export interface AlertDialogPopupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Popup>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AlertDialogTitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Title>, 'className'> {
+export interface AlertDialogTitleProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Title>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AlertDialogDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Description>, 'className'> {
+export interface AlertDialogDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Description>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -92,8 +100,10 @@ export interface AlertDialogActionsProps extends React.HTMLAttributes<HTMLDivEle
   sx?: StyleXStyles;
 }
 
-export interface AlertDialogCloseProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Close>, 'className'> {
+export interface AlertDialogCloseProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Close>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -102,15 +112,13 @@ export interface AlertDialogCloseProps
 const Root = (props: AlertDialogRootProps) => <BaseAlertDialog.Root {...props} />;
 Root.displayName = 'AlertDialog.Root';
 
-const Trigger = forwardRef<HTMLButtonElement, AlertDialogTriggerProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAlertDialog.Trigger
-      ref={ref}
-      {...props}
-      className={sx ? (stylex.props(sx).className ?? '') : undefined}
-    />
-  ),
-);
+const Trigger = forwardRef<HTMLButtonElement, AlertDialogTriggerProps>(({ sx, ...props }, ref) => (
+  <BaseAlertDialog.Trigger
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+  />
+));
 Trigger.displayName = 'AlertDialog.Trigger';
 
 const Portal = ({ keepMounted = true, ...props }: AlertDialogPortalProps) => (
@@ -118,24 +126,20 @@ const Portal = ({ keepMounted = true, ...props }: AlertDialogPortalProps) => (
 );
 Portal.displayName = 'AlertDialog.Portal';
 
-const Backdrop = forwardRef<HTMLDivElement, AlertDialogBackdropProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAlertDialog.Backdrop
-      ref={ref}
-      {...props}
-      className={() =>
-        `basex-alert-dialog-backdrop ${stylex.props(styles.backdrop, sx).className ?? ''}`
-      }
-    />
-  ),
-);
+const Backdrop = forwardRef<HTMLDivElement, AlertDialogBackdropProps>(({ sx, ...props }, ref) => (
+  <BaseAlertDialog.Backdrop
+    ref={ref}
+    {...props}
+    className={() =>
+      `basex-alert-dialog-backdrop ${stylex.props(styles.backdrop, sx).className ?? ''}`
+    }
+  />
+));
 Backdrop.displayName = 'AlertDialog.Backdrop';
 
 const Popup = forwardRef<HTMLDivElement, AlertDialogPopupProps>(
   ({ children, sx, ...props }, ref) => (
-    <BaseAlertDialog.Viewport
-      className={stylex.props(styles.viewport).className ?? ''}
-    >
+    <BaseAlertDialog.Viewport className={stylex.props(styles.viewport).className ?? ''}>
       <BaseAlertDialog.Popup
         ref={ref}
         {...props}
@@ -150,15 +154,13 @@ const Popup = forwardRef<HTMLDivElement, AlertDialogPopupProps>(
 );
 Popup.displayName = 'AlertDialog.Popup';
 
-const Title = forwardRef<HTMLHeadingElement, AlertDialogTitleProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAlertDialog.Title
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.title, sx).className ?? ''}
-    />
-  ),
-);
+const Title = forwardRef<HTMLHeadingElement, AlertDialogTitleProps>(({ sx, ...props }, ref) => (
+  <BaseAlertDialog.Title
+    ref={ref}
+    {...props}
+    className={stylex.props(styles.title, sx).className ?? ''}
+  />
+));
 Title.displayName = 'AlertDialog.Title';
 
 const Description = forwardRef<HTMLParagraphElement, AlertDialogDescriptionProps>(
@@ -172,26 +174,18 @@ const Description = forwardRef<HTMLParagraphElement, AlertDialogDescriptionProps
 );
 Description.displayName = 'AlertDialog.Description';
 
-const Actions = forwardRef<HTMLDivElement, AlertDialogActionsProps>(
-  ({ sx, ...props }, ref) => (
-    <div
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.actions, sx).className ?? ''}
-    />
-  ),
-);
+const Actions = forwardRef<HTMLDivElement, AlertDialogActionsProps>(({ sx, ...props }, ref) => (
+  <div ref={ref} {...props} className={stylex.props(styles.actions, sx).className ?? ''} />
+));
 Actions.displayName = 'AlertDialog.Actions';
 
-const Close = forwardRef<HTMLButtonElement, AlertDialogCloseProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAlertDialog.Close
-      ref={ref}
-      {...props}
-      className={sx ? (stylex.props(sx).className ?? '') : undefined}
-    />
-  ),
-);
+const Close = forwardRef<HTMLButtonElement, AlertDialogCloseProps>(({ sx, ...props }, ref) => (
+  <BaseAlertDialog.Close
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+  />
+));
 Close.displayName = 'AlertDialog.Close';
 
 // --- Public API ---

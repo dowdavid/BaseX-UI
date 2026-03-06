@@ -41,7 +41,7 @@ const fruits = [
       </Combobox.Item>
     )}
   </Combobox.Popup>
-</Combobox.Root>
+</Combobox.Root>;
 ```
 
 ### Multi-select
@@ -99,7 +99,7 @@ const produce = [
       </Combobox.Group>
     )}
   </Combobox.Popup>
-</Combobox.Root>
+</Combobox.Root>;
 ```
 
 ### Sizes
@@ -119,7 +119,9 @@ Popup animation and group separators require global CSS inside `@layer priority1
   .basex-combobox-popup {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-combobox-popup[data-starting-style],
   .basex-combobox-popup[data-ending-style] {
@@ -140,85 +142,85 @@ Popup animation and group separators require global CSS inside `@layer priority1
 
 State container. No DOM element rendered.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `items` | `ItemValue[] \| Group[]` | **required** | Items to display |
-| `value` | `Value \| Value[] \| null` | — | Controlled selected value |
-| `defaultValue` | `Value \| Value[] \| null` | — | Initial value (uncontrolled) |
-| `onValueChange` | `(value, details) => void` | — | Selection change callback |
-| `multiple` | `boolean` | `false` | Allow multiple selections |
-| `open` | `boolean` | — | Controlled popup visibility |
-| `onOpenChange` | `(open, details) => void` | — | Popup open/close callback |
-| `onInputValueChange` | `(inputValue, details) => void` | — | Search input change callback |
-| `filter` | `(itemValue, query) => boolean` | contains | Custom filter function |
-| `autoHighlight` | `boolean` | `false` | Auto-highlight first match |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of all parts |
-| `getItemLabel` | `(item) => string` | `.label \| .value \| String()` | Convert item to display label for pills |
-| `disabled` | `boolean` | `false` | Disable all interactions |
+| Prop                 | Type                            | Default                        | Description                             |
+| -------------------- | ------------------------------- | ------------------------------ | --------------------------------------- |
+| `items`              | `ItemValue[] \| Group[]`        | **required**                   | Items to display                        |
+| `value`              | `Value \| Value[] \| null`      | —                              | Controlled selected value               |
+| `defaultValue`       | `Value \| Value[] \| null`      | —                              | Initial value (uncontrolled)            |
+| `onValueChange`      | `(value, details) => void`      | —                              | Selection change callback               |
+| `multiple`           | `boolean`                       | `false`                        | Allow multiple selections               |
+| `open`               | `boolean`                       | —                              | Controlled popup visibility             |
+| `onOpenChange`       | `(open, details) => void`       | —                              | Popup open/close callback               |
+| `onInputValueChange` | `(inputValue, details) => void` | —                              | Search input change callback            |
+| `filter`             | `(itemValue, query) => boolean` | contains                       | Custom filter function                  |
+| `autoHighlight`      | `boolean`                       | `false`                        | Auto-highlight first match              |
+| `size`               | `'sm' \| 'md' \| 'lg'`          | `'md'`                         | Size of all parts                       |
+| `getItemLabel`       | `(item) => string`              | `.label \| .value \| String()` | Convert item to display label for pills |
+| `disabled`           | `boolean`                       | `false`                        | Disable all interactions                |
 
 ### Input
 
 Main searchable input. In single-select mode, includes a chevron icon and clear button. In multi-select mode, renders a flex-wrap container with removable pills.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `placeholder` | `string` | — | Placeholder text (hidden when pills are present in multi-select) |
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop          | Type           | Default | Description                                                      |
+| ------------- | -------------- | ------- | ---------------------------------------------------------------- |
+| `placeholder` | `string`       | —       | Placeholder text (hidden when pills are present in multi-select) |
+| `sx`          | `StyleXStyles` | —       | Consumer style overrides                                         |
 
 ### Popup
 
 Dropdown panel (Portal + Positioner + List internalized).
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop | Type           | Default | Description              |
+| ---- | -------------- | ------- | ------------------------ |
+| `sx` | `StyleXStyles` | —       | Consumer style overrides |
 
 ### Item
 
 A single selectable option.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `any` | **required** | Item value |
-| `disabled` | `boolean` | `false` | Disable this item |
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop       | Type           | Default      | Description              |
+| ---------- | -------------- | ------------ | ------------------------ |
+| `value`    | `any`          | **required** | Item value               |
+| `disabled` | `boolean`      | `false`      | Disable this item        |
+| `sx`       | `StyleXStyles` | —            | Consumer style overrides |
 
 ### ItemIndicator
 
 Checkmark shown when item is selected. Always mounted to reserve space for consistent alignment.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop | Type           | Default | Description              |
+| ---- | -------------- | ------- | ------------------------ |
+| `sx` | `StyleXStyles` | —       | Consumer style overrides |
 
 ### Clear
 
 Button to reset selection. Built into Input by default; also available standalone.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop | Type           | Default | Description              |
+| ---- | -------------- | ------- | ------------------------ |
+| `sx` | `StyleXStyles` | —       | Consumer style overrides |
 
 ### Empty
 
 Shown when no items match the filter.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop | Type           | Default | Description              |
+| ---- | -------------- | ------- | ------------------------ |
+| `sx` | `StyleXStyles` | —       | Consumer style overrides |
 
 ### Group
 
 Groups related items. Adjacent groups get a separator border automatically via global CSS.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop | Type           | Default | Description              |
+| ---- | -------------- | ------- | ------------------------ |
+| `sx` | `StyleXStyles` | —       | Consumer style overrides |
 
 ### GroupLabel
 
 Heading for a group.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | — | Consumer style overrides |
+| Prop | Type           | Default | Description              |
+| ---- | -------------- | ------- | ------------------------ |
+| `sx` | `StyleXStyles` | —       | Consumer style overrides |

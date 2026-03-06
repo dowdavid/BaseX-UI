@@ -89,7 +89,11 @@ const Indicator = forwardRef<HTMLSpanElement, CheckboxIndicatorProps>(({ sx, ...
     }
     render={(renderProps, state) => (
       <span {...renderProps}>
-        {state.indeterminate ? <Minus size={12} strokeWidth={3.5} /> : <Check size={12} strokeWidth={3.5} />}
+        {state.indeterminate ? (
+          <Minus size={12} strokeWidth={3.5} />
+        ) : (
+          <Check size={12} strokeWidth={3.5} />
+        )}
       </span>
     )}
   />

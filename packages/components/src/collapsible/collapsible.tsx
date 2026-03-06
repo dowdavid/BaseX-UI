@@ -86,9 +86,7 @@ const Root = forwardRef<HTMLDivElement, CollapsibleRootProps>(({ sx, ...props },
   <BaseCollapsible.Root
     ref={ref}
     {...props}
-    className={(state) =>
-      stylex.props(state.disabled && styles.disabled, sx).className ?? ''
-    }
+    className={(state) => stylex.props(state.disabled && styles.disabled, sx).className ?? ''}
   />
 ));
 Root.displayName = 'Collapsible.Root';
@@ -99,7 +97,8 @@ const Trigger = forwardRef<HTMLButtonElement, CollapsibleTriggerProps>(
       ref={ref}
       {...props}
       className={(state) =>
-        stylex.props(styles.trigger, focusRing, state.disabled && styles.disabled, sx).className ?? ''
+        stylex.props(styles.trigger, focusRing, state.disabled && styles.disabled, sx).className ??
+        ''
       }
       style={(state) =>
         ({
@@ -114,16 +113,18 @@ const Trigger = forwardRef<HTMLButtonElement, CollapsibleTriggerProps>(
 );
 Trigger.displayName = 'Collapsible.Trigger';
 
-const Panel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(({ children, sx, ...props }, ref) => (
-  <BaseCollapsible.Panel
-    keepMounted
-    ref={ref}
-    {...props}
-    className={() => `basex-collapsible-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
-  >
-    <div {...stylex.props(styles.panelContent)}>{children}</div>
-  </BaseCollapsible.Panel>
-));
+const Panel = forwardRef<HTMLDivElement, CollapsiblePanelProps>(
+  ({ children, sx, ...props }, ref) => (
+    <BaseCollapsible.Panel
+      keepMounted
+      ref={ref}
+      {...props}
+      className={() => `basex-collapsible-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
+    >
+      <div {...stylex.props(styles.panelContent)}>{children}</div>
+    </BaseCollapsible.Panel>
+  ),
+);
 Panel.displayName = 'Collapsible.Panel';
 
 // --- Public API ---

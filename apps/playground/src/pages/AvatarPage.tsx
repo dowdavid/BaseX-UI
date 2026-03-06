@@ -37,17 +37,11 @@ export function AvatarPage() {
       >
         <div {...stylex.props(overrides.row)}>
           <Avatar.Root>
-            <Avatar.Image
-              src="https://i.pravatar.cc/80?u=jane"
-              alt="Jane Doe"
-            />
+            <Avatar.Image src="https://i.pravatar.cc/80?u=jane" alt="Jane Doe" />
             <Avatar.Fallback>JD</Avatar.Fallback>
           </Avatar.Root>
           <Avatar.Root>
-            <Avatar.Image
-              src="https://i.pravatar.cc/80?u=alex"
-              alt="Alex Smith"
-            />
+            <Avatar.Image src="https://i.pravatar.cc/80?u=alex" alt="Alex Smith" />
             <Avatar.Fallback>AS</Avatar.Fallback>
           </Avatar.Root>
         </div>

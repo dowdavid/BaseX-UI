@@ -232,7 +232,14 @@
   "intents": [
     {
       "intent": "search-with-suggestions",
-      "signals": ["search", "autocomplete", "search input", "suggestion", "typeahead", "search box"],
+      "signals": [
+        "search",
+        "autocomplete",
+        "search input",
+        "suggestion",
+        "typeahead",
+        "search box"
+      ],
       "reasoning": "Autocomplete is the primary component for text inputs that show filtered suggestions as the user types.",
       "composition": "<Autocomplete.Root items={items}>\n  <Autocomplete.Input placeholder=\"Search...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No results found.</Autocomplete.Empty>\n    {(item) => (\n      <Autocomplete.Item key={item.id} value={item}>\n        {item.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
     },

@@ -24,17 +24,10 @@ export type {
 } from './alert-dialog';
 
 export { Avatar } from './avatar';
-export type {
-  AvatarRootProps,
-  AvatarImageProps,
-  AvatarFallbackProps,
-} from './avatar';
+export type { AvatarRootProps, AvatarImageProps, AvatarFallbackProps } from './avatar';
 
 export { Checkbox } from './checkbox';
-export type {
-  CheckboxRootProps,
-  CheckboxIndicatorProps,
-} from './checkbox';
+export type { CheckboxRootProps, CheckboxIndicatorProps } from './checkbox';
 
 export { CheckboxGroup } from './checkbox-group';
 export type { CheckboxGroupRootProps } from './checkbox-group';
@@ -86,3 +79,35 @@ export type {
   ComboboxGroupProps,
   ComboboxGroupLabelProps,
 } from './combobox';
+
+export { Drawer } from './drawer';
+export type {
+  DrawerRootProps,
+  DrawerTriggerProps,
+  DrawerPortalProps,
+  DrawerBackdropProps,
+  DrawerPopupProps,
+  DrawerHeaderProps,
+  DrawerTitleProps,
+  DrawerDescriptionProps,
+  DrawerPanelProps,
+  DrawerFooterProps,
+  DrawerCloseProps,
+} from './drawer';
+
+export { Field } from './field';
+export type {
+  FieldControlSize,
+  FieldRootProps,
+  FieldLabelProps,
+  FieldDescriptionProps,
+  FieldErrorProps,
+  FieldControlProps,
+  FieldValidityProps,
+} from './field';
+
+export { Fieldset } from './fieldset';
+export type { FieldsetRootProps, FieldsetLegendProps } from './fieldset';
+
+export { Form } from './form';
+export type { FormProps } from './form';

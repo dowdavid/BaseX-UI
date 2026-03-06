@@ -47,11 +47,7 @@ export function Preview({ title, description, constrained, children }: PreviewPr
       <h2 {...stylex.props(styles.title)}>{title}</h2>
       {description && <p {...stylex.props(styles.description)}>{description}</p>}
       <div {...stylex.props(styles.card)}>
-        {constrained ? (
-          <div {...stylex.props(styles.constrained)}>{children}</div>
-        ) : (
-          children
-        )}
+        {constrained ? <div {...stylex.props(styles.constrained)}>{children}</div> : children}
       </div>
     </section>
   );

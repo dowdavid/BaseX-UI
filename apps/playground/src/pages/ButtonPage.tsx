@@ -51,10 +51,7 @@ export function ButtonPage() {
         </div>
       </Preview>
 
-      <Preview
-        title="Sizes"
-        description="Small, medium, and large."
-      >
+      <Preview title="Sizes" description="Small, medium, and large.">
         <div {...stylex.props(styles.row)}>
           {sizes.map((size) => (
             <Button key={size} size={size}>
@@ -64,10 +61,7 @@ export function ButtonPage() {
         </div>
       </Preview>
 
-      <Preview
-        title="Disabled"
-        description="Reduced opacity with no pointer events."
-      >
+      <Preview title="Disabled" description="Reduced opacity with no pointer events.">
         <div {...stylex.props(styles.row)}>
           {variants.map((variant) => (
             <Button key={variant} variant={variant} disabled>

@@ -2,7 +2,15 @@ import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { capitalize, focusRing } from '@basex-ui/styles';
-import { createContext, forwardRef, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import {
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { ChevronDown, X, Check } from 'lucide-react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -427,51 +435,71 @@ const ComboboxInternalContext = createContext<ComboboxInternalContextValue>({
   anchorRef: { current: null },
 });
 
-export interface ComboboxRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseCombobox.Root> {
+export interface ComboboxRootProps extends React.ComponentPropsWithoutRef<
+  typeof BaseCombobox.Root
+> {
   size?: ComboboxSize;
   /** Convert an item to its display label for pills. Defaults to item.label ?? item.value ?? String(item). */
   getItemLabel?: (item: unknown) => string;
 }
 
-export interface ComboboxInputProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Input>, 'className' | 'size'> {
+export interface ComboboxInputProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.Input>,
+  'className' | 'size'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ComboboxPopupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Popup>, 'className' | 'children'> {
+export interface ComboboxPopupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.Popup>,
+  'className' | 'children'
+> {
   sx?: StyleXStyles;
-  children?: React.ReactNode | ((item: never) => React.ReactNode) | Array<React.ReactNode | ((item: never) => React.ReactNode)>;
+  children?:
+    | React.ReactNode
+    | ((item: never) => React.ReactNode)
+    | Array<React.ReactNode | ((item: never) => React.ReactNode)>;
 }
 
-export interface ComboboxItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Item>, 'className'> {
-  sx?: StyleXStyles;
-}
-
-export interface ComboboxItemIndicatorProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.ItemIndicator>, 'className'> {
-  sx?: StyleXStyles;
-}
-
-export interface ComboboxClearProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Clear>, 'className'> {
+export interface ComboboxItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.Item>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ComboboxEmptyProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Empty>, 'className'> {
+export interface ComboboxItemIndicatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.ItemIndicator>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ComboboxGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.Group>, 'className'> {
+export interface ComboboxClearProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.Clear>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ComboboxGroupLabelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseCombobox.GroupLabel>, 'className'> {
+export interface ComboboxEmptyProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.Empty>,
+  'className'
+> {
+  sx?: StyleXStyles;
+}
+
+export interface ComboboxGroupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.Group>,
+  'className'
+> {
+  sx?: StyleXStyles;
+}
+
+export interface ComboboxGroupLabelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseCombobox.GroupLabel>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -499,10 +527,8 @@ const Root = ({
 
   const currentValue = isControlled ? valueProp : internalValue;
   const hasValue =
-    currentValue != null &&
-    !(Array.isArray(currentValue) && currentValue.length === 0);
-  const selectedValues =
-    multiple && Array.isArray(currentValue) ? currentValue : [];
+    currentValue != null && !(Array.isArray(currentValue) && currentValue.length === 0);
+  const selectedValues = multiple && Array.isArray(currentValue) ? currentValue : [];
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
@@ -525,14 +551,9 @@ const Root = ({
   const removeValue = useCallback(
     (itemToRemove: unknown) => {
       if (!multiple) return;
-      const newValues = (currentValue as unknown[]).filter(
-        (v) => v !== itemToRemove,
-      );
+      const newValues = (currentValue as unknown[]).filter((v) => v !== itemToRemove);
       if (!isControlled) setInternalValue(newValues);
-      (onValueChange as ((...a: unknown[]) => void) | undefined)?.(
-        newValues,
-        undefined,
-      );
+      (onValueChange as ((...a: unknown[]) => void) | undefined)?.(newValues, undefined);
     },
     [multiple, currentValue, isControlled, onValueChange],
   );
@@ -540,10 +561,7 @@ const Root = ({
   const handleValueChange = useCallback(
     (value: unknown, context: unknown) => {
       if (!isControlled) setInternalValue(value);
-      (onValueChange as ((...a: unknown[]) => void) | undefined)?.(
-        value,
-        context,
-      );
+      (onValueChange as ((...a: unknown[]) => void) | undefined)?.(value, context);
     },
     [isControlled, onValueChange],
   );
@@ -561,10 +579,7 @@ const Root = ({
         return;
       }
       if (!isOpenControlled) setInternalOpen(open);
-      (userOnOpenChange as ((...a: unknown[]) => void) | undefined)?.(
-        open,
-        context,
-      );
+      (userOnOpenChange as ((...a: unknown[]) => void) | undefined)?.(open, context);
     },
     [isOpenControlled, multiple, userOnOpenChange],
   );
@@ -591,155 +606,139 @@ const Root = ({
 };
 Root.displayName = 'Combobox.Root';
 
-const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(
-  ({ sx, ...props }, ref) => {
-    const size = useContext(SizeContext);
-    const { multiple, hasValue, selectedValues, removeValue, getItemLabel, anchorRef } =
-      useContext(ComboboxInternalContext);
-    const cap = capitalize(size);
+const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(({ sx, ...props }, ref) => {
+  const size = useContext(SizeContext);
+  const { multiple, hasValue, selectedValues, removeValue, getItemLabel, anchorRef } =
+    useContext(ComboboxInternalContext);
+  const cap = capitalize(size);
 
-    // --- Multi-select mode: bordered wrapper with pills + inline input ---
-    if (multiple) {
-      const wrapperKey = `multiWrapperSize${cap}` as const;
-      const inlineKey = `inputInlineSize${cap}` as const;
-      const pillKey = `pillSize${cap}` as const;
-      const pillRemKey = `pillRemoveSize${cap}` as const;
-      const pillIconSz = pillRemoveIconSize[size];
-
-      return (
-        <div ref={anchorRef} {...stylex.props(styles.multiWrapper, styles[wrapperKey], sx)}>
-          {selectedValues.map((item) => (
-            <span key={getItemLabel(item)} {...stylex.props(styles.pill, styles[pillKey])}>
-              <span {...stylex.props(styles.pillText)}>
-                {getItemLabel(item)}
-              </span>
-              <button
-                type="button"
-                aria-label={`Remove ${getItemLabel(item)}`}
-                onPointerDown={(e) => { e.stopPropagation(); e.preventDefault(); }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeValue(item);
-                }}
-                {...stylex.props(styles.pillRemove, styles[pillRemKey])}
-              >
-                <X size={pillIconSz} />
-              </button>
-            </span>
-          ))}
-          <BaseCombobox.Input
-            ref={ref}
-            {...props}
-            placeholder={selectedValues.length > 0 ? undefined : props.placeholder}
-            className={(state) =>
-              stylex.props(
-                styles.inputInline,
-                styles[inlineKey],
-                state.disabled && styles.disabled,
-              ).className ?? ''
-            }
-          />
-        </div>
-      );
-    }
-
-    // --- Single-select mode: bordered input + chevron / clear ---
-    const sizeKey = `inputSize${cap}` as const;
-    const endKey = `endSize${cap}` as const;
-    const chevronSz = chevronIconSize[size];
-    const clearSz = clearIconSizeMap[size];
+  // --- Multi-select mode: bordered wrapper with pills + inline input ---
+  if (multiple) {
+    const wrapperKey = `multiWrapperSize${cap}` as const;
+    const inlineKey = `inputInlineSize${cap}` as const;
+    const pillKey = `pillSize${cap}` as const;
+    const pillRemKey = `pillRemoveSize${cap}` as const;
+    const pillIconSz = pillRemoveIconSize[size];
 
     return (
-      <div {...stylex.props(styles.inputWrapper)}>
+      <div ref={anchorRef} {...stylex.props(styles.multiWrapper, styles[wrapperKey], sx)}>
+        {selectedValues.map((item) => (
+          <span key={getItemLabel(item)} {...stylex.props(styles.pill, styles[pillKey])}>
+            <span {...stylex.props(styles.pillText)}>{getItemLabel(item)}</span>
+            <button
+              type="button"
+              aria-label={`Remove ${getItemLabel(item)}`}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                removeValue(item);
+              }}
+              {...stylex.props(styles.pillRemove, styles[pillRemKey])}
+            >
+              <X size={pillIconSz} />
+            </button>
+          </span>
+        ))}
         <BaseCombobox.Input
           ref={ref}
           {...props}
+          placeholder={selectedValues.length > 0 ? undefined : props.placeholder}
           className={(state) =>
-            stylex.props(
-              styles.input,
-              styles[sizeKey],
-              focusRing,
-              state.disabled && styles.disabled,
-              sx,
-            ).className ?? ''
+            stylex.props(styles.inputInline, styles[inlineKey], state.disabled && styles.disabled)
+              .className ?? ''
           }
         />
-        {hasValue ? (
-          <BaseCombobox.Clear
-            {...stylex.props(styles.clearButton, styles[endKey])}
-          >
-            <X size={clearSz} />
-          </BaseCombobox.Clear>
-        ) : (
-          <span {...stylex.props(styles.endIcon, styles[endKey])}>
-            <ChevronDown size={chevronSz} />
-          </span>
-        )}
       </div>
     );
-  },
-);
-Input.displayName = 'Combobox.Input';
+  }
 
-const Popup = forwardRef<HTMLDivElement, ComboboxPopupProps>(
-  ({ children, sx, ...props }, ref) => {
-    const { multiple, anchorRef } = useContext(ComboboxInternalContext);
-    const raw = Array.isArray(children) ? children : [children];
-    const renderFn = raw.find((c) => typeof c === 'function');
-    const nonFnChildren = raw.filter(
-      (c) => typeof c !== 'function',
-    ) as React.ReactNode[];
+  // --- Single-select mode: bordered input + chevron / clear ---
+  const sizeKey = `inputSize${cap}` as const;
+  const endKey = `endSize${cap}` as const;
+  const chevronSz = chevronIconSize[size];
+  const clearSz = clearIconSizeMap[size];
 
-    return (
-      <BaseCombobox.Portal keepMounted>
-        <BaseCombobox.Positioner
-          sideOffset={6}
-          anchor={multiple ? anchorRef : undefined}
-          className={stylex.props(styles.positioner).className ?? ''}
-        >
-          <BaseCombobox.Popup
-            ref={ref}
-            {...props}
-            className={() =>
-              `basex-combobox-popup ${stylex.props(styles.popup, sx).className ?? ''}`
-            }
-          >
-            <BaseCombobox.List
-              className={stylex.props(styles.list).className ?? ''}
-            >
-              {renderFn as React.ReactNode}
-            </BaseCombobox.List>
-            {nonFnChildren}
-          </BaseCombobox.Popup>
-        </BaseCombobox.Positioner>
-      </BaseCombobox.Portal>
-    );
-  },
-);
-Popup.displayName = 'Combobox.Popup';
-
-const Item = forwardRef<HTMLDivElement, ComboboxItemProps>(
-  ({ sx, ...props }, ref) => {
-    const size = useContext(SizeContext);
-    const itemKey = `itemSize${capitalize(size)}` as const;
-    return (
-      <BaseCombobox.Item
+  return (
+    <div {...stylex.props(styles.inputWrapper)}>
+      <BaseCombobox.Input
         ref={ref}
         {...props}
         className={(state) =>
           stylex.props(
-            styles.item,
-            styles[itemKey],
-            state.highlighted && styles.itemHighlighted,
-            state.selected && styles.itemSelected,
-            state.disabled && styles.itemDisabled,
+            styles.input,
+            styles[sizeKey],
+            focusRing,
+            state.disabled && styles.disabled,
             sx,
           ).className ?? ''
         }
       />
-    );
-  },
-);
+      {hasValue ? (
+        <BaseCombobox.Clear {...stylex.props(styles.clearButton, styles[endKey])}>
+          <X size={clearSz} />
+        </BaseCombobox.Clear>
+      ) : (
+        <span {...stylex.props(styles.endIcon, styles[endKey])}>
+          <ChevronDown size={chevronSz} />
+        </span>
+      )}
+    </div>
+  );
+});
+Input.displayName = 'Combobox.Input';
+
+const Popup = forwardRef<HTMLDivElement, ComboboxPopupProps>(({ children, sx, ...props }, ref) => {
+  const { multiple, anchorRef } = useContext(ComboboxInternalContext);
+  const raw = Array.isArray(children) ? children : [children];
+  const renderFn = raw.find((c) => typeof c === 'function');
+  const nonFnChildren = raw.filter((c) => typeof c !== 'function') as React.ReactNode[];
+
+  return (
+    <BaseCombobox.Portal keepMounted>
+      <BaseCombobox.Positioner
+        sideOffset={6}
+        anchor={multiple ? anchorRef : undefined}
+        className={stylex.props(styles.positioner).className ?? ''}
+      >
+        <BaseCombobox.Popup
+          ref={ref}
+          {...props}
+          className={() => `basex-combobox-popup ${stylex.props(styles.popup, sx).className ?? ''}`}
+        >
+          <BaseCombobox.List className={stylex.props(styles.list).className ?? ''}>
+            {renderFn as React.ReactNode}
+          </BaseCombobox.List>
+          {nonFnChildren}
+        </BaseCombobox.Popup>
+      </BaseCombobox.Positioner>
+    </BaseCombobox.Portal>
+  );
+});
+Popup.displayName = 'Combobox.Popup';
+
+const Item = forwardRef<HTMLDivElement, ComboboxItemProps>(({ sx, ...props }, ref) => {
+  const size = useContext(SizeContext);
+  const itemKey = `itemSize${capitalize(size)}` as const;
+  return (
+    <BaseCombobox.Item
+      ref={ref}
+      {...props}
+      className={(state) =>
+        stylex.props(
+          styles.item,
+          styles[itemKey],
+          state.highlighted && styles.itemHighlighted,
+          state.selected && styles.itemSelected,
+          state.disabled && styles.itemDisabled,
+          sx,
+        ).className ?? ''
+      }
+    />
+  );
+});
 Item.displayName = 'Combobox.Item';
 
 const ItemIndicator = forwardRef<HTMLSpanElement, ComboboxItemIndicatorProps>(
@@ -786,43 +785,37 @@ const Clear = forwardRef<HTMLButtonElement, ComboboxClearProps>(
 );
 Clear.displayName = 'Combobox.Clear';
 
-const Empty = forwardRef<HTMLDivElement, ComboboxEmptyProps>(
-  ({ children, sx, ...props }, ref) => {
-    const size = useContext(SizeContext);
-    const emptyKey = `emptySize${capitalize(size)}` as const;
-    return (
-      <BaseCombobox.Empty ref={ref} {...props}>
-        <div {...stylex.props(styles.emptyInner, styles[emptyKey], sx)}>{children}</div>
-      </BaseCombobox.Empty>
-    );
-  },
-);
+const Empty = forwardRef<HTMLDivElement, ComboboxEmptyProps>(({ children, sx, ...props }, ref) => {
+  const size = useContext(SizeContext);
+  const emptyKey = `emptySize${capitalize(size)}` as const;
+  return (
+    <BaseCombobox.Empty ref={ref} {...props}>
+      <div {...stylex.props(styles.emptyInner, styles[emptyKey], sx)}>{children}</div>
+    </BaseCombobox.Empty>
+  );
+});
 Empty.displayName = 'Combobox.Empty';
 
-const Group = forwardRef<HTMLDivElement, ComboboxGroupProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseCombobox.Group
-      ref={ref}
-      {...props}
-      className={`basex-combobox-group ${sx ? (stylex.props(sx).className ?? '') : ''}`}
-    />
-  ),
-);
+const Group = forwardRef<HTMLDivElement, ComboboxGroupProps>(({ sx, ...props }, ref) => (
+  <BaseCombobox.Group
+    ref={ref}
+    {...props}
+    className={`basex-combobox-group ${sx ? (stylex.props(sx).className ?? '') : ''}`}
+  />
+));
 Group.displayName = 'Combobox.Group';
 
-const GroupLabel = forwardRef<HTMLDivElement, ComboboxGroupLabelProps>(
-  ({ sx, ...props }, ref) => {
-    const size = useContext(SizeContext);
-    const labelKey = `groupLabelSize${capitalize(size)}` as const;
-    return (
-      <BaseCombobox.GroupLabel
-        ref={ref}
-        {...props}
-        className={stylex.props(styles.groupLabel, styles[labelKey], sx).className ?? ''}
-      />
-    );
-  },
-);
+const GroupLabel = forwardRef<HTMLDivElement, ComboboxGroupLabelProps>(({ sx, ...props }, ref) => {
+  const size = useContext(SizeContext);
+  const labelKey = `groupLabelSize${capitalize(size)}` as const;
+  return (
+    <BaseCombobox.GroupLabel
+      ref={ref}
+      {...props}
+      className={stylex.props(styles.groupLabel, styles[labelKey], sx).className ?? ''}
+    />
+  );
+});
 GroupLabel.displayName = 'Combobox.GroupLabel';
 
 // --- Public API ---

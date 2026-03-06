@@ -8,12 +8,12 @@ import {
 } from './data';
 
 describe('listComponents', () => {
-  it('returns Button and Accordion', () => {
+  it('returns all registered components', () => {
     const list = listComponents();
     const names = list.map((c) => c.name);
     expect(names).toContain('Button');
     expect(names).toContain('Accordion');
-    expect(list).toHaveLength(2);
+    expect(list).toHaveLength(14);
   });
 });
 

@@ -29,9 +29,11 @@ Autocomplete is a text input with a filterable suggestion dropdown. Built on `@b
 - **GroupLabel**: `<div>` — heading for a group
 
 Internalized (consumer never sees):
+
 - Portal, Positioner, List, Status, Clear
 
 Skipped:
+
 - Trigger, Icon, Arrow, Backdrop, Row, Collection, Separator, Value
 
 ## Design Decisions
@@ -59,7 +61,9 @@ Popup fade + slide-down on open, fade + slide-up on close.
   .basex-autocomplete-popup {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-autocomplete-popup[data-starting-style],
   .basex-autocomplete-popup[data-ending-style] {
@@ -71,15 +75,15 @@ Popup fade + slide-down on open, fade + slide-up on close.
 
 ## Props
 
-| Part | Props | Notes |
-|------|-------|-------|
-| Root | `items`, `value`, `defaultValue`, `onValueChange`, `open`, `defaultOpen`, `onOpenChange`, `mode`, `filter`, `filteredItems`, `autoHighlight`, `limit`, `disabled`, `name`, `size` | Pass-through to Base UI + `size` cascades via context |
-| Input | `sx`, `placeholder`, `startAddon` | Wraps Base UI Input + Clear internally |
-| Popup | `sx` | Portal + Positioner + List internal |
-| Item | `sx`, `value`, `disabled` | Each suggestion row |
-| Empty | `sx` | No-results message |
-| Group | `sx` | Groups related items |
-| GroupLabel | `sx` | Group heading |
+| Part       | Props                                                                                                                                                                             | Notes                                                 |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Root       | `items`, `value`, `defaultValue`, `onValueChange`, `open`, `defaultOpen`, `onOpenChange`, `mode`, `filter`, `filteredItems`, `autoHighlight`, `limit`, `disabled`, `name`, `size` | Pass-through to Base UI + `size` cascades via context |
+| Input      | `sx`, `placeholder`, `startAddon`                                                                                                                                                 | Wraps Base UI Input + Clear internally                |
+| Popup      | `sx`                                                                                                                                                                              | Portal + Positioner + List internal                   |
+| Item       | `sx`, `value`, `disabled`                                                                                                                                                         | Each suggestion row                                   |
+| Empty      | `sx`                                                                                                                                                                              | No-results message                                    |
+| Group      | `sx`                                                                                                                                                                              | Groups related items                                  |
+| GroupLabel | `sx`                                                                                                                                                                              | Group heading                                         |
 
 ## Usage Examples
 
@@ -102,7 +106,7 @@ const fruits = [
       </Autocomplete.Item>
     )}
   </Autocomplete.Popup>
-</Autocomplete.Root>
+</Autocomplete.Root>;
 ```
 
 ### Grouped

@@ -35,15 +35,27 @@ const fruits = [
       </Autocomplete.Item>
     )}
   </Autocomplete.Popup>
-</Autocomplete.Root>
+</Autocomplete.Root>;
 ```
 
 ### Grouped suggestions
 
 ```tsx
 const produce = [
-  { label: 'Fruits', items: [{ id: 1, value: 'Apple' }, { id: 2, value: 'Banana' }] },
-  { label: 'Vegetables', items: [{ id: 3, value: 'Carrot' }, { id: 4, value: 'Broccoli' }] },
+  {
+    label: 'Fruits',
+    items: [
+      { id: 1, value: 'Apple' },
+      { id: 2, value: 'Banana' },
+    ],
+  },
+  {
+    label: 'Vegetables',
+    items: [
+      { id: 3, value: 'Carrot' },
+      { id: 4, value: 'Broccoli' },
+    ],
+  },
 ];
 
 <Autocomplete.Root items={produce}>
@@ -61,7 +73,7 @@ const produce = [
       </Autocomplete.Group>
     )}
   </Autocomplete.Popup>
-</Autocomplete.Root>
+</Autocomplete.Root>;
 ```
 
 ### Auto-highlight first match
@@ -124,11 +136,7 @@ function AsyncSearch() {
   }
 
   return (
-    <Autocomplete.Root
-      items={results}
-      filteredItems={results}
-      onValueChange={handleValueChange}
-    >
+    <Autocomplete.Root items={results} filteredItems={results} onValueChange={handleValueChange}>
       <Autocomplete.Input placeholder="Search..." />
       <Autocomplete.Popup>
         <Autocomplete.Empty>No results.</Autocomplete.Empty>
@@ -152,7 +160,9 @@ Popup fade and slide animation requires global CSS inside `@layer priority1`:
   .basex-autocomplete-popup {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-autocomplete-popup[data-starting-style],
   .basex-autocomplete-popup[data-ending-style] {
@@ -166,42 +176,42 @@ Popup fade and slide animation requires global CSS inside `@layer priority1`:
 
 ### Root
 
-| Prop              | Type                                                     | Default  | Description                                      |
-| ----------------- | -------------------------------------------------------- | -------- | ------------------------------------------------ |
-| `items`           | `ItemValue[] \| Group[]`                                 | —        | Items or grouped items to display                |
-| `value`           | `string`                                                 | —        | Controlled input value                           |
-| `defaultValue`    | `string`                                                 | —        | Initial input value for uncontrolled mode        |
-| `onValueChange`   | `(value: string, details: ChangeEventDetails) => void`   | —        | Callback when input value changes                |
-| `open`            | `boolean`                                                | —        | Controlled popup visibility                      |
-| `defaultOpen`     | `boolean`                                                | `false`  | Initial popup state                              |
-| `onOpenChange`    | `(open: boolean, details: ChangeEventDetails) => void`   | —        | Callback when popup opens or closes              |
-| `mode`            | `'list' \| 'both' \| 'inline' \| 'none'`                | `'list'` | Filtering and inline autocompletion behavior     |
-| `filter`          | `(itemValue, query, itemToString?) => boolean`           | —        | Custom filter function                           |
-| `filteredItems`   | `any[] \| Group[]`                                       | —        | Externally filtered items (for async search)     |
-| `autoHighlight`   | `boolean \| 'always'`                                    | `false`  | Auto-highlight first matching item               |
-| `limit`           | `number`                                                 | `-1`     | Max visible items (-1 unlimited)                 |
-| `disabled`        | `boolean`                                                | `false`  | Disable all interactions                         |
-| `name`            | `string`                                                 | —        | Form field name                                  |
-| `size`            | `'sm' \| 'md' \| 'lg'`                                  | `'md'`   | Size of input and dropdown (sm=32, md=36, lg=40px) |
+| Prop            | Type                                                   | Default  | Description                                        |
+| --------------- | ------------------------------------------------------ | -------- | -------------------------------------------------- |
+| `items`         | `ItemValue[] \| Group[]`                               | —        | Items or grouped items to display                  |
+| `value`         | `string`                                               | —        | Controlled input value                             |
+| `defaultValue`  | `string`                                               | —        | Initial input value for uncontrolled mode          |
+| `onValueChange` | `(value: string, details: ChangeEventDetails) => void` | —        | Callback when input value changes                  |
+| `open`          | `boolean`                                              | —        | Controlled popup visibility                        |
+| `defaultOpen`   | `boolean`                                              | `false`  | Initial popup state                                |
+| `onOpenChange`  | `(open: boolean, details: ChangeEventDetails) => void` | —        | Callback when popup opens or closes                |
+| `mode`          | `'list' \| 'both' \| 'inline' \| 'none'`               | `'list'` | Filtering and inline autocompletion behavior       |
+| `filter`        | `(itemValue, query, itemToString?) => boolean`         | —        | Custom filter function                             |
+| `filteredItems` | `any[] \| Group[]`                                     | —        | Externally filtered items (for async search)       |
+| `autoHighlight` | `boolean \| 'always'`                                  | `false`  | Auto-highlight first matching item                 |
+| `limit`         | `number`                                               | `-1`     | Max visible items (-1 unlimited)                   |
+| `disabled`      | `boolean`                                              | `false`  | Disable all interactions                           |
+| `name`          | `string`                                               | —        | Form field name                                    |
+| `size`          | `'sm' \| 'md' \| 'lg'`                                 | `'md'`   | Size of input and dropdown (sm=32, md=36, lg=40px) |
 
 ### Input
 
-| Prop          | Type           | Default | Description                                    |
-| ------------- | -------------- | ------- | ---------------------------------------------- |
-| `placeholder` | `string`       | —       | Placeholder text                               |
-| `startAddon`  | `ReactNode`    | —       | Icon or element at the start of the input      |
-| `sx`          | `StyleXStyles` | —       | StyleX overrides                               |
+| Prop          | Type           | Default | Description                               |
+| ------------- | -------------- | ------- | ----------------------------------------- |
+| `placeholder` | `string`       | —       | Placeholder text                          |
+| `startAddon`  | `ReactNode`    | —       | Icon or element at the start of the input |
+| `sx`          | `StyleXStyles` | —       | StyleX overrides                          |
 
 #### Data attributes
 
-| Attribute         | Description                             |
-| ----------------- | --------------------------------------- |
-| `data-popup-open` | Present when suggestion popup is open   |
-| `data-disabled`   | Present when input is disabled          |
-| `data-readonly`   | Present when input is read-only         |
-| `data-required`   | Present when input is required          |
-| `data-focused`    | Present when input is focused           |
-| `data-filled`     | Present when input has a value          |
+| Attribute         | Description                           |
+| ----------------- | ------------------------------------- |
+| `data-popup-open` | Present when suggestion popup is open |
+| `data-disabled`   | Present when input is disabled        |
+| `data-readonly`   | Present when input is read-only       |
+| `data-required`   | Present when input is required        |
+| `data-focused`    | Present when input is focused         |
+| `data-filled`     | Present when input has a value        |
 
 ### Popup
 
@@ -211,24 +221,24 @@ Popup fade and slide animation requires global CSS inside `@layer priority1`:
 
 #### Data attributes
 
-| Attribute             | Description                            |
-| --------------------- | -------------------------------------- |
-| `data-open`           | Present when the popup is open         |
-| `data-closed`         | Present when the popup is closed       |
-| `data-starting-style` | Present during entrance animation      |
-| `data-ending-style`   | Present during exit animation          |
-| `data-side`           | Positioned side (top/bottom/left/right)|
-| `data-empty`          | Present when no items match            |
+| Attribute             | Description                             |
+| --------------------- | --------------------------------------- |
+| `data-open`           | Present when the popup is open          |
+| `data-closed`         | Present when the popup is closed        |
+| `data-starting-style` | Present during entrance animation       |
+| `data-ending-style`   | Present during exit animation           |
+| `data-side`           | Positioned side (top/bottom/left/right) |
+| `data-empty`          | Present when no items match             |
 
 #### CSS variables
 
-| Variable             | Description                          |
-| -------------------- | ------------------------------------ |
-| `--anchor-width`     | Width of the input element           |
-| `--anchor-height`    | Height of the input element          |
-| `--available-height` | Available height for the popup       |
-| `--available-width`  | Available width for the popup        |
-| `--transform-origin` | Computed transform origin            |
+| Variable             | Description                    |
+| -------------------- | ------------------------------ |
+| `--anchor-width`     | Width of the input element     |
+| `--anchor-height`    | Height of the input element    |
+| `--available-height` | Available height for the popup |
+| `--available-width`  | Available width for the popup  |
+| `--transform-origin` | Computed transform origin      |
 
 ### Item
 
@@ -240,11 +250,11 @@ Popup fade and slide animation requires global CSS inside `@layer priority1`:
 
 #### Data attributes
 
-| Attribute          | Description                               |
-| ------------------ | ----------------------------------------- |
+| Attribute          | Description                                  |
+| ------------------ | -------------------------------------------- |
 | `data-highlighted` | Present when item has keyboard/pointer focus |
-| `data-selected`    | Present when item matches input value     |
-| `data-disabled`    | Present when item is disabled             |
+| `data-selected`    | Present when item matches input value        |
+| `data-disabled`    | Present when item is disabled                |
 
 ### Empty
 

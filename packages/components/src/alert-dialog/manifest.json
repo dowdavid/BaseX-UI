@@ -189,7 +189,13 @@
   "intents": [
     {
       "intent": "confirm-destructive-action",
-      "signals": ["confirm delete", "are you sure", "destructive confirmation", "delete confirmation", "irreversible action"],
+      "signals": [
+        "confirm delete",
+        "are you sure",
+        "destructive confirmation",
+        "delete confirmation",
+        "irreversible action"
+      ],
       "reasoning": "AlertDialog is the correct component when a destructive or irreversible action requires explicit user confirmation before proceeding.",
       "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"outline\" color=\"destructive\">Delete</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Delete this item?</AlertDialog.Title>\n      <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Delete</Button>} onClick={handleDelete} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
     },

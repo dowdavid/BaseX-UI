@@ -33,10 +33,7 @@ export function AlertDialogPage() {
         </AlertDialog.Root>
       </Preview>
 
-      <Preview
-        title="Discard changes"
-        description="Warn before losing unsaved work."
-      >
+      <Preview title="Discard changes" description="Warn before losing unsaved work.">
         <AlertDialog.Root>
           <AlertDialog.Trigger render={<Button variant="ghost">Leave page</Button>} />
           <AlertDialog.Portal>

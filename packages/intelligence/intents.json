@@ -62,7 +62,13 @@
     {
       "intent": "confirm-destructive-action",
       "component": "AlertDialog",
-      "signals": ["confirm delete", "are you sure", "destructive confirmation", "delete confirmation", "irreversible action"],
+      "signals": [
+        "confirm delete",
+        "are you sure",
+        "destructive confirmation",
+        "delete confirmation",
+        "irreversible action"
+      ],
       "reasoning": "AlertDialog is the correct component when a destructive or irreversible action requires explicit user confirmation before proceeding.",
       "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"outline\" color=\"destructive\">Delete</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Delete this item?</AlertDialog.Title>\n      <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Delete</Button>} onClick={handleDelete} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
     },
@@ -146,14 +152,26 @@
     {
       "intent": "grouped-checkboxes",
       "component": "CheckboxGroup",
-      "signals": ["checkbox group", "multiple checkboxes", "checkbox list", "grouped options", "multi-select form"],
+      "signals": [
+        "checkbox group",
+        "multiple checkboxes",
+        "checkbox list",
+        "grouped options",
+        "multi-select form"
+      ],
       "reasoning": "CheckboxGroup manages shared state across multiple checkboxes, tracking which items are selected via a value array.",
       "composition": "<CheckboxGroup.Root defaultValue={['a']}>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option A\n  </label>\n  <label>\n    <Checkbox.Root name=\"b\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option B\n  </label>\n</CheckboxGroup.Root>"
     },
     {
       "intent": "select-all-pattern",
       "component": "CheckboxGroup",
-      "signals": ["select all", "check all", "parent checkbox", "indeterminate parent", "bulk select"],
+      "signals": [
+        "select all",
+        "check all",
+        "parent checkbox",
+        "indeterminate parent",
+        "bulk select"
+      ],
       "reasoning": "A parent checkbox inside a controlled CheckboxGroup auto-derives its checked/indeterminate state from children, providing a native select-all pattern. The group MUST be controlled (value + onValueChange) for the parent checkbox to work.",
       "composition": "const [value, setValue] = useState<string[]>([]);\n\n<CheckboxGroup.Root allValues={['a', 'b', 'c']} value={value} onValueChange={setValue}>\n  <label>\n    <Checkbox.Root parent>\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Select all\n  </label>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option A\n  </label>\n</CheckboxGroup.Root>"
     },
@@ -174,7 +192,14 @@
     {
       "intent": "search-with-suggestions",
       "component": "Autocomplete",
-      "signals": ["search", "autocomplete", "search input", "suggestion", "typeahead", "search box"],
+      "signals": [
+        "search",
+        "autocomplete",
+        "search input",
+        "suggestion",
+        "typeahead",
+        "search box"
+      ],
       "reasoning": "Autocomplete is the primary component for text inputs that show filtered suggestions as the user types.",
       "composition": "<Autocomplete.Root items={items}>\n  <Autocomplete.Input placeholder=\"Search...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No results found.</Autocomplete.Empty>\n    {(item) => (\n      <Autocomplete.Item key={item.id} value={item}>\n        {item.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
     },
@@ -188,21 +213,41 @@
     {
       "intent": "searchable-select",
       "component": "Combobox",
-      "signals": ["searchable select", "filterable select", "select with search", "searchable dropdown", "combobox", "pick from list"],
+      "signals": [
+        "searchable select",
+        "filterable select",
+        "select with search",
+        "searchable dropdown",
+        "combobox",
+        "pick from list"
+      ],
       "reasoning": "Combobox is the primary component for selecting from a predefined list with the ability to search/filter options.",
       "composition": "<Combobox.Root items={items}>\n  <Combobox.Input placeholder=\"Select...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results found.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
     },
     {
       "intent": "filterable-dropdown",
       "component": "Combobox",
-      "signals": ["filterable dropdown", "dropdown with filter", "dropdown search", "type to filter", "filter options"],
+      "signals": [
+        "filterable dropdown",
+        "dropdown with filter",
+        "dropdown search",
+        "type to filter",
+        "filter options"
+      ],
       "reasoning": "Combobox provides a dropdown that filters options as the user types, ideal for long option lists.",
       "composition": "<Combobox.Root items={options}>\n  <Combobox.Input placeholder=\"Choose...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No options.</Combobox.Empty>\n    {(option) => (\n      <Combobox.Item key={option.id} value={option}>\n        <Combobox.ItemIndicator />\n        {option.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
     },
     {
       "intent": "multi-select-picker",
       "component": "Combobox",
-      "signals": ["multi-select", "multi select dropdown", "pick multiple", "select multiple", "multi picker", "multiple selection"],
+      "signals": [
+        "multi-select",
+        "multi select dropdown",
+        "pick multiple",
+        "select multiple",
+        "multi picker",
+        "multiple selection"
+      ],
       "reasoning": "Combobox with multiple mode allows selecting several items from a list with checkmark indicators.",
       "composition": "<Combobox.Root items={items} multiple>\n  <Combobox.Input placeholder=\"Select items...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
     },
@@ -212,6 +257,82 @@
       "signals": ["tag input", "label search", "category filter", "filter by tag"],
       "reasoning": "Autocomplete works well for searching through and selecting from a list of tags or labels.",
       "composition": "<Autocomplete.Root items={tags}>\n  <Autocomplete.Input placeholder=\"Search tags...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No tags found.</Autocomplete.Empty>\n    {(tag) => (\n      <Autocomplete.Item key={tag.id} value={tag}>\n        {tag.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "intent": "side-panel-navigation",
+      "component": "Drawer",
+      "signals": [
+        "drawer",
+        "side panel",
+        "navigation menu",
+        "hamburger menu",
+        "mobile menu",
+        "off-canvas"
+      ],
+      "reasoning": "Drawer provides a slide-out panel anchored to a screen edge, ideal for navigation menus on mobile or supplementary content.",
+      "composition": "<Drawer.Root swipeDirection=\"left\">\n  <Drawer.Trigger render={<Button variant=\"outline\">Menu</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title>Navigation</Drawer.Title>\n      </Drawer.Header>\n      <Drawer.Panel>\n        <nav>{/* nav links */}</nav>\n      </Drawer.Panel>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "mobile-bottom-sheet",
+      "component": "Drawer",
+      "signals": ["bottom sheet", "action sheet", "swipe up", "pull up", "mobile panel"],
+      "reasoning": "Drawer with default bottom swipe direction provides a mobile-native bottom sheet pattern with swipe-to-dismiss.",
+      "composition": "<Drawer.Root>\n  <Drawer.Trigger render={<Button>Open</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <Drawer.Header>\n        <Drawer.Title>Options</Drawer.Title>\n      </Drawer.Header>\n      <Drawer.Panel>\n        {/* content */}\n      </Drawer.Panel>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "supplementary-form-panel",
+      "component": "Drawer",
+      "signals": ["form drawer", "create drawer", "add item drawer", "edit drawer", "side form"],
+      "reasoning": "Drawer provides a slide-out panel for forms that don't need the full-screen blocking of a Dialog.",
+      "composition": "<Drawer.Root>\n  <Drawer.Trigger render={<Button>Add item</Button>} />\n  <Drawer.Portal>\n    <Drawer.Backdrop />\n    <Drawer.Popup>\n      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>\n        <Drawer.Header>\n          <Drawer.Title>Add item</Drawer.Title>\n        </Drawer.Header>\n        <Drawer.Panel>\n          {/* form fields */}\n        </Drawer.Panel>\n        <Drawer.Footer>\n          <Drawer.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n          <Button type=\"submit\">Save</Button>\n        </Drawer.Footer>\n      </form>\n    </Drawer.Popup>\n  </Drawer.Portal>\n</Drawer.Root>"
+    },
+    {
+      "intent": "form-field",
+      "component": "Field",
+      "signals": ["form field", "input field", "labeled input", "text field", "field wrapper"],
+      "reasoning": "Field connects a label, description, input control, and validation error with proper accessibility attributes.",
+      "composition": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Field.Control type=\"email\" placeholder=\"you@example.com\" />\n  <Field.Error />\n</Field.Root>"
+    },
+    {
+      "intent": "validated-input",
+      "component": "Field",
+      "signals": ["validation", "required field", "field error", "input validation", "form error"],
+      "reasoning": "Field automatically connects validation errors to the input control for screen readers via aria-describedby.",
+      "composition": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Field.Control type=\"email\" required />\n  <Field.Error match=\"typeMismatch\">Please enter a valid email.</Field.Error>\n  <Field.Error match=\"valueMissing\">Email is required.</Field.Error>\n</Field.Root>"
+    },
+    {
+      "intent": "group-form-fields",
+      "component": "Fieldset",
+      "signals": ["fieldset", "field group", "form section", "group fields", "related fields"],
+      "reasoning": "Fieldset semantically groups related form controls with an accessible legend, essential for screen readers.",
+      "composition": "<Fieldset.Root>\n  <Fieldset.Legend>Personal information</Fieldset.Legend>\n  <Field.Root>\n    <Field.Label>Name</Field.Label>\n    <Field.Control />\n  </Field.Root>\n</Fieldset.Root>"
+    },
+    {
+      "intent": "disabled-field-group",
+      "component": "Fieldset",
+      "signals": ["disable group", "disable section", "readonly section", "locked fields"],
+      "reasoning": "Fieldset's disabled prop cascades to all child form controls, providing a single switch to disable an entire group.",
+      "composition": "<Fieldset.Root disabled>\n  <Fieldset.Legend>Locked section</Fieldset.Legend>\n  {/* All fields within are disabled */}\n</Fieldset.Root>"
+    },
+    {
+      "intent": "form-with-validation",
+      "component": "Form",
+      "signals": ["form", "submit", "validation", "server errors", "form validation"],
+      "reasoning": "Form manages server-side validation errors and distributes them to child Field components automatically.",
+      "composition": "<Form errors={serverErrors} onClearErrors={handleClearErrors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    },
+    {
+      "intent": "server-validated-form",
+      "component": "Form",
+      "signals": [
+        "server validation",
+        "API errors",
+        "backend errors",
+        "form errors",
+        "error display"
+      ],
+      "reasoning": "Form's errors prop accepts a record of server-side errors keyed by field name, automatically distributing them to matching Field.Error components.",
+      "composition": "<Form errors={errors} onClearErrors={handleClear} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
     }
   ],
   "antiPatterns": [
@@ -400,6 +521,60 @@
       "scenario": "Simple text input without suggestions",
       "reasoning": "Use Input directly. Autocomplete adds overhead for the popup and filtering logic that is unnecessary without suggestions.",
       "alternative": "Use Input."
+    },
+    {
+      "component": "Drawer",
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Use AlertDialog instead. Drawer is too easy to dismiss for critical confirmations.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "component": "Drawer",
+      "scenario": "Simple tooltip or hover information",
+      "reasoning": "Use Tooltip or Popover for lightweight contextual information. Drawer is overweight for a hover tip.",
+      "alternative": "Tooltip or Popover"
+    },
+    {
+      "component": "Drawer",
+      "scenario": "Full-page content that needs centered modal focus",
+      "reasoning": "Use Dialog for centered modal overlays. Drawer is anchored to an edge and slides in, which doesn't suit centered content.",
+      "alternative": "Dialog"
+    },
+    {
+      "component": "Field",
+      "scenario": "A standalone label without an input control",
+      "reasoning": "Use a plain <label> element. Field's value is in connecting label, control, and error — without a control it adds no benefit.",
+      "alternative": "Plain <label> element"
+    },
+    {
+      "component": "Field",
+      "scenario": "Complex multi-input groups (e.g., date range with two inputs)",
+      "reasoning": "Use Fieldset to group multiple related inputs. Field is for a single label-control pair.",
+      "alternative": "Fieldset"
+    },
+    {
+      "component": "Fieldset",
+      "scenario": "A single standalone form field",
+      "reasoning": "Use Field alone. Fieldset is for grouping multiple related fields.",
+      "alternative": "Field"
+    },
+    {
+      "component": "Fieldset",
+      "scenario": "Visual-only section dividers without semantic grouping",
+      "reasoning": "Use a heading or Separator for visual organization. Fieldset adds semantic grouping that affects assistive technology.",
+      "alternative": "Separator or heading element"
+    },
+    {
+      "component": "Form",
+      "scenario": "A form without server-side validation",
+      "reasoning": "If you only need client-side validation, a plain <form> element works fine. Form adds value when you need to pipe server errors to Field components.",
+      "alternative": "Plain <form> element"
+    },
+    {
+      "component": "Form",
+      "scenario": "Non-form content layout",
+      "reasoning": "Form renders a <form> element. Don't use it as a generic flex-column layout container.",
+      "alternative": "A plain <div> with flex styling"
     }
   ]
 }

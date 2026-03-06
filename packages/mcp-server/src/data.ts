@@ -24,8 +24,26 @@ import checkboxGroupManifest from '../../components/src/checkbox-group/manifest.
 import collapsibleManifest from '../../components/src/collapsible/manifest.json';
 import comboboxManifest from '../../components/src/combobox/manifest.json';
 import dialogManifest from '../../components/src/dialog/manifest.json';
+import drawerManifest from '../../components/src/drawer/manifest.json';
+import fieldManifest from '../../components/src/field/manifest.json';
+import fieldsetManifest from '../../components/src/fieldset/manifest.json';
+import formManifest from '../../components/src/form/manifest.json';
 
-export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest | typeof autocompleteManifest | typeof avatarManifest | typeof checkboxManifest | typeof checkboxGroupManifest | typeof collapsibleManifest | typeof comboboxManifest | typeof dialogManifest;
+export type ComponentManifest =
+  | typeof buttonManifest
+  | typeof accordionManifest
+  | typeof alertDialogManifest
+  | typeof autocompleteManifest
+  | typeof avatarManifest
+  | typeof checkboxManifest
+  | typeof checkboxGroupManifest
+  | typeof collapsibleManifest
+  | typeof comboboxManifest
+  | typeof dialogManifest
+  | typeof drawerManifest
+  | typeof fieldManifest
+  | typeof fieldsetManifest
+  | typeof formManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -38,6 +56,10 @@ const components = new Map<string, ComponentManifest>([
   ['collapsible', collapsibleManifest],
   ['combobox', comboboxManifest],
   ['dialog', dialogManifest],
+  ['drawer', drawerManifest],
+  ['field', fieldManifest],
+  ['fieldset', fieldsetManifest],
+  ['form', formManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -146,9 +168,7 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'item highlight', preset: 'State' },
     ],
     avatar: [],
-    checkbox: [
-      { interaction: 'indicator appear/disappear', preset: 'State' },
-    ],
+    checkbox: [{ interaction: 'indicator appear/disappear', preset: 'State' }],
     'checkbox-group': [],
     collapsible: [
       { interaction: 'trigger hover/focus', preset: 'State' },
@@ -170,6 +190,15 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'close button hover', preset: 'State' },
       { interaction: 'scroll indicators', preset: 'State' },
     ],
+    drawer: [
+      { interaction: 'backdrop fade in/out', preset: 'Enter' },
+      { interaction: 'popup slide in', preset: 'Enter' },
+      { interaction: 'popup slide out', preset: 'Exit' },
+      { interaction: 'close button hover', preset: 'State' },
+    ],
+    field: [{ interaction: 'control focus ring', preset: 'State' }],
+    fieldset: [],
+    form: [],
   };
 
   return {
