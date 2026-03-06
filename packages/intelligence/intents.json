@@ -275,6 +275,90 @@
       "signals": ["server validation", "API errors", "backend errors", "form errors", "error display"],
       "reasoning": "Form's errors prop accepts a record of server-side errors keyed by field name, automatically distributing them to matching Field.Error components.",
       "composition": "<Form errors={errors} onClearErrors={handleClear} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    },
+    {
+      "intent": "text-input",
+      "component": "Input",
+      "signals": ["input", "text input", "text field", "type text", "enter text", "free text"],
+      "reasoning": "Input is the primary component for standalone text entry. Use when you need a simple text input without the full Field wrapper.",
+      "composition": "<Input placeholder=\"Enter text...\" />"
+    },
+    {
+      "intent": "input-with-field",
+      "component": "Input",
+      "signals": ["labeled input", "form input", "input with label", "input with validation"],
+      "reasoning": "Input automatically integrates with Field for label, description, and validation when nested inside Field.Root.",
+      "composition": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Input type=\"email\" placeholder=\"you@example.com\" />\n  <Field.Error />\n</Field.Root>"
+    },
+    {
+      "intent": "search-input",
+      "component": "Input",
+      "signals": ["search box", "search bar", "quick search", "filter input"],
+      "reasoning": "Input works well as a simple search box. For search with suggestions, use Autocomplete instead.",
+      "composition": "<Input type=\"search\" placeholder=\"Search...\" />"
+    },
+    {
+      "intent": "dropdown-menu",
+      "component": "Menu",
+      "signals": ["menu", "dropdown", "dropdown menu", "action menu", "options menu", "context actions"],
+      "reasoning": "Menu is the primary component for dropdown menus triggered by a button. It provides keyboard navigation, focus management, and ARIA attributes.",
+      "composition": "<Menu.Root>\n  <Menu.Trigger>Options</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item>Edit</Menu.Item>\n        <Menu.Item>Duplicate</Menu.Item>\n        <Menu.Separator />\n        <Menu.Item destructive>Delete</Menu.Item>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    },
+    {
+      "intent": "menu-with-checkboxes",
+      "component": "Menu",
+      "signals": ["menu checkboxes", "toggle menu items", "menu settings", "menu preferences"],
+      "reasoning": "Menu supports checkbox items for toggling boolean options within a menu.",
+      "composition": "<Menu.Root>\n  <Menu.Trigger>View</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.CheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>\n          <Menu.CheckboxItemIndicator />\n          Show Grid\n        </Menu.CheckboxItem>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    },
+    {
+      "intent": "menu-with-submenus",
+      "component": "Menu",
+      "signals": ["submenu", "nested menu", "cascading menu", "hierarchical menu"],
+      "reasoning": "Menu supports nested submenus for organizing complex menu hierarchies.",
+      "composition": "<Menu.Root>\n  <Menu.Trigger>File</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item>New</Menu.Item>\n        <Menu.SubmenuRoot>\n          <Menu.SubmenuTrigger>Open Recent</Menu.SubmenuTrigger>\n          <Menu.Portal>\n            <Menu.Positioner>\n              <Menu.Popup>\n                <Menu.Item>file1.txt</Menu.Item>\n                <Menu.Item>file2.txt</Menu.Item>\n              </Menu.Popup>\n            </Menu.Positioner>\n          </Menu.Portal>\n        </Menu.SubmenuRoot>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    },
+    {
+      "intent": "application-menubar",
+      "component": "Menubar",
+      "signals": ["menubar", "menu bar", "application menu", "file edit view menu", "toolbar menus"],
+      "reasoning": "Menubar provides a horizontal bar of menus with arrow-key navigation between them, like desktop application menu bars.",
+      "composition": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger>File</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>New</Menu.Item>\n          <Menu.Item>Open</Menu.Item>\n          <Menu.Item>Save</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n  <Menu.Root>\n    <Menu.Trigger>Edit</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Undo</Menu.Item>\n          <Menu.Item>Redo</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
+    },
+    {
+      "intent": "grouped-menus",
+      "component": "Menubar",
+      "signals": ["grouped menus", "multiple menus", "menu group", "menu collection"],
+      "reasoning": "Menubar groups multiple Menu components together with shared keyboard navigation and focus management.",
+      "composition": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger>Actions</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Action 1</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n  <Menu.Root>\n    <Menu.Trigger>Settings</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Preferences</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
+    },
+    {
+      "intent": "value-meter",
+      "component": "Meter",
+      "signals": ["meter", "gauge", "level", "capacity", "usage", "quota"],
+      "reasoning": "Meter displays a scalar measurement within a known range. Use for disk usage, battery level, password strength, etc.",
+      "composition": "<Meter.Root value={75}>\n  <Meter.Label>Storage used</Meter.Label>\n  <Meter.Track>\n    <Meter.Indicator />\n  </Meter.Track>\n  <Meter.Value />\n</Meter.Root>"
+    },
+    {
+      "intent": "threshold-indicator",
+      "component": "Meter",
+      "signals": ["threshold", "warning level", "critical level", "danger zone", "limit"],
+      "reasoning": "Meter with destructive color communicates when a value has crossed a critical threshold.",
+      "composition": "<Meter.Root value={92}>\n  <Meter.Label>CPU Usage</Meter.Label>\n  <Meter.Track>\n    <Meter.Indicator color=\"destructive\" />\n  </Meter.Track>\n  <Meter.Value />\n</Meter.Root>"
+    },
+    {
+      "intent": "site-navigation",
+      "component": "NavigationMenu",
+      "signals": ["navigation", "nav menu", "site menu", "header nav", "main navigation", "nav bar"],
+      "reasoning": "NavigationMenu is the primary component for site-wide navigation with hover-triggered dropdown panels.",
+      "composition": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"products\">\n      <NavigationMenu.Trigger>Products <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <a href=\"/products/a\">Product A</a>\n        <a href=\"/products/b\">Product B</a>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/about\">About</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
+    },
+    {
+      "intent": "mega-menu",
+      "component": "NavigationMenu",
+      "signals": ["mega menu", "large dropdown nav", "category navigation", "multi-column nav"],
+      "reasoning": "NavigationMenu content panels can hold any layout, making them ideal for mega-menu patterns with multi-column grids.",
+      "composition": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"categories\">\n      <NavigationMenu.Trigger>Categories <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>\n          <div><h3>Category A</h3><a href=\"/a/1\">Item 1</a></div>\n          <div><h3>Category B</h3><a href=\"/b/1\">Item 1</a></div>\n          <div><h3>Category C</h3><a href=\"/c/1\">Item 1</a></div>\n        </div>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
     }
   ],
   "antiPatterns": [
@@ -517,6 +601,96 @@
       "scenario": "Non-form content layout",
       "reasoning": "Form renders a <form> element. Don't use it as a generic flex-column layout container.",
       "alternative": "A plain <div> with flex styling"
+    },
+    {
+      "component": "Input",
+      "scenario": "Search input with filtered suggestion dropdown",
+      "reasoning": "Use Autocomplete which provides the popup and filtering logic.",
+      "alternative": "Autocomplete"
+    },
+    {
+      "component": "Input",
+      "scenario": "Selecting from a predefined list of options",
+      "reasoning": "Use Select or Combobox for option selection, not a free-text input.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "component": "Input",
+      "scenario": "Multi-line text entry",
+      "reasoning": "Input renders a single-line <input>. Use a <textarea> or Field.Control with render prop for multi-line.",
+      "alternative": "Use Field.Control with render={<textarea />}"
+    },
+    {
+      "component": "Menu",
+      "scenario": "Navigation links that should be visible at all times",
+      "reasoning": "Use a visible navigation bar or NavigationMenu instead. Menus hide their content until triggered.",
+      "alternative": "NavigationMenu or plain nav with links"
+    },
+    {
+      "component": "Menu",
+      "scenario": "Selecting a single value from a list (form input)",
+      "reasoning": "Use Select or Combobox for form value selection. Menu is for actions, not form values.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "component": "Menu",
+      "scenario": "Right-click context menu",
+      "reasoning": "Use ContextMenu which handles the right-click trigger pattern. Menu requires an explicit trigger button.",
+      "alternative": "ContextMenu"
+    },
+    {
+      "component": "Menubar",
+      "scenario": "A single dropdown menu",
+      "reasoning": "Use Menu alone. Menubar adds keyboard navigation between multiple menus that isn't needed for a single menu.",
+      "alternative": "Menu"
+    },
+    {
+      "component": "Menubar",
+      "scenario": "Site-wide navigation with dropdowns",
+      "reasoning": "Use NavigationMenu which is designed for site navigation with hover-triggered content panels.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "component": "Menubar",
+      "scenario": "A toolbar with action buttons",
+      "reasoning": "Use Toolbar which is designed for groups of action buttons and controls, not menus.",
+      "alternative": "Toolbar"
+    },
+    {
+      "component": "Meter",
+      "scenario": "Showing progress of a task that will complete",
+      "reasoning": "Use Progress for indeterminate or determinate task progress. Meter is for static scalar values, not ongoing operations.",
+      "alternative": "Progress"
+    },
+    {
+      "component": "Meter",
+      "scenario": "Loading indicators",
+      "reasoning": "Use Progress with indeterminate mode or a spinner. Meter represents a measurement, not a loading state.",
+      "alternative": "Progress"
+    },
+    {
+      "component": "Meter",
+      "scenario": "Star ratings or discrete steps",
+      "reasoning": "Meter shows a continuous bar. For discrete steps, use a rating component or radio group.",
+      "alternative": "Custom rating component or RadioGroup"
+    },
+    {
+      "component": "NavigationMenu",
+      "scenario": "Action menus triggered by a button click",
+      "reasoning": "Use Menu for action dropdowns. NavigationMenu is for site navigation with hover-triggered content.",
+      "alternative": "Menu"
+    },
+    {
+      "component": "NavigationMenu",
+      "scenario": "Mobile hamburger menus",
+      "reasoning": "Use Drawer for mobile slide-out navigation. NavigationMenu is designed for desktop hover interactions.",
+      "alternative": "Drawer"
+    },
+    {
+      "component": "NavigationMenu",
+      "scenario": "Application menu bars (File, Edit, View)",
+      "reasoning": "Use Menubar with Menu components. NavigationMenu is for site navigation, not application commands.",
+      "alternative": "Menubar"
     }
   ]
 }

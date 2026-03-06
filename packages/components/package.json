@@ -80,6 +80,26 @@
     "./form": {
       "types": "./dist/form/index.d.ts",
       "import": "./dist/form/index.js"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "import": "./dist/input/index.js"
+    },
+    "./menu": {
+      "types": "./dist/menu/index.d.ts",
+      "import": "./dist/menu/index.js"
+    },
+    "./menubar": {
+      "types": "./dist/menubar/index.d.ts",
+      "import": "./dist/menubar/index.js"
+    },
+    "./meter": {
+      "types": "./dist/meter/index.d.ts",
+      "import": "./dist/meter/index.js"
+    },
+    "./navigation-menu": {
+      "types": "./dist/navigation-menu/index.d.ts",
+      "import": "./dist/navigation-menu/index.js"
     }
   },
   "files": [

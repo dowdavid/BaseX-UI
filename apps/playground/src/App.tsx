@@ -17,6 +17,11 @@ import { DrawerPage } from './pages/DrawerPage';
 import { FieldPage } from './pages/FieldPage';
 import { FieldsetPage } from './pages/FieldsetPage';
 import { FormPage } from './pages/FormPage';
+import { InputPage } from './pages/InputPage';
+import { MenuPage } from './pages/MenuPage';
+import { MenubarPage } from './pages/MenubarPage';
+import { MeterPage } from './pages/MeterPage';
+import { NavigationMenuPage } from './pages/NavigationMenuPage';
 
 const pages = [
   {
@@ -102,6 +107,36 @@ const pages = [
     label: 'Form',
     description: 'An enhanced form element with server-side validation error management.',
     component: FormPage,
+  },
+  {
+    id: 'input',
+    label: 'Input',
+    description: 'A standalone styled text input with Field integration.',
+    component: InputPage,
+  },
+  {
+    id: 'menu',
+    label: 'Menu',
+    description: 'A dropdown menu with items, groups, checkbox items, and submenus.',
+    component: MenuPage,
+  },
+  {
+    id: 'menubar',
+    label: 'Menubar',
+    description: 'A horizontal container for multiple menus with keyboard navigation.',
+    component: MenubarPage,
+  },
+  {
+    id: 'meter',
+    label: 'Meter',
+    description: 'A visual indicator showing a scalar value within a known range.',
+    component: MeterPage,
+  },
+  {
+    id: 'navigation-menu',
+    label: 'Navigation Menu',
+    description: 'A site navigation component with hover-triggered dropdown content.',
+    component: NavigationMenuPage,
   },
 ] as const;
 

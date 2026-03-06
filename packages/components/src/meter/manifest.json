@@ -1,0 +1,174 @@
+{
+  "name": "Meter",
+  "description": "A visual indicator showing a scalar value within a known range. Built on Base UI Meter with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/meter",
+
+  "anatomy": "<Meter.Root value={50}>\n  <Meter.Label />\n  <Meter.Value />\n  <Meter.Track>\n    <Meter.Indicator />\n  </Meter.Track>\n</Meter.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "The container that provides meter state (value, min, max) to child parts.",
+      "props": {
+        "value": {
+          "type": "number",
+          "required": true,
+          "description": "The current value of the meter."
+        },
+        "min": {
+          "type": "number",
+          "default": 0,
+          "description": "The minimum value."
+        },
+        "max": {
+          "type": "number",
+          "default": 100,
+          "description": "The maximum value."
+        },
+        "format": {
+          "type": "Intl.NumberFormatOptions",
+          "description": "Formatting options for the displayed value."
+        },
+        "locale": {
+          "type": "string",
+          "description": "Locale for number formatting."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Label": {
+      "element": "label",
+      "description": "An accessible label for the meter.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Track": {
+      "element": "div",
+      "description": "The background track of the meter.",
+      "props": {
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Height of the track (sm=4px, md=8px, lg=12px)."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Indicator": {
+      "element": "div",
+      "description": "The filled portion of the meter, proportional to the value.",
+      "props": {
+        "color": {
+          "type": "'default' | 'secondary' | 'destructive'",
+          "default": "default",
+          "description": "Color of the indicator bar."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Value": {
+      "element": "span",
+      "description": "Displays the formatted value of the meter.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorPrimary",
+    "colorSecondary",
+    "colorDestructive",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "space1h",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "radiusFull",
+    "motionDurationNormal",
+    "motionEaseInOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "value-meter",
+      "signals": ["meter", "gauge", "level", "capacity", "usage", "quota"],
+      "reasoning": "Meter displays a scalar measurement within a known range. Use for disk usage, battery level, password strength, etc.",
+      "composition": "<Meter.Root value={75}>\n  <Meter.Label>Storage used</Meter.Label>\n  <Meter.Track>\n    <Meter.Indicator />\n  </Meter.Track>\n  <Meter.Value />\n</Meter.Root>"
+    },
+    {
+      "intent": "threshold-indicator",
+      "signals": ["threshold", "warning level", "critical level", "danger zone", "limit"],
+      "reasoning": "Meter with destructive color communicates when a value has crossed a critical threshold.",
+      "composition": "<Meter.Root value={92}>\n  <Meter.Label>CPU Usage</Meter.Label>\n  <Meter.Track>\n    <Meter.Indicator color=\"destructive\" />\n  </Meter.Track>\n  <Meter.Value />\n</Meter.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Showing progress of a task that will complete",
+      "reasoning": "Use Progress for indeterminate or determinate task progress. Meter is for static scalar values, not ongoing operations.",
+      "alternative": "Progress"
+    },
+    {
+      "scenario": "Loading indicators",
+      "reasoning": "Use Progress with indeterminate mode or a spinner. Meter represents a measurement, not a loading state.",
+      "alternative": "Progress"
+    },
+    {
+      "scenario": "Star ratings or discrete steps",
+      "reasoning": "Meter shows a continuous bar. For discrete steps, use a rating component or radio group.",
+      "alternative": "Custom rating component or RadioGroup"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic meter showing a percentage",
+      "code": "<Meter.Root value={65}>\n  <Meter.Label>Storage</Meter.Label>\n  <Meter.Track>\n    <Meter.Indicator />\n  </Meter.Track>\n</Meter.Root>"
+    },
+    {
+      "name": "with-value",
+      "description": "Meter with value display",
+      "code": "<Meter.Root value={42} format={{ style: 'percent', maximumFractionDigits: 0 }}>\n  <Meter.Label>Upload progress</Meter.Label>\n  <Meter.Value />\n  <Meter.Track>\n    <Meter.Indicator />\n  </Meter.Track>\n</Meter.Root>"
+    },
+    {
+      "name": "colors",
+      "description": "Meter color variations",
+      "code": "<>\n  <Meter.Root value={30}>\n    <Meter.Track>\n      <Meter.Indicator color=\"default\" />\n    </Meter.Track>\n  </Meter.Root>\n  <Meter.Root value={60}>\n    <Meter.Track>\n      <Meter.Indicator color=\"secondary\" />\n    </Meter.Track>\n  </Meter.Root>\n  <Meter.Root value={90}>\n    <Meter.Track>\n      <Meter.Indicator color=\"destructive\" />\n    </Meter.Track>\n  </Meter.Root>\n</>"
+    },
+    {
+      "name": "sizes",
+      "description": "Meter size variations",
+      "code": "<>\n  <Meter.Root value={50}>\n    <Meter.Track size=\"sm\">\n      <Meter.Indicator />\n    </Meter.Track>\n  </Meter.Root>\n  <Meter.Root value={50}>\n    <Meter.Track size=\"md\">\n      <Meter.Indicator />\n    </Meter.Track>\n  </Meter.Root>\n  <Meter.Root value={50}>\n    <Meter.Track size=\"lg\">\n      <Meter.Indicator />\n    </Meter.Track>\n  </Meter.Root>\n</>"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "name": "Menu",
+  "description": "A dropdown menu triggered by a button, supporting items, checkbox items, radio items, submenus, and keyboard navigation. Built on Base UI Menu with StyleX styling.",
+  "category": "navigation",
+  "baseComponent": "@base-ui/react/menu",
+
+  "anatomy": "<Menu.Root>\n  <Menu.Trigger />\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item />\n        <Menu.Separator />\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "Provides menu state and context. Does not render a DOM element.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Whether the menu is open (controlled)."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, event: Event) => void",
+          "description": "Callback when the menu open state changes."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "The button that opens the menu. Handles aria-expanded, aria-haspopup, and keyboard shortcuts.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the menu popup is open.",
+        "data-disabled": "Present when the trigger is disabled."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "The menu popup container. Contains the menu items.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the menu is open.",
+        "data-closed": "Present when the menu is closed.",
+        "data-starting-style": "Present on first render when opening for CSS transition.",
+        "data-ending-style": "Present when closing for CSS transition."
+      }
+    },
+    "Item": {
+      "element": "div",
+      "description": "A menu item. Supports keyboard navigation and focus management.",
+      "props": {
+        "destructive": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the item represents a destructive action, styled with destructive colors."
+        },
+        "closeOnClick": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether clicking the item closes the menu."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-highlighted": "Present when the item is highlighted via keyboard or pointer.",
+        "data-disabled": "Present when the item is disabled."
+      }
+    },
+    "Separator": {
+      "element": "div",
+      "description": "A visual separator between menu items.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Menu popup enter/exit animations using Base UI data attributes.",
+    "css": ".basex-menu-popup {\n  opacity: 1;\n  transform: scale(1);\n  transition: opacity 150ms ease-out, transform 150ms ease-out;\n}\n.basex-menu-popup[data-starting-style],\n.basex-menu-popup[data-ending-style] {\n  opacity: 0;\n  transform: scale(0.95);\n}"
+  },
+
+  "tokens": [
+    "colorText",
+    "colorTextMuted",
+    "colorBorder",
+    "colorBorderMuted",
+    "colorMuted",
+    "colorSurface",
+    "colorDestructive",
+    "colorDestructiveMuted",
+    "colorFocusRing",
+    "space1",
+    "space1h",
+    "space2",
+    "space3",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontSizeXs",
+    "fontWeightMedium",
+    "lineHeightTight",
+    "lineHeightNormal",
+    "letterSpacingWide",
+    "radiusMd",
+    "radiusLg",
+    "borderWidthDefault",
+    "shadowLg",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "dropdown-menu",
+      "signals": ["menu", "dropdown", "dropdown menu", "action menu", "options menu", "context actions"],
+      "reasoning": "Menu is the primary component for dropdown menus triggered by a button. It provides keyboard navigation, focus management, and ARIA attributes.",
+      "composition": "<Menu.Root>\n  <Menu.Trigger>Options</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item>Edit</Menu.Item>\n        <Menu.Item>Duplicate</Menu.Item>\n        <Menu.Separator />\n        <Menu.Item destructive>Delete</Menu.Item>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    },
+    {
+      "intent": "menu-with-checkboxes",
+      "signals": ["menu checkboxes", "toggle menu items", "menu settings", "menu preferences"],
+      "reasoning": "Menu supports checkbox items for toggling boolean options within a menu.",
+      "composition": "<Menu.Root>\n  <Menu.Trigger>View</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.CheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>\n          <Menu.CheckboxItemIndicator />\n          Show Grid\n        </Menu.CheckboxItem>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    },
+    {
+      "intent": "menu-with-submenus",
+      "signals": ["submenu", "nested menu", "cascading menu", "hierarchical menu"],
+      "reasoning": "Menu supports nested submenus for organizing complex menu hierarchies.",
+      "composition": "<Menu.Root>\n  <Menu.Trigger>File</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item>New</Menu.Item>\n        <Menu.SubmenuRoot>\n          <Menu.SubmenuTrigger>Open Recent</Menu.SubmenuTrigger>\n          <Menu.Portal>\n            <Menu.Positioner>\n              <Menu.Popup>\n                <Menu.Item>file1.txt</Menu.Item>\n                <Menu.Item>file2.txt</Menu.Item>\n              </Menu.Popup>\n            </Menu.Positioner>\n          </Menu.Portal>\n        </Menu.SubmenuRoot>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Navigation links that should be visible at all times",
+      "reasoning": "Use a visible navigation bar or NavigationMenu instead. Menus hide their content until triggered.",
+      "alternative": "NavigationMenu or plain nav with links"
+    },
+    {
+      "scenario": "Selecting a single value from a list (form input)",
+      "reasoning": "Use Select or Combobox for form value selection. Menu is for actions, not form values.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "scenario": "Right-click context menu",
+      "reasoning": "Use ContextMenu which handles the right-click trigger pattern. Menu requires an explicit trigger button.",
+      "alternative": "ContextMenu"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic dropdown menu with items",
+      "code": "<Menu.Root>\n  <Menu.Trigger>Options</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item>Edit</Menu.Item>\n        <Menu.Item>Duplicate</Menu.Item>\n        <Menu.Separator />\n        <Menu.Item destructive>Delete</Menu.Item>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    },
+    {
+      "name": "with-groups",
+      "description": "Menu with labeled groups",
+      "code": "<Menu.Root>\n  <Menu.Trigger>View</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Group>\n          <Menu.GroupLabel>Layout</Menu.GroupLabel>\n          <Menu.Item>Grid</Menu.Item>\n          <Menu.Item>List</Menu.Item>\n        </Menu.Group>\n        <Menu.Separator />\n        <Menu.Group>\n          <Menu.GroupLabel>Sort</Menu.GroupLabel>\n          <Menu.Item>Name</Menu.Item>\n          <Menu.Item>Date</Menu.Item>\n        </Menu.Group>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    },
+    {
+      "name": "with-links",
+      "description": "Menu with link items for navigation",
+      "code": "<Menu.Root>\n  <Menu.Trigger>Navigate</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.LinkItem href=\"/dashboard\">Dashboard</Menu.LinkItem>\n        <Menu.LinkItem href=\"/settings\">Settings</Menu.LinkItem>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
+    }
+  ]
+}

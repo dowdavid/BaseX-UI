@@ -1,0 +1,178 @@
+{
+  "name": "NavigationMenu",
+  "description": "A site navigation component with hover-triggered dropdown content panels. Built on Base UI NavigationMenu with StyleX styling.",
+  "category": "navigation",
+  "baseComponent": "@base-ui/react/navigation-menu",
+
+  "anatomy": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item>\n      <NavigationMenu.Trigger />\n      <NavigationMenu.Content />\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link />\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "nav",
+      "description": "The navigation container. Renders a <nav> element by default.",
+      "props": {
+        "value": {
+          "type": "string | null",
+          "description": "The value of the currently open item (controlled)."
+        },
+        "defaultValue": {
+          "type": "string | null",
+          "default": "null",
+          "description": "The initially open item value."
+        },
+        "onValueChange": {
+          "type": "(value: string | null) => void",
+          "description": "Callback when the open item changes."
+        },
+        "delay": {
+          "type": "number",
+          "default": 50,
+          "description": "Delay in ms before opening on hover."
+        },
+        "closeDelay": {
+          "type": "number",
+          "default": 50,
+          "description": "Delay in ms before closing on pointer leave."
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "The orientation of the navigation menu."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "The orientation of the navigation menu."
+      }
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "A button that opens a content panel on hover or click.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the associated content is visible.",
+        "data-disabled": "Present when the trigger is disabled."
+      }
+    },
+    "Content": {
+      "element": "div",
+      "description": "The content panel revealed by a trigger.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the content is visible.",
+        "data-starting-style": "Present on first render when opening.",
+        "data-ending-style": "Present when closing."
+      }
+    },
+    "Link": {
+      "element": "a",
+      "description": "A direct navigation link item (no dropdown content).",
+      "props": {
+        "href": {
+          "type": "string",
+          "description": "The URL the link navigates to."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "NavigationMenu popup and content enter/exit animations.",
+    "css": ".basex-navigation-menu-popup {\n  opacity: 1;\n  transform: translateY(0);\n  transition: opacity 200ms ease-out, transform 200ms ease-out;\n}\n.basex-navigation-menu-popup[data-starting-style],\n.basex-navigation-menu-popup[data-ending-style] {\n  opacity: 0;\n  transform: translateY(-4px);\n}\n.basex-navigation-menu-content {\n  opacity: 1;\n  transition: opacity 200ms ease-out;\n}\n.basex-navigation-menu-content[data-starting-style],\n.basex-navigation-menu-content[data-ending-style] {\n  opacity: 0;\n}"
+  },
+
+  "tokens": [
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorSurface",
+    "colorBorderMuted",
+    "colorFocusRing",
+    "space1",
+    "space1h",
+    "space2",
+    "space3",
+    "space4",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightTight",
+    "radiusMd",
+    "radiusLg",
+    "borderWidthDefault",
+    "shadowLg",
+    "motionDurationFast",
+    "motionDurationNormal",
+    "motionEaseOut",
+    "motionEaseInOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "site-navigation",
+      "signals": ["navigation", "nav menu", "site menu", "header nav", "main navigation", "nav bar"],
+      "reasoning": "NavigationMenu is the primary component for site-wide navigation with hover-triggered dropdown panels.",
+      "composition": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"products\">\n      <NavigationMenu.Trigger>Products <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <a href=\"/products/a\">Product A</a>\n        <a href=\"/products/b\">Product B</a>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/about\">About</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
+    },
+    {
+      "intent": "mega-menu",
+      "signals": ["mega menu", "large dropdown nav", "category navigation", "multi-column nav"],
+      "reasoning": "NavigationMenu content panels can hold any layout, making them ideal for mega-menu patterns with multi-column grids.",
+      "composition": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"categories\">\n      <NavigationMenu.Trigger>Categories <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>\n          <div><h3>Category A</h3><a href=\"/a/1\">Item 1</a></div>\n          <div><h3>Category B</h3><a href=\"/b/1\">Item 1</a></div>\n          <div><h3>Category C</h3><a href=\"/c/1\">Item 1</a></div>\n        </div>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Action menus triggered by a button click",
+      "reasoning": "Use Menu for action dropdowns. NavigationMenu is for site navigation with hover-triggered content.",
+      "alternative": "Menu"
+    },
+    {
+      "scenario": "Mobile hamburger menus",
+      "reasoning": "Use Drawer for mobile slide-out navigation. NavigationMenu is designed for desktop hover interactions.",
+      "alternative": "Drawer"
+    },
+    {
+      "scenario": "Application menu bars (File, Edit, View)",
+      "reasoning": "Use Menubar with Menu components. NavigationMenu is for site navigation, not application commands.",
+      "alternative": "Menubar"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic navigation menu with dropdown and link items",
+      "code": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"products\">\n      <NavigationMenu.Trigger>Products <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <a href=\"/products/a\">Product A</a>\n        <a href=\"/products/b\">Product B</a>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/about\">About</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
+    },
+    {
+      "name": "with-links-only",
+      "description": "Simple navigation with link items only (no dropdowns)",
+      "code": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/\">Home</NavigationMenu.Link>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/about\">About</NavigationMenu.Link>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/contact\">Contact</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n</NavigationMenu.Root>"
+    },
+    {
+      "name": "vertical",
+      "description": "Vertical navigation menu",
+      "code": "<NavigationMenu.Root orientation=\"vertical\">\n  <NavigationMenu.List>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/dashboard\">Dashboard</NavigationMenu.Link>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/settings\">Settings</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n</NavigationMenu.Root>"
+    }
+  ]
+}

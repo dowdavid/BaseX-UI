@@ -1,0 +1,107 @@
+{
+  "name": "Menubar",
+  "description": "A horizontal container for multiple menus, providing keyboard navigation between menu triggers. Built on Base UI Menubar with StyleX styling.",
+  "category": "navigation",
+  "baseComponent": "@base-ui/react/menubar",
+
+  "anatomy": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger />\n    <Menu.Portal>...</Menu.Portal>\n  </Menu.Root>\n</Menubar>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "A horizontal bar containing multiple Menu.Root components. Provides arrow-key navigation between menu triggers.",
+      "props": {
+        "modal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the menubar is modal when a menu is open."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the entire menubar is disabled."
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "The orientation of the menubar."
+        },
+        "loopFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to loop keyboard focus back to the first item when the end is reached."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "The orientation of the menubar ('horizontal' or 'vertical').",
+        "data-disabled": "Present when the menubar is disabled."
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorSurface",
+    "colorBorderMuted",
+    "space1",
+    "fontFamilySans",
+    "radiusLg",
+    "borderWidthDefault"
+  ],
+
+  "intents": [
+    {
+      "intent": "application-menubar",
+      "signals": ["menubar", "menu bar", "application menu", "file edit view menu", "toolbar menus"],
+      "reasoning": "Menubar provides a horizontal bar of menus with arrow-key navigation between them, like desktop application menu bars.",
+      "composition": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger>File</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>New</Menu.Item>\n          <Menu.Item>Open</Menu.Item>\n          <Menu.Item>Save</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n  <Menu.Root>\n    <Menu.Trigger>Edit</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Undo</Menu.Item>\n          <Menu.Item>Redo</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
+    },
+    {
+      "intent": "grouped-menus",
+      "signals": ["grouped menus", "multiple menus", "menu group", "menu collection"],
+      "reasoning": "Menubar groups multiple Menu components together with shared keyboard navigation and focus management.",
+      "composition": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger>Actions</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Action 1</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n  <Menu.Root>\n    <Menu.Trigger>Settings</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Preferences</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "A single dropdown menu",
+      "reasoning": "Use Menu alone. Menubar adds keyboard navigation between multiple menus that isn't needed for a single menu.",
+      "alternative": "Menu"
+    },
+    {
+      "scenario": "Site-wide navigation with dropdowns",
+      "reasoning": "Use NavigationMenu which is designed for site navigation with hover-triggered content panels.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "scenario": "A toolbar with action buttons",
+      "reasoning": "Use Toolbar which is designed for groups of action buttons and controls, not menus.",
+      "alternative": "Toolbar"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic application menubar with File and Edit menus",
+      "code": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger>File</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>New</Menu.Item>\n          <Menu.Item>Open</Menu.Item>\n          <Menu.Item>Save</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n  <Menu.Root>\n    <Menu.Trigger>Edit</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Undo</Menu.Item>\n          <Menu.Item>Redo</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled menubar",
+      "code": "<Menubar disabled>\n  <Menu.Root>\n    <Menu.Trigger>File</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>New</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
+    },
+    {
+      "name": "vertical",
+      "description": "Vertical menubar orientation",
+      "code": "<Menubar orientation=\"vertical\">\n  <Menu.Root>\n    <Menu.Trigger>File</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>New</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
+    }
+  ]
+}
