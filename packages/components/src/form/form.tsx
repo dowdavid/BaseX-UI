@@ -9,7 +9,7 @@ const styles = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: tokens.space8,
+    gap: tokens.space6,
     width: '100%',
     fontFamily: tokens.fontFamilySans,
   },

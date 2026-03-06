@@ -18,8 +18,6 @@ const pageStyles = stylex.create({
 
 export function FormPage() {
   const [basicSubmitted, setBasicSubmitted] = useState(false);
-  const [serverErrors, setServerErrors] = useState<Record<string, string[]>>({});
-  const [serverSubmitting, setServerSubmitting] = useState(false);
 
   return (
     <>
@@ -53,45 +51,6 @@ export function FormPage() {
               Form submitted successfully.
             </div>
           )}
-        </Form>
-      </Preview>
-
-      <Preview
-        title="Server-side validation errors"
-        description="Simulates a server response that returns field-level errors via the errors prop."
-        constrained
-      >
-        <Form
-          errors={serverErrors}
-          onSubmit={(e) => {
-            e.preventDefault();
-            setServerErrors({});
-            setServerSubmitting(true);
-            setTimeout(() => {
-              setServerErrors({
-                email: ['This email is already registered.'],
-                username: [
-                  'Username must be at least 3 characters.',
-                  'Username cannot contain spaces.',
-                ],
-              });
-              setServerSubmitting(false);
-            }, 800);
-          }}
-        >
-          <Field.Root name="username">
-            <Field.Label>Username</Field.Label>
-            <Field.Control defaultValue="a b" />
-            <Field.Error />
-          </Field.Root>
-          <Field.Root name="email">
-            <Field.Label>Email</Field.Label>
-            <Field.Control type="email" defaultValue="taken@example.com" />
-            <Field.Error />
-          </Field.Root>
-          <Button type="submit" disabled={serverSubmitting}>
-            {serverSubmitting ? 'Submitting...' : 'Submit'}
-          </Button>
         </Form>
       </Preview>
     </>
