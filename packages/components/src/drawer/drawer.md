@@ -109,51 +109,89 @@ Backdrop fade, popup slide, and scroll indicator animations require global CSS i
 
 ```css
 @layer priority1 {
-  /* Drawer backdrop fade animation — Enter: 200ms ease-out */
+  /* Drawer viewport — non-interactive when closed */
+  .basex-drawer-viewport {
+    pointer-events: none;
+  }
+  .basex-drawer-viewport:has(.basex-drawer-popup[data-open]),
+  .basex-drawer-viewport:has(.basex-drawer-popup[data-ending-style]) {
+    pointer-events: auto;
+  }
+
+  /* Drawer backdrop — 450ms smooth ease, swipe-reactive opacity */
   .basex-drawer-backdrop {
-    opacity: 1;
-    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1);
+    opacity: calc(1 - var(--drawer-swipe-progress, 0));
+    transition: opacity 450ms cubic-bezier(0.32, 0.72, 0, 1);
   }
   .basex-drawer-backdrop[data-starting-style],
   .basex-drawer-backdrop[data-ending-style] {
     opacity: 0;
   }
+  .basex-drawer-backdrop[data-swiping] {
+    transition-duration: 0ms;
+  }
+  .basex-drawer-backdrop[data-ending-style] {
+    transition-duration: calc(var(--drawer-swipe-strength, 1) * 400ms);
+  }
 
-  /* Drawer popup slide animation — Enter: 200ms ease-out, Exit: 100ms ease-out */
+  /* Drawer popup slide — 450ms smooth ease, swipe-reactive transform */
   .basex-drawer-popup {
-    opacity: 1;
-    transform: translate(0, 0);
-    transition:
-      opacity 200ms cubic-bezier(0, 0, 0.2, 1),
-      transform 200ms cubic-bezier(0, 0, 0.2, 1);
+    will-change: transform;
+    transition: transform 450ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .basex-drawer-popup[data-swiping] {
+    transition-duration: 0ms;
   }
   .basex-drawer-popup[data-ending-style] {
-    transition:
-      opacity 100ms cubic-bezier(0, 0, 0.2, 1),
-      transform 100ms cubic-bezier(0, 0, 0.2, 1);
+    transition-duration: calc(var(--drawer-swipe-strength, 1) * 400ms);
   }
-  .basex-drawer-popup[data-starting-style],
-  .basex-drawer-popup[data-ending-style] {
-    opacity: 0;
+  /* Closed state — off-screen and hidden */
+  .basex-drawer-popup--down:not([data-open]):not([data-starting-style]):not([data-ending-style]) {
+    transform: translateY(100%);
+    visibility: hidden;
   }
-  /* Bottom (default): slide up from below */
-  .basex-drawer-popup[data-swipe-direction='down'][data-starting-style],
-  .basex-drawer-popup[data-swipe-direction='down'][data-ending-style] {
+  .basex-drawer-popup--up:not([data-open]):not([data-starting-style]):not([data-ending-style]) {
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+  .basex-drawer-popup--left:not([data-open]):not([data-starting-style]):not([data-ending-style]) {
+    transform: translateX(-100%);
+    visibility: hidden;
+  }
+  .basex-drawer-popup--right:not([data-open]):not([data-starting-style]):not([data-ending-style]) {
+    transform: translateX(100%);
+    visibility: hidden;
+  }
+  /* Bottom (default): slide up */
+  .basex-drawer-popup--down {
+    transform: translateY(var(--drawer-swipe-movement-y, 0));
+  }
+  .basex-drawer-popup--down[data-starting-style],
+  .basex-drawer-popup--down[data-ending-style] {
     transform: translateY(100%);
   }
-  /* Top: slide down from above */
-  .basex-drawer-popup[data-swipe-direction='up'][data-starting-style],
-  .basex-drawer-popup[data-swipe-direction='up'][data-ending-style] {
+  /* Top: slide down */
+  .basex-drawer-popup--up {
+    transform: translateY(var(--drawer-swipe-movement-y, 0));
+  }
+  .basex-drawer-popup--up[data-starting-style],
+  .basex-drawer-popup--up[data-ending-style] {
     transform: translateY(-100%);
   }
-  /* Left: slide in from the left */
-  .basex-drawer-popup[data-swipe-direction='left'][data-starting-style],
-  .basex-drawer-popup[data-swipe-direction='left'][data-ending-style] {
+  /* Left: slide from left */
+  .basex-drawer-popup--left {
+    transform: translateX(var(--drawer-swipe-movement-x, 0));
+  }
+  .basex-drawer-popup--left[data-starting-style],
+  .basex-drawer-popup--left[data-ending-style] {
     transform: translateX(-100%);
   }
-  /* Right: slide in from the right */
-  .basex-drawer-popup[data-swipe-direction='right'][data-starting-style],
-  .basex-drawer-popup[data-swipe-direction='right'][data-ending-style] {
+  /* Right: slide from right */
+  .basex-drawer-popup--right {
+    transform: translateX(var(--drawer-swipe-movement-x, 0));
+  }
+  .basex-drawer-popup--right[data-starting-style],
+  .basex-drawer-popup--right[data-ending-style] {
     transform: translateX(100%);
   }
 

@@ -13,7 +13,7 @@ import { DrawerPreview as BaseDrawer } from '@base-ui/react/drawer';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { X } from 'lucide-react';
-import { createContext, forwardRef, useContext } from 'react';
+import { createContext, forwardRef, useCallback, useContext } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
 // --- Swipe direction context ---
@@ -25,12 +25,14 @@ const styles = stylex.create({
   backdrop: {
     position: 'fixed',
     inset: 0,
+    zIndex: 50,
     backgroundColor: tokens.colorOverlay,
   },
 
   viewport: {
     position: 'fixed',
     inset: 0,
+    zIndex: 50,
     display: 'flex',
     overflow: 'auto',
   },
@@ -65,9 +67,8 @@ const styles = stylex.create({
   popupBottom: {
     borderTopLeftRadius: tokens.radiusLg,
     borderTopRightRadius: tokens.radiusLg,
-    maxHeight: '85vh',
+    maxHeight: '80vh',
     width: '100%',
-    maxWidth: '40rem',
   },
   popupTop: {
     borderBottomLeftRadius: tokens.radiusLg,
@@ -139,6 +140,9 @@ const styles = stylex.create({
     minHeight: 0,
     overflow: 'auto',
     paddingInline: tokens.space6,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: tokens.space4,
   },
 
   footer: {
@@ -148,6 +152,12 @@ const styles = stylex.create({
     paddingInline: tokens.space6,
     paddingBottom: tokens.space6,
     paddingTop: tokens.space4,
+  },
+
+  footerBordered: {
+    borderTopWidth: '1px',
+    borderTopStyle: 'solid',
+    borderTopColor: tokens.colorBorderMuted,
   },
 });
 
@@ -167,15 +177,9 @@ const popupStyles: Record<SwipeDirection, keyof typeof styles> = {
 };
 
 // --- Types ---
-export interface DrawerRootProps {
-  open?: boolean;
-  defaultOpen?: boolean;
-  modal?: boolean | 'trap-focus';
-  onOpenChange?: (open: boolean, eventDetails: unknown) => void;
-  onOpenChangeComplete?: (open: boolean) => void;
+export interface DrawerRootProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Root>, 'swipeDirection'> {
   swipeDirection?: SwipeDirection;
-  children?: React.ReactNode;
-  [key: string]: unknown;
 }
 
 export interface DrawerTriggerProps
@@ -216,6 +220,7 @@ export interface DrawerPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export interface DrawerFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'bordered';
   sx?: StyleXStyles;
 }
 
@@ -246,8 +251,8 @@ const Trigger = forwardRef<HTMLButtonElement, DrawerTriggerProps>(
 );
 Trigger.displayName = 'Drawer.Trigger';
 
-const Portal = (props: DrawerPortalProps) => (
-  <BaseDrawer.Portal keepMounted {...props} />
+const Portal = ({ keepMounted = true, ...props }: DrawerPortalProps) => (
+  <BaseDrawer.Portal keepMounted={keepMounted} {...props} />
 );
 Portal.displayName = 'Drawer.Portal';
 
@@ -272,7 +277,7 @@ const Popup = forwardRef<HTMLDivElement, DrawerPopupProps>(
 
     return (
       <BaseDrawer.Viewport
-        className={stylex.props(styles.viewport, styles[viewportKey]).className ?? ''}
+        className={`basex-drawer-viewport ${stylex.props(styles.viewport, styles[viewportKey]).className ?? ''}`}
       >
         <BaseDrawer.Popup
           ref={ref}
@@ -327,19 +332,52 @@ const Description = forwardRef<HTMLParagraphElement, DrawerDescriptionProps>(
 Description.displayName = 'Drawer.Description';
 
 const Panel = forwardRef<HTMLDivElement, DrawerPanelProps>(
-  ({ sx, ...props }, ref) => (
-    <div
-      ref={ref}
-      {...props}
-      className={`basex-drawer-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
-    />
-  ),
+  ({ sx, children, ...props }, ref) => {
+    const checkScroll = useCallback((el: HTMLElement) => {
+      const canScrollUp = el.scrollTop > 1;
+      const canScrollDown = el.scrollTop + el.clientHeight < el.scrollHeight - 1;
+      if (canScrollUp) el.setAttribute('data-scroll-top', '');
+      else el.removeAttribute('data-scroll-top');
+      if (canScrollDown) el.setAttribute('data-scroll-bottom', '');
+      else el.removeAttribute('data-scroll-bottom');
+    }, []);
+
+    const scrollRef = useCallback(
+      (el: HTMLDivElement | null) => {
+        if (!el) return;
+        checkScroll(el);
+        const ro = new ResizeObserver(() => checkScroll(el));
+        ro.observe(el);
+        if (typeof ref === 'function') ref(el);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+      },
+      [ref, checkScroll],
+    );
+
+    return (
+      <div
+        ref={scrollRef}
+        {...props}
+        className={`basex-drawer-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
+        onScroll={(e) => {
+          checkScroll(e.currentTarget);
+          props.onScroll?.(e);
+        }}
+      >
+        {children}
+      </div>
+    );
+  },
 );
 Panel.displayName = 'Drawer.Panel';
 
 const Footer = forwardRef<HTMLDivElement, DrawerFooterProps>(
-  ({ sx, ...props }, ref) => (
-    <div ref={ref} {...props} {...stylex.props(styles.footer, sx)} />
+  ({ variant = 'default', sx, ...props }, ref) => (
+    <div
+      ref={ref}
+      {...props}
+      {...stylex.props(styles.footer, variant === 'bordered' && styles.footerBordered, sx)}
+    />
   ),
 );
 Footer.displayName = 'Drawer.Footer';
