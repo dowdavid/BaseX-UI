@@ -18,7 +18,7 @@ const styles = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: tokens.space4,
+    gap: tokens.space3,
     borderWidth: 0,
     borderStyle: 'none',
     padding: 0,
@@ -31,7 +31,7 @@ const styles = stylex.create({
   },
 
   legend: {
-    fontSize: tokens.fontSizeSm,
+    fontSize: tokens.fontSizeMd,
     fontWeight: tokens.fontWeightSemibold,
     fontFamily: tokens.fontFamilySans,
     color: tokens.colorText,

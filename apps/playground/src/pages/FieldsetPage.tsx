@@ -1,4 +1,4 @@
-import { Fieldset, Field } from '@basex-ui/components';
+import { Fieldset, Field, Form } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
 
 export function FieldsetPage() {
@@ -36,10 +36,12 @@ export function FieldsetPage() {
           <Field.Root>
             <Field.Label>Email</Field.Label>
             <Field.Control value="locked@example.com" />
+            <Field.Description>This field is locked.</Field.Description>
           </Field.Root>
           <Field.Root>
             <Field.Label>Role</Field.Label>
             <Field.Control value="Admin" />
+            <Field.Description>This field is locked.</Field.Description>
           </Field.Root>
         </Fieldset.Root>
       </Preview>
@@ -49,29 +51,31 @@ export function FieldsetPage() {
         description="Multiple fieldsets organizing sections of a form."
         constrained
       >
-        <Fieldset.Root>
-          <Fieldset.Legend>Contact</Fieldset.Legend>
-          <Field.Root>
-            <Field.Label>Phone</Field.Label>
-            <Field.Control type="tel" placeholder="+44 7700 900000" />
-          </Field.Root>
-          <Field.Root>
-            <Field.Label>Email</Field.Label>
-            <Field.Control type="email" placeholder="contact@example.com" />
-          </Field.Root>
-        </Fieldset.Root>
+        <Form>
+          <Fieldset.Root>
+            <Fieldset.Legend>Contact</Fieldset.Legend>
+            <Field.Root>
+              <Field.Label>Phone</Field.Label>
+              <Field.Control type="tel" placeholder="+44 7700 900000" />
+            </Field.Root>
+            <Field.Root>
+              <Field.Label>Email</Field.Label>
+              <Field.Control type="email" placeholder="contact@example.com" />
+            </Field.Root>
+          </Fieldset.Root>
 
-        <Fieldset.Root>
-          <Fieldset.Legend>Address</Fieldset.Legend>
-          <Field.Root>
-            <Field.Label>Street</Field.Label>
-            <Field.Control placeholder="123 Main St" />
-          </Field.Root>
-          <Field.Root>
-            <Field.Label>City</Field.Label>
-            <Field.Control placeholder="Forres" />
-          </Field.Root>
-        </Fieldset.Root>
+          <Fieldset.Root>
+            <Fieldset.Legend>Address</Fieldset.Legend>
+            <Field.Root>
+              <Field.Label>Street</Field.Label>
+              <Field.Control placeholder="123 Main St" />
+            </Field.Root>
+            <Field.Root>
+              <Field.Label>City</Field.Label>
+              <Field.Control placeholder="Forres" />
+            </Field.Root>
+          </Fieldset.Root>
+        </Form>
       </Preview>
     </>
   );
