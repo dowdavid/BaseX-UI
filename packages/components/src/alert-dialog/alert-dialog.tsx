@@ -57,16 +57,14 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface AlertDialogRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Root> {}
+export type AlertDialogRootProps = React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Root>;
 
 export interface AlertDialogTriggerProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Trigger>, 'className'> {
   sx?: StyleXStyles;
 }
 
-export interface AlertDialogPortalProps
-  extends React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Portal> {}
+export type AlertDialogPortalProps = React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Portal>;
 
 export interface AlertDialogBackdropProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseAlertDialog.Backdrop>, 'className'> {

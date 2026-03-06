@@ -103,16 +103,14 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface DialogRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseDialog.Root> {}
+export type DialogRootProps = React.ComponentPropsWithoutRef<typeof BaseDialog.Root>;
 
 export interface DialogTriggerProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Trigger>, 'className'> {
   sx?: StyleXStyles;
 }
 
-export interface DialogPortalProps
-  extends React.ComponentPropsWithoutRef<typeof BaseDialog.Portal> {}
+export type DialogPortalProps = React.ComponentPropsWithoutRef<typeof BaseDialog.Portal>;
 
 export interface DialogBackdropProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Backdrop>, 'className'> {

@@ -187,8 +187,7 @@ export interface DrawerTriggerProps
   sx?: StyleXStyles;
 }
 
-export interface DrawerPortalProps
-  extends React.ComponentPropsWithoutRef<typeof BaseDrawer.Portal> {}
+export type DrawerPortalProps = React.ComponentPropsWithoutRef<typeof BaseDrawer.Portal>;
 
 export interface DrawerBackdropProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Backdrop>, 'className'> {

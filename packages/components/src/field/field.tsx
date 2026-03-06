@@ -112,8 +112,7 @@ export interface FieldControlProps
   sx?: StyleXStyles;
 }
 
-export interface FieldValidityProps
-  extends React.ComponentPropsWithoutRef<typeof BaseField.Validity> {}
+export type FieldValidityProps = React.ComponentPropsWithoutRef<typeof BaseField.Validity>;
 
 // --- Components ---
 
