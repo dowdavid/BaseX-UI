@@ -1,5 +1,13 @@
+import * as stylex from '@stylexjs/stylex';
+import { tokens } from '@basex-ui/tokens';
 import { Fieldset, Field, Form } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
+
+const pageStyles = stylex.create({
+  sectionForm: {
+    gap: tokens.space8,
+  },
+});
 
 export function FieldsetPage() {
   return (
@@ -51,7 +59,7 @@ export function FieldsetPage() {
         description="Multiple fieldsets organizing sections of a form."
         constrained
       >
-        <Form>
+        <Form sx={pageStyles.sectionForm}>
           <Fieldset.Root>
             <Fieldset.Legend>Contact</Fieldset.Legend>
             <Field.Root>

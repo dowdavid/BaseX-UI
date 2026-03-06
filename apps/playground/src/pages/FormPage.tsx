@@ -5,6 +5,9 @@ import { Form, Field, Button } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
 
 const pageStyles = stylex.create({
+  actions: {
+    marginTop: tokens.space3,
+  },
   submitted: {
     fontSize: tokens.fontSizeSm,
     fontFamily: tokens.fontFamilySans,
@@ -43,7 +46,7 @@ export function FormPage() {
             <Field.Error match="valueMissing">Email is required.</Field.Error>
             <Field.Error match="typeMismatch">Please enter a valid email address.</Field.Error>
           </Field.Root>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" sx={pageStyles.actions}>Submit</Button>
           {basicSubmitted && (
             <div {...stylex.props(pageStyles.submitted)}>Form submitted successfully.</div>
           )}
