@@ -9,7 +9,7 @@
   "parts": {
     "Root": {
       "element": "div",
-      "description": "Groups label, description, control, and error. Renders a flex-column container with gap.",
+      "description": "Groups label, description, control, and error. Renders a flex-column container with space1 (4px) gap between parts (label → control, control → error, etc.).",
       "props": {
         "invalid": {
           "type": "boolean",
@@ -142,7 +142,7 @@
     "colorDestructive",
     "colorBorder",
     "colorFocusRing",
-    "space1h",
+    "space1",
     "space2h",
     "space3",
     "space3h",

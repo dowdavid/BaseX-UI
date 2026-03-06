@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
-import { Field, Button } from '@basex-ui/components';
+import { Field, Form, Button } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
 
 const pageStyles = stylex.create({
@@ -36,12 +36,8 @@ export function FieldPage() {
         description="A required email field that shows validation errors on submit. Clear the input and click submit to see the error."
         constrained
       >
-        <form
-          {...stylex.props(pageStyles.form)}
-          onSubmit={(e) => e.preventDefault()}
-          noValidate
-        >
-          <Field.Root>
+        <Form onSubmit={(e) => e.preventDefault()}>
+          <Field.Root name="email">
             <Field.Label>Email</Field.Label>
             <Field.Control
               type="email"
@@ -60,7 +56,7 @@ export function FieldPage() {
               Submit
             </Button>
           </div>
-        </form>
+        </Form>
       </Preview>
 
       <Preview
@@ -68,12 +64,8 @@ export function FieldPage() {
         description="A password field with a hint description and multiple validation constraints."
         constrained
       >
-        <form
-          {...stylex.props(pageStyles.form)}
-          onSubmit={(e) => e.preventDefault()}
-          noValidate
-        >
-          <Field.Root>
+        <Form onSubmit={(e) => e.preventDefault()}>
+          <Field.Root name="password">
             <Field.Label>Password</Field.Label>
             <Field.Description>
               Must be at least 8 characters long.
@@ -91,7 +83,7 @@ export function FieldPage() {
               Submit
             </Button>
           </div>
-        </form>
+        </Form>
       </Preview>
     </>
   );

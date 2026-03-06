@@ -13,7 +13,7 @@ A form field wrapper that connects a label, description, input control, and vali
 </Field.Root>
 ```
 
-- **Root** -- Groups label, description, control, and error. Renders a `<div>` with flex-column layout.
+- **Root** -- Groups label, description, control, and error. Renders a `<div>` with flex-column layout and `space1` (4px) gap between parts.
 - **Label** -- The label for the field. Renders a `<label>` automatically linked to Control via `htmlFor`.
 - **Description** -- Hint text below the label. Renders a `<p>` linked to Control via `aria-describedby`.
 - **Control** -- The input element. Renders an `<input>` by default. Supports `render` prop to swap the element.

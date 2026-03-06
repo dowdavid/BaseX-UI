@@ -10,7 +10,7 @@ const styles = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: tokens.space1h,
+    gap: tokens.space1,
     width: '100%',
   },
 
@@ -23,10 +23,11 @@ const styles = stylex.create({
   },
 
   description: {
-    fontSize: tokens.fontSizeSm,
+    fontSize: tokens.fontSizeXs,
     fontFamily: tokens.fontFamilySans,
     color: tokens.colorTextMuted,
     lineHeight: tokens.lineHeightNormal,
+    marginTop: '-2px',
   },
 
   error: {
@@ -48,6 +49,9 @@ const styles = stylex.create({
     lineHeight: tokens.lineHeightNormal,
     '::placeholder': {
       color: tokens.colorTextPlaceholder,
+    },
+    ':autofill': {
+      boxShadow: `0 0 0 1000px ${tokens.colorSurface} inset`,
     },
   },
 
