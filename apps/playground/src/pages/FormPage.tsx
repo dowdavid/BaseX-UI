@@ -41,15 +41,11 @@ export function FormPage() {
             <Field.Label>Email</Field.Label>
             <Field.Control type="email" placeholder="you@example.com" required />
             <Field.Error match="valueMissing">Email is required.</Field.Error>
-            <Field.Error match="typeMismatch">
-              Please enter a valid email address.
-            </Field.Error>
+            <Field.Error match="typeMismatch">Please enter a valid email address.</Field.Error>
           </Field.Root>
           <Button type="submit">Submit</Button>
           {basicSubmitted && (
-            <div {...stylex.props(pageStyles.submitted)}>
-              Form submitted successfully.
-            </div>
+            <div {...stylex.props(pageStyles.submitted)}>Form submitted successfully.</div>
           )}
         </Form>
       </Preview>

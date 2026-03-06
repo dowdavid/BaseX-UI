@@ -63,11 +63,7 @@ export interface AvatarFallbackProps extends Omit<
 // --- Components ---
 
 const Root = forwardRef<HTMLSpanElement, AvatarRootProps>(({ sx, ...props }, ref) => (
-  <BaseAvatar.Root
-    ref={ref}
-    {...props}
-    className={stylex.props(styles.root, sx).className ?? ''}
-  />
+  <BaseAvatar.Root ref={ref} {...props} className={stylex.props(styles.root, sx).className ?? ''} />
 ));
 Root.displayName = 'Avatar.Root';
 

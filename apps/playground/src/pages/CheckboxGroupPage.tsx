@@ -29,10 +29,7 @@ export function CheckboxGroupPage() {
 
   return (
     <>
-      <Preview
-        title="Basic group"
-        description="Three checkboxes sharing state via CheckboxGroup."
-      >
+      <Preview title="Basic group" description="Three checkboxes sharing state via CheckboxGroup.">
         <CheckboxGroup.Root value={value} onValueChange={setValue}>
           <label {...stylex.props(labelStyles.label)}>
             <Checkbox.Root name="apples">

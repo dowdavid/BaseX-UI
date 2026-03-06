@@ -39,17 +39,9 @@ export function FieldPage() {
         <Form onSubmit={(e) => e.preventDefault()}>
           <Field.Root name="email">
             <Field.Label>Email</Field.Label>
-            <Field.Control
-              type="email"
-              required
-              placeholder="you@example.com"
-            />
-            <Field.Error match="valueMissing">
-              Email is required.
-            </Field.Error>
-            <Field.Error match="typeMismatch">
-              Please enter a valid email address.
-            </Field.Error>
+            <Field.Control type="email" required placeholder="you@example.com" />
+            <Field.Error match="valueMissing">Email is required.</Field.Error>
+            <Field.Error match="typeMismatch">Please enter a valid email address.</Field.Error>
           </Field.Root>
           <div {...stylex.props(pageStyles.actions)}>
             <Button type="submit" size="sm">
@@ -67,16 +59,10 @@ export function FieldPage() {
         <Form onSubmit={(e) => e.preventDefault()}>
           <Field.Root name="password">
             <Field.Label>Password</Field.Label>
-            <Field.Description>
-              Must be at least 8 characters long.
-            </Field.Description>
+            <Field.Description>Must be at least 8 characters long.</Field.Description>
             <Field.Control type="password" required minLength={8} />
-            <Field.Error match="valueMissing">
-              Password is required.
-            </Field.Error>
-            <Field.Error match="tooShort">
-              Password must be at least 8 characters.
-            </Field.Error>
+            <Field.Error match="valueMissing">Password is required.</Field.Error>
+            <Field.Error match="tooShort">Password must be at least 8 characters.</Field.Error>
           </Field.Root>
           <div {...stylex.props(pageStyles.actions)}>
             <Button type="submit" size="sm">

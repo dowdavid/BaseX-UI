@@ -16,20 +16,16 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface FormProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseForm>, 'className'> {
+export interface FormProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseForm>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 // --- Component ---
-export const Form = forwardRef<HTMLFormElement, FormProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseForm
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.root, sx).className ?? ''}
-    />
-  ),
-);
+export const Form = forwardRef<HTMLFormElement, FormProps>(({ sx, ...props }, ref) => (
+  <BaseForm ref={ref} {...props} className={stylex.props(styles.root, sx).className ?? ''} />
+));
 
 Form.displayName = 'Form';

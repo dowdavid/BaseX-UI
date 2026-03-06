@@ -150,10 +150,7 @@ export function DialogPage() {
         </Dialog.Root>
       </Preview>
 
-      <Preview
-        title="Settings dialog"
-        description="Controlled dialog with interactive content."
-      >
+      <Preview title="Settings dialog" description="Controlled dialog with interactive content.">
         <Dialog.Root open={settingsOpen} onOpenChange={setSettingsOpen}>
           <Dialog.Trigger render={<Button variant="outline">Settings</Button>} />
           <Dialog.Portal>
@@ -165,7 +162,9 @@ export function DialogPage() {
               </Dialog.Header>
               <Dialog.Panel>
                 <CheckboxGroup.Root>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+                  <label
+                    style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
+                  >
                     <Checkbox.Root checked={emailEnabled} onCheckedChange={setEmailEnabled}>
                       <Checkbox.Indicator />
                     </Checkbox.Root>
@@ -173,7 +172,9 @@ export function DialogPage() {
                       Email notifications
                     </span>
                   </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+                  <label
+                    style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
+                  >
                     <Checkbox.Root checked={pushEnabled} onCheckedChange={setPushEnabled}>
                       <Checkbox.Indicator />
                     </Checkbox.Root>
@@ -191,10 +192,7 @@ export function DialogPage() {
         </Dialog.Root>
       </Preview>
 
-      <Preview
-        title="Nested dialogs"
-        description="A dialog that opens another dialog on top."
-      >
+      <Preview title="Nested dialogs" description="A dialog that opens another dialog on top.">
         <Dialog.Root>
           <Dialog.Trigger render={<Button>Open</Button>} />
           <Dialog.Portal>

@@ -85,11 +85,7 @@ export function ComboboxPage() {
         </Combobox.Root>
       </Preview>
 
-      <Preview
-        title="Grouped"
-        description="Items organized under labeled groups."
-        constrained
-      >
+      <Preview title="Grouped" description="Items organized under labeled groups." constrained>
         <Combobox.Root items={produce}>
           <Combobox.Input placeholder="Select produce..." />
           <Combobox.Popup>

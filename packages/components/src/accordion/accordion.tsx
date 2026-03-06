@@ -152,7 +152,8 @@ const Trigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
       ref={ref}
       {...props}
       className={(state) =>
-        stylex.props(styles.trigger, focusRing, state.disabled && styles.disabled, sx).className ?? ''
+        stylex.props(styles.trigger, focusRing, state.disabled && styles.disabled, sx).className ??
+        ''
       }
       style={(state) =>
         ({

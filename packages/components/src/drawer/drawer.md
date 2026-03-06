@@ -65,9 +65,7 @@ const [open, setOpen] = useState(false);
           <Drawer.Title>Add item</Drawer.Title>
           <Drawer.Description>Fill in the details below.</Drawer.Description>
         </Drawer.Header>
-        <Drawer.Panel>
-          {/* form fields */}
-        </Drawer.Panel>
+        <Drawer.Panel>{/* form fields */}</Drawer.Panel>
         <Drawer.Footer>
           <Drawer.Close render={<Button variant="ghost">Cancel</Button>} />
           <Button type="submit">Save</Button>
@@ -75,7 +73,7 @@ const [open, setOpen] = useState(false);
       </form>
     </Drawer.Popup>
   </Drawer.Portal>
-</Drawer.Root>
+</Drawer.Root>;
 ```
 
 **Note:** Wrap the form around Header, Panel, and Footer with `display: contents` so it participates in the Popup's flex layout while still allowing native form submission.
@@ -215,15 +213,15 @@ Backdrop fade, popup slide, and scroll indicator animations require global CSS i
 
 ### Root
 
-| Prop                   | Type                                                        | Default  | Description                                                    |
-| ---------------------- | ----------------------------------------------------------- | -------- | -------------------------------------------------------------- |
-| `open`                 | `boolean`                                                   | —        | Controlled open state                                          |
-| `defaultOpen`          | `boolean`                                                   | `false`  | Initial open state for uncontrolled mode                       |
-| `onOpenChange`         | `(open: boolean, eventDetails: ChangeEventDetails) => void` | —        | Callback fired when the drawer opens or closes                 |
-| `onOpenChangeComplete` | `(open: boolean) => void`                                   | —        | Callback fired after animations complete                       |
-| `modal`                | `boolean`                                                   | `true`   | Whether the drawer is modal                                    |
-| `swipeDirection`       | `'up' \| 'down' \| 'left' \| 'right'`                      | `'down'` | Direction to swipe to dismiss; determines edge anchoring       |
-| `snapPoints`           | `number[]`                                                  | —        | Array of snap points (0–1) the drawer can rest at when swiped  |
+| Prop                   | Type                                                        | Default  | Description                                                   |
+| ---------------------- | ----------------------------------------------------------- | -------- | ------------------------------------------------------------- |
+| `open`                 | `boolean`                                                   | —        | Controlled open state                                         |
+| `defaultOpen`          | `boolean`                                                   | `false`  | Initial open state for uncontrolled mode                      |
+| `onOpenChange`         | `(open: boolean, eventDetails: ChangeEventDetails) => void` | —        | Callback fired when the drawer opens or closes                |
+| `onOpenChangeComplete` | `(open: boolean) => void`                                   | —        | Callback fired after animations complete                      |
+| `modal`                | `boolean`                                                   | `true`   | Whether the drawer is modal                                   |
+| `swipeDirection`       | `'up' \| 'down' \| 'left' \| 'right'`                       | `'down'` | Direction to swipe to dismiss; determines edge anchoring      |
+| `snapPoints`           | `number[]`                                                  | —        | Array of snap points (0–1) the drawer can rest at when swiped |
 
 ### Trigger
 
@@ -234,17 +232,17 @@ Backdrop fade, popup slide, and scroll indicator animations require global CSS i
 
 #### Data attributes
 
-| Attribute         | Description                       |
-| ----------------- | --------------------------------- |
-| `data-popup-open` | Present when the drawer is open   |
+| Attribute         | Description                          |
+| ----------------- | ------------------------------------ |
+| `data-popup-open` | Present when the drawer is open      |
 | `data-disabled`   | Present when the trigger is disabled |
 
 ### Portal
 
-| Prop          | Type                                     | Default | Description                            |
-| ------------- | ---------------------------------------- | ------- | -------------------------------------- |
+| Prop          | Type                                     | Default | Description                                 |
+| ------------- | ---------------------------------------- | ------- | ------------------------------------------- |
 | `keepMounted` | `boolean`                                | —       | Keep in DOM when closed for exit animations |
-| `container`   | `HTMLElement \| ShadowRoot \| RefObject` | —       | Target parent element                  |
+| `container`   | `HTMLElement \| ShadowRoot \| RefObject` | —       | Target parent element                       |
 
 ### Backdrop
 
@@ -254,35 +252,35 @@ Backdrop fade, popup slide, and scroll indicator animations require global CSS i
 
 #### Data attributes
 
-| Attribute             | Description                        |
-| --------------------- | ---------------------------------- |
-| `data-open`           | Present when the drawer is open    |
-| `data-closed`         | Present when the drawer is closed  |
-| `data-starting-style` | Present during entrance animation  |
-| `data-ending-style`   | Present during exit animation      |
+| Attribute             | Description                       |
+| --------------------- | --------------------------------- |
+| `data-open`           | Present when the drawer is open   |
+| `data-closed`         | Present when the drawer is closed |
+| `data-starting-style` | Present during entrance animation |
+| `data-ending-style`   | Present during exit animation     |
 
 ### Popup
 
-| Prop              | Type                                       | Default | Description                                  |
-| ----------------- | ------------------------------------------ | ------- | -------------------------------------------- |
-| `showCloseButton` | `boolean`                                  | `true`  | Whether to show the X close button top-right |
+| Prop              | Type                                        | Default | Description                                  |
+| ----------------- | ------------------------------------------- | ------- | -------------------------------------------- |
+| `showCloseButton` | `boolean`                                   | `true`  | Whether to show the X close button top-right |
 | `initialFocus`    | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when drawer opens           |
 | `finalFocus`      | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when drawer closes          |
-| `sx`              | `StyleXStyles`                             | —       | StyleX overrides                             |
+| `sx`              | `StyleXStyles`                              | —       | StyleX overrides                             |
 
 #### Data attributes
 
-| Attribute                  | Description                                   |
-| -------------------------- | --------------------------------------------- |
-| `data-open`                | Present when the drawer is open               |
-| `data-closed`              | Present when the drawer is closed             |
-| `data-starting-style`      | Present during entrance animation             |
-| `data-ending-style`        | Present during exit animation                 |
-| `data-nested`              | Present when nested inside another drawer     |
-| `data-nested-drawer-open`  | Present when a child drawer is open           |
-| `data-swiping`             | Present while the user is actively swiping    |
-| `data-swipe-direction`     | The configured swipe direction                |
-| `data-expanded`            | Present when the drawer is fully expanded     |
+| Attribute                 | Description                                |
+| ------------------------- | ------------------------------------------ |
+| `data-open`               | Present when the drawer is open            |
+| `data-closed`             | Present when the drawer is closed          |
+| `data-starting-style`     | Present during entrance animation          |
+| `data-ending-style`       | Present during exit animation              |
+| `data-nested`             | Present when nested inside another drawer  |
+| `data-nested-drawer-open` | Present when a child drawer is open        |
+| `data-swiping`            | Present while the user is actively swiping |
+| `data-swipe-direction`    | The configured swipe direction             |
+| `data-expanded`           | Present when the drawer is fully expanded  |
 
 ### Header
 

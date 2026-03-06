@@ -165,13 +165,25 @@
     },
     {
       "intent": "validated-input",
-      "signals": ["validation", "error message", "required field", "form validation", "invalid input"],
+      "signals": [
+        "validation",
+        "error message",
+        "required field",
+        "form validation",
+        "invalid input"
+      ],
       "reasoning": "Field automatically handles native constraint validation and displays error messages matched to specific validity states.",
       "composition": "<Field.Root>\n  <Field.Label>Username</Field.Label>\n  <Field.Control required minLength={3} />\n  <Field.Error match=\"valueMissing\">Username is required.</Field.Error>\n  <Field.Error match=\"tooShort\">Username must be at least 3 characters.</Field.Error>\n</Field.Root>"
     },
     {
       "intent": "labeled-input",
-      "signals": ["labeled input", "accessible input", "input with description", "hint text", "help text"],
+      "signals": [
+        "labeled input",
+        "accessible input",
+        "input with description",
+        "hint text",
+        "help text"
+      ],
       "reasoning": "Field automatically links the label and description to the input via htmlFor and aria-describedby, ensuring full accessibility.",
       "composition": "<Field.Root>\n  <Field.Label>Password</Field.Label>\n  <Field.Description>Must be at least 8 characters.</Field.Description>\n  <Field.Control type=\"password\" />\n</Field.Root>"
     }

@@ -133,10 +133,7 @@ export function AutocompletePage() {
         constrained
       >
         <Autocomplete.Root items={fruits}>
-          <Autocomplete.Input
-            startAddon={<SearchIcon />}
-            placeholder="Search fruits..."
-          />
+          <Autocomplete.Input startAddon={<SearchIcon />} placeholder="Search fruits..." />
           <Autocomplete.Popup>
             <Autocomplete.Empty>No results.</Autocomplete.Empty>
             {(fruit: Fruit) => (

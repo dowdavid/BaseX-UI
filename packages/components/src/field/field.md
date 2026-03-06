@@ -104,92 +104,92 @@ A form field wrapper that connects a label, description, input control, and vali
 
 ### Field.Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `invalid` | `boolean` | `false` | Whether the field is in an invalid state. |
-| `disabled` | `boolean` | `false` | Whether the entire field is disabled. |
-| `name` | `string` | -- | The name of the field, used when submitting a form. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop       | Type           | Default | Description                                         |
+| ---------- | -------------- | ------- | --------------------------------------------------- |
+| `invalid`  | `boolean`      | `false` | Whether the field is in an invalid state.           |
+| `disabled` | `boolean`      | `false` | Whether the entire field is disabled.               |
+| `name`     | `string`       | --      | The name of the field, used when submitting a form. |
+| `sx`       | `StyleXStyles` | --      | StyleX styles for consumer overrides.               |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-valid` | Present when the field is valid. |
-| `data-invalid` | Present when the field is invalid. |
-| `data-dirty` | Present when the field value has been modified. |
+| Attribute      | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `data-valid`   | Present when the field is valid.                     |
+| `data-invalid` | Present when the field is invalid.                   |
+| `data-dirty`   | Present when the field value has been modified.      |
 | `data-touched` | Present when the field has been focused and blurred. |
 
 ### Field.Label
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop | Type           | Default | Description                           |
+| ---- | -------------- | ------- | ------------------------------------- |
+| `sx` | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-valid` | Present when the field is valid. |
-| `data-invalid` | Present when the field is invalid. |
-| `data-dirty` | Present when the field value has been modified. |
+| Attribute      | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `data-valid`   | Present when the field is valid.                     |
+| `data-invalid` | Present when the field is invalid.                   |
+| `data-dirty`   | Present when the field value has been modified.      |
 | `data-touched` | Present when the field has been focused and blurred. |
 
 ### Field.Description
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop | Type           | Default | Description                           |
+| ---- | -------------- | ------- | ------------------------------------- |
+| `sx` | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-valid` | Present when the field is valid. |
-| `data-invalid` | Present when the field is invalid. |
-| `data-dirty` | Present when the field value has been modified. |
+| Attribute      | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `data-valid`   | Present when the field is valid.                     |
+| `data-invalid` | Present when the field is invalid.                   |
+| `data-dirty`   | Present when the field value has been modified.      |
 | `data-touched` | Present when the field has been focused and blurred. |
 
 ### Field.Error
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `match` | `keyof ValidityState \| ((validity: ValidityState) => boolean)` | -- | Match a specific ValidityState key or provide a custom function. Only shows the error when the matched condition is true. |
-| `forceShow` | `boolean` | `false` | Whether to show the error message regardless of validity state. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop        | Type                                                            | Default | Description                                                                                                               |
+| ----------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `match`     | `keyof ValidityState \| ((validity: ValidityState) => boolean)` | --      | Match a specific ValidityState key or provide a custom function. Only shows the error when the matched condition is true. |
+| `forceShow` | `boolean`                                                       | `false` | Whether to show the error message regardless of validity state.                                                           |
+| `sx`        | `StyleXStyles`                                                  | --      | StyleX styles for consumer overrides.                                                                                     |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-valid` | Present when the field is valid. |
-| `data-invalid` | Present when the field is invalid. |
-| `data-dirty` | Present when the field value has been modified. |
+| Attribute      | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `data-valid`   | Present when the field is valid.                     |
+| `data-invalid` | Present when the field is invalid.                   |
+| `data-dirty`   | Present when the field value has been modified.      |
 | `data-touched` | Present when the field has been focused and blurred. |
 
 ### Field.Control
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the control affecting height, padding, and font size. |
-| `render` | `React.ReactElement \| ((props: object) => React.ReactElement)` | -- | Swap the rendered element (e.g., to use a `<textarea>`). |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop     | Type                                                            | Default | Description                                                   |
+| -------- | --------------------------------------------------------------- | ------- | ------------------------------------------------------------- |
+| `size`   | `'sm' \| 'md' \| 'lg'`                                          | `'md'`  | Size of the control affecting height, padding, and font size. |
+| `render` | `React.ReactElement \| ((props: object) => React.ReactElement)` | --      | Swap the rendered element (e.g., to use a `<textarea>`).      |
+| `sx`     | `StyleXStyles`                                                  | --      | StyleX styles for consumer overrides.                         |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-valid` | Present when the field is valid. |
-| `data-invalid` | Present when the field is invalid. |
-| `data-dirty` | Present when the field value has been modified. |
-| `data-touched` | Present when the field has been focused and blurred. |
-| `data-disabled` | Present when the control is disabled. |
+| Attribute       | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `data-valid`    | Present when the field is valid.                     |
+| `data-invalid`  | Present when the field is invalid.                   |
+| `data-dirty`    | Present when the field value has been modified.      |
+| `data-touched`  | Present when the field has been focused and blurred. |
+| `data-disabled` | Present when the control is disabled.                |
 
 ### Field.Validity
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `(state: FieldValidityData) => React.ReactNode` | -- | Render function receiving validity state, errors, and value. |
+| Prop       | Type                                            | Default | Description                                                  |
+| ---------- | ----------------------------------------------- | ------- | ------------------------------------------------------------ |
+| `children` | `(state: FieldValidityData) => React.ReactNode` | --      | Render function receiving validity state, errors, and value. |
 
 ## When to Use
 

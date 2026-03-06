@@ -5,9 +5,7 @@ An enhanced form element that manages server-side validation errors for child Fi
 ## Anatomy
 
 ```tsx
-<Form>
-  {/* Field, Fieldset, and submit button */}
-</Form>
+<Form>{/* Field, Fieldset, and submit button */}</Form>
 ```
 
 ## Examples
@@ -15,7 +13,11 @@ An enhanced form element that manages server-side validation errors for child Fi
 ### Basic form
 
 ```tsx
-<Form onSubmit={(e) => { e.preventDefault(); /* handle submit */ }}>
+<Form
+  onSubmit={(e) => {
+    e.preventDefault(); /* handle submit */
+  }}
+>
   <Field.Root name="email">
     <Field.Label>Email</Field.Label>
     <Field.Control type="email" required />
@@ -44,20 +46,20 @@ const [errors, setErrors] = useState<Record<string, string[]>>({});
     <Field.Error />
   </Field.Root>
   <Button type="submit">Submit</Button>
-</Form>
+</Form>;
 ```
 
 ## API Reference
 
 ### Form (single component, not compound)
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| errors | Record<string, string[] \| null> | — | Server-side errors keyed by field name |
-| validationMode | 'onBlur' \| 'onChange' \| 'onSubmit' | 'onSubmit' | When validation occurs |
-| onFormSubmit | (event, formData) => void | — | Enhanced submit handler with FormData |
-| onSubmit | FormEventHandler | — | Standard form submit handler |
-| sx | StyleXStyles | — | StyleX overrides |
+| Prop           | Type                                 | Default    | Description                            |
+| -------------- | ------------------------------------ | ---------- | -------------------------------------- |
+| errors         | Record<string, string[] \| null>     | —          | Server-side errors keyed by field name |
+| validationMode | 'onBlur' \| 'onChange' \| 'onSubmit' | 'onSubmit' | When validation occurs                 |
+| onFormSubmit   | (event, formData) => void            | —          | Enhanced submit handler with FormData  |
+| onSubmit       | FormEventHandler                     | —          | Standard form submit handler           |
+| sx             | StyleXStyles                         | —          | StyleX overrides                       |
 
 ## When to Use
 

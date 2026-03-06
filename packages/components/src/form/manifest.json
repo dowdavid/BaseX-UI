@@ -45,7 +45,13 @@
     },
     {
       "intent": "server-validated-form",
-      "signals": ["server validation", "API errors", "backend errors", "form errors", "error display"],
+      "signals": [
+        "server validation",
+        "API errors",
+        "backend errors",
+        "form errors",
+        "error display"
+      ],
       "reasoning": "Form's errors prop accepts a record of server-side errors keyed by field name, automatically distributing them to matching Field.Error components.",
       "composition": "const [errors, setErrors] = useState({});\nconst handleSubmit = async (e) => {\n  e.preventDefault();\n  const res = await submitToAPI(data);\n  if (res.errors) setErrors(res.errors);\n};\n\n<Form errors={errors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
     }

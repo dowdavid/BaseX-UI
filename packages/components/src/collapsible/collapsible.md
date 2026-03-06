@@ -74,13 +74,13 @@ Panel height animation requires global CSS rules inside `@layer priority1`. Styl
 
 Container that manages open/closed state. Renders a `<div>`.
 
-| Prop            | Type                       | Default | Description                    |
-| --------------- | -------------------------- | ------- | ------------------------------ |
-| `open`          | `boolean`                  | —       | Controlled open state          |
-| `defaultOpen`   | `boolean`                  | `false` | Initial open state             |
-| `onOpenChange`  | `(open: boolean) => void`  | —       | Open state change callback     |
-| `disabled`      | `boolean`                  | `false` | Disable the collapsible        |
-| `sx`            | `StyleXStyles`             | —       | Style overrides                |
+| Prop           | Type                      | Default | Description                |
+| -------------- | ------------------------- | ------- | -------------------------- |
+| `open`         | `boolean`                 | —       | Controlled open state      |
+| `defaultOpen`  | `boolean`                 | `false` | Initial open state         |
+| `onOpenChange` | `(open: boolean) => void` | —       | Open state change callback |
+| `disabled`     | `boolean`                 | `false` | Disable the collapsible    |
+| `sx`           | `StyleXStyles`            | —       | Style overrides            |
 
 | Attribute       | Description                              |
 | --------------- | ---------------------------------------- |
@@ -94,20 +94,20 @@ Button that toggles the panel. Includes a built-in chevron icon that rotates on 
 | ---- | -------------- | ------- | --------------- |
 | `sx` | `StyleXStyles` | —       | Style overrides |
 
-| Attribute         | Description                           |
-| ----------------- | ------------------------------------- |
-| `data-panel-open` | Present when the panel is expanded    |
+| Attribute         | Description                              |
+| ----------------- | ---------------------------------------- |
+| `data-panel-open` | Present when the panel is expanded       |
 | `data-disabled`   | Present when the collapsible is disabled |
 
 ### Panel
 
 Collapsible content area with animated height transition. Renders a `<div>`. Uses `keepMounted` internally for smooth close animation.
 
-| Prop               | Type           | Default | Description                                        |
-| ------------------ | -------------- | ------- | -------------------------------------------------- |
-| `keepMounted`      | `boolean`      | `true`  | Keep element in DOM while closed (for animation)   |
-| `hiddenUntilFound` | `boolean`      | `false` | Allow browser page search to find hidden content   |
-| `sx`               | `StyleXStyles` | —       | Style overrides                                    |
+| Prop               | Type           | Default | Description                                      |
+| ------------------ | -------------- | ------- | ------------------------------------------------ |
+| `keepMounted`      | `boolean`      | `true`  | Keep element in DOM while closed (for animation) |
+| `hiddenUntilFound` | `boolean`      | `false` | Allow browser page search to find hidden content |
+| `sx`               | `StyleXStyles` | —       | Style overrides                                  |
 
 | Attribute             | Description                                |
 | --------------------- | ------------------------------------------ |

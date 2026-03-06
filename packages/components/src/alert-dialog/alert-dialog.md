@@ -26,7 +26,13 @@ A modal dialog that requires explicit user acknowledgment. Used for destructive 
 
 ```tsx
 <AlertDialog.Root>
-  <AlertDialog.Trigger render={<Button variant="outline" color="destructive">Delete</Button>} />
+  <AlertDialog.Trigger
+    render={
+      <Button variant="outline" color="destructive">
+        Delete
+      </Button>
+    }
+  />
   <AlertDialog.Portal>
     <AlertDialog.Backdrop />
     <AlertDialog.Popup>
@@ -62,7 +68,7 @@ const [open, setOpen] = useState(false);
       </AlertDialog.Actions>
     </AlertDialog.Popup>
   </AlertDialog.Portal>
-</AlertDialog.Root>
+</AlertDialog.Root>;
 ```
 
 ### Discard unsaved changes
@@ -102,7 +108,9 @@ Backdrop fade and popup scale animations require global CSS inside `@layer prior
   .basex-alert-dialog-popup {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-alert-dialog-popup[data-starting-style],
   .basex-alert-dialog-popup[data-ending-style] {
@@ -116,33 +124,33 @@ Backdrop fade and popup scale animations require global CSS inside `@layer prior
 
 ### Root
 
-| Prop                    | Type                                                       | Default | Description                                    |
-| ----------------------- | ---------------------------------------------------------- | ------- | ---------------------------------------------- |
-| `open`                  | `boolean`                                                  | —       | Controlled open state                          |
-| `defaultOpen`           | `boolean`                                                  | `false` | Initial open state for uncontrolled mode       |
-| `onOpenChange`          | `(open: boolean, eventDetails: ChangeEventDetails) => void`| —       | Callback fired when the dialog opens or closes |
-| `onOpenChangeComplete`  | `(open: boolean) => void`                                  | —       | Callback fired after animations complete       |
+| Prop                   | Type                                                        | Default | Description                                    |
+| ---------------------- | ----------------------------------------------------------- | ------- | ---------------------------------------------- |
+| `open`                 | `boolean`                                                   | —       | Controlled open state                          |
+| `defaultOpen`          | `boolean`                                                   | `false` | Initial open state for uncontrolled mode       |
+| `onOpenChange`         | `(open: boolean, eventDetails: ChangeEventDetails) => void` | —       | Callback fired when the dialog opens or closes |
+| `onOpenChangeComplete` | `(open: boolean) => void`                                   | —       | Callback fired after animations complete       |
 
 ### Trigger
 
-| Prop     | Type                                          | Default | Description                          |
-| -------- | --------------------------------------------- | ------- | ------------------------------------ |
+| Prop     | Type                                             | Default | Description                          |
+| -------- | ------------------------------------------------ | ------- | ------------------------------------ |
 | `render` | `ReactElement \| (props, state) => ReactElement` | —       | Replace element (e.g. styled Button) |
-| `sx`     | `StyleXStyles`                                | —       | StyleX overrides                     |
+| `sx`     | `StyleXStyles`                                   | —       | StyleX overrides                     |
 
 #### Data attributes
 
-| Attribute         | Description                      |
-| ----------------- | -------------------------------- |
-| `data-popup-open` | Present when the dialog is open  |
+| Attribute         | Description                          |
+| ----------------- | ------------------------------------ |
+| `data-popup-open` | Present when the dialog is open      |
 | `data-disabled`   | Present when the trigger is disabled |
 
 ### Portal
 
-| Prop          | Type                                      | Default | Description                            |
-| ------------- | ----------------------------------------- | ------- | -------------------------------------- |
-| `keepMounted` | `boolean`                                 | `true`  | Keep in DOM when closed for animations |
-| `container`   | `HTMLElement \| ShadowRoot \| RefObject`  | —       | Target parent element                  |
+| Prop          | Type                                     | Default | Description                            |
+| ------------- | ---------------------------------------- | ------- | -------------------------------------- |
+| `keepMounted` | `boolean`                                | `true`  | Keep in DOM when closed for animations |
+| `container`   | `HTMLElement \| ShadowRoot \| RefObject` | —       | Target parent element                  |
 
 ### Backdrop
 
@@ -152,37 +160,37 @@ Backdrop fade and popup scale animations require global CSS inside `@layer prior
 
 #### Data attributes
 
-| Attribute             | Description                         |
-| --------------------- | ----------------------------------- |
-| `data-open`           | Present when the dialog is open     |
-| `data-closed`         | Present when the dialog is closed   |
-| `data-starting-style` | Present during entrance animation   |
-| `data-ending-style`   | Present during exit animation       |
+| Attribute             | Description                       |
+| --------------------- | --------------------------------- |
+| `data-open`           | Present when the dialog is open   |
+| `data-closed`         | Present when the dialog is closed |
+| `data-starting-style` | Present during entrance animation |
+| `data-ending-style`   | Present during exit animation     |
 
 ### Popup
 
-| Prop           | Type                                       | Default | Description                          |
-| -------------- | ------------------------------------------ | ------- | ------------------------------------ |
-| `initialFocus` | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog opens   |
-| `finalFocus`   | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog closes  |
-| `sx`           | `StyleXStyles`                             | —       | StyleX overrides                     |
+| Prop           | Type                                        | Default | Description                         |
+| -------------- | ------------------------------------------- | ------- | ----------------------------------- |
+| `initialFocus` | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog opens  |
+| `finalFocus`   | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog closes |
+| `sx`           | `StyleXStyles`                              | —       | StyleX overrides                    |
 
 #### Data attributes
 
-| Attribute                  | Description                                |
-| -------------------------- | ------------------------------------------ |
-| `data-open`                | Present when the dialog is open            |
-| `data-closed`              | Present when the dialog is closed          |
-| `data-starting-style`      | Present during entrance animation          |
-| `data-ending-style`        | Present during exit animation              |
-| `data-nested`              | Present when nested inside another dialog  |
-| `data-nested-dialog-open`  | Present when a child dialog is open        |
+| Attribute                 | Description                               |
+| ------------------------- | ----------------------------------------- |
+| `data-open`               | Present when the dialog is open           |
+| `data-closed`             | Present when the dialog is closed         |
+| `data-starting-style`     | Present during entrance animation         |
+| `data-ending-style`       | Present during exit animation             |
+| `data-nested`             | Present when nested inside another dialog |
+| `data-nested-dialog-open` | Present when a child dialog is open       |
 
 #### CSS variables
 
-| Variable            | Description                              |
-| ------------------- | ---------------------------------------- |
-| `--nested-dialogs`  | Count of nested open dialogs (integer)   |
+| Variable           | Description                            |
+| ------------------ | -------------------------------------- |
+| `--nested-dialogs` | Count of nested open dialogs (integer) |
 
 ### Title
 
@@ -204,10 +212,10 @@ Backdrop fade and popup scale animations require global CSS inside `@layer prior
 
 ### Close
 
-| Prop     | Type                                          | Default | Description                          |
-| -------- | --------------------------------------------- | ------- | ------------------------------------ |
+| Prop     | Type                                             | Default | Description                          |
+| -------- | ------------------------------------------------ | ------- | ------------------------------------ |
 | `render` | `ReactElement \| (props, state) => ReactElement` | —       | Replace element (e.g. styled Button) |
-| `sx`     | `StyleXStyles`                                | —       | StyleX overrides                     |
+| `sx`     | `StyleXStyles`                                   | —       | StyleX overrides                     |
 
 #### Data attributes
 

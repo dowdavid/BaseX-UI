@@ -42,9 +42,7 @@ const [open, setOpen] = useState(false);
           <Dialog.Title>Edit profile</Dialog.Title>
           <Dialog.Description>Update your display name and bio.</Dialog.Description>
         </Dialog.Header>
-        <Dialog.Panel>
-          {/* form fields */}
-        </Dialog.Panel>
+        <Dialog.Panel>{/* form fields */}</Dialog.Panel>
         <Dialog.Footer>
           <Dialog.Close render={<Button variant="ghost">Cancel</Button>} />
           <Button type="submit">Save</Button>
@@ -52,7 +50,7 @@ const [open, setOpen] = useState(false);
       </form>
     </Dialog.Popup>
   </Dialog.Portal>
-</Dialog.Root>
+</Dialog.Root>;
 ```
 
 **Note:** Wrap the form around Header, Panel, and Footer with `display: contents` so it participates in the Popup's flex layout while still allowing native form submission.
@@ -72,16 +70,14 @@ const [open, setOpen] = useState(false);
         <Dialog.Description>Choose which notifications you receive.</Dialog.Description>
       </Dialog.Header>
       <Dialog.Panel>
-        <CheckboxGroup.Root>
-          {/* checkbox items */}
-        </CheckboxGroup.Root>
+        <CheckboxGroup.Root>{/* checkbox items */}</CheckboxGroup.Root>
       </Dialog.Panel>
       <Dialog.Footer>
         <Dialog.Close render={<Button>Done</Button>} />
       </Dialog.Footer>
     </Dialog.Popup>
   </Dialog.Portal>
-</Dialog.Root>
+</Dialog.Root>;
 ```
 
 ### Nested dialogs
@@ -141,7 +137,9 @@ Backdrop fade, popup scale, nested stagger, and scroll indicator animations requ
   .basex-dialog-popup {
     opacity: 1;
     transform: scale(1) translateY(0);
-    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1), transform 200ms cubic-bezier(0, 0, 0.2, 1);
+    transition:
+      opacity 200ms cubic-bezier(0, 0, 0.2, 1),
+      transform 200ms cubic-bezier(0, 0, 0.2, 1);
   }
   .basex-dialog-popup[data-starting-style],
   .basex-dialog-popup[data-ending-style] {
@@ -154,7 +152,9 @@ Backdrop fade, popup scale, nested stagger, and scroll indicator animations requ
     transform: scale(0.94) translateY(-8px);
     opacity: 0.4;
     pointer-events: none;
-    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Dialog panel scroll indicators — State: 100ms ease-out */
@@ -177,34 +177,34 @@ Backdrop fade, popup scale, nested stagger, and scroll indicator animations requ
 
 ### Root
 
-| Prop                    | Type                                                       | Default | Description                                    |
-| ----------------------- | ---------------------------------------------------------- | ------- | ---------------------------------------------- |
-| `open`                  | `boolean`                                                  | —       | Controlled open state                          |
-| `defaultOpen`           | `boolean`                                                  | `false` | Initial open state for uncontrolled mode       |
-| `onOpenChange`          | `(open: boolean, eventDetails: ChangeEventDetails) => void`| —       | Callback fired when the dialog opens or closes |
-| `onOpenChangeComplete`  | `(open: boolean) => void`                                  | —       | Callback fired after animations complete       |
-| `dismissible`           | `boolean`                                                  | `true`  | Whether the dialog closes on backdrop click or Escape |
+| Prop                   | Type                                                        | Default | Description                                           |
+| ---------------------- | ----------------------------------------------------------- | ------- | ----------------------------------------------------- |
+| `open`                 | `boolean`                                                   | —       | Controlled open state                                 |
+| `defaultOpen`          | `boolean`                                                   | `false` | Initial open state for uncontrolled mode              |
+| `onOpenChange`         | `(open: boolean, eventDetails: ChangeEventDetails) => void` | —       | Callback fired when the dialog opens or closes        |
+| `onOpenChangeComplete` | `(open: boolean) => void`                                   | —       | Callback fired after animations complete              |
+| `dismissible`          | `boolean`                                                   | `true`  | Whether the dialog closes on backdrop click or Escape |
 
 ### Trigger
 
-| Prop     | Type                                          | Default | Description                          |
-| -------- | --------------------------------------------- | ------- | ------------------------------------ |
+| Prop     | Type                                             | Default | Description                          |
+| -------- | ------------------------------------------------ | ------- | ------------------------------------ |
 | `render` | `ReactElement \| (props, state) => ReactElement` | —       | Replace element (e.g. styled Button) |
-| `sx`     | `StyleXStyles`                                | —       | StyleX overrides                     |
+| `sx`     | `StyleXStyles`                                   | —       | StyleX overrides                     |
 
 #### Data attributes
 
-| Attribute         | Description                      |
-| ----------------- | -------------------------------- |
-| `data-popup-open` | Present when the dialog is open  |
+| Attribute         | Description                          |
+| ----------------- | ------------------------------------ |
+| `data-popup-open` | Present when the dialog is open      |
 | `data-disabled`   | Present when the trigger is disabled |
 
 ### Portal
 
-| Prop          | Type                                      | Default | Description                            |
-| ------------- | ----------------------------------------- | ------- | -------------------------------------- |
-| `keepMounted` | `boolean`                                 | —       | Keep in DOM when closed. Pass true if you need exit animations and handle closed-state visibility in CSS |
-| `container`   | `HTMLElement \| ShadowRoot \| RefObject`  | —       | Target parent element                  |
+| Prop          | Type                                     | Default | Description                                                                                              |
+| ------------- | ---------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `keepMounted` | `boolean`                                | —       | Keep in DOM when closed. Pass true if you need exit animations and handle closed-state visibility in CSS |
+| `container`   | `HTMLElement \| ShadowRoot \| RefObject` | —       | Target parent element                                                                                    |
 
 ### Backdrop
 
@@ -214,38 +214,38 @@ Backdrop fade, popup scale, nested stagger, and scroll indicator animations requ
 
 #### Data attributes
 
-| Attribute             | Description                         |
-| --------------------- | ----------------------------------- |
-| `data-open`           | Present when the dialog is open     |
-| `data-closed`         | Present when the dialog is closed   |
-| `data-starting-style` | Present during entrance animation   |
-| `data-ending-style`   | Present during exit animation       |
+| Attribute             | Description                       |
+| --------------------- | --------------------------------- |
+| `data-open`           | Present when the dialog is open   |
+| `data-closed`         | Present when the dialog is closed |
+| `data-starting-style` | Present during entrance animation |
+| `data-ending-style`   | Present during exit animation     |
 
 ### Popup
 
-| Prop              | Type                                       | Default | Description                                    |
-| ----------------- | ------------------------------------------ | ------- | ---------------------------------------------- |
-| `showCloseButton` | `boolean`                                  | `true`  | Whether to show the X close button top-right   |
-| `initialFocus`    | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog opens             |
-| `finalFocus`      | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog closes            |
-| `sx`              | `StyleXStyles`                             | —       | StyleX overrides                               |
+| Prop              | Type                                        | Default | Description                                  |
+| ----------------- | ------------------------------------------- | ------- | -------------------------------------------- |
+| `showCloseButton` | `boolean`                                   | `true`  | Whether to show the X close button top-right |
+| `initialFocus`    | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog opens           |
+| `finalFocus`      | `boolean \| RefObject \| () => HTMLElement` | —       | Element to focus when dialog closes          |
+| `sx`              | `StyleXStyles`                              | —       | StyleX overrides                             |
 
 #### Data attributes
 
-| Attribute                  | Description                                |
-| -------------------------- | ------------------------------------------ |
-| `data-open`                | Present when the dialog is open            |
-| `data-closed`              | Present when the dialog is closed          |
-| `data-starting-style`      | Present during entrance animation          |
-| `data-ending-style`        | Present during exit animation              |
-| `data-nested`              | Present when nested inside another dialog  |
-| `data-nested-dialog-open`  | Present when a child dialog is open        |
+| Attribute                 | Description                               |
+| ------------------------- | ----------------------------------------- |
+| `data-open`               | Present when the dialog is open           |
+| `data-closed`             | Present when the dialog is closed         |
+| `data-starting-style`     | Present during entrance animation         |
+| `data-ending-style`       | Present during exit animation             |
+| `data-nested`             | Present when nested inside another dialog |
+| `data-nested-dialog-open` | Present when a child dialog is open       |
 
 #### CSS variables
 
-| Variable            | Description                              |
-| ------------------- | ---------------------------------------- |
-| `--nested-dialogs`  | Count of nested open dialogs (integer)   |
+| Variable           | Description                            |
+| ------------------ | -------------------------------------- |
+| `--nested-dialogs` | Count of nested open dialogs (integer) |
 
 ### Header
 
@@ -277,26 +277,26 @@ Scrollable content area between Header and Footer. Automatically shows inset box
 
 #### Data attributes
 
-| Attribute            | Description                                                  |
-| -------------------- | ------------------------------------------------------------ |
-| `data-scroll-top`    | Present when content is scrolled away from the top           |
-| `data-scroll-bottom` | Present when there is more content below the visible area    |
+| Attribute            | Description                                               |
+| -------------------- | --------------------------------------------------------- |
+| `data-scroll-top`    | Present when content is scrolled away from the top        |
+| `data-scroll-bottom` | Present when there is more content below the visible area |
 
 ### Footer
 
 Flex row for action buttons. Right-aligned with gap between children.
 
-| Prop      | Type                       | Default     | Description                                          |
-| --------- | -------------------------- | ----------- | ---------------------------------------------------- |
-| `variant` | `'default' \| 'bordered'`  | `'default'` | 'bordered' adds a top border separator               |
-| `sx`      | `StyleXStyles`             | —           | StyleX overrides                                     |
+| Prop      | Type                      | Default     | Description                            |
+| --------- | ------------------------- | ----------- | -------------------------------------- |
+| `variant` | `'default' \| 'bordered'` | `'default'` | 'bordered' adds a top border separator |
+| `sx`      | `StyleXStyles`            | —           | StyleX overrides                       |
 
 ### Close
 
-| Prop     | Type                                          | Default | Description                          |
-| -------- | --------------------------------------------- | ------- | ------------------------------------ |
+| Prop     | Type                                             | Default | Description                          |
+| -------- | ------------------------------------------------ | ------- | ------------------------------------ |
 | `render` | `ReactElement \| (props, state) => ReactElement` | —       | Replace element (e.g. styled Button) |
-| `sx`     | `StyleXStyles`                                | —       | StyleX overrides                     |
+| `sx`     | `StyleXStyles`                                   | —       | StyleX overrides                     |
 
 #### Data attributes
 

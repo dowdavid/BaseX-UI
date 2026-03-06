@@ -86,11 +86,11 @@ Outer container — a 40px circle with overflow hidden. Renders a `<span>`.
 
 The avatar image. Hidden automatically when the image fails to load. Renders an `<img>`.
 
-| Prop  | Type           | Default | Description              |
-| ----- | -------------- | ------- | ------------------------ |
-| `src` | `string`       | —       | Image source URL         |
-| `alt` | `string`       | —       | Alt text for the image   |
-| `sx`  | `StyleXStyles` | —       | Style overrides          |
+| Prop  | Type           | Default | Description            |
+| ----- | -------------- | ------- | ---------------------- |
+| `src` | `string`       | —       | Image source URL       |
+| `alt` | `string`       | —       | Alt text for the image |
+| `sx`  | `StyleXStyles` | —       | Style overrides        |
 
 ### Fallback
 

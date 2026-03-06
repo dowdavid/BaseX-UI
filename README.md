@@ -18,14 +18,14 @@ Most component libraries assume a human is reading the docs. BaseX UI ships with
 
 ## Packages
 
-| Package | Description |
-| --- | --- |
-| `@basex-ui/components` | Accessible React components on Base UI + StyleX |
+| Package                  | Description                                     |
+| ------------------------ | ----------------------------------------------- |
+| `@basex-ui/components`   | Accessible React components on Base UI + StyleX |
 | `@basex-ui/intelligence` | AI intent resolution and anti-pattern detection |
-| `@basex-ui/mcp-server` | MCP server for AI agent component discovery |
-| `@basex-ui/tokens` | Design tokens as StyleX variables |
-| `@basex-ui/styles` | Theme definitions (light/dark) and utilities |
-| `@basex-ui/cli` | CLI for scaffolding BaseX UI into projects |
+| `@basex-ui/mcp-server`   | MCP server for AI agent component discovery     |
+| `@basex-ui/tokens`       | Design tokens as StyleX variables               |
+| `@basex-ui/styles`       | Theme definitions (light/dark) and utilities    |
+| `@basex-ui/cli`          | CLI for scaffolding BaseX UI into projects      |
 
 ## Quick Start
 

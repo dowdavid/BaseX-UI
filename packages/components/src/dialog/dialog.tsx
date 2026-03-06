@@ -105,20 +105,26 @@ const styles = stylex.create({
 // --- Types ---
 export type DialogRootProps = React.ComponentPropsWithoutRef<typeof BaseDialog.Root>;
 
-export interface DialogTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Trigger>, 'className'> {
+export interface DialogTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDialog.Trigger>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 export type DialogPortalProps = React.ComponentPropsWithoutRef<typeof BaseDialog.Portal>;
 
-export interface DialogBackdropProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Backdrop>, 'className'> {
+export interface DialogBackdropProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDialog.Backdrop>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface DialogPopupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Popup>, 'className'> {
+export interface DialogPopupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDialog.Popup>,
+  'className'
+> {
   showCloseButton?: boolean;
   sx?: StyleXStyles;
 }
@@ -127,13 +133,17 @@ export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   sx?: StyleXStyles;
 }
 
-export interface DialogTitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Title>, 'className'> {
+export interface DialogTitleProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDialog.Title>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface DialogDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Description>, 'className'> {
+export interface DialogDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDialog.Description>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -146,8 +156,10 @@ export interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> 
   sx?: StyleXStyles;
 }
 
-export interface DialogCloseProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDialog.Close>, 'className'> {
+export interface DialogCloseProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDialog.Close>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -156,52 +168,37 @@ export interface DialogCloseProps
 const Root = (props: DialogRootProps) => <BaseDialog.Root {...props} />;
 Root.displayName = 'Dialog.Root';
 
-const Trigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDialog.Trigger
-      ref={ref}
-      {...props}
-      className={sx ? (stylex.props(sx).className ?? '') : undefined}
-    />
-  ),
-);
+const Trigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(({ sx, ...props }, ref) => (
+  <BaseDialog.Trigger
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+  />
+));
 Trigger.displayName = 'Dialog.Trigger';
 
-const Portal = (props: DialogPortalProps) => (
-  <BaseDialog.Portal {...props} />
-);
+const Portal = (props: DialogPortalProps) => <BaseDialog.Portal {...props} />;
 Portal.displayName = 'Dialog.Portal';
 
-const Backdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDialog.Backdrop
-      ref={ref}
-      {...props}
-      className={() =>
-        `basex-dialog-backdrop ${stylex.props(styles.backdrop, sx).className ?? ''}`
-      }
-    />
-  ),
-);
+const Backdrop = forwardRef<HTMLDivElement, DialogBackdropProps>(({ sx, ...props }, ref) => (
+  <BaseDialog.Backdrop
+    ref={ref}
+    {...props}
+    className={() => `basex-dialog-backdrop ${stylex.props(styles.backdrop, sx).className ?? ''}`}
+  />
+));
 Backdrop.displayName = 'Dialog.Backdrop';
 
 const Popup = forwardRef<HTMLDivElement, DialogPopupProps>(
   ({ children, showCloseButton = true, sx, ...props }, ref) => (
-    <BaseDialog.Viewport
-      className={stylex.props(styles.viewport).className ?? ''}
-    >
+    <BaseDialog.Viewport className={stylex.props(styles.viewport).className ?? ''}>
       <BaseDialog.Popup
         ref={ref}
         {...props}
-        className={() =>
-          `basex-dialog-popup ${stylex.props(styles.popup, sx).className ?? ''}`
-        }
+        className={() => `basex-dialog-popup ${stylex.props(styles.popup, sx).className ?? ''}`}
       >
         {showCloseButton && (
-          <BaseDialog.Close
-            {...stylex.props(styles.closeButton)}
-            aria-label="Close"
-          >
+          <BaseDialog.Close {...stylex.props(styles.closeButton)} aria-label="Close">
             <X size={16} />
           </BaseDialog.Close>
         )}
@@ -212,26 +209,18 @@ const Popup = forwardRef<HTMLDivElement, DialogPopupProps>(
 );
 Popup.displayName = 'Dialog.Popup';
 
-const Header = forwardRef<HTMLDivElement, DialogHeaderProps>(
-  ({ sx, ...props }, ref) => (
-    <div
-      ref={ref}
-      {...props}
-      {...stylex.props(styles.header, sx)}
-    />
-  ),
-);
+const Header = forwardRef<HTMLDivElement, DialogHeaderProps>(({ sx, ...props }, ref) => (
+  <div ref={ref} {...props} {...stylex.props(styles.header, sx)} />
+));
 Header.displayName = 'Dialog.Header';
 
-const Title = forwardRef<HTMLHeadingElement, DialogTitleProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDialog.Title
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.title, sx).className ?? ''}
-    />
-  ),
-);
+const Title = forwardRef<HTMLHeadingElement, DialogTitleProps>(({ sx, ...props }, ref) => (
+  <BaseDialog.Title
+    ref={ref}
+    {...props}
+    className={stylex.props(styles.title, sx).className ?? ''}
+  />
+));
 Title.displayName = 'Dialog.Title';
 
 const Description = forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
@@ -245,45 +234,43 @@ const Description = forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
 );
 Description.displayName = 'Dialog.Description';
 
-const Panel = forwardRef<HTMLDivElement, DialogPanelProps>(
-  ({ sx, children, ...props }, ref) => {
-    const checkScroll = useCallback((el: HTMLElement) => {
-      const canScrollUp = el.scrollTop > 1;
-      const canScrollDown = el.scrollTop + el.clientHeight < el.scrollHeight - 1;
-      if (canScrollUp) el.setAttribute('data-scroll-top', '');
-      else el.removeAttribute('data-scroll-top');
-      if (canScrollDown) el.setAttribute('data-scroll-bottom', '');
-      else el.removeAttribute('data-scroll-bottom');
-    }, []);
+const Panel = forwardRef<HTMLDivElement, DialogPanelProps>(({ sx, children, ...props }, ref) => {
+  const checkScroll = useCallback((el: HTMLElement) => {
+    const canScrollUp = el.scrollTop > 1;
+    const canScrollDown = el.scrollTop + el.clientHeight < el.scrollHeight - 1;
+    if (canScrollUp) el.setAttribute('data-scroll-top', '');
+    else el.removeAttribute('data-scroll-top');
+    if (canScrollDown) el.setAttribute('data-scroll-bottom', '');
+    else el.removeAttribute('data-scroll-bottom');
+  }, []);
 
-    const scrollRef = useCallback(
-      (el: HTMLDivElement | null) => {
-        if (!el) return;
-        checkScroll(el);
-        const ro = new ResizeObserver(() => checkScroll(el));
-        ro.observe(el);
-        if (typeof ref === 'function') ref(el);
-        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
-      },
-      [ref, checkScroll],
-    );
+  const scrollRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      if (!el) return;
+      checkScroll(el);
+      const ro = new ResizeObserver(() => checkScroll(el));
+      ro.observe(el);
+      if (typeof ref === 'function') ref(el);
+      else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    },
+    [ref, checkScroll],
+  );
 
-    return (
-      <div
-        ref={scrollRef}
-        {...props}
-        {...stylex.props(styles.panel, sx)}
-        className={`basex-dialog-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
-        onScroll={(e) => {
-          checkScroll(e.currentTarget);
-          props.onScroll?.(e);
-        }}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+  return (
+    <div
+      ref={scrollRef}
+      {...props}
+      {...stylex.props(styles.panel, sx)}
+      className={`basex-dialog-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
+      onScroll={(e) => {
+        checkScroll(e.currentTarget);
+        props.onScroll?.(e);
+      }}
+    >
+      {children}
+    </div>
+  );
+});
 Panel.displayName = 'Dialog.Panel';
 
 const Footer = forwardRef<HTMLDivElement, DialogFooterProps>(
@@ -297,15 +284,13 @@ const Footer = forwardRef<HTMLDivElement, DialogFooterProps>(
 );
 Footer.displayName = 'Dialog.Footer';
 
-const Close = forwardRef<HTMLButtonElement, DialogCloseProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDialog.Close
-      ref={ref}
-      {...props}
-      className={sx ? (stylex.props(sx).className ?? '') : undefined}
-    />
-  ),
-);
+const Close = forwardRef<HTMLButtonElement, DialogCloseProps>(({ sx, ...props }, ref) => (
+  <BaseDialog.Close
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+  />
+));
 Close.displayName = 'Dialog.Close';
 
 // --- Public API ---

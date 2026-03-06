@@ -261,19 +261,39 @@
   "intents": [
     {
       "intent": "searchable-select",
-      "signals": ["searchable select", "filterable select", "select with search", "searchable dropdown", "combobox", "pick from list"],
+      "signals": [
+        "searchable select",
+        "filterable select",
+        "select with search",
+        "searchable dropdown",
+        "combobox",
+        "pick from list"
+      ],
       "reasoning": "Combobox is the primary component for selecting from a predefined list with the ability to search/filter options.",
       "composition": "<Combobox.Root items={items}>\n  <Combobox.Input placeholder=\"Select...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results found.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
     },
     {
       "intent": "filterable-dropdown",
-      "signals": ["filterable dropdown", "dropdown with filter", "dropdown search", "type to filter", "filter options"],
+      "signals": [
+        "filterable dropdown",
+        "dropdown with filter",
+        "dropdown search",
+        "type to filter",
+        "filter options"
+      ],
       "reasoning": "Combobox provides a dropdown that filters options as the user types, ideal for long option lists.",
       "composition": "<Combobox.Root items={options}>\n  <Combobox.Input placeholder=\"Choose...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No options.</Combobox.Empty>\n    {(option) => (\n      <Combobox.Item key={option.id} value={option}>\n        <Combobox.ItemIndicator />\n        {option.label}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
     },
     {
       "intent": "multi-select-picker",
-      "signals": ["multi-select", "multi select dropdown", "pick multiple", "select multiple", "multi picker", "multiple selection"],
+      "signals": [
+        "multi-select",
+        "multi select dropdown",
+        "pick multiple",
+        "select multiple",
+        "multi picker",
+        "multiple selection"
+      ],
       "reasoning": "Combobox with multiple mode allows selecting several items from a list with checkmark indicators.",
       "composition": "<Combobox.Root items={items} multiple>\n  <Combobox.Input placeholder=\"Select items...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
     }

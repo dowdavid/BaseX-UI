@@ -60,21 +60,21 @@ A semantic grouping container for related form fields with an accessible legend.
 
 ### Root
 
-| Prop       | Type           | Default | Description                                         |
-| ---------- | -------------- | ------- | --------------------------------------------------- |
-| `disabled` | `boolean`      | —       | Disables all form controls within the fieldset.     |
-| `sx`       | `StyleXStyles` | —       | StyleX overrides.                                   |
+| Prop       | Type           | Default | Description                                     |
+| ---------- | -------------- | ------- | ----------------------------------------------- |
+| `disabled` | `boolean`      | —       | Disables all form controls within the fieldset. |
+| `sx`       | `StyleXStyles` | —       | StyleX overrides.                               |
 
 #### Data attributes
 
-| Attribute       | Description                         |
-| --------------- | ----------------------------------- |
+| Attribute       | Description                            |
+| --------------- | -------------------------------------- |
 | `data-disabled` | Present when the fieldset is disabled. |
 
 ### Legend
 
-| Prop | Type           | Default | Description      |
-| ---- | -------------- | ------- | ---------------- |
+| Prop | Type           | Default | Description       |
+| ---- | -------------- | ------- | ----------------- |
 | `sx` | `StyleXStyles` | —       | StyleX overrides. |
 
 ## When to Use

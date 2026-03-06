@@ -36,7 +36,7 @@ const [checked, setChecked] = useState(false);
     <Checkbox.Indicator />
   </Checkbox.Root>
   Enable notifications
-</label>
+</label>;
 ```
 
 ### Indeterminate
@@ -81,50 +81,50 @@ const labelStyles = stylex.create({
     <Checkbox.Indicator />
   </Checkbox.Root>
   Remember me
-</label>
+</label>;
 ```
 
 ## API Reference
 
 ### Checkbox.Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `checked` | `boolean` | — | Whether the checkbox is ticked. Use for controlled mode. |
-| `defaultChecked` | `boolean` | `false` | Whether the checkbox is initially ticked. Use for uncontrolled mode. |
-| `onCheckedChange` | `(checked: boolean, eventDetails: object) => void` | — | Callback fired when the checkbox is ticked or unticked. |
-| `indeterminate` | `boolean` | `false` | Whether the checkbox is in a mixed state. |
-| `disabled` | `boolean` | `false` | Whether the component should ignore user interaction. |
-| `required` | `boolean` | `false` | Whether the user must tick the checkbox before submitting a form. |
-| `name` | `string` | — | Identifies the field when a form is submitted. |
-| `sx` | `StyleXStyles` | — | StyleX styles for consumer overrides. |
+| Prop              | Type                                               | Default | Description                                                          |
+| ----------------- | -------------------------------------------------- | ------- | -------------------------------------------------------------------- |
+| `checked`         | `boolean`                                          | —       | Whether the checkbox is ticked. Use for controlled mode.             |
+| `defaultChecked`  | `boolean`                                          | `false` | Whether the checkbox is initially ticked. Use for uncontrolled mode. |
+| `onCheckedChange` | `(checked: boolean, eventDetails: object) => void` | —       | Callback fired when the checkbox is ticked or unticked.              |
+| `indeterminate`   | `boolean`                                          | `false` | Whether the checkbox is in a mixed state.                            |
+| `disabled`        | `boolean`                                          | `false` | Whether the component should ignore user interaction.                |
+| `required`        | `boolean`                                          | `false` | Whether the user must tick the checkbox before submitting a form.    |
+| `name`            | `string`                                           | —       | Identifies the field when a form is submitted.                       |
+| `sx`              | `StyleXStyles`                                     | —       | StyleX styles for consumer overrides.                                |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-checked` | Present when the checkbox is ticked. |
-| `data-unchecked` | Present when the checkbox is not ticked. |
+| Attribute            | Description                                    |
+| -------------------- | ---------------------------------------------- |
+| `data-checked`       | Present when the checkbox is ticked.           |
+| `data-unchecked`     | Present when the checkbox is not ticked.       |
 | `data-indeterminate` | Present when the checkbox is in a mixed state. |
-| `data-disabled` | Present when the checkbox is disabled. |
-| `data-required` | Present when the checkbox is required. |
+| `data-disabled`      | Present when the checkbox is disabled.         |
+| `data-required`      | Present when the checkbox is required.         |
 
 ### Checkbox.Indicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `keepMounted` | `boolean` | `true` | Whether to keep the element in the DOM when unchecked. Defaults to `true` for animation support. |
-| `sx` | `StyleXStyles` | — | StyleX styles for consumer overrides. |
+| Prop          | Type           | Default | Description                                                                                      |
+| ------------- | -------------- | ------- | ------------------------------------------------------------------------------------------------ |
+| `keepMounted` | `boolean`      | `true`  | Whether to keep the element in the DOM when unchecked. Defaults to `true` for animation support. |
+| `sx`          | `StyleXStyles` | —       | StyleX styles for consumer overrides.                                                            |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-checked` | Present when the checkbox is ticked. |
-| `data-unchecked` | Present when the checkbox is not ticked. |
-| `data-indeterminate` | Present when the checkbox is in a mixed state. |
-| `data-starting-style` | Present when the indicator is animating in. |
-| `data-ending-style` | Present when the indicator is animating out. |
+| Attribute             | Description                                    |
+| --------------------- | ---------------------------------------------- |
+| `data-checked`        | Present when the checkbox is ticked.           |
+| `data-unchecked`      | Present when the checkbox is not ticked.       |
+| `data-indeterminate`  | Present when the checkbox is in a mixed state. |
+| `data-starting-style` | Present when the indicator is animating in.    |
+| `data-ending-style`   | Present when the indicator is animating out.   |
 
 ## CSS Requirements
 
@@ -135,7 +135,9 @@ The indicator enter/exit animation requires global CSS rules inside `@layer prio
   .basex-checkbox-indicator {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 100ms ease-out, transform 100ms ease-out;
+    transition:
+      opacity 100ms ease-out,
+      transform 100ms ease-out;
   }
   .basex-checkbox-indicator[data-starting-style],
   .basex-checkbox-indicator[data-ending-style] {

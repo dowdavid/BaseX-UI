@@ -68,7 +68,9 @@ Stable classes: `.basex-alert-dialog-backdrop`, `.basex-alert-dialog-popup`
   .basex-alert-dialog-popup {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 200ms ease-out, transform 200ms ease-out;
+    transition:
+      opacity 200ms ease-out,
+      transform 200ms ease-out;
   }
   .basex-alert-dialog-popup[data-starting-style],
   .basex-alert-dialog-popup[data-ending-style] {
@@ -82,30 +84,34 @@ Presets: Enter 200ms ease-out, Exit 100ms ease-out (matches existing animation p
 
 ## Props
 
-| Part | Props | Notes |
-|------|-------|-------|
-| Root | `open`, `defaultOpen`, `onOpenChange`, `onOpenChangeComplete` | Pass-through |
-| Trigger | `sx` | Unstyled, use `render` for custom element |
-| Portal | `keepMounted` (default `true`), `container` | |
-| Backdrop | `sx` | Styled overlay |
-| Popup | `sx`, `initialFocus`, `finalFocus` | Centered card |
-| Title | `sx` | `<h2>` |
-| Description | `sx` | `<p>` |
-| Actions | `sx` | Custom flex row |
-| Close | `sx` | Unstyled, use `render` for custom element |
+| Part        | Props                                                         | Notes                                     |
+| ----------- | ------------------------------------------------------------- | ----------------------------------------- |
+| Root        | `open`, `defaultOpen`, `onOpenChange`, `onOpenChangeComplete` | Pass-through                              |
+| Trigger     | `sx`                                                          | Unstyled, use `render` for custom element |
+| Portal      | `keepMounted` (default `true`), `container`                   |                                           |
+| Backdrop    | `sx`                                                          | Styled overlay                            |
+| Popup       | `sx`, `initialFocus`, `finalFocus`                            | Centered card                             |
+| Title       | `sx`                                                          | `<h2>`                                    |
+| Description | `sx`                                                          | `<p>`                                     |
+| Actions     | `sx`                                                          | Custom flex row                           |
+| Close       | `sx`                                                          | Unstyled, use `render` for custom element |
 
 ## Usage Example
 
 ```tsx
 <AlertDialog.Root>
-  <AlertDialog.Trigger render={<Button variant="outline" color="destructive">Delete</Button>} />
+  <AlertDialog.Trigger
+    render={
+      <Button variant="outline" color="destructive">
+        Delete
+      </Button>
+    }
+  />
   <AlertDialog.Portal>
     <AlertDialog.Backdrop />
     <AlertDialog.Popup>
       <AlertDialog.Title>Delete this item?</AlertDialog.Title>
-      <AlertDialog.Description>
-        This action cannot be undone.
-      </AlertDialog.Description>
+      <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
       <AlertDialog.Actions>
         <AlertDialog.Close render={<Button variant="ghost">Cancel</Button>} />
         <AlertDialog.Close

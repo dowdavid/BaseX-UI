@@ -177,25 +177,33 @@ const popupStyles: Record<SwipeDirection, keyof typeof styles> = {
 };
 
 // --- Types ---
-export interface DrawerRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Root>, 'swipeDirection'> {
+export interface DrawerRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDrawer.Root>,
+  'swipeDirection'
+> {
   swipeDirection?: SwipeDirection;
 }
 
-export interface DrawerTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Trigger>, 'className'> {
+export interface DrawerTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDrawer.Trigger>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 export type DrawerPortalProps = React.ComponentPropsWithoutRef<typeof BaseDrawer.Portal>;
 
-export interface DrawerBackdropProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Backdrop>, 'className'> {
+export interface DrawerBackdropProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDrawer.Backdrop>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface DrawerPopupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Popup>, 'className'> {
+export interface DrawerPopupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDrawer.Popup>,
+  'className'
+> {
   showCloseButton?: boolean;
   sx?: StyleXStyles;
 }
@@ -204,13 +212,17 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   sx?: StyleXStyles;
 }
 
-export interface DrawerTitleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Title>, 'className'> {
+export interface DrawerTitleProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDrawer.Title>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface DrawerDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Description>, 'className'> {
+export interface DrawerDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDrawer.Description>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -223,8 +235,10 @@ export interface DrawerFooterProps extends React.HTMLAttributes<HTMLDivElement> 
   sx?: StyleXStyles;
 }
 
-export interface DrawerCloseProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseDrawer.Close>, 'className'> {
+export interface DrawerCloseProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseDrawer.Close>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -239,15 +253,13 @@ const Root = ({ swipeDirection = 'down', children, ...props }: DrawerRootProps) 
 );
 Root.displayName = 'Drawer.Root';
 
-const Trigger = forwardRef<HTMLButtonElement, DrawerTriggerProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDrawer.Trigger
-      ref={ref}
-      {...props}
-      className={sx ? (stylex.props(sx).className ?? '') : undefined}
-    />
-  ),
-);
+const Trigger = forwardRef<HTMLButtonElement, DrawerTriggerProps>(({ sx, ...props }, ref) => (
+  <BaseDrawer.Trigger
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+  />
+));
 Trigger.displayName = 'Drawer.Trigger';
 
 const Portal = ({ keepMounted = true, ...props }: DrawerPortalProps) => (
@@ -255,17 +267,13 @@ const Portal = ({ keepMounted = true, ...props }: DrawerPortalProps) => (
 );
 Portal.displayName = 'Drawer.Portal';
 
-const Backdrop = forwardRef<HTMLDivElement, DrawerBackdropProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDrawer.Backdrop
-      ref={ref}
-      {...props}
-      className={() =>
-        `basex-drawer-backdrop ${stylex.props(styles.backdrop, sx).className ?? ''}`
-      }
-    />
-  ),
-);
+const Backdrop = forwardRef<HTMLDivElement, DrawerBackdropProps>(({ sx, ...props }, ref) => (
+  <BaseDrawer.Backdrop
+    ref={ref}
+    {...props}
+    className={() => `basex-drawer-backdrop ${stylex.props(styles.backdrop, sx).className ?? ''}`}
+  />
+));
 Backdrop.displayName = 'Drawer.Backdrop';
 
 const Popup = forwardRef<HTMLDivElement, DrawerPopupProps>(
@@ -286,10 +294,7 @@ const Popup = forwardRef<HTMLDivElement, DrawerPopupProps>(
           }
         >
           {showCloseButton && (
-            <BaseDrawer.Close
-              {...stylex.props(styles.closeButton)}
-              aria-label="Close"
-            >
+            <BaseDrawer.Close {...stylex.props(styles.closeButton)} aria-label="Close">
               <X size={16} />
             </BaseDrawer.Close>
           )}
@@ -301,22 +306,18 @@ const Popup = forwardRef<HTMLDivElement, DrawerPopupProps>(
 );
 Popup.displayName = 'Drawer.Popup';
 
-const Header = forwardRef<HTMLDivElement, DrawerHeaderProps>(
-  ({ sx, ...props }, ref) => (
-    <div ref={ref} {...props} {...stylex.props(styles.header, sx)} />
-  ),
-);
+const Header = forwardRef<HTMLDivElement, DrawerHeaderProps>(({ sx, ...props }, ref) => (
+  <div ref={ref} {...props} {...stylex.props(styles.header, sx)} />
+));
 Header.displayName = 'Drawer.Header';
 
-const Title = forwardRef<HTMLHeadingElement, DrawerTitleProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDrawer.Title
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.title, sx).className ?? ''}
-    />
-  ),
-);
+const Title = forwardRef<HTMLHeadingElement, DrawerTitleProps>(({ sx, ...props }, ref) => (
+  <BaseDrawer.Title
+    ref={ref}
+    {...props}
+    className={stylex.props(styles.title, sx).className ?? ''}
+  />
+));
 Title.displayName = 'Drawer.Title';
 
 const Description = forwardRef<HTMLParagraphElement, DrawerDescriptionProps>(
@@ -330,44 +331,42 @@ const Description = forwardRef<HTMLParagraphElement, DrawerDescriptionProps>(
 );
 Description.displayName = 'Drawer.Description';
 
-const Panel = forwardRef<HTMLDivElement, DrawerPanelProps>(
-  ({ sx, children, ...props }, ref) => {
-    const checkScroll = useCallback((el: HTMLElement) => {
-      const canScrollUp = el.scrollTop > 1;
-      const canScrollDown = el.scrollTop + el.clientHeight < el.scrollHeight - 1;
-      if (canScrollUp) el.setAttribute('data-scroll-top', '');
-      else el.removeAttribute('data-scroll-top');
-      if (canScrollDown) el.setAttribute('data-scroll-bottom', '');
-      else el.removeAttribute('data-scroll-bottom');
-    }, []);
+const Panel = forwardRef<HTMLDivElement, DrawerPanelProps>(({ sx, children, ...props }, ref) => {
+  const checkScroll = useCallback((el: HTMLElement) => {
+    const canScrollUp = el.scrollTop > 1;
+    const canScrollDown = el.scrollTop + el.clientHeight < el.scrollHeight - 1;
+    if (canScrollUp) el.setAttribute('data-scroll-top', '');
+    else el.removeAttribute('data-scroll-top');
+    if (canScrollDown) el.setAttribute('data-scroll-bottom', '');
+    else el.removeAttribute('data-scroll-bottom');
+  }, []);
 
-    const scrollRef = useCallback(
-      (el: HTMLDivElement | null) => {
-        if (!el) return;
-        checkScroll(el);
-        const ro = new ResizeObserver(() => checkScroll(el));
-        ro.observe(el);
-        if (typeof ref === 'function') ref(el);
-        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
-      },
-      [ref, checkScroll],
-    );
+  const scrollRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      if (!el) return;
+      checkScroll(el);
+      const ro = new ResizeObserver(() => checkScroll(el));
+      ro.observe(el);
+      if (typeof ref === 'function') ref(el);
+      else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    },
+    [ref, checkScroll],
+  );
 
-    return (
-      <div
-        ref={scrollRef}
-        {...props}
-        className={`basex-drawer-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
-        onScroll={(e) => {
-          checkScroll(e.currentTarget);
-          props.onScroll?.(e);
-        }}
-      >
-        {children}
-      </div>
-    );
-  },
-);
+  return (
+    <div
+      ref={scrollRef}
+      {...props}
+      className={`basex-drawer-panel ${stylex.props(styles.panel, sx).className ?? ''}`}
+      onScroll={(e) => {
+        checkScroll(e.currentTarget);
+        props.onScroll?.(e);
+      }}
+    >
+      {children}
+    </div>
+  );
+});
 Panel.displayName = 'Drawer.Panel';
 
 const Footer = forwardRef<HTMLDivElement, DrawerFooterProps>(
@@ -381,15 +380,13 @@ const Footer = forwardRef<HTMLDivElement, DrawerFooterProps>(
 );
 Footer.displayName = 'Drawer.Footer';
 
-const Close = forwardRef<HTMLButtonElement, DrawerCloseProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseDrawer.Close
-      ref={ref}
-      {...props}
-      className={sx ? (stylex.props(sx).className ?? '') : undefined}
-    />
-  ),
-);
+const Close = forwardRef<HTMLButtonElement, DrawerCloseProps>(({ sx, ...props }, ref) => (
+  <BaseDrawer.Close
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+  />
+));
 Close.displayName = 'Drawer.Close';
 
 // --- Public API ---

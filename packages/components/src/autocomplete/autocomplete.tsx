@@ -256,41 +256,57 @@ const clearIconSize: Record<AutocompleteInputSize, number> = {
 // --- Size context ---
 const SizeContext = createContext<AutocompleteInputSize>('md');
 
-export interface AutocompleteRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Root> {
+export interface AutocompleteRootProps extends React.ComponentPropsWithoutRef<
+  typeof BaseAutocomplete.Root
+> {
   size?: AutocompleteInputSize;
 }
 
-export interface AutocompleteInputProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Input>, 'className' | 'size'> {
+export interface AutocompleteInputProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Input>,
+  'className' | 'size'
+> {
   startAddon?: React.ReactNode;
   sx?: StyleXStyles;
 }
 
-export interface AutocompletePopupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Popup>, 'className' | 'children'> {
+export interface AutocompletePopupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Popup>,
+  'className' | 'children'
+> {
   sx?: StyleXStyles;
   /** Accepts ReactNode, a render function `(item) => ReactNode`, or a mix of both. */
-  children?: React.ReactNode | ((item: never) => React.ReactNode) | Array<React.ReactNode | ((item: never) => React.ReactNode)>;
+  children?:
+    | React.ReactNode
+    | ((item: never) => React.ReactNode)
+    | Array<React.ReactNode | ((item: never) => React.ReactNode)>;
 }
 
-export interface AutocompleteItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Item>, 'className'> {
+export interface AutocompleteItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Item>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AutocompleteEmptyProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Empty>, 'className'> {
+export interface AutocompleteEmptyProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Empty>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AutocompleteGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Group>, 'className'> {
+export interface AutocompleteGroupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAutocomplete.Group>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface AutocompleteGroupLabelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseAutocomplete.GroupLabel>, 'className'> {
+export interface AutocompleteGroupLabelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseAutocomplete.GroupLabel>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -319,9 +335,7 @@ const Input = forwardRef<HTMLInputElement, AutocompleteInputProps>(
     return (
       <div {...stylex.props(styles.inputWrapper)}>
         {startAddon != null && (
-          <span {...stylex.props(styles.startAddon, styles[addonKey])}>
-            {startAddon}
-          </span>
+          <span {...stylex.props(styles.startAddon, styles[addonKey])}>{startAddon}</span>
         )}
         <BaseAutocomplete.Input
           ref={ref}
@@ -337,9 +351,7 @@ const Input = forwardRef<HTMLInputElement, AutocompleteInputProps>(
             ).className ?? ''
           }
         />
-        <BaseAutocomplete.Clear
-          {...stylex.props(styles.clearButton, styles[clearKey])}
-        >
+        <BaseAutocomplete.Clear {...stylex.props(styles.clearButton, styles[clearKey])}>
           <X size={iconSize} />
         </BaseAutocomplete.Clear>
       </div>
@@ -369,9 +381,7 @@ const Popup = forwardRef<HTMLDivElement, AutocompletePopupProps>(
               `basex-autocomplete-popup ${stylex.props(styles.popup, sx).className ?? ''}`
             }
           >
-            <BaseAutocomplete.List
-              className={stylex.props(styles.list).className ?? ''}
-            >
+            <BaseAutocomplete.List className={stylex.props(styles.list).className ?? ''}>
               {renderFn as React.ReactNode}
             </BaseAutocomplete.List>
             {nonFnChildren}
@@ -383,27 +393,25 @@ const Popup = forwardRef<HTMLDivElement, AutocompletePopupProps>(
 );
 Popup.displayName = 'Autocomplete.Popup';
 
-const Item = forwardRef<HTMLDivElement, AutocompleteItemProps>(
-  ({ sx, ...props }, ref) => {
-    const size = useContext(SizeContext);
-    const itemKey = `itemSize${capitalize(size)}` as const;
-    return (
-      <BaseAutocomplete.Item
-        ref={ref}
-        {...props}
-        className={(state) =>
-          stylex.props(
-            styles.item,
-            styles[itemKey],
-            state.highlighted && styles.itemHighlighted,
-            state.disabled && styles.itemDisabled,
-            sx,
-          ).className ?? ''
-        }
-      />
-    );
-  },
-);
+const Item = forwardRef<HTMLDivElement, AutocompleteItemProps>(({ sx, ...props }, ref) => {
+  const size = useContext(SizeContext);
+  const itemKey = `itemSize${capitalize(size)}` as const;
+  return (
+    <BaseAutocomplete.Item
+      ref={ref}
+      {...props}
+      className={(state) =>
+        stylex.props(
+          styles.item,
+          styles[itemKey],
+          state.highlighted && styles.itemHighlighted,
+          state.disabled && styles.itemDisabled,
+          sx,
+        ).className ?? ''
+      }
+    />
+  );
+});
 Item.displayName = 'Autocomplete.Item';
 
 const Empty = forwardRef<HTMLDivElement, AutocompleteEmptyProps>(
@@ -419,15 +427,13 @@ const Empty = forwardRef<HTMLDivElement, AutocompleteEmptyProps>(
 );
 Empty.displayName = 'Autocomplete.Empty';
 
-const Group = forwardRef<HTMLDivElement, AutocompleteGroupProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAutocomplete.Group
-      ref={ref}
-      {...props}
-      className={sx ? (stylex.props(sx).className ?? '') : undefined}
-    />
-  ),
-);
+const Group = forwardRef<HTMLDivElement, AutocompleteGroupProps>(({ sx, ...props }, ref) => (
+  <BaseAutocomplete.Group
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+  />
+));
 Group.displayName = 'Autocomplete.Group';
 
 const GroupLabel = forwardRef<HTMLDivElement, AutocompleteGroupLabelProps>(

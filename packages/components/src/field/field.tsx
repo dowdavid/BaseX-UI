@@ -86,28 +86,38 @@ const styles = stylex.create({
 // --- Types ---
 export type FieldControlSize = 'sm' | 'md' | 'lg';
 
-export interface FieldRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseField.Root>, 'className'> {
+export interface FieldRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseField.Root>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface FieldLabelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseField.Label>, 'className'> {
+export interface FieldLabelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseField.Label>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface FieldDescriptionProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseField.Description>, 'className'> {
+export interface FieldDescriptionProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseField.Description>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface FieldErrorProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseField.Error>, 'className'> {
+export interface FieldErrorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseField.Error>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface FieldControlProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseField.Control>, 'className' | 'size'> {
+export interface FieldControlProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseField.Control>,
+  'className' | 'size'
+> {
   size?: FieldControlSize;
   sx?: StyleXStyles;
 }
@@ -117,11 +127,7 @@ export type FieldValidityProps = React.ComponentPropsWithoutRef<typeof BaseField
 // --- Components ---
 
 const Root = forwardRef<HTMLDivElement, FieldRootProps>(({ sx, ...props }, ref) => (
-  <BaseField.Root
-    ref={ref}
-    {...props}
-    className={stylex.props(styles.root, sx).className ?? ''}
-  />
+  <BaseField.Root ref={ref} {...props} className={stylex.props(styles.root, sx).className ?? ''} />
 ));
 Root.displayName = 'Field.Root';
 

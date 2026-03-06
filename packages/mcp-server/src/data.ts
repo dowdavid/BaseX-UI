@@ -29,7 +29,21 @@ import fieldManifest from '../../components/src/field/manifest.json';
 import fieldsetManifest from '../../components/src/fieldset/manifest.json';
 import formManifest from '../../components/src/form/manifest.json';
 
-export type ComponentManifest = typeof buttonManifest | typeof accordionManifest | typeof alertDialogManifest | typeof autocompleteManifest | typeof avatarManifest | typeof checkboxManifest | typeof checkboxGroupManifest | typeof collapsibleManifest | typeof comboboxManifest | typeof dialogManifest | typeof drawerManifest | typeof fieldManifest | typeof fieldsetManifest | typeof formManifest;
+export type ComponentManifest =
+  | typeof buttonManifest
+  | typeof accordionManifest
+  | typeof alertDialogManifest
+  | typeof autocompleteManifest
+  | typeof avatarManifest
+  | typeof checkboxManifest
+  | typeof checkboxGroupManifest
+  | typeof collapsibleManifest
+  | typeof comboboxManifest
+  | typeof dialogManifest
+  | typeof drawerManifest
+  | typeof fieldManifest
+  | typeof fieldsetManifest
+  | typeof formManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -154,9 +168,7 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'item highlight', preset: 'State' },
     ],
     avatar: [],
-    checkbox: [
-      { interaction: 'indicator appear/disappear', preset: 'State' },
-    ],
+    checkbox: [{ interaction: 'indicator appear/disappear', preset: 'State' }],
     'checkbox-group': [],
     collapsible: [
       { interaction: 'trigger hover/focus', preset: 'State' },
@@ -184,9 +196,7 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'popup slide out', preset: 'Exit' },
       { interaction: 'close button hover', preset: 'State' },
     ],
-    field: [
-      { interaction: 'control focus ring', preset: 'State' },
-    ],
+    field: [{ interaction: 'control focus ring', preset: 'State' }],
     fieldset: [],
     form: [],
   };

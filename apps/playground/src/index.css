@@ -48,7 +48,9 @@
   .basex-alert-dialog-popup {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-alert-dialog-popup[data-starting-style],
   .basex-alert-dialog-popup[data-ending-style] {
@@ -70,7 +72,9 @@
   .basex-dialog-popup {
     opacity: 1;
     transform: scale(1) translateY(0);
-    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1), transform 200ms cubic-bezier(0, 0, 0.2, 1);
+    transition:
+      opacity 200ms cubic-bezier(0, 0, 0.2, 1),
+      transform 200ms cubic-bezier(0, 0, 0.2, 1);
   }
   .basex-dialog-popup[data-starting-style],
   .basex-dialog-popup[data-ending-style] {
@@ -83,7 +87,9 @@
     transform: scale(0.94) translateY(-8px);
     opacity: 0.4;
     pointer-events: none;
-    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Dialog panel scroll indicators — State: 100ms ease-out */
@@ -104,7 +110,9 @@
   .basex-checkbox-indicator {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 100ms ease-out, transform 100ms ease-out;
+    transition:
+      opacity 100ms ease-out,
+      transform 100ms ease-out;
   }
   .basex-checkbox-indicator[data-starting-style],
   .basex-checkbox-indicator[data-ending-style] {
@@ -127,7 +135,9 @@
   .basex-combobox-popup {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-combobox-popup[data-starting-style],
   .basex-combobox-popup[data-ending-style] {
@@ -246,7 +256,9 @@
   .basex-autocomplete-popup {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-autocomplete-popup[data-starting-style],
   .basex-autocomplete-popup[data-ending-style] {

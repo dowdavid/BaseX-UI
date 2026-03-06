@@ -45,8 +45,17 @@ describe('Drawer', () => {
 
   it('does not expose unexpected parts', () => {
     const expectedParts = [
-      'Root', 'Trigger', 'Portal', 'Backdrop', 'Popup',
-      'Header', 'Title', 'Description', 'Panel', 'Footer', 'Close',
+      'Root',
+      'Trigger',
+      'Portal',
+      'Backdrop',
+      'Popup',
+      'Header',
+      'Title',
+      'Description',
+      'Panel',
+      'Footer',
+      'Close',
     ];
     const actualParts = Object.keys(Drawer);
     expect(actualParts.sort()).toEqual(expectedParts.sort());

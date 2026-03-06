@@ -42,43 +42,39 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface FieldsetRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseFieldset.Root>, 'className'> {
+export interface FieldsetRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseFieldset.Root>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface FieldsetLegendProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseFieldset.Legend>, 'className'> {
+export interface FieldsetLegendProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseFieldset.Legend>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 // --- Components ---
-const Root = forwardRef<HTMLFieldSetElement, FieldsetRootProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseFieldset.Root
-      ref={ref}
-      {...props}
-      className={(state) =>
-        stylex.props(
-          styles.root,
-          state.disabled && styles.disabled,
-          sx,
-        ).className ?? ''
-      }
-    />
-  ),
-);
+const Root = forwardRef<HTMLFieldSetElement, FieldsetRootProps>(({ sx, ...props }, ref) => (
+  <BaseFieldset.Root
+    ref={ref}
+    {...props}
+    className={(state) =>
+      stylex.props(styles.root, state.disabled && styles.disabled, sx).className ?? ''
+    }
+  />
+));
 Root.displayName = 'Fieldset.Root';
 
-const Legend = forwardRef<HTMLLegendElement, FieldsetLegendProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseFieldset.Legend
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.legend, sx).className ?? ''}
-    />
-  ),
-);
+const Legend = forwardRef<HTMLLegendElement, FieldsetLegendProps>(({ sx, ...props }, ref) => (
+  <BaseFieldset.Legend
+    ref={ref}
+    {...props}
+    className={stylex.props(styles.legend, sx).className ?? ''}
+  />
+));
 Legend.displayName = 'Fieldset.Legend';
 
 // --- Public API ---
