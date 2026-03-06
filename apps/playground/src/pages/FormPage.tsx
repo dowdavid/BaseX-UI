@@ -46,7 +46,9 @@ export function FormPage() {
             <Field.Error match="valueMissing">Email is required.</Field.Error>
             <Field.Error match="typeMismatch">Please enter a valid email address.</Field.Error>
           </Field.Root>
-          <Button type="submit" sx={pageStyles.actions}>Submit</Button>
+          <Button type="submit" sx={pageStyles.actions}>
+            Submit
+          </Button>
           {basicSubmitted && (
             <div {...stylex.props(pageStyles.submitted)}>Form submitted successfully.</div>
           )}
