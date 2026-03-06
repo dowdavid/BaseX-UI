@@ -32,13 +32,6 @@ const [errors, setErrors] = useState<Record<string, string[]>>({});
 
 <Form
   errors={errors}
-  onClearErrors={(names) => {
-    setErrors((prev) => {
-      const next = { ...prev };
-      names.forEach((n) => delete next[n]);
-      return next;
-    });
-  }}
   onSubmit={async (e) => {
     e.preventDefault();
     const res = await api.submit(formData);
@@ -61,8 +54,9 @@ const [errors, setErrors] = useState<Record<string, string[]>>({});
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | errors | Record<string, string[] \| null> | — | Server-side errors keyed by field name |
-| onClearErrors | (errors: string[]) => void | — | Called when errors should be cleared |
-| onSubmit | FormEventHandler | — | Form submit handler |
+| validationMode | 'onBlur' \| 'onChange' \| 'onSubmit' | 'onSubmit' | When validation occurs |
+| onFormSubmit | (event, formData) => void | — | Enhanced submit handler with FormData |
+| onSubmit | FormEventHandler | — | Standard form submit handler |
 | sx | StyleXStyles | — | StyleX overrides |
 
 ## When to Use

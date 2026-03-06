@@ -152,7 +152,8 @@
     "fontWeightMedium",
     "lineHeightNormal",
     "radiusMd",
-    "borderWidthDefault"
+    "borderWidthDefault",
+    "colorSurface"
   ],
 
   "intents": [

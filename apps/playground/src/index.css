@@ -228,6 +228,20 @@
     transform: translateX(100%);
   }
 
+  /* Drawer panel scroll indicators — State: 100ms ease-out */
+  .basex-drawer-panel {
+    --_shadow-top: inset 0 8px 6px -6px transparent;
+    --_shadow-bottom: inset 0 -8px 6px -6px transparent;
+    box-shadow: var(--_shadow-top), var(--_shadow-bottom);
+    transition: box-shadow 100ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .basex-drawer-panel[data-scroll-top] {
+    --_shadow-top: inset 0 8px 6px -6px oklch(0 0 0 / 0.08);
+  }
+  .basex-drawer-panel[data-scroll-bottom] {
+    --_shadow-bottom: inset 0 -8px 6px -6px oklch(0 0 0 / 0.08);
+  }
+
   /* Autocomplete popup fade/slide animation */
   .basex-autocomplete-popup {
     opacity: 1;

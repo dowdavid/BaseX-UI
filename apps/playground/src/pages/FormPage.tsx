@@ -1,43 +1,10 @@
 import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
-import { Form, Button } from '@basex-ui/components';
+import { Form, Field, Button } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
 
-const formStyles = stylex.create({
-  field: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: tokens.space1,
-  },
-  label: {
-    display: 'block',
-    fontSize: tokens.fontSizeSm,
-    fontWeight: tokens.fontWeightMedium,
-    fontFamily: tokens.fontFamilySans,
-    color: tokens.colorText,
-    marginBottom: tokens.space1,
-  },
-  input: {
-    width: '100%',
-    padding: `${tokens.space2} ${tokens.space3}`,
-    borderRadius: tokens.radiusMd,
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
-    fontSize: tokens.fontSizeSm,
-    fontFamily: tokens.fontFamilySans,
-    color: tokens.colorText,
-    backgroundColor: tokens.colorBackground,
-    boxSizing: 'border-box' as const,
-    outline: 'none',
-  },
-  error: {
-    fontSize: tokens.fontSizeSm,
-    fontFamily: tokens.fontFamilySans,
-    color: tokens.colorDestructive,
-    lineHeight: tokens.lineHeightNormal,
-  },
+const pageStyles = stylex.create({
   submitted: {
     fontSize: tokens.fontSizeSm,
     fontFamily: tokens.fontFamilySans,
@@ -58,7 +25,7 @@ export function FormPage() {
     <>
       <Preview
         title="Basic form"
-        description="A simple form with submit handling."
+        description="A simple form with Field components and native validation."
         constrained
       >
         <Form
@@ -67,27 +34,22 @@ export function FormPage() {
             setBasicSubmitted(true);
           }}
         >
-          <div {...stylex.props(formStyles.field)}>
-            <label {...stylex.props(formStyles.label)}>Name</label>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              required
-              {...stylex.props(formStyles.input)}
-            />
-          </div>
-          <div {...stylex.props(formStyles.field)}>
-            <label {...stylex.props(formStyles.label)}>Email</label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              required
-              {...stylex.props(formStyles.input)}
-            />
-          </div>
+          <Field.Root name="name">
+            <Field.Label>Name</Field.Label>
+            <Field.Control placeholder="Enter your name" required />
+            <Field.Error match="valueMissing">Name is required.</Field.Error>
+          </Field.Root>
+          <Field.Root name="email">
+            <Field.Label>Email</Field.Label>
+            <Field.Control type="email" placeholder="you@example.com" required />
+            <Field.Error match="valueMissing">Email is required.</Field.Error>
+            <Field.Error match="typeMismatch">
+              Please enter a valid email address.
+            </Field.Error>
+          </Field.Root>
           <Button type="submit">Submit</Button>
           {basicSubmitted && (
-            <div {...stylex.props(formStyles.submitted)}>
+            <div {...stylex.props(pageStyles.submitted)}>
               Form submitted successfully.
             </div>
           )}
@@ -96,7 +58,7 @@ export function FormPage() {
 
       <Preview
         title="Server-side validation errors"
-        description="Simulates a server response that returns field-level errors."
+        description="Simulates a server response that returns field-level errors via the errors prop."
         constrained
       >
         <Form
@@ -105,38 +67,28 @@ export function FormPage() {
             e.preventDefault();
             setServerErrors({});
             setServerSubmitting(true);
-            // Simulate server response delay
             setTimeout(() => {
               setServerErrors({
                 email: ['This email is already registered.'],
-                username: ['Username must be at least 3 characters.', 'Username cannot contain spaces.'],
+                username: [
+                  'Username must be at least 3 characters.',
+                  'Username cannot contain spaces.',
+                ],
               });
               setServerSubmitting(false);
             }, 800);
           }}
         >
-          <div {...stylex.props(formStyles.field)}>
-            <label {...stylex.props(formStyles.label)}>Username</label>
-            <input
-              type="text"
-              defaultValue="a b"
-              {...stylex.props(formStyles.input)}
-            />
-            {serverErrors.username?.map((msg) => (
-              <span key={msg} {...stylex.props(formStyles.error)}>{msg}</span>
-            ))}
-          </div>
-          <div {...stylex.props(formStyles.field)}>
-            <label {...stylex.props(formStyles.label)}>Email</label>
-            <input
-              type="email"
-              defaultValue="taken@example.com"
-              {...stylex.props(formStyles.input)}
-            />
-            {serverErrors.email?.map((msg) => (
-              <span key={msg} {...stylex.props(formStyles.error)}>{msg}</span>
-            ))}
-          </div>
+          <Field.Root name="username">
+            <Field.Label>Username</Field.Label>
+            <Field.Control defaultValue="a b" />
+            <Field.Error />
+          </Field.Root>
+          <Field.Root name="email">
+            <Field.Label>Email</Field.Label>
+            <Field.Control type="email" defaultValue="taken@example.com" />
+            <Field.Error />
+          </Field.Root>
           <Button type="submit" disabled={serverSubmitting}>
             {serverSubmitting ? 'Submitting...' : 'Submit'}
           </Button>

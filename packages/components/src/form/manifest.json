@@ -13,9 +13,14 @@
           "type": "Record<string, string[] | null>",
           "description": "Server-side validation errors keyed by field name. Passed to child Field.Error components automatically."
         },
-        "onClearErrors": {
-          "type": "(errors: string[]) => void",
-          "description": "Callback fired when field errors should be cleared (e.g., when the user modifies a field with a server error)."
+        "validationMode": {
+          "type": "'onBlur' | 'onChange' | 'onSubmit'",
+          "default": "onSubmit",
+          "description": "Controls when validation occurs for child Field components."
+        },
+        "onFormSubmit": {
+          "type": "(event: FormEvent, formData: FormData) => void",
+          "description": "Enhanced submit handler that receives both the event and parsed FormData."
         },
         "onSubmit": {
           "type": "FormEventHandler<HTMLFormElement>",
@@ -36,13 +41,13 @@
       "intent": "form-with-validation",
       "signals": ["form", "submit", "validation", "server errors", "form validation"],
       "reasoning": "Form manages server-side validation errors and distributes them to child Field components automatically.",
-      "composition": "<Form errors={serverErrors} onClearErrors={handleClearErrors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+      "composition": "<Form errors={serverErrors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
     },
     {
       "intent": "server-validated-form",
       "signals": ["server validation", "API errors", "backend errors", "form errors", "error display"],
       "reasoning": "Form's errors prop accepts a record of server-side errors keyed by field name, automatically distributing them to matching Field.Error components.",
-      "composition": "const [errors, setErrors] = useState({});\nconst handleSubmit = async (e) => {\n  const res = await submitToAPI(data);\n  if (res.errors) setErrors(res.errors);\n};\n\n<Form errors={errors} onClearErrors={(names) => setErrors(prev => { const next = {...prev}; names.forEach(n => delete next[n]); return next; })} onSubmit={handleSubmit}>\n  {/* Field components */}\n</Form>"
+      "composition": "const [errors, setErrors] = useState({});\nconst handleSubmit = async (e) => {\n  e.preventDefault();\n  const res = await submitToAPI(data);\n  if (res.errors) setErrors(res.errors);\n};\n\n<Form errors={errors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
     }
   ],
   "avoidWhen": [
@@ -66,7 +71,7 @@
     {
       "name": "server-errors",
       "description": "Form with server-side error management",
-      "code": "const [errors, setErrors] = useState<Record<string, string[]>>({});\n\n<Form\n  errors={errors}\n  onClearErrors={(names) => {\n    setErrors(prev => {\n      const next = { ...prev };\n      names.forEach(n => delete next[n]);\n      return next;\n    });\n  }}\n  onSubmit={async (e) => {\n    e.preventDefault();\n    const res = await api.submit(formData);\n    if (res.errors) setErrors(res.errors);\n  }}\n>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+      "code": "const [errors, setErrors] = useState<Record<string, string[]>>({});\n\n<Form\n  errors={errors}\n  onSubmit={async (e) => {\n    e.preventDefault();\n    const res = await api.submit(formData);\n    if (res.errors) setErrors(res.errors);\n  }}\n>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
     },
     {
       "name": "with-fieldsets",
