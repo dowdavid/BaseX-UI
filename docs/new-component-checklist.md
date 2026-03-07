@@ -17,6 +17,7 @@ The template files live in `packages/components/src/_template/`.
   - Stable CSS class `basex-{name}-{part}` on parts targeted by global CSS
   - `sx` prop on **every** part for consumer overrides
   - `forwardRef` on every part
+  - Disabled state style: `opacity: 0.5`, `backgroundColor: tokens.colorMuted`, `borderColor: tokens.colorBorderMuted`, `color: tokens.colorTextMuted`, `cursor: 'not-allowed'`
 - [ ] `index.ts` — Barrel export of component + all prop types
 
 ## 2. Manifest (Agent Intelligence)

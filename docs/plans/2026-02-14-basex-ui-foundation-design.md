@@ -92,7 +92,7 @@ const styles = stylex.create({
     /* scale/opacity shift */
   },
   disabled: {
-    /* reduced opacity, no pointer */
+    /* 50% opacity, muted background/border/text, not-allowed cursor */
   },
   focusVisible: {
     /* focus ring */

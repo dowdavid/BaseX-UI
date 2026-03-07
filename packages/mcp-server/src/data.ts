@@ -28,6 +28,11 @@ import drawerManifest from '../../components/src/drawer/manifest.json';
 import fieldManifest from '../../components/src/field/manifest.json';
 import fieldsetManifest from '../../components/src/fieldset/manifest.json';
 import formManifest from '../../components/src/form/manifest.json';
+import inputManifest from '../../components/src/input/manifest.json';
+import menuManifest from '../../components/src/menu/manifest.json';
+import menubarManifest from '../../components/src/menubar/manifest.json';
+import meterManifest from '../../components/src/meter/manifest.json';
+import navigationMenuManifest from '../../components/src/navigation-menu/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -43,7 +48,12 @@ export type ComponentManifest =
   | typeof drawerManifest
   | typeof fieldManifest
   | typeof fieldsetManifest
-  | typeof formManifest;
+  | typeof formManifest
+  | typeof inputManifest
+  | typeof menuManifest
+  | typeof menubarManifest
+  | typeof meterManifest
+  | typeof navigationMenuManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -60,6 +70,11 @@ const components = new Map<string, ComponentManifest>([
   ['field', fieldManifest],
   ['fieldset', fieldsetManifest],
   ['form', formManifest],
+  ['input', inputManifest],
+  ['menu', menuManifest],
+  ['menubar', menubarManifest],
+  ['meter', meterManifest],
+  ['navigation-menu', navigationMenuManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -199,6 +214,21 @@ export function getComponentSetup(name: string): ComponentSetup | null {
     field: [{ interaction: 'control focus ring', preset: 'State' }],
     fieldset: [],
     form: [],
+    input: [{ interaction: 'focus ring', preset: 'State' }],
+    menu: [
+      { interaction: 'trigger hover/focus', preset: 'State' },
+      { interaction: 'popup scale/fade in', preset: 'Enter' },
+      { interaction: 'popup scale/fade out', preset: 'Exit' },
+      { interaction: 'item highlight', preset: 'State' },
+    ],
+    menubar: [],
+    meter: [{ interaction: 'indicator width transition', preset: 'Move' }],
+    'navigation-menu': [
+      { interaction: 'trigger hover/focus', preset: 'State' },
+      { interaction: 'popup fade/slide in', preset: 'Enter' },
+      { interaction: 'popup fade/slide out', preset: 'Exit' },
+      { interaction: 'content crossfade', preset: 'Enter' },
+    ],
   };
 
   return {
