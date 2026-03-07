@@ -44,18 +44,6 @@ export function InputPage() {
       </Preview>
 
       <Preview
-        title="Sizes"
-        description="Small, medium, and large input sizes."
-        constrained
-      >
-        <div {...stylex.props(pageStyles.stack)}>
-          {sizes.map((size) => (
-            <Input key={size} size={size} placeholder={`${size} (${size === 'sm' ? '32px' : size === 'md' ? '36px' : '40px'})`} />
-          ))}
-        </div>
-      </Preview>
-
-      <Preview
         title="Inside a Field"
         description="Input automatically integrates with Field for label, description, and validation."
         constrained
@@ -80,10 +68,25 @@ export function InputPage() {
 
       <Preview
         title="Disabled"
-        description="A disabled input."
+        description="A disabled input with a Field label."
         constrained
       >
-        <Input disabled value="Cannot edit this" />
+        <Field.Root disabled>
+          <Field.Label>Username</Field.Label>
+          <Input value="daviddow" />
+        </Field.Root>
+      </Preview>
+
+      <Preview
+        title="Sizes"
+        description="Small, medium, and large input sizes."
+        constrained
+      >
+        <div {...stylex.props(pageStyles.stack)}>
+          {sizes.map((size) => (
+            <Input key={size} size={size} placeholder={`${size} (${size === 'sm' ? '32px' : size === 'md' ? '36px' : '40px'})`} />
+          ))}
+        </div>
       </Preview>
     </>
   );

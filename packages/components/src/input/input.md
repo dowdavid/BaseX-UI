@@ -38,8 +38,13 @@ A standalone styled text input that automatically integrates with [Field](https:
 
 ### Disabled
 
+Disabled inputs show a muted background, lighter border, dimmed text at 50% opacity, and a `not-allowed` cursor. Use `Field.Root disabled` to propagate the disabled state to labels too.
+
 ```tsx
-<Input disabled value="Cannot edit this" />
+<Field.Root disabled>
+  <Field.Label>Username</Field.Label>
+  <Input value="daviddow" />
+</Field.Root>
 ```
 
 ## API Reference

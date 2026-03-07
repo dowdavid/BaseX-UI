@@ -13,7 +13,7 @@ export function MenuPage() {
         description="A dropdown menu with items and a destructive action."
       >
         <Menu.Root>
-          <Menu.Trigger>Options</Menu.Trigger>
+          <Menu.Trigger>Open Menu</Menu.Trigger>
           <Menu.Portal>
             <Menu.Positioner>
               <Menu.Popup>
@@ -32,7 +32,7 @@ export function MenuPage() {
         description="Menu items organized into labeled groups."
       >
         <Menu.Root>
-          <Menu.Trigger>View</Menu.Trigger>
+          <Menu.Trigger>Open Menu</Menu.Trigger>
           <Menu.Portal>
             <Menu.Positioner>
               <Menu.Popup>
@@ -59,7 +59,7 @@ export function MenuPage() {
         description="Menu items that toggle boolean options."
       >
         <Menu.Root>
-          <Menu.Trigger>View Options</Menu.Trigger>
+          <Menu.Trigger>Open Menu</Menu.Trigger>
           <Menu.Portal>
             <Menu.Positioner>
               <Menu.Popup>

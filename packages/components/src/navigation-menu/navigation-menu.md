@@ -36,7 +36,7 @@ A site navigation component with hover-triggered dropdown content panels. Built 
 - **Popup** -- The popup container.
 - **Viewport** -- The animated viewport that sizes to the active content.
 - **Backdrop** -- An optional backdrop behind the popup.
-- **Icon** -- A chevron icon that rotates when open.
+- **Icon** -- A chevron icon that rotates when open. Accepts custom `children` to replace the default chevron.
 - **Arrow** -- An optional arrow pointing to the trigger.
 
 ## Examples
@@ -121,7 +121,7 @@ NavigationMenu animations use global CSS with Base UI data attributes:
 | `defaultValue` | `string \| null` | `null` | The initially open item. |
 | `onValueChange` | `(value: string \| null) => void` | -- | Callback when the open item changes. |
 | `delay` | `number` | `50` | Delay in ms before opening on hover. |
-| `closeDelay` | `number` | `50` | Delay in ms before closing on pointer leave. |
+| `closeDelay` | `number` | `150` | Delay in ms before closing on pointer leave. |
 | `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the menu. |
 | `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
 
@@ -142,6 +142,26 @@ NavigationMenu animations use global CSS with Base UI data attributes:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `href` | `string` | -- | The URL the link navigates to. |
+| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+
+### NavigationMenu.Positioner
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Which side of the trigger to position against. |
+| `sideOffset` | `number` | `2` | Gap between trigger and popup in px. |
+| `collisionPadding` | `number` | `10` | Minimum distance from viewport edges in px. |
+| `collisionAvoidance` | `{ side, align }` | `{ side: 'none', align: 'shift' }` | Controls repositioning when the popup would overflow the viewport. |
+| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+
+> **Note:** Side-flip is disabled by default (`side: 'none'`) to prevent a flicker loop caused by hover-triggered open/close cycles when the popup flips position. The Viewport constrains its height to the available space via `--available-height` and scrolls overflow content instead. If you need flip behavior (e.g. for nested submenus opened by click), override with `collisionAvoidance={{ side: 'flip', align: 'shift' }}`.
+
+### NavigationMenu.Icon
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sideways` | `boolean` | `false` | Rotate the chevron to point right/left instead of down/up. |
+| `children` | `ReactNode` | `<ChevronDown />` | Custom icon element to replace the default chevron. |
 | `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
 
 ## When to Use

@@ -27,9 +27,11 @@ const styles = stylex.create({
   },
 
   disabled: {
-    opacity: 0.64,
-    pointerEvents: 'none',
-    cursor: 'default',
+    opacity: 0.5,
+    backgroundColor: tokens.colorMuted,
+    borderColor: tokens.colorBorderMuted,
+    color: tokens.colorTextMuted,
+    cursor: 'not-allowed',
   },
 
   // --- Size axis ---

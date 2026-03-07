@@ -1,5 +1,12 @@
+import * as stylex from '@stylexjs/stylex';
 import { Menu, Menubar } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
+
+const pageStyles = stylex.create({
+  ghostTrigger: {
+    borderColor: 'transparent',
+  },
+});
 
 export function MenubarPage() {
   return (
@@ -10,7 +17,7 @@ export function MenubarPage() {
       >
         <Menubar>
           <Menu.Root>
-            <Menu.Trigger>File</Menu.Trigger>
+            <Menu.Trigger sx={pageStyles.ghostTrigger}>File</Menu.Trigger>
             <Menu.Portal>
               <Menu.Positioner>
                 <Menu.Popup>
@@ -24,7 +31,7 @@ export function MenubarPage() {
             </Menu.Portal>
           </Menu.Root>
           <Menu.Root>
-            <Menu.Trigger>Edit</Menu.Trigger>
+            <Menu.Trigger sx={pageStyles.ghostTrigger}>Edit</Menu.Trigger>
             <Menu.Portal>
               <Menu.Positioner>
                 <Menu.Popup>
@@ -39,7 +46,7 @@ export function MenubarPage() {
             </Menu.Portal>
           </Menu.Root>
           <Menu.Root>
-            <Menu.Trigger>Help</Menu.Trigger>
+            <Menu.Trigger sx={pageStyles.ghostTrigger}>Help</Menu.Trigger>
             <Menu.Portal>
               <Menu.Positioner>
                 <Menu.Popup>

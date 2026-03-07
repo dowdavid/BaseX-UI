@@ -29,7 +29,7 @@ const styles = stylex.create({
   },
   constrained: {
     width: '100%',
-    maxWidth: '24rem',
+    maxWidth: '15rem',
   },
 });
 

@@ -17,26 +17,37 @@ const styles = stylex.create({
     fontSize: tokens.fontSizeSm,
     lineHeight: tokens.lineHeightTight,
     color: tokens.colorText,
-    backgroundColor: 'transparent',
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': tokens.colorMuted,
+    },
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
     borderColor: tokens.colorBorder,
     borderRadius: tokens.radiusMd,
-    paddingBlock: tokens.space2,
+    height: '36px',
     paddingInline: tokens.space3,
     cursor: 'pointer',
     userSelect: 'none',
-    transitionProperty: 'background-color, color, border-color',
+    whiteSpace: 'nowrap',
+    flexShrink: 0,
+    textDecoration: 'none',
+    transitionProperty: 'background-color, color, border-color, box-shadow, opacity, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
+    transform: {
+      default: 'none',
+      ':active': 'scale(0.98)',
+    },
   },
 
   positioner: {
     zIndex: 50,
+    paddingBlock: '2px',
   },
 
   popup: {
-    minWidth: '180px',
+    minWidth: 'max-content',
     backgroundColor: tokens.colorSurface,
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
@@ -44,6 +55,7 @@ const styles = stylex.create({
     borderRadius: tokens.radiusLg,
     paddingBlock: tokens.space1,
     boxShadow: tokens.shadowLg,
+    outline: 'none',
   },
 
   item: {
@@ -67,6 +79,7 @@ const styles = stylex.create({
     transitionProperty: 'background-color, color',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
+    outline: 'none',
   },
 
   itemDestructive: {
@@ -103,6 +116,7 @@ const styles = stylex.create({
     transitionProperty: 'background-color, color',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
+    outline: 'none',
   },
 
   separator: {
@@ -122,22 +136,42 @@ const styles = stylex.create({
     textTransform: 'uppercase' as const,
   },
 
+  checkboxItem: {
+    paddingInlineStart: `calc(${tokens.space3} + 20px)`,
+    position: 'relative',
+  },
+
   checkboxItemIndicator: {
+    position: 'absolute',
+    left: tokens.space3,
+    top: '50%',
+    transform: 'translateY(-50%)',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: '16px',
     height: '16px',
     flexShrink: 0,
+    color: tokens.colorPrimary,
+  },
+
+  radioItem: {
+    paddingInlineStart: `calc(${tokens.space3} + 20px)`,
+    position: 'relative',
   },
 
   radioItemIndicator: {
+    position: 'absolute',
+    left: tokens.space3,
+    top: '50%',
+    transform: 'translateY(-50%)',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     width: '16px',
     height: '16px',
     flexShrink: 0,
+    color: tokens.colorPrimary,
   },
 
   backdrop: {
@@ -167,6 +201,7 @@ const styles = stylex.create({
     transitionProperty: 'background-color, color',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
+    outline: 'none',
   },
 });
 
@@ -353,7 +388,7 @@ const CheckboxItem = forwardRef<HTMLDivElement, MenuCheckboxItemProps>(({ sx, ..
     ref={ref}
     {...props}
     className={(state) =>
-      stylex.props(styles.item, state.disabled && styles.itemDisabled, sx).className ?? ''
+      stylex.props(styles.item, styles.checkboxItem, state.disabled && styles.itemDisabled, sx).className ?? ''
     }
   />
 ));
@@ -380,7 +415,7 @@ const RadioItem = forwardRef<HTMLDivElement, MenuRadioItemProps>(({ sx, ...props
     ref={ref}
     {...props}
     className={(state) =>
-      stylex.props(styles.item, state.disabled && styles.itemDisabled, sx).className ?? ''
+      stylex.props(styles.item, styles.radioItem, state.disabled && styles.itemDisabled, sx).className ?? ''
     }
   />
 ));
