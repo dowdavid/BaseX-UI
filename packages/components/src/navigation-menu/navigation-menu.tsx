@@ -173,8 +173,7 @@ export interface NavigationMenuContentProps
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuPortalProps
-  extends React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Portal> {}
+export type NavigationMenuPortalProps = React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Portal>;
 
 export interface NavigationMenuPositionerProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Positioner>, 'className'> {

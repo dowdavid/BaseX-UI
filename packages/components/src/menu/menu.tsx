@@ -206,16 +206,14 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface MenuRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseMenu.Root> {}
+export type MenuRootProps = React.ComponentPropsWithoutRef<typeof BaseMenu.Root>;
 
 export interface MenuTriggerProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Trigger>, 'className'> {
   sx?: StyleXStyles;
 }
 
-export interface MenuPortalProps
-  extends React.ComponentPropsWithoutRef<typeof BaseMenu.Portal> {}
+export type MenuPortalProps = React.ComponentPropsWithoutRef<typeof BaseMenu.Portal>;
 
 export interface MenuPositionerProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Positioner>, 'className'> {
@@ -283,8 +281,7 @@ export interface MenuBackdropProps
   sx?: StyleXStyles;
 }
 
-export interface MenuSubmenuRootProps
-  extends React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuRoot> {}
+export type MenuSubmenuRootProps = React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuRoot>;
 
 export interface MenuSubmenuTriggerProps
   extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuTrigger>, 'className'> {
