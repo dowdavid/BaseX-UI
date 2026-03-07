@@ -51,23 +51,23 @@ Disabled inputs show a muted background, lighter border, dimmed text at 50% opac
 
 ### Input
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the input affecting height, padding, and font size. |
-| `onValueChange` | `(value: string, event: React.ChangeEvent) => void` | -- | Callback fired when the value changes. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop            | Type                                                | Default | Description                                                 |
+| --------------- | --------------------------------------------------- | ------- | ----------------------------------------------------------- |
+| `size`          | `'sm' \| 'md' \| 'lg'`                              | `'md'`  | Size of the input affecting height, padding, and font size. |
+| `onValueChange` | `(value: string, event: React.ChangeEvent) => void` | --      | Callback fired when the value changes.                      |
+| `sx`            | `StyleXStyles`                                      | --      | StyleX styles for consumer overrides.                       |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-valid` | Present when the field is valid. |
-| `data-invalid` | Present when the field is invalid. |
-| `data-dirty` | Present when the field value has been modified. |
-| `data-touched` | Present when the field has been focused and blurred. |
-| `data-filled` | Present when the input has a non-empty value. |
-| `data-focused` | Present when the input is focused. |
-| `data-disabled` | Present when the input is disabled. |
+| Attribute       | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `data-valid`    | Present when the field is valid.                     |
+| `data-invalid`  | Present when the field is invalid.                   |
+| `data-dirty`    | Present when the field value has been modified.      |
+| `data-touched`  | Present when the field has been focused and blurred. |
+| `data-filled`   | Present when the input has a non-empty value.        |
+| `data-focused`  | Present when the input is focused.                   |
+| `data-disabled` | Present when the input is disabled.                  |
 
 ## When to Use
 

@@ -208,88 +208,120 @@ const styles = stylex.create({
 // --- Types ---
 export type MenuRootProps = React.ComponentPropsWithoutRef<typeof BaseMenu.Root>;
 
-export interface MenuTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Trigger>, 'className'> {
+export interface MenuTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Trigger>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 export type MenuPortalProps = React.ComponentPropsWithoutRef<typeof BaseMenu.Portal>;
 
-export interface MenuPositionerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Positioner>, 'className'> {
+export interface MenuPositionerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Positioner>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuPopupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Popup>, 'className'> {
+export interface MenuPopupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Popup>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Item>, 'className'> {
+export interface MenuItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Item>,
+  'className'
+> {
   destructive?: boolean;
   sx?: StyleXStyles;
 }
 
-export interface MenuLinkItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.LinkItem>, 'className'> {
+export interface MenuLinkItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.LinkItem>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Group>, 'className'> {
+export interface MenuGroupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Group>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuGroupLabelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.GroupLabel>, 'className'> {
+export interface MenuGroupLabelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.GroupLabel>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuSeparatorProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Separator>, 'className'> {
+export interface MenuSeparatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Separator>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuCheckboxItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItem>, 'className'> {
+export interface MenuCheckboxItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItem>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuCheckboxItemIndicatorProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItemIndicator>, 'className'> {
+export interface MenuCheckboxItemIndicatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.CheckboxItemIndicator>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuRadioGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.RadioGroup>, 'className'> {
+export interface MenuRadioGroupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.RadioGroup>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuRadioItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.RadioItem>, 'className'> {
+export interface MenuRadioItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.RadioItem>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuRadioItemIndicatorProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.RadioItemIndicator>, 'className'> {
+export interface MenuRadioItemIndicatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.RadioItemIndicator>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuBackdropProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Backdrop>, 'className'> {
+export interface MenuBackdropProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Backdrop>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 export type MenuSubmenuRootProps = React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuRoot>;
 
-export interface MenuSubmenuTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuTrigger>, 'className'> {
+export interface MenuSubmenuTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuTrigger>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MenuArrowProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenu.Arrow>, 'className'> {
+export interface MenuArrowProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenu.Arrow>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -303,7 +335,8 @@ const Trigger = forwardRef<HTMLButtonElement, MenuTriggerProps>(({ sx, ...props 
     ref={ref}
     {...props}
     className={(state) =>
-      stylex.props(styles.trigger, focusRing, state.disabled && styles.itemDisabled, sx).className ?? ''
+      stylex.props(styles.trigger, focusRing, state.disabled && styles.itemDisabled, sx)
+        .className ?? ''
     }
   />
 ));
@@ -385,7 +418,8 @@ const CheckboxItem = forwardRef<HTMLDivElement, MenuCheckboxItemProps>(({ sx, ..
     ref={ref}
     {...props}
     className={(state) =>
-      stylex.props(styles.item, styles.checkboxItem, state.disabled && styles.itemDisabled, sx).className ?? ''
+      stylex.props(styles.item, styles.checkboxItem, state.disabled && styles.itemDisabled, sx)
+        .className ?? ''
     }
   />
 ));
@@ -412,7 +446,8 @@ const RadioItem = forwardRef<HTMLDivElement, MenuRadioItemProps>(({ sx, ...props
     ref={ref}
     {...props}
     className={(state) =>
-      stylex.props(styles.item, styles.radioItem, state.disabled && styles.itemDisabled, sx).className ?? ''
+      stylex.props(styles.item, styles.radioItem, state.disabled && styles.itemDisabled, sx)
+        .className ?? ''
     }
   />
 ));
@@ -447,7 +482,8 @@ const SubmenuTrigger = forwardRef<HTMLDivElement, MenuSubmenuTriggerProps>(
       ref={ref}
       {...props}
       className={(state) =>
-        stylex.props(styles.submenuTrigger, state.disabled && styles.itemDisabled, sx).className ?? ''
+        stylex.props(styles.submenuTrigger, state.disabled && styles.itemDisabled, sx).className ??
+        ''
       }
     />
   ),

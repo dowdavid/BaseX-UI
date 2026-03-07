@@ -55,34 +55,34 @@ const styles = stylex.create({
 // --- Types ---
 export type InputSize = 'sm' | 'md' | 'lg';
 
-export interface InputProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseInput>, 'className' | 'size'> {
+export interface InputProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseInput>,
+  'className' | 'size'
+> {
   size?: InputSize;
   sx?: StyleXStyles;
 }
 
 // --- Component ---
-export const Input = forwardRef<HTMLElement, InputProps>(
-  ({ size = 'md', sx, ...props }, ref) => {
-    const sizeKey = `size${capitalize(size)}` as const;
+export const Input = forwardRef<HTMLElement, InputProps>(({ size = 'md', sx, ...props }, ref) => {
+  const sizeKey = `size${capitalize(size)}` as const;
 
-    return (
-      <BaseInput
-        ref={ref}
-        {...props}
-        className={(state) =>
-          stylex.props(
-            styles.root,
-            focusRing,
-            styles[sizeKey as keyof typeof styles],
-            state.valid === false && styles.invalid,
-            state.disabled && styles.disabled,
-            sx,
-          ).className ?? ''
-        }
-      />
-    );
-  },
-);
+  return (
+    <BaseInput
+      ref={ref}
+      {...props}
+      className={(state) =>
+        stylex.props(
+          styles.root,
+          focusRing,
+          styles[sizeKey as keyof typeof styles],
+          state.valid === false && styles.invalid,
+          state.disabled && styles.disabled,
+          sx,
+        ).className ?? ''
+      }
+    />
+  );
+});
 
 Input.displayName = 'Input';

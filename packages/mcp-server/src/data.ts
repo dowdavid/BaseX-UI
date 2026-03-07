@@ -214,9 +214,7 @@ export function getComponentSetup(name: string): ComponentSetup | null {
     field: [{ interaction: 'control focus ring', preset: 'State' }],
     fieldset: [],
     form: [],
-    input: [
-      { interaction: 'focus ring', preset: 'State' },
-    ],
+    input: [{ interaction: 'focus ring', preset: 'State' }],
     menu: [
       { interaction: 'trigger hover/focus', preset: 'State' },
       { interaction: 'popup scale/fade in', preset: 'Enter' },
@@ -224,9 +222,7 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'item highlight', preset: 'State' },
     ],
     menubar: [],
-    meter: [
-      { interaction: 'indicator width transition', preset: 'Move' },
-    ],
+    meter: [{ interaction: 'indicator width transition', preset: 'Move' }],
     'navigation-menu': [
       { interaction: 'trigger hover/focus', preset: 'State' },
       { interaction: 'popup fade/slide in', preset: 'Enter' },

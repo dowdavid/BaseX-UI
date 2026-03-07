@@ -358,7 +358,14 @@
     {
       "intent": "dropdown-menu",
       "component": "Menu",
-      "signals": ["menu", "dropdown", "dropdown menu", "action menu", "options menu", "context actions"],
+      "signals": [
+        "menu",
+        "dropdown",
+        "dropdown menu",
+        "action menu",
+        "options menu",
+        "context actions"
+      ],
       "reasoning": "Menu is the primary component for dropdown menus triggered by a button. It provides keyboard navigation, focus management, and ARIA attributes.",
       "composition": "<Menu.Root>\n  <Menu.Trigger>Options</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item>Edit</Menu.Item>\n        <Menu.Item>Duplicate</Menu.Item>\n        <Menu.Separator />\n        <Menu.Item destructive>Delete</Menu.Item>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
     },
@@ -379,7 +386,13 @@
     {
       "intent": "application-menubar",
       "component": "Menubar",
-      "signals": ["menubar", "menu bar", "application menu", "file edit view menu", "toolbar menus"],
+      "signals": [
+        "menubar",
+        "menu bar",
+        "application menu",
+        "file edit view menu",
+        "toolbar menus"
+      ],
       "reasoning": "Menubar provides a horizontal bar of menus with arrow-key navigation between them, like desktop application menu bars.",
       "composition": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger>File</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>New</Menu.Item>\n          <Menu.Item>Open</Menu.Item>\n          <Menu.Item>Save</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n  <Menu.Root>\n    <Menu.Trigger>Edit</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Undo</Menu.Item>\n          <Menu.Item>Redo</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
     },
@@ -407,7 +420,14 @@
     {
       "intent": "site-navigation",
       "component": "NavigationMenu",
-      "signals": ["navigation", "nav menu", "site menu", "header nav", "main navigation", "nav bar"],
+      "signals": [
+        "navigation",
+        "nav menu",
+        "site menu",
+        "header nav",
+        "main navigation",
+        "nav bar"
+      ],
       "reasoning": "NavigationMenu is the primary component for site-wide navigation with hover-triggered dropdown panels.",
       "composition": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"products\">\n      <NavigationMenu.Trigger>Products <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <a href=\"/products/a\">Product A</a>\n        <a href=\"/products/b\">Product B</a>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/about\">About</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
     },

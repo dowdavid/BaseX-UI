@@ -93,7 +93,9 @@ NavigationMenu animations use global CSS with Base UI data attributes:
   .basex-navigation-menu-popup {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 200ms ease-out, transform 200ms ease-out;
+    transition:
+      opacity 200ms ease-out,
+      transform 200ms ease-out;
   }
   .basex-navigation-menu-popup[data-starting-style],
   .basex-navigation-menu-popup[data-ending-style] {
@@ -115,54 +117,54 @@ NavigationMenu animations use global CSS with Base UI data attributes:
 
 ### NavigationMenu.Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string \| null` | -- | The currently open item value (controlled). |
-| `defaultValue` | `string \| null` | `null` | The initially open item. |
-| `onValueChange` | `(value: string \| null) => void` | -- | Callback when the open item changes. |
-| `delay` | `number` | `50` | Delay in ms before opening on hover. |
-| `closeDelay` | `number` | `150` | Delay in ms before closing on pointer leave. |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the menu. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop            | Type                              | Default        | Description                                  |
+| --------------- | --------------------------------- | -------------- | -------------------------------------------- |
+| `value`         | `string \| null`                  | --             | The currently open item value (controlled).  |
+| `defaultValue`  | `string \| null`                  | `null`         | The initially open item.                     |
+| `onValueChange` | `(value: string \| null) => void` | --             | Callback when the open item changes.         |
+| `delay`         | `number`                          | `50`           | Delay in ms before opening on hover.         |
+| `closeDelay`    | `number`                          | `150`          | Delay in ms before closing on pointer leave. |
+| `orientation`   | `'horizontal' \| 'vertical'`      | `'horizontal'` | The orientation of the menu.                 |
+| `sx`            | `StyleXStyles`                    | --             | StyleX styles for consumer overrides.        |
 
 ### NavigationMenu.Trigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop | Type           | Default | Description                           |
+| ---- | -------------- | ------- | ------------------------------------- |
+| `sx` | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
+| Attribute         | Description                          |
+| ----------------- | ------------------------------------ |
 | `data-popup-open` | Present when the content is visible. |
 
 ### NavigationMenu.Link
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `href` | `string` | -- | The URL the link navigates to. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop   | Type           | Default | Description                           |
+| ------ | -------------- | ------- | ------------------------------------- |
+| `href` | `string`       | --      | The URL the link navigates to.        |
+| `sx`   | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 ### NavigationMenu.Positioner
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Which side of the trigger to position against. |
-| `sideOffset` | `number` | `2` | Gap between trigger and popup in px. |
-| `collisionPadding` | `number` | `10` | Minimum distance from viewport edges in px. |
-| `collisionAvoidance` | `{ side, align }` | `{ side: 'none', align: 'shift' }` | Controls repositioning when the popup would overflow the viewport. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop                 | Type                                     | Default                            | Description                                                        |
+| -------------------- | ---------------------------------------- | ---------------------------------- | ------------------------------------------------------------------ |
+| `side`               | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'`                         | Which side of the trigger to position against.                     |
+| `sideOffset`         | `number`                                 | `2`                                | Gap between trigger and popup in px.                               |
+| `collisionPadding`   | `number`                                 | `10`                               | Minimum distance from viewport edges in px.                        |
+| `collisionAvoidance` | `{ side, align }`                        | `{ side: 'none', align: 'shift' }` | Controls repositioning when the popup would overflow the viewport. |
+| `sx`                 | `StyleXStyles`                           | --                                 | StyleX styles for consumer overrides.                              |
 
 > **Note:** Side-flip is disabled by default (`side: 'none'`) to prevent a flicker loop caused by hover-triggered open/close cycles when the popup flips position. The Viewport constrains its height to the available space via `--available-height` and scrolls overflow content instead. If you need flip behavior (e.g. for nested submenus opened by click), override with `collisionAvoidance={{ side: 'flip', align: 'shift' }}`.
 
 ### NavigationMenu.Icon
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sideways` | `boolean` | `false` | Rotate the chevron to point right/left instead of down/up. |
-| `children` | `ReactNode` | `<ChevronDown />` | Custom icon element to replace the default chevron. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop       | Type           | Default           | Description                                                |
+| ---------- | -------------- | ----------------- | ---------------------------------------------------------- |
+| `sideways` | `boolean`      | `false`           | Rotate the chevron to point right/left instead of down/up. |
+| `children` | `ReactNode`    | `<ChevronDown />` | Custom icon element to replace the default chevron.        |
+| `sx`       | `StyleXStyles` | --                | StyleX styles for consumer overrides.                      |
 
 ## When to Use
 

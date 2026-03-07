@@ -69,41 +69,47 @@ const styles = stylex.create({
 export type MeterSize = 'sm' | 'md' | 'lg';
 export type MeterColor = 'default' | 'secondary' | 'destructive';
 
-export interface MeterRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMeter.Root>, 'className'> {
+export interface MeterRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMeter.Root>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MeterTrackProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMeter.Track>, 'className'> {
+export interface MeterTrackProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMeter.Track>,
+  'className'
+> {
   size?: MeterSize;
   sx?: StyleXStyles;
 }
 
-export interface MeterIndicatorProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMeter.Indicator>, 'className'> {
+export interface MeterIndicatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMeter.Indicator>,
+  'className'
+> {
   color?: MeterColor;
   sx?: StyleXStyles;
 }
 
-export interface MeterValueProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMeter.Value>, 'className'> {
+export interface MeterValueProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMeter.Value>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface MeterLabelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMeter.Label>, 'className'> {
+export interface MeterLabelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMeter.Label>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 // --- Components ---
 
 const Root = forwardRef<HTMLDivElement, MeterRootProps>(({ sx, ...props }, ref) => (
-  <BaseMeter.Root
-    ref={ref}
-    {...props}
-    className={stylex.props(styles.root, sx).className ?? ''}
-  />
+  <BaseMeter.Root ref={ref} {...props} className={stylex.props(styles.root, sx).className ?? ''} />
 ));
 Root.displayName = 'Meter.Root';
 
@@ -116,18 +122,17 @@ const Label = forwardRef<HTMLLabelElement, MeterLabelProps>(({ sx, ...props }, r
 ));
 Label.displayName = 'Meter.Label';
 
-const Track = forwardRef<HTMLDivElement, MeterTrackProps>(
-  ({ size = 'md', sx, ...props }, ref) => {
-    const sizeStyle = size === 'sm' ? styles.trackSizeSm : size === 'lg' ? styles.trackSizeLg : styles.trackSizeMd;
-    return (
-      <BaseMeter.Track
-        ref={ref}
-        {...props}
-        className={stylex.props(styles.track, sizeStyle, sx).className ?? ''}
-      />
-    );
-  },
-);
+const Track = forwardRef<HTMLDivElement, MeterTrackProps>(({ size = 'md', sx, ...props }, ref) => {
+  const sizeStyle =
+    size === 'sm' ? styles.trackSizeSm : size === 'lg' ? styles.trackSizeLg : styles.trackSizeMd;
+  return (
+    <BaseMeter.Track
+      ref={ref}
+      {...props}
+      className={stylex.props(styles.track, sizeStyle, sx).className ?? ''}
+    />
+  );
+});
 Track.displayName = 'Meter.Track';
 
 const Indicator = forwardRef<HTMLDivElement, MeterIndicatorProps>(

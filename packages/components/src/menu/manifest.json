@@ -130,7 +130,14 @@
   "intents": [
     {
       "intent": "dropdown-menu",
-      "signals": ["menu", "dropdown", "dropdown menu", "action menu", "options menu", "context actions"],
+      "signals": [
+        "menu",
+        "dropdown",
+        "dropdown menu",
+        "action menu",
+        "options menu",
+        "context actions"
+      ],
       "reasoning": "Menu is the primary component for dropdown menus triggered by a button. It provides keyboard navigation, focus management, and ARIA attributes.",
       "composition": "<Menu.Root>\n  <Menu.Trigger>Options</Menu.Trigger>\n  <Menu.Portal>\n    <Menu.Positioner>\n      <Menu.Popup>\n        <Menu.Item>Edit</Menu.Item>\n        <Menu.Item>Duplicate</Menu.Item>\n        <Menu.Separator />\n        <Menu.Item destructive>Delete</Menu.Item>\n      </Menu.Popup>\n    </Menu.Positioner>\n  </Menu.Portal>\n</Menu.Root>"
     },

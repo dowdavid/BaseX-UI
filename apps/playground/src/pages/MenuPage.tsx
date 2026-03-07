@@ -20,17 +20,16 @@ export function MenuPage() {
                 <Menu.Item onClick={() => {}}>Edit</Menu.Item>
                 <Menu.Item onClick={() => {}}>Duplicate</Menu.Item>
                 <Menu.Separator />
-                <Menu.Item destructive onClick={() => {}}>Delete</Menu.Item>
+                <Menu.Item destructive onClick={() => {}}>
+                  Delete
+                </Menu.Item>
               </Menu.Popup>
             </Menu.Positioner>
           </Menu.Portal>
         </Menu.Root>
       </Preview>
 
-      <Preview
-        title="Menu with groups"
-        description="Menu items organized into labeled groups."
-      >
+      <Preview title="Menu with groups" description="Menu items organized into labeled groups.">
         <Menu.Root>
           <Menu.Trigger>Open Menu</Menu.Trigger>
           <Menu.Portal>
@@ -54,10 +53,7 @@ export function MenuPage() {
         </Menu.Root>
       </Preview>
 
-      <Preview
-        title="Checkbox items"
-        description="Menu items that toggle boolean options."
-      >
+      <Preview title="Checkbox items" description="Menu items that toggle boolean options.">
         <Menu.Root>
           <Menu.Trigger>Open Menu</Menu.Trigger>
           <Menu.Portal>

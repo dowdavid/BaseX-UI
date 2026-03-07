@@ -131,19 +131,22 @@ export function NavigationMenuPage() {
                   <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                     <div {...stylex.props(pageStyles.contentListTitle)}>Styling</div>
                     <div {...stylex.props(pageStyles.contentListDesc)}>
-                      Base UI components can be styled with plain CSS, Tailwind CSS, CSS-in-JS, or CSS Modules.
+                      Base UI components can be styled with plain CSS, Tailwind CSS, CSS-in-JS, or
+                      CSS Modules.
                     </div>
                   </a>
                   <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                     <div {...stylex.props(pageStyles.contentListTitle)}>Animation</div>
                     <div {...stylex.props(pageStyles.contentListDesc)}>
-                      Base UI components can be animated with CSS transitions, CSS animations, or JavaScript libraries.
+                      Base UI components can be animated with CSS transitions, CSS animations, or
+                      JavaScript libraries.
                     </div>
                   </a>
                   <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                     <div {...stylex.props(pageStyles.contentListTitle)}>Composition</div>
                     <div {...stylex.props(pageStyles.contentListDesc)}>
-                      Base UI components can be replaced and composed with your own existing components.
+                      Base UI components can be replaced and composed with your own existing
+                      components.
                     </div>
                   </a>
                 </div>
@@ -187,15 +190,21 @@ export function NavigationMenuPage() {
                         <div {...stylex.props(pageStyles.contentList)}>
                           <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                             <div {...stylex.props(pageStyles.contentListTitle)}>Styling</div>
-                            <div {...stylex.props(pageStyles.contentListDesc)}>Style with CSS, Tailwind, or CSS-in-JS</div>
+                            <div {...stylex.props(pageStyles.contentListDesc)}>
+                              Style with CSS, Tailwind, or CSS-in-JS
+                            </div>
                           </a>
                           <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                             <div {...stylex.props(pageStyles.contentListTitle)}>Theming</div>
-                            <div {...stylex.props(pageStyles.contentListDesc)}>Customize colors, fonts, and spacing</div>
+                            <div {...stylex.props(pageStyles.contentListDesc)}>
+                              Customize colors, fonts, and spacing
+                            </div>
                           </a>
                           <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                             <div {...stylex.props(pageStyles.contentListTitle)}>Testing</div>
-                            <div {...stylex.props(pageStyles.contentListDesc)}>Write tests for your components</div>
+                            <div {...stylex.props(pageStyles.contentListDesc)}>
+                              Write tests for your components
+                            </div>
                           </a>
                         </div>
                       </NavigationMenu.Content>
@@ -230,15 +239,21 @@ export function NavigationMenuPage() {
                           <div {...stylex.props(pageStyles.contentList)}>
                             <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                               <div {...stylex.props(pageStyles.contentListTitle)}>General</div>
-                              <div {...stylex.props(pageStyles.contentListDesc)}>Chat with the community</div>
+                              <div {...stylex.props(pageStyles.contentListDesc)}>
+                                Chat with the community
+                              </div>
                             </a>
                             <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                               <div {...stylex.props(pageStyles.contentListTitle)}>Help</div>
-                              <div {...stylex.props(pageStyles.contentListDesc)}>Get support from others</div>
+                              <div {...stylex.props(pageStyles.contentListDesc)}>
+                                Get support from others
+                              </div>
                             </a>
                             <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                               <div {...stylex.props(pageStyles.contentListTitle)}>Showcase</div>
-                              <div {...stylex.props(pageStyles.contentListDesc)}>Share what you&apos;ve built</div>
+                              <div {...stylex.props(pageStyles.contentListDesc)}>
+                                Share what you&apos;ve built
+                              </div>
                             </a>
                           </div>
                         </NavigationMenu.Content>

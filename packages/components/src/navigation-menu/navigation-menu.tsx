@@ -144,64 +144,87 @@ const styles = stylex.create({
     inset: 0,
     zIndex: 49,
   },
-
 });
 
 // --- Types ---
-export interface NavigationMenuRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Root>, 'className'> {
+export interface NavigationMenuRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Root>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuListProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.List>, 'className'> {
+export interface NavigationMenuListProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.List>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuItemProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Item>, 'className'> {
+export interface NavigationMenuItemProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Item>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuTriggerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Trigger>, 'className'> {
+export interface NavigationMenuTriggerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Trigger>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Content>, 'className'> {
+export interface NavigationMenuContentProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Content>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export type NavigationMenuPortalProps = React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Portal>;
+export type NavigationMenuPortalProps = React.ComponentPropsWithoutRef<
+  typeof BaseNavigationMenu.Portal
+>;
 
-export interface NavigationMenuPositionerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Positioner>, 'className'> {
+export interface NavigationMenuPositionerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Positioner>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuPopupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Popup>, 'className'> {
+export interface NavigationMenuPopupProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Popup>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuViewportProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Viewport>, 'className'> {
+export interface NavigationMenuViewportProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Viewport>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuBackdropProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Backdrop>, 'className'> {
+export interface NavigationMenuBackdropProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Backdrop>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuLinkProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Link>, 'className'> {
+export interface NavigationMenuLinkProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Link>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface NavigationMenuIconProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Icon>, 'className' | 'children'> {
+export interface NavigationMenuIconProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Icon>,
+  'className' | 'children'
+> {
   sx?: StyleXStyles;
   /** Rotate the chevron to point right/left instead of down/up */
   sideways?: boolean;
@@ -209,8 +232,10 @@ export interface NavigationMenuIconProps
   children?: React.ReactNode;
 }
 
-export interface NavigationMenuArrowProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Arrow>, 'className'> {
+export interface NavigationMenuArrowProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseNavigationMenu.Arrow>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -252,12 +277,8 @@ const Trigger = forwardRef<HTMLButtonElement, NavigationMenuTriggerProps>(
       ref={ref}
       {...props}
       className={(state) =>
-        stylex.props(
-          styles.trigger,
-          focusRing,
-          state.open && styles.triggerActive,
-          sx,
-        ).className ?? ''
+        stylex.props(styles.trigger, focusRing, state.open && styles.triggerActive, sx).className ??
+        ''
       }
     />
   ),
@@ -279,7 +300,16 @@ const Portal = (props: NavigationMenuPortalProps) => <BaseNavigationMenu.Portal 
 Portal.displayName = 'NavigationMenu.Portal';
 
 const Positioner = forwardRef<HTMLDivElement, NavigationMenuPositionerProps>(
-  ({ sx, collisionPadding = 10, sideOffset = 2, collisionAvoidance = { side: 'none', align: 'shift' }, ...props }, ref) => (
+  (
+    {
+      sx,
+      collisionPadding = 10,
+      sideOffset = 2,
+      collisionAvoidance = { side: 'none', align: 'shift' },
+      ...props
+    },
+    ref,
+  ) => (
     <BaseNavigationMenu.Positioner
       ref={ref}
       collisionPadding={collisionPadding}
@@ -344,7 +374,11 @@ const Icon = forwardRef<HTMLSpanElement, NavigationMenuIconProps>(
       className={(state) =>
         stylex.props(
           styles.icon,
-          sideways ? (state.open ? styles.iconSidewaysOpen : styles.iconSideways) : (state.open && styles.iconOpen),
+          sideways
+            ? state.open
+              ? styles.iconSidewaysOpen
+              : styles.iconSideways
+            : state.open && styles.iconOpen,
           sx,
         ).className ?? ''
       }

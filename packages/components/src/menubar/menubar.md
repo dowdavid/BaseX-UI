@@ -68,20 +68,20 @@ A horizontal container for multiple menus, providing keyboard navigation between
 
 ### Menubar
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `modal` | `boolean` | `true` | Whether the menubar is modal when a menu is open. |
-| `disabled` | `boolean` | `false` | Whether the entire menubar is disabled. |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the menubar. |
-| `loopFocus` | `boolean` | `true` | Whether to loop keyboard focus back to the first item. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop          | Type                         | Default        | Description                                            |
+| ------------- | ---------------------------- | -------------- | ------------------------------------------------------ |
+| `modal`       | `boolean`                    | `true`         | Whether the menubar is modal when a menu is open.      |
+| `disabled`    | `boolean`                    | `false`        | Whether the entire menubar is disabled.                |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the menubar.                        |
+| `loopFocus`   | `boolean`                    | `true`         | Whether to loop keyboard focus back to the first item. |
+| `sx`          | `StyleXStyles`               | --             | StyleX styles for consumer overrides.                  |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-orientation` | The orientation of the menubar. |
-| `data-disabled` | Present when the menubar is disabled. |
+| Attribute          | Description                           |
+| ------------------ | ------------------------------------- |
+| `data-orientation` | The orientation of the menubar.       |
+| `data-disabled`    | Present when the menubar is disabled. |
 
 ## When to Use
 

@@ -136,7 +136,9 @@ Menu popup animations use global CSS with Base UI data attributes:
   .basex-menu-popup {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 150ms ease-out, transform 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
   }
   .basex-menu-popup[data-starting-style],
   .basex-menu-popup[data-ending-style] {
@@ -150,45 +152,45 @@ Menu popup animations use global CSS with Base UI data attributes:
 
 ### Menu.Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `open` | `boolean` | -- | Whether the menu is open (controlled). |
-| `onOpenChange` | `(open: boolean, event: Event) => void` | -- | Callback when open state changes. |
+| Prop           | Type                                    | Default | Description                            |
+| -------------- | --------------------------------------- | ------- | -------------------------------------- |
+| `open`         | `boolean`                               | --      | Whether the menu is open (controlled). |
+| `onOpenChange` | `(open: boolean, event: Event) => void` | --      | Callback when open state changes.      |
 
 ### Menu.Trigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop | Type           | Default | Description                           |
+| ---- | -------------- | ------- | ------------------------------------- |
+| `sx` | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| `data-popup-open` | Present when the menu popup is open. |
-| `data-disabled` | Present when the trigger is disabled. |
+| Attribute         | Description                           |
+| ----------------- | ------------------------------------- |
+| `data-popup-open` | Present when the menu popup is open.  |
+| `data-disabled`   | Present when the trigger is disabled. |
 
 ### Menu.Item
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `destructive` | `boolean` | `false` | Whether the item is styled as a destructive action. |
-| `closeOnClick` | `boolean` | `true` | Whether clicking the item closes the menu. |
-| `disabled` | `boolean` | `false` | Whether the item is disabled. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop           | Type           | Default | Description                                         |
+| -------------- | -------------- | ------- | --------------------------------------------------- |
+| `destructive`  | `boolean`      | `false` | Whether the item is styled as a destructive action. |
+| `closeOnClick` | `boolean`      | `true`  | Whether clicking the item closes the menu.          |
+| `disabled`     | `boolean`      | `false` | Whether the item is disabled.                       |
+| `sx`           | `StyleXStyles` | --      | StyleX styles for consumer overrides.               |
 
 #### Data attributes
 
-| Attribute | Description |
-|-----------|-------------|
+| Attribute          | Description                           |
+| ------------------ | ------------------------------------- |
 | `data-highlighted` | Present when the item is highlighted. |
-| `data-disabled` | Present when the item is disabled. |
+| `data-disabled`    | Present when the item is disabled.    |
 
 ### Menu.Separator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop | Type           | Default | Description                           |
+| ---- | -------------- | ------- | ------------------------------------- |
+| `sx` | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 ## When to Use
 

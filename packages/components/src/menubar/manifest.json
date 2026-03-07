@@ -57,7 +57,13 @@
   "intents": [
     {
       "intent": "application-menubar",
-      "signals": ["menubar", "menu bar", "application menu", "file edit view menu", "toolbar menus"],
+      "signals": [
+        "menubar",
+        "menu bar",
+        "application menu",
+        "file edit view menu",
+        "toolbar menus"
+      ],
       "reasoning": "Menubar provides a horizontal bar of menus with arrow-key navigation between them, like desktop application menu bars.",
       "composition": "<Menubar>\n  <Menu.Root>\n    <Menu.Trigger>File</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>New</Menu.Item>\n          <Menu.Item>Open</Menu.Item>\n          <Menu.Item>Save</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n  <Menu.Root>\n    <Menu.Trigger>Edit</Menu.Trigger>\n    <Menu.Portal>\n      <Menu.Positioner>\n        <Menu.Popup>\n          <Menu.Item>Undo</Menu.Item>\n          <Menu.Item>Redo</Menu.Item>\n        </Menu.Popup>\n      </Menu.Positioner>\n    </Menu.Portal>\n  </Menu.Root>\n</Menubar>"
     },

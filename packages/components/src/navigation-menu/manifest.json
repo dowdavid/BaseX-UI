@@ -128,7 +128,14 @@
   "intents": [
     {
       "intent": "site-navigation",
-      "signals": ["navigation", "nav menu", "site menu", "header nav", "main navigation", "nav bar"],
+      "signals": [
+        "navigation",
+        "nav menu",
+        "site menu",
+        "header nav",
+        "main navigation",
+        "nav bar"
+      ],
       "reasoning": "NavigationMenu is the primary component for site-wide navigation with hover-triggered dropdown panels.",
       "composition": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"products\">\n      <NavigationMenu.Trigger>Products <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <a href=\"/products/a\">Product A</a>\n        <a href=\"/products/b\">Product B</a>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n    <NavigationMenu.Item>\n      <NavigationMenu.Link href=\"/about\">About</NavigationMenu.Link>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
     },

@@ -81,40 +81,40 @@ A visual indicator showing a scalar value within a known range. Built on [Base U
 
 ### Meter.Root
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `number` | -- | **Required.** The current value of the meter. |
-| `min` | `number` | `0` | The minimum value. |
-| `max` | `number` | `100` | The maximum value. |
-| `format` | `Intl.NumberFormatOptions` | -- | Formatting options for the value display. |
-| `locale` | `string` | -- | Locale for number formatting. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop     | Type                       | Default | Description                                   |
+| -------- | -------------------------- | ------- | --------------------------------------------- |
+| `value`  | `number`                   | --      | **Required.** The current value of the meter. |
+| `min`    | `number`                   | `0`     | The minimum value.                            |
+| `max`    | `number`                   | `100`   | The maximum value.                            |
+| `format` | `Intl.NumberFormatOptions` | --      | Formatting options for the value display.     |
+| `locale` | `string`                   | --      | Locale for number formatting.                 |
+| `sx`     | `StyleXStyles`             | --      | StyleX styles for consumer overrides.         |
 
 ### Meter.Label
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop | Type           | Default | Description                           |
+| ---- | -------------- | ------- | ------------------------------------- |
+| `sx` | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 ### Meter.Track
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Height of the track (sm=4px, md=8px, lg=12px). |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop   | Type                   | Default | Description                                    |
+| ------ | ---------------------- | ------- | ---------------------------------------------- |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'`  | Height of the track (sm=4px, md=8px, lg=12px). |
+| `sx`   | `StyleXStyles`         | --      | StyleX styles for consumer overrides.          |
 
 ### Meter.Indicator
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `color` | `'default' \| 'secondary' \| 'destructive'` | `'default'` | Color of the indicator bar. |
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop    | Type                                        | Default     | Description                           |
+| ------- | ------------------------------------------- | ----------- | ------------------------------------- |
+| `color` | `'default' \| 'secondary' \| 'destructive'` | `'default'` | Color of the indicator bar.           |
+| `sx`    | `StyleXStyles`                              | --          | StyleX styles for consumer overrides. |
 
 ### Meter.Value
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sx` | `StyleXStyles` | -- | StyleX styles for consumer overrides. |
+| Prop | Type           | Default | Description                           |
+| ---- | -------------- | ------- | ------------------------------------- |
+| `sx` | `StyleXStyles` | --      | StyleX styles for consumer overrides. |
 
 ## When to Use
 

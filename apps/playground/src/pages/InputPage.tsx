@@ -35,11 +35,7 @@ const pageStyles = stylex.create({
 export function InputPage() {
   return (
     <>
-      <Preview
-        title="Basic input"
-        description="A simple standalone text input."
-        constrained
-      >
+      <Preview title="Basic input" description="A simple standalone text input." constrained>
         <Input placeholder="Enter your name" />
       </Preview>
 
@@ -48,11 +44,7 @@ export function InputPage() {
         description="Input automatically integrates with Field for label, description, and validation."
         constrained
       >
-        <form
-          {...stylex.props(pageStyles.form)}
-          onSubmit={(e) => e.preventDefault()}
-          noValidate
-        >
+        <form {...stylex.props(pageStyles.form)} onSubmit={(e) => e.preventDefault()} noValidate>
           <Field.Root>
             <Field.Label>Email</Field.Label>
             <Field.Description>We&apos;ll never share your email.</Field.Description>
@@ -61,30 +53,28 @@ export function InputPage() {
             <Field.Error match="typeMismatch">Please enter a valid email.</Field.Error>
           </Field.Root>
           <div {...stylex.props(pageStyles.actions)}>
-            <Button type="submit" size="sm">Submit</Button>
+            <Button type="submit" size="sm">
+              Submit
+            </Button>
           </div>
         </form>
       </Preview>
 
-      <Preview
-        title="Disabled"
-        description="A disabled input with a Field label."
-        constrained
-      >
+      <Preview title="Disabled" description="A disabled input with a Field label." constrained>
         <Field.Root disabled>
           <Field.Label>Username</Field.Label>
           <Input value="daviddow" />
         </Field.Root>
       </Preview>
 
-      <Preview
-        title="Sizes"
-        description="Small, medium, and large input sizes."
-        constrained
-      >
+      <Preview title="Sizes" description="Small, medium, and large input sizes." constrained>
         <div {...stylex.props(pageStyles.stack)}>
           {sizes.map((size) => (
-            <Input key={size} size={size} placeholder={`${size} (${size === 'sm' ? '32px' : size === 'md' ? '36px' : '40px'})`} />
+            <Input
+              key={size}
+              size={size}
+              placeholder={`${size} (${size === 'sm' ? '32px' : size === 'md' ? '36px' : '40px'})`}
+            />
           ))}
         </div>
       </Preview>

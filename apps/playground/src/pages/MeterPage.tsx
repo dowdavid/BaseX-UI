@@ -24,11 +24,7 @@ const pageStyles = stylex.create({
 export function MeterPage() {
   return (
     <>
-      <Preview
-        title="Basic meter"
-        description="A simple meter with a label."
-        constrained
-      >
+      <Preview title="Basic meter" description="A simple meter with a label." constrained>
         <Meter.Root value={65}>
           <Meter.Label>Storage used</Meter.Label>
           <Meter.Track>
@@ -70,11 +66,7 @@ export function MeterPage() {
         </div>
       </Preview>
 
-      <Preview
-        title="Sizes"
-        description="Small, medium, and large track heights."
-        constrained
-      >
+      <Preview title="Sizes" description="Small, medium, and large track heights." constrained>
         <div {...stylex.props(pageStyles.stack)}>
           {sizes.map((size) => (
             <Meter.Root key={size} value={50}>

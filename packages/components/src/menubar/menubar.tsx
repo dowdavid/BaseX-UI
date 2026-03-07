@@ -28,19 +28,23 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface MenubarProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseMenubar>, 'className'> {
+export interface MenubarProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseMenubar>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
 // --- Component ---
-export const Menubar = forwardRef<HTMLDivElement, MenubarProps>(({ disabled, sx, ...props }, ref) => (
-  <BaseMenubar
-    ref={ref}
-    disabled={disabled}
-    {...props}
-    className={stylex.props(styles.root, disabled && styles.disabled, sx).className ?? ''}
-  />
-));
+export const Menubar = forwardRef<HTMLDivElement, MenubarProps>(
+  ({ disabled, sx, ...props }, ref) => (
+    <BaseMenubar
+      ref={ref}
+      disabled={disabled}
+      {...props}
+      className={stylex.props(styles.root, disabled && styles.disabled, sx).className ?? ''}
+    />
+  ),
+);
 
 Menubar.displayName = 'Menubar';
