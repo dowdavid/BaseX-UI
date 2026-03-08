@@ -126,17 +126,18 @@ const styles = stylex.create({
     borderColor: tokens.colorBorderMuted,
     borderRadius: tokens.radiusLg,
     boxShadow: tokens.shadowLg,
-    overflow: 'hidden',
+    // visible (not hidden) so nested Positioner popups can render outside parent popup bounds
+    overflow: 'visible',
   },
 
   viewport: {
     position: 'relative',
-    maxHeight: 'calc(var(--available-height, 100vh) - 20px)',
-    overflowY: 'auto',
   },
 
   content: {
     padding: tokens.space2,
+    maxHeight: 'calc(var(--available-height, 100vh) - 20px)',
+    overflowY: 'auto',
   },
 
   backdrop: {
