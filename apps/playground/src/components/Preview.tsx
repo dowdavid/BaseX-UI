@@ -1,9 +1,14 @@
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 
+const MOBILE = '@media (max-width: 768px)' as const;
+
 const styles = stylex.create({
   section: {
     marginBottom: tokens.space10,
+    [MOBILE]: {
+      marginBottom: tokens.space6,
+    },
   },
   title: {
     fontSize: tokens.fontSizeMd,
@@ -26,6 +31,9 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    [MOBILE]: {
+      padding: tokens.space4,
+    },
   },
   constrained: {
     width: '100%',
