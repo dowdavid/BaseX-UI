@@ -9,19 +9,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "@stylexjs/stylex": "^0.17.5",
-    "@basex-ui/tokens": "workspace:*",
+    "@basex-ui/components": "workspace:*",
     "@basex-ui/styles": "workspace:*",
-    "@basex-ui/components": "workspace:*"
+    "@basex-ui/tokens": "workspace:*",
+    "@stylexjs/stylex": "^0.17.5",
+    "lucide-react": "^0.575.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@stylexjs/unplugin": "^0.17.5",
-    "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.0.0",
-    "typescript": "^5.7.0",
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
   }
 }
