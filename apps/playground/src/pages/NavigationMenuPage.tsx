@@ -271,13 +271,7 @@ function NestedSubmenusDesktop() {
 
 // --- Mobile: nested items use plain accordion expand (no nested NavigationMenu) ---
 
-function AnimatedExpand({
-  open,
-  children,
-}: {
-  open: boolean;
-  children: React.ReactNode;
-}) {
+function AnimatedExpand({ open, children }: { open: boolean; children: React.ReactNode }) {
   return (
     <div {...stylex.props(pageStyles.expandWrapper, open && pageStyles.expandWrapperOpen)}>
       <div {...stylex.props(pageStyles.expandInner)}>{children}</div>
@@ -285,13 +279,7 @@ function AnimatedExpand({
   );
 }
 
-function AccordionItem({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function AccordionItem({ label, children }: { label: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -303,10 +291,7 @@ function AccordionItem({
         {label}
         <ChevronDown
           size={14}
-          {...stylex.props(
-            pageStyles.accordionIcon,
-            open && pageStyles.accordionIconOpen,
-          )}
+          {...stylex.props(pageStyles.accordionIcon, open && pageStyles.accordionIconOpen)}
         />
       </button>
       <AnimatedExpand open={open}>
@@ -324,7 +309,11 @@ function NestedSubmenusMobile() {
   return (
     <nav {...stylex.props(pageStyles.contentList)}>
       <div>
-        <button {...stylex.props(pageStyles.accordionTrigger)} onClick={() => toggle('docs')} aria-expanded={openMenu === 'docs'}>
+        <button
+          {...stylex.props(pageStyles.accordionTrigger)}
+          onClick={() => toggle('docs')}
+          aria-expanded={openMenu === 'docs'}
+        >
           Docs
           <ChevronDown
             size={14}
@@ -336,7 +325,9 @@ function NestedSubmenusMobile() {
         </button>
         <AnimatedExpand open={openMenu === 'docs'}>
           <div {...stylex.props(pageStyles.mobileDropdown)}>
-            <a href="#" {...stylex.props(pageStyles.contentListLink)}>Start</a>
+            <a href="#" {...stylex.props(pageStyles.contentListLink)}>
+              Start
+            </a>
             <AccordionItem label="Guides">
               <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                 <div {...stylex.props(pageStyles.contentListTitle)}>Styling</div>
@@ -357,13 +348,19 @@ function NestedSubmenusMobile() {
                 </div>
               </a>
             </AccordionItem>
-            <a href="#" {...stylex.props(pageStyles.contentListLink)}>API</a>
+            <a href="#" {...stylex.props(pageStyles.contentListLink)}>
+              API
+            </a>
           </div>
         </AnimatedExpand>
       </div>
 
       <div>
-        <button {...stylex.props(pageStyles.accordionTrigger)} onClick={() => toggle('community')} aria-expanded={openMenu === 'community'}>
+        <button
+          {...stylex.props(pageStyles.accordionTrigger)}
+          onClick={() => toggle('community')}
+          aria-expanded={openMenu === 'community'}
+        >
           Community
           <ChevronDown
             size={14}
@@ -378,15 +375,11 @@ function NestedSubmenusMobile() {
             <AccordionItem label="Discord">
               <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                 <div {...stylex.props(pageStyles.contentListTitle)}>General</div>
-                <div {...stylex.props(pageStyles.contentListDesc)}>
-                  Chat with the community
-                </div>
+                <div {...stylex.props(pageStyles.contentListDesc)}>Chat with the community</div>
               </a>
               <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                 <div {...stylex.props(pageStyles.contentListTitle)}>Help</div>
-                <div {...stylex.props(pageStyles.contentListDesc)}>
-                  Get support from others
-                </div>
+                <div {...stylex.props(pageStyles.contentListDesc)}>Get support from others</div>
               </a>
               <a href="#" {...stylex.props(pageStyles.contentListLink)}>
                 <div {...stylex.props(pageStyles.contentListTitle)}>Showcase</div>
@@ -395,13 +388,19 @@ function NestedSubmenusMobile() {
                 </div>
               </a>
             </AccordionItem>
-            <a href="#" {...stylex.props(pageStyles.contentListLink)}>GitHub</a>
-            <a href="#" {...stylex.props(pageStyles.contentListLink)}>Twitter</a>
+            <a href="#" {...stylex.props(pageStyles.contentListLink)}>
+              GitHub
+            </a>
+            <a href="#" {...stylex.props(pageStyles.contentListLink)}>
+              Twitter
+            </a>
           </div>
         </AnimatedExpand>
       </div>
 
-      <a href="#" {...stylex.props(pageStyles.contentListLink)}>Blog</a>
+      <a href="#" {...stylex.props(pageStyles.contentListLink)}>
+        Blog
+      </a>
     </nav>
   );
 }
