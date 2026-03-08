@@ -126,6 +126,7 @@ const styles = stylex.create({
     borderColor: tokens.colorBorderMuted,
     borderRadius: tokens.radiusLg,
     boxShadow: tokens.shadowLg,
+    // visible (not hidden) so nested Positioner popups can render outside parent popup bounds
     overflow: 'visible',
   },
 

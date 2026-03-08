@@ -26,7 +26,7 @@ const pageStyles = stylex.create({
     gap: tokens.space3,
     width: {
       default: '340px',
-      '@media (max-width: 500px)': 'calc(100vw - 40px)',
+      '@media (max-width: 768px)': 'calc(100vw - 40px)',
     },
   },
   contentLink: {
@@ -55,7 +55,7 @@ const pageStyles = stylex.create({
     flexDirection: 'column',
     width: {
       default: '280px',
-      '@media (max-width: 500px)': 'calc(100vw - 40px)',
+      '@media (max-width: 768px)': 'calc(100vw - 40px)',
     },
   },
   contentListLink: {
@@ -324,7 +324,7 @@ function NestedSubmenusMobile() {
   return (
     <nav {...stylex.props(pageStyles.contentList)}>
       <div>
-        <button {...stylex.props(pageStyles.accordionTrigger)} onClick={() => toggle('docs')}>
+        <button {...stylex.props(pageStyles.accordionTrigger)} onClick={() => toggle('docs')} aria-expanded={openMenu === 'docs'}>
           Docs
           <ChevronDown
             size={14}
@@ -363,7 +363,7 @@ function NestedSubmenusMobile() {
       </div>
 
       <div>
-        <button {...stylex.props(pageStyles.accordionTrigger)} onClick={() => toggle('community')}>
+        <button {...stylex.props(pageStyles.accordionTrigger)} onClick={() => toggle('community')} aria-expanded={openMenu === 'community'}>
           Community
           <ChevronDown
             size={14}
