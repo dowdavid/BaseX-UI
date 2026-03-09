@@ -33,6 +33,11 @@ import menuManifest from '../../components/src/menu/manifest.json';
 import menubarManifest from '../../components/src/menubar/manifest.json';
 import meterManifest from '../../components/src/meter/manifest.json';
 import navigationMenuManifest from '../../components/src/navigation-menu/manifest.json';
+import numberFieldManifest from '../../components/src/number-field/manifest.json';
+import popoverManifest from '../../components/src/popover/manifest.json';
+import previewCardManifest from '../../components/src/preview-card/manifest.json';
+import progressManifest from '../../components/src/progress/manifest.json';
+import radioManifest from '../../components/src/radio/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -53,7 +58,12 @@ export type ComponentManifest =
   | typeof menuManifest
   | typeof menubarManifest
   | typeof meterManifest
-  | typeof navigationMenuManifest;
+  | typeof navigationMenuManifest
+  | typeof numberFieldManifest
+  | typeof popoverManifest
+  | typeof previewCardManifest
+  | typeof progressManifest
+  | typeof radioManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -75,6 +85,11 @@ const components = new Map<string, ComponentManifest>([
   ['menubar', menubarManifest],
   ['meter', meterManifest],
   ['navigation-menu', navigationMenuManifest],
+  ['number-field', numberFieldManifest],
+  ['popover', popoverManifest],
+  ['preview-card', previewCardManifest],
+  ['progress', progressManifest],
+  ['radio', radioManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -229,6 +244,24 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'popup fade/slide out', preset: 'Exit' },
       { interaction: 'content crossfade', preset: 'Enter' },
     ],
+    'number-field': [
+      { interaction: 'button hover', preset: 'State' },
+      { interaction: 'input focus ring', preset: 'State' },
+    ],
+    popover: [
+      { interaction: 'popup scale/fade in', preset: 'Enter' },
+      { interaction: 'popup scale/fade out', preset: 'Exit' },
+      { interaction: 'close button hover', preset: 'State' },
+    ],
+    'preview-card': [
+      { interaction: 'popup fade/slide in', preset: 'Enter' },
+      { interaction: 'popup fade/slide out', preset: 'Exit' },
+    ],
+    progress: [
+      { interaction: 'indicator width transition', preset: 'Move' },
+      { interaction: 'indeterminate animation', preset: 'Move' },
+    ],
+    radio: [{ interaction: 'indicator appear/disappear', preset: 'State' }],
   };
 
   return {

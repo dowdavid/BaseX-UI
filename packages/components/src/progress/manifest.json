@@ -1,0 +1,181 @@
+{
+  "name": "Progress",
+  "description": "A progress bar showing determinate or indeterminate task completion. Built on Base UI Progress with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/progress",
+
+  "anatomy": "<Progress.Root value={50}>\n  <Progress.Label />\n  <Progress.Value />\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n</Progress.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Container that provides progress state (value, min, max) to child parts.",
+      "props": {
+        "value": {
+          "type": "number | null",
+          "required": true,
+          "description": "The current value. Pass null for indeterminate."
+        },
+        "min": {
+          "type": "number",
+          "default": 0,
+          "description": "The minimum value."
+        },
+        "max": {
+          "type": "number",
+          "default": 100,
+          "description": "The maximum value."
+        },
+        "format": {
+          "type": "Intl.NumberFormatOptions",
+          "description": "Formatting options for the displayed value."
+        },
+        "locale": {
+          "type": "string",
+          "description": "Locale for number formatting."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-indeterminate": "Present when value is null."
+      }
+    },
+    "Label": {
+      "element": "label",
+      "description": "An accessible label for the progress bar.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Track": {
+      "element": "div",
+      "description": "The background track of the progress bar.",
+      "props": {
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Height of the track (sm=4px, md=8px, lg=12px)."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Indicator": {
+      "element": "div",
+      "description": "The filled portion of the progress bar, proportional to the value.",
+      "props": {
+        "color": {
+          "type": "'default' | 'secondary' | 'destructive'",
+          "default": "default",
+          "description": "Color of the indicator bar."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-indeterminate": "Present when value is null."
+      }
+    },
+    "Value": {
+      "element": "span",
+      "description": "Displays the formatted value of the progress.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Indeterminate progress animation for the indicator.",
+    "css": "@layer priority1 {\n  .basex-progress-indicator[data-indeterminate] {\n    width: 40% !important;\n    animation: basex-progress-indeterminate 1.5s ease-in-out infinite;\n  }\n  @keyframes basex-progress-indeterminate {\n    0% { transform: translateX(-100%); }\n    100% { transform: translateX(250%); }\n  }\n}"
+  },
+
+  "tokens": [
+    "colorPrimary",
+    "colorSecondary",
+    "colorDestructive",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "space1h",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "radiusFull",
+    "motionDurationNormal",
+    "motionEaseInOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "task-progress",
+      "signals": ["progress bar", "loading indicator", "upload progress", "task progress", "completion"],
+      "reasoning": "Progress shows how far along a task is toward completion. Use for file uploads, form submissions, or any ongoing operation.",
+      "composition": "<Progress.Root value={75}>\n  <Progress.Label>Uploading...</Progress.Label>\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n  <Progress.Value />\n</Progress.Root>"
+    },
+    {
+      "intent": "indeterminate-loading",
+      "signals": ["loading", "indeterminate", "processing", "please wait", "fetching"],
+      "reasoning": "Progress with null value shows an indeterminate animation for operations with unknown duration.",
+      "composition": "<Progress.Root value={null}>\n  <Progress.Label>Loading...</Progress.Label>\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n</Progress.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Showing a scalar measurement within a range",
+      "reasoning": "Use Meter for static values like disk usage or battery level. Progress is for ongoing operations.",
+      "alternative": "Meter"
+    },
+    {
+      "scenario": "Spinner-style loading indicators",
+      "reasoning": "Use a spinner component for compact loading states. Progress is a horizontal bar.",
+      "alternative": "Spinner"
+    },
+    {
+      "scenario": "Multi-step wizards or discrete steps",
+      "reasoning": "Use a stepper component for step-by-step progress. Progress shows continuous completion.",
+      "alternative": "Stepper"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic progress bar",
+      "code": "<Progress.Root value={65}>\n  <Progress.Label>Upload</Progress.Label>\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n</Progress.Root>"
+    },
+    {
+      "name": "with-value",
+      "description": "Progress bar with value display",
+      "code": "<Progress.Root value={42}>\n  <Progress.Label>Processing</Progress.Label>\n  <Progress.Value />\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n</Progress.Root>"
+    },
+    {
+      "name": "indeterminate",
+      "description": "Indeterminate progress bar",
+      "code": "<Progress.Root value={null}>\n  <Progress.Label>Loading...</Progress.Label>\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n</Progress.Root>"
+    },
+    {
+      "name": "colors",
+      "description": "Progress color variations",
+      "code": "<>\n  <Progress.Root value={30}>\n    <Progress.Track>\n      <Progress.Indicator color=\"default\" />\n    </Progress.Track>\n  </Progress.Root>\n  <Progress.Root value={60}>\n    <Progress.Track>\n      <Progress.Indicator color=\"secondary\" />\n    </Progress.Track>\n  </Progress.Root>\n  <Progress.Root value={90}>\n    <Progress.Track>\n      <Progress.Indicator color=\"destructive\" />\n    </Progress.Track>\n  </Progress.Root>\n</>"
+    }
+  ]
+}

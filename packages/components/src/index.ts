@@ -168,3 +168,55 @@ export type {
   NavigationMenuIconProps,
   NavigationMenuArrowProps,
 } from './navigation-menu';
+
+export { NumberField } from './number-field';
+export type {
+  NumberFieldSize,
+  NumberFieldRootProps,
+  NumberFieldGroupProps,
+  NumberFieldInputProps,
+  NumberFieldIncrementProps,
+  NumberFieldDecrementProps,
+} from './number-field';
+
+export { Popover } from './popover';
+export type {
+  PopoverRootProps,
+  PopoverTriggerProps,
+  PopoverPortalProps,
+  PopoverPositionerProps,
+  PopoverPopupProps,
+  PopoverArrowProps,
+  PopoverTitleProps,
+  PopoverDescriptionProps,
+  PopoverCloseProps,
+} from './popover';
+
+export { PreviewCard } from './preview-card';
+export type {
+  PreviewCardRootProps,
+  PreviewCardTriggerProps,
+  PreviewCardPortalProps,
+  PreviewCardPositionerProps,
+  PreviewCardPopupProps,
+  PreviewCardArrowProps,
+} from './preview-card';
+
+export { Progress } from './progress';
+export type {
+  ProgressSize,
+  ProgressColor,
+  ProgressRootProps,
+  ProgressTrackProps,
+  ProgressIndicatorProps,
+  ProgressValueProps,
+  ProgressLabelProps,
+} from './progress';
+
+export { Radio } from './radio';
+export type {
+  RadioOrientation,
+  RadioGroupProps,
+  RadioRootProps,
+  RadioIndicatorProps,
+} from './radio';
