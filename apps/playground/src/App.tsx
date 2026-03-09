@@ -24,6 +24,11 @@ import { MenuPage } from './pages/MenuPage';
 import { MenubarPage } from './pages/MenubarPage';
 import { MeterPage } from './pages/MeterPage';
 import { NavigationMenuPage } from './pages/NavigationMenuPage';
+import { NumberFieldPage } from './pages/NumberFieldPage';
+import { PopoverPage } from './pages/PopoverPage';
+import { PreviewCardPage } from './pages/PreviewCardPage';
+import { ProgressPage } from './pages/ProgressPage';
+import { RadioPage } from './pages/RadioPage';
 
 const pages = [
   {
@@ -139,6 +144,36 @@ const pages = [
     label: 'Navigation Menu',
     description: 'A site navigation component with hover-triggered dropdown content.',
     component: NavigationMenuPage,
+  },
+  {
+    id: 'number-field',
+    label: 'Number Field',
+    description: 'A numeric input with increment and decrement buttons.',
+    component: NumberFieldPage,
+  },
+  {
+    id: 'popover',
+    label: 'Popover',
+    description: 'A floating content panel that appears next to a trigger element.',
+    component: PopoverPage,
+  },
+  {
+    id: 'preview-card',
+    label: 'Preview Card',
+    description: 'A hover-triggered card showing a preview of linked content.',
+    component: PreviewCardPage,
+  },
+  {
+    id: 'progress',
+    label: 'Progress',
+    description: 'A progress bar showing determinate or indeterminate task completion.',
+    component: ProgressPage,
+  },
+  {
+    id: 'radio',
+    label: 'Radio',
+    description: 'A radio button group for single-select choices.',
+    component: RadioPage,
   },
 ] as const;
 

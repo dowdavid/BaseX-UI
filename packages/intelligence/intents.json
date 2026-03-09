@@ -437,6 +437,76 @@
       "signals": ["mega menu", "large dropdown nav", "category navigation", "multi-column nav"],
       "reasoning": "NavigationMenu content panels can hold any layout, making them ideal for mega-menu patterns with multi-column grids.",
       "composition": "<NavigationMenu.Root>\n  <NavigationMenu.List>\n    <NavigationMenu.Item value=\"categories\">\n      <NavigationMenu.Trigger>Categories <NavigationMenu.Icon /></NavigationMenu.Trigger>\n      <NavigationMenu.Content>\n        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>\n          <div><h3>Category A</h3><a href=\"/a/1\">Item 1</a></div>\n          <div><h3>Category B</h3><a href=\"/b/1\">Item 1</a></div>\n          <div><h3>Category C</h3><a href=\"/c/1\">Item 1</a></div>\n        </div>\n      </NavigationMenu.Content>\n    </NavigationMenu.Item>\n  </NavigationMenu.List>\n  <NavigationMenu.Portal>\n    <NavigationMenu.Positioner>\n      <NavigationMenu.Popup>\n        <NavigationMenu.Viewport />\n      </NavigationMenu.Popup>\n    </NavigationMenu.Positioner>\n  </NavigationMenu.Portal>\n</NavigationMenu.Root>"
+    },
+    {
+      "intent": "numeric-input",
+      "component": "NumberField",
+      "signals": ["number field", "numeric input", "quantity", "stepper", "increment", "counter", "amount"],
+      "reasoning": "NumberField provides a structured numeric input with increment/decrement buttons, keyboard step support, and min/max constraints.",
+      "composition": "<NumberField.Root defaultValue={1} min={0} max={99}>\n  <NumberField.Group>\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>"
+    },
+    {
+      "intent": "quantity-picker",
+      "component": "NumberField",
+      "signals": ["quantity selector", "item count", "cart quantity", "order amount", "how many"],
+      "reasoning": "NumberField is ideal for quantity picking with its compact design and constrained numeric input.",
+      "composition": "<NumberField.Root defaultValue={1} min={1} max={99} step={1}>\n  <NumberField.Group size=\"sm\">\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>"
+    },
+    {
+      "intent": "interactive-popup",
+      "component": "Popover",
+      "signals": ["popover", "tooltip with interaction", "info popup", "contextual help", "detail popup"],
+      "reasoning": "Popover provides a floating panel that can contain interactive content like forms, buttons, or rich text.",
+      "composition": "<Popover.Root>\n  <Popover.Trigger>Open</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        <Popover.Title>Info</Popover.Title>\n        <Popover.Description>Additional details here.</Popover.Description>\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
+    },
+    {
+      "intent": "contextual-actions",
+      "component": "Popover",
+      "signals": ["action popover", "quick actions", "inline actions", "context popup"],
+      "reasoning": "Popover can host small action panels or contextual controls near their trigger.",
+      "composition": "<Popover.Root>\n  <Popover.Trigger>Actions</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        <Popover.Close />\n        {/* action content */}\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
+    },
+    {
+      "intent": "link-preview",
+      "component": "PreviewCard",
+      "signals": ["preview card", "hover card", "link preview", "content preview"],
+      "reasoning": "PreviewCard shows a rich preview of content when hovering over a link or trigger.",
+      "composition": "<PreviewCard.Root>\n  <PreviewCard.Trigger href=\"#\">Link text</PreviewCard.Trigger>\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner>\n      <PreviewCard.Popup>\n        Preview content here\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>"
+    },
+    {
+      "intent": "user-preview",
+      "component": "PreviewCard",
+      "signals": ["user card", "profile preview", "member preview", "author card"],
+      "reasoning": "PreviewCard is ideal for showing a summary of a user profile when hovering over their name or avatar.",
+      "composition": "<PreviewCard.Root>\n  <PreviewCard.Trigger href=\"/user/123\">@username</PreviewCard.Trigger>\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner>\n      <PreviewCard.Popup>\n        <PreviewCard.Arrow />\n        {/* avatar, name, bio */}\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>"
+    },
+    {
+      "intent": "task-progress",
+      "component": "Progress",
+      "signals": ["progress bar", "loading indicator", "upload progress", "task progress", "completion"],
+      "reasoning": "Progress shows how far along a task is toward completion. Use for file uploads, form submissions, or any ongoing operation.",
+      "composition": "<Progress.Root value={75}>\n  <Progress.Label>Uploading...</Progress.Label>\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n  <Progress.Value />\n</Progress.Root>"
+    },
+    {
+      "intent": "indeterminate-loading",
+      "component": "Progress",
+      "signals": ["loading", "indeterminate", "processing", "please wait", "fetching"],
+      "reasoning": "Progress with null value shows an indeterminate animation for operations with unknown duration.",
+      "composition": "<Progress.Root value={null}>\n  <Progress.Label>Loading...</Progress.Label>\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n</Progress.Root>"
+    },
+    {
+      "intent": "single-select",
+      "component": "Radio",
+      "signals": ["radio", "radio group", "single select", "option picker", "exclusive choice", "one of many"],
+      "reasoning": "Radio is the standard pattern for mutually exclusive choices where all options should be visible.",
+      "composition": "<Radio.Group defaultValue=\"option1\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"option1\"><Radio.Indicator /></Radio.Root>\n    Option 1\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"option2\"><Radio.Indicator /></Radio.Root>\n    Option 2\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "preference-selection",
+      "component": "Radio",
+      "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
+      "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
+      "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
     }
   ],
   "antiPatterns": [
@@ -769,6 +839,96 @@
       "scenario": "Application menu bars (File, Edit, View)",
       "reasoning": "Use Menubar with Menu components. NavigationMenu is for site navigation, not application commands.",
       "alternative": "Menubar"
+    },
+    {
+      "component": "NumberField",
+      "scenario": "Free-form text input",
+      "reasoning": "Use Input for general text entry. NumberField is specifically for numeric values with step controls.",
+      "alternative": "Input"
+    },
+    {
+      "component": "NumberField",
+      "scenario": "Selecting a value within a continuous range",
+      "reasoning": "Use Slider for visual range selection. NumberField is better for precise numeric entry.",
+      "alternative": "Slider"
+    },
+    {
+      "component": "NumberField",
+      "scenario": "Phone numbers, credit cards, or formatted numeric strings",
+      "reasoning": "Use Input with appropriate pattern/mask. NumberField treats values as numbers, not formatted strings.",
+      "alternative": "Input"
+    },
+    {
+      "component": "Popover",
+      "scenario": "Simple tooltips with no interactivity",
+      "reasoning": "Use Tooltip for non-interactive hover text. Popover is for content that users interact with.",
+      "alternative": "Tooltip"
+    },
+    {
+      "component": "Popover",
+      "scenario": "Full forms or complex workflows",
+      "reasoning": "Use Dialog for modal workflows. Popover is for lightweight contextual content.",
+      "alternative": "Dialog"
+    },
+    {
+      "component": "Popover",
+      "scenario": "Navigation dropdown menus",
+      "reasoning": "Use NavigationMenu or Menu for structured navigation. Popover is for arbitrary content.",
+      "alternative": "NavigationMenu or Menu"
+    },
+    {
+      "component": "PreviewCard",
+      "scenario": "Interactive content that needs clicks",
+      "reasoning": "Use Popover for content with buttons, forms, or interactive elements. PreviewCard is for passive previews.",
+      "alternative": "Popover"
+    },
+    {
+      "component": "PreviewCard",
+      "scenario": "Navigation dropdown menus",
+      "reasoning": "Use NavigationMenu for structured navigation with links and sections.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "component": "PreviewCard",
+      "scenario": "Simple text tooltips",
+      "reasoning": "Use Tooltip for brief, non-interactive labels or descriptions.",
+      "alternative": "Tooltip"
+    },
+    {
+      "component": "Progress",
+      "scenario": "Showing a scalar measurement within a range",
+      "reasoning": "Use Meter for static values like disk usage or battery level. Progress is for ongoing operations.",
+      "alternative": "Meter"
+    },
+    {
+      "component": "Progress",
+      "scenario": "Spinner-style loading indicators",
+      "reasoning": "Use a spinner component for compact loading states. Progress is a horizontal bar.",
+      "alternative": "Spinner"
+    },
+    {
+      "component": "Progress",
+      "scenario": "Multi-step wizards or discrete steps",
+      "reasoning": "Use a stepper component for step-by-step progress. Progress shows continuous completion.",
+      "alternative": "Stepper"
+    },
+    {
+      "component": "Radio",
+      "scenario": "Multiple selections allowed",
+      "reasoning": "Use CheckboxGroup when users can select more than one option.",
+      "alternative": "CheckboxGroup"
+    },
+    {
+      "component": "Radio",
+      "scenario": "Long lists of options (>7 items)",
+      "reasoning": "Use Select or Combobox for long lists to save space and improve usability.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "component": "Radio",
+      "scenario": "Binary on/off toggle",
+      "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
+      "alternative": "Switch"
     }
   ]
 }

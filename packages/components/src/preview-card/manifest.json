@@ -1,0 +1,177 @@
+{
+  "name": "PreviewCard",
+  "description": "A hover-triggered card that shows a preview of linked content. Built on Base UI PreviewCard with StyleX styling.",
+  "category": "data-display",
+  "baseComponent": "@base-ui/react/preview-card",
+
+  "anatomy": "<PreviewCard.Root>\n  <PreviewCard.Trigger />\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner>\n      <PreviewCard.Popup>\n        <PreviewCard.Arrow />\n        {/* preview content */}\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "Manages hover/focus state and provides context to child parts.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "description": "Callback fired when open state changes."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "The initial uncontrolled open state."
+        },
+        "delay": {
+          "type": "number",
+          "default": 600,
+          "description": "Delay in ms before the preview card appears."
+        },
+        "closeDelay": {
+          "type": "number",
+          "default": 300,
+          "description": "Delay in ms before the preview card hides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "a",
+      "description": "The link or element that triggers the preview card on hover.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the preview card is open."
+      }
+    },
+    "Portal": {
+      "element": null,
+      "description": "Renders preview card content into a React portal.",
+      "props": {},
+      "dataAttributes": {}
+    },
+    "Positioner": {
+      "element": "div",
+      "description": "Positions the popup relative to the trigger.",
+      "props": {
+        "side": {
+          "type": "'top' | 'bottom' | 'left' | 'right'",
+          "default": "bottom",
+          "description": "Preferred side of the trigger."
+        },
+        "sideOffset": {
+          "type": "number",
+          "default": 8,
+          "description": "Offset from the trigger in pixels."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Popup": {
+      "element": "div",
+      "description": "The floating preview content container.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the preview card is open.",
+        "data-starting-style": "Present during open animation.",
+        "data-ending-style": "Present during close animation."
+      }
+    },
+    "Arrow": {
+      "element": "div",
+      "description": "An arrow pointing from the popup to the trigger.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Preview card popup fade/slide animation.",
+    "css": "@layer priority1 {\n  .basex-preview-card-popup {\n    opacity: 1;\n    transform: translateY(0);\n    transition:\n      opacity 200ms ease-out,\n      transform 200ms ease-out;\n  }\n  .basex-preview-card-popup[data-starting-style],\n  .basex-preview-card-popup[data-ending-style] {\n    opacity: 0;\n    transform: translateY(-4px);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorPrimary",
+    "colorSurfaceRaised",
+    "colorBorderMuted",
+    "colorText",
+    "fontFamilySans",
+    "fontSizeSm",
+    "lineHeightNormal",
+    "radiusLg",
+    "shadowLg",
+    "borderWidthDefault",
+    "space4"
+  ],
+
+  "intents": [
+    {
+      "intent": "link-preview",
+      "signals": ["preview card", "hover card", "link preview", "content preview"],
+      "reasoning": "PreviewCard shows a rich preview of content when hovering over a link or trigger.",
+      "composition": "<PreviewCard.Root>\n  <PreviewCard.Trigger href=\"#\">Link text</PreviewCard.Trigger>\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner>\n      <PreviewCard.Popup>\n        Preview content here\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>"
+    },
+    {
+      "intent": "user-preview",
+      "signals": ["user card", "profile preview", "member preview", "author card"],
+      "reasoning": "PreviewCard is ideal for showing a summary of a user profile when hovering over their name or avatar.",
+      "composition": "<PreviewCard.Root>\n  <PreviewCard.Trigger href=\"/user/123\">@username</PreviewCard.Trigger>\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner>\n      <PreviewCard.Popup>\n        <PreviewCard.Arrow />\n        {/* avatar, name, bio */}\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Interactive content that needs clicks",
+      "reasoning": "Use Popover for content with buttons, forms, or interactive elements. PreviewCard is for passive previews.",
+      "alternative": "Popover"
+    },
+    {
+      "scenario": "Navigation dropdown menus",
+      "reasoning": "Use NavigationMenu for structured navigation with links and sections.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "scenario": "Simple text tooltips",
+      "reasoning": "Use Tooltip for brief, non-interactive labels or descriptions.",
+      "alternative": "Tooltip"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic preview card on hover",
+      "code": "<PreviewCard.Root>\n  <PreviewCard.Trigger href=\"#\">Hover me</PreviewCard.Trigger>\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner>\n      <PreviewCard.Popup>\n        A simple preview of the linked content.\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>"
+    },
+    {
+      "name": "with-arrow",
+      "description": "Preview card with arrow",
+      "code": "<PreviewCard.Root>\n  <PreviewCard.Trigger href=\"#\">Link</PreviewCard.Trigger>\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner sideOffset={8}>\n      <PreviewCard.Popup>\n        <PreviewCard.Arrow />\n        Preview content with arrow.\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>"
+    },
+    {
+      "name": "rich-content",
+      "description": "Preview card with rich content",
+      "code": "<PreviewCard.Root>\n  <PreviewCard.Trigger href=\"#\">@johndoe</PreviewCard.Trigger>\n  <PreviewCard.Portal>\n    <PreviewCard.Positioner>\n      <PreviewCard.Popup>\n        <strong>John Doe</strong>\n        <p>Software engineer building great things.</p>\n      </PreviewCard.Popup>\n    </PreviewCard.Positioner>\n  </PreviewCard.Portal>\n</PreviewCard.Root>"
+    }
+  ]
+}

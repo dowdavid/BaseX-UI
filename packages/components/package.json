@@ -100,6 +100,26 @@
     "./navigation-menu": {
       "types": "./dist/navigation-menu/index.d.ts",
       "import": "./dist/navigation-menu/index.js"
+    },
+    "./number-field": {
+      "types": "./dist/number-field/index.d.ts",
+      "import": "./dist/number-field/index.js"
+    },
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.js"
+    },
+    "./preview-card": {
+      "types": "./dist/preview-card/index.d.ts",
+      "import": "./dist/preview-card/index.js"
+    },
+    "./progress": {
+      "types": "./dist/progress/index.d.ts",
+      "import": "./dist/progress/index.js"
+    },
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "import": "./dist/radio/index.js"
     }
   },
   "files": [

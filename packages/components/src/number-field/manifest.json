@@ -1,0 +1,191 @@
+{
+  "name": "NumberField",
+  "description": "A numeric input with increment and decrement buttons. Built on Base UI NumberField with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/number-field",
+
+  "anatomy": "<NumberField.Root>\n  <NumberField.Group>\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Container that provides number field state (value, min, max, step) to child parts.",
+      "props": {
+        "defaultValue": {
+          "type": "number",
+          "description": "The initial uncontrolled value."
+        },
+        "value": {
+          "type": "number",
+          "description": "The controlled value."
+        },
+        "onValueChange": {
+          "type": "(value: number | null, event?: Event) => void",
+          "description": "Callback fired when the value changes."
+        },
+        "min": {
+          "type": "number",
+          "description": "The minimum allowed value."
+        },
+        "max": {
+          "type": "number",
+          "description": "The maximum allowed value."
+        },
+        "step": {
+          "type": "number",
+          "default": 1,
+          "description": "The step increment."
+        },
+        "smallStep": {
+          "type": "number",
+          "description": "Step used when Shift is held."
+        },
+        "largeStep": {
+          "type": "number",
+          "description": "Step used when Page Up/Down is pressed."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the number field is disabled."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the number field is read-only."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the number field is disabled."
+      }
+    },
+    "Group": {
+      "element": "div",
+      "description": "Groups the input and buttons into a single bordered container.",
+      "props": {
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Height of the group (sm=32px, md=40px, lg=48px)."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Input": {
+      "element": "input",
+      "description": "The text input for entering numeric values.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Increment": {
+      "element": "button",
+      "description": "Button to increment the value by one step.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the value is at max."
+      }
+    },
+    "Decrement": {
+      "element": "button",
+      "description": "Button to decrement the value by one step.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the value is at min."
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorPrimary",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorBorder",
+    "colorBorderMuted",
+    "colorBackground",
+    "space1h",
+    "space3",
+    "fontFamilySans",
+    "fontSizeSm",
+    "radiusMd",
+    "borderWidthDefault",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "numeric-input",
+      "signals": ["number field", "numeric input", "quantity", "stepper", "increment", "counter", "amount"],
+      "reasoning": "NumberField provides a structured numeric input with increment/decrement buttons, keyboard step support, and min/max constraints.",
+      "composition": "<NumberField.Root defaultValue={1} min={0} max={99}>\n  <NumberField.Group>\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>"
+    },
+    {
+      "intent": "quantity-picker",
+      "signals": ["quantity selector", "item count", "cart quantity", "order amount", "how many"],
+      "reasoning": "NumberField is ideal for quantity picking with its compact design and constrained numeric input.",
+      "composition": "<NumberField.Root defaultValue={1} min={1} max={99} step={1}>\n  <NumberField.Group size=\"sm\">\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Free-form text input",
+      "reasoning": "Use Input for general text entry. NumberField is specifically for numeric values with step controls.",
+      "alternative": "Input"
+    },
+    {
+      "scenario": "Selecting a value within a continuous range",
+      "reasoning": "Use Slider for visual range selection. NumberField is better for precise numeric entry.",
+      "alternative": "Slider"
+    },
+    {
+      "scenario": "Phone numbers, credit cards, or formatted numeric strings",
+      "reasoning": "Use Input with appropriate pattern/mask. NumberField treats values as numbers, not formatted strings.",
+      "alternative": "Input"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic number field with default value",
+      "code": "<NumberField.Root defaultValue={5}>\n  <NumberField.Group>\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>"
+    },
+    {
+      "name": "constrained",
+      "description": "Number field with min, max, and step",
+      "code": "<NumberField.Root defaultValue={0} min={0} max={100} step={5}>\n  <NumberField.Group>\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>"
+    },
+    {
+      "name": "sizes",
+      "description": "Number field size variations",
+      "code": "<>\n  <NumberField.Root defaultValue={1}>\n    <NumberField.Group size=\"sm\">\n      <NumberField.Decrement />\n      <NumberField.Input />\n      <NumberField.Increment />\n    </NumberField.Group>\n  </NumberField.Root>\n  <NumberField.Root defaultValue={1}>\n    <NumberField.Group size=\"lg\">\n      <NumberField.Decrement />\n      <NumberField.Input />\n      <NumberField.Increment />\n    </NumberField.Group>\n  </NumberField.Root>\n</>"
+    }
+  ]
+}

@@ -313,6 +313,63 @@
   .basex-navigation-menu-backdrop[data-ending-style] {
     opacity: 0;
   }
+
+  /* Popover popup scale/fade animation — Enter: 150ms ease-out */
+  .basex-popover-popup {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
+  }
+  .basex-popover-popup[data-starting-style],
+  .basex-popover-popup[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  /* PreviewCard popup fade/slide animation — Enter: 200ms ease-out */
+  .basex-preview-card-popup {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 200ms ease-out,
+      transform 200ms ease-out;
+  }
+  .basex-preview-card-popup[data-starting-style],
+  .basex-preview-card-popup[data-ending-style] {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  /* Progress indeterminate animation */
+  .basex-progress-indicator[data-indeterminate] {
+    width: 40% !important;
+    animation: basex-progress-indeterminate 1.5s ease-in-out infinite;
+  }
+  @keyframes basex-progress-indeterminate {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
+  }
+
+  /* Radio indicator enter/exit animation — State: 100ms ease-out */
+  .basex-radio-indicator {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 100ms ease-out,
+      transform 100ms ease-out;
+  }
+  .basex-radio-indicator[data-unchecked] {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  /* Radio root checked state */
+  .basex-radio-root[data-checked] {
+    border-color: var(--colorPrimary);
+    background-color: var(--colorPrimary);
+  }
 }
 
 body {

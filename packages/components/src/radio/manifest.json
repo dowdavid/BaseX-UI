@@ -1,0 +1,153 @@
+{
+  "name": "Radio",
+  "description": "A radio button group for single-select choices. Built on Base UI Radio and RadioGroup with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/radio",
+
+  "anatomy": "<Radio.Group defaultValue=\"a\">\n  <Radio.Root value=\"a\">\n    <Radio.Indicator />\n  </Radio.Root>\n  <Radio.Root value=\"b\">\n    <Radio.Indicator />\n  </Radio.Root>\n</Radio.Group>",
+
+  "parts": {
+    "Group": {
+      "element": "div",
+      "description": "Container that manages which radio is selected.",
+      "props": {
+        "defaultValue": {
+          "type": "string",
+          "description": "The initial uncontrolled selected value."
+        },
+        "value": {
+          "type": "string",
+          "description": "The controlled selected value."
+        },
+        "onValueChange": {
+          "type": "(value: string, event: React.ChangeEvent) => void",
+          "description": "Callback fired when the selected value changes."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the entire group is disabled."
+        },
+        "orientation": {
+          "type": "'vertical' | 'horizontal'",
+          "default": "vertical",
+          "description": "Layout direction of the radio items."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Root": {
+      "element": "button",
+      "description": "An individual radio button.",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "The value of this radio option."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this radio is disabled."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-checked": "Present when the radio is selected.",
+        "data-unchecked": "Present when the radio is not selected.",
+        "data-disabled": "Present when the radio is disabled."
+      }
+    },
+    "Indicator": {
+      "element": "div",
+      "description": "The visual dot that appears when the radio is selected.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-checked": "Present when the parent radio is selected.",
+        "data-unchecked": "Present when the parent radio is not selected."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Radio root checked styles and indicator enter/exit animation.",
+    "css": "@layer priority1 {\n  .basex-radio-root[data-checked] {\n    border-color: var(--colorPrimary);\n    background-color: var(--colorPrimary);\n  }\n  .basex-radio-indicator {\n    opacity: 1;\n    transform: scale(1);\n    transition:\n      opacity 100ms ease-out,\n      transform 100ms ease-out;\n  }\n  .basex-radio-indicator[data-unchecked] {\n    opacity: 0;\n    transform: scale(0.5);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorPrimary",
+    "colorPrimaryContrast",
+    "colorBorder",
+    "colorBorderMuted",
+    "colorBackground",
+    "colorMuted",
+    "space2",
+    "space4",
+    "radiusFull",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "single-select",
+      "signals": ["radio", "radio group", "single select", "option picker", "exclusive choice", "one of many"],
+      "reasoning": "Radio is the standard pattern for mutually exclusive choices where all options should be visible.",
+      "composition": "<Radio.Group defaultValue=\"option1\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"option1\"><Radio.Indicator /></Radio.Root>\n    Option 1\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"option2\"><Radio.Indicator /></Radio.Root>\n    Option 2\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "preference-selection",
+      "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
+      "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
+      "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Multiple selections allowed",
+      "reasoning": "Use CheckboxGroup when users can select more than one option.",
+      "alternative": "CheckboxGroup"
+    },
+    {
+      "scenario": "Long lists of options (>7 items)",
+      "reasoning": "Use Select or Combobox for long lists to save space and improve usability.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "scenario": "Binary on/off toggle",
+      "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
+      "alternative": "Switch"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic radio group",
+      "code": "<Radio.Group defaultValue=\"a\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"a\"><Radio.Indicator /></Radio.Root>\n    Option A\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"b\"><Radio.Indicator /></Radio.Root>\n    Option B\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"c\"><Radio.Indicator /></Radio.Root>\n    Option C\n  </label>\n</Radio.Group>"
+    },
+    {
+      "name": "horizontal",
+      "description": "Horizontal radio group",
+      "code": "<Radio.Group defaultValue=\"left\" orientation=\"horizontal\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"left\"><Radio.Indicator /></Radio.Root>\n    Left\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"center\"><Radio.Indicator /></Radio.Root>\n    Center\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"right\"><Radio.Indicator /></Radio.Root>\n    Right\n  </label>\n</Radio.Group>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled radio group",
+      "code": "<Radio.Group defaultValue=\"a\" disabled>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"a\"><Radio.Indicator /></Radio.Root>\n    Option A\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"b\"><Radio.Indicator /></Radio.Root>\n    Option B\n  </label>\n</Radio.Group>"
+    }
+  ]
+}
