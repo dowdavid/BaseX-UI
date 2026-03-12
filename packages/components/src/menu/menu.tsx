@@ -482,7 +482,7 @@ const SubmenuTrigger = forwardRef<HTMLDivElement, MenuSubmenuTriggerProps>(
       ref={ref}
       {...props}
       className={(state) =>
-        stylex.props(styles.submenuTrigger, state.disabled && styles.itemDisabled, sx).className ??
+        stylex.props(styles.submenuTrigger, focusRing, state.disabled && styles.itemDisabled, sx).className ??
         ''
       }
     />

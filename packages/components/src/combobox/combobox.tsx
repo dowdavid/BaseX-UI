@@ -84,7 +84,7 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     pointerEvents: 'none',
   },
 
@@ -98,7 +98,7 @@ const styles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: tokens.space1,
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     backgroundColor: {
       default: 'transparent',
       ':hover': tokens.colorMuted,
@@ -118,6 +118,7 @@ const styles = stylex.create({
 
   // --- Multi-select wrapper (bordered container with flex-wrap pills) ---
   multiWrapper: {
+    position: 'relative',
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
@@ -144,18 +145,21 @@ const styles = stylex.create({
   multiWrapperSizeSm: {
     minHeight: '32px',
     padding: '2px',
+    paddingInlineEnd: '26px',
     gap: '3px',
     borderRadius: tokens.radiusMd,
   },
   multiWrapperSizeMd: {
     minHeight: '36px',
     padding: '3px',
+    paddingInlineEnd: '30px',
     gap: '4px',
     borderRadius: tokens.radiusMd,
   },
   multiWrapperSizeLg: {
     minHeight: '40px',
     padding: '4px',
+    paddingInlineEnd: '34px',
     gap: '4px',
     borderRadius: tokens.radiusMd,
   },
@@ -236,7 +240,7 @@ const styles = stylex.create({
     justifyContent: 'center',
     flexShrink: 0,
     cursor: 'pointer',
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     borderRadius: tokens.radiusSm,
     borderWidth: 0,
     padding: 0,
@@ -619,6 +623,7 @@ const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(({ sx, ...props }
     const pillKey = `pillSize${cap}` as const;
     const pillRemKey = `pillRemoveSize${cap}` as const;
     const pillIconSz = pillRemoveIconSize[size];
+    const multiEndKey = `endSize${cap}` as const;
 
     return (
       <div ref={anchorRef} {...stylex.props(styles.multiWrapper, styles[wrapperKey], sx)}>
@@ -636,9 +641,9 @@ const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(({ sx, ...props }
                 e.stopPropagation();
                 removeValue(item);
               }}
-              {...stylex.props(styles.pillRemove, styles[pillRemKey])}
+              {...stylex.props(styles.pillRemove, styles[pillRemKey], focusRing)}
             >
-              <X size={pillIconSz} />
+              <X size={pillIconSz} aria-hidden="true" />
             </button>
           </span>
         ))}
@@ -651,6 +656,11 @@ const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(({ sx, ...props }
               .className ?? ''
           }
         />
+        {selectedValues.length === 0 && (
+          <span {...stylex.props(styles.endIcon, styles[multiEndKey])}>
+            <ChevronDown size={chevronIconSize[size]} />
+          </span>
+        )}
       </div>
     );
   }
@@ -677,7 +687,7 @@ const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(({ sx, ...props }
         }
       />
       {hasValue ? (
-        <BaseCombobox.Clear {...stylex.props(styles.clearButton, styles[endKey])}>
+        <BaseCombobox.Clear {...stylex.props(styles.clearButton, styles[endKey], focusRing)}>
           <X size={clearSz} />
         </BaseCombobox.Clear>
       ) : (

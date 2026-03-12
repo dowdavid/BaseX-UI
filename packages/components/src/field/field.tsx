@@ -19,7 +19,7 @@ const styles = stylex.create({
     fontWeight: tokens.fontWeightMedium,
     fontFamily: tokens.fontFamilySans,
     color: tokens.colorText,
-    lineHeight: tokens.lineHeightNormal,
+    lineHeight: tokens.lineHeightTight,
   },
 
   description: {
@@ -60,9 +60,9 @@ const styles = stylex.create({
   },
 
   controlDisabled: {
-    opacity: 0.64,
-    pointerEvents: 'none',
-    cursor: 'default',
+    color: tokens.colorTextMuted,
+    borderColor: tokens.colorBorderMuted,
+    cursor: 'not-allowed',
   },
 
   // --- Size axis ---

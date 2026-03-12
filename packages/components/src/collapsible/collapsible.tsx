@@ -34,7 +34,7 @@ const styles = stylex.create({
     flexShrink: 0,
     width: '16px',
     height: '16px',
-    opacity: 0.8,
+    color: tokens.colorIcon,
     transform: 'rotate(var(--collapsible-chevron-rotation, 0deg))',
     transitionProperty: 'transform',
     transitionDuration: tokens.motionDurationNormal,

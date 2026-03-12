@@ -1,6 +1,7 @@
 import { NumberField as BaseNumberField } from '@base-ui/react/number-field';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { focusRing } from '@basex-ui/styles';
 import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -37,8 +38,6 @@ const styles = stylex.create({
   },
 
   groupDisabled: {
-    opacity: 0.5,
-    backgroundColor: tokens.colorMuted,
     borderColor: tokens.colorBorderMuted,
     cursor: 'not-allowed',
   },
@@ -70,14 +69,15 @@ const styles = stylex.create({
     justifyContent: 'center',
     border: 'none',
     backgroundColor: {
-      default: 'transparent',
-      ':hover': tokens.colorMuted,
+      default: tokens.colorMuted,
+      ':hover': tokens.colorBorderMuted,
+      ':active': tokens.colorBorder,
     },
-    color: tokens.colorText,
+    color: tokens.colorIcon,
     cursor: 'pointer',
     flexShrink: 0,
     width: '32px',
-    transitionProperty: 'background-color',
+    transitionProperty: 'background-color, color',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
   },
@@ -118,6 +118,7 @@ export interface NumberFieldGroupProps extends Omit<
   'className'
 > {
   size?: NumberFieldSize;
+  disabled?: boolean;
   sx?: StyleXStyles;
 }
 
@@ -150,7 +151,7 @@ const Root = forwardRef<HTMLDivElement, NumberFieldRootProps>(({ sx, ...props },
 Root.displayName = 'NumberField.Root';
 
 const Group = forwardRef<HTMLDivElement, NumberFieldGroupProps>(
-  ({ size = 'md', sx, ...props }, ref) => {
+  ({ size = 'md', disabled, sx, ...props }, ref) => {
     const sizeStyle =
       size === 'sm' ? styles.groupSizeSm : size === 'lg' ? styles.groupSizeLg : styles.groupSizeMd;
     return (
@@ -158,7 +159,7 @@ const Group = forwardRef<HTMLDivElement, NumberFieldGroupProps>(
         ref={ref}
         {...props}
         className={
-          `basex-number-field-group ${stylex.props(styles.group, sizeStyle, sx).className ?? ''}`
+          `basex-number-field-group ${stylex.props(styles.group, sizeStyle, disabled && styles.groupDisabled, sx).className ?? ''}`
         }
       />
     );
@@ -180,10 +181,10 @@ const Decrement = forwardRef<HTMLButtonElement, NumberFieldDecrementProps>(
     <BaseNumberField.Decrement
       ref={ref}
       {...props}
-      className={stylex.props(styles.button, styles.decrement, sx).className ?? ''}
+      className={stylex.props(styles.button, styles.decrement, focusRing, sx).className ?? ''}
     >
       {children ?? (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M3 7h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       )}
@@ -197,10 +198,10 @@ const Increment = forwardRef<HTMLButtonElement, NumberFieldIncrementProps>(
     <BaseNumberField.Increment
       ref={ref}
       {...props}
-      className={stylex.props(styles.button, styles.increment, sx).className ?? ''}
+      className={stylex.props(styles.button, styles.increment, focusRing, sx).className ?? ''}
     >
       {children ?? (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M7 3v8M3 7h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       )}

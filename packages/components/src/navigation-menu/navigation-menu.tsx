@@ -135,7 +135,7 @@ const styles = stylex.create({
   },
 
   content: {
-    padding: tokens.space2,
+    padding: tokens.space3,
     maxHeight: 'calc(var(--available-height, 100vh) - 20px)',
     overflowY: 'auto',
   },

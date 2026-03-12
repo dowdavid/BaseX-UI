@@ -17,7 +17,10 @@ The template files live in `packages/components/src/_template/`.
   - Stable CSS class `basex-{name}-{part}` on parts targeted by global CSS
   - `sx` prop on **every** part for consumer overrides
   - `forwardRef` on every part
-  - Disabled state style: `opacity: 0.5`, `backgroundColor: tokens.colorMuted`, `borderColor: tokens.colorBorderMuted`, `color: tokens.colorTextMuted`, `cursor: 'not-allowed'`
+  - Disabled state style: `color: tokens.colorTextMuted`, `borderColor: tokens.colorBorderMuted`, `cursor: 'not-allowed'` (no opacity — use muted tokens for contrast-safe disabled states)
+  - `focusRing` from `@basex-ui/styles` on every interactive element (buttons, inputs, triggers)
+  - `aria-label` on icon-only buttons (e.g. close buttons: `aria-label="Close"`)
+  - `aria-hidden="true"` on decorative SVGs/icons
 - [ ] `index.ts` — Barrel export of component + all prop types
 
 ## 2. Manifest (Agent Intelligence)

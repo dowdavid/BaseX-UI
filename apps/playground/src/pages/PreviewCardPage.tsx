@@ -7,7 +7,7 @@ const pageStyles = stylex.create({
   cardContent: {
     display: 'flex',
     flexDirection: 'column',
-    gap: tokens.space2,
+    gap: '2px',
   },
   cardTitle: {
     fontSize: tokens.fontSizeMd,
@@ -34,7 +34,7 @@ const pageStyles = stylex.create({
   },
   row: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'start',
     gap: tokens.space3,
   },
 });

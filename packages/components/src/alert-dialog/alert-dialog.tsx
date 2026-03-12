@@ -29,7 +29,7 @@ const styles = stylex.create({
     boxShadow: tokens.shadowLg,
     maxWidth: '28rem',
     width: '100%',
-    padding: tokens.space6,
+    padding: tokens.space4,
   },
 
   title: {
@@ -52,7 +52,13 @@ const styles = stylex.create({
     display: 'flex',
     justifyContent: 'flex-end',
     gap: tokens.space3,
-    marginTop: tokens.space6,
+    marginTop: tokens.space4,
+    marginInline: `calc(-1 * ${tokens.space4})`,
+    paddingTop: tokens.space3,
+    paddingInline: tokens.space4,
+    borderTopWidth: '1px',
+    borderTopStyle: 'solid',
+    borderTopColor: `color-mix(in srgb, ${tokens.colorBorder} 50%, transparent)`,
   },
 });
 

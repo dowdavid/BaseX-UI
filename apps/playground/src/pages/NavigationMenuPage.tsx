@@ -5,6 +5,8 @@ import { NavigationMenu } from '@basex-ui/components';
 import { ChevronDown } from 'lucide-react';
 import { Preview } from '../components/Preview';
 
+const MOBILE = '@media (max-width: 768px)' as const;
+
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(
     typeof window !== 'undefined' ? window.innerWidth <= breakpoint : false,
@@ -26,7 +28,7 @@ const pageStyles = stylex.create({
     gap: tokens.space3,
     width: {
       default: '340px',
-      '@media (max-width: 768px)': 'calc(100vw - 40px)',
+      [MOBILE]: 'calc(100vw - 40px)',
     },
   },
   contentLink: {
@@ -55,7 +57,7 @@ const pageStyles = stylex.create({
     flexDirection: 'column',
     width: {
       default: '280px',
-      '@media (max-width: 768px)': 'calc(100vw - 40px)',
+      [MOBILE]: 'calc(100vw - 40px)',
     },
   },
   contentListLink: {

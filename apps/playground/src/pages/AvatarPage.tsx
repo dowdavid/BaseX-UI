@@ -1,4 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
+import { tokens } from '@basex-ui/tokens';
 import { Avatar } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
 
@@ -24,7 +25,7 @@ const overrides = stylex.create({
   row: {
     display: 'flex',
     alignItems: 'center',
-    gap: '12px',
+    gap: tokens.space3,
   },
 });
 

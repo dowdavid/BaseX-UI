@@ -14,12 +14,24 @@
         "sx": {
           "type": "StyleXStyles",
           "description": "StyleX styles for consumer overrides."
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Disables the component. Uses muted color tokens (no opacity)."
         }
       },
       "dataAttributes": {
         "data-disabled": "Present when the component is disabled."
-      }
+      },
+      "focusRing": "Applied via focusRing from @basex-ui/styles. Renders 2px solid outline on :focus-visible."
     }
+  },
+
+  "conventions": {
+    "focusRing": "Every interactive element (button, input, trigger) must apply focusRing from @basex-ui/styles.",
+    "disabledState": "Use muted color tokens (colorTextMuted, colorBorderMuted) instead of opacity for contrast-safe disabled states.",
+    "ariaLabels": "Icon-only buttons must have aria-label (e.g. aria-label=\"Close\" on close buttons).",
+    "ariaHidden": "Decorative SVGs/icons must have aria-hidden=\"true\"."
   },
 
   "cssRequirements": null,

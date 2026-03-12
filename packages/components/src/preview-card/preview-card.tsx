@@ -22,7 +22,7 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorderMuted,
     borderRadius: tokens.radiusLg,
-    padding: tokens.space4,
+    padding: tokens.space3,
     boxShadow: tokens.shadowLg,
     fontFamily: tokens.fontFamilySans,
     fontSize: tokens.fontSizeSm,

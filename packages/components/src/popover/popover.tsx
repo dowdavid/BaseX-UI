@@ -1,6 +1,7 @@
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { focusRing } from '@basex-ui/styles';
 import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -12,7 +13,7 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorderMuted,
     borderRadius: tokens.radiusLg,
-    padding: tokens.space4,
+    padding: tokens.space3,
     boxShadow: tokens.shadowLg,
     fontFamily: tokens.fontFamilySans,
     fontSize: tokens.fontSizeSm,
@@ -63,15 +64,15 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '24px',
-    height: '24px',
+    width: '2rem',
+    height: '2rem',
     border: 'none',
     backgroundColor: {
       default: 'transparent',
       ':hover': tokens.colorMuted,
     },
     borderRadius: tokens.radiusSm,
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     cursor: 'pointer',
     transitionProperty: 'background-color',
     transitionDuration: tokens.motionDurationFast,
@@ -193,11 +194,12 @@ const Close = forwardRef<HTMLButtonElement, PopoverCloseProps>(
   ({ sx, children, ...props }, ref) => (
     <BasePopover.Close
       ref={ref}
+      aria-label="Close"
       {...props}
-      className={stylex.props(styles.close, sx).className ?? ''}
+      className={stylex.props(styles.close, focusRing, sx).className ?? ''}
     >
       {children ?? (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       )}

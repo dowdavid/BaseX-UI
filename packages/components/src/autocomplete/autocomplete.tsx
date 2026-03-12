@@ -74,7 +74,7 @@ const styles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: tokens.space1,
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     backgroundColor: {
       default: 'transparent',
       ':hover': tokens.colorMuted,
@@ -112,7 +112,7 @@ const styles = stylex.create({
     justifyContent: 'flex-end',
     paddingInlineEnd: tokens.space1h,
     pointerEvents: 'none',
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
   },
   startAddonSizeSm: {
     width: tokens.space8,
@@ -351,7 +351,7 @@ const Input = forwardRef<HTMLInputElement, AutocompleteInputProps>(
             ).className ?? ''
           }
         />
-        <BaseAutocomplete.Clear {...stylex.props(styles.clearButton, styles[clearKey])}>
+        <BaseAutocomplete.Clear {...stylex.props(styles.clearButton, styles[clearKey], focusRing)}>
           <X size={iconSize} />
         </BaseAutocomplete.Clear>
       </div>
