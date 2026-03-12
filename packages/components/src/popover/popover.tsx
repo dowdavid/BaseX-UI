@@ -140,16 +140,27 @@ const Root: React.FC<PopoverRootProps> = (props) => <BasePopover.Root {...props}
 Root.displayName = 'Popover.Root';
 
 const Trigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(({ sx, ...props }, ref) => (
-  <BasePopover.Trigger ref={ref} {...props} className={sx ? (stylex.props(sx).className ?? '') : ''} />
+  <BasePopover.Trigger
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : ''}
+  />
 ));
 Trigger.displayName = 'Popover.Trigger';
 
 const Portal: React.FC<PopoverPortalProps> = (props) => <BasePopover.Portal {...props} />;
 Portal.displayName = 'Popover.Portal';
 
-const Positioner = forwardRef<HTMLDivElement, PopoverPositionerProps>(({ sideOffset = 2, sx, ...props }, ref) => (
-  <BasePopover.Positioner ref={ref} sideOffset={sideOffset} {...props} className={sx ? (stylex.props(sx).className ?? '') : ''} />
-));
+const Positioner = forwardRef<HTMLDivElement, PopoverPositionerProps>(
+  ({ sideOffset = 2, sx, ...props }, ref) => (
+    <BasePopover.Positioner
+      ref={ref}
+      sideOffset={sideOffset}
+      {...props}
+      className={sx ? (stylex.props(sx).className ?? '') : ''}
+    />
+  ),
+);
 Positioner.displayName = 'Popover.Positioner';
 
 const Popup = forwardRef<HTMLDivElement, PopoverPopupProps>(({ sx, ...props }, ref) => (
@@ -200,7 +211,12 @@ const Close = forwardRef<HTMLButtonElement, PopoverCloseProps>(
     >
       {children ?? (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <path
+            d="M3.5 3.5l7 7M10.5 3.5l-7 7"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
         </svg>
       )}
     </BasePopover.Close>
@@ -209,4 +225,14 @@ const Close = forwardRef<HTMLButtonElement, PopoverCloseProps>(
 Close.displayName = 'Popover.Close';
 
 // --- Public API ---
-export const Popover = { Root, Trigger, Portal, Positioner, Popup, Arrow, Title, Description, Close };
+export const Popover = {
+  Root,
+  Trigger,
+  Portal,
+  Positioner,
+  Popup,
+  Arrow,
+  Title,
+  Description,
+  Close,
+};

@@ -47,9 +47,7 @@ export function PreviewCardPage() {
           <PreviewCard.Trigger href="#">Hover for preview</PreviewCard.Trigger>
           <PreviewCard.Portal>
             <PreviewCard.Positioner>
-              <PreviewCard.Popup>
-                A simple preview of the linked content.
-              </PreviewCard.Popup>
+              <PreviewCard.Popup>A simple preview of the linked content.</PreviewCard.Popup>
             </PreviewCard.Positioner>
           </PreviewCard.Portal>
         </PreviewCard.Root>

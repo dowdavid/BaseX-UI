@@ -89,11 +89,8 @@ const Group = forwardRef<HTMLDivElement, RadioGroupProps>(
       ref={ref}
       {...props}
       className={
-        stylex.props(
-          styles.group,
-          orientation === 'horizontal' && styles.groupHorizontal,
-          sx,
-        ).className ?? ''
+        stylex.props(styles.group, orientation === 'horizontal' && styles.groupHorizontal, sx)
+          .className ?? ''
       }
     />
   ),
@@ -105,13 +102,15 @@ const Root = forwardRef<HTMLButtonElement, RadioRootProps>(({ sx, ...props }, re
     ref={ref}
     {...props}
     className={(state) =>
-      `basex-radio-root ${stylex.props(
-        styles.root,
-        state.checked && styles.rootChecked,
-        state.disabled && styles.rootDisabled,
-        focusRing,
-        sx,
-      ).className ?? ''}`
+      `basex-radio-root ${
+        stylex.props(
+          styles.root,
+          state.checked && styles.rootChecked,
+          state.disabled && styles.rootDisabled,
+          focusRing,
+          sx,
+        ).className ?? ''
+      }`
     }
   />
 ));
@@ -122,9 +121,7 @@ const Indicator = forwardRef<HTMLDivElement, RadioIndicatorProps>(({ sx, ...prop
     ref={ref}
     keepMounted
     {...props}
-    className={() =>
-      `basex-radio-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`
-    }
+    className={() => `basex-radio-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`}
   />
 ));
 Indicator.displayName = 'Radio.Indicator';

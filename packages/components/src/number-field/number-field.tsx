@@ -146,7 +146,11 @@ export interface NumberFieldDecrementProps extends Omit<
 // --- Components ---
 
 const Root = forwardRef<HTMLDivElement, NumberFieldRootProps>(({ sx, ...props }, ref) => (
-  <BaseNumberField.Root ref={ref} {...props} className={stylex.props(styles.root, sx).className ?? ''} />
+  <BaseNumberField.Root
+    ref={ref}
+    {...props}
+    className={stylex.props(styles.root, sx).className ?? ''}
+  />
 ));
 Root.displayName = 'NumberField.Root';
 
@@ -158,9 +162,7 @@ const Group = forwardRef<HTMLDivElement, NumberFieldGroupProps>(
       <BaseNumberField.Group
         ref={ref}
         {...props}
-        className={
-          `basex-number-field-group ${stylex.props(styles.group, sizeStyle, disabled && styles.groupDisabled, sx).className ?? ''}`
-        }
+        className={`basex-number-field-group ${stylex.props(styles.group, sizeStyle, disabled && styles.groupDisabled, sx).className ?? ''}`}
       />
     );
   },

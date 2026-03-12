@@ -11,9 +11,7 @@ export function PopoverPage() {
           </Popover.Trigger>
           <Popover.Portal>
             <Popover.Positioner>
-              <Popover.Popup>
-                This is a simple popover with some helpful content.
-              </Popover.Popup>
+              <Popover.Popup>This is a simple popover with some helpful content.</Popover.Popup>
             </Popover.Positioner>
           </Popover.Portal>
         </Popover.Root>
@@ -21,9 +19,7 @@ export function PopoverPage() {
 
       <Preview title="With title & description" description="Popover with structured content.">
         <Popover.Root>
-          <Popover.Trigger render={<Button variant="outline" size="sm" />}>
-            Details
-          </Popover.Trigger>
+          <Popover.Trigger render={<Button variant="outline" size="sm" />}>Details</Popover.Trigger>
           <Popover.Portal>
             <Popover.Positioner>
               <Popover.Popup>

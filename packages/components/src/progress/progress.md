@@ -93,8 +93,12 @@ A progress bar showing determinate or indeterminate task completion. Built on [B
     animation: basex-progress-indeterminate 1.5s ease-in-out infinite;
   }
   @keyframes basex-progress-indeterminate {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(250%); }
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(250%);
+    }
   }
 }
 ```
@@ -103,20 +107,20 @@ A progress bar showing determinate or indeterminate task completion. Built on [B
 
 ### Progress.Root
 
-| Prop     | Type                       | Default | Description                                      |
-| -------- | -------------------------- | ------- | ------------------------------------------------ |
+| Prop     | Type                       | Default | Description                                          |
+| -------- | -------------------------- | ------- | ---------------------------------------------------- |
 | `value`  | `number \| null`           | --      | **Required.** Current value. `null` = indeterminate. |
-| `min`    | `number`                   | `0`     | The minimum value.                               |
-| `max`    | `number`                   | `100`   | The maximum value.                               |
-| `format` | `Intl.NumberFormatOptions` | --      | Formatting options for the value display.        |
-| `locale` | `string`                   | --      | Locale for number formatting.                    |
-| `sx`     | `StyleXStyles`             | --      | StyleX styles for consumer overrides.            |
+| `min`    | `number`                   | `0`     | The minimum value.                                   |
+| `max`    | `number`                   | `100`   | The maximum value.                                   |
+| `format` | `Intl.NumberFormatOptions` | --      | Formatting options for the value display.            |
+| `locale` | `string`                   | --      | Locale for number formatting.                        |
+| `sx`     | `StyleXStyles`             | --      | StyleX styles for consumer overrides.                |
 
 #### Data attributes
 
-| Attribute            | Description                     |
-| -------------------- | ------------------------------- |
-| `data-indeterminate` | Present when value is null.     |
+| Attribute            | Description                 |
+| -------------------- | --------------------------- |
+| `data-indeterminate` | Present when value is null. |
 
 ### Progress.Label
 
@@ -126,10 +130,10 @@ A progress bar showing determinate or indeterminate task completion. Built on [B
 
 ### Progress.Track
 
-| Prop   | Type                    | Default | Description                                    |
-| ------ | ----------------------- | ------- | ---------------------------------------------- |
+| Prop   | Type                   | Default | Description                                    |
+| ------ | ---------------------- | ------- | ---------------------------------------------- |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'`  | Height of the track (sm=4px, md=8px, lg=12px). |
-| `sx`   | `StyleXStyles`          | --      | StyleX styles for consumer overrides.          |
+| `sx`   | `StyleXStyles`         | --      | StyleX styles for consumer overrides.          |
 
 ### Progress.Indicator
 
@@ -140,9 +144,9 @@ A progress bar showing determinate or indeterminate task completion. Built on [B
 
 #### Data attributes
 
-| Attribute            | Description                     |
-| -------------------- | ------------------------------- |
-| `data-indeterminate` | Present when value is null.     |
+| Attribute            | Description                 |
+| -------------------- | --------------------------- |
+| `data-indeterminate` | Present when value is null. |
 
 ### Progress.Value
 

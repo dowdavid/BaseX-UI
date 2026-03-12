@@ -348,8 +348,12 @@
     animation: basex-progress-indeterminate 1.5s ease-in-out infinite;
   }
   @keyframes basex-progress-indeterminate {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(250%); }
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(250%);
+    }
   }
 
   /* Radio indicator enter/exit animation — State: 100ms ease-out */
