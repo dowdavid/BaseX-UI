@@ -5,6 +5,7 @@ vi.mock('@stylexjs/stylex', () => {
     create: (s: Record<string, unknown>) => s,
     props: () => ({ className: '' }),
     defineVars: (v: Record<string, unknown>) => v,
+    createTheme: () => ({}),
   };
   return { default: m, ...m };
 });
