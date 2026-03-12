@@ -81,7 +81,7 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface PopoverRootProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Root> {}
+export type PopoverRootProps = React.ComponentPropsWithoutRef<typeof BasePopover.Root>;
 
 export interface PopoverTriggerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BasePopover.Trigger>,
@@ -90,7 +90,7 @@ export interface PopoverTriggerProps extends Omit<
   sx?: StyleXStyles;
 }
 
-export interface PopoverPortalProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Portal> {}
+export type PopoverPortalProps = React.ComponentPropsWithoutRef<typeof BasePopover.Portal>;
 
 export interface PopoverPositionerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BasePopover.Positioner>,
