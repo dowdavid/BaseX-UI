@@ -5,12 +5,12 @@ import { Preview } from '../components/Preview';
 
 const pageStyles = stylex.create({
   handle: {
-    width: '3rem',
+    width: tokens.space12,
     height: '0.25rem',
     margin: '0 auto',
     marginTop: tokens.space2,
     marginBottom: tokens.space6,
-    borderRadius: '9999px',
+    borderRadius: tokens.radiusFull,
     backgroundColor: tokens.colorBorderMuted,
   },
   bottomHeader: {
@@ -35,7 +35,7 @@ export function DrawerPage() {
         description="A right-anchored drawer with a title and close button."
       >
         <Drawer.Root swipeDirection="right">
-          <Drawer.Trigger render={<Button>Side drawer</Button>} />
+          <Drawer.Trigger render={<Button variant="outline">Side drawer</Button>} />
           <Drawer.Portal>
             <Drawer.Backdrop />
             <Drawer.Popup showCloseButton={false}>
@@ -55,7 +55,7 @@ export function DrawerPage() {
         description="A full-width drawer that slides up from the bottom edge."
       >
         <Drawer.Root>
-          <Drawer.Trigger render={<Button>Bottom drawer</Button>} />
+          <Drawer.Trigger render={<Button variant="outline">Bottom drawer</Button>} />
           <Drawer.Portal>
             <Drawer.Backdrop />
             <Drawer.Popup showCloseButton={false}>

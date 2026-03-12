@@ -34,9 +34,7 @@ A hover-triggered card that shows a preview of linked content. Built on [Base UI
   <PreviewCard.Trigger href="#">Hover me</PreviewCard.Trigger>
   <PreviewCard.Portal>
     <PreviewCard.Positioner>
-      <PreviewCard.Popup>
-        A simple preview of the linked content.
-      </PreviewCard.Popup>
+      <PreviewCard.Popup>A simple preview of the linked content.</PreviewCard.Popup>
     </PreviewCard.Positioner>
   </PreviewCard.Portal>
 </PreviewCard.Root>
@@ -81,13 +79,13 @@ A hover-triggered card that shows a preview of linked content. Built on [Base UI
 
 ### PreviewCard.Root
 
-| Prop           | Type                       | Default | Description                         |
-| -------------- | -------------------------- | ------- | ----------------------------------- |
-| `open`         | `boolean`                  | --      | Controlled open state.              |
-| `onOpenChange` | `(open: boolean) => void`  | --      | Callback when open state changes.   |
-| `defaultOpen`  | `boolean`                  | `false` | Initial uncontrolled open state.    |
-| `delay`        | `number`                   | `600`   | Delay (ms) before card appears.     |
-| `closeDelay`   | `number`                   | `300`   | Delay (ms) before card hides.       |
+| Prop           | Type                      | Default | Description                       |
+| -------------- | ------------------------- | ------- | --------------------------------- |
+| `open`         | `boolean`                 | --      | Controlled open state.            |
+| `onOpenChange` | `(open: boolean) => void` | --      | Callback when open state changes. |
+| `defaultOpen`  | `boolean`                 | `false` | Initial uncontrolled open state.  |
+| `delay`        | `number`                  | `600`   | Delay (ms) before card appears.   |
+| `closeDelay`   | `number`                  | `300`   | Delay (ms) before card hides.     |
 
 ### PreviewCard.Trigger
 
@@ -97,17 +95,17 @@ A hover-triggered card that shows a preview of linked content. Built on [Base UI
 
 #### Data attributes
 
-| Attribute         | Description                          |
-| ----------------- | ------------------------------------ |
+| Attribute         | Description                            |
+| ----------------- | -------------------------------------- |
 | `data-popup-open` | Present when the preview card is open. |
 
 ### PreviewCard.Positioner
 
-| Prop         | Type                                      | Default    | Description                    |
-| ------------ | ----------------------------------------- | ---------- | ------------------------------ |
+| Prop         | Type                                     | Default    | Description                    |
+| ------------ | ---------------------------------------- | ---------- | ------------------------------ |
 | `side`       | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Preferred side of the trigger. |
-| `sideOffset` | `number`                                  | `8`        | Offset from the trigger (px).  |
-| `sx`         | `StyleXStyles`                            | --         | StyleX styles for overrides.   |
+| `sideOffset` | `number`                                 | `8`        | Offset from the trigger (px).  |
+| `sx`         | `StyleXStyles`                           | --         | StyleX styles for overrides.   |
 
 ### PreviewCard.Popup
 
@@ -117,11 +115,11 @@ A hover-triggered card that shows a preview of linked content. Built on [Base UI
 
 #### Data attributes
 
-| Attribute            | Description                         |
-| -------------------- | ----------------------------------- |
-| `data-open`          | Present when the card is open.      |
-| `data-starting-style`| Present during open animation.      |
-| `data-ending-style`  | Present during close animation.     |
+| Attribute             | Description                     |
+| --------------------- | ------------------------------- |
+| `data-open`           | Present when the card is open.  |
+| `data-starting-style` | Present during open animation.  |
+| `data-ending-style`   | Present during close animation. |
 
 ### PreviewCard.Arrow
 

@@ -141,7 +141,15 @@
   "intents": [
     {
       "intent": "numeric-input",
-      "signals": ["number field", "numeric input", "quantity", "stepper", "increment", "counter", "amount"],
+      "signals": [
+        "number field",
+        "numeric input",
+        "quantity",
+        "stepper",
+        "increment",
+        "counter",
+        "amount"
+      ],
       "reasoning": "NumberField provides a structured numeric input with increment/decrement buttons, keyboard step support, and min/max constraints.",
       "composition": "<NumberField.Root defaultValue={1} min={0} max={99}>\n  <NumberField.Group>\n    <NumberField.Decrement />\n    <NumberField.Input />\n    <NumberField.Increment />\n  </NumberField.Group>\n</NumberField.Root>"
     },

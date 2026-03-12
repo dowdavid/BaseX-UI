@@ -58,7 +58,7 @@ export function NumberFieldPage() {
 
       <Preview title="Disabled" description="A disabled number field." constrained>
         <NumberField.Root defaultValue={3} disabled>
-          <NumberField.Group>
+          <NumberField.Group disabled>
             <NumberField.Decrement />
             <NumberField.Input />
             <NumberField.Increment />

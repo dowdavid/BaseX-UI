@@ -35,7 +35,13 @@ export function AlertDialogPage() {
 
       <Preview title="Discard changes" description="Warn before losing unsaved work.">
         <AlertDialog.Root>
-          <AlertDialog.Trigger render={<Button variant="ghost">Leave page</Button>} />
+          <AlertDialog.Trigger
+            render={
+              <Button variant="outline" color="destructive">
+                Leave page
+              </Button>
+            }
+          />
           <AlertDialog.Portal>
             <AlertDialog.Backdrop />
             <AlertDialog.Popup>
@@ -57,7 +63,7 @@ export function AlertDialogPage() {
         description="Block interaction until the user explicitly agrees."
       >
         <AlertDialog.Root>
-          <AlertDialog.Trigger render={<Button>Continue to checkout</Button>} />
+          <AlertDialog.Trigger render={<Button variant="outline">Continue to checkout</Button>} />
           <AlertDialog.Portal>
             <AlertDialog.Backdrop />
             <AlertDialog.Popup>

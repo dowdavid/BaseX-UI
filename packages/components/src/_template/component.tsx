@@ -11,9 +11,13 @@
  * - `keepMounted` on any part that needs close animation
  * - Stable CSS class `basex-{component}-{part}` for global CSS targeting
  * - `sx` prop on every part for consumer overrides
+ * - `focusRing` from `@basex-ui/styles` on every interactive element
+ * - `aria-label` on icon-only buttons
+ * - `aria-hidden="true"` on decorative SVGs/icons
  */
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { focusRing } from '@basex-ui/styles';
 import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -24,20 +28,33 @@ const styles = stylex.create({
     fontSize: tokens.fontSizeSm,
     color: tokens.colorText,
   },
+
+  disabled: {
+    color: tokens.colorTextMuted,
+    borderColor: tokens.colorBorderMuted,
+    cursor: 'not-allowed',
+  },
 });
 
 // --- Types ---
 export interface ComponentNameProps {
   children?: React.ReactNode;
+  disabled?: boolean;
   sx?: StyleXStyles;
 }
 
 // --- Component ---
-const Root = forwardRef<HTMLDivElement, ComponentNameProps>(({ children, sx, ...props }, ref) => (
-  <div ref={ref} {...props} {...stylex.props(styles.root, sx)}>
-    {children}
-  </div>
-));
+const Root = forwardRef<HTMLDivElement, ComponentNameProps>(
+  ({ children, disabled, sx, ...props }, ref) => (
+    <div
+      ref={ref}
+      {...props}
+      {...stylex.props(styles.root, disabled && styles.disabled, focusRing, sx)}
+    >
+      {children}
+    </div>
+  ),
+);
 Root.displayName = 'ComponentName.Root';
 
 // --- Compound export ---

@@ -35,6 +35,18 @@ const formStyles = stylex.create({
   popupConstrained: {
     maxHeight: '420px',
   },
+  formContents: {
+    display: 'contents',
+  },
+  checkboxLabel: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: tokens.space2,
+    cursor: 'pointer',
+  },
+  labelNoMargin: {
+    marginBottom: 0,
+  },
   textarea: {
     width: '100%',
     padding: `${tokens.space2} ${tokens.space3}`,
@@ -65,7 +77,7 @@ export function DialogPage() {
         description="Capture input in a modal context with submit and cancel."
       >
         <Dialog.Root open={formOpen} onOpenChange={setFormOpen}>
-          <Dialog.Trigger render={<Button>Edit profile</Button>} />
+          <Dialog.Trigger render={<Button variant="outline">Edit profile</Button>} />
           <Dialog.Portal>
             <Dialog.Backdrop />
             <Dialog.Popup sx={formStyles.popupConstrained}>
@@ -74,7 +86,7 @@ export function DialogPage() {
                   e.preventDefault();
                   setFormOpen(false);
                 }}
-                style={{ display: 'contents' }}
+                {...stylex.props(formStyles.formContents)}
               >
                 <Dialog.Header>
                   <Dialog.Title>Edit profile</Dialog.Title>
@@ -162,23 +174,19 @@ export function DialogPage() {
               </Dialog.Header>
               <Dialog.Panel>
                 <CheckboxGroup.Root>
-                  <label
-                    style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
-                  >
+                  <label {...stylex.props(formStyles.checkboxLabel)}>
                     <Checkbox.Root checked={emailEnabled} onCheckedChange={setEmailEnabled}>
                       <Checkbox.Indicator />
                     </Checkbox.Root>
-                    <span {...stylex.props(formStyles.label)} style={{ marginBottom: 0 }}>
+                    <span {...stylex.props(formStyles.label, formStyles.labelNoMargin)}>
                       Email notifications
                     </span>
                   </label>
-                  <label
-                    style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
-                  >
+                  <label {...stylex.props(formStyles.checkboxLabel)}>
                     <Checkbox.Root checked={pushEnabled} onCheckedChange={setPushEnabled}>
                       <Checkbox.Indicator />
                     </Checkbox.Root>
-                    <span {...stylex.props(formStyles.label)} style={{ marginBottom: 0 }}>
+                    <span {...stylex.props(formStyles.label, formStyles.labelNoMargin)}>
                       Push notifications
                     </span>
                   </label>
@@ -194,7 +202,7 @@ export function DialogPage() {
 
       <Preview title="Nested dialogs" description="A dialog that opens another dialog on top.">
         <Dialog.Root>
-          <Dialog.Trigger render={<Button>Open</Button>} />
+          <Dialog.Trigger render={<Button variant="outline">Open</Button>} />
           <Dialog.Portal>
             <Dialog.Backdrop />
             <Dialog.Popup>

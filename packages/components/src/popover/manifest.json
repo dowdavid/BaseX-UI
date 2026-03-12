@@ -163,7 +163,13 @@
   "intents": [
     {
       "intent": "interactive-popup",
-      "signals": ["popover", "tooltip with interaction", "info popup", "contextual help", "detail popup"],
+      "signals": [
+        "popover",
+        "tooltip with interaction",
+        "info popup",
+        "contextual help",
+        "detail popup"
+      ],
       "reasoning": "Popover provides a floating panel that can contain interactive content like forms, buttons, or rich text.",
       "composition": "<Popover.Root>\n  <Popover.Trigger>Open</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        <Popover.Title>Info</Popover.Title>\n        <Popover.Description>Additional details here.</Popover.Description>\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
     },

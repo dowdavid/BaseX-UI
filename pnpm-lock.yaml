@@ -44,6 +44,9 @@ importers:
       '@stylexjs/stylex':
         specifier: ^0.17.5
         version: 0.17.5
+      agentation:
+        specifier: ^2.3.2
+        version: 2.3.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       lucide-react:
         specifier: ^0.575.0
         version: 0.575.0(react@19.2.4)
@@ -1045,6 +1048,17 @@ packages:
     resolution: {integrity: sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  agentation@2.3.2:
+    resolution: {integrity: sha512-TMCD7/n1GFZIuThrVWAmNWJuq2s/o7Iabx6M9fKf/Foi2EvH+ZZ8E2AWLSoLgIcAabN653WvCPfx+XqGmcbdmg==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   ajv-formats@3.0.1:
     resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
@@ -3309,6 +3323,11 @@ snapshots:
   acorn@8.15.0: {}
 
   acorn@8.16.0: {}
+
+  agentation@2.3.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+    optionalDependencies:
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
 
   ajv-formats@3.0.1(ajv@8.18.0):
     optionalDependencies:

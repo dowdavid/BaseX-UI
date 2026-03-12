@@ -7,7 +7,7 @@ const pageStyles = stylex.create({
   cardContent: {
     display: 'flex',
     flexDirection: 'column',
-    gap: tokens.space2,
+    gap: '2px',
   },
   cardTitle: {
     fontSize: tokens.fontSizeMd,
@@ -34,7 +34,7 @@ const pageStyles = stylex.create({
   },
   row: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'start',
     gap: tokens.space3,
   },
 });
@@ -47,9 +47,7 @@ export function PreviewCardPage() {
           <PreviewCard.Trigger href="#">Hover for preview</PreviewCard.Trigger>
           <PreviewCard.Portal>
             <PreviewCard.Positioner>
-              <PreviewCard.Popup>
-                A simple preview of the linked content.
-              </PreviewCard.Popup>
+              <PreviewCard.Popup>A simple preview of the linked content.</PreviewCard.Popup>
             </PreviewCard.Positioner>
           </PreviewCard.Portal>
         </PreviewCard.Root>

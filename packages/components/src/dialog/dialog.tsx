@@ -2,6 +2,7 @@ import { Dialog as BaseDialog } from '@base-ui/react/dialog';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { X } from 'lucide-react';
+import { focusRing } from '@basex-ui/styles';
 import { forwardRef, useCallback } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -37,15 +38,15 @@ const styles = stylex.create({
 
   closeButton: {
     position: 'absolute',
-    top: tokens.space3,
-    right: tokens.space3,
+    top: tokens.space2,
+    right: tokens.space2,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '1.75rem',
-    height: '1.75rem',
+    width: '2rem',
+    height: '2rem',
     borderRadius: tokens.radiusSm,
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     cursor: 'pointer',
     backgroundColor: {
       default: 'transparent',
@@ -57,8 +58,8 @@ const styles = stylex.create({
   },
 
   header: {
-    padding: tokens.space6,
-    paddingBottom: tokens.space5,
+    padding: tokens.space4,
+    paddingBottom: tokens.space3,
   },
 
   title: {
@@ -82,16 +83,20 @@ const styles = stylex.create({
     flex: 1,
     minHeight: 0,
     overflow: 'auto',
-    paddingInline: tokens.space6,
+    paddingInline: tokens.space4,
+    paddingBottom: tokens.space4,
   },
 
   footer: {
     display: 'flex',
     justifyContent: 'flex-end',
     gap: tokens.space3,
-    paddingInline: tokens.space6,
-    paddingBottom: tokens.space6,
-    paddingTop: tokens.space4,
+    paddingInline: tokens.space4,
+    paddingBottom: tokens.space4,
+    paddingTop: tokens.space3,
+    borderTopWidth: '1px',
+    borderTopStyle: 'solid',
+    borderTopColor: `color-mix(in srgb, ${tokens.colorBorder} 50%, transparent)`,
   },
 
   footerBordered: {
@@ -198,7 +203,7 @@ const Popup = forwardRef<HTMLDivElement, DialogPopupProps>(
         className={() => `basex-dialog-popup ${stylex.props(styles.popup, sx).className ?? ''}`}
       >
         {showCloseButton && (
-          <BaseDialog.Close {...stylex.props(styles.closeButton)} aria-label="Close">
+          <BaseDialog.Close {...stylex.props(styles.closeButton, focusRing)} aria-label="Close">
             <X size={16} />
           </BaseDialog.Close>
         )}

@@ -109,7 +109,11 @@ export interface ProgressLabelProps extends Omit<
 // --- Components ---
 
 const Root = forwardRef<HTMLDivElement, ProgressRootProps>(({ sx, ...props }, ref) => (
-  <BaseProgress.Root ref={ref} {...props} className={stylex.props(styles.root, sx).className ?? ''} />
+  <BaseProgress.Root
+    ref={ref}
+    {...props}
+    className={stylex.props(styles.root, sx).className ?? ''}
+  />
 ));
 Root.displayName = 'Progress.Root';
 
@@ -122,17 +126,19 @@ const Label = forwardRef<HTMLLabelElement, ProgressLabelProps>(({ sx, ...props }
 ));
 Label.displayName = 'Progress.Label';
 
-const Track = forwardRef<HTMLDivElement, ProgressTrackProps>(({ size = 'md', sx, ...props }, ref) => {
-  const sizeStyle =
-    size === 'sm' ? styles.trackSizeSm : size === 'lg' ? styles.trackSizeLg : styles.trackSizeMd;
-  return (
-    <BaseProgress.Track
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.track, sizeStyle, sx).className ?? ''}
-    />
-  );
-});
+const Track = forwardRef<HTMLDivElement, ProgressTrackProps>(
+  ({ size = 'md', sx, ...props }, ref) => {
+    const sizeStyle =
+      size === 'sm' ? styles.trackSizeSm : size === 'lg' ? styles.trackSizeLg : styles.trackSizeMd;
+    return (
+      <BaseProgress.Track
+        ref={ref}
+        {...props}
+        className={stylex.props(styles.track, sizeStyle, sx).className ?? ''}
+      />
+    );
+  },
+);
 Track.displayName = 'Progress.Track';
 
 const Indicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
@@ -140,14 +146,14 @@ const Indicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
     <BaseProgress.Indicator
       ref={ref}
       {...props}
-      className={
-        `basex-progress-indicator ${stylex.props(
+      className={`basex-progress-indicator ${
+        stylex.props(
           styles.indicator,
           color === 'secondary' && styles.indicatorSecondary,
           color === 'destructive' && styles.indicatorDestructive,
           sx,
-        ).className ?? ''}`
-      }
+        ).className ?? ''
+      }`}
     />
   ),
 );

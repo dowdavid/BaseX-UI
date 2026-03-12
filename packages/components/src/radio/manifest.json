@@ -103,7 +103,14 @@
   "intents": [
     {
       "intent": "single-select",
-      "signals": ["radio", "radio group", "single select", "option picker", "exclusive choice", "one of many"],
+      "signals": [
+        "radio",
+        "radio group",
+        "single select",
+        "option picker",
+        "exclusive choice",
+        "one of many"
+      ],
       "reasoning": "Radio is the standard pattern for mutually exclusive choices where all options should be visible.",
       "composition": "<Radio.Group defaultValue=\"option1\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"option1\"><Radio.Indicator /></Radio.Root>\n    Option 1\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"option2\"><Radio.Indicator /></Radio.Root>\n    Option 2\n  </label>\n</Radio.Group>"
     },

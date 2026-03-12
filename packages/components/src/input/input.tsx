@@ -27,10 +27,8 @@ const styles = stylex.create({
   },
 
   disabled: {
-    opacity: 0.5,
-    backgroundColor: tokens.colorMuted,
-    borderColor: tokens.colorBorderMuted,
     color: tokens.colorTextMuted,
+    borderColor: tokens.colorBorderMuted,
     cursor: 'not-allowed',
   },
 

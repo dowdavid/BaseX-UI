@@ -70,29 +70,29 @@ A numeric input with increment and decrement buttons. Built on [Base UI NumberFi
 
 ### NumberField.Root
 
-| Prop            | Type                                          | Default | Description                               |
-| --------------- | --------------------------------------------- | ------- | ----------------------------------------- |
-| `defaultValue`  | `number`                                      | --      | The initial uncontrolled value.           |
-| `value`         | `number`                                      | --      | The controlled value.                     |
-| `onValueChange` | `(value: number \| null, event?) => void`     | --      | Callback fired when the value changes.    |
-| `min`           | `number`                                      | --      | The minimum allowed value.                |
-| `max`           | `number`                                      | --      | The maximum allowed value.                |
-| `step`          | `number`                                      | `1`     | The step increment.                       |
-| `disabled`      | `boolean`                                     | `false` | Whether the number field is disabled.     |
-| `sx`            | `StyleXStyles`                                | --      | StyleX styles for consumer overrides.     |
+| Prop            | Type                                      | Default | Description                            |
+| --------------- | ----------------------------------------- | ------- | -------------------------------------- |
+| `defaultValue`  | `number`                                  | --      | The initial uncontrolled value.        |
+| `value`         | `number`                                  | --      | The controlled value.                  |
+| `onValueChange` | `(value: number \| null, event?) => void` | --      | Callback fired when the value changes. |
+| `min`           | `number`                                  | --      | The minimum allowed value.             |
+| `max`           | `number`                                  | --      | The maximum allowed value.             |
+| `step`          | `number`                                  | `1`     | The step increment.                    |
+| `disabled`      | `boolean`                                 | `false` | Whether the number field is disabled.  |
+| `sx`            | `StyleXStyles`                            | --      | StyleX styles for consumer overrides.  |
 
 #### Data attributes
 
-| Attribute       | Description                    |
-| --------------- | ------------------------------ |
-| `data-disabled` | Present when disabled.         |
+| Attribute       | Description            |
+| --------------- | ---------------------- |
+| `data-disabled` | Present when disabled. |
 
 ### NumberField.Group
 
-| Prop   | Type                    | Default | Description                                      |
-| ------ | ----------------------- | ------- | ------------------------------------------------ |
+| Prop   | Type                   | Default | Description                                      |
+| ------ | ---------------------- | ------- | ------------------------------------------------ |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'`  | Height of the group (sm=32px, md=40px, lg=48px). |
-| `sx`   | `StyleXStyles`          | --      | StyleX styles for consumer overrides.            |
+| `sx`   | `StyleXStyles`         | --      | StyleX styles for consumer overrides.            |
 
 ### NumberField.Input
 
@@ -108,9 +108,9 @@ A numeric input with increment and decrement buttons. Built on [Base UI NumberFi
 
 #### Data attributes
 
-| Attribute       | Description                    |
-| --------------- | ------------------------------ |
-| `data-disabled` | Present when value is at max.  |
+| Attribute       | Description                   |
+| --------------- | ----------------------------- |
+| `data-disabled` | Present when value is at max. |
 
 ### NumberField.Decrement
 
@@ -120,9 +120,9 @@ A numeric input with increment and decrement buttons. Built on [Base UI NumberFi
 
 #### Data attributes
 
-| Attribute       | Description                    |
-| --------------- | ------------------------------ |
-| `data-disabled` | Present when value is at min.  |
+| Attribute       | Description                   |
+| --------------- | ----------------------------- |
+| `data-disabled` | Present when value is at min. |
 
 ## When to Use
 

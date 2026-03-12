@@ -1,3 +1,5 @@
+import * as stylex from '@stylexjs/stylex';
+import { tokens } from '@basex-ui/tokens';
 import { Combobox } from '@basex-ui/components';
 import type { ComboboxSize } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
@@ -43,6 +45,15 @@ const produce: ProduceGroup[] = [
     ],
   },
 ];
+
+const pageStyles = stylex.create({
+  sizesColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: tokens.space3,
+    width: '100%',
+  },
+});
 
 export function ComboboxPage() {
   return (
@@ -110,7 +121,7 @@ export function ComboboxPage() {
         description="Three sizes: sm (32px), md (36px, default), lg (40px)."
         constrained
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+        <div {...stylex.props(pageStyles.sizesColumn)}>
           {sizes.map((s) => (
             <Combobox.Root key={s} items={fruits} size={s}>
               <Combobox.Input placeholder={`Size "${s}"`} />

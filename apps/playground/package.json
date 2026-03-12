@@ -13,6 +13,7 @@
     "@basex-ui/styles": "workspace:*",
     "@basex-ui/tokens": "workspace:*",
     "@stylexjs/stylex": "^0.17.5",
+    "agentation": "^2.3.2",
     "lucide-react": "^0.575.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

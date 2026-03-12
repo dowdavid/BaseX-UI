@@ -1,6 +1,7 @@
 import { Popover as BasePopover } from '@base-ui/react/popover';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { focusRing } from '@basex-ui/styles';
 import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -12,7 +13,7 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorderMuted,
     borderRadius: tokens.radiusLg,
-    padding: tokens.space4,
+    padding: tokens.space3,
     boxShadow: tokens.shadowLg,
     fontFamily: tokens.fontFamilySans,
     fontSize: tokens.fontSizeSm,
@@ -63,15 +64,15 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '24px',
-    height: '24px',
+    width: '2rem',
+    height: '2rem',
     border: 'none',
     backgroundColor: {
       default: 'transparent',
       ':hover': tokens.colorMuted,
     },
     borderRadius: tokens.radiusSm,
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     cursor: 'pointer',
     transitionProperty: 'background-color',
     transitionDuration: tokens.motionDurationFast,
@@ -80,7 +81,7 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface PopoverRootProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Root> {}
+export type PopoverRootProps = React.ComponentPropsWithoutRef<typeof BasePopover.Root>;
 
 export interface PopoverTriggerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BasePopover.Trigger>,
@@ -89,7 +90,7 @@ export interface PopoverTriggerProps extends Omit<
   sx?: StyleXStyles;
 }
 
-export interface PopoverPortalProps extends React.ComponentPropsWithoutRef<typeof BasePopover.Portal> {}
+export type PopoverPortalProps = React.ComponentPropsWithoutRef<typeof BasePopover.Portal>;
 
 export interface PopoverPositionerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BasePopover.Positioner>,
@@ -139,16 +140,27 @@ const Root: React.FC<PopoverRootProps> = (props) => <BasePopover.Root {...props}
 Root.displayName = 'Popover.Root';
 
 const Trigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(({ sx, ...props }, ref) => (
-  <BasePopover.Trigger ref={ref} {...props} className={sx ? (stylex.props(sx).className ?? '') : ''} />
+  <BasePopover.Trigger
+    ref={ref}
+    {...props}
+    className={sx ? (stylex.props(sx).className ?? '') : ''}
+  />
 ));
 Trigger.displayName = 'Popover.Trigger';
 
 const Portal: React.FC<PopoverPortalProps> = (props) => <BasePopover.Portal {...props} />;
 Portal.displayName = 'Popover.Portal';
 
-const Positioner = forwardRef<HTMLDivElement, PopoverPositionerProps>(({ sideOffset = 2, sx, ...props }, ref) => (
-  <BasePopover.Positioner ref={ref} sideOffset={sideOffset} {...props} className={sx ? (stylex.props(sx).className ?? '') : ''} />
-));
+const Positioner = forwardRef<HTMLDivElement, PopoverPositionerProps>(
+  ({ sideOffset = 2, sx, ...props }, ref) => (
+    <BasePopover.Positioner
+      ref={ref}
+      sideOffset={sideOffset}
+      {...props}
+      className={sx ? (stylex.props(sx).className ?? '') : ''}
+    />
+  ),
+);
 Positioner.displayName = 'Popover.Positioner';
 
 const Popup = forwardRef<HTMLDivElement, PopoverPopupProps>(({ sx, ...props }, ref) => (
@@ -193,12 +205,18 @@ const Close = forwardRef<HTMLButtonElement, PopoverCloseProps>(
   ({ sx, children, ...props }, ref) => (
     <BasePopover.Close
       ref={ref}
+      aria-label="Close"
       {...props}
-      className={stylex.props(styles.close, sx).className ?? ''}
+      className={stylex.props(styles.close, focusRing, sx).className ?? ''}
     >
       {children ?? (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path
+            d="M3.5 3.5l7 7M10.5 3.5l-7 7"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
         </svg>
       )}
     </BasePopover.Close>
@@ -207,4 +225,14 @@ const Close = forwardRef<HTMLButtonElement, PopoverCloseProps>(
 Close.displayName = 'Popover.Close';
 
 // --- Public API ---
-export const Popover = { Root, Trigger, Portal, Positioner, Popup, Arrow, Title, Description, Close };
+export const Popover = {
+  Root,
+  Trigger,
+  Portal,
+  Positioner,
+  Popup,
+  Arrow,
+  Title,
+  Description,
+  Close,
+};

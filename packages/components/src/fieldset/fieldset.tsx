@@ -18,7 +18,7 @@ const styles = stylex.create({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: tokens.space2,
+    gap: tokens.space4,
     borderWidth: 0,
     borderStyle: 'none',
     padding: 0,

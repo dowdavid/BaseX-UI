@@ -2,6 +2,7 @@ import { Radio as BaseRadio } from '@base-ui/react/radio';
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { focusRing } from '@basex-ui/styles';
 import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -42,9 +43,8 @@ const styles = stylex.create({
   },
 
   rootDisabled: {
-    opacity: 0.5,
-    backgroundColor: tokens.colorMuted,
     borderColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorMuted,
     cursor: 'not-allowed',
   },
 
@@ -89,11 +89,8 @@ const Group = forwardRef<HTMLDivElement, RadioGroupProps>(
       ref={ref}
       {...props}
       className={
-        stylex.props(
-          styles.group,
-          orientation === 'horizontal' && styles.groupHorizontal,
-          sx,
-        ).className ?? ''
+        stylex.props(styles.group, orientation === 'horizontal' && styles.groupHorizontal, sx)
+          .className ?? ''
       }
     />
   ),
@@ -105,12 +102,15 @@ const Root = forwardRef<HTMLButtonElement, RadioRootProps>(({ sx, ...props }, re
     ref={ref}
     {...props}
     className={(state) =>
-      `basex-radio-root ${stylex.props(
-        styles.root,
-        state.checked && styles.rootChecked,
-        state.disabled && styles.rootDisabled,
-        sx,
-      ).className ?? ''}`
+      `basex-radio-root ${
+        stylex.props(
+          styles.root,
+          state.checked && styles.rootChecked,
+          state.disabled && styles.rootDisabled,
+          focusRing,
+          sx,
+        ).className ?? ''
+      }`
     }
   />
 ));
@@ -121,9 +121,7 @@ const Indicator = forwardRef<HTMLDivElement, RadioIndicatorProps>(({ sx, ...prop
     ref={ref}
     keepMounted
     {...props}
-    className={() =>
-      `basex-radio-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`
-    }
+    className={() => `basex-radio-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`}
   />
 ));
 Indicator.displayName = 'Radio.Indicator';

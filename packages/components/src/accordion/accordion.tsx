@@ -31,7 +31,7 @@ const styles = stylex.create({
     alignItems: 'start',
     justifyContent: 'space-between',
     gap: tokens.space4,
-    paddingBlock: tokens.space4,
+    paddingBlock: tokens.space2,
     fontFamily: tokens.fontFamilySans,
     fontWeight: tokens.fontWeightMedium,
     fontSize: tokens.fontSizeSm,
@@ -53,7 +53,7 @@ const styles = stylex.create({
     flexShrink: 0,
     width: '16px',
     height: '16px',
-    opacity: 0.8,
+    color: tokens.colorIcon,
     transform: 'translateY(2px) rotate(var(--accordion-chevron-rotation, 0deg))',
     transitionProperty: 'transform',
     transitionDuration: tokens.motionDurationNormal,
@@ -66,7 +66,7 @@ const styles = stylex.create({
   },
   panelContent: {
     paddingTop: 0,
-    paddingBottom: tokens.space4,
+    paddingBottom: tokens.space2,
     paddingInline: 0,
   },
 

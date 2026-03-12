@@ -126,7 +126,13 @@
   "intents": [
     {
       "intent": "task-progress",
-      "signals": ["progress bar", "loading indicator", "upload progress", "task progress", "completion"],
+      "signals": [
+        "progress bar",
+        "loading indicator",
+        "upload progress",
+        "task progress",
+        "completion"
+      ],
       "reasoning": "Progress shows how far along a task is toward completion. Use for file uploads, form submissions, or any ongoing operation.",
       "composition": "<Progress.Root value={75}>\n  <Progress.Label>Uploading...</Progress.Label>\n  <Progress.Track>\n    <Progress.Indicator />\n  </Progress.Track>\n  <Progress.Value />\n</Progress.Root>"
     },

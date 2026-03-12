@@ -22,7 +22,7 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorderMuted,
     borderRadius: tokens.radiusLg,
-    padding: tokens.space4,
+    padding: tokens.space3,
     boxShadow: tokens.shadowLg,
     fontFamily: tokens.fontFamilySans,
     fontSize: tokens.fontSizeSm,
@@ -52,7 +52,7 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface PreviewCardRootProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Root> {}
+export type PreviewCardRootProps = React.ComponentPropsWithoutRef<typeof BasePreviewCard.Root>;
 
 export interface PreviewCardTriggerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BasePreviewCard.Trigger>,
@@ -61,7 +61,7 @@ export interface PreviewCardTriggerProps extends Omit<
   sx?: StyleXStyles;
 }
 
-export interface PreviewCardPortalProps extends React.ComponentPropsWithoutRef<typeof BasePreviewCard.Portal> {}
+export type PreviewCardPortalProps = React.ComponentPropsWithoutRef<typeof BasePreviewCard.Portal>;
 
 export interface PreviewCardPositionerProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BasePreviewCard.Positioner>,

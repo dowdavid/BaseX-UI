@@ -13,6 +13,7 @@ import { DrawerPreview as BaseDrawer } from '@base-ui/react/drawer';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { X } from 'lucide-react';
+import { focusRing } from '@basex-ui/styles';
 import { createContext, forwardRef, useCallback, useContext } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
@@ -99,10 +100,10 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '1.75rem',
-    height: '1.75rem',
+    width: '2rem',
+    height: '2rem',
     borderRadius: tokens.radiusSm,
-    color: tokens.colorTextMuted,
+    color: tokens.colorIcon,
     cursor: 'pointer',
     backgroundColor: {
       default: 'transparent',
@@ -114,8 +115,8 @@ const styles = stylex.create({
   },
 
   header: {
-    padding: tokens.space6,
-    paddingBottom: tokens.space5,
+    padding: tokens.space4,
+    paddingBottom: tokens.space3,
   },
 
   title: {
@@ -139,7 +140,7 @@ const styles = stylex.create({
     flex: 1,
     minHeight: 0,
     overflow: 'auto',
-    paddingInline: tokens.space6,
+    paddingInline: tokens.space4,
     display: 'flex',
     flexDirection: 'column',
     gap: tokens.space4,
@@ -149,8 +150,8 @@ const styles = stylex.create({
     display: 'flex',
     justifyContent: 'flex-end',
     gap: tokens.space3,
-    paddingInline: tokens.space6,
-    paddingBottom: tokens.space6,
+    paddingInline: tokens.space4,
+    paddingBottom: tokens.space4,
     paddingTop: tokens.space4,
   },
 
@@ -294,7 +295,7 @@ const Popup = forwardRef<HTMLDivElement, DrawerPopupProps>(
           }
         >
           {showCloseButton && (
-            <BaseDrawer.Close {...stylex.props(styles.closeButton)} aria-label="Close">
+            <BaseDrawer.Close {...stylex.props(styles.closeButton, focusRing)} aria-label="Close">
               <X size={16} />
             </BaseDrawer.Close>
           )}

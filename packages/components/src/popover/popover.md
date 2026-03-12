@@ -39,9 +39,7 @@ A floating content panel that appears next to a trigger element. Built on [Base 
   <Popover.Trigger>Info</Popover.Trigger>
   <Popover.Portal>
     <Popover.Positioner>
-      <Popover.Popup>
-        This is a popover with some content.
-      </Popover.Popup>
+      <Popover.Popup>This is a popover with some content.</Popover.Popup>
     </Popover.Positioner>
   </Popover.Portal>
 </Popover.Root>
@@ -103,11 +101,11 @@ A floating content panel that appears next to a trigger element. Built on [Base 
 
 ### Popover.Root
 
-| Prop           | Type                       | Default | Description                        |
-| -------------- | -------------------------- | ------- | ---------------------------------- |
-| `open`         | `boolean`                  | --      | Controlled open state.             |
-| `onOpenChange` | `(open: boolean) => void`  | --      | Callback when open state changes.  |
-| `defaultOpen`  | `boolean`                  | `false` | Initial uncontrolled open state.   |
+| Prop           | Type                      | Default | Description                       |
+| -------------- | ------------------------- | ------- | --------------------------------- |
+| `open`         | `boolean`                 | --      | Controlled open state.            |
+| `onOpenChange` | `(open: boolean) => void` | --      | Callback when open state changes. |
+| `defaultOpen`  | `boolean`                 | `false` | Initial uncontrolled open state.  |
 
 ### Popover.Trigger
 
@@ -117,18 +115,18 @@ A floating content panel that appears next to a trigger element. Built on [Base 
 
 #### Data attributes
 
-| Attribute         | Description                     |
-| ----------------- | ------------------------------- |
+| Attribute         | Description                       |
+| ----------------- | --------------------------------- |
 | `data-popup-open` | Present when the popover is open. |
 
 ### Popover.Positioner
 
-| Prop        | Type                                      | Default    | Description                      |
-| ----------- | ----------------------------------------- | ---------- | -------------------------------- |
-| `side`      | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Preferred side of the trigger.   |
-| `alignment` | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the side.        |
-| `sideOffset`| `number`                                  | `8`        | Offset from the trigger (px).    |
-| `sx`        | `StyleXStyles`                            | --         | StyleX styles for overrides.     |
+| Prop         | Type                                     | Default    | Description                    |
+| ------------ | ---------------------------------------- | ---------- | ------------------------------ |
+| `side`       | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Preferred side of the trigger. |
+| `alignment`  | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the side.      |
+| `sideOffset` | `number`                                 | `8`        | Offset from the trigger (px).  |
+| `sx`         | `StyleXStyles`                           | --         | StyleX styles for overrides.   |
 
 ### Popover.Popup
 
@@ -138,11 +136,11 @@ A floating content panel that appears next to a trigger element. Built on [Base 
 
 #### Data attributes
 
-| Attribute            | Description                      |
-| -------------------- | -------------------------------- |
-| `data-open`          | Present when the popover is open.|
-| `data-starting-style`| Present during open animation.   |
-| `data-ending-style`  | Present during close animation.  |
+| Attribute             | Description                       |
+| --------------------- | --------------------------------- |
+| `data-open`           | Present when the popover is open. |
+| `data-starting-style` | Present during open animation.    |
+| `data-ending-style`   | Present during close animation.   |
 
 ### Popover.Arrow
 
