@@ -1,0 +1,65 @@
+---
+title: MCP Server
+description: 10 tools that let AI agents discover, validate, and generate Base-X UI components.
+---
+
+The MCP server is how agents interact with Base-X UI. It exposes 10 tools over the Model Context Protocol that cover the full workflow: discover what's available, pick the right component, get setup requirements, and validate the choice before generating code.
+
+## Setup
+
+```bash
+pnpm add @basex-ui/mcp-server
+```
+
+Add to your MCP client configuration (e.g., Claude Desktop, Cursor, or any MCP-compatible agent):
+
+```json
+{
+  "mcpServers": {
+    "basex-ui": {
+      "command": "npx",
+      "args": ["@basex-ui/mcp-server"]
+    }
+  }
+}
+```
+
+The server starts via stdio transport. No HTTP, no API keys, no configuration needed.
+
+## Agent workflow
+
+A typical agent session follows this pattern:
+
+```
+1. resolve_intent("FAQ with expandable answers")
+   → Accordion, reasoning, composition, imports, CSS reqs
+
+2. get_component_setup("Accordion")
+   → Import, required props, CSS, animation presets
+
+3. get_component("Accordion")
+   → Full manifest: parts, props, data attributes, examples
+
+4. get_tokens("spacing")
+   → Spacing values for layout
+
+5. check_usage("Accordion", "multi-step wizard")
+   → Warning: use a stepper pattern instead
+```
+
+Each step narrows the decision space. By step 3, the agent has everything it needs to generate correct code without hallucinating imports, props, or structure.
+
+## Tools at a glance
+
+| Tool | Purpose | Key input |
+|------|---------|-----------|
+| `list_components` | Browse all 24 components | — |
+| `search_components` | Fuzzy search by name/category/description | `query` |
+| `get_component` | Full manifest with parts, props, examples | `name` |
+| `get_component_example` | Usage examples, optionally by variant | `name`, `variant?` |
+| `resolve_intent` | Natural language → component recommendation | `description` |
+| `check_usage` | Validate component choice against anti-patterns | `component`, `context` |
+| `get_tokens` | Design tokens by category | `category?` |
+| `get_theme_example` | Theme setup code (light, dark, custom) | `theme` |
+| `get_animation` | Animation presets by name or use case | `preset?`, `useCase?` |
+| `get_component_setup` | Pre-generation requirements: imports, CSS, props | `name` |

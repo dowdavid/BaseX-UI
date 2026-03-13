@@ -1,0 +1,88 @@
+---
+title: Anti-Patterns
+description: 70 rules that catch component misuse before code is generated.
+---
+
+The anti-pattern system validates component choices against known misuse scenarios. It runs automatically during intent resolution and is also available as a standalone check.
+
+## Usage
+
+```tsx
+import { checkUsage } from '@basex-ui/intelligence';
+
+const warnings = checkUsage('Button', 'navigating to the settings page');
+```
+
+Returns:
+
+```json
+[
+  {
+    "component": "Button",
+    "scenario": "Using Button for navigation or page linking",
+    "reasoning": "Buttons trigger actions; links navigate. Using Button for navigation breaks semantics and accessibility.",
+    "alternative": "Use an anchor tag or Link component for navigation. If it looks like a button, style the link."
+  }
+]
+```
+
+## How matching works
+
+Anti-pattern matching uses a two-phase scoring system:
+
+1. **Keyword overlap** — Extract meaningful words from both the scenario and the context, compare them
+2. **Phrase matching** — Check for two-word phrases (bigrams) from the scenario appearing in the context
+
+Phrases count double because they're stronger signals. A match threshold of 0.2 (20% overlap) triggers the warning — low enough to catch relevant cases, high enough to avoid noise.
+
+```
+Context: "navigating to the settings page"
+Scenario: "Using Button for navigation or page linking"
+
+Keywords:  navigating ∩ navigation → substring match (+0.5)
+           settings ∩ ∅ → no match
+           page ∩ page → exact match (+1)
+Phrases:   "page linking" ∉ context → no match
+
+Score: 1.5 / (4 keywords × 2) = 0.19... → rounds up with substring → triggers
+```
+
+## What gets caught
+
+70 anti-patterns across all 24 components. Some examples:
+
+| Component | Scenario | Alternative |
+|-----------|----------|-------------|
+| Button | Navigation or page linking | Use Link component |
+| Button | Toggle between two states | Use Checkbox or Toggle |
+| Accordion | Multi-step wizard | Use a dedicated stepper pattern |
+| Dialog | Simple alerts or confirmations | Use AlertDialog |
+| Dialog | Toast or notification | Use a toast component |
+| Checkbox | Exclusive single selection | Use Radio |
+| Input | Rich text or multi-line | Use textarea |
+| Menu | Primary navigation | Use NavigationMenu |
+| Popover | Long-form content or forms | Use Dialog or Drawer |
+
+## Automatic during intent resolution
+
+When you call `resolveIntent`, anti-pattern checking runs automatically. If the recommended component has warnings for the given description, they're included in the response:
+
+```tsx
+const result = resolveIntent('a button to navigate to settings');
+// result.intent.component === 'Button'
+// result.warnings[0].alternative === 'Use Link component'
+```
+
+The agent gets the recommendation and the warning in the same call. No second round-trip needed.
+
+## Standalone validation
+
+Use `checkUsage` when you already know the component and want to validate the choice:
+
+```tsx
+// Agent chose Dialog — is that right for this context?
+const warnings = checkUsage('Dialog', 'showing a success notification after save');
+// Warning: "Use a toast component for transient notifications"
+```
+
+This is useful as a guardrail step before generating code. The agent picks a component, validates it, and only proceeds if there are no warnings (or if the warnings are acceptable for the specific case).
