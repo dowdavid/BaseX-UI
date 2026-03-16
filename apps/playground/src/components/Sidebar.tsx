@@ -83,6 +83,9 @@ const styles = stylex.create({
     '::placeholder': {
       color: tokens.colorTextMuted,
     },
+    ':focus': {
+      borderColor: tokens.colorBorder,
+    },
   },
   sectionHeader: {
     display: 'flex',

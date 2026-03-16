@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
-import { Routes, Route } from 'react-router';
+import { Routes, Route, useLocation } from 'react-router';
 import { pages, type PageEntry } from './registry';
 import { Sidebar } from './components/Sidebar';
 import { GuidePage } from './pages/GuidePage';
@@ -137,7 +137,14 @@ function PageWrapper({ page }: { page: PageEntry }) {
 export function App() {
   const [dark, setDark] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const mainRef = useRef<HTMLElement>(null);
+  const location = useLocation();
   const theme = dark ? darkTheme : lightTheme;
+
+  // Scroll main content to top on navigation
+  useEffect(() => {
+    mainRef.current?.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     const themeProps = stylex.props(theme);
@@ -186,7 +193,7 @@ export function App() {
         onToggleTheme={() => setDark((d) => !d)}
       />
 
-      <main {...stylex.props(styles.main)}>
+      <main ref={mainRef} {...stylex.props(styles.main)}>
         <div {...stylex.props(styles.content)}>
           <Routes>
             {pages.map((page) => (

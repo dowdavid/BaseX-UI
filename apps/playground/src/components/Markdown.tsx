@@ -77,10 +77,13 @@ const styles = stylex.create({
     borderTopColor: tokens.colorBorderMuted,
     marginBlock: tokens.space8,
   },
+  tableWrapper: {
+    overflowX: 'auto',
+    marginBlock: tokens.space6,
+  },
   table: {
     width: '100%',
     borderCollapse: 'collapse',
-    marginBlock: tokens.space6,
     fontSize: tokens.fontSizeSm,
   },
   th: {
@@ -179,7 +182,9 @@ const components = {
   ),
   hr: (props: ComponentPropsWithoutRef<'hr'>) => <hr {...stylex.props(styles.hr)} {...props} />,
   table: (props: ComponentPropsWithoutRef<'table'>) => (
-    <table {...stylex.props(styles.table)} {...props} />
+    <div {...stylex.props(styles.tableWrapper)}>
+      <table {...stylex.props(styles.table)} {...props} />
+    </div>
   ),
   th: (props: ComponentPropsWithoutRef<'th'>) => <th {...stylex.props(styles.th)} {...props} />,
   td: (props: ComponentPropsWithoutRef<'td'>) => <td {...stylex.props(styles.td)} {...props} />,
