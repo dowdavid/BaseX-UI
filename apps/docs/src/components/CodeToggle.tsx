@@ -80,9 +80,11 @@ export function CodeToggle({ code }: CodeToggleProps) {
       codeToHtml(trimmed, {
         lang: 'tsx',
         theme: dark ? 'github-dark-default' : 'github-light-default',
-      }).then((result) => {
-        if (!cancelled) setHtml(result);
-      }).catch(() => {});
+      })
+        .then((result) => {
+          if (!cancelled) setHtml(result);
+        })
+        .catch(() => {});
     });
     return () => {
       cancelled = true;

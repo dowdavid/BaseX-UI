@@ -46,6 +46,7 @@ apps/
 ## Component Pattern
 
 Each component lives in `packages/components/src/{name}/` with:
+
 - `{name}.tsx` — Base UI wrapper + StyleX styling, forwardRef, sx prop
 - `{name}.md` — User-facing markdown docs
 - `manifest.json` — Machine-readable metadata (anatomy, parts, props, intents, anti-patterns, examples)
@@ -56,6 +57,7 @@ Compound component pattern with dot notation: `Accordion.Root`, `Accordion.Item`
 ## Docs Architecture
 
 A single Vite SPA with React Router provides:
+
 - `registry.ts` — single source of truth for all pages (components, guides, sections)
 - `Sidebar.tsx` — search (Fuse.js), collapsible sections, active page highlighting
 - `Markdown.tsx` — react-markdown + remark-gfm + Shiki syntax highlighting

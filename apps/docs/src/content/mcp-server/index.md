@@ -46,15 +46,15 @@ Each step narrows the decision space. By step 3, the agent has everything it nee
 
 ## Tools at a glance
 
-| Tool | Purpose | Key input |
-|------|---------|-----------|
-| `list_components` | Browse all 24 components | — |
-| `search_components` | Fuzzy search by name/category/description | `query` |
-| `get_component` | Full manifest with parts, props, examples | `name` |
-| `get_component_example` | Usage examples, optionally by variant | `name`, `variant?` |
-| `resolve_intent` | Natural language → component recommendation | `description` |
-| `check_usage` | Validate component choice against anti-patterns | `component`, `context` |
-| `get_tokens` | Design tokens by category | `category?` |
-| `get_theme_example` | Theme setup code (light, dark, custom) | `theme` |
-| `get_animation` | Animation presets by name or use case | `preset?`, `useCase?` |
-| `get_component_setup` | Pre-generation requirements: imports, CSS, props | `name` |
+| Tool                    | Purpose                                          | Key input              |
+| ----------------------- | ------------------------------------------------ | ---------------------- |
+| `list_components`       | Browse all 24 components                         | —                      |
+| `search_components`     | Fuzzy search by name/category/description        | `query`                |
+| `get_component`         | Full manifest with parts, props, examples        | `name`                 |
+| `get_component_example` | Usage examples, optionally by variant            | `name`, `variant?`     |
+| `resolve_intent`        | Natural language → component recommendation      | `description`          |
+| `check_usage`           | Validate component choice against anti-patterns  | `component`, `context` |
+| `get_tokens`            | Design tokens by category                        | `category?`            |
+| `get_theme_example`     | Theme setup code (light, dark, custom)           | `theme`                |
+| `get_animation`         | Animation presets by name or use case            | `preset?`, `useCase?`  |
+| `get_component_setup`   | Pre-generation requirements: imports, CSS, props | `name`                 |

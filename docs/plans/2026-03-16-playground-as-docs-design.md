@@ -85,12 +85,14 @@ Fuse.js client-side fuzzy search over page names, descriptions, and headings. Si
 ## Tech Stack
 
 ### New dependencies
+
 - `react-router` v7 — URL routing, SPA fallback
 - `react-markdown` + `remark-gfm` — Markdown to React (tables, strikethrough)
 - `shiki` — Syntax highlighting (build time via Vite plugin)
 - `fuse.js` — Client-side fuzzy search
 
 ### Kept
+
 - Vite 6
 - React 19
 - StyleX 0.17.5
@@ -99,6 +101,7 @@ Fuse.js client-side fuzzy search over page names, descriptions, and headings. Si
 - @basex-ui/components, tokens, styles
 
 ### Removed (with apps/docs/)
+
 - next, fumadocs-core, fumadocs-mdx, fumadocs-ui
 - tailwindcss, postcss
 - next-themes
@@ -106,19 +109,20 @@ Fuse.js client-side fuzzy search over page names, descriptions, and headings. Si
 
 ## Content Sources
 
-| Content | Source | Location |
-|---------|--------|----------|
-| Component demos | Existing playground pages | `src/pages/` |
-| Component API docs | Package markdown files | `packages/components/src/{name}/{name}.md` |
-| About | New content (user writes) | `src/content/about.md` |
-| Getting Started | Port from docs MDX | `src/content/getting-started.md` |
-| Intelligence | Port from docs MDX | `src/content/intelligence/` |
-| MCP Server | Port from docs MDX | `src/content/mcp-server/` |
-| CLI | Port from docs MDX | `src/content/cli.md` |
+| Content            | Source                    | Location                                   |
+| ------------------ | ------------------------- | ------------------------------------------ |
+| Component demos    | Existing playground pages | `src/pages/`                               |
+| Component API docs | Package markdown files    | `packages/components/src/{name}/{name}.md` |
+| About              | New content (user writes) | `src/content/about.md`                     |
+| Getting Started    | Port from docs MDX        | `src/content/getting-started.md`           |
+| Intelligence       | Port from docs MDX        | `src/content/intelligence/`                |
+| MCP Server         | Port from docs MDX        | `src/content/mcp-server/`                  |
+| CLI                | Port from docs MDX        | `src/content/cli.md`                       |
 
 ## What Gets Deleted
 
 The entire `apps/docs/` directory (~50 files):
+
 - next.config.mjs (StyleXCSSBridge)
 - Fumadocs configuration
 - Tailwind + PostCSS configuration

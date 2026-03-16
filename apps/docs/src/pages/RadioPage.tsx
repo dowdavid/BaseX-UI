@@ -22,7 +22,10 @@ const pageStyles = stylex.create({
 export function RadioPage() {
   return (
     <>
-      <Preview title="Basic" description="A vertical radio group with three options." code={`<Radio.Group defaultValue="apple">
+      <Preview
+        title="Basic"
+        description="A vertical radio group with three options."
+        code={`<Radio.Group defaultValue="apple">
   <label>
     <Radio.Root value="apple"><Radio.Indicator /></Radio.Root>
     Apple
@@ -31,7 +34,8 @@ export function RadioPage() {
     <Radio.Root value="banana"><Radio.Indicator /></Radio.Root>
     Banana
   </label>
-</Radio.Group>`}>
+</Radio.Group>`}
+      >
         <Radio.Group defaultValue="apple">
           <label {...stylex.props(pageStyles.label)}>
             <Radio.Root value="apple">
@@ -54,10 +58,14 @@ export function RadioPage() {
         </Radio.Group>
       </Preview>
 
-      <Preview title="Horizontal" description="Radio group in a horizontal layout." code={`<Radio.Group defaultValue="left" orientation="horizontal">
+      <Preview
+        title="Horizontal"
+        description="Radio group in a horizontal layout."
+        code={`<Radio.Group defaultValue="left" orientation="horizontal">
   <label><Radio.Root value="left"><Radio.Indicator /></Radio.Root> Left</label>
   <label><Radio.Root value="center"><Radio.Indicator /></Radio.Root> Center</label>
-</Radio.Group>`}>
+</Radio.Group>`}
+      >
         <Radio.Group defaultValue="left" orientation="horizontal">
           <label {...stylex.props(pageStyles.label)}>
             <Radio.Root value="left">
@@ -80,10 +88,14 @@ export function RadioPage() {
         </Radio.Group>
       </Preview>
 
-      <Preview title="Disabled" description="A disabled radio group." code={`<Radio.Group defaultValue="standard" disabled>
+      <Preview
+        title="Disabled"
+        description="A disabled radio group."
+        code={`<Radio.Group defaultValue="standard" disabled>
   <label><Radio.Root value="standard"><Radio.Indicator /></Radio.Root> Standard</label>
   <label><Radio.Root value="express"><Radio.Indicator /></Radio.Root> Express</label>
-</Radio.Group>`}>
+</Radio.Group>`}
+      >
         <Radio.Group defaultValue="standard" disabled>
           <label {...stylex.props(pageStyles.label, pageStyles.labelDisabled)}>
             <Radio.Root value="standard">

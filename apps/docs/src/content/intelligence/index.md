@@ -49,8 +49,8 @@ Agents hallucinate. They pick the wrong component, guess at prop names, invent i
 
 ## Packages
 
-| Package | Purpose |
-|---------|---------|
+| Package                  | Purpose                                                     |
+| ------------------------ | ----------------------------------------------------------- |
 | `@basex-ui/intelligence` | Intent resolution, anti-pattern checking, animation presets |
-| `@basex-ui/mcp-server` | 10 MCP tools for agent-to-component interaction |
-| `@basex-ui/cli` | Developer scaffolding: init, add, theme, list |
+| `@basex-ui/mcp-server`   | 10 MCP tools for agent-to-component interaction             |
+| `@basex-ui/cli`          | Developer scaffolding: init, add, theme, list               |

@@ -191,10 +191,7 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
     'mcp-server': false,
   });
 
-  const filtered = useMemo(
-    () => (query ? fuse.search(query).map((r) => r.item) : pages),
-    [query],
-  );
+  const filtered = useMemo(() => (query ? fuse.search(query).map((r) => r.item) : pages), [query]);
 
   const isActive = (path: string) => location.pathname === path;
   const isSearching = query.length > 0;
@@ -275,10 +272,7 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
                   key={page.id}
                   to={page.path}
                   onClick={onClose}
-                  {...stylex.props(
-                    styles.navItem,
-                    isActive(page.path) && styles.navItemActive,
-                  )}
+                  {...stylex.props(styles.navItem, isActive(page.path) && styles.navItemActive)}
                 >
                   {page.label}
                 </Link>
@@ -286,7 +280,6 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
           </div>
         );
       })}
-
     </nav>
   );
 }

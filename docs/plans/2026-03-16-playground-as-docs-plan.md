@@ -13,6 +13,7 @@
 ## Task 1: Install dependencies and configure React Router
 
 **Files:**
+
 - Modify: `apps/playground/package.json`
 - Modify: `apps/playground/src/main.tsx`
 - Modify: `apps/playground/vite.config.ts`
@@ -48,7 +49,7 @@ import { App } from './App';
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <App />
-  </BrowserRouter>
+  </BrowserRouter>,
 );
 ```
 
@@ -74,6 +75,7 @@ git commit -m "feat(playground): install docs dependencies and add React Router"
 ## Task 2: Create the page registry and route structure
 
 **Files:**
+
 - Create: `apps/playground/src/registry.ts`
 - Modify: `apps/playground/src/App.tsx`
 
@@ -426,6 +428,7 @@ export const pages: PageEntry[] = [
 Replace the `useState(activePage)` navigation with React Router's `Routes`/`Route` and `useLocation`/`useNavigate`. The sidebar reads from the registry and uses `<Link>` or `navigate()`. The main content area renders routes.
 
 Key changes to `App.tsx`:
+
 - Remove all 24 page imports (moved to registry.ts)
 - Remove `pages` array (moved to registry.ts)
 - Replace `useState(activePage)` with `useLocation()` to determine active page
@@ -440,34 +443,35 @@ import { Routes, Route, Link, useLocation } from 'react-router';
 import { pages, sections } from './registry';
 
 // In the sidebar:
-{sections.map(section => (
-  <div key={section.id}>
-    {section.label && <SectionHeader>{section.label}</SectionHeader>}
-    {pages.filter(p => p.section === section.id).map(page => (
-      <Link
-        key={page.id}
-        to={page.path}
-        {...stylex.props(styles.navItem, isActive(page.path) && styles.navItemActive)}
-      >
-        {page.label}
-      </Link>
-    ))}
-  </div>
-))}
+{
+  sections.map((section) => (
+    <div key={section.id}>
+      {section.label && <SectionHeader>{section.label}</SectionHeader>}
+      {pages
+        .filter((p) => p.section === section.id)
+        .map((page) => (
+          <Link
+            key={page.id}
+            to={page.path}
+            {...stylex.props(styles.navItem, isActive(page.path) && styles.navItemActive)}
+          >
+            {page.label}
+          </Link>
+        ))}
+    </div>
+  ));
+}
 
 // In the main content area:
 <Routes>
-  {pages.map(page => (
-    <Route
-      key={page.id}
-      path={page.path}
-      element={<PageWrapper page={page} />}
-    />
+  {pages.map((page) => (
+    <Route key={page.id} path={page.path} element={<PageWrapper page={page} />} />
   ))}
-</Routes>
+</Routes>;
 ```
 
 The `PageWrapper` component renders the header (title + description) plus either:
+
 - Component demo page (if `page.component` exists)
 - Guide page with markdown (if `page.markdown` exists)
 
@@ -493,12 +497,14 @@ git commit -m "feat(playground): add URL routing with React Router and page regi
 ## Task 3: Create the sidebar with sections, search, and collapsible groups
 
 **Files:**
+
 - Create: `apps/playground/src/components/Sidebar.tsx`
 - Modify: `apps/playground/src/App.tsx`
 
 **Step 1: Create Sidebar component**
 
 Extract sidebar from App.tsx into its own component. Add:
+
 - Search input at top that filters pages by label and description using Fuse.js
 - Section headers ("Components", "Intelligence", "MCP Server")
 - Collapsible section groups (Components section starts expanded, others collapsed)
@@ -522,7 +528,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
     'mcp-server': false,
   });
 
-  const filtered = query ? fuse.search(query).map(r => r.item) : pages;
+  const filtered = query ? fuse.search(query).map((r) => r.item) : pages;
 
   return (
     <nav {...stylex.props(styles.sidebar, open && styles.sidebarOpen)}>
@@ -558,11 +564,13 @@ git commit -m "feat(playground): add sidebar with search, sections, and collapsi
 ## Task 4: Create markdown renderer with syntax highlighting
 
 **Files:**
+
 - Create: `apps/playground/src/components/Markdown.tsx`
 
 **Step 1: Create the Markdown component**
 
 This component takes a raw markdown string and renders it with:
+
 - `react-markdown` for parsing
 - `remark-gfm` for tables and strikethrough
 - Custom renderers for headings, code blocks, tables, and inline code
@@ -682,17 +690,23 @@ function CodeBlock({ language, code }: { language?: string; code: string }) {
       codeToHtml(code.trim(), {
         lang: language || 'tsx',
         theme: 'github-dark-default',
-      }).then(result => {
+      }).then((result) => {
         if (!cancelled) setHtml(result);
       });
     });
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [code, language]);
 
   if (html) {
     return <div {...stylex.props(styles.pre)} dangerouslySetInnerHTML={{ __html: html }} />;
   }
-  return <pre {...stylex.props(styles.pre)}><code>{code.trim()}</code></pre>;
+  return (
+    <pre {...stylex.props(styles.pre)}>
+      <code>{code.trim()}</code>
+    </pre>
+  );
 }
 ```
 
@@ -712,6 +726,7 @@ git commit -m "feat(playground): add markdown renderer with Shiki syntax highlig
 ## Task 5: Create guide pages and port markdown content
 
 **Files:**
+
 - Create: `apps/playground/src/content/about.md`
 - Create: `apps/playground/src/content/getting-started.md`
 - Create: `apps/playground/src/content/cli.md`
@@ -838,12 +853,14 @@ git commit -m "feat(playground): add guide pages with ported markdown content"
 ## Task 6: Create ComponentDocPage with demos + API reference
 
 **Files:**
+
 - Create: `apps/playground/src/pages/ComponentDocPage.tsx`
 - Modify: `apps/playground/src/App.tsx` (route setup)
 
 **Step 1: Create ComponentDocPage**
 
 This is the key component. For each component page, it renders:
+
 1. Import snippet (styled code block)
 2. The existing demo page component (live demos)
 3. The package `.md` file as rendered markdown (API reference)
@@ -941,6 +958,7 @@ For component pages, the route element becomes:
 **Step 4: Verify a component page shows demos + API docs**
 
 Navigate to `/components/button`. Should see:
+
 1. Import snippet
 2. Live Button demos (variants, sizes, disabled)
 3. Divider
@@ -959,6 +977,7 @@ git commit -m "feat(playground): add component doc pages with demos and API refe
 ## Task 7: Add "View Code" toggle to demo previews
 
 **Files:**
+
 - Modify: `apps/playground/src/components/Preview.tsx`
 - Create: `apps/playground/src/components/CodeToggle.tsx`
 
@@ -1070,6 +1089,7 @@ git commit -m "feat(playground): add View Code toggle to demo previews"
 ## Task 8: Polish typography, spacing, and visual design
 
 **Files:**
+
 - Modify: `apps/playground/src/App.tsx` (layout styles)
 - Modify: `apps/playground/src/components/Sidebar.tsx` (sidebar styles)
 - Modify: `apps/playground/src/components/Markdown.tsx` (prose styles)
@@ -1103,6 +1123,7 @@ This task is about making it look sharp. No functional changes. Focus on:
 **Step 4: Dark mode verification**
 
 Switch to dark mode and verify all elements look correct:
+
 - Code blocks readable
 - Tables readable
 - Borders visible but subtle
@@ -1111,6 +1132,7 @@ Switch to dark mode and verify all elements look correct:
 **Step 5: Mobile verification**
 
 Test at 768px breakpoint:
+
 - Hamburger menu works
 - Content reflows properly
 - Code blocks don't overflow
@@ -1128,6 +1150,7 @@ git commit -m "chore(playground): polish typography, spacing, and visual design"
 ## Task 9: Configure production build and deployment
 
 **Files:**
+
 - Modify: `apps/playground/vite.config.ts`
 - Modify: `apps/playground/package.json`
 
@@ -1163,6 +1186,7 @@ git commit -m "chore(playground): configure production build for SPA deployment"
 ## Task 10: Delete the docs app
 
 **Files:**
+
 - Delete: `apps/docs/` (entire directory)
 - Modify: `pnpm-workspace.yaml` (if it references apps/docs explicitly)
 - Modify: root `package.json` (remove any docs-specific scripts)
@@ -1205,6 +1229,7 @@ git commit -m "chore: remove Fumadocs/Next.js docs app in favor of playground-as
 ## Task 11: Update project documentation
 
 **Files:**
+
 - Modify: `CLAUDE.md` (update Monorepo Layout, Docs App Pattern sections)
 - Modify: `docs/plans/2026-03-16-playground-as-docs-design.md` (mark as complete)
 

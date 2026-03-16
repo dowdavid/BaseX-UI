@@ -52,11 +52,7 @@ export function CopyButton({ text }: CopyButtonProps) {
       onClick={handleCopy}
       aria-label={copied ? 'Copied' : 'Copy code'}
     >
-      {copied ? (
-        <Check {...stylex.props(styles.icon)} />
-      ) : (
-        <Copy {...stylex.props(styles.icon)} />
-      )}
+      {copied ? <Check {...stylex.props(styles.icon)} /> : <Copy {...stylex.props(styles.icon)} />}
     </button>
   );
 }

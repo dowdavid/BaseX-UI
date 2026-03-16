@@ -179,7 +179,10 @@ export function DialogPage() {
         </Dialog.Root>
       </Preview>
 
-      <Preview title="Settings dialog" description="Controlled dialog with interactive content." code={`<Dialog.Root open={open} onOpenChange={setOpen}>
+      <Preview
+        title="Settings dialog"
+        description="Controlled dialog with interactive content."
+        code={`<Dialog.Root open={open} onOpenChange={setOpen}>
   <Dialog.Trigger render={<Button variant="outline">Settings</Button>} />
   <Dialog.Portal>
     <Dialog.Backdrop />
@@ -193,7 +196,8 @@ export function DialogPage() {
       </Dialog.Footer>
     </Dialog.Popup>
   </Dialog.Portal>
-</Dialog.Root>`}>
+</Dialog.Root>`}
+      >
         <Dialog.Root open={settingsOpen} onOpenChange={setSettingsOpen}>
           <Dialog.Trigger render={<Button variant="outline">Settings</Button>} />
           <Dialog.Portal>
@@ -231,7 +235,10 @@ export function DialogPage() {
         </Dialog.Root>
       </Preview>
 
-      <Preview title="Nested dialogs" description="A dialog that opens another dialog on top." code={`<Dialog.Root>
+      <Preview
+        title="Nested dialogs"
+        description="A dialog that opens another dialog on top."
+        code={`<Dialog.Root>
   <Dialog.Trigger render={<Button>Open</Button>} />
   <Dialog.Portal>
     <Dialog.Backdrop />
@@ -250,7 +257,8 @@ export function DialogPage() {
       </Dialog.Footer>
     </Dialog.Popup>
   </Dialog.Portal>
-</Dialog.Root>`}>
+</Dialog.Root>`}
+      >
         <Dialog.Root>
           <Dialog.Trigger render={<Button variant="outline">Open</Button>} />
           <Dialog.Portal>

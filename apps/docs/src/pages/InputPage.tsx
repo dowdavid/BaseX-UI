@@ -35,7 +35,12 @@ const pageStyles = stylex.create({
 export function InputPage() {
   return (
     <>
-      <Preview title="Basic input" description="A simple standalone text input." constrained code={`<Input placeholder="Enter your name" />`}>
+      <Preview
+        title="Basic input"
+        description="A simple standalone text input."
+        constrained
+        code={`<Input placeholder="Enter your name" />`}
+      >
         <Input placeholder="Enter your name" />
       </Preview>
 
@@ -66,19 +71,29 @@ export function InputPage() {
         </form>
       </Preview>
 
-      <Preview title="Disabled" description="A disabled input with a Field label." constrained code={`<Field.Root disabled>
+      <Preview
+        title="Disabled"
+        description="A disabled input with a Field label."
+        constrained
+        code={`<Field.Root disabled>
   <Field.Label>Username</Field.Label>
   <Input value="daviddow" />
-</Field.Root>`}>
+</Field.Root>`}
+      >
         <Field.Root disabled>
           <Field.Label>Username</Field.Label>
           <Input value="daviddow" />
         </Field.Root>
       </Preview>
 
-      <Preview title="Sizes" description="Small, medium, and large input sizes." constrained code={`<Input size="sm" placeholder="Small" />
+      <Preview
+        title="Sizes"
+        description="Small, medium, and large input sizes."
+        constrained
+        code={`<Input size="sm" placeholder="Small" />
 <Input size="md" placeholder="Medium" />
-<Input size="lg" placeholder="Large" />`}>
+<Input size="lg" placeholder="Large" />`}
+      >
         <div {...stylex.props(pageStyles.stack)}>
           {sizes.map((size) => (
             <Input

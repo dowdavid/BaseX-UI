@@ -22,6 +22,7 @@ Call this before generating code for any component. Returns the import statement
 ```
 
 This prevents three common agent mistakes:
+
 1. Missing CSS animations that components depend on
 2. Omitting required props (e.g., `value` on Accordion.Item)
 3. Using wrong animation timing

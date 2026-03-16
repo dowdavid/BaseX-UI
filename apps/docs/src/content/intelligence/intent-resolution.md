@@ -43,17 +43,17 @@ The scoring is intentionally simple. Signal keywords are handcrafted per intent,
 
 Every component has between 1 and 5 intents covering its primary use cases:
 
-| Component | Example intents |
-|-----------|----------------|
-| Button | trigger-action, confirm-action, cancel-action, destructive-action, secondary-action |
-| Accordion | collapsible-sections, show-hide-content, faq-list |
-| AlertDialog | confirm-destructive-action, blocking-confirmation, discard-unsaved-changes |
-| Dialog | display-detail-overlay, modal-form, settings-panel |
-| Drawer | mobile-navigation, side-panel, filter-panel |
-| Input | text-input, search-input, url-input |
-| Checkbox | toggle-option, agree-to-terms, multi-select-list |
-| Radio | exclusive-selection, plan-picker, setting-choice |
-| Menu | context-menu, action-menu, dropdown-menu |
+| Component   | Example intents                                                                     |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Button      | trigger-action, confirm-action, cancel-action, destructive-action, secondary-action |
+| Accordion   | collapsible-sections, show-hide-content, faq-list                                   |
+| AlertDialog | confirm-destructive-action, blocking-confirmation, discard-unsaved-changes          |
+| Dialog      | display-detail-overlay, modal-form, settings-panel                                  |
+| Drawer      | mobile-navigation, side-panel, filter-panel                                         |
+| Input       | text-input, search-input, url-input                                                 |
+| Checkbox    | toggle-option, agree-to-terms, multi-select-list                                    |
+| Radio       | exclusive-selection, plan-picker, setting-choice                                    |
+| Menu        | context-menu, action-menu, dropdown-menu                                            |
 
 ## Composition blueprints
 
@@ -62,7 +62,13 @@ Every intent includes a `composition` field — a JSX snippet showing the recomm
 ```tsx
 // Intent: confirm-destructive-action
 <AlertDialog.Root>
-  <AlertDialog.Trigger render={<Button variant="outline" color="destructive">Delete</Button>} />
+  <AlertDialog.Trigger
+    render={
+      <Button variant="outline" color="destructive">
+        Delete
+      </Button>
+    }
+  />
   <AlertDialog.Portal>
     <AlertDialog.Backdrop />
     <AlertDialog.Popup>
@@ -70,7 +76,10 @@ Every intent includes a `composition` field — a JSX snippet showing the recomm
       <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
       <AlertDialog.Actions>
         <AlertDialog.Close render={<Button variant="ghost">Cancel</Button>} />
-        <AlertDialog.Close render={<Button color="destructive">Delete</Button>} onClick={handleDelete} />
+        <AlertDialog.Close
+          render={<Button color="destructive">Delete</Button>}
+          onClick={handleDelete}
+        />
       </AlertDialog.Actions>
     </AlertDialog.Popup>
   </AlertDialog.Portal>

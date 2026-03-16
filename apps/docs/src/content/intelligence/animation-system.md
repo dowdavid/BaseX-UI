@@ -2,13 +2,13 @@ Base-X UI constrains all animations to five presets. Every component, every inte
 
 ## The five presets
 
-| Preset | Duration | Easing | Use for |
-|--------|----------|--------|---------|
-| **State** | 100ms | `motionEaseOut` | Hover, focus, active, color changes, border changes |
-| **Expand** | 200ms | `motionEaseInOut` | Accordion panels, collapsible content, height transitions |
-| **Move** | 200ms | `motionEaseInOut` | Rotation, translation, slide, scale, chevron rotation |
-| **Enter** | 200ms | `motionEaseOut` | Popover, tooltip, menu, dialog appear, fade in |
-| **Exit** | 100ms | `motionEaseOut` | Popover close, tooltip hide, dialog dismiss, fade out |
+| Preset     | Duration | Easing            | Use for                                                   |
+| ---------- | -------- | ----------------- | --------------------------------------------------------- |
+| **State**  | 100ms    | `motionEaseOut`   | Hover, focus, active, color changes, border changes       |
+| **Expand** | 200ms    | `motionEaseInOut` | Accordion panels, collapsible content, height transitions |
+| **Move**   | 200ms    | `motionEaseInOut` | Rotation, translation, slide, scale, chevron rotation     |
+| **Enter**  | 200ms    | `motionEaseOut`   | Popover, tooltip, menu, dialog appear, fade in            |
+| **Exit**   | 100ms    | `motionEaseOut`   | Popover close, tooltip hide, dialog dismiss, fade out     |
 
 ## Why five
 

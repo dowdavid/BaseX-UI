@@ -164,51 +164,47 @@ export function App() {
 
   return (
     <ThemeProvider value={dark}>
-    <div {...stylex.props(theme, styles.layout)}>
-      {/* Mobile header */}
-      <div {...stylex.props(styles.mobileHeader)}>
-        <button
-          {...stylex.props(styles.hamburger)}
-          onClick={() => setSidebarOpen(true)}
-          aria-label="Open navigation"
-        >
-          <svg {...stylex.props(styles.hamburgerIcon)} viewBox="0 0 20 20" fill="currentColor">
-            <path
-              fillRule="evenodd"
-              d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 5A.75.75 0 012.75 9h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 9.75zm0 5a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        <span {...stylex.props(styles.mobileLogoText)}>Base-X UI</span>
-      </div>
-
-      {/* Mobile overlay */}
-      {sidebarOpen && (
-        <div {...stylex.props(styles.overlay)} onClick={() => setSidebarOpen(false)} />
-      )}
-
-      <Sidebar
-        open={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        dark={dark}
-        onToggleTheme={() => setDark((d) => !d)}
-      />
-
-      <main ref={mainRef} {...stylex.props(styles.main)}>
-        <div {...stylex.props(styles.content)}>
-          <Routes>
-            {pages.map((page) => (
-              <Route
-                key={page.id}
-                path={page.path}
-                element={<PageWrapper page={page} />}
+      <div {...stylex.props(theme, styles.layout)}>
+        {/* Mobile header */}
+        <div {...stylex.props(styles.mobileHeader)}>
+          <button
+            {...stylex.props(styles.hamburger)}
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open navigation"
+          >
+            <svg {...stylex.props(styles.hamburgerIcon)} viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fillRule="evenodd"
+                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 5A.75.75 0 012.75 9h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 9.75zm0 5a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
+                clipRule="evenodd"
               />
-            ))}
-          </Routes>
+            </svg>
+          </button>
+          <span {...stylex.props(styles.mobileLogoText)}>Base-X UI</span>
         </div>
-      </main>
-    </div>
+
+        {/* Mobile overlay */}
+        {sidebarOpen && (
+          <div {...stylex.props(styles.overlay)} onClick={() => setSidebarOpen(false)} />
+        )}
+
+        <Sidebar
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          dark={dark}
+          onToggleTheme={() => setDark((d) => !d)}
+        />
+
+        <main ref={mainRef} {...stylex.props(styles.main)}>
+          <div {...stylex.props(styles.content)}>
+            <Routes>
+              {pages.map((page) => (
+                <Route key={page.id} path={page.path} element={<PageWrapper page={page} />} />
+              ))}
+            </Routes>
+          </div>
+        </main>
+      </div>
     </ThemeProvider>
   );
 }

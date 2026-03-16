@@ -146,9 +146,11 @@ function CodeBlock({ language, code }: { language?: string; code: string }) {
       codeToHtml(trimmed, {
         lang: language || 'tsx',
         theme: dark ? 'github-dark-default' : 'github-light-default',
-      }).then((result) => {
-        if (!cancelled) setHtml(result);
-      }).catch(() => {});
+      })
+        .then((result) => {
+          if (!cancelled) setHtml(result);
+        })
+        .catch(() => {});
     });
     return () => {
       cancelled = true;
@@ -193,7 +195,11 @@ const components = {
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong {...stylex.props(styles.strong)} {...props} />
   ),
-  code: ({ className, children, ...rest }: ComponentPropsWithoutRef<'code'> & { inline?: boolean }) => {
+  code: ({
+    className,
+    children,
+    ...rest
+  }: ComponentPropsWithoutRef<'code'> & { inline?: boolean }) => {
     const match = /language-(\w+)/.exec(className || '');
     const codeStr = String(children).replace(/\n$/, '');
 
@@ -203,7 +209,11 @@ const components = {
     }
 
     // Inline code
-    return <code {...stylex.props(styles.inlineCode)} {...rest}>{children}</code>;
+    return (
+      <code {...stylex.props(styles.inlineCode)} {...rest}>
+        {children}
+      </code>
+    );
   },
   pre: ({ children }: ComponentPropsWithoutRef<'pre'>) => {
     // If children is a CodeBlock (via code component), just pass through

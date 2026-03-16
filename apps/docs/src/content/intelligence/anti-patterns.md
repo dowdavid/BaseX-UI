@@ -46,17 +46,17 @@ Score: 1.5 / (4 keywords × 2) = 0.19... → rounds up with substring → trigge
 
 70 anti-patterns across all 24 components. Some examples:
 
-| Component | Scenario | Alternative |
-|-----------|----------|-------------|
-| Button | Navigation or page linking | Use Link component |
-| Button | Toggle between two states | Use Checkbox or Toggle |
-| Accordion | Multi-step wizard | Use a dedicated stepper pattern |
-| Dialog | Simple alerts or confirmations | Use AlertDialog |
-| Dialog | Toast or notification | Use a toast component |
-| Checkbox | Exclusive single selection | Use Radio |
-| Input | Rich text or multi-line | Use textarea |
-| Menu | Primary navigation | Use NavigationMenu |
-| Popover | Long-form content or forms | Use Dialog or Drawer |
+| Component | Scenario                       | Alternative                     |
+| --------- | ------------------------------ | ------------------------------- |
+| Button    | Navigation or page linking     | Use Link component              |
+| Button    | Toggle between two states      | Use Checkbox or Toggle          |
+| Accordion | Multi-step wizard              | Use a dedicated stepper pattern |
+| Dialog    | Simple alerts or confirmations | Use AlertDialog                 |
+| Dialog    | Toast or notification          | Use a toast component           |
+| Checkbox  | Exclusive single selection     | Use Radio                       |
+| Input     | Rich text or multi-line        | Use textarea                    |
+| Menu      | Primary navigation             | Use NavigationMenu              |
+| Popover   | Long-form content or forms     | Use Dialog or Drawer            |
 
 ## Automatic during intent resolution
 

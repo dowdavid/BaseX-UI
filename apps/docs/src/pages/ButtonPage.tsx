@@ -55,9 +55,13 @@ export function ButtonPage() {
         </div>
       </Preview>
 
-      <Preview title="Sizes" description="Small, medium, and large." code={`<Button size="sm">Small</Button>
+      <Preview
+        title="Sizes"
+        description="Small, medium, and large."
+        code={`<Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
-<Button size="lg">Large</Button>`}>
+<Button size="lg">Large</Button>`}
+      >
         <div {...stylex.props(styles.row)}>
           {sizes.map((size) => (
             <Button key={size} size={size}>
@@ -67,9 +71,13 @@ export function ButtonPage() {
         </div>
       </Preview>
 
-      <Preview title="Disabled" description="Reduced opacity with no pointer events." code={`<Button disabled>Solid</Button>
+      <Preview
+        title="Disabled"
+        description="Reduced opacity with no pointer events."
+        code={`<Button disabled>Solid</Button>
 <Button variant="outline" disabled>Outline</Button>
-<Button variant="ghost" disabled>Ghost</Button>`}>
+<Button variant="ghost" disabled>Ghost</Button>`}
+      >
         <div {...stylex.props(styles.row)}>
           {variants.map((variant) => (
             <Button key={variant} variant={variant} disabled>
