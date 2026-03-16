@@ -3,7 +3,7 @@ title: NumberField
 description: A numeric input with increment and decrement buttons.
 ---
 
-import { NumberFieldBasic, NumberFieldConstrained, NumberFieldSizes } from '@/components/demos/number-field-demo';
+import { NumberFieldBasic, NumberFieldConstrained, NumberFieldSizes, NumberFieldDisabled } from '@/components/demos/number-field-demo';
 
 ## Import
 
@@ -30,7 +30,7 @@ import { NumberField } from '@basex-ui/components';
 <NumberFieldConstrained />
 
 ```tsx
-<NumberField.Root min={0} max={100} step={5}>
+<NumberField.Root defaultValue={0} min={0} max={100} step={5}>
   <NumberField.Group>
     <NumberField.Decrement />
     <NumberField.Input />
@@ -42,6 +42,20 @@ import { NumberField } from '@basex-ui/components';
 ## Sizes
 
 <NumberFieldSizes />
+
+## Disabled
+
+<NumberFieldDisabled />
+
+```tsx
+<NumberField.Root defaultValue={3} disabled>
+  <NumberField.Group disabled>
+    <NumberField.Decrement />
+    <NumberField.Input />
+    <NumberField.Increment />
+  </NumberField.Group>
+</NumberField.Root>
+```
 
 ## Parts
 

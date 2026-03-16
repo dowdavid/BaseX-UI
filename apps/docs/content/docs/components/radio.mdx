@@ -3,7 +3,7 @@ title: Radio
 description: A radio button group for single-select choices.
 ---
 
-import { RadioBasic, RadioHorizontal } from '@/components/demos/radio-demo';
+import { RadioBasic, RadioHorizontal, RadioDisabled } from '@/components/demos/radio-demo';
 
 ## Import
 
@@ -16,10 +16,10 @@ import { Radio } from '@basex-ui/components';
 <RadioBasic />
 
 ```tsx
-<Radio.Group defaultValue="md">
-  <label><Radio.Root value="sm"><Radio.Indicator /></Radio.Root> Small</label>
-  <label><Radio.Root value="md"><Radio.Indicator /></Radio.Root> Medium</label>
-  <label><Radio.Root value="lg"><Radio.Indicator /></Radio.Root> Large</label>
+<Radio.Group defaultValue="apple">
+  <label><Radio.Root value="apple"><Radio.Indicator /></Radio.Root> Apple</label>
+  <label><Radio.Root value="banana"><Radio.Indicator /></Radio.Root> Banana</label>
+  <label><Radio.Root value="cherry"><Radio.Indicator /></Radio.Root> Cherry</label>
 </Radio.Group>
 ```
 
@@ -28,10 +28,16 @@ import { Radio } from '@basex-ui/components';
 <RadioHorizontal />
 
 ```tsx
-<Radio.Group orientation="horizontal">
-  {/* items */}
+<Radio.Group defaultValue="left" orientation="horizontal">
+  <label><Radio.Root value="left"><Radio.Indicator /></Radio.Root> Left</label>
+  <label><Radio.Root value="center"><Radio.Indicator /></Radio.Root> Center</label>
+  <label><Radio.Root value="right"><Radio.Indicator /></Radio.Root> Right</label>
 </Radio.Group>
 ```
+
+## Disabled
+
+<RadioDisabled />
 
 ## Parts
 

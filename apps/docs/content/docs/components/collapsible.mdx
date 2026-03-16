@@ -3,7 +3,7 @@ title: Collapsible
 description: A single collapsible section with a trigger button and animated content panel.
 ---
 
-import { CollapsibleBasic } from '@/components/demos/collapsible-demo';
+import { CollapsibleBasic, CollapsibleDefaultOpen, CollapsibleDisabled } from '@/components/demos/collapsible-demo';
 
 ## Import
 
@@ -17,10 +17,34 @@ import { Collapsible } from '@basex-ui/components';
 
 ```tsx
 <Collapsible.Root>
-  <Collapsible.Trigger>Show details</Collapsible.Trigger>
+  <Collapsible.Trigger>What is BaseX UI?</Collapsible.Trigger>
   <Collapsible.Panel>
-    Here are the additional details that were hidden.
+    BaseX UI is an AI-first component library built on Base UI and styled with StyleX.
   </Collapsible.Panel>
+</Collapsible.Root>
+```
+
+## Default open
+
+<CollapsibleDefaultOpen />
+
+```tsx
+<Collapsible.Root defaultOpen>
+  <Collapsible.Trigger>Project details</Collapsible.Trigger>
+  <Collapsible.Panel>
+    This panel starts open. Click the trigger to collapse it.
+  </Collapsible.Panel>
+</Collapsible.Root>
+```
+
+## Disabled
+
+<CollapsibleDisabled />
+
+```tsx
+<Collapsible.Root disabled>
+  <Collapsible.Trigger>Locked section</Collapsible.Trigger>
+  <Collapsible.Panel>This content is hidden and cannot be revealed.</Collapsible.Panel>
 </Collapsible.Root>
 ```
 

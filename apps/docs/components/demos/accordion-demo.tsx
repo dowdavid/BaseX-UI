@@ -29,32 +29,31 @@ function Preview({ children }: { children: React.ReactNode }) {
 export function AccordionBasic() {
   return (
     <Preview>
-      <Accordion.Root style={{ width: '100%' }}>
-        <Accordion.Item value="getting-started">
+      <Accordion.Root defaultValue={['item-1']} style={{ width: '100%' }}>
+        <Accordion.Item value="item-1">
           <Accordion.Header>
-            <Accordion.Trigger>Getting Started</Accordion.Trigger>
+            <Accordion.Trigger>What is BaseX UI?</Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Panel>
-            Base X UI provides a set of unstyled, accessible components built on Base UI and styled
-            with StyleX. Install the package and import components to get started.
+            BaseX UI is an AI-first, copy-paste component library built on Base UI and styled with
+            StyleX.
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item value="installation">
+        <Accordion.Item value="item-2">
           <Accordion.Header>
-            <Accordion.Trigger>Installation</Accordion.Trigger>
+            <Accordion.Trigger>How does theming work?</Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Panel>
-            Run npm install @basex-ui/components to add the component library to your project.
-            StyleX and Base UI are included as peer dependencies.
+            Themes are built with stylex.createTheme, overriding design tokens defined with
+            stylex.defineVars.
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item value="usage">
+        <Accordion.Item value="item-3">
           <Accordion.Header>
-            <Accordion.Trigger>Usage</Accordion.Trigger>
+            <Accordion.Trigger>Can I customize components?</Accordion.Trigger>
           </Accordion.Header>
           <Accordion.Panel>
-            Import individual components from @basex-ui/components. Each component uses a compound
-            pattern with dot notation like Accordion.Root, Accordion.Item, and Accordion.Trigger.
+            Yes — every part accepts an sx prop for StyleX overrides, and you own the source code.
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion.Root>
@@ -65,33 +64,18 @@ export function AccordionBasic() {
 export function AccordionMultiple() {
   return (
     <Preview>
-      <Accordion.Root multiple style={{ width: '100%' }}>
-        <Accordion.Item value="getting-started">
+      <Accordion.Root multiple defaultValue={['item-1', 'item-2']} style={{ width: '100%' }}>
+        <Accordion.Item value="item-1">
           <Accordion.Header>
-            <Accordion.Trigger>Getting Started</Accordion.Trigger>
+            <Accordion.Trigger>Section 1 (open)</Accordion.Trigger>
           </Accordion.Header>
-          <Accordion.Panel>
-            Base X UI provides a set of unstyled, accessible components built on Base UI and styled
-            with StyleX. Install the package and import components to get started.
-          </Accordion.Panel>
+          <Accordion.Panel>Both panels can be open at the same time.</Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item value="installation">
+        <Accordion.Item value="item-2">
           <Accordion.Header>
-            <Accordion.Trigger>Installation</Accordion.Trigger>
+            <Accordion.Trigger>Section 2 (open)</Accordion.Trigger>
           </Accordion.Header>
-          <Accordion.Panel>
-            Run npm install @basex-ui/components to add the component library to your project.
-            StyleX and Base UI are included as peer dependencies.
-          </Accordion.Panel>
-        </Accordion.Item>
-        <Accordion.Item value="usage">
-          <Accordion.Header>
-            <Accordion.Trigger>Usage</Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Panel>
-            Import individual components from @basex-ui/components. Each component uses a compound
-            pattern with dot notation like Accordion.Root, Accordion.Item, and Accordion.Trigger.
-          </Accordion.Panel>
+          <Accordion.Panel>Try closing one — the other stays open.</Accordion.Panel>
         </Accordion.Item>
       </Accordion.Root>
     </Preview>

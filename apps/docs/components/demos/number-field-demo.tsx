@@ -26,10 +26,19 @@ function Preview({ children }: { children: React.ReactNode }) {
   );
 }
 
+const styles = stylex.create({
+  stack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    width: '100%',
+  },
+});
+
 export function NumberFieldBasic() {
   return (
     <Preview>
-      <NumberField.Root defaultValue={0}>
+      <NumberField.Root defaultValue={5}>
         <NumberField.Group>
           <NumberField.Decrement />
           <NumberField.Input />
@@ -43,7 +52,7 @@ export function NumberFieldBasic() {
 export function NumberFieldConstrained() {
   return (
     <Preview>
-      <NumberField.Root defaultValue={50} min={0} max={100} step={5}>
+      <NumberField.Root defaultValue={0} min={0} max={100} step={5}>
         <NumberField.Group>
           <NumberField.Decrement />
           <NumberField.Input />
@@ -57,22 +66,26 @@ export function NumberFieldConstrained() {
 export function NumberFieldSizes() {
   return (
     <Preview>
-      <NumberField.Root defaultValue={0}>
-        <NumberField.Group size="sm">
-          <NumberField.Decrement />
-          <NumberField.Input />
-          <NumberField.Increment />
-        </NumberField.Group>
-      </NumberField.Root>
-      <NumberField.Root defaultValue={0}>
-        <NumberField.Group size="md">
-          <NumberField.Decrement />
-          <NumberField.Input />
-          <NumberField.Increment />
-        </NumberField.Group>
-      </NumberField.Root>
-      <NumberField.Root defaultValue={0}>
-        <NumberField.Group size="lg">
+      <div {...stylex.props(styles.stack)}>
+        {(['sm', 'md', 'lg'] as const).map((size) => (
+          <NumberField.Root key={size} defaultValue={1}>
+            <NumberField.Group size={size}>
+              <NumberField.Decrement />
+              <NumberField.Input />
+              <NumberField.Increment />
+            </NumberField.Group>
+          </NumberField.Root>
+        ))}
+      </div>
+    </Preview>
+  );
+}
+
+export function NumberFieldDisabled() {
+  return (
+    <Preview>
+      <NumberField.Root defaultValue={3} disabled>
+        <NumberField.Group disabled>
           <NumberField.Decrement />
           <NumberField.Input />
           <NumberField.Increment />

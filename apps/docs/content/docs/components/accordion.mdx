@@ -16,12 +16,14 @@ import { Accordion } from '@basex-ui/components';
 <AccordionBasic />
 
 ```tsx
-<Accordion.Root>
-  <Accordion.Item value="getting-started">
+<Accordion.Root defaultValue={['item-1']}>
+  <Accordion.Item value="item-1">
     <Accordion.Header>
-      <Accordion.Trigger>Getting Started</Accordion.Trigger>
+      <Accordion.Trigger>What is BaseX UI?</Accordion.Trigger>
     </Accordion.Header>
-    <Accordion.Panel>Install Base-X UI and start building.</Accordion.Panel>
+    <Accordion.Panel>
+      BaseX UI is an AI-first, copy-paste component library built on Base UI and styled with StyleX.
+    </Accordion.Panel>
   </Accordion.Item>
 </Accordion.Root>
 ```
@@ -31,8 +33,13 @@ import { Accordion } from '@basex-ui/components';
 <AccordionMultiple />
 
 ```tsx
-<Accordion.Root multiple>
-  {/* Multiple panels can be open simultaneously */}
+<Accordion.Root multiple defaultValue={['item-1', 'item-2']}>
+  <Accordion.Item value="item-1">
+    <Accordion.Header>
+      <Accordion.Trigger>Section 1 (open)</Accordion.Trigger>
+    </Accordion.Header>
+    <Accordion.Panel>Both panels can be open at the same time.</Accordion.Panel>
+  </Accordion.Item>
 </Accordion.Root>
 ```
 

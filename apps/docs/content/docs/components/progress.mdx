@@ -3,7 +3,7 @@ title: Progress
 description: A progress bar showing determinate or indeterminate task completion.
 ---
 
-import { ProgressBasic, ProgressColors, ProgressIndeterminate } from '@/components/demos/progress-demo';
+import { ProgressBasic, ProgressWithValue, ProgressColors, ProgressSizes, ProgressIndeterminate } from '@/components/demos/progress-demo';
 
 ## Import
 
@@ -16,18 +16,37 @@ import { Progress } from '@basex-ui/components';
 <ProgressBasic />
 
 ```tsx
-<Progress.Root value={45}>
-  <Progress.Label>Upload</Progress.Label>
+<Progress.Root value={65}>
+  <Progress.Label>Uploading...</Progress.Label>
   <Progress.Track>
     <Progress.Indicator />
   </Progress.Track>
-  <Progress.Value />
+</Progress.Root>
+```
+
+## With value display
+
+<ProgressWithValue />
+
+```tsx
+<Progress.Root value={42}>
+  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Progress.Label>Processing</Progress.Label>
+    <Progress.Value />
+  </div>
+  <Progress.Track>
+    <Progress.Indicator />
+  </Progress.Track>
 </Progress.Root>
 ```
 
 ## Colors
 
 <ProgressColors />
+
+## Sizes
+
+<ProgressSizes />
 
 ## Indeterminate
 
@@ -37,6 +56,7 @@ Pass `value={null}` for an indeterminate progress bar.
 
 ```tsx
 <Progress.Root value={null}>
+  <Progress.Label>Loading...</Progress.Label>
   <Progress.Track>
     <Progress.Indicator />
   </Progress.Track>

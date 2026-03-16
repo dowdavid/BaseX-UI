@@ -3,12 +3,12 @@ title: Field
 description: A form field wrapper connecting label, description, input, and validation error.
 ---
 
-import { FieldBasic, FieldWithValidation, FieldWithDescription } from '@/components/demos/field-demo';
+import { FieldBasic, FieldWithError, FieldWithDescription } from '@/components/demos/field-demo';
 
 ## Import
 
 ```tsx
-import { Field, Input } from '@basex-ui/components';
+import { Field, Form, Button } from '@basex-ui/components';
 ```
 
 ## Usage
@@ -17,24 +17,28 @@ import { Field, Input } from '@basex-ui/components';
 
 ```tsx
 <Field.Root>
-  <Field.Label>Email</Field.Label>
-  <Input placeholder="you@example.com" />
+  <Field.Label>Name</Field.Label>
+  <Field.Control placeholder="Enter your name" />
 </Field.Root>
 ```
 
-## With validation
+## With error
 
-<FieldWithValidation />
+<FieldWithError />
 
 ```tsx
-<Field.Root invalid>
-  <Field.Label>Email</Field.Label>
-  <Input />
-  <Field.Error>Please enter a valid email address.</Field.Error>
-</Field.Root>
+<Form onSubmit={(e) => e.preventDefault()}>
+  <Field.Root name="email">
+    <Field.Label>Email</Field.Label>
+    <Field.Control type="email" required placeholder="you@example.com" />
+    <Field.Error match="valueMissing">Email is required.</Field.Error>
+    <Field.Error match="typeMismatch">Please enter a valid email address.</Field.Error>
+  </Field.Root>
+  <Button type="submit" size="sm">Submit</Button>
+</Form>
 ```
 
-## With description
+## With description and validation
 
 <FieldWithDescription />
 

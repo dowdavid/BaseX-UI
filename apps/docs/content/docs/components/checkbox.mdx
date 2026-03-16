@@ -3,7 +3,7 @@ title: Checkbox
 description: A control for toggling between checked, unchecked, and optionally indeterminate states.
 ---
 
-import { CheckboxBasic, CheckboxStates } from '@/components/demos/checkbox-demo';
+import { CheckboxBasic, CheckboxDisabled } from '@/components/demos/checkbox-demo';
 
 ## Import
 
@@ -17,16 +17,16 @@ import { Checkbox } from '@basex-ui/components';
 
 ```tsx
 <label>
-  <Checkbox.Root>
+  <Checkbox.Root defaultChecked>
     <Checkbox.Indicator />
   </Checkbox.Root>
   Enable notifications
 </label>
 ```
 
-## States
+## Disabled
 
-<CheckboxStates />
+<CheckboxDisabled />
 
 ## Parts
 

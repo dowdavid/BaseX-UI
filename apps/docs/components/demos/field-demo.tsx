@@ -1,7 +1,7 @@
 'use client';
 
 import * as stylex from '@stylexjs/stylex';
-import { Field, Input } from '@basex-ui/components';
+import { Field, Form, Button } from '@basex-ui/components';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { useTheme } from 'next-themes';
 
@@ -30,21 +30,27 @@ export function FieldBasic() {
   return (
     <Preview>
       <Field.Root>
-        <Field.Label>Email</Field.Label>
-        <Input placeholder="you@example.com" />
+        <Field.Label>Name</Field.Label>
+        <Field.Control placeholder="Enter your name" />
       </Field.Root>
     </Preview>
   );
 }
 
-export function FieldWithValidation() {
+export function FieldWithError() {
   return (
     <Preview>
-      <Field.Root invalid>
-        <Field.Label>Email</Field.Label>
-        <Input placeholder="you@example.com" />
-        <Field.Error>Please enter a valid email address.</Field.Error>
-      </Field.Root>
+      <Form onSubmit={(e: React.FormEvent) => e.preventDefault()}>
+        <Field.Root name="email">
+          <Field.Label>Email</Field.Label>
+          <Field.Control type="email" required placeholder="you@example.com" />
+          <Field.Error match="valueMissing">Email is required.</Field.Error>
+          <Field.Error match="typeMismatch">Please enter a valid email address.</Field.Error>
+        </Field.Root>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+          <Button type="submit" size="sm">Submit</Button>
+        </div>
+      </Form>
     </Preview>
   );
 }
@@ -52,11 +58,18 @@ export function FieldWithValidation() {
 export function FieldWithDescription() {
   return (
     <Preview>
-      <Field.Root>
-        <Field.Label>Username</Field.Label>
-        <Field.Description>Your public display name</Field.Description>
-        <Input placeholder="johndoe" />
-      </Field.Root>
+      <Form onSubmit={(e: React.FormEvent) => e.preventDefault()}>
+        <Field.Root name="password">
+          <Field.Label>Password</Field.Label>
+          <Field.Description>Must be at least 8 characters long.</Field.Description>
+          <Field.Control type="password" required minLength={8} />
+          <Field.Error match="valueMissing">Password is required.</Field.Error>
+          <Field.Error match="tooShort">Password must be at least 8 characters.</Field.Error>
+        </Field.Root>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+          <Button type="submit" size="sm">Submit</Button>
+        </div>
+      </Form>
     </Preview>
   );
 }

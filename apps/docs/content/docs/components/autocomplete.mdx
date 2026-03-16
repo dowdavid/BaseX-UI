@@ -3,7 +3,7 @@ title: Autocomplete
 description: A text input with a filterable suggestion dropdown.
 ---
 
-import { AutocompleteBasic, AutocompleteSizes } from '@/components/demos/autocomplete-demo';
+import { AutocompleteBasic, AutocompleteGrouped, AutocompleteAutoHighlight, AutocompleteStartAddon, AutocompleteSizes } from '@/components/demos/autocomplete-demo';
 
 ## Import
 
@@ -16,12 +16,81 @@ import { Autocomplete } from '@basex-ui/components';
 <AutocompleteBasic />
 
 ```tsx
-const fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape'];
+const fruits = [
+  { id: 1, value: 'Apple' },
+  { id: 2, value: 'Banana' },
+  { id: 3, value: 'Cherry' },
+  // ...
+];
 
 <Autocomplete.Root items={fruits}>
   <Autocomplete.Input placeholder="Search fruits..." />
   <Autocomplete.Popup>
-    {(item) => <Autocomplete.Item value={item}>{item}</Autocomplete.Item>}
+    <Autocomplete.Empty>No fruits found.</Autocomplete.Empty>
+    {(fruit) => (
+      <Autocomplete.Item key={fruit.id} value={fruit}>
+        {fruit.value}
+      </Autocomplete.Item>
+    )}
+  </Autocomplete.Popup>
+</Autocomplete.Root>
+```
+
+## Grouped suggestions
+
+<AutocompleteGrouped />
+
+```tsx
+<Autocomplete.Root items={produce}>
+  <Autocomplete.Input placeholder="Search produce..." />
+  <Autocomplete.Popup>
+    <Autocomplete.Empty>No results.</Autocomplete.Empty>
+    {(group) => (
+      <Autocomplete.Group key={group.label}>
+        <Autocomplete.GroupLabel>{group.label}</Autocomplete.GroupLabel>
+        {group.items.map((item) => (
+          <Autocomplete.Item key={item.id} value={item}>
+            {item.value}
+          </Autocomplete.Item>
+        ))}
+      </Autocomplete.Group>
+    )}
+  </Autocomplete.Popup>
+</Autocomplete.Root>
+```
+
+## Auto-highlight
+
+<AutocompleteAutoHighlight />
+
+```tsx
+<Autocomplete.Root items={fruits} autoHighlight>
+  <Autocomplete.Input placeholder="Start typing..." />
+  <Autocomplete.Popup>
+    <Autocomplete.Empty>No results.</Autocomplete.Empty>
+    {(fruit) => (
+      <Autocomplete.Item key={fruit.id} value={fruit}>
+        {fruit.value}
+      </Autocomplete.Item>
+    )}
+  </Autocomplete.Popup>
+</Autocomplete.Root>
+```
+
+## Start addon
+
+<AutocompleteStartAddon />
+
+```tsx
+<Autocomplete.Root items={fruits}>
+  <Autocomplete.Input startAddon={<SearchIcon />} placeholder="Search fruits..." />
+  <Autocomplete.Popup>
+    <Autocomplete.Empty>No results.</Autocomplete.Empty>
+    {(fruit) => (
+      <Autocomplete.Item key={fruit.id} value={fruit}>
+        {fruit.value}
+      </Autocomplete.Item>
+    )}
   </Autocomplete.Popup>
 </Autocomplete.Root>
 ```

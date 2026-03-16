@@ -30,7 +30,7 @@ export function CheckboxBasic() {
   return (
     <Preview>
       <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Checkbox.Root>
+        <Checkbox.Root defaultChecked>
           <Checkbox.Indicator />
         </Checkbox.Root>
         Enable notifications
@@ -39,27 +39,23 @@ export function CheckboxBasic() {
   );
 }
 
-export function CheckboxStates() {
+export function CheckboxDisabled() {
   return (
     <Preview>
-      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Checkbox.Root defaultChecked>
-          <Checkbox.Indicator />
-        </Checkbox.Root>
-        Checked
-      </label>
-      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Checkbox.Root>
-          <Checkbox.Indicator />
-        </Checkbox.Root>
-        Unchecked
-      </label>
-      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Checkbox.Root indeterminate>
-          <Checkbox.Indicator />
-        </Checkbox.Root>
-        Indeterminate
-      </label>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: 0.64 }}>
+          <Checkbox.Root disabled>
+            <Checkbox.Indicator />
+          </Checkbox.Root>
+          Unchecked disabled
+        </label>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: 0.64 }}>
+          <Checkbox.Root disabled defaultChecked>
+            <Checkbox.Indicator />
+          </Checkbox.Root>
+          Checked disabled
+        </label>
+      </div>
     </Preview>
   );
 }

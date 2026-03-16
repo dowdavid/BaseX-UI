@@ -29,24 +29,24 @@ function Preview({ children }: { children: React.ReactNode }) {
 export function RadioBasic() {
   return (
     <Preview>
-      <Radio.Group defaultValue="medium">
+      <Radio.Group defaultValue="apple">
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Radio.Root value="small">
+          <Radio.Root value="apple">
             <Radio.Indicator />
           </Radio.Root>
-          Small
+          Apple
         </label>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Radio.Root value="medium">
+          <Radio.Root value="banana">
             <Radio.Indicator />
           </Radio.Root>
-          Medium
+          Banana
         </label>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Radio.Root value="large">
+          <Radio.Root value="cherry">
             <Radio.Indicator />
           </Radio.Root>
-          Large
+          Cherry
         </label>
       </Radio.Group>
     </Preview>
@@ -56,24 +56,45 @@ export function RadioBasic() {
 export function RadioHorizontal() {
   return (
     <Preview>
-      <Radio.Group defaultValue="medium" orientation="horizontal">
+      <Radio.Group defaultValue="left" orientation="horizontal">
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Radio.Root value="small">
+          <Radio.Root value="left">
             <Radio.Indicator />
           </Radio.Root>
-          Small
+          Left
         </label>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Radio.Root value="medium">
+          <Radio.Root value="center">
             <Radio.Indicator />
           </Radio.Root>
-          Medium
+          Center
         </label>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Radio.Root value="large">
+          <Radio.Root value="right">
             <Radio.Indicator />
           </Radio.Root>
-          Large
+          Right
+        </label>
+      </Radio.Group>
+    </Preview>
+  );
+}
+
+export function RadioDisabled() {
+  return (
+    <Preview>
+      <Radio.Group defaultValue="standard" disabled>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: 0.5 }}>
+          <Radio.Root value="standard">
+            <Radio.Indicator />
+          </Radio.Root>
+          Standard
+        </label>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: 0.5 }}>
+          <Radio.Root value="express">
+            <Radio.Indicator />
+          </Radio.Root>
+          Express
         </label>
       </Radio.Group>
     </Preview>

@@ -30,8 +30,23 @@ export function MeterBasic() {
   return (
     <Preview>
       <Meter.Root value={65} style={{ width: '100%' }}>
-        <Meter.Label>Storage</Meter.Label>
-        <Meter.Value />
+        <Meter.Label>Storage used</Meter.Label>
+        <Meter.Track>
+          <Meter.Indicator />
+        </Meter.Track>
+      </Meter.Root>
+    </Preview>
+  );
+}
+
+export function MeterWithValue() {
+  return (
+    <Preview>
+      <Meter.Root value={42} style={{ width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Meter.Label>Upload progress</Meter.Label>
+          <Meter.Value />
+        </div>
         <Meter.Track>
           <Meter.Indicator />
         </Meter.Track>
@@ -41,45 +56,33 @@ export function MeterBasic() {
 }
 
 export function MeterColors() {
+  const colors = ['default', 'secondary', 'destructive'] as const;
   return (
     <Preview>
-      <Meter.Root value={50} style={{ width: '100%' }}>
-        <Meter.Track>
-          <Meter.Indicator />
-        </Meter.Track>
-      </Meter.Root>
-      <Meter.Root value={50} style={{ width: '100%' }}>
-        <Meter.Track>
-          <Meter.Indicator color="secondary" />
-        </Meter.Track>
-      </Meter.Root>
-      <Meter.Root value={50} style={{ width: '100%' }}>
-        <Meter.Track>
-          <Meter.Indicator color="destructive" />
-        </Meter.Track>
-      </Meter.Root>
+      {colors.map((color, i) => (
+        <Meter.Root key={color} value={30 + i * 30} style={{ width: '100%' }}>
+          <Meter.Label>{color}</Meter.Label>
+          <Meter.Track>
+            <Meter.Indicator color={color} />
+          </Meter.Track>
+        </Meter.Root>
+      ))}
     </Preview>
   );
 }
 
 export function MeterSizes() {
+  const sizes = ['sm', 'md', 'lg'] as const;
   return (
     <Preview>
-      <Meter.Root value={60} style={{ width: '100%' }}>
-        <Meter.Track size="sm">
-          <Meter.Indicator />
-        </Meter.Track>
-      </Meter.Root>
-      <Meter.Root value={60} style={{ width: '100%' }}>
-        <Meter.Track size="md">
-          <Meter.Indicator />
-        </Meter.Track>
-      </Meter.Root>
-      <Meter.Root value={60} style={{ width: '100%' }}>
-        <Meter.Track size="lg">
-          <Meter.Indicator />
-        </Meter.Track>
-      </Meter.Root>
+      {sizes.map((size) => (
+        <Meter.Root key={size} value={50} style={{ width: '100%' }}>
+          <Meter.Label>{size}</Meter.Label>
+          <Meter.Track size={size}>
+            <Meter.Indicator />
+          </Meter.Track>
+        </Meter.Root>
+      ))}
     </Preview>
   );
 }
