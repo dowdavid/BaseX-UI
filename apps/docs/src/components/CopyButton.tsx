@@ -6,7 +6,7 @@ import { Copy, Check } from 'lucide-react';
 const styles = stylex.create({
   button: {
     position: 'absolute',
-    top: tokens.space5,
+    top: tokens.space3,
     right: tokens.space3,
     display: 'flex',
     alignItems: 'center',

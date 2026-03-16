@@ -5,6 +5,8 @@ import { Code } from 'lucide-react';
 import { useIsDark } from '../context/ThemeContext';
 import { CopyButton } from './CopyButton';
 
+const MOBILE = '@media (max-width: 768px)' as const;
+
 const styles = stylex.create({
   toggle: {
     display: 'flex',
@@ -42,7 +44,10 @@ const styles = stylex.create({
     position: 'relative',
     backgroundColor: tokens.colorMuted,
     borderRadius: tokens.radiusMd,
-    padding: tokens.space5,
+    paddingTop: tokens.space5,
+    paddingBottom: tokens.space5,
+    paddingLeft: tokens.space5,
+    paddingRight: tokens.space10,
     overflowX: 'auto',
     fontSize: tokens.fontSizeSm,
     fontFamily: tokens.fontFamilyMono,
@@ -51,6 +56,14 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorderMuted,
     margin: 0,
+    maxWidth: '100%',
+    [MOBILE]: {
+      fontSize: tokens.fontSizeXs,
+      paddingTop: tokens.space4,
+      paddingBottom: tokens.space4,
+      paddingLeft: tokens.space4,
+      paddingRight: tokens.space10,
+    },
   },
 });
 

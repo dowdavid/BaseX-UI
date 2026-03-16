@@ -8,6 +8,15 @@
   border: none;
 }
 
+/* Ensure Shiki code blocks don't overflow their containers */
+.shiki {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.shiki code {
+  white-space: pre;
+}
+
 @layer priority1 {
   *,
   *::before,
@@ -389,6 +398,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

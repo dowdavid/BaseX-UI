@@ -32,6 +32,7 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    overflowX: 'auto',
     [MOBILE]: {
       padding: tokens.space4,
     },

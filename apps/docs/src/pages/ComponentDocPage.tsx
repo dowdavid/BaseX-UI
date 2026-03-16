@@ -4,12 +4,17 @@ import { CopyButton } from '../components/CopyButton';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 
+const MOBILE = '@media (max-width: 768px)' as const;
+
 const styles = stylex.create({
   importBlock: {
     position: 'relative',
     backgroundColor: tokens.colorMuted,
     borderRadius: tokens.radiusMd,
-    padding: tokens.space5,
+    paddingTop: tokens.space5,
+    paddingBottom: tokens.space5,
+    paddingLeft: tokens.space5,
+    paddingRight: tokens.space10,
     fontFamily: tokens.fontFamilyMono,
     fontSize: tokens.fontSizeSm,
     color: tokens.colorText,
@@ -18,6 +23,17 @@ const styles = stylex.create({
     borderStyle: 'solid',
     borderColor: tokens.colorBorderMuted,
     overflowX: 'auto',
+    maxWidth: '100%',
+    [MOBILE]: {
+      fontSize: tokens.fontSizeXs,
+      paddingTop: tokens.space4,
+      paddingBottom: tokens.space4,
+      paddingLeft: tokens.space4,
+      paddingRight: tokens.space10,
+      marginBottom: tokens.space6,
+      whiteSpace: 'pre-wrap',
+      wordBreak: 'break-all',
+    },
   },
   divider: {
     borderTopWidth: '1px',

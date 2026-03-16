@@ -17,6 +17,8 @@ const styles = stylex.create({
   layout: {
     display: 'flex',
     height: '100vh',
+    width: '100vw',
+    overflowX: 'hidden',
     backgroundColor: tokens.colorBackground,
     color: tokens.colorText,
     fontFamily: tokens.fontFamilySans,
@@ -77,12 +79,15 @@ const styles = stylex.create({
     flex: 1,
     padding: tokens.space8,
     overflowY: 'auto',
+    overflowX: 'hidden',
+    minWidth: 0,
     [MOBILE]: {
       padding: tokens.space4,
     },
   },
   content: {
     maxWidth: '768px',
+    width: '100%',
   },
   header: {
     marginBottom: tokens.space10,
