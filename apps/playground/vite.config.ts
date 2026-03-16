@@ -4,6 +4,9 @@ import stylexUnplugin from '@stylexjs/unplugin';
 import path from 'node:path';
 
 export default defineConfig({
+  server: {
+    port: 5173,
+  },
   plugins: [
     // StyleX must come before React plugin for HMR to work correctly
     stylexUnplugin.vite({
