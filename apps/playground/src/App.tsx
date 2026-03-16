@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
-import { Button } from '@basex-ui/components';
-import { Routes, Route, Link, useLocation } from 'react-router';
-import { pages, sections, type PageEntry } from './registry';
+import { Routes, Route } from 'react-router';
+import { pages, type PageEntry } from './registry';
+import { Sidebar } from './components/Sidebar';
 
 const MOBILE = '@media (max-width: 768px)' as const;
 
@@ -68,96 +68,6 @@ const styles = stylex.create({
       zIndex: 40,
     },
   },
-  sidebar: {
-    width: '220px',
-    flexShrink: 0,
-    borderRightWidth: '1px',
-    borderRightStyle: 'solid',
-    borderRightColor: tokens.colorBorderMuted,
-    padding: tokens.space4,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: tokens.space1,
-    position: 'sticky',
-    top: 0,
-    height: '100vh',
-    overflowY: 'auto',
-    [MOBILE]: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      zIndex: 50,
-      backgroundColor: tokens.colorBackground,
-      transform: 'translateX(-100%)',
-      transitionProperty: 'transform',
-      transitionDuration: '200ms',
-      transitionTimingFunction: 'ease-out',
-    },
-  },
-  sidebarOpen: {
-    [MOBILE]: {
-      transform: 'translateX(0)',
-    },
-  },
-  sidebarHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: tokens.space2,
-    paddingBlock: tokens.space2,
-    paddingInline: tokens.space2,
-    marginBottom: tokens.space2,
-  },
-  logoMark: {
-    width: '24px',
-    height: '24px',
-    flexShrink: 0,
-    color: tokens.colorText,
-  },
-  logoInner: {
-    stroke: tokens.colorBackground,
-  },
-  logoText: {
-    fontSize: tokens.fontSizeSm,
-    fontWeight: tokens.fontWeightBold,
-    letterSpacing: tokens.letterSpacingWide,
-    color: tokens.colorText,
-    lineHeight: 1,
-  },
-  sectionLabel: {
-    fontSize: tokens.fontSizeXs,
-    fontWeight: tokens.fontWeightSemibold,
-    color: tokens.colorTextMuted,
-    textTransform: 'uppercase',
-    letterSpacing: tokens.letterSpacingWide,
-    paddingInline: tokens.space3,
-    paddingBlock: tokens.space1,
-    marginTop: tokens.space4,
-  },
-  navItem: {
-    display: 'block',
-    width: '100%',
-    textAlign: 'left',
-    paddingBlock: tokens.space2,
-    paddingInline: tokens.space3,
-    borderRadius: tokens.radiusMd,
-    fontSize: tokens.fontSizeSm,
-    fontWeight: tokens.fontWeightMedium,
-    color: tokens.colorTextMuted,
-    cursor: 'pointer',
-    textDecoration: 'none',
-    backgroundColor: {
-      default: 'transparent',
-      ':hover': tokens.colorMuted,
-    },
-    transitionProperty: 'background-color, color',
-    transitionDuration: tokens.motionDurationFast,
-    transitionTimingFunction: tokens.motionEaseOut,
-  },
-  navItemActive: {
-    backgroundColor: tokens.colorMuted,
-    color: tokens.colorText,
-  },
   main: {
     flex: 1,
     padding: tokens.space8,
@@ -197,16 +107,6 @@ const styles = stylex.create({
       fontSize: tokens.fontSizeSm,
     },
   },
-  spacer: {
-    flex: 1,
-  },
-  themeToggle: {
-    marginTop: 'auto',
-    paddingTop: tokens.space4,
-    borderTopWidth: '1px',
-    borderTopStyle: 'solid',
-    borderTopColor: tokens.colorBorderMuted,
-  },
 });
 
 function PageWrapper({ page }: { page: PageEntry }) {
@@ -228,7 +128,6 @@ function PageWrapper({ page }: { page: PageEntry }) {
 export function App() {
   const [dark, setDark] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const location = useLocation();
   const theme = dark ? darkTheme : lightTheme;
 
   useEffect(() => {
@@ -245,8 +144,6 @@ export function App() {
       el.style.cssText = '';
     };
   }, [dark]);
-
-  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div {...stylex.props(theme, styles.layout)}>
@@ -273,62 +170,12 @@ export function App() {
         <div {...stylex.props(styles.overlay)} onClick={() => setSidebarOpen(false)} />
       )}
 
-      <nav {...stylex.props(styles.sidebar, sidebarOpen && styles.sidebarOpen)}>
-        <div {...stylex.props(styles.sidebarHeader)}>
-          <svg
-            {...stylex.props(styles.logoMark)}
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="24" height="24" rx="6" fill="currentColor" />
-            <path
-              d="M6 8.5L12 5L18 8.5V15.5L12 19L6 15.5V8.5Z"
-              {...stylex.props(styles.logoInner)}
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <path
-              d="M12 5V19M6 8.5L18 15.5M18 8.5L6 15.5"
-              {...stylex.props(styles.logoInner)}
-              strokeWidth="1.5"
-            />
-          </svg>
-          <div>
-            <div {...stylex.props(styles.logoText)}>Base-X UI</div>
-          </div>
-        </div>
-
-        {sections.map((section) => (
-          <div key={section.id}>
-            {section.label && (
-              <div {...stylex.props(styles.sectionLabel)}>{section.label}</div>
-            )}
-            {pages
-              .filter((p) => p.section === section.id)
-              .map((page) => (
-                <Link
-                  key={page.id}
-                  to={page.path}
-                  onClick={() => setSidebarOpen(false)}
-                  {...stylex.props(
-                    styles.navItem,
-                    isActive(page.path) && styles.navItemActive,
-                  )}
-                >
-                  {page.label}
-                </Link>
-              ))}
-          </div>
-        ))}
-
-        <div {...stylex.props(styles.spacer)} />
-        <div {...stylex.props(styles.themeToggle)}>
-          <Button variant="ghost" size="sm" onClick={() => setDark((d) => !d)}>
-            {dark ? 'Light mode' : 'Dark mode'}
-          </Button>
-        </div>
-      </nav>
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        dark={dark}
+        onToggleTheme={() => setDark((d) => !d)}
+      />
 
       <main {...stylex.props(styles.main)}>
         <div {...stylex.props(styles.content)}>
