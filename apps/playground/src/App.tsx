@@ -1,181 +1,12 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { Button } from '@basex-ui/components';
+import { Routes, Route, Link, useLocation } from 'react-router';
+import { pages, sections, type PageEntry } from './registry';
 
 const MOBILE = '@media (max-width: 768px)' as const;
-import { AccordionPage } from './pages/AccordionPage';
-import { AlertDialogPage } from './pages/AlertDialogPage';
-import { AutocompletePage } from './pages/AutocompletePage';
-import { AvatarPage } from './pages/AvatarPage';
-import { ButtonPage } from './pages/ButtonPage';
-import { CheckboxPage } from './pages/CheckboxPage';
-import { CheckboxGroupPage } from './pages/CheckboxGroupPage';
-import { CollapsiblePage } from './pages/CollapsiblePage';
-import { ComboboxPage } from './pages/ComboboxPage';
-import { DialogPage } from './pages/DialogPage';
-import { DrawerPage } from './pages/DrawerPage';
-import { FieldPage } from './pages/FieldPage';
-import { FieldsetPage } from './pages/FieldsetPage';
-import { FormPage } from './pages/FormPage';
-import { InputPage } from './pages/InputPage';
-import { MenuPage } from './pages/MenuPage';
-import { MenubarPage } from './pages/MenubarPage';
-import { MeterPage } from './pages/MeterPage';
-import { NavigationMenuPage } from './pages/NavigationMenuPage';
-import { NumberFieldPage } from './pages/NumberFieldPage';
-import { PopoverPage } from './pages/PopoverPage';
-import { PreviewCardPage } from './pages/PreviewCardPage';
-import { ProgressPage } from './pages/ProgressPage';
-import { RadioPage } from './pages/RadioPage';
-
-const pages = [
-  {
-    id: 'accordion',
-    label: 'Accordion',
-    description: 'Collapsible sections for progressive content disclosure.',
-    component: AccordionPage,
-  },
-  {
-    id: 'alert-dialog',
-    label: 'Alert Dialog',
-    description: 'A modal dialog that requires user acknowledgment to proceed.',
-    component: AlertDialogPage,
-  },
-  {
-    id: 'autocomplete',
-    label: 'Autocomplete',
-    description: 'A text input with a filterable suggestion dropdown.',
-    component: AutocompletePage,
-  },
-  {
-    id: 'avatar',
-    label: 'Avatar',
-    description: 'A circular image or fallback representing a user or entity.',
-    component: AvatarPage,
-  },
-  {
-    id: 'button',
-    label: 'Button',
-    description: 'A clickable element for triggering actions.',
-    component: ButtonPage,
-  },
-  {
-    id: 'checkbox',
-    label: 'Checkbox',
-    description: 'A control for toggling between checked, unchecked, and indeterminate states.',
-    component: CheckboxPage,
-  },
-  {
-    id: 'checkbox-group',
-    label: 'Checkbox Group',
-    description: 'A container that provides shared state to a series of checkboxes.',
-    component: CheckboxGroupPage,
-  },
-  {
-    id: 'collapsible',
-    label: 'Collapsible',
-    description: 'A single collapsible section with a trigger button and animated content panel.',
-    component: CollapsiblePage,
-  },
-  {
-    id: 'combobox',
-    label: 'Combobox',
-    description: 'A searchable select dropdown with optional multi-select.',
-    component: ComboboxPage,
-  },
-  {
-    id: 'dialog',
-    label: 'Dialog',
-    description: 'A general-purpose modal overlay for content, forms, or interactive flows.',
-    component: DialogPage,
-  },
-  {
-    id: 'drawer',
-    label: 'Drawer',
-    description: 'A slide-out panel anchored to a screen edge for supplementary content.',
-    component: DrawerPage,
-  },
-  {
-    id: 'field',
-    label: 'Field',
-    description: 'A form field wrapper connecting label, control, description, and error.',
-    component: FieldPage,
-  },
-  {
-    id: 'fieldset',
-    label: 'Fieldset',
-    description: 'A semantic grouping container for related form fields.',
-    component: FieldsetPage,
-  },
-  {
-    id: 'form',
-    label: 'Form',
-    description: 'An enhanced form element with server-side validation error management.',
-    component: FormPage,
-  },
-  {
-    id: 'input',
-    label: 'Input',
-    description: 'A standalone styled text input with Field integration.',
-    component: InputPage,
-  },
-  {
-    id: 'menu',
-    label: 'Menu',
-    description: 'A dropdown menu with items, groups, checkbox items, and submenus.',
-    component: MenuPage,
-  },
-  {
-    id: 'menubar',
-    label: 'Menubar',
-    description: 'A horizontal container for multiple menus with keyboard navigation.',
-    component: MenubarPage,
-  },
-  {
-    id: 'meter',
-    label: 'Meter',
-    description: 'A visual indicator showing a scalar value within a known range.',
-    component: MeterPage,
-  },
-  {
-    id: 'navigation-menu',
-    label: 'Navigation Menu',
-    description: 'A site navigation component with hover-triggered dropdown content.',
-    component: NavigationMenuPage,
-  },
-  {
-    id: 'number-field',
-    label: 'Number Field',
-    description: 'A numeric input with increment and decrement buttons.',
-    component: NumberFieldPage,
-  },
-  {
-    id: 'popover',
-    label: 'Popover',
-    description: 'A floating content panel that appears next to a trigger element.',
-    component: PopoverPage,
-  },
-  {
-    id: 'preview-card',
-    label: 'Preview Card',
-    description: 'A hover-triggered card showing a preview of linked content.',
-    component: PreviewCardPage,
-  },
-  {
-    id: 'progress',
-    label: 'Progress',
-    description: 'A progress bar showing determinate or indeterminate task completion.',
-    component: ProgressPage,
-  },
-  {
-    id: 'radio',
-    label: 'Radio',
-    description: 'A radio button group for single-select choices.',
-    component: RadioPage,
-  },
-] as const;
 
 const styles = stylex.create({
   layout: {
@@ -293,9 +124,15 @@ const styles = stylex.create({
     color: tokens.colorText,
     lineHeight: 1,
   },
-  logoTextMuted: {
+  sectionLabel: {
+    fontSize: tokens.fontSizeXs,
+    fontWeight: tokens.fontWeightSemibold,
     color: tokens.colorTextMuted,
-    fontWeight: tokens.fontWeightMedium,
+    textTransform: 'uppercase',
+    letterSpacing: tokens.letterSpacingWide,
+    paddingInline: tokens.space3,
+    paddingBlock: tokens.space1,
+    marginTop: tokens.space4,
   },
   navItem: {
     display: 'block',
@@ -308,6 +145,7 @@ const styles = stylex.create({
     fontWeight: tokens.fontWeightMedium,
     color: tokens.colorTextMuted,
     cursor: 'pointer',
+    textDecoration: 'none',
     backgroundColor: {
       default: 'transparent',
       ':hover': tokens.colorMuted,
@@ -371,13 +209,28 @@ const styles = stylex.create({
   },
 });
 
+function PageWrapper({ page }: { page: PageEntry }) {
+  const PageComponent = page.component;
+  return (
+    <>
+      <header {...stylex.props(styles.header)}>
+        <h1 {...stylex.props(styles.title)}>{page.label}</h1>
+        <p {...stylex.props(styles.description)}>{page.description}</p>
+      </header>
+      {PageComponent && <PageComponent />}
+      {page.markdown && (
+        <p {...stylex.props(styles.description)}>Guide content coming soon.</p>
+      )}
+    </>
+  );
+}
+
 export function App() {
   const [dark, setDark] = useState(false);
-  const [activePage, setActivePage] = useState<string>('accordion');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
   const theme = dark ? darkTheme : lightTheme;
 
-  // Apply theme to <html> so portaled content (dropdowns, dialogs) inherits tokens
   useEffect(() => {
     const themeProps = stylex.props(theme);
     const el = document.documentElement;
@@ -393,13 +246,7 @@ export function App() {
     };
   }, [dark]);
 
-  const handlePageSelect = useCallback((pageId: string) => {
-    setActivePage(pageId);
-    setSidebarOpen(false);
-  }, []);
-
-  const currentPage = pages.find((p) => p.id === activePage) ?? pages[0];
-  const PageComponent = currentPage.component;
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div {...stylex.props(theme, styles.layout)}>
@@ -451,15 +298,30 @@ export function App() {
             <div {...stylex.props(styles.logoText)}>Base-X UI</div>
           </div>
         </div>
-        {pages.map((page) => (
-          <button
-            key={page.id}
-            onClick={() => handlePageSelect(page.id)}
-            {...stylex.props(styles.navItem, activePage === page.id && styles.navItemActive)}
-          >
-            {page.label}
-          </button>
+
+        {sections.map((section) => (
+          <div key={section.id}>
+            {section.label && (
+              <div {...stylex.props(styles.sectionLabel)}>{section.label}</div>
+            )}
+            {pages
+              .filter((p) => p.section === section.id)
+              .map((page) => (
+                <Link
+                  key={page.id}
+                  to={page.path}
+                  onClick={() => setSidebarOpen(false)}
+                  {...stylex.props(
+                    styles.navItem,
+                    isActive(page.path) && styles.navItemActive,
+                  )}
+                >
+                  {page.label}
+                </Link>
+              ))}
+          </div>
         ))}
+
         <div {...stylex.props(styles.spacer)} />
         <div {...stylex.props(styles.themeToggle)}>
           <Button variant="ghost" size="sm" onClick={() => setDark((d) => !d)}>
@@ -470,11 +332,15 @@ export function App() {
 
       <main {...stylex.props(styles.main)}>
         <div {...stylex.props(styles.content)}>
-          <header {...stylex.props(styles.header)}>
-            <h1 {...stylex.props(styles.title)}>{currentPage.label}</h1>
-            <p {...stylex.props(styles.description)}>{currentPage.description}</p>
-          </header>
-          <PageComponent />
+          <Routes>
+            {pages.map((page) => (
+              <Route
+                key={page.id}
+                path={page.path}
+                element={<PageWrapper page={page} />}
+              />
+            ))}
+          </Routes>
         </div>
       </main>
     </div>
