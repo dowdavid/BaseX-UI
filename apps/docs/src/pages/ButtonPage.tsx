@@ -34,6 +34,10 @@ export function ButtonPage() {
       <Preview
         title="Variants & Colors"
         description="Three variants (solid, outline, ghost) across three color axes."
+        code={`<Button>default</Button>
+<Button variant="outline">outline</Button>
+<Button variant="ghost">ghost</Button>
+<Button color="destructive">destructive</Button>`}
       >
         <div {...stylex.props(styles.grid)}>
           {variants.map((variant) => (
@@ -51,7 +55,13 @@ export function ButtonPage() {
         </div>
       </Preview>
 
-      <Preview title="Sizes" description="Small, medium, and large.">
+      <Preview
+        title="Sizes"
+        description="Small, medium, and large."
+        code={`<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>`}
+      >
         <div {...stylex.props(styles.row)}>
           {sizes.map((size) => (
             <Button key={size} size={size}>
@@ -61,7 +71,13 @@ export function ButtonPage() {
         </div>
       </Preview>
 
-      <Preview title="Disabled" description="Reduced opacity with no pointer events.">
+      <Preview
+        title="Disabled"
+        description="Reduced opacity with no pointer events."
+        code={`<Button disabled>Solid</Button>
+<Button variant="outline" disabled>Outline</Button>
+<Button variant="ghost" disabled>Ghost</Button>`}
+      >
         <div {...stylex.props(styles.row)}>
           {variants.map((variant) => (
             <Button key={variant} variant={variant} disabled>

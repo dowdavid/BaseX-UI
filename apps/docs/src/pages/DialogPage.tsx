@@ -75,6 +75,23 @@ export function DialogPage() {
       <Preview
         title="Form dialog"
         description="Capture input in a modal context with submit and cancel."
+        code={`<Dialog.Root>
+  <Dialog.Trigger render={<Button variant="outline">Edit profile</Button>} />
+  <Dialog.Portal>
+    <Dialog.Backdrop />
+    <Dialog.Popup>
+      <Dialog.Header>
+        <Dialog.Title>Edit profile</Dialog.Title>
+        <Dialog.Description>Update your details.</Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Panel>...</Dialog.Panel>
+      <Dialog.Footer>
+        <Dialog.Close render={<Button variant="ghost">Cancel</Button>} />
+        <Button type="submit">Save</Button>
+      </Dialog.Footer>
+    </Dialog.Popup>
+  </Dialog.Portal>
+</Dialog.Root>`}
       >
         <Dialog.Root open={formOpen} onOpenChange={setFormOpen}>
           <Dialog.Trigger render={<Button variant="outline">Edit profile</Button>} />
@@ -162,7 +179,25 @@ export function DialogPage() {
         </Dialog.Root>
       </Preview>
 
-      <Preview title="Settings dialog" description="Controlled dialog with interactive content.">
+      <Preview
+        title="Settings dialog"
+        description="Controlled dialog with interactive content."
+        code={`<Dialog.Root open={open} onOpenChange={setOpen}>
+  <Dialog.Trigger render={<Button variant="outline">Settings</Button>} />
+  <Dialog.Portal>
+    <Dialog.Backdrop />
+    <Dialog.Popup>
+      <Dialog.Header>
+        <Dialog.Title>Settings</Dialog.Title>
+      </Dialog.Header>
+      <Dialog.Panel>...</Dialog.Panel>
+      <Dialog.Footer>
+        <Dialog.Close render={<Button>Done</Button>} />
+      </Dialog.Footer>
+    </Dialog.Popup>
+  </Dialog.Portal>
+</Dialog.Root>`}
+      >
         <Dialog.Root open={settingsOpen} onOpenChange={setSettingsOpen}>
           <Dialog.Trigger render={<Button variant="outline">Settings</Button>} />
           <Dialog.Portal>
@@ -200,7 +235,30 @@ export function DialogPage() {
         </Dialog.Root>
       </Preview>
 
-      <Preview title="Nested dialogs" description="A dialog that opens another dialog on top.">
+      <Preview
+        title="Nested dialogs"
+        description="A dialog that opens another dialog on top."
+        code={`<Dialog.Root>
+  <Dialog.Trigger render={<Button>Open</Button>} />
+  <Dialog.Portal>
+    <Dialog.Backdrop />
+    <Dialog.Popup>
+      <Dialog.Header>
+        <Dialog.Title>Parent</Dialog.Title>
+      </Dialog.Header>
+      <Dialog.Footer>
+        <Dialog.Root>
+          <Dialog.Trigger render={<Button>Open nested</Button>} />
+          <Dialog.Portal>
+            <Dialog.Backdrop />
+            <Dialog.Popup>...</Dialog.Popup>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </Dialog.Footer>
+    </Dialog.Popup>
+  </Dialog.Portal>
+</Dialog.Root>`}
+      >
         <Dialog.Root>
           <Dialog.Trigger render={<Button variant="outline">Open</Button>} />
           <Dialog.Portal>

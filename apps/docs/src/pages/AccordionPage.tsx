@@ -8,6 +8,14 @@ export function AccordionPage() {
         title="Single open"
         description="Only one panel open at a time. Opening a new panel closes the previous."
         constrained
+        code={`<Accordion.Root defaultValue={['item-1']}>
+  <Accordion.Item value="item-1">
+    <Accordion.Header>
+      <Accordion.Trigger>Question</Accordion.Trigger>
+    </Accordion.Header>
+    <Accordion.Panel>Answer</Accordion.Panel>
+  </Accordion.Item>
+</Accordion.Root>`}
       >
         <Accordion.Root defaultValue={['item-1']}>
           <Accordion.Item value="item-1">
@@ -43,6 +51,10 @@ export function AccordionPage() {
         title="Multiple open"
         description="Multiple panels can be expanded simultaneously."
         constrained
+        code={`<Accordion.Root multiple defaultValue={['item-1', 'item-2']}>
+  <Accordion.Item value="item-1">...</Accordion.Item>
+  <Accordion.Item value="item-2">...</Accordion.Item>
+</Accordion.Root>`}
       >
         <Accordion.Root multiple defaultValue={['item-1', 'item-2']}>
           <Accordion.Item value="item-1">
@@ -64,6 +76,10 @@ export function AccordionPage() {
         title="Disabled item"
         description="Individual items can be disabled to prevent interaction."
         constrained
+        code={`<Accordion.Root>
+  <Accordion.Item value="item-1">...</Accordion.Item>
+  <Accordion.Item value="item-2" disabled>...</Accordion.Item>
+</Accordion.Root>`}
       >
         <Accordion.Root>
           <Accordion.Item value="item-1">

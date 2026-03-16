@@ -1,6 +1,6 @@
 {
   "buildCommand": "pnpm run build",
   "installCommand": "pnpm install",
-  "outputDirectory": "apps/playground/dist",
+  "outputDirectory": "apps/docs/dist",
   "framework": "vite"
 }

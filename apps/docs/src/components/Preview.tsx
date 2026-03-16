@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { CodeToggle } from './CodeToggle';
 
 const MOBILE = '@media (max-width: 768px)' as const;
 
@@ -46,10 +47,12 @@ interface PreviewProps {
   description?: string;
   /** Constrain children to a max-width (e.g. for Accordion). */
   constrained?: boolean;
+  /** Source code for the demo, shown via a View Code toggle. */
+  code?: string;
   children: React.ReactNode;
 }
 
-export function Preview({ title, description, constrained, children }: PreviewProps) {
+export function Preview({ title, description, constrained, code, children }: PreviewProps) {
   return (
     <section {...stylex.props(styles.section)}>
       <h2 {...stylex.props(styles.title)}>{title}</h2>
@@ -57,6 +60,7 @@ export function Preview({ title, description, constrained, children }: PreviewPr
       <div {...stylex.props(styles.card)}>
         {constrained ? <div {...stylex.props(styles.constrained)}>{children}</div> : children}
       </div>
+      {code && <CodeToggle code={code} />}
     </section>
   );
 }

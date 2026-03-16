@@ -31,6 +31,12 @@ export function CheckboxPage() {
       <Preview
         title="Basic checkbox"
         description="A simple checkbox with a label. Click the label or the checkbox to toggle."
+        code={`<label>
+  <Checkbox.Root defaultChecked>
+    <Checkbox.Indicator />
+  </Checkbox.Root>
+  Enable notifications
+</label>`}
       >
         <label {...stylex.props(labelStyles.label)}>
           <Checkbox.Root defaultChecked>
@@ -43,6 +49,9 @@ export function CheckboxPage() {
       <Preview
         title="Disabled"
         description="Disabled checkboxes show reduced opacity and prevent interaction."
+        code={`<Checkbox.Root disabled>
+  <Checkbox.Indicator />
+</Checkbox.Root>`}
       >
         <div {...stylex.props(labelStyles.group)}>
           <label {...stylex.props(labelStyles.label, labelStyles.disabled)}>

@@ -1,3 +1,13 @@
+/* Neutralize Shiki-generated pre/code styles so our containers control spacing */
+.shiki,
+.shiki pre,
+.shiki code {
+  background: transparent !important;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
 @layer priority1 {
   *,
   *::before,
@@ -381,4 +391,20 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.7 0 0 / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.5 0 0 / 0.4);
 }
