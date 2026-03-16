@@ -4,7 +4,7 @@
 
 ## What This Is
 
-An AI-first, accessible React component library built on Base UI and styled with StyleX. Ships 24+ components with machine-readable manifests, an intelligence layer for intent-based component resolution, an MCP server for AI agent discovery, and a CLI for scaffolding. The monorepo includes a Vite playground for dev testing and a Fumadocs/Next.js documentation site.
+An AI-first, accessible React component library built on Base UI and styled with StyleX. Ships 24+ components with machine-readable manifests, an intelligence layer for intent-based component resolution, an MCP server for AI agent discovery, and a CLI for scaffolding. The monorepo includes a Vite-based docs/playground SPA with URL routing, sidebar search, markdown guide pages, and live component demos.
 
 ## Stack
 
@@ -15,8 +15,7 @@ An AI-first, accessible React component library built on Base UI and styled with
 - Framework: React 19, Base UI 1.2.0
 - Styling: StyleX 0.17.5 (tokens, themes, sx prop override pattern)
 - Color system: OKLCH palette generation
-- Docs: Next.js 15.3 + Fumadocs 15 + Tailwind 4.2 + next-themes
-- Playground: Vite 6 + React 19
+- Docs/Playground: Vite 6 + React 19 + React Router 7 + react-markdown + Shiki + Fuse.js
 - Testing: Vitest 4
 - CI: GitHub Actions (Node 20, frozen lockfile, build, test, lint, format)
 - Deployment: Vercel (playground at apps/playground/dist)
@@ -41,8 +40,7 @@ packages/
   cli/            init, add, theme, list commands
 
 apps/
-  playground/     Vite SPA — dev sandbox, component demos (port 5173)
-  docs/           Next.js + Fumadocs — documentation site (port 3001)
+  playground/     Vite SPA — docs site + component demos (port 5173)
 ```
 
 ## Component Pattern
@@ -55,13 +53,22 @@ Each component lives in `packages/components/src/{name}/` with:
 
 Compound component pattern with dot notation: `Accordion.Root`, `Accordion.Item`, `Accordion.Header`, `Accordion.Trigger`, `Accordion.Panel`.
 
-## Docs App Pattern
+## Docs Architecture
 
-Demo files live in `apps/docs/components/demos/{name}-demo.tsx`. Each exports named demo functions that use the shared `Preview` component from `@/components/preview`. No per-demo theme handling — theme tokens are applied globally via `BaseXThemeSync` on `<html>`.
+The playground IS the docs site. A single Vite SPA with React Router provides:
+- `registry.ts` — single source of truth for all pages (components, guides, sections)
+- `Sidebar.tsx` — search (Fuse.js), collapsible sections, active page highlighting
+- `Markdown.tsx` — react-markdown + remark-gfm + Shiki syntax highlighting
+- `ComponentDocPage.tsx` — renders import snippet + live demos + API reference markdown
+- `GuidePage.tsx` — renders guide markdown from `src/content/`
 
-Animation CSS for all components is in `apps/docs/app/basex-animations.css` (keep in sync with `apps/playground/src/index.css`).
+Demo pages live in `apps/playground/src/pages/{Name}Page.tsx`. Each uses the `Preview` component with an optional `code` prop for View Code toggle.
 
-MDX content is in `apps/docs/content/docs/components/{name}.mdx`.
+Guide content lives in `apps/playground/src/content/` as `.md` files imported via `?raw`.
+
+Component API docs are imported directly from `packages/components/src/{name}/{name}.md`.
+
+Animation CSS is in `apps/playground/src/index.css`.
 
 ## Scripts
 
@@ -77,11 +84,11 @@ pnpm format:check   Prettier check (CI)
 
 ## Skills Policy (Always-On)
 
-When working with Base UI, StyleX, Fumadocs, or the MCP SDK, consult the relevant installed skill/docs before writing or changing code. Skills override model memory.
+When working with Base UI, StyleX, or the MCP SDK, consult the relevant installed skill/docs before writing or changing code. Skills override model memory.
 
 ## Project-Specific Rules
 
-- Playground is the source of truth for component demos. Docs demos must match playground exactly.
+- The playground is the docs site. All demos and guide content live there.
 - Every component needs a manifest.json for AI discoverability.
 - StyleX sx prop is always the last prop applied (deterministic override).
 - Base UI handles accessibility; we handle styling and composition.
@@ -95,6 +102,5 @@ When working with Base UI, StyleX, Fumadocs, or the MCP SDK, consult the relevan
 
 ## Known Risks
 
-- StyleX unplugin compatibility with Next.js can be fragile across versions
-- Portal-based components (dialog, drawer, popover, combobox) need theme tokens on `<html>` to render correctly in docs (solved via BaseXThemeSync)
-- Animation CSS is duplicated between playground and docs (single source would be better long-term)
+- Portal-based components (dialog, drawer, popover, combobox) need theme tokens on `<html>` to render correctly (solved via useEffect theme sync in App.tsx)
+- Shiki bundles all language grammars, making the production build large (~1MB main chunk). Could be optimized with dynamic imports or a reduced language set.
