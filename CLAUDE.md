@@ -4,7 +4,7 @@
 
 ## What This Is
 
-An AI-first, accessible React component library built on Base UI and styled with StyleX. Ships 24+ components with machine-readable manifests, an intelligence layer for intent-based component resolution, an MCP server for AI agent discovery, and a CLI for scaffolding. The monorepo includes a Vite-based docs/playground SPA with URL routing, sidebar search, markdown guide pages, and live component demos.
+An AI-first, accessible React component library built on Base UI and styled with StyleX. Ships 24+ components with machine-readable manifests, an intelligence layer for intent-based component resolution, an MCP server for AI agent discovery, and a CLI for scaffolding. The monorepo includes a Vite docs site with URL routing, sidebar search, markdown guide pages, and live component demos.
 
 ## Stack
 
@@ -15,10 +15,10 @@ An AI-first, accessible React component library built on Base UI and styled with
 - Framework: React 19, Base UI 1.2.0
 - Styling: StyleX 0.17.5 (tokens, themes, sx prop override pattern)
 - Color system: OKLCH palette generation
-- Docs/Playground: Vite 6 + React 19 + React Router 7 + react-markdown + Shiki + Fuse.js
+- Docs: Vite 6 + React 19 + React Router 7 + react-markdown + Shiki + Fuse.js
 - Testing: Vitest 4
 - CI: GitHub Actions (Node 20, frozen lockfile, build, test, lint, format)
-- Deployment: Vercel (playground at apps/playground/dist)
+- Deployment: Vercel (docs at apps/docs/dist)
 
 ## UI Stack (Enforced)
 
@@ -40,7 +40,7 @@ packages/
   cli/            init, add, theme, list commands
 
 apps/
-  playground/     Vite SPA — docs site + component demos (port 5173)
+  docs/           Vite SPA — docs site + component demos (port 5173)
 ```
 
 ## Component Pattern
@@ -55,20 +55,20 @@ Compound component pattern with dot notation: `Accordion.Root`, `Accordion.Item`
 
 ## Docs Architecture
 
-The playground IS the docs site. A single Vite SPA with React Router provides:
+A single Vite SPA with React Router provides:
 - `registry.ts` — single source of truth for all pages (components, guides, sections)
 - `Sidebar.tsx` — search (Fuse.js), collapsible sections, active page highlighting
 - `Markdown.tsx` — react-markdown + remark-gfm + Shiki syntax highlighting
 - `ComponentDocPage.tsx` — renders import snippet + live demos + API reference markdown
 - `GuidePage.tsx` — renders guide markdown from `src/content/`
 
-Demo pages live in `apps/playground/src/pages/{Name}Page.tsx`. Each uses the `Preview` component with an optional `code` prop for View Code toggle.
+Demo pages live in `apps/docs/src/pages/{Name}Page.tsx`. Each uses the `Preview` component with an optional `code` prop for View Code toggle.
 
-Guide content lives in `apps/playground/src/content/` as `.md` files imported via `?raw`.
+Guide content lives in `apps/docs/src/content/` as `.md` files imported via `?raw`.
 
 Component API docs are imported directly from `packages/components/src/{name}/{name}.md`.
 
-Animation CSS is in `apps/playground/src/index.css`.
+Animation CSS is in `apps/docs/src/index.css`.
 
 ## Scripts
 
@@ -88,7 +88,7 @@ When working with Base UI, StyleX, or the MCP SDK, consult the relevant installe
 
 ## Project-Specific Rules
 
-- The playground is the docs site. All demos and guide content live there.
+- All demos and guide content live in `apps/docs/`.
 - Every component needs a manifest.json for AI discoverability.
 - StyleX sx prop is always the last prop applied (deterministic override).
 - Base UI handles accessibility; we handle styling and composition.

@@ -1,9 +1,8 @@
 import { useState, useMemo } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
-import { Button } from '@basex-ui/components';
 import { Link, useLocation } from 'react-router';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Sun, Moon } from 'lucide-react';
 import Fuse from 'fuse.js';
 import { pages, sections } from '../registry';
 
@@ -49,6 +48,29 @@ const styles = stylex.create({
     paddingBlock: tokens.space2,
     paddingInline: tokens.space2,
     marginBottom: tokens.space2,
+  },
+  headerSpacer: {
+    flex: 1,
+  },
+  themeButton: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '28px',
+    height: '28px',
+    borderRadius: tokens.radiusMd,
+    cursor: 'pointer',
+    color: tokens.colorTextMuted,
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': tokens.colorMuted,
+    },
+    transitionProperty: 'color, background-color',
+    transitionDuration: tokens.motionDurationFast,
+  },
+  themeIcon: {
+    width: '16px',
+    height: '16px',
   },
   logoMark: {
     width: '24px',
@@ -145,16 +167,6 @@ const styles = stylex.create({
     backgroundColor: tokens.colorMuted,
     color: tokens.colorText,
   },
-  spacer: {
-    flex: 1,
-  },
-  themeToggle: {
-    marginTop: 'auto',
-    paddingTop: tokens.space4,
-    borderTopWidth: '1px',
-    borderTopStyle: 'solid',
-    borderTopColor: tokens.colorBorderMuted,
-  },
 });
 
 const fuse = new Fuse(pages, {
@@ -216,6 +228,18 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
         <div>
           <div {...stylex.props(styles.logoText)}>Base-X UI</div>
         </div>
+        <div {...stylex.props(styles.headerSpacer)} />
+        <button
+          {...stylex.props(styles.themeButton)}
+          onClick={onToggleTheme}
+          aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {dark ? (
+            <Sun {...stylex.props(styles.themeIcon)} />
+          ) : (
+            <Moon {...stylex.props(styles.themeIcon)} />
+          )}
+        </button>
       </div>
 
       <input
@@ -263,12 +287,6 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
         );
       })}
 
-      <div {...stylex.props(styles.spacer)} />
-      <div {...stylex.props(styles.themeToggle)}>
-        <Button variant="ghost" size="sm" onClick={onToggleTheme}>
-          {dark ? 'Light mode' : 'Dark mode'}
-        </Button>
-      </div>
     </nav>
   );
 }

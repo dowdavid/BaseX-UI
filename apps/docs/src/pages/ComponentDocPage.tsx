@@ -1,13 +1,15 @@
 import { type ComponentType } from 'react';
 import { Markdown } from '../components/Markdown';
+import { CopyButton } from '../components/CopyButton';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 
 const styles = stylex.create({
   importBlock: {
+    position: 'relative',
     backgroundColor: tokens.colorMuted,
     borderRadius: tokens.radiusMd,
-    padding: tokens.space4,
+    padding: tokens.space5,
     fontFamily: tokens.fontFamilyMono,
     fontSize: tokens.fontSizeSm,
     color: tokens.colorText,
@@ -42,6 +44,7 @@ export function ComponentDocPage({ DemoPage, apiDocs, importStatement }: Compone
   return (
     <>
       <pre {...stylex.props(styles.importBlock)}>
+        <CopyButton text={importStatement} />
         <code>{importStatement}</code>
       </pre>
 

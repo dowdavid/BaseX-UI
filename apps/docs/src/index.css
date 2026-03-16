@@ -1,3 +1,13 @@
+/* Neutralize Shiki-generated pre/code styles so our containers control spacing */
+.shiki,
+.shiki pre,
+.shiki code {
+  background: transparent !important;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
 @layer priority1 {
   *,
   *::before,

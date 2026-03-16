@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { useIsDark } from '../context/ThemeContext';
+import { CopyButton } from './CopyButton';
 
 const styles = stylex.create({
   root: {
@@ -114,9 +116,10 @@ const styles = stylex.create({
     color: tokens.colorText,
   },
   pre: {
+    position: 'relative',
     backgroundColor: tokens.colorMuted,
     borderRadius: tokens.radiusMd,
-    padding: tokens.space4,
+    padding: tokens.space5,
     overflowX: 'auto',
     marginBlock: tokens.space4,
     fontSize: tokens.fontSizeSm,
@@ -134,36 +137,35 @@ const styles = stylex.create({
 
 function CodeBlock({ language, code }: { language?: string; code: string }) {
   const [html, setHtml] = useState<string | null>(null);
+  const dark = useIsDark();
+  const trimmed = code.trim();
 
   useEffect(() => {
     let cancelled = false;
     import('shiki').then(({ codeToHtml }) => {
-      codeToHtml(code.trim(), {
+      codeToHtml(trimmed, {
         lang: language || 'tsx',
-        theme: 'github-dark-default',
+        theme: dark ? 'github-dark-default' : 'github-light-default',
       }).then((result) => {
         if (!cancelled) setHtml(result);
-      }).catch(() => {
-        // Language not supported, leave unstyled
-      });
+      }).catch(() => {});
     });
     return () => {
       cancelled = true;
     };
-  }, [code, language]);
+  }, [trimmed, language, dark]);
 
-  if (html) {
-    return (
-      <div
-        {...stylex.props(styles.pre)}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    );
-  }
   return (
-    <pre {...stylex.props(styles.pre)}>
-      <code>{code.trim()}</code>
-    </pre>
+    <div {...stylex.props(styles.pre)}>
+      <CopyButton text={trimmed} />
+      {html ? (
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      ) : (
+        <pre style={{ margin: 0 }}>
+          <code>{trimmed}</code>
+        </pre>
+      )}
+    </div>
   );
 }
 

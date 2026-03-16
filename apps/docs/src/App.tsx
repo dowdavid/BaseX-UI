@@ -9,6 +9,7 @@ import { GuidePage } from './pages/GuidePage';
 import { ComponentDocPage } from './pages/ComponentDocPage';
 import { content } from './content';
 import { apiDocs } from './content/api-docs';
+import { ThemeProvider } from './context/ThemeContext';
 
 const MOBILE = '@media (max-width: 768px)' as const;
 
@@ -162,6 +163,7 @@ export function App() {
   }, [dark]);
 
   return (
+    <ThemeProvider value={dark}>
     <div {...stylex.props(theme, styles.layout)}>
       {/* Mobile header */}
       <div {...stylex.props(styles.mobileHeader)}>
@@ -207,5 +209,6 @@ export function App() {
         </div>
       </main>
     </div>
+    </ThemeProvider>
   );
 }

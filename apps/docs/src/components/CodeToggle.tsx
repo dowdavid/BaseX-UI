@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { Code } from 'lucide-react';
+import { useIsDark } from '../context/ThemeContext';
+import { CopyButton } from './CopyButton';
 
 const styles = stylex.create({
   toggle: {
@@ -37,9 +39,10 @@ const styles = stylex.create({
     paddingTop: tokens.space3,
   },
   pre: {
+    position: 'relative',
     backgroundColor: tokens.colorMuted,
     borderRadius: tokens.radiusMd,
-    padding: tokens.space4,
+    padding: tokens.space5,
     overflowX: 'auto',
     fontSize: tokens.fontSizeSm,
     fontFamily: tokens.fontFamilyMono,
@@ -60,6 +63,8 @@ export function CodeToggle({ code }: CodeToggleProps) {
   const [height, setHeight] = useState(0);
   const [html, setHtml] = useState<string | null>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const dark = useIsDark();
+  const trimmed = code.trim();
 
   useEffect(() => {
     if (open && innerRef.current) {
@@ -72,9 +77,9 @@ export function CodeToggle({ code }: CodeToggleProps) {
   useEffect(() => {
     let cancelled = false;
     import('shiki').then(({ codeToHtml }) => {
-      codeToHtml(code.trim(), {
+      codeToHtml(trimmed, {
         lang: 'tsx',
-        theme: 'github-dark-default',
+        theme: dark ? 'github-dark-default' : 'github-light-default',
       }).then((result) => {
         if (!cancelled) setHtml(result);
       }).catch(() => {});
@@ -82,7 +87,7 @@ export function CodeToggle({ code }: CodeToggleProps) {
     return () => {
       cancelled = true;
     };
-  }, [code]);
+  }, [trimmed, dark]);
 
   return (
     <>
@@ -92,16 +97,16 @@ export function CodeToggle({ code }: CodeToggleProps) {
       </button>
       <div {...stylex.props(styles.wrapper)} style={{ height: `${height}px` }}>
         <div ref={innerRef} {...stylex.props(styles.inner)}>
-          {html ? (
-            <div
-              {...stylex.props(styles.pre)}
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          ) : (
-            <pre {...stylex.props(styles.pre)}>
-              <code>{code.trim()}</code>
-            </pre>
-          )}
+          <div {...stylex.props(styles.pre)}>
+            <CopyButton text={trimmed} />
+            {html ? (
+              <div dangerouslySetInnerHTML={{ __html: html }} />
+            ) : (
+              <pre style={{ margin: 0 }}>
+                <code>{trimmed}</code>
+              </pre>
+            )}
+          </div>
         </div>
       </div>
     </>
