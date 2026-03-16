@@ -3,7 +3,7 @@ title: Popover
 description: A floating content panel that appears next to a trigger element.
 ---
 
-import { PopoverBasic } from '@/components/demos/popover-demo';
+import { PopoverBasic, PopoverWithTitle, PopoverDismissible } from '@/components/demos/popover-demo';
 
 ## Import
 
@@ -17,13 +17,54 @@ import { Popover } from '@basex-ui/components';
 
 ```tsx
 <Popover.Root>
-  <Popover.Trigger render={<Button>Show info</Button>} />
+  <Popover.Trigger render={<Button variant="outline" size="sm" />}>
+    Open popover
+  </Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Positioner>
+      <Popover.Popup>This is a simple popover with some helpful content.</Popover.Popup>
+    </Popover.Positioner>
+  </Popover.Portal>
+</Popover.Root>
+```
+
+## With Title & Description
+
+<PopoverWithTitle />
+
+```tsx
+<Popover.Root>
+  <Popover.Trigger render={<Button variant="outline" size="sm" />}>Details</Popover.Trigger>
   <Popover.Portal>
     <Popover.Positioner>
       <Popover.Popup>
-        <Popover.Title>Dimensions</Popover.Title>
-        <Popover.Description>Set the dimensions for the layer.</Popover.Description>
+        <Popover.Title>Notifications</Popover.Title>
+        <Popover.Description>
+          You have 3 unread notifications. Click to view them in your inbox.
+        </Popover.Description>
+      </Popover.Popup>
+    </Popover.Positioner>
+  </Popover.Portal>
+</Popover.Root>
+```
+
+## With Close Button
+
+<PopoverDismissible />
+
+```tsx
+<Popover.Root>
+  <Popover.Trigger render={<Button variant="outline" size="sm" />}>
+    Dismissible
+  </Popover.Trigger>
+  <Popover.Portal>
+    <Popover.Positioner>
+      <Popover.Popup>
         <Popover.Close />
+        <Popover.Title>Settings</Popover.Title>
+        <Popover.Description>
+          Configure your notification preferences here.
+        </Popover.Description>
       </Popover.Popup>
     </Popover.Positioner>
   </Popover.Portal>

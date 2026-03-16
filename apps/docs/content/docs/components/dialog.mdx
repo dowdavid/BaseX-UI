@@ -8,7 +8,7 @@ import { DialogBasic, DialogForm } from '@/components/demos/dialog-demo';
 ## Import
 
 ```tsx
-import { Dialog } from '@basex-ui/components';
+import { Dialog, Button, Field, Input } from '@basex-ui/components';
 ```
 
 ## Usage
@@ -16,19 +16,34 @@ import { Dialog } from '@basex-ui/components';
 <DialogBasic />
 
 ```tsx
-<Dialog.Root>
-  <Dialog.Trigger render={<Button>Edit profile</Button>} />
+const [open, setOpen] = useState(false);
+
+<Dialog.Root open={open} onOpenChange={setOpen}>
+  <Dialog.Trigger render={<Button variant="outline">Edit profile</Button>} />
   <Dialog.Portal>
     <Dialog.Backdrop />
     <Dialog.Popup>
-      <Dialog.Header>
-        <Dialog.Title>Edit profile</Dialog.Title>
-        <Dialog.Description>Make changes to your profile.</Dialog.Description>
-      </Dialog.Header>
-      <Dialog.Panel>{/* content */}</Dialog.Panel>
-      <Dialog.Footer>
-        <Dialog.Close render={<Button variant="ghost">Close</Button>} />
-      </Dialog.Footer>
+      <form onSubmit={(e) => { e.preventDefault(); setOpen(false); }}>
+        <Dialog.Header>
+          <Dialog.Title>Edit profile</Dialog.Title>
+          <Dialog.Description>Update your display name and bio.</Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Panel>
+          <Field.Root>
+            <Field.Label>Display name</Field.Label>
+            <Input type="text" defaultValue="Dave Dow" />
+          </Field.Root>
+          <Field.Root>
+            <Field.Label>Email</Field.Label>
+            <Input type="email" defaultValue="dave@ghostdigital.co" />
+          </Field.Root>
+          {/* Location, Website fields */}
+        </Dialog.Panel>
+        <Dialog.Footer>
+          <Dialog.Close render={<Button variant="ghost">Cancel</Button>} />
+          <Button type="submit">Save</Button>
+        </Dialog.Footer>
+      </form>
     </Dialog.Popup>
   </Dialog.Portal>
 </Dialog.Root>

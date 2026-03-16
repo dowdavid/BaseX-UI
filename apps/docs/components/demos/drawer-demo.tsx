@@ -29,23 +29,17 @@ function Preview({ children }: { children: React.ReactNode }) {
 export function DrawerBasic() {
   return (
     <Preview>
-      <Drawer.Root>
-        <Drawer.Trigger render={<Button>Open drawer</Button>} />
+      <Drawer.Root swipeDirection="right">
+        <Drawer.Trigger render={<Button variant="outline">Side drawer</Button>} />
         <Drawer.Portal>
           <Drawer.Backdrop />
-          <Drawer.Popup>
+          <Drawer.Popup showCloseButton={false}>
             <Drawer.Header>
-              <Drawer.Title>Navigation</Drawer.Title>
+              <Drawer.Title>Side drawer</Drawer.Title>
             </Drawer.Header>
             <Drawer.Panel>
-              <p>Dashboard</p>
-              <p>Settings</p>
-              <p>Account</p>
-              <p>Support</p>
-            </Drawer.Panel>
-            <Drawer.Footer>
               <Drawer.Close render={<Button variant="outline">Close</Button>} />
-            </Drawer.Footer>
+            </Drawer.Panel>
           </Drawer.Popup>
         </Drawer.Portal>
       </Drawer.Root>
@@ -53,36 +47,19 @@ export function DrawerBasic() {
   );
 }
 
-export function DrawerDirections() {
+export function DrawerBottom() {
   return (
     <Preview>
-      <Drawer.Root swipeDirection="left">
-        <Drawer.Trigger render={<Button variant="outline">Left drawer</Button>} />
+      <Drawer.Root>
+        <Drawer.Trigger render={<Button variant="outline">Bottom drawer</Button>} />
         <Drawer.Portal>
           <Drawer.Backdrop />
-          <Drawer.Popup>
+          <Drawer.Popup showCloseButton={false}>
             <Drawer.Header>
-              <Drawer.Title>Left panel</Drawer.Title>
-              <Drawer.Description>Slides in from the left edge.</Drawer.Description>
+              <Drawer.Title>Bottom drawer</Drawer.Title>
             </Drawer.Header>
             <Drawer.Panel>
-              <p>Sidebar content goes here.</p>
-            </Drawer.Panel>
-          </Drawer.Popup>
-        </Drawer.Portal>
-      </Drawer.Root>
-
-      <Drawer.Root swipeDirection="right">
-        <Drawer.Trigger render={<Button variant="outline">Right drawer</Button>} />
-        <Drawer.Portal>
-          <Drawer.Backdrop />
-          <Drawer.Popup>
-            <Drawer.Header>
-              <Drawer.Title>Right panel</Drawer.Title>
-              <Drawer.Description>Slides in from the right edge.</Drawer.Description>
-            </Drawer.Header>
-            <Drawer.Panel>
-              <p>Detail content goes here.</p>
+              <Drawer.Close render={<Button variant="outline">Close</Button>} />
             </Drawer.Panel>
           </Drawer.Popup>
         </Drawer.Portal>

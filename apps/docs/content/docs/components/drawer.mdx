@@ -3,7 +3,7 @@ title: Drawer
 description: A slide-out panel anchored to a screen edge with swipe-to-dismiss support.
 ---
 
-import { DrawerBasic, DrawerDirections } from '@/components/demos/drawer-demo';
+import { DrawerBasic, DrawerBottom } from '@/components/demos/drawer-demo';
 
 ## Import
 
@@ -11,28 +11,30 @@ import { DrawerBasic, DrawerDirections } from '@/components/demos/drawer-demo';
 import { Drawer } from '@basex-ui/components';
 ```
 
-## Usage
+## Side drawer
 
 <DrawerBasic />
 
 ```tsx
-<Drawer.Root>
-  <Drawer.Trigger render={<Button>Open drawer</Button>} />
+<Drawer.Root swipeDirection="right">
+  <Drawer.Trigger render={<Button variant="outline">Side drawer</Button>} />
   <Drawer.Portal>
     <Drawer.Backdrop />
-    <Drawer.Popup>
+    <Drawer.Popup showCloseButton={false}>
       <Drawer.Header>
-        <Drawer.Title>Navigation</Drawer.Title>
+        <Drawer.Title>Side drawer</Drawer.Title>
       </Drawer.Header>
-      <Drawer.Panel>{/* content */}</Drawer.Panel>
+      <Drawer.Panel>
+        <Drawer.Close render={<Button variant="outline">Close</Button>} />
+      </Drawer.Panel>
     </Drawer.Popup>
   </Drawer.Portal>
 </Drawer.Root>
 ```
 
-## Directions
+## Bottom drawer
 
-<DrawerDirections />
+<DrawerBottom />
 
 ## Parts
 

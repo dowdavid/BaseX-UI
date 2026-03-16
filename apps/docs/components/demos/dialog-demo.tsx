@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { Dialog, Button } from '@basex-ui/components';
+import { Dialog, Button, Field, Input } from '@basex-ui/components';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { useTheme } from 'next-themes';
 
@@ -26,26 +27,65 @@ function Preview({ children }: { children: React.ReactNode }) {
   );
 }
 
+const styles = stylex.create({
+  fields: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+  },
+  formContents: {
+    display: 'contents',
+  },
+});
+
 export function DialogBasic() {
+  const [open, setOpen] = useState(false);
+
   return (
     <Preview>
-      <Dialog.Root>
-        <Dialog.Trigger render={<Button>Edit profile</Button>} />
+      <Dialog.Root open={open} onOpenChange={setOpen}>
+        <Dialog.Trigger render={<Button variant="outline">Edit profile</Button>} />
         <Dialog.Portal>
           <Dialog.Backdrop />
           <Dialog.Popup>
-            <Dialog.Header>
-              <Dialog.Title>Edit profile</Dialog.Title>
-              <Dialog.Description>
-                Make changes to your profile.
-              </Dialog.Description>
-            </Dialog.Header>
-            <Dialog.Panel>
-              <p>Profile settings and preferences.</p>
-            </Dialog.Panel>
-            <Dialog.Footer>
-              <Dialog.Close render={<Button variant="outline">Close</Button>} />
-            </Dialog.Footer>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setOpen(false);
+              }}
+              {...stylex.props(styles.formContents)}
+            >
+              <Dialog.Header>
+                <Dialog.Title>Edit profile</Dialog.Title>
+                <Dialog.Description>
+                  Update your display name and bio.
+                </Dialog.Description>
+              </Dialog.Header>
+              <Dialog.Panel>
+                <div {...stylex.props(styles.fields)}>
+                  <Field.Root>
+                    <Field.Label>Display name</Field.Label>
+                    <Input type="text" defaultValue="Dave Dow" />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label>Email</Field.Label>
+                    <Input type="email" defaultValue="dave@ghostdigital.co" />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label>Location</Field.Label>
+                    <Input type="text" defaultValue="Forres, Scotland" />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label>Website</Field.Label>
+                    <Input type="url" defaultValue="https://ghostdigital.co" />
+                  </Field.Root>
+                </div>
+              </Dialog.Panel>
+              <Dialog.Footer>
+                <Dialog.Close render={<Button variant="ghost">Cancel</Button>} />
+                <Button type="submit">Save</Button>
+              </Dialog.Footer>
+            </form>
           </Dialog.Popup>
         </Dialog.Portal>
       </Dialog.Root>
@@ -54,26 +94,49 @@ export function DialogBasic() {
 }
 
 export function DialogForm() {
+  const [open, setOpen] = useState(false);
+
   return (
     <Preview>
-      <Dialog.Root>
-        <Dialog.Trigger render={<Button>Create item</Button>} />
+      <Dialog.Root open={open} onOpenChange={setOpen}>
+        <Dialog.Trigger render={<Button variant="outline">Create item</Button>} />
         <Dialog.Portal>
           <Dialog.Backdrop />
           <Dialog.Popup>
-            <Dialog.Header>
-              <Dialog.Title>New item</Dialog.Title>
-              <Dialog.Description>
-                Add a new item to your collection. Fill in the details below.
-              </Dialog.Description>
-            </Dialog.Header>
-            <Dialog.Panel>
-              <p>Form fields for the new item go here.</p>
-            </Dialog.Panel>
-            <Dialog.Footer>
-              <Dialog.Close render={<Button variant="outline">Cancel</Button>} />
-              <Dialog.Close render={<Button>Save</Button>} />
-            </Dialog.Footer>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setOpen(false);
+              }}
+              {...stylex.props(styles.formContents)}
+            >
+              <Dialog.Header>
+                <Dialog.Title>Create item</Dialog.Title>
+                <Dialog.Description>
+                  Add a new item to your collection.
+                </Dialog.Description>
+              </Dialog.Header>
+              <Dialog.Panel>
+                <div {...stylex.props(styles.fields)}>
+                  <Field.Root>
+                    <Field.Label>Name</Field.Label>
+                    <Input type="text" placeholder="Item name" />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label>Description</Field.Label>
+                    <Input type="text" placeholder="Brief description" />
+                  </Field.Root>
+                  <Field.Root>
+                    <Field.Label>Category</Field.Label>
+                    <Input type="text" placeholder="e.g. Design, Engineering" />
+                  </Field.Root>
+                </div>
+              </Dialog.Panel>
+              <Dialog.Footer>
+                <Dialog.Close render={<Button variant="ghost">Cancel</Button>} />
+                <Button type="submit">Create</Button>
+              </Dialog.Footer>
+            </form>
           </Dialog.Popup>
         </Dialog.Portal>
       </Dialog.Root>
