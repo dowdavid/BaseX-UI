@@ -35,7 +35,7 @@ const pageStyles = stylex.create({
 export function InputPage() {
   return (
     <>
-      <Preview title="Basic input" description="A simple standalone text input." constrained>
+      <Preview title="Basic input" description="A simple standalone text input." constrained code={`<Input placeholder="Enter your name" />`}>
         <Input placeholder="Enter your name" />
       </Preview>
 
@@ -43,6 +43,12 @@ export function InputPage() {
         title="Inside a Field"
         description="Input automatically integrates with Field for label, description, and validation."
         constrained
+        code={`<Field.Root>
+  <Field.Label>Email</Field.Label>
+  <Field.Description>We'll never share your email.</Field.Description>
+  <Input type="email" required placeholder="you@example.com" />
+  <Field.Error match="valueMissing">Email is required.</Field.Error>
+</Field.Root>`}
       >
         <form {...stylex.props(pageStyles.form)} onSubmit={(e) => e.preventDefault()} noValidate>
           <Field.Root>
@@ -60,14 +66,19 @@ export function InputPage() {
         </form>
       </Preview>
 
-      <Preview title="Disabled" description="A disabled input with a Field label." constrained>
+      <Preview title="Disabled" description="A disabled input with a Field label." constrained code={`<Field.Root disabled>
+  <Field.Label>Username</Field.Label>
+  <Input value="daviddow" />
+</Field.Root>`}>
         <Field.Root disabled>
           <Field.Label>Username</Field.Label>
           <Input value="daviddow" />
         </Field.Root>
       </Preview>
 
-      <Preview title="Sizes" description="Small, medium, and large input sizes." constrained>
+      <Preview title="Sizes" description="Small, medium, and large input sizes." constrained code={`<Input size="sm" placeholder="Small" />
+<Input size="md" placeholder="Medium" />
+<Input size="lg" placeholder="Large" />`}>
         <div {...stylex.props(pageStyles.stack)}>
           {sizes.map((size) => (
             <Input
