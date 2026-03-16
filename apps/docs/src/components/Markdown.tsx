@@ -6,6 +6,8 @@ import { tokens } from '@basex-ui/tokens';
 import { useIsDark } from '../context/ThemeContext';
 import { CopyButton } from './CopyButton';
 
+const MOBILE = '@media (max-width: 768px)' as const;
+
 const styles = stylex.create({
   root: {
     fontSize: tokens.fontSizeSm,
@@ -119,7 +121,10 @@ const styles = stylex.create({
     position: 'relative',
     backgroundColor: tokens.colorMuted,
     borderRadius: tokens.radiusMd,
-    padding: tokens.space5,
+    paddingTop: tokens.space5,
+    paddingBottom: tokens.space5,
+    paddingLeft: tokens.space5,
+    paddingRight: tokens.space10,
     overflowX: 'auto',
     marginBlock: tokens.space4,
     fontSize: tokens.fontSizeSm,
@@ -128,6 +133,14 @@ const styles = stylex.create({
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: tokens.colorBorderMuted,
+    maxWidth: '100%',
+    [MOBILE]: {
+      fontSize: tokens.fontSizeXs,
+      paddingTop: tokens.space4,
+      paddingBottom: tokens.space4,
+      paddingLeft: tokens.space4,
+      paddingRight: tokens.space10,
+    },
   },
   strong: {
     fontWeight: tokens.fontWeightSemibold,
