@@ -1,0 +1,49 @@
+---
+title: Checkbox
+description: A control for toggling between checked, unchecked, and optionally indeterminate states.
+---
+
+import { CheckboxBasic, CheckboxStates } from '@/components/demos/checkbox-demo';
+
+## Import
+
+```tsx
+import { Checkbox } from '@basex-ui/components';
+```
+
+## Usage
+
+<CheckboxBasic />
+
+```tsx
+<label>
+  <Checkbox.Root>
+    <Checkbox.Indicator />
+  </Checkbox.Root>
+  Enable notifications
+</label>
+```
+
+## States
+
+<CheckboxStates />
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | The checkbox control |
+| `Indicator` | Check or minus icon |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | — | Controlled checked state |
+| `defaultChecked` | `boolean` | `false` | Initially checked |
+| `onCheckedChange` | `(checked) => void` | — | Called on change |
+| `indeterminate` | `boolean` | `false` | Indeterminate state |
+| `disabled` | `boolean` | `false` | Disabled |
+| `required` | `boolean` | `false` | Required for form validation |

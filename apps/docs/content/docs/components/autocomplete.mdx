@@ -1,0 +1,55 @@
+---
+title: Autocomplete
+description: A text input with a filterable suggestion dropdown.
+---
+
+import { AutocompleteBasic, AutocompleteSizes } from '@/components/demos/autocomplete-demo';
+
+## Import
+
+```tsx
+import { Autocomplete } from '@basex-ui/components';
+```
+
+## Usage
+
+<AutocompleteBasic />
+
+```tsx
+const fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape'];
+
+<Autocomplete.Root items={fruits}>
+  <Autocomplete.Input placeholder="Search fruits..." />
+  <Autocomplete.Popup>
+    {(item) => <Autocomplete.Item value={item}>{item}</Autocomplete.Item>}
+  </Autocomplete.Popup>
+</Autocomplete.Root>
+```
+
+## Sizes
+
+<AutocompleteSizes />
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Container managing items and filtering (requires `items`) |
+| `Input` | Text input with optional clear button |
+| `Popup` | Dropdown container |
+| `Item` | Individual suggestion (requires `value`) |
+| `Empty` | Shown when no items match |
+| `Group` | Groups items under a label |
+| `GroupLabel` | Label for a group |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `string[]` | **required** | List of suggestion items |
+| `value` | `string` | — | Controlled selected value |
+| `onValueChange` | `(value) => void` | — | Called on selection |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Input size |
+| `disabled` | `boolean` | `false` | Disable the input |

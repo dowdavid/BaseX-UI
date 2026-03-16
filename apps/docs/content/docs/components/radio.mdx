@@ -1,0 +1,61 @@
+---
+title: Radio
+description: A radio button group for single-select choices.
+---
+
+import { RadioBasic, RadioHorizontal } from '@/components/demos/radio-demo';
+
+## Import
+
+```tsx
+import { Radio } from '@basex-ui/components';
+```
+
+## Usage
+
+<RadioBasic />
+
+```tsx
+<Radio.Group defaultValue="md">
+  <label><Radio.Root value="sm"><Radio.Indicator /></Radio.Root> Small</label>
+  <label><Radio.Root value="md"><Radio.Indicator /></Radio.Root> Medium</label>
+  <label><Radio.Root value="lg"><Radio.Indicator /></Radio.Root> Large</label>
+</Radio.Group>
+```
+
+## Horizontal
+
+<RadioHorizontal />
+
+```tsx
+<Radio.Group orientation="horizontal">
+  {/* items */}
+</Radio.Group>
+```
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Group` | Container managing selection |
+| `Root` | Individual radio button (requires `value`) |
+| `Indicator` | Selected dot |
+
+## Props
+
+### Group
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | Controlled selection |
+| `defaultValue` | `string` | — | Initially selected |
+| `onValueChange` | `(value) => void` | — | Called on change |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction |
+| `disabled` | `boolean` | `false` | Disable all radios |
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | Value for this option |
+| `disabled` | `boolean` | `false` | Disable this radio |

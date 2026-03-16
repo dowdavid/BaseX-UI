@@ -1,0 +1,66 @@
+---
+title: Accordion
+description: Collapsible panels with headings for progressive content disclosure.
+---
+
+import { AccordionBasic, AccordionMultiple } from '@/components/demos/accordion-demo';
+
+## Import
+
+```tsx
+import { Accordion } from '@basex-ui/components';
+```
+
+## Usage
+
+<AccordionBasic />
+
+```tsx
+<Accordion.Root>
+  <Accordion.Item value="getting-started">
+    <Accordion.Header>
+      <Accordion.Trigger>Getting Started</Accordion.Trigger>
+    </Accordion.Header>
+    <Accordion.Panel>Install Base-X UI and start building.</Accordion.Panel>
+  </Accordion.Item>
+</Accordion.Root>
+```
+
+## Multiple panels
+
+<AccordionMultiple />
+
+```tsx
+<Accordion.Root openMultiple>
+  {/* Multiple panels can be open simultaneously */}
+</Accordion.Root>
+```
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Container managing open state |
+| `Item` | Individual collapsible section (requires `value`) |
+| `Header` | Wrapper for the trigger |
+| `Trigger` | Button that toggles the panel |
+| `Panel` | Collapsible content area |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string \| string[]` | — | Controlled open items |
+| `defaultValue` | `string \| string[]` | — | Initially open items |
+| `onValueChange` | `(value) => void` | — | Called when open items change |
+| `openMultiple` | `boolean` | `false` | Allow multiple panels open |
+| `disabled` | `boolean` | `false` | Disable all items |
+
+### Item
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | Unique identifier |
+| `disabled` | `boolean` | `false` | Disable this item |

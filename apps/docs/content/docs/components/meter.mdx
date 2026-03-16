@@ -1,0 +1,66 @@
+---
+title: Meter
+description: A visual indicator showing a scalar value within a known range.
+---
+
+import { MeterBasic, MeterColors, MeterSizes } from '@/components/demos/meter-demo';
+
+## Import
+
+```tsx
+import { Meter } from '@basex-ui/components';
+```
+
+## Usage
+
+<MeterBasic />
+
+```tsx
+<Meter.Root value={65}>
+  <Meter.Label>Storage</Meter.Label>
+  <Meter.Track>
+    <Meter.Indicator />
+  </Meter.Track>
+  <Meter.Value />
+</Meter.Root>
+```
+
+## Colors
+
+<MeterColors />
+
+## Sizes
+
+<MeterSizes />
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Container with value context (requires `value`) |
+| `Label` | Accessible label |
+| `Track` | Background bar |
+| `Indicator` | Filled portion |
+| `Value` | Formatted value text |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | **required** | Current value |
+| `min` | `number` | `0` | Minimum |
+| `max` | `number` | `100` | Maximum |
+
+### Track
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Track height |
+
+### Indicator
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `'default' \| 'secondary' \| 'destructive'` | `'default'` | Bar color |

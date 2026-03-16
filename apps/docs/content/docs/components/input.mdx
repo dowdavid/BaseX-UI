@@ -1,0 +1,42 @@
+---
+title: Input
+description: A standalone styled text input that integrates with Field for validation.
+---
+
+import { InputBasic, InputSizes, InputDisabled } from '@/components/demos/input-demo';
+
+## Import
+
+```tsx
+import { Input } from '@basex-ui/components';
+```
+
+## Usage
+
+<InputBasic />
+
+```tsx
+<Input placeholder="Enter text..." />
+```
+
+## Sizes
+
+<InputSizes />
+
+```tsx
+<Input size="sm" placeholder="Small" />
+<Input size="md" placeholder="Medium" />
+<Input size="lg" placeholder="Large" />
+```
+
+## Disabled
+
+<InputDisabled />
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Input size |
+| `onValueChange` | `(value) => void` | — | Called on value change |
+| `disabled` | `boolean` | `false` | Disabled |

@@ -1,0 +1,44 @@
+---
+title: Collapsible
+description: A single collapsible section with a trigger button and animated content panel.
+---
+
+import { CollapsibleBasic } from '@/components/demos/collapsible-demo';
+
+## Import
+
+```tsx
+import { Collapsible } from '@basex-ui/components';
+```
+
+## Usage
+
+<CollapsibleBasic />
+
+```tsx
+<Collapsible.Root>
+  <Collapsible.Trigger>Show details</Collapsible.Trigger>
+  <Collapsible.Panel>
+    Here are the additional details that were hidden.
+  </Collapsible.Panel>
+</Collapsible.Root>
+```
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Container managing open state |
+| `Trigger` | Button that toggles the panel |
+| `Panel` | Collapsible content area |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Initially open |
+| `onOpenChange` | `(open) => void` | — | Called on change |
+| `disabled` | `boolean` | `false` | Disabled |

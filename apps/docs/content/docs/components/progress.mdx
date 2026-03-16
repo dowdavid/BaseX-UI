@@ -1,0 +1,76 @@
+---
+title: Progress
+description: A progress bar showing determinate or indeterminate task completion.
+---
+
+import { ProgressBasic, ProgressColors, ProgressIndeterminate } from '@/components/demos/progress-demo';
+
+## Import
+
+```tsx
+import { Progress } from '@basex-ui/components';
+```
+
+## Usage
+
+<ProgressBasic />
+
+```tsx
+<Progress.Root value={45}>
+  <Progress.Label>Upload</Progress.Label>
+  <Progress.Track>
+    <Progress.Indicator />
+  </Progress.Track>
+  <Progress.Value />
+</Progress.Root>
+```
+
+## Colors
+
+<ProgressColors />
+
+## Indeterminate
+
+Pass `value={null}` for an indeterminate progress bar.
+
+<ProgressIndeterminate />
+
+```tsx
+<Progress.Root value={null}>
+  <Progress.Track>
+    <Progress.Indicator />
+  </Progress.Track>
+</Progress.Root>
+```
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Container with value context |
+| `Label` | Accessible label |
+| `Track` | Background bar |
+| `Indicator` | Filled portion |
+| `Value` | Formatted value text |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number \| null` | **required** | Current value (`null` for indeterminate) |
+| `min` | `number` | `0` | Minimum |
+| `max` | `number` | `100` | Maximum |
+
+### Track
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Track height |
+
+### Indicator
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `color` | `'default' \| 'secondary' \| 'destructive'` | `'default'` | Bar color |

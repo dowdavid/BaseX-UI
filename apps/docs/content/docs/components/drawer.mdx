@@ -1,0 +1,62 @@
+---
+title: Drawer
+description: A slide-out panel anchored to a screen edge with swipe-to-dismiss support.
+---
+
+import { DrawerBasic, DrawerDirections } from '@/components/demos/drawer-demo';
+
+## Import
+
+```tsx
+import { Drawer } from '@basex-ui/components';
+```
+
+## Usage
+
+<DrawerBasic />
+
+```tsx
+<Drawer.Root>
+  <Drawer.Trigger render={<Button>Open drawer</Button>} />
+  <Drawer.Portal>
+    <Drawer.Backdrop />
+    <Drawer.Popup>
+      <Drawer.Header>
+        <Drawer.Title>Navigation</Drawer.Title>
+      </Drawer.Header>
+      <Drawer.Panel>{/* content */}</Drawer.Panel>
+    </Drawer.Popup>
+  </Drawer.Portal>
+</Drawer.Root>
+```
+
+## Directions
+
+<DrawerDirections />
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Controls state and swipe direction |
+| `Trigger` | Opens the drawer |
+| `Portal` | Renders outside the DOM tree |
+| `Backdrop` | Overlay |
+| `Popup` | The drawer panel |
+| `Header` | Top section |
+| `Title` | Heading |
+| `Description` | Supporting text |
+| `Panel` | Scrollable content |
+| `Footer` | Bottom section |
+| `Close` | Closes the drawer |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open) => void` | — | Called on change |
+| `swipeDirection` | `'up' \| 'down' \| 'left' \| 'right'` | `'down'` | Edge the drawer slides from |
+| `modal` | `boolean` | `true` | Block interaction behind |

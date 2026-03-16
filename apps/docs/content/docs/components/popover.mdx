@@ -1,0 +1,63 @@
+---
+title: Popover
+description: A floating content panel that appears next to a trigger element.
+---
+
+import { PopoverBasic } from '@/components/demos/popover-demo';
+
+## Import
+
+```tsx
+import { Popover } from '@basex-ui/components';
+```
+
+## Usage
+
+<PopoverBasic />
+
+```tsx
+<Popover.Root>
+  <Popover.Trigger render={<Button>Show info</Button>} />
+  <Popover.Portal>
+    <Popover.Positioner>
+      <Popover.Popup>
+        <Popover.Title>Dimensions</Popover.Title>
+        <Popover.Description>Set the dimensions for the layer.</Popover.Description>
+        <Popover.Close />
+      </Popover.Popup>
+    </Popover.Positioner>
+  </Popover.Portal>
+</Popover.Root>
+```
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Controls open state |
+| `Trigger` | Opens the popover |
+| `Portal` | Renders outside the DOM tree |
+| `Positioner` | Positions relative to trigger |
+| `Popup` | Content container |
+| `Arrow` | Arrow pointing to trigger |
+| `Title` | Heading |
+| `Description` | Supporting text |
+| `Close` | Close button |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Initially open |
+| `onOpenChange` | `(open) => void` | — | Called on change |
+
+### Positioner
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Preferred side |
+| `alignment` | `'start' \| 'center' \| 'end'` | `'center'` | Alignment on the side |
+| `sideOffset` | `number` | `2` | Distance from trigger |

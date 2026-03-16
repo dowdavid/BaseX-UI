@@ -1,0 +1,57 @@
+---
+title: NavigationMenu
+description: A site navigation component with hover-triggered dropdown content panels.
+---
+
+import { NavigationMenuBasic } from '@/components/demos/navigation-menu-demo';
+
+## Import
+
+```tsx
+import { NavigationMenu } from '@basex-ui/components';
+```
+
+## Usage
+
+<NavigationMenuBasic />
+
+```tsx
+<NavigationMenu.Root>
+  <NavigationMenu.List>
+    <NavigationMenu.Item>
+      <NavigationMenu.Link href="/">Home</NavigationMenu.Link>
+    </NavigationMenu.Item>
+    <NavigationMenu.Item>
+      <NavigationMenu.Link href="/about">About</NavigationMenu.Link>
+    </NavigationMenu.Item>
+    <NavigationMenu.Item>
+      <NavigationMenu.Link href="/contact">Contact</NavigationMenu.Link>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+</NavigationMenu.Root>
+```
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Container managing active item |
+| `List` | Navigation list |
+| `Item` | Navigation item |
+| `Trigger` | Opens dropdown content |
+| `Content` | Dropdown panel |
+| `Link` | Navigation link |
+| `Portal` | Renders outside the DOM tree |
+| `Viewport` | Container for content panels |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | Controlled active item |
+| `onValueChange` | `(value) => void` | — | Called on change |
+| `delay` | `number` | `50` | Open delay in ms |
+| `closeDelay` | `number` | `50` | Close delay in ms |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction |

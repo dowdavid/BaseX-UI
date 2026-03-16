@@ -1,0 +1,45 @@
+---
+title: CheckboxGroup
+description: A container providing shared state to a series of checkboxes.
+---
+
+import { CheckboxGroupBasic } from '@/components/demos/checkbox-group-demo';
+
+## Import
+
+```tsx
+import { Checkbox, CheckboxGroup } from '@basex-ui/components';
+```
+
+## Usage
+
+<CheckboxGroupBasic />
+
+```tsx
+<CheckboxGroup.Root defaultValue={['email']}>
+  <label>
+    <Checkbox.Root name="email">
+      <Checkbox.Indicator />
+    </Checkbox.Root>
+    Email
+  </label>
+  <label>
+    <Checkbox.Root name="sms">
+      <Checkbox.Indicator />
+    </Checkbox.Root>
+    SMS
+  </label>
+</CheckboxGroup.Root>
+```
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string[]` | — | Controlled selected values |
+| `defaultValue` | `string[]` | `[]` | Initially selected values |
+| `onValueChange` | `(value) => void` | — | Called on change |
+| `allValues` | `string[]` | — | All possible values (for select-all) |
+| `disabled` | `boolean` | `false` | Disable all checkboxes |

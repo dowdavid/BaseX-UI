@@ -1,0 +1,65 @@
+---
+title: Field
+description: A form field wrapper connecting label, description, input, and validation error.
+---
+
+import { FieldBasic, FieldWithValidation, FieldWithDescription } from '@/components/demos/field-demo';
+
+## Import
+
+```tsx
+import { Field, Input } from '@basex-ui/components';
+```
+
+## Usage
+
+<FieldBasic />
+
+```tsx
+<Field.Root>
+  <Field.Label>Email</Field.Label>
+  <Input placeholder="you@example.com" />
+</Field.Root>
+```
+
+## With validation
+
+<FieldWithValidation />
+
+```tsx
+<Field.Root invalid>
+  <Field.Label>Email</Field.Label>
+  <Input />
+  <Field.Error>Please enter a valid email address.</Field.Error>
+</Field.Root>
+```
+
+## With description
+
+<FieldWithDescription />
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Container connecting label to input |
+| `Label` | Accessible label |
+| `Description` | Helper text |
+| `Error` | Validation error message |
+| `Control` | Styled input wrapper |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `invalid` | `boolean` | `false` | Show error state |
+| `disabled` | `boolean` | `false` | Disabled |
+| `name` | `string` | — | Field name |
+
+### Control
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Input size |

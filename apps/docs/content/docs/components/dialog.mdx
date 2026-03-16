@@ -1,0 +1,78 @@
+---
+title: Dialog
+description: A general-purpose modal overlay for content, forms, or interactive flows.
+---
+
+import { DialogBasic, DialogForm } from '@/components/demos/dialog-demo';
+
+## Import
+
+```tsx
+import { Dialog } from '@basex-ui/components';
+```
+
+## Usage
+
+<DialogBasic />
+
+```tsx
+<Dialog.Root>
+  <Dialog.Trigger render={<Button>Edit profile</Button>} />
+  <Dialog.Portal>
+    <Dialog.Backdrop />
+    <Dialog.Popup>
+      <Dialog.Header>
+        <Dialog.Title>Edit profile</Dialog.Title>
+        <Dialog.Description>Make changes to your profile.</Dialog.Description>
+      </Dialog.Header>
+      <Dialog.Panel>{/* content */}</Dialog.Panel>
+      <Dialog.Footer>
+        <Dialog.Close render={<Button variant="ghost">Close</Button>} />
+      </Dialog.Footer>
+    </Dialog.Popup>
+  </Dialog.Portal>
+</Dialog.Root>
+```
+
+## With form
+
+<DialogForm />
+
+## Parts
+
+| Part | Description |
+|------|-------------|
+| `Root` | Controls open state |
+| `Trigger` | Opens the dialog |
+| `Portal` | Renders outside the DOM tree |
+| `Backdrop` | Overlay |
+| `Popup` | Dialog container (includes close button by default) |
+| `Header` | Top section |
+| `Title` | Heading |
+| `Description` | Supporting text |
+| `Panel` | Scrollable content area |
+| `Footer` | Bottom section for actions |
+| `Close` | Closes the dialog |
+
+## Props
+
+### Root
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Initially open |
+| `onOpenChange` | `(open) => void` | — | Called on change |
+| `dismissible` | `boolean` | `true` | Close on backdrop click or Escape |
+
+### Popup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `showCloseButton` | `boolean` | `true` | Show the X close button |
+
+### Footer
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'bordered'` | `'default'` | Footer style |
