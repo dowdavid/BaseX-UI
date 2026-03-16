@@ -6,7 +6,9 @@ import { Routes, Route } from 'react-router';
 import { pages, type PageEntry } from './registry';
 import { Sidebar } from './components/Sidebar';
 import { GuidePage } from './pages/GuidePage';
+import { ComponentDocPage } from './pages/ComponentDocPage';
 import { content } from './content';
+import { apiDocs } from './content/api-docs';
 
 const MOBILE = '@media (max-width: 768px)' as const;
 
@@ -112,14 +114,19 @@ const styles = stylex.create({
 });
 
 function PageWrapper({ page }: { page: PageEntry }) {
-  const PageComponent = page.component;
   return (
     <>
       <header {...stylex.props(styles.header)}>
         <h1 {...stylex.props(styles.title)}>{page.label}</h1>
         <p {...stylex.props(styles.description)}>{page.description}</p>
       </header>
-      {PageComponent && <PageComponent />}
+      {page.component && (
+        <ComponentDocPage
+          DemoPage={page.component}
+          apiDocs={apiDocs[page.id]}
+          importStatement={`import { ${page.label.replace(/\s/g, '')} } from '@basex-ui/components';`}
+        />
+      )}
       {page.markdown && content[page.markdown] && (
         <GuidePage content={content[page.markdown]} />
       )}
