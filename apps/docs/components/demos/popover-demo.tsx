@@ -30,9 +30,7 @@ export function PopoverBasic() {
   return (
     <Preview>
       <Popover.Root>
-        <Popover.Trigger>
-          <Button>Show info</Button>
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button>Show info</Button>} />
         <Popover.Portal>
           <Popover.Positioner>
             <Popover.Popup>

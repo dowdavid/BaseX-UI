@@ -16,9 +16,9 @@ function Preview({ children }: { children: React.ReactNode }) {
         borderRadius: '0.5rem',
         border: '1px solid var(--fd-border)',
         display: 'flex',
-        flexWrap: 'wrap',
-        gap: '0.75rem',
-        alignItems: 'center',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '100%',
       }}
     >
       {children}
@@ -29,7 +29,7 @@ function Preview({ children }: { children: React.ReactNode }) {
 export function MeterBasic() {
   return (
     <Preview>
-      <Meter.Root value={65}>
+      <Meter.Root value={65} style={{ width: '100%' }}>
         <Meter.Label>Storage</Meter.Label>
         <Meter.Value />
         <Meter.Track>
@@ -43,17 +43,17 @@ export function MeterBasic() {
 export function MeterColors() {
   return (
     <Preview>
-      <Meter.Root value={50}>
+      <Meter.Root value={50} style={{ width: '100%' }}>
         <Meter.Track>
           <Meter.Indicator />
         </Meter.Track>
       </Meter.Root>
-      <Meter.Root value={50}>
+      <Meter.Root value={50} style={{ width: '100%' }}>
         <Meter.Track>
           <Meter.Indicator color="secondary" />
         </Meter.Track>
       </Meter.Root>
-      <Meter.Root value={50}>
+      <Meter.Root value={50} style={{ width: '100%' }}>
         <Meter.Track>
           <Meter.Indicator color="destructive" />
         </Meter.Track>
@@ -65,17 +65,17 @@ export function MeterColors() {
 export function MeterSizes() {
   return (
     <Preview>
-      <Meter.Root value={60}>
+      <Meter.Root value={60} style={{ width: '100%' }}>
         <Meter.Track size="sm">
           <Meter.Indicator />
         </Meter.Track>
       </Meter.Root>
-      <Meter.Root value={60}>
+      <Meter.Root value={60} style={{ width: '100%' }}>
         <Meter.Track size="md">
           <Meter.Indicator />
         </Meter.Track>
       </Meter.Root>
-      <Meter.Root value={60}>
+      <Meter.Root value={60} style={{ width: '100%' }}>
         <Meter.Track size="lg">
           <Meter.Indicator />
         </Meter.Track>

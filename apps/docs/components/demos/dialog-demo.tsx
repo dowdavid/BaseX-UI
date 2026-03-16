@@ -40,6 +40,9 @@ export function DialogBasic() {
                 Make changes to your profile.
               </Dialog.Description>
             </Dialog.Header>
+            <Dialog.Panel>
+              <p>Profile settings and preferences.</p>
+            </Dialog.Panel>
             <Dialog.Footer>
               <Dialog.Close render={<Button variant="outline">Close</Button>} />
             </Dialog.Footer>
@@ -64,6 +67,9 @@ export function DialogForm() {
                 Add a new item to your collection. Fill in the details below.
               </Dialog.Description>
             </Dialog.Header>
+            <Dialog.Panel>
+              <p>Form fields for the new item go here.</p>
+            </Dialog.Panel>
             <Dialog.Footer>
               <Dialog.Close render={<Button variant="outline">Cancel</Button>} />
               <Dialog.Close render={<Button>Save</Button>} />

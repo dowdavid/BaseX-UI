@@ -30,7 +30,7 @@ export function AccordionBasic() {
   return (
     <Preview>
       <Accordion.Root style={{ width: '100%' }}>
-        <Accordion.Item>
+        <Accordion.Item value="getting-started">
           <Accordion.Header>
             <Accordion.Trigger>Getting Started</Accordion.Trigger>
           </Accordion.Header>
@@ -39,7 +39,7 @@ export function AccordionBasic() {
             with StyleX. Install the package and import components to get started.
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item>
+        <Accordion.Item value="installation">
           <Accordion.Header>
             <Accordion.Trigger>Installation</Accordion.Trigger>
           </Accordion.Header>
@@ -48,7 +48,7 @@ export function AccordionBasic() {
             StyleX and Base UI are included as peer dependencies.
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item>
+        <Accordion.Item value="usage">
           <Accordion.Header>
             <Accordion.Trigger>Usage</Accordion.Trigger>
           </Accordion.Header>
@@ -65,8 +65,8 @@ export function AccordionBasic() {
 export function AccordionMultiple() {
   return (
     <Preview>
-      <Accordion.Root openMultiple style={{ width: '100%' }}>
-        <Accordion.Item>
+      <Accordion.Root multiple style={{ width: '100%' }}>
+        <Accordion.Item value="getting-started">
           <Accordion.Header>
             <Accordion.Trigger>Getting Started</Accordion.Trigger>
           </Accordion.Header>
@@ -75,7 +75,7 @@ export function AccordionMultiple() {
             with StyleX. Install the package and import components to get started.
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item>
+        <Accordion.Item value="installation">
           <Accordion.Header>
             <Accordion.Trigger>Installation</Accordion.Trigger>
           </Accordion.Header>
@@ -84,7 +84,7 @@ export function AccordionMultiple() {
             StyleX and Base UI are included as peer dependencies.
           </Accordion.Panel>
         </Accordion.Item>
-        <Accordion.Item>
+        <Accordion.Item value="usage">
           <Accordion.Header>
             <Accordion.Trigger>Usage</Accordion.Trigger>
           </Accordion.Header>

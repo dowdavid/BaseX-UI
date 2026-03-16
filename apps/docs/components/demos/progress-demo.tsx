@@ -16,9 +16,9 @@ function Preview({ children }: { children: React.ReactNode }) {
         borderRadius: '0.5rem',
         border: '1px solid var(--fd-border)',
         display: 'flex',
-        flexWrap: 'wrap',
-        gap: '0.75rem',
-        alignItems: 'center',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '100%',
       }}
     >
       {children}
@@ -29,7 +29,7 @@ function Preview({ children }: { children: React.ReactNode }) {
 export function ProgressBasic() {
   return (
     <Preview>
-      <Progress.Root value={45}>
+      <Progress.Root value={45} style={{ width: '100%' }}>
         <Progress.Label>Upload</Progress.Label>
         <Progress.Value />
         <Progress.Track>
@@ -43,17 +43,17 @@ export function ProgressBasic() {
 export function ProgressColors() {
   return (
     <Preview>
-      <Progress.Root value={50}>
+      <Progress.Root value={50} style={{ width: '100%' }}>
         <Progress.Track>
           <Progress.Indicator />
         </Progress.Track>
       </Progress.Root>
-      <Progress.Root value={50}>
+      <Progress.Root value={50} style={{ width: '100%' }}>
         <Progress.Track>
           <Progress.Indicator color="secondary" />
         </Progress.Track>
       </Progress.Root>
-      <Progress.Root value={50}>
+      <Progress.Root value={50} style={{ width: '100%' }}>
         <Progress.Track>
           <Progress.Indicator color="destructive" />
         </Progress.Track>
@@ -65,7 +65,7 @@ export function ProgressColors() {
 export function ProgressIndeterminate() {
   return (
     <Preview>
-      <Progress.Root value={null}>
+      <Progress.Root value={null} style={{ width: '100%' }}>
         <Progress.Label>Loading</Progress.Label>
         <Progress.Track>
           <Progress.Indicator />

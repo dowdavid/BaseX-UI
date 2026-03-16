@@ -30,9 +30,7 @@ export function AlertDialogBasic() {
   return (
     <Preview>
       <AlertDialog.Root>
-        <AlertDialog.Trigger>
-          <Button color="destructive">Delete item</Button>
-        </AlertDialog.Trigger>
+        <AlertDialog.Trigger render={<Button color="destructive" variant="outline">Delete</Button>} />
         <AlertDialog.Portal>
           <AlertDialog.Backdrop />
           <AlertDialog.Popup>
@@ -41,12 +39,8 @@ export function AlertDialogBasic() {
               This action cannot be undone.
             </AlertDialog.Description>
             <AlertDialog.Actions>
-              <AlertDialog.Close>
-                <Button variant="outline">Cancel</Button>
-              </AlertDialog.Close>
-              <AlertDialog.Close>
-                <Button color="destructive">Delete</Button>
-              </AlertDialog.Close>
+              <AlertDialog.Close render={<Button variant="ghost">Cancel</Button>} />
+              <AlertDialog.Close render={<Button color="destructive">Delete</Button>} />
             </AlertDialog.Actions>
           </AlertDialog.Popup>
         </AlertDialog.Portal>
