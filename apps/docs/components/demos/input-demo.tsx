@@ -5,7 +5,7 @@ import { Input, Field, Button } from '@basex-ui/components';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { useTheme } from 'next-themes';
 
-function Preview({ children }: { children: React.ReactNode }) {
+function Preview({ children, constrained }: { children: React.ReactNode; constrained?: boolean }) {
   const { resolvedTheme } = useTheme();
   const theme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
   return (
@@ -19,9 +19,10 @@ function Preview({ children }: { children: React.ReactNode }) {
         flexWrap: 'wrap',
         gap: '0.75rem',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {children}
+      {constrained ? <div style={{ width: '100%', maxWidth: '15rem' }}>{children}</div> : children}
     </div>
   );
 }
@@ -48,7 +49,7 @@ const styles = stylex.create({
 
 export function InputBasic() {
   return (
-    <Preview>
+    <Preview constrained>
       <Input placeholder="Enter your name" />
     </Preview>
   );
@@ -56,7 +57,7 @@ export function InputBasic() {
 
 export function InputField() {
   return (
-    <Preview>
+    <Preview constrained>
       <form {...stylex.props(styles.form)} onSubmit={(e) => e.preventDefault()} noValidate>
         <Field.Root>
           <Field.Label>Email</Field.Label>
@@ -77,7 +78,7 @@ export function InputField() {
 
 export function InputDisabled() {
   return (
-    <Preview>
+    <Preview constrained>
       <Field.Root disabled>
         <Field.Label>Username</Field.Label>
         <Input value="daviddow" />
@@ -88,7 +89,7 @@ export function InputDisabled() {
 
 export function InputSizes() {
   return (
-    <Preview>
+    <Preview constrained>
       <div {...stylex.props(styles.stack)}>
         {(['sm', 'md', 'lg'] as const).map((size) => (
           <Input

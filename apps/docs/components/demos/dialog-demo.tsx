@@ -20,6 +20,7 @@ function Preview({ children }: { children: React.ReactNode }) {
         flexWrap: 'wrap',
         gap: '0.75rem',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       {children}

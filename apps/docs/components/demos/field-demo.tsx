@@ -5,7 +5,7 @@ import { Field, Form, Button } from '@basex-ui/components';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { useTheme } from 'next-themes';
 
-function Preview({ children }: { children: React.ReactNode }) {
+function Preview({ children, constrained }: { children: React.ReactNode; constrained?: boolean }) {
   const { resolvedTheme } = useTheme();
   const theme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
   return (
@@ -19,16 +19,17 @@ function Preview({ children }: { children: React.ReactNode }) {
         flexWrap: 'wrap',
         gap: '0.75rem',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {children}
+      {constrained ? <div style={{ width: '100%', maxWidth: '15rem' }}>{children}</div> : children}
     </div>
   );
 }
 
 export function FieldBasic() {
   return (
-    <Preview>
+    <Preview constrained>
       <Field.Root>
         <Field.Label>Name</Field.Label>
         <Field.Control placeholder="Enter your name" />
@@ -39,7 +40,7 @@ export function FieldBasic() {
 
 export function FieldWithError() {
   return (
-    <Preview>
+    <Preview constrained>
       <Form onSubmit={(e: React.FormEvent) => e.preventDefault()}>
         <Field.Root name="email">
           <Field.Label>Email</Field.Label>
@@ -57,7 +58,7 @@ export function FieldWithError() {
 
 export function FieldWithDescription() {
   return (
-    <Preview>
+    <Preview constrained>
       <Form onSubmit={(e: React.FormEvent) => e.preventDefault()}>
         <Field.Root name="password">
           <Field.Label>Password</Field.Label>

@@ -5,7 +5,7 @@ import { Checkbox, CheckboxGroup } from '@basex-ui/components';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { useTheme } from 'next-themes';
 
-function Preview({ children }: { children: React.ReactNode }) {
+function Preview({ children, constrained }: { children: React.ReactNode; constrained?: boolean }) {
   const { resolvedTheme } = useTheme();
   const theme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
   return (
@@ -19,16 +19,17 @@ function Preview({ children }: { children: React.ReactNode }) {
         flexWrap: 'wrap',
         gap: '0.75rem',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {children}
+      {constrained ? <div style={{ width: '100%', maxWidth: '15rem' }}>{children}</div> : children}
     </div>
   );
 }
 
 export function CheckboxGroupBasic() {
   return (
-    <Preview>
+    <Preview constrained>
       <CheckboxGroup.Root>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Checkbox.Root name="notifications" value="email">

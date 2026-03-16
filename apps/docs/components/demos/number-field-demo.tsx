@@ -5,7 +5,7 @@ import { NumberField } from '@basex-ui/components';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { useTheme } from 'next-themes';
 
-function Preview({ children }: { children: React.ReactNode }) {
+function Preview({ children, constrained }: { children: React.ReactNode; constrained?: boolean }) {
   const { resolvedTheme } = useTheme();
   const theme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
   return (
@@ -19,9 +19,10 @@ function Preview({ children }: { children: React.ReactNode }) {
         flexWrap: 'wrap',
         gap: '0.75rem',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {children}
+      {constrained ? <div style={{ width: '100%', maxWidth: '15rem' }}>{children}</div> : children}
     </div>
   );
 }
@@ -37,7 +38,7 @@ const styles = stylex.create({
 
 export function NumberFieldBasic() {
   return (
-    <Preview>
+    <Preview constrained>
       <NumberField.Root defaultValue={5}>
         <NumberField.Group>
           <NumberField.Decrement />
@@ -51,7 +52,7 @@ export function NumberFieldBasic() {
 
 export function NumberFieldConstrained() {
   return (
-    <Preview>
+    <Preview constrained>
       <NumberField.Root defaultValue={0} min={0} max={100} step={5}>
         <NumberField.Group>
           <NumberField.Decrement />
@@ -65,7 +66,7 @@ export function NumberFieldConstrained() {
 
 export function NumberFieldSizes() {
   return (
-    <Preview>
+    <Preview constrained>
       <div {...stylex.props(styles.stack)}>
         {(['sm', 'md', 'lg'] as const).map((size) => (
           <NumberField.Root key={size} defaultValue={1}>
@@ -83,7 +84,7 @@ export function NumberFieldSizes() {
 
 export function NumberFieldDisabled() {
   return (
-    <Preview>
+    <Preview constrained>
       <NumberField.Root defaultValue={3} disabled>
         <NumberField.Group disabled>
           <NumberField.Decrement />

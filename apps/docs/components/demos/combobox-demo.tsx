@@ -5,7 +5,7 @@ import { Combobox } from '@basex-ui/components';
 import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { useTheme } from 'next-themes';
 
-function Preview({ children }: { children: React.ReactNode }) {
+function Preview({ children, constrained }: { children: React.ReactNode; constrained?: boolean }) {
   const { resolvedTheme } = useTheme();
   const theme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
   return (
@@ -19,9 +19,10 @@ function Preview({ children }: { children: React.ReactNode }) {
         flexWrap: 'wrap',
         gap: '0.75rem',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {children}
+      {constrained ? <div style={{ width: '100%', maxWidth: '15rem' }}>{children}</div> : children}
     </div>
   );
 }
@@ -30,7 +31,7 @@ const fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape
 
 export function ComboboxBasic() {
   return (
-    <Preview>
+    <Preview constrained>
       <Combobox.Root items={fruits}>
         <Combobox.Input placeholder="Pick a fruit..." />
         <Combobox.Popup>
@@ -49,7 +50,7 @@ export function ComboboxBasic() {
 
 export function ComboboxMulti() {
   return (
-    <Preview>
+    <Preview constrained>
       <Combobox.Root items={fruits} multiple>
         <Combobox.Input placeholder="Select fruits..." />
         <Combobox.Popup>
