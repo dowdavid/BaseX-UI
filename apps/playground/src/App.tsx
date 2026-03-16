@@ -5,6 +5,8 @@ import { lightTheme, darkTheme } from '@basex-ui/styles';
 import { Routes, Route } from 'react-router';
 import { pages, type PageEntry } from './registry';
 import { Sidebar } from './components/Sidebar';
+import { GuidePage } from './pages/GuidePage';
+import { content } from './content';
 
 const MOBILE = '@media (max-width: 768px)' as const;
 
@@ -118,8 +120,8 @@ function PageWrapper({ page }: { page: PageEntry }) {
         <p {...stylex.props(styles.description)}>{page.description}</p>
       </header>
       {PageComponent && <PageComponent />}
-      {page.markdown && (
-        <p {...stylex.props(styles.description)}>Guide content coming soon.</p>
+      {page.markdown && content[page.markdown] && (
+        <GuidePage content={content[page.markdown]} />
       )}
     </>
   );
