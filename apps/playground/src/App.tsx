@@ -127,8 +127,8 @@ function PageWrapper({ page }: { page: PageEntry }) {
           importStatement={`import { ${page.label.replace(/\s/g, '')} } from '@basex-ui/components';`}
         />
       )}
-      {page.markdown && content[page.markdown] && (
-        <GuidePage content={content[page.markdown]} />
+      {page.markdown && content[page.markdown] != null && (
+        <GuidePage content={content[page.markdown]!} />
       )}
     </>
   );

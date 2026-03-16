@@ -7,6 +7,9 @@ export default defineConfig({
   server: {
     port: 5173,
   },
+  build: {
+    outDir: 'dist',
+  },
   plugins: [
     // StyleX must come before React plugin for HMR to work correctly
     stylexUnplugin.vite({
