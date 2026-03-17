@@ -58,6 +58,15 @@ const styles = stylex.create({
     width: '20px',
     height: '20px',
   },
+  mobileLogoMark: {
+    width: '24px',
+    height: '24px',
+    flexShrink: 0,
+    color: tokens.colorText,
+  },
+  mobileLogoInner: {
+    stroke: tokens.colorBackground,
+  },
   mobileLogoText: {
     fontSize: tokens.fontSizeSm,
     fontWeight: tokens.fontWeightBold,
@@ -99,20 +108,6 @@ const styles = stylex.create({
       marginBottom: tokens.space6,
       paddingBottom: tokens.space4,
     },
-  },
-  titleRow: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: tokens.space3,
-  },
-  logoMark: {
-    width: '28px',
-    height: '28px',
-    flexShrink: 0,
-    color: tokens.colorText,
-  },
-  logoInner: {
-    stroke: tokens.colorBackground,
   },
   title: {
     fontSize: tokens.fontSize2xl,
@@ -166,28 +161,7 @@ function PageWrapper({ page }: { page: PageEntry }) {
   return (
     <>
       <header {...stylex.props(styles.header)}>
-        <div {...stylex.props(styles.titleRow)}>
-          <svg
-            {...stylex.props(styles.logoMark)}
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="24" height="24" rx="6" fill="currentColor" />
-            <path
-              d="M6 8.5L12 5L18 8.5V15.5L12 19L6 15.5V8.5Z"
-              {...stylex.props(styles.logoInner)}
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <path
-              d="M12 5V19M6 8.5L18 15.5M18 8.5L6 15.5"
-              {...stylex.props(styles.logoInner)}
-              strokeWidth="1.5"
-            />
-          </svg>
-          <h1 {...stylex.props(styles.title)}>{page.label}</h1>
-        </div>
+        <h1 {...stylex.props(styles.title)}>{page.label}</h1>
         <div {...stylex.props(styles.descriptionRow)}>
           <p {...stylex.props(styles.description)}>{page.description}</p>
           <a
@@ -267,6 +241,25 @@ export function App() {
               />
             </svg>
           </button>
+          <svg
+            {...stylex.props(styles.mobileLogoMark)}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="24" height="24" rx="6" fill="currentColor" />
+            <path
+              d="M6 8.5L12 5L18 8.5V15.5L12 19L6 15.5V8.5Z"
+              {...stylex.props(styles.mobileLogoInner)}
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <path
+              d="M12 5V19M6 8.5L18 15.5M18 8.5L6 15.5"
+              {...stylex.props(styles.mobileLogoInner)}
+              strokeWidth="1.5"
+            />
+          </svg>
           <span {...stylex.props(styles.mobileLogoText)}>Base-X UI</span>
         </div>
 
