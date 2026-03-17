@@ -16,6 +16,17 @@ export function FieldsetPage() {
         title="Basic fieldset"
         description="Groups related fields with an accessible legend."
         constrained
+        code={`<Fieldset.Root>
+  <Fieldset.Legend>Personal information</Fieldset.Legend>
+  <Field.Root>
+    <Field.Label>First name</Field.Label>
+    <Field.Control placeholder="John" />
+  </Field.Root>
+  <Field.Root>
+    <Field.Label>Last name</Field.Label>
+    <Field.Control placeholder="Doe" />
+  </Field.Root>
+</Fieldset.Root>`}
       >
         <Fieldset.Root>
           <Fieldset.Legend>Personal information</Fieldset.Legend>
@@ -38,6 +49,13 @@ export function FieldsetPage() {
         title="Disabled fieldset"
         description="All child controls are disabled via the fieldset's disabled prop."
         constrained
+        code={`<Fieldset.Root disabled>
+  <Fieldset.Legend>Locked section</Fieldset.Legend>
+  <Field.Root>
+    <Field.Label>Email</Field.Label>
+    <Field.Control value="locked@example.com" />
+  </Field.Root>
+</Fieldset.Root>`}
       >
         <Fieldset.Root disabled>
           <Fieldset.Legend>Locked section</Fieldset.Legend>
@@ -58,6 +76,22 @@ export function FieldsetPage() {
         title="Multiple groups"
         description="Multiple fieldsets organizing sections of a form."
         constrained
+        code={`<Form>
+  <Fieldset.Root>
+    <Fieldset.Legend>Contact</Fieldset.Legend>
+    <Field.Root>
+      <Field.Label>Phone</Field.Label>
+      <Field.Control type="tel" />
+    </Field.Root>
+  </Fieldset.Root>
+  <Fieldset.Root>
+    <Fieldset.Legend>Address</Fieldset.Legend>
+    <Field.Root>
+      <Field.Label>Street</Field.Label>
+      <Field.Control />
+    </Field.Root>
+  </Fieldset.Root>
+</Form>`}
       >
         <Form sx={pageStyles.sectionForm}>
           <Fieldset.Root>

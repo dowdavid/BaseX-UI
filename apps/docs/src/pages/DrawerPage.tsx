@@ -33,6 +33,20 @@ export function DrawerPage() {
       <Preview
         title="Side drawer"
         description="A right-anchored drawer with a title and close button."
+        code={`<Drawer.Root swipeDirection="right">
+  <Drawer.Trigger render={<Button variant="outline">Side drawer</Button>} />
+  <Drawer.Portal>
+    <Drawer.Backdrop />
+    <Drawer.Popup>
+      <Drawer.Header>
+        <Drawer.Title>Side drawer</Drawer.Title>
+      </Drawer.Header>
+      <Drawer.Panel>
+        <Drawer.Close render={<Button variant="outline">Close</Button>} />
+      </Drawer.Panel>
+    </Drawer.Popup>
+  </Drawer.Portal>
+</Drawer.Root>`}
       >
         <Drawer.Root swipeDirection="right">
           <Drawer.Trigger render={<Button variant="outline">Side drawer</Button>} />
@@ -53,6 +67,20 @@ export function DrawerPage() {
       <Preview
         title="Bottom drawer"
         description="A full-width drawer that slides up from the bottom edge."
+        code={`<Drawer.Root>
+  <Drawer.Trigger render={<Button variant="outline">Bottom drawer</Button>} />
+  <Drawer.Portal>
+    <Drawer.Backdrop />
+    <Drawer.Popup>
+      <Drawer.Header>
+        <Drawer.Title>Bottom drawer</Drawer.Title>
+      </Drawer.Header>
+      <Drawer.Panel>
+        <Drawer.Close render={<Button variant="outline">Close</Button>} />
+      </Drawer.Panel>
+    </Drawer.Popup>
+  </Drawer.Portal>
+</Drawer.Root>`}
       >
         <Drawer.Root>
           <Drawer.Trigger render={<Button variant="outline">Bottom drawer</Button>} />

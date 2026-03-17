@@ -28,6 +28,19 @@ export function FormPage() {
         title="Basic form"
         description="A simple form with Field components and native validation."
         constrained
+        code={`<Form onSubmit={handleSubmit}>
+  <Field.Root name="name">
+    <Field.Label>Name</Field.Label>
+    <Field.Control placeholder="Enter your name" required />
+    <Field.Error match="valueMissing">Name is required.</Field.Error>
+  </Field.Root>
+  <Field.Root name="email">
+    <Field.Label>Email</Field.Label>
+    <Field.Control type="email" required />
+    <Field.Error match="typeMismatch">Invalid email.</Field.Error>
+  </Field.Root>
+  <Button type="submit">Submit</Button>
+</Form>`}
       >
         <Form
           onSubmit={(e) => {

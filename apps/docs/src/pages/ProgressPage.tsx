@@ -24,7 +24,17 @@ const pageStyles = stylex.create({
 export function ProgressPage() {
   return (
     <>
-      <Preview title="Basic progress" description="A simple progress bar with a label." constrained>
+      <Preview
+        title="Basic progress"
+        description="A simple progress bar with a label."
+        constrained
+        code={`<Progress.Root value={65}>
+  <Progress.Label>Uploading...</Progress.Label>
+  <Progress.Track>
+    <Progress.Indicator />
+  </Progress.Track>
+</Progress.Root>`}
+      >
         <Progress.Root value={65}>
           <Progress.Label>Uploading...</Progress.Label>
           <Progress.Track>
@@ -37,6 +47,13 @@ export function ProgressPage() {
         title="With value display"
         description="Progress bar showing the formatted value."
         constrained
+        code={`<Progress.Root value={42}>
+  <Progress.Label>Processing</Progress.Label>
+  <Progress.Value />
+  <Progress.Track>
+    <Progress.Indicator />
+  </Progress.Track>
+</Progress.Root>`}
       >
         <Progress.Root value={42}>
           <div {...stylex.props(pageStyles.labelRow)}>
@@ -53,6 +70,16 @@ export function ProgressPage() {
         title="Colors"
         description="Default, secondary, and destructive indicator colors."
         constrained
+        code={`<Progress.Root value={60}>
+  <Progress.Track>
+    <Progress.Indicator color="default" />
+  </Progress.Track>
+</Progress.Root>
+<Progress.Root value={60}>
+  <Progress.Track>
+    <Progress.Indicator color="destructive" />
+  </Progress.Track>
+</Progress.Root>`}
       >
         <div {...stylex.props(pageStyles.stack)}>
           {colors.map((color, i) => (
@@ -66,7 +93,21 @@ export function ProgressPage() {
         </div>
       </Preview>
 
-      <Preview title="Sizes" description="Small, medium, and large track heights." constrained>
+      <Preview
+        title="Sizes"
+        description="Small, medium, and large track heights."
+        constrained
+        code={`<Progress.Root value={50}>
+  <Progress.Track size="sm">
+    <Progress.Indicator />
+  </Progress.Track>
+</Progress.Root>
+<Progress.Root value={50}>
+  <Progress.Track size="lg">
+    <Progress.Indicator />
+  </Progress.Track>
+</Progress.Root>`}
+      >
         <div {...stylex.props(pageStyles.stack)}>
           {sizes.map((size) => (
             <Progress.Root key={size} value={50}>
@@ -83,6 +124,12 @@ export function ProgressPage() {
         title="Indeterminate"
         description="Animated progress bar for unknown duration tasks."
         constrained
+        code={`<Progress.Root value={null}>
+  <Progress.Label>Loading...</Progress.Label>
+  <Progress.Track>
+    <Progress.Indicator />
+  </Progress.Track>
+</Progress.Root>`}
       >
         <Progress.Root value={null}>
           <Progress.Label>Loading...</Progress.Label>
