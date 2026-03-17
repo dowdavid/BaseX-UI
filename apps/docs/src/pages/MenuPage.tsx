@@ -11,6 +11,19 @@ export function MenuPage() {
       <Preview
         title="Basic menu"
         description="A dropdown menu with items and a destructive action."
+        code={`<Menu.Root>
+  <Menu.Trigger>Open Menu</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Positioner>
+      <Menu.Popup>
+        <Menu.Item>Edit</Menu.Item>
+        <Menu.Item>Duplicate</Menu.Item>
+        <Menu.Separator />
+        <Menu.Item destructive>Delete</Menu.Item>
+      </Menu.Popup>
+    </Menu.Positioner>
+  </Menu.Portal>
+</Menu.Root>`}
       >
         <Menu.Root>
           <Menu.Trigger>Open Menu</Menu.Trigger>
@@ -29,7 +42,29 @@ export function MenuPage() {
         </Menu.Root>
       </Preview>
 
-      <Preview title="Menu with groups" description="Menu items organized into labeled groups.">
+      <Preview
+        title="Menu with groups"
+        description="Menu items organized into labeled groups."
+        code={`<Menu.Root>
+  <Menu.Trigger>Open Menu</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Positioner>
+      <Menu.Popup>
+        <Menu.Group>
+          <Menu.GroupLabel>Layout</Menu.GroupLabel>
+          <Menu.Item>Grid</Menu.Item>
+          <Menu.Item>List</Menu.Item>
+        </Menu.Group>
+        <Menu.Separator />
+        <Menu.Group>
+          <Menu.GroupLabel>Sort by</Menu.GroupLabel>
+          <Menu.Item>Name</Menu.Item>
+        </Menu.Group>
+      </Menu.Popup>
+    </Menu.Positioner>
+  </Menu.Portal>
+</Menu.Root>`}
+      >
         <Menu.Root>
           <Menu.Trigger>Open Menu</Menu.Trigger>
           <Menu.Portal>
@@ -53,7 +88,23 @@ export function MenuPage() {
         </Menu.Root>
       </Preview>
 
-      <Preview title="Checkbox items" description="Menu items that toggle boolean options.">
+      <Preview
+        title="Checkbox items"
+        description="Menu items that toggle boolean options."
+        code={`<Menu.Root>
+  <Menu.Trigger>Open Menu</Menu.Trigger>
+  <Menu.Portal>
+    <Menu.Positioner>
+      <Menu.Popup>
+        <Menu.CheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>
+          <Menu.CheckboxItemIndicator>✓</Menu.CheckboxItemIndicator>
+          Show Grid
+        </Menu.CheckboxItem>
+      </Menu.Popup>
+    </Menu.Positioner>
+  </Menu.Portal>
+</Menu.Root>`}
+      >
         <Menu.Root>
           <Menu.Trigger>Open Menu</Menu.Trigger>
           <Menu.Portal>

@@ -29,7 +29,18 @@ export function CheckboxGroupPage() {
 
   return (
     <>
-      <Preview title="Basic group" description="Three checkboxes sharing state via CheckboxGroup.">
+      <Preview
+        title="Basic group"
+        description="Three checkboxes sharing state via CheckboxGroup."
+        code={`<CheckboxGroup.Root value={value} onValueChange={setValue}>
+  <label>
+    <Checkbox.Root name="apples">
+      <Checkbox.Indicator />
+    </Checkbox.Root>
+    Apples
+  </label>
+</CheckboxGroup.Root>`}
+      >
         <CheckboxGroup.Root value={value} onValueChange={setValue}>
           <label {...stylex.props(labelStyles.label)}>
             <Checkbox.Root name="apples">
@@ -55,6 +66,16 @@ export function CheckboxGroupPage() {
       <Preview
         title="Select all"
         description="A parent checkbox auto-derives checked/indeterminate state from children."
+        code={`<CheckboxGroup.Root allValues={fruits} value={value} onValueChange={setValue}>
+  <Checkbox.Root parent>
+    <Checkbox.Indicator />
+  </Checkbox.Root>
+  {fruits.map((fruit) => (
+    <Checkbox.Root name={fruit}>
+      <Checkbox.Indicator />
+    </Checkbox.Root>
+  ))}
+</CheckboxGroup.Root>`}
       >
         <div>
           <CheckboxGroup.Root allValues={fruits} value={parentValue} onValueChange={setParentValue}>
@@ -81,6 +102,11 @@ export function CheckboxGroupPage() {
       <Preview
         title="Disabled group"
         description="Set disabled on the Root to prevent all interaction."
+        code={`<CheckboxGroup.Root disabled defaultValue={['email']}>
+  <Checkbox.Root name="email">
+    <Checkbox.Indicator />
+  </Checkbox.Root>
+</CheckboxGroup.Root>`}
       >
         <CheckboxGroup.Root disabled defaultValue={['email']}>
           <label {...stylex.props(labelStyles.label, labelStyles.disabled)}>

@@ -14,6 +14,24 @@ export function MenubarPage() {
       <Preview
         title="Basic menubar"
         description="An application-style menu bar with File and Edit menus."
+        code={`<Menubar>
+  <Menu.Root>
+    <Menu.Trigger>File</Menu.Trigger>
+    <Menu.Portal>
+      <Menu.Positioner>
+        <Menu.Popup>
+          <Menu.Item>New</Menu.Item>
+          <Menu.Item>Open</Menu.Item>
+          <Menu.Item>Save</Menu.Item>
+        </Menu.Popup>
+      </Menu.Positioner>
+    </Menu.Portal>
+  </Menu.Root>
+  <Menu.Root>
+    <Menu.Trigger>Edit</Menu.Trigger>
+    ...
+  </Menu.Root>
+</Menubar>`}
       >
         <Menubar>
           <Menu.Root>

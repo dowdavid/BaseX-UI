@@ -35,6 +35,10 @@ export function AvatarPage() {
       <Preview
         title="Image avatar"
         description="Displays a user photo. The fallback is shown until the image loads."
+        code={`<Avatar.Root>
+  <Avatar.Image src="https://i.pravatar.cc/80?u=jane" alt="Jane Doe" />
+  <Avatar.Fallback>JD</Avatar.Fallback>
+</Avatar.Root>`}
       >
         <div {...stylex.props(overrides.row)}>
           <Avatar.Root>
@@ -51,6 +55,9 @@ export function AvatarPage() {
       <Preview
         title="Initials fallback"
         description="When no image is provided, initials are shown on a muted background."
+        code={`<Avatar.Root>
+  <Avatar.Fallback>AB</Avatar.Fallback>
+</Avatar.Root>`}
       >
         <div {...stylex.props(overrides.row)}>
           <Avatar.Root>
@@ -68,6 +75,11 @@ export function AvatarPage() {
       <Preview
         title="Icon fallback"
         description="An icon SVG can be used as a generic placeholder for anonymous users."
+        code={`<Avatar.Root>
+  <Avatar.Fallback>
+    <UserIcon />
+  </Avatar.Fallback>
+</Avatar.Root>`}
       >
         <Avatar.Root>
           <Avatar.Fallback>
@@ -79,6 +91,10 @@ export function AvatarPage() {
       <Preview
         title="Broken image fallback"
         description="When the image URL fails to load, the fallback content is displayed automatically."
+        code={`<Avatar.Root>
+  <Avatar.Image src="/broken-url.jpg" alt="Missing" />
+  <Avatar.Fallback>?</Avatar.Fallback>
+</Avatar.Root>`}
       >
         <Avatar.Root>
           <Avatar.Image src="/this-image-does-not-exist.jpg" alt="Missing" />

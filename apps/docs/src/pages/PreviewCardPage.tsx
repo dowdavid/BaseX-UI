@@ -42,7 +42,18 @@ const pageStyles = stylex.create({
 export function PreviewCardPage() {
   return (
     <>
-      <Preview title="Basic" description="Hover over the link to see a preview.">
+      <Preview
+        title="Basic"
+        description="Hover over the link to see a preview."
+        code={`<PreviewCard.Root>
+  <PreviewCard.Trigger href="#">Hover for preview</PreviewCard.Trigger>
+  <PreviewCard.Portal>
+    <PreviewCard.Positioner>
+      <PreviewCard.Popup>Preview content here.</PreviewCard.Popup>
+    </PreviewCard.Positioner>
+  </PreviewCard.Portal>
+</PreviewCard.Root>`}
+      >
         <PreviewCard.Root>
           <PreviewCard.Trigger href="#">Hover for preview</PreviewCard.Trigger>
           <PreviewCard.Portal>
@@ -53,7 +64,21 @@ export function PreviewCardPage() {
         </PreviewCard.Root>
       </Preview>
 
-      <Preview title="User preview" description="Rich content preview for a user profile.">
+      <Preview
+        title="User preview"
+        description="Rich content preview for a user profile."
+        code={`<PreviewCard.Root>
+  <PreviewCard.Trigger href="#">@janedoe</PreviewCard.Trigger>
+  <PreviewCard.Portal>
+    <PreviewCard.Positioner>
+      <PreviewCard.Popup>
+        <span>Jane Doe</span>
+        <span>Design engineer building accessible components.</span>
+      </PreviewCard.Popup>
+    </PreviewCard.Positioner>
+  </PreviewCard.Portal>
+</PreviewCard.Root>`}
+      >
         <PreviewCard.Root>
           <PreviewCard.Trigger href="#">@janedoe</PreviewCard.Trigger>
           <PreviewCard.Portal>

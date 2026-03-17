@@ -24,7 +24,17 @@ const pageStyles = stylex.create({
 export function MeterPage() {
   return (
     <>
-      <Preview title="Basic meter" description="A simple meter with a label." constrained>
+      <Preview
+        title="Basic meter"
+        description="A simple meter with a label."
+        constrained
+        code={`<Meter.Root value={65}>
+  <Meter.Label>Storage used</Meter.Label>
+  <Meter.Track>
+    <Meter.Indicator />
+  </Meter.Track>
+</Meter.Root>`}
+      >
         <Meter.Root value={65}>
           <Meter.Label>Storage used</Meter.Label>
           <Meter.Track>
@@ -37,6 +47,13 @@ export function MeterPage() {
         title="With value display"
         description="Meter showing the formatted value alongside the bar."
         constrained
+        code={`<Meter.Root value={42}>
+  <Meter.Label>Upload progress</Meter.Label>
+  <Meter.Value />
+  <Meter.Track>
+    <Meter.Indicator />
+  </Meter.Track>
+</Meter.Root>`}
       >
         <Meter.Root value={42}>
           <div {...stylex.props(pageStyles.labelRow)}>
@@ -53,6 +70,16 @@ export function MeterPage() {
         title="Colors"
         description="Default, secondary, and destructive indicator colors."
         constrained
+        code={`<Meter.Root value={60}>
+  <Meter.Track>
+    <Meter.Indicator color="default" />
+  </Meter.Track>
+</Meter.Root>
+<Meter.Root value={60}>
+  <Meter.Track>
+    <Meter.Indicator color="destructive" />
+  </Meter.Track>
+</Meter.Root>`}
       >
         <div {...stylex.props(pageStyles.stack)}>
           {colors.map((color, i) => (
@@ -66,7 +93,21 @@ export function MeterPage() {
         </div>
       </Preview>
 
-      <Preview title="Sizes" description="Small, medium, and large track heights." constrained>
+      <Preview
+        title="Sizes"
+        description="Small, medium, and large track heights."
+        constrained
+        code={`<Meter.Root value={50}>
+  <Meter.Track size="sm">
+    <Meter.Indicator />
+  </Meter.Track>
+</Meter.Root>
+<Meter.Root value={50}>
+  <Meter.Track size="lg">
+    <Meter.Indicator />
+  </Meter.Track>
+</Meter.Root>`}
+      >
         <div {...stylex.props(pageStyles.stack)}>
           {sizes.map((size) => (
             <Meter.Root key={size} value={50}>

@@ -83,6 +83,17 @@ export function AutocompletePage() {
         title="Basic search"
         description="Type to filter a flat list of suggestions."
         constrained
+        code={`<Autocomplete.Root items={fruits}>
+  <Autocomplete.Input placeholder="Search fruits..." />
+  <Autocomplete.Popup>
+    <Autocomplete.Empty>No fruits found.</Autocomplete.Empty>
+    {(fruit) => (
+      <Autocomplete.Item key={fruit.id} value={fruit}>
+        {fruit.value}
+      </Autocomplete.Item>
+    )}
+  </Autocomplete.Popup>
+</Autocomplete.Root>`}
       >
         <Autocomplete.Root items={fruits}>
           <Autocomplete.Input placeholder="Search fruits..." />
@@ -101,6 +112,21 @@ export function AutocompletePage() {
         title="Grouped suggestions"
         description="Items organized under labeled groups."
         constrained
+        code={`<Autocomplete.Root items={produce}>
+  <Autocomplete.Input placeholder="Search produce..." />
+  <Autocomplete.Popup>
+    {(group) => (
+      <Autocomplete.Group key={group.label}>
+        <Autocomplete.GroupLabel>{group.label}</Autocomplete.GroupLabel>
+        {group.items.map((item) => (
+          <Autocomplete.Item key={item.id} value={item}>
+            {item.value}
+          </Autocomplete.Item>
+        ))}
+      </Autocomplete.Group>
+    )}
+  </Autocomplete.Popup>
+</Autocomplete.Root>`}
       >
         <Autocomplete.Root items={produce}>
           <Autocomplete.Input placeholder="Search produce..." />
@@ -124,6 +150,16 @@ export function AutocompletePage() {
         title="Auto-highlight"
         description="First matching item is highlighted automatically as you type."
         constrained
+        code={`<Autocomplete.Root items={fruits} autoHighlight>
+  <Autocomplete.Input placeholder="Start typing..." />
+  <Autocomplete.Popup>
+    {(fruit) => (
+      <Autocomplete.Item key={fruit.id} value={fruit}>
+        {fruit.value}
+      </Autocomplete.Item>
+    )}
+  </Autocomplete.Popup>
+</Autocomplete.Root>`}
       >
         <Autocomplete.Root items={fruits} autoHighlight>
           <Autocomplete.Input placeholder="Start typing..." />
@@ -142,6 +178,16 @@ export function AutocompletePage() {
         title="Start addon"
         description="An icon or element positioned at the start of the input."
         constrained
+        code={`<Autocomplete.Root items={fruits}>
+  <Autocomplete.Input startAddon={<SearchIcon />} placeholder="Search fruits..." />
+  <Autocomplete.Popup>
+    {(fruit) => (
+      <Autocomplete.Item key={fruit.id} value={fruit}>
+        {fruit.value}
+      </Autocomplete.Item>
+    )}
+  </Autocomplete.Popup>
+</Autocomplete.Root>`}
       >
         <Autocomplete.Root items={fruits}>
           <Autocomplete.Input startAddon={<SearchIcon />} placeholder="Search fruits..." />
@@ -160,6 +206,18 @@ export function AutocompletePage() {
         title="Sizes"
         description="Three sizes: sm (32px), md (36px, default), lg (40px)."
         constrained
+        code={`<Autocomplete.Root items={fruits} size="sm">
+  <Autocomplete.Input placeholder='Size "sm"' />
+  ...
+</Autocomplete.Root>
+<Autocomplete.Root items={fruits} size="md">
+  <Autocomplete.Input placeholder='Size "md"' />
+  ...
+</Autocomplete.Root>
+<Autocomplete.Root items={fruits} size="lg">
+  <Autocomplete.Input placeholder='Size "lg"' />
+  ...
+</Autocomplete.Root>`}
       >
         <div {...stylex.props(pageStyles.sizesColumn)}>
           {sizes.map((s) => (

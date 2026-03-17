@@ -415,6 +415,28 @@ export function NavigationMenuPage() {
       <Preview
         title="Grid and vertical dropdowns"
         description="A navigation bar with a grid layout dropdown, a vertical list dropdown, and direct links."
+        code={`<NavigationMenu.Root>
+  <NavigationMenu.List>
+    <NavigationMenu.Item value="products">
+      <NavigationMenu.Trigger>
+        Products <NavigationMenu.Icon />
+      </NavigationMenu.Trigger>
+      <NavigationMenu.Content>
+        {/* Grid or list of links */}
+      </NavigationMenu.Content>
+    </NavigationMenu.Item>
+    <NavigationMenu.Item>
+      <NavigationMenu.Link href="#">Pricing</NavigationMenu.Link>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+  <NavigationMenu.Portal>
+    <NavigationMenu.Positioner>
+      <NavigationMenu.Popup>
+        <NavigationMenu.Viewport />
+      </NavigationMenu.Popup>
+    </NavigationMenu.Positioner>
+  </NavigationMenu.Portal>
+</NavigationMenu.Root>`}
       >
         <NavigationMenu.Root>
           <NavigationMenu.List>
@@ -494,6 +516,27 @@ export function NavigationMenuPage() {
             ? 'On mobile, nested items expand inline within the dropdown.'
             : 'A navigation menu with nested content below and to the side.'
         }
+        code={`<NavigationMenu.Root>
+  <NavigationMenu.List>
+    <NavigationMenu.Item value="docs">
+      <NavigationMenu.Trigger>
+        Docs <NavigationMenu.Icon />
+      </NavigationMenu.Trigger>
+      <NavigationMenu.Content>
+        <NavigationMenu.Root orientation="vertical">
+          <NavigationMenu.List>
+            <NavigationMenu.Item value="guides">
+              <NavigationMenu.Trigger>
+                Guides <NavigationMenu.Icon />
+              </NavigationMenu.Trigger>
+              <NavigationMenu.Content>...</NavigationMenu.Content>
+            </NavigationMenu.Item>
+          </NavigationMenu.List>
+        </NavigationMenu.Root>
+      </NavigationMenu.Content>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+</NavigationMenu.Root>`}
       >
         {isMobile ? <NestedSubmenusMobile /> : <NestedSubmenusDesktop />}
       </Preview>

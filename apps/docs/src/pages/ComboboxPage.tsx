@@ -62,6 +62,18 @@ export function ComboboxPage() {
         title="Basic"
         description="Select a single item from a searchable dropdown."
         constrained
+        code={`<Combobox.Root items={fruits}>
+  <Combobox.Input placeholder="Select a fruit..." />
+  <Combobox.Popup>
+    <Combobox.Empty>No fruits found.</Combobox.Empty>
+    {(fruit) => (
+      <Combobox.Item key={fruit.id} value={fruit}>
+        <Combobox.ItemIndicator />
+        {fruit.value}
+      </Combobox.Item>
+    )}
+  </Combobox.Popup>
+</Combobox.Root>`}
       >
         <Combobox.Root items={fruits}>
           <Combobox.Input placeholder="Select a fruit..." />
@@ -81,6 +93,17 @@ export function ComboboxPage() {
         title="Multi-select"
         description="Select multiple items with checkmark indicators."
         constrained
+        code={`<Combobox.Root items={fruits} multiple>
+  <Combobox.Input placeholder="Select fruits..." />
+  <Combobox.Popup>
+    {(fruit) => (
+      <Combobox.Item key={fruit.id} value={fruit}>
+        <Combobox.ItemIndicator />
+        {fruit.value}
+      </Combobox.Item>
+    )}
+  </Combobox.Popup>
+</Combobox.Root>`}
       >
         <Combobox.Root items={fruits} multiple>
           <Combobox.Input placeholder="Select fruits..." />
@@ -96,7 +119,27 @@ export function ComboboxPage() {
         </Combobox.Root>
       </Preview>
 
-      <Preview title="Grouped" description="Items organized under labeled groups." constrained>
+      <Preview
+        title="Grouped"
+        description="Items organized under labeled groups."
+        constrained
+        code={`<Combobox.Root items={produce}>
+  <Combobox.Input placeholder="Select produce..." />
+  <Combobox.Popup>
+    {(group) => (
+      <Combobox.Group key={group.label}>
+        <Combobox.GroupLabel>{group.label}</Combobox.GroupLabel>
+        {group.items.map((item) => (
+          <Combobox.Item key={item.id} value={item}>
+            <Combobox.ItemIndicator />
+            {item.value}
+          </Combobox.Item>
+        ))}
+      </Combobox.Group>
+    )}
+  </Combobox.Popup>
+</Combobox.Root>`}
+      >
         <Combobox.Root items={produce}>
           <Combobox.Input placeholder="Select produce..." />
           <Combobox.Popup>
@@ -120,6 +163,14 @@ export function ComboboxPage() {
         title="Sizes"
         description="Three sizes: sm (32px), md (36px, default), lg (40px)."
         constrained
+        code={`<Combobox.Root items={fruits} size="sm">
+  <Combobox.Input placeholder='Size "sm"' />
+  ...
+</Combobox.Root>
+<Combobox.Root items={fruits} size="lg">
+  <Combobox.Input placeholder='Size "lg"' />
+  ...
+</Combobox.Root>`}
       >
         <div {...stylex.props(pageStyles.sizesColumn)}>
           {sizes.map((s) => (
