@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { PreviewCard } from '@basex-ui/components';
@@ -40,11 +41,14 @@ const pageStyles = stylex.create({
 });
 
 export function PreviewCardPage() {
+  const [basicOpen, setBasicOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
+
   return (
     <>
       <Preview
         title="Basic"
-        description="Hover over the link to see a preview."
+        description="Hover or tap the link to see a preview."
         code={`<PreviewCard.Root>
   <PreviewCard.Trigger href="#">Hover for preview</PreviewCard.Trigger>
   <PreviewCard.Portal>
@@ -54,8 +58,16 @@ export function PreviewCardPage() {
   </PreviewCard.Portal>
 </PreviewCard.Root>`}
       >
-        <PreviewCard.Root>
-          <PreviewCard.Trigger href="#">Hover for preview</PreviewCard.Trigger>
+        <PreviewCard.Root open={basicOpen} onOpenChange={setBasicOpen}>
+          <PreviewCard.Trigger
+            href="#"
+            onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+              setBasicOpen((prev) => !prev);
+            }}
+          >
+            Hover for preview
+          </PreviewCard.Trigger>
           <PreviewCard.Portal>
             <PreviewCard.Positioner>
               <PreviewCard.Popup>A simple preview of the linked content.</PreviewCard.Popup>
@@ -79,8 +91,16 @@ export function PreviewCardPage() {
   </PreviewCard.Portal>
 </PreviewCard.Root>`}
       >
-        <PreviewCard.Root>
-          <PreviewCard.Trigger href="#">@janedoe</PreviewCard.Trigger>
+        <PreviewCard.Root open={userOpen} onOpenChange={setUserOpen}>
+          <PreviewCard.Trigger
+            href="#"
+            onClick={(e: React.MouseEvent) => {
+              e.preventDefault();
+              setUserOpen((prev) => !prev);
+            }}
+          >
+            @janedoe
+          </PreviewCard.Trigger>
           <PreviewCard.Portal>
             <PreviewCard.Positioner>
               <PreviewCard.Popup>
