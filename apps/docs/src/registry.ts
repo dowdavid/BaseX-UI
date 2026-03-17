@@ -38,9 +38,9 @@ export interface PageEntry {
 
 export const sections = [
   { id: 'main', label: null },
-  { id: 'components', label: 'Components' },
   { id: 'intelligence', label: 'Intelligence' },
   { id: 'mcp-server', label: 'MCP Server' },
+  { id: 'components', label: 'Components' },
 ] as const;
 
 export const pages: PageEntry[] = [

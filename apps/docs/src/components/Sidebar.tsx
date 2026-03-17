@@ -167,6 +167,13 @@ const styles = stylex.create({
     backgroundColor: tokens.colorMuted,
     color: tokens.colorText,
   },
+  sidebarFooter: {
+    flexShrink: 0,
+    height: tokens.space10,
+    [MOBILE]: {
+      height: '80px',
+    },
+  },
 });
 
 const fuse = new Fuse(pages, {
@@ -186,9 +193,9 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     main: true,
-    components: true,
     intelligence: false,
     'mcp-server': false,
+    components: false,
   });
 
   const filtered = useMemo(() => (query ? fuse.search(query).map((r) => r.item) : pages), [query]);
@@ -280,6 +287,7 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
           </div>
         );
       })}
+      <div {...stylex.props(styles.sidebarFooter)} />
     </nav>
   );
 }
