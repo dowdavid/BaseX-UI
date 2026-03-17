@@ -128,6 +128,11 @@ const styles = stylex.create({
     justifyContent: 'space-between',
     gap: tokens.space4,
     marginTop: tokens.space2,
+    [MOBILE]: {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      gap: tokens.space2,
+    },
   },
   description: {
     fontSize: tokens.fontSizeMd,

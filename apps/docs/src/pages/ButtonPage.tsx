@@ -4,6 +4,8 @@ import { Button } from '@basex-ui/components';
 import type { ButtonVariant, ButtonColor, ButtonSize } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
 
+const MOBILE = '@media (max-width: 768px)' as const;
+
 const variants: ButtonVariant[] = ['solid', 'outline', 'ghost'];
 const colors: ButtonColor[] = ['default', 'secondary', 'destructive'];
 const sizes: ButtonSize[] = ['sm', 'md', 'lg'];
@@ -13,8 +15,22 @@ const styles = stylex.create({
     display: 'inline-flex',
     flexDirection: 'column',
     gap: tokens.space4,
+    [MOBILE]: {
+      display: 'flex',
+      width: '100%',
+    },
   },
   row: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: tokens.space3,
+    [MOBILE]: {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+    },
+  },
+  buttons: {
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
@@ -43,13 +59,15 @@ export function ButtonPage() {
           {variants.map((variant) => (
             <div key={variant} {...stylex.props(styles.row)}>
               <span {...stylex.props(styles.label)}>{variant}</span>
-              {colors
-                .filter((color) => variant === 'solid' || color !== 'secondary')
-                .map((color) => (
-                  <Button key={`${variant}-${color}`} variant={variant} color={color}>
-                    {color}
-                  </Button>
-                ))}
+              <div {...stylex.props(styles.buttons)}>
+                {colors
+                  .filter((color) => variant === 'solid' || color !== 'secondary')
+                  .map((color) => (
+                    <Button key={`${variant}-${color}`} variant={variant} color={color}>
+                      {color}
+                    </Button>
+                  ))}
+              </div>
             </div>
           ))}
         </div>

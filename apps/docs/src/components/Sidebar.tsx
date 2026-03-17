@@ -34,6 +34,7 @@ const styles = stylex.create({
       transitionProperty: 'transform',
       transitionDuration: '200ms',
       transitionTimingFunction: 'ease-out',
+      paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 80px)',
     },
   },
   sidebarOpen: {
