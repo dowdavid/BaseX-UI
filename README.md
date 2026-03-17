@@ -4,7 +4,7 @@ Accessible React components built on [Base UI](https://base-ui.com) and [StyleX]
 
 Most component libraries assume a human is reading the docs. BaseX UI ships with an intelligence layer and MCP server so AI agents can discover components, resolve intent from natural language, detect anti-patterns, and generate production code without hallucinating props or picking the wrong component.
 
-**[Live Playground](https://basex-playground.vercel.app)**
+**[Documentation](https://basex-ui-docs.vercel.app)**
 
 ## What makes this different
 
