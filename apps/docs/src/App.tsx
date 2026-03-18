@@ -124,8 +124,6 @@ const styles = stylex.create({
     gap: tokens.space4,
     marginTop: tokens.space2,
     [MOBILE]: {
-      flexDirection: 'column',
-      alignItems: 'flex-start',
       gap: tokens.space2,
     },
   },
