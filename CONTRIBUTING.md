@@ -27,7 +27,7 @@ pnpm format:check # Check formatting
 pnpm typecheck    # TypeScript type checking
 ```
 
-The playground app (`apps/playground`) is a Vite dev sandbox for testing components locally.
+The docs app (`apps/docs`) is a Vite site that serves documentation and live component demos locally.
 
 ## Adding a New Component
 
@@ -41,7 +41,7 @@ Key integration points:
 4. Update `intents.json` with component intents and anti-patterns
 5. Register in `mcp-server/src/data.ts`
 6. Add to CLI (`packages/cli/src/commands/add.ts` and `list.ts`)
-7. Playground demo
+7. Docs demo page
 
 ## Commit Conventions
 

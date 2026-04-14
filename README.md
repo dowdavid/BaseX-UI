@@ -77,7 +77,7 @@ packages/
   styles/        — Themes + utilities
   cli/           — CLI tool
 apps/
-  playground/    — Live component sandbox
+  docs/          — Documentation site and live component demos
 ```
 
 > **ESM-only** — All packages ship ES modules exclusively.
