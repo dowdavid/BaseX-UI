@@ -52,7 +52,7 @@ Copy from `_template/component.md` and fill in:
 
 ## 4. Global CSS (if component has animations)
 
-**File**: Consumer's global stylesheet (demonstrated in `apps/playground/src/index.css`)
+**File**: Consumer's global stylesheet (demonstrated in `apps/docs/src/index.css`)
 
 - [ ] Animation rules inside `@layer priority1 { ... }`
 - [ ] Stable CSS class `.basex-{name}-{part}` as selector
@@ -98,16 +98,16 @@ Copy from `_template/component.md` and fill in:
 
 - [ ] Add entry: `src/{name}/index.ts`
 
-## 8. Playground Demo
+## 8. Docs Demo
 
-**File**: `apps/playground/src/pages/{Name}Page.tsx`
+**File**: `apps/docs/src/pages/{Name}Page.tsx`
 
-- [ ] Create page component in `apps/playground/src/pages/`
+- [ ] Create page component in `apps/docs/src/pages/`
 - [ ] Use the `Preview` component from `../components/Preview` for every demo section
   - Each `Preview` gets a `title`, `description`, and the demo as children
   - Use `constrained` prop for full-width components (e.g. Accordion) to cap inner width
-- [ ] Register in `apps/playground/src/App.tsx`: import, add to `pages` array with `id`, `label`, `description`, `component`
-- [ ] Add any required global CSS to `apps/playground/src/index.css`
+- [ ] Register in `apps/docs/src/App.tsx`: import, add to `pages` array with `id`, `label`, `description`, `component`
+- [ ] Add any required global CSS to `apps/docs/src/index.css`
 
 ## 9. Update Roadmap
 
@@ -123,7 +123,7 @@ After all files are in place:
 
 - [ ] `pnpm build` passes across all packages
 - [ ] `pnpm typecheck` passes (if available)
-- [ ] Playground demo renders correctly
+- [ ] Docs demo renders correctly
 - [ ] MCP server serves the component via `list_components`, `get_component`, `get_component_setup`
 - [ ] `resolve_intent` returns the component for at least one intent signal
 - [ ] `check_usage` catches at least one anti-pattern
@@ -137,11 +137,11 @@ After all files are in place:
 | Component       | `packages/components/src/{name}/{name}.tsx`, `index.ts` |
 | Manifest        | `packages/components/src/{name}/manifest.json`          |
 | Docs            | `packages/components/src/{name}/{name}.md`              |
-| Global CSS      | `apps/playground/src/index.css` (demo)                  |
+| Global CSS      | `apps/docs/src/index.css` (demo)                  |
 | Intents         | `packages/intelligence/intents.json`                    |
 | MCP data        | `packages/mcp-server/src/data.ts`                       |
 | MCP tsconfig    | `packages/mcp-server/tsconfig.json`                     |
 | Barrel          | `packages/components/src/index.ts`                      |
 | Package exports | `packages/components/package.json`                      |
 | Build entry     | `packages/components/tsup.config.ts`                    |
-| Playground      | `apps/playground/src/App.tsx`                           |
+| Docs demo       | `apps/docs/src/App.tsx`                           |
