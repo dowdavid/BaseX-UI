@@ -137,11 +137,11 @@ After all files are in place:
 | Component       | `packages/components/src/{name}/{name}.tsx`, `index.ts` |
 | Manifest        | `packages/components/src/{name}/manifest.json`          |
 | Docs            | `packages/components/src/{name}/{name}.md`              |
-| Global CSS      | `apps/docs/src/index.css` (demo)                  |
+| Global CSS      | `apps/docs/src/index.css` (demo)                        |
 | Intents         | `packages/intelligence/intents.json`                    |
 | MCP data        | `packages/mcp-server/src/data.ts`                       |
 | MCP tsconfig    | `packages/mcp-server/tsconfig.json`                     |
 | Barrel          | `packages/components/src/index.ts`                      |
 | Package exports | `packages/components/package.json`                      |
 | Build entry     | `packages/components/tsup.config.ts`                    |
-| Docs demo       | `apps/docs/src/App.tsx`                           |
+| Docs demo       | `apps/docs/src/App.tsx`                                 |
