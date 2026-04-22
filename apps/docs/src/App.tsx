@@ -21,7 +21,8 @@ const styles = stylex.create({
     overflowX: 'hidden',
     backgroundColor: tokens.colorBackground,
     color: tokens.colorText,
-    fontFamily: tokens.fontFamilySans,
+    // Mono is the primary voice (matches portfolio/lab/runnar). Sans remains as body default fallback.
+    fontFamily: tokens.fontFamilyMono,
     [MOBILE]: {
       flexDirection: 'column',
     },
@@ -68,9 +69,11 @@ const styles = stylex.create({
     stroke: tokens.colorBackground,
   },
   mobileLogoText: {
-    fontSize: tokens.fontSizeSm,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeLabel,
     fontWeight: tokens.fontWeightBold,
-    letterSpacing: tokens.letterSpacingWide,
+    letterSpacing: tokens.letterSpacingLabel,
+    textTransform: 'uppercase',
     color: tokens.colorText,
     lineHeight: 1,
   },
@@ -110,11 +113,14 @@ const styles = stylex.create({
     },
   },
   title: {
-    fontSize: tokens.fontSize2xl,
-    fontWeight: tokens.fontWeightBold,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeTitle,
+    fontWeight: tokens.fontWeightSemibold,
     lineHeight: tokens.lineHeightTight,
+    letterSpacing: tokens.letterSpacingTight,
+    color: tokens.colorText,
     [MOBILE]: {
-      fontSize: tokens.fontSizeXl,
+      fontSize: tokens.fontSizeSubhead,
     },
   },
   descriptionRow: {
@@ -128,7 +134,8 @@ const styles = stylex.create({
     },
   },
   description: {
-    fontSize: tokens.fontSizeMd,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeBody,
     color: tokens.colorTextMuted,
     lineHeight: tokens.lineHeightNormal,
     [MOBILE]: {

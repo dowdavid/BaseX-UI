@@ -10,26 +10,32 @@ const MOBILE = '@media (max-width: 768px)' as const;
 
 const styles = stylex.create({
   root: {
-    fontSize: tokens.fontSizeSm,
+    // Prose uses mono as the primary voice (matches portfolio ArticleLayout).
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeBody,
     lineHeight: tokens.lineHeightRelaxed,
     color: tokens.colorText,
   },
   h1: {
-    fontSize: tokens.fontSize2xl,
-    fontWeight: tokens.fontWeightBold,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeTitle,
+    fontWeight: tokens.fontWeightSemibold,
     marginTop: tokens.space10,
     marginBottom: tokens.space4,
     lineHeight: tokens.lineHeightTight,
+    letterSpacing: tokens.letterSpacingTight,
     color: tokens.colorText,
   },
   h2: {
-    fontSize: tokens.fontSizeLg,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeSubhead,
     fontWeight: tokens.fontWeightSemibold,
     marginTop: tokens.space10,
     marginBottom: tokens.space4,
     color: tokens.colorText,
   },
   h3: {
+    fontFamily: tokens.fontFamilyMono,
     fontSize: tokens.fontSizeMd,
     fontWeight: tokens.fontWeightSemibold,
     marginTop: tokens.space8,
@@ -37,7 +43,8 @@ const styles = stylex.create({
     color: tokens.colorText,
   },
   h4: {
-    fontSize: tokens.fontSizeSm,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeBody,
     fontWeight: tokens.fontWeightSemibold,
     marginTop: tokens.space6,
     marginBottom: tokens.space2,

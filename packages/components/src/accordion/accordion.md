@@ -84,7 +84,7 @@ const overrides = stylex.create({
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'var(--colorBorder)',
-    borderRadius: '8px',
+    borderRadius: '0',
   },
 });
 

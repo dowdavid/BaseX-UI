@@ -43,8 +43,9 @@ const styles = stylex.create({
     paddingTop: tokens.space10,
   },
   apiHeading: {
-    fontSize: tokens.fontSizeLg,
-    fontWeight: tokens.fontWeightBold,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeSubhead,
+    fontWeight: tokens.fontWeightSemibold,
     marginBottom: tokens.space6,
     color: tokens.colorText,
   },

@@ -413,7 +413,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: oklch(0.7 0 0 / 0.3);
-  border-radius: 3px;
+  border-radius: 0;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: oklch(0.5 0 0 / 0.4);

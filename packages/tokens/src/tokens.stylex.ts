@@ -13,7 +13,7 @@ export const tokens = stylex.defineVars({
   colorPrimary: 'oklch(0.703 0.198 43.4)',
   colorPrimaryHover: 'oklch(0.738 0.171 46.0)',
   colorPrimaryActive: 'oklch(0.454 0.123 44.0)',
-  colorPrimaryContrast: 'oklch(0.145 0.002 286)',
+  colorPrimaryContrast: 'oklch(1 0 0)',
 
   // Secondary palette
   colorSecondary: 'oklch(0.55 0.05 260)',
@@ -74,18 +74,27 @@ export const tokens = stylex.defineVars({
   // --- Typography ---
 
   // Font families
+  // Note: fontFamilySans intentionally resolves to the Geist Mono stack so the
+  // entire component surface shares a single monospace voice. Kept as a named
+  // token to preserve existing component references (zero-diff switch).
   fontFamilySans:
-    "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontFamilyMono:
-    "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
 
-  // Font sizes
+  // Font sizes (base scale)
   fontSizeXs: '0.75rem',
   fontSizeSm: '0.875rem',
   fontSizeMd: '1rem',
   fontSizeLg: '1.125rem',
   fontSizeXl: '1.25rem',
   fontSize2xl: '1.5rem',
+
+  // Typography scale (portfolio-aligned: label / body / subhead / title)
+  fontSizeLabel: '10px',
+  fontSizeBody: '14px',
+  fontSizeSubhead: '18px',
+  fontSizeTitle: '22px',
 
   // Font weights
   fontWeightNormal: '400',
@@ -102,14 +111,16 @@ export const tokens = stylex.defineVars({
   letterSpacingTight: '-0.025em',
   letterSpacingNormal: '0em',
   letterSpacingWide: '0.025em',
+  letterSpacingLabel: '0.2em',
 
   // --- Border Radius ---
+  // Flattened to 0 across the board — BaseX UI uses squared corners system-wide.
   radiusNone: '0px',
-  radiusSm: '4px',
-  radiusMd: '8px',
-  radiusLg: '12px',
-  radiusXl: '16px',
-  radiusFull: '9999px',
+  radiusSm: '0px',
+  radiusMd: '0px',
+  radiusLg: '0px',
+  radiusXl: '0px',
+  radiusFull: '0px',
 
   // --- Border Width ---
   borderWidthDefault: '1px',
