@@ -8,10 +8,10 @@ import { tokens } from '@basex-ui/tokens';
 export const lightTheme = stylex.createTheme(tokens, {
   // Light theme matches the defaults in tokens.stylex.ts.
   // Explicitly listed here for clarity and as the canonical reference.
-  colorPrimary: 'oklch(0.55 0.2 250)',
-  colorPrimaryHover: 'oklch(0.50 0.22 250)',
-  colorPrimaryActive: 'oklch(0.45 0.24 250)',
-  colorPrimaryContrast: 'oklch(0.98 0 0)',
+  colorPrimary: 'oklch(0.703 0.198 43.4)',
+  colorPrimaryHover: 'oklch(0.738 0.171 46.0)',
+  colorPrimaryActive: 'oklch(0.454 0.123 44.0)',
+  colorPrimaryContrast: 'oklch(0.145 0.002 286)',
 
   colorSecondary: 'oklch(0.55 0.05 260)',
   colorSecondaryHover: 'oklch(0.50 0.06 260)',
@@ -107,11 +107,11 @@ export const lightTheme = stylex.createTheme(tokens, {
  * Surfaces are dark, text is light, colors shift for contrast on dark backgrounds.
  */
 export const darkTheme = stylex.createTheme(tokens, {
-  // Primary — lighter on dark backgrounds
-  colorPrimary: 'oklch(0.70 0.18 250)',
-  colorPrimaryHover: 'oklch(0.75 0.20 250)',
-  colorPrimaryActive: 'oklch(0.65 0.16 250)',
-  colorPrimaryContrast: 'oklch(0.15 0 0)',
+  // Primary — Sodium Orange on dark backgrounds
+  colorPrimary: 'oklch(0.703 0.198 43.4)',
+  colorPrimaryHover: 'oklch(0.738 0.171 46.0)',
+  colorPrimaryActive: 'oklch(0.454 0.123 44.0)',
+  colorPrimaryContrast: 'oklch(0.145 0.002 286)',
 
   // Secondary — lighter on dark backgrounds
   colorSecondary: 'oklch(0.70 0.04 260)',
