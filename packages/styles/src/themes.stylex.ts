@@ -58,15 +58,19 @@ export const lightTheme = stylex.createTheme(tokens, {
   space12: '48px',
 
   fontFamilySans:
-    "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   fontFamilyMono:
-    "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontSizeXs: '0.75rem',
   fontSizeSm: '0.875rem',
   fontSizeMd: '1rem',
   fontSizeLg: '1.125rem',
   fontSizeXl: '1.25rem',
   fontSize2xl: '1.5rem',
+  fontSizeLabel: '10px',
+  fontSizeBody: '14px',
+  fontSizeSubhead: '18px',
+  fontSizeTitle: '22px',
   fontWeightNormal: '400',
   fontWeightMedium: '500',
   fontWeightSemibold: '600',
@@ -77,6 +81,7 @@ export const lightTheme = stylex.createTheme(tokens, {
   letterSpacingTight: '-0.025em',
   letterSpacingNormal: '0em',
   letterSpacingWide: '0.025em',
+  letterSpacingLabel: '0.2em',
 
   radiusNone: '0px',
   radiusSm: '4px',
@@ -169,15 +174,19 @@ export const darkTheme = stylex.createTheme(tokens, {
   space12: '48px',
 
   fontFamilySans:
-    "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   fontFamilyMono:
-    "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontSizeXs: '0.75rem',
   fontSizeSm: '0.875rem',
   fontSizeMd: '1rem',
   fontSizeLg: '1.125rem',
   fontSizeXl: '1.25rem',
   fontSize2xl: '1.5rem',
+  fontSizeLabel: '10px',
+  fontSizeBody: '14px',
+  fontSizeSubhead: '18px',
+  fontSizeTitle: '22px',
   fontWeightNormal: '400',
   fontWeightMedium: '500',
   fontWeightSemibold: '600',
@@ -188,6 +197,7 @@ export const darkTheme = stylex.createTheme(tokens, {
   letterSpacingTight: '-0.025em',
   letterSpacingNormal: '0em',
   letterSpacingWide: '0.025em',
+  letterSpacingLabel: '0.2em',
 
   radiusNone: '0px',
   radiusSm: '4px',

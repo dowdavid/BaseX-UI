@@ -75,17 +75,23 @@ export const tokens = stylex.defineVars({
 
   // Font families
   fontFamilySans:
-    "'TikTok Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   fontFamilyMono:
-    "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
 
-  // Font sizes
+  // Font sizes (base scale)
   fontSizeXs: '0.75rem',
   fontSizeSm: '0.875rem',
   fontSizeMd: '1rem',
   fontSizeLg: '1.125rem',
   fontSizeXl: '1.25rem',
   fontSize2xl: '1.5rem',
+
+  // Typography scale (portfolio-aligned: label / body / subhead / title)
+  fontSizeLabel: '10px',
+  fontSizeBody: '14px',
+  fontSizeSubhead: '18px',
+  fontSizeTitle: '22px',
 
   // Font weights
   fontWeightNormal: '400',
@@ -102,6 +108,7 @@ export const tokens = stylex.defineVars({
   letterSpacingTight: '-0.025em',
   letterSpacingNormal: '0em',
   letterSpacingWide: '0.025em',
+  letterSpacingLabel: '0.2em',
 
   // --- Border Radius ---
   radiusNone: '0px',

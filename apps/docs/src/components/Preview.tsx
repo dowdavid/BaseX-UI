@@ -12,13 +12,15 @@ const styles = stylex.create({
     },
   },
   title: {
-    fontSize: tokens.fontSizeMd,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeSubhead,
     fontWeight: tokens.fontWeightSemibold,
     color: tokens.colorText,
     marginBottom: tokens.space1,
   },
   description: {
-    fontSize: tokens.fontSizeSm,
+    fontFamily: tokens.fontFamilyMono,
+    fontSize: tokens.fontSizeBody,
     color: tokens.colorTextMuted,
     lineHeight: tokens.lineHeightNormal,
     marginBottom: tokens.space4,
