@@ -23,6 +23,7 @@ const styles = stylex.create({
     top: 0,
     height: '100vh',
     overflowY: 'auto',
+    scrollbarGutter: 'stable',
     [MOBILE]: {
       position: 'fixed',
       top: 0,
@@ -130,15 +131,15 @@ const styles = stylex.create({
   },
   sectionLabel: {
     fontFamily: tokens.fontFamilyMono,
-    fontSize: tokens.fontSizeLabel,
+    fontSize: tokens.fontSizeBody,
     fontWeight: tokens.fontWeightSemibold,
     color: tokens.colorTextMuted,
     textTransform: 'uppercase',
     letterSpacing: tokens.letterSpacingLabel,
   },
   chevron: {
-    width: '14px',
-    height: '14px',
+    width: '16px',
+    height: '16px',
     color: tokens.colorTextMuted,
     transitionProperty: 'transform',
     transitionDuration: tokens.motionDurationFast,
