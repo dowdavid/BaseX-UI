@@ -82,7 +82,6 @@ Root.displayName = 'Checkbox.Root';
 const Indicator = forwardRef<HTMLSpanElement, CheckboxIndicatorProps>(({ sx, ...props }, ref) => (
   <BaseCheckbox.Indicator
     ref={ref}
-    keepMounted
     {...props}
     className={() =>
       `basex-checkbox-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`
@@ -91,9 +90,9 @@ const Indicator = forwardRef<HTMLSpanElement, CheckboxIndicatorProps>(({ sx, ...
       <span {...renderProps}>
         {state.indeterminate ? (
           <Minus size={12} strokeWidth={3.5} />
-        ) : (
+        ) : state.checked ? (
           <Check size={12} strokeWidth={3.5} />
-        )}
+        ) : null}
       </span>
     )}
   />

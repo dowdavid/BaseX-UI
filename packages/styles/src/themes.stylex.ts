@@ -11,7 +11,7 @@ export const lightTheme = stylex.createTheme(tokens, {
   colorPrimary: 'oklch(0.703 0.198 43.4)',
   colorPrimaryHover: 'oklch(0.738 0.171 46.0)',
   colorPrimaryActive: 'oklch(0.454 0.123 44.0)',
-  colorPrimaryContrast: 'oklch(0.145 0.002 286)',
+  colorPrimaryContrast: 'oklch(1 0 0)',
 
   colorSecondary: 'oklch(0.55 0.05 260)',
   colorSecondaryHover: 'oklch(0.50 0.06 260)',
@@ -116,7 +116,7 @@ export const darkTheme = stylex.createTheme(tokens, {
   colorPrimary: 'oklch(0.703 0.198 43.4)',
   colorPrimaryHover: 'oklch(0.738 0.171 46.0)',
   colorPrimaryActive: 'oklch(0.454 0.123 44.0)',
-  colorPrimaryContrast: 'oklch(0.145 0.002 286)',
+  colorPrimaryContrast: 'oklch(1 0 0)',
 
   // Secondary — lighter on dark backgrounds
   colorSecondary: 'oklch(0.70 0.04 260)',
