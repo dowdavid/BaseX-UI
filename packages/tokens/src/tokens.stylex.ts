@@ -74,8 +74,11 @@ export const tokens = stylex.defineVars({
   // --- Typography ---
 
   // Font families
+  // Note: fontFamilySans intentionally resolves to the Geist Mono stack so the
+  // entire component surface shares a single monospace voice. Kept as a named
+  // token to preserve existing component references (zero-diff switch).
   fontFamilySans:
-    "'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontFamilyMono:
     "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
 
@@ -111,12 +114,13 @@ export const tokens = stylex.defineVars({
   letterSpacingLabel: '0.2em',
 
   // --- Border Radius ---
+  // Flattened to 0 across the board — BaseX UI uses squared corners system-wide.
   radiusNone: '0px',
-  radiusSm: '4px',
-  radiusMd: '8px',
-  radiusLg: '12px',
-  radiusXl: '16px',
-  radiusFull: '9999px',
+  radiusSm: '0px',
+  radiusMd: '0px',
+  radiusLg: '0px',
+  radiusXl: '0px',
+  radiusFull: '0px',
 
   // --- Border Width ---
   borderWidthDefault: '1px',

@@ -58,7 +58,7 @@ export const lightTheme = stylex.createTheme(tokens, {
   space12: '48px',
 
   fontFamilySans:
-    "'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontFamilyMono:
     "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontSizeXs: '0.75rem',
@@ -84,11 +84,11 @@ export const lightTheme = stylex.createTheme(tokens, {
   letterSpacingLabel: '0.2em',
 
   radiusNone: '0px',
-  radiusSm: '4px',
-  radiusMd: '8px',
-  radiusLg: '12px',
-  radiusXl: '16px',
-  radiusFull: '9999px',
+  radiusSm: '0px',
+  radiusMd: '0px',
+  radiusLg: '0px',
+  radiusXl: '0px',
+  radiusFull: '0px',
 
   borderWidthDefault: '1px',
   borderWidthThick: '2px',
@@ -174,7 +174,7 @@ export const darkTheme = stylex.createTheme(tokens, {
   space12: '48px',
 
   fontFamilySans:
-    "'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontFamilyMono:
     "'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace",
   fontSizeXs: '0.75rem',
@@ -200,11 +200,11 @@ export const darkTheme = stylex.createTheme(tokens, {
   letterSpacingLabel: '0.2em',
 
   radiusNone: '0px',
-  radiusSm: '4px',
-  radiusMd: '8px',
-  radiusLg: '12px',
-  radiusXl: '16px',
-  radiusFull: '9999px',
+  radiusSm: '0px',
+  radiusMd: '0px',
+  radiusLg: '0px',
+  radiusXl: '0px',
+  radiusFull: '0px',
 
   borderWidthDefault: '1px',
   borderWidthThick: '2px',
