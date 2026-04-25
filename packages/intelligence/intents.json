@@ -534,6 +534,34 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "tabbed-content",
+      "component": "Tabs",
+      "signals": [
+        "tabs",
+        "tabbed",
+        "tab interface",
+        "switch between views",
+        "tabbed sections",
+        "panel switcher"
+      ],
+      "reasoning": "Tabs is the canonical component for switching between mutually exclusive content panels at the same level of hierarchy.",
+      "composition": "<Tabs.Root defaultValue=\"overview\">\n  <Tabs.List>\n    <Tabs.Tab value=\"overview\">Overview</Tabs.Tab>\n    <Tabs.Tab value=\"details\">Details</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"overview\">Overview content</Tabs.Panel>\n  <Tabs.Panel value=\"details\">Details content</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "settings-sections",
+      "component": "Tabs",
+      "signals": ["settings tabs", "preferences tabs", "vertical tabs", "side tabs"],
+      "reasoning": "Vertical Tabs work well for settings UIs where users move between configuration groups.",
+      "composition": "<Tabs.Root orientation=\"vertical\" defaultValue=\"profile\">\n  <Tabs.List>\n    <Tabs.Tab value=\"profile\">Profile</Tabs.Tab>\n    <Tabs.Tab value=\"account\">Account</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"profile\">Profile fields</Tabs.Panel>\n  <Tabs.Panel value=\"account\">Account fields</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "form-with-tabs",
+      "component": "Tabs",
+      "signals": ["multi-step form", "tabbed form", "form sections"],
+      "reasoning": "Use manual activation when tab content includes form controls, so screen readers don't trigger panel changes during arrow-key navigation.",
+      "composition": "<Tabs.Root defaultValue=\"step1\">\n  <Tabs.List activationMode=\"manual\">\n    <Tabs.Tab value=\"step1\">Step 1</Tabs.Tab>\n    <Tabs.Tab value=\"step2\">Step 2</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"step1\">{/* form fields */}</Tabs.Panel>\n  <Tabs.Panel value=\"step2\">{/* form fields */}</Tabs.Panel>\n</Tabs.Root>"
     }
   ],
   "antiPatterns": [
@@ -956,6 +984,24 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "Tabs",
+      "scenario": "Sequential steps that must be completed in order",
+      "reasoning": "Tabs imply free navigation between siblings. For ordered flows, use a stepper or wizard pattern.",
+      "alternative": "Custom stepper"
+    },
+    {
+      "component": "Tabs",
+      "scenario": "Site-wide navigation between pages",
+      "reasoning": "Tabs are for content within a single view. Use NavigationMenu for top-level site nav.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "component": "Tabs",
+      "scenario": "Many sections (more than ~7) or long labels that wrap",
+      "reasoning": "Tab lists work best with a small number of short labels. Use Accordion or a sidebar nav for larger sets.",
+      "alternative": "Accordion"
     }
   ]
 }

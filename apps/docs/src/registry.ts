@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { TabsPage } from './pages/TabsPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'tabs',
+    label: 'Tabs',
+    description: 'Switch between sibling content panels with full keyboard support and an animated indicator.',
+    path: '/components/tabs',
+    section: 'components',
+    component: TabsPage,
   },
 
   // Intelligence section

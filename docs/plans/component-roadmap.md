@@ -38,7 +38,7 @@
 | 28  | Separator       | `Separator`      | —        |              |
 | 29  | Slider          | `Slider`         | —        |              |
 | 30  | Switch          | `Switch`         | —        |              |
-| 31  | Tabs            | `Tabs`           | —        |              |
+| 31  | Tabs            | `Tabs`           | Done     |              |
 | 32  | Toast           | `Toast`          | —        |              |
 | 33  | Toggle          | `Toggle`         | —        |              |
 | 34  | Toggle Group    | `ToggleGroup`    | —        |              |
@@ -47,7 +47,7 @@
 
 ## Progress
 
-- **Done**: 25 / 36
+- **Done**: 26 / 36
 - **Next**: Scroll Area
 
 ## How to Use This File

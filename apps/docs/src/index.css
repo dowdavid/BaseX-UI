@@ -393,6 +393,14 @@
     border-color: var(--colorPrimary);
     background-color: var(--colorPrimary);
   }
+
+  /* Tabs indicator — slide to active tab. Move preset: 200ms ease-in-out. */
+  /* Position is driven by Base UI CSS vars set on Tabs.Indicator. */
+  @media (prefers-reduced-motion: reduce) {
+    .basex-tabs-indicator {
+      transition-duration: 0ms !important;
+    }
+  }
 }
 
 body {
