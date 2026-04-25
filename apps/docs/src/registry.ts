@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { ToolbarPage } from './pages/ToolbarPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,15 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'toolbar',
+    label: 'Toolbar',
+    description:
+      'A container for action buttons, links, and toggles with WAI-ARIA roving tabindex.',
+    path: '/components/toolbar',
+    section: 'components',
+    component: ToolbarPage,
   },
 
   // Intelligence section

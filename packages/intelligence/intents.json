@@ -534,6 +534,34 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "action-toolbar",
+      "component": "Toolbar",
+      "signals": ["toolbar", "action bar", "command bar", "button bar", "icon bar"],
+      "reasoning": "Toolbar groups action buttons with WAI-ARIA roving tabindex, so a single Tab stop reaches the bar and arrow keys move between actions.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.Button>Save</Toolbar.Button>\n  <Toolbar.Button>Undo</Toolbar.Button>\n  <Toolbar.Button>Redo</Toolbar.Button>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "formatting-toolbar",
+      "component": "Toolbar",
+      "signals": ["formatting", "rich text", "wysiwyg", "bold italic underline", "editor toolbar"],
+      "reasoning": "ToggleGroup with multiple=true supports independent pressed states for bold/italic/underline-style controls.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.ToggleGroup multiple defaultValue={[]}>\n    <Toolbar.ToggleItem value=\"bold\">B</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"italic\">I</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"underline\">U</Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "alignment-toolbar",
+      "component": "Toolbar",
+      "signals": ["alignment", "align left right center", "single select toggle"],
+      "reasoning": "Single-select ToggleGroup (multiple=false) is ideal for mutually exclusive choices like text alignment.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.ToggleGroup defaultValue={[\"left\"]}>\n    <Toolbar.ToggleItem value=\"left\">Left</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"center\">Center</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"right\">Right</Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "vertical-toolbar",
+      "component": "Toolbar",
+      "signals": ["vertical toolbar", "side rail", "side toolbar", "tool palette"],
+      "reasoning": "orientation=\"vertical\" lays the toolbar out as a column and remaps arrow keys to Up/Down for focus traversal.",
+      "composition": "<Toolbar.Root orientation=\"vertical\">\n  <Toolbar.Button>Select</Toolbar.Button>\n  <Toolbar.Button>Move</Toolbar.Button>\n  <Toolbar.Separator />\n  <Toolbar.Button>Delete</Toolbar.Button>\n</Toolbar.Root>"
     }
   ],
   "antiPatterns": [
@@ -956,6 +984,24 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "Toolbar",
+      "scenario": "A bar of dropdown menus (File, Edit, View)",
+      "reasoning": "Use Menubar — its keyboard model and menu popup integration are tuned for menu triggers, not action buttons.",
+      "alternative": "Menubar"
+    },
+    {
+      "component": "Toolbar",
+      "scenario": "Site-wide top navigation",
+      "reasoning": "Use NavigationMenu — toolbars are for in-app actions, not page-level navigation links.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "component": "Toolbar",
+      "scenario": "A standalone toggle button",
+      "reasoning": "If you need just one on/off button, the ToggleGroup wrapper is unnecessary overhead. Use Button with an aria-pressed pattern.",
+      "alternative": "Button"
     }
   ]
 }

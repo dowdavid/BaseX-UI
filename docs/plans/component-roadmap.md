@@ -42,7 +42,7 @@
 | 32  | Toast           | `Toast`          | —        |              |
 | 33  | Toggle          | `Toggle`         | —        |              |
 | 34  | Toggle Group    | `ToggleGroup`    | —        |              |
-| 35  | Toolbar         | `Toolbar`        | —        |              |
+| 35  | Toolbar         | `Toolbar`        | Done     |              |
 | 36  | Tooltip         | `Tooltip`        | —        |              |
 
 ## Progress

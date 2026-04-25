@@ -220,3 +220,14 @@ export type {
   RadioRootProps,
   RadioIndicatorProps,
 } from './radio';
+
+export { Toolbar } from './toolbar';
+export type {
+  ToolbarRootProps,
+  ToolbarButtonProps,
+  ToolbarLinkProps,
+  ToolbarGroupProps,
+  ToolbarSeparatorProps,
+  ToolbarToggleGroupProps,
+  ToolbarToggleItemProps,
+} from './toolbar';
