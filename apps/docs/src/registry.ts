@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { SliderPage } from './pages/SliderPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'slider',
+    label: 'Slider',
+    description: 'A range input for picking a single value or a range from a continuous scale.',
+    path: '/components/slider',
+    section: 'components',
+    component: SliderPage,
   },
 
   // Intelligence section

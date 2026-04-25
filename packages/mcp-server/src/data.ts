@@ -38,6 +38,7 @@ import popoverManifest from '../../components/src/popover/manifest.json';
 import previewCardManifest from '../../components/src/preview-card/manifest.json';
 import progressManifest from '../../components/src/progress/manifest.json';
 import radioManifest from '../../components/src/radio/manifest.json';
+import sliderManifest from '../../components/src/slider/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -63,7 +64,8 @@ export type ComponentManifest =
   | typeof popoverManifest
   | typeof previewCardManifest
   | typeof progressManifest
-  | typeof radioManifest;
+  | typeof radioManifest
+  | typeof sliderManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -90,6 +92,7 @@ const components = new Map<string, ComponentManifest>([
   ['preview-card', previewCardManifest],
   ['progress', progressManifest],
   ['radio', radioManifest],
+  ['slider', sliderManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -262,6 +265,11 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'indeterminate animation', preset: 'Move' },
     ],
     radio: [{ interaction: 'indicator appear/disappear', preset: 'State' }],
+    slider: [
+      { interaction: 'thumb hover/focus ring', preset: 'State' },
+      { interaction: 'thumb drag (transform)', preset: 'Move' },
+      { interaction: 'indicator color transition', preset: 'State' },
+    ],
   };
 
   return {
