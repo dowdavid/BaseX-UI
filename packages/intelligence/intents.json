@@ -534,6 +534,33 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "single-select-toggle-group",
+      "component": "ToggleGroup",
+      "signals": [
+        "toggle group",
+        "segmented control",
+        "view switcher",
+        "single select toggle",
+        "exclusive toggle",
+        "alignment picker"
+      ],
+      "reasoning": "Single-mode ToggleGroup is ideal for mutually exclusive views (e.g. list vs grid), alignment pickers, or tabs-like switchers where one item is pressed at a time. Exposes radiogroup semantics for AT.",
+      "composition": "<ToggleGroup.Root type=\"single\" defaultValue=\"left\">\n  <ToggleGroup.Item value=\"left\">Left</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"center\">Center</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"right\">Right</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    },
+    {
+      "intent": "multi-select-toggle-group",
+      "component": "ToggleGroup",
+      "signals": [
+        "formatting toolbar",
+        "bold italic underline",
+        "multi-select toggles",
+        "tag picker",
+        "filter chips"
+      ],
+      "reasoning": "Multi-mode ToggleGroup fits formatting toolbars or tag/filter pickers where any combination of items can be pressed simultaneously.",
+      "composition": "<ToggleGroup.Root type=\"multiple\" defaultValue={['bold']}>\n  <ToggleGroup.Item value=\"bold\">B</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"italic\">I</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"underline\">U</ToggleGroup.Item>\n</ToggleGroup.Root>"
     }
   ],
   "antiPatterns": [
@@ -956,6 +983,24 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "ToggleGroup",
+      "scenario": "A single standalone on/off button",
+      "reasoning": "Use Toggle directly. ToggleGroup adds shared-state overhead for a single item.",
+      "alternative": "Toggle"
+    },
+    {
+      "component": "ToggleGroup",
+      "scenario": "Navigation between page-level views with associated content panels",
+      "reasoning": "Use Tabs. Tabs ties triggers to panels and exposes the correct ARIA relationship; ToggleGroup is for stateful buttons without panels.",
+      "alternative": "Tabs"
+    },
+    {
+      "component": "ToggleGroup",
+      "scenario": "Form selection where the value is submitted as a form field",
+      "reasoning": "Use Radio (single) or CheckboxGroup (multiple). ToggleGroup buttons don't participate in native form submission.",
+      "alternative": "Radio or CheckboxGroup"
     }
   ]
 }

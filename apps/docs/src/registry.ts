@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { ToggleGroupPage } from './pages/ToggleGroupPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'toggle-group',
+    label: 'Toggle Group',
+    description: 'Single- or multi-select group of two-state toggle buttons with roving tabindex.',
+    path: '/components/toggle-group',
+    section: 'components',
+    component: ToggleGroupPage,
   },
 
   // Intelligence section
