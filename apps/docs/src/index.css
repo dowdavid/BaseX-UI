@@ -285,6 +285,28 @@
     transform: translateY(-4px);
   }
 
+  /* Select popup fade/slide animation — mirrors Combobox */
+  .basex-select-popup {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
+  }
+  .basex-select-popup[data-starting-style],
+  .basex-select-popup[data-ending-style] {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .basex-select-popup,
+    .basex-select-popup[data-starting-style],
+    .basex-select-popup[data-ending-style] {
+      transition: none;
+      transform: none;
+    }
+  }
+
   /* Menu popup scale/fade animation — Enter: 150ms ease-out */
   .basex-menu-popup {
     opacity: 1;

@@ -534,6 +534,47 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "single-value-select",
+      "component": "Select",
+      "signals": [
+        "select",
+        "dropdown",
+        "single select",
+        "pick one",
+        "choose one",
+        "select option",
+        "form select"
+      ],
+      "reasoning": "Select is the primary single-value dropdown for short-to-medium predefined option lists, with native keyboard typeahead and listbox ARIA. Use over Combobox when filter input adds friction.",
+      "composition": "<Select.Root defaultValue=\"a\">\n  <Select.Trigger>\n    <Select.Value placeholder=\"Choose...\" />\n    <Select.Icon />\n  </Select.Trigger>\n  <Select.Portal>\n    <Select.Positioner>\n      <Select.Popup>\n        <Select.Viewport>\n          <Select.Item value=\"a\"><Select.ItemIndicator /><Select.ItemText>Option A</Select.ItemText></Select.Item>\n        </Select.Viewport>\n      </Select.Popup>\n    </Select.Positioner>\n  </Select.Portal>\n</Select.Root>"
+    },
+    {
+      "intent": "form-select-field",
+      "component": "Select",
+      "signals": [
+        "select form field",
+        "select with label",
+        "form dropdown",
+        "labelled select",
+        "select inside field"
+      ],
+      "reasoning": "Compose Select inside Field for label, description, and error wiring. Use the `name` prop on Select.Root to submit the value with the form.",
+      "composition": "<Field.Root name=\"role\">\n  <Field.Label>Role</Field.Label>\n  <Select.Root name=\"role\">\n    <Select.Trigger><Select.Value placeholder=\"Pick a role\" /><Select.Icon /></Select.Trigger>\n    <Select.Portal><Select.Positioner><Select.Popup><Select.Viewport>\n      <Select.Item value=\"admin\"><Select.ItemIndicator /><Select.ItemText>Admin</Select.ItemText></Select.Item>\n    </Select.Viewport></Select.Popup></Select.Positioner></Select.Portal>\n  </Select.Root>\n</Field.Root>"
+    },
+    {
+      "intent": "grouped-options",
+      "component": "Select",
+      "signals": [
+        "grouped select",
+        "select with sections",
+        "categorized dropdown",
+        "select group label",
+        "select with separators"
+      ],
+      "reasoning": "Use Select.Group + Select.GroupLabel + Select.Separator for visually-organized option sets without losing keyboard navigation.",
+      "composition": "<Select.Root>\n  <Select.Trigger><Select.Value placeholder=\"Pick fruit\" /><Select.Icon /></Select.Trigger>\n  <Select.Portal><Select.Positioner><Select.Popup><Select.Viewport>\n    <Select.Group>\n      <Select.GroupLabel>Citrus</Select.GroupLabel>\n      <Select.Item value=\"orange\"><Select.ItemIndicator /><Select.ItemText>Orange</Select.ItemText></Select.Item>\n    </Select.Group>\n    <Select.Separator />\n    <Select.Group>\n      <Select.GroupLabel>Berries</Select.GroupLabel>\n      <Select.Item value=\"strawberry\"><Select.ItemIndicator /><Select.ItemText>Strawberry</Select.ItemText></Select.Item>\n    </Select.Group>\n  </Select.Viewport></Select.Popup></Select.Positioner></Select.Portal>\n</Select.Root>"
     }
   ],
   "antiPatterns": [
@@ -956,6 +997,30 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "Select",
+      "scenario": "Long lists where users need to search by typing arbitrary text",
+      "reasoning": "Select supports typeahead but assumes the list is browseable. Use Combobox to filter a long list as the user types.",
+      "alternative": "Combobox"
+    },
+    {
+      "component": "Select",
+      "scenario": "Multiple selections required",
+      "reasoning": "Select is a single-value primitive. Use Combobox with `multiple` for tag-style multi-select, or CheckboxGroup for an inline list.",
+      "alternative": "Combobox (multiple) or CheckboxGroup"
+    },
+    {
+      "component": "Select",
+      "scenario": "Free-form input with optional suggestions",
+      "reasoning": "Select forces a choice from a fixed list. Use Autocomplete when the user can submit any string.",
+      "alternative": "Autocomplete"
+    },
+    {
+      "component": "Select",
+      "scenario": "Two or three options that fit on one row",
+      "reasoning": "An inline RadioGroup or ToggleGroup is faster — no extra click, all options visible.",
+      "alternative": "Radio or ToggleGroup"
     }
   ]
 }

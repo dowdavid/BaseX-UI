@@ -34,7 +34,7 @@
 | 24  | Progress        | `Progress`       | Done     |              |
 | 25  | Radio           | `Radio`          | Done     |              |
 | 26  | Scroll Area     | `ScrollArea`     | **Next** |              |
-| 27  | Select          | `Select`         | —        |              |
+| 27  | Select          | `Select`         | Done     |              |
 | 28  | Separator       | `Separator`      | —        |              |
 | 29  | Slider          | `Slider`         | —        |              |
 | 30  | Switch          | `Switch`         | —        |              |
@@ -47,7 +47,7 @@
 
 ## Progress
 
-- **Done**: 25 / 36
+- **Done**: 26 / 36
 - **Next**: Scroll Area
 
 ## How to Use This File

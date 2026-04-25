@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { SelectPage } from './pages/SelectPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'select',
+    label: 'Select',
+    description: 'A native-feeling single-value dropdown with keyboard typeahead.',
+    path: '/components/select',
+    section: 'components',
+    component: SelectPage,
   },
 
   // Intelligence section
