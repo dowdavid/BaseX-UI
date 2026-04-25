@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { ToastPage } from './pages/ToastPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,15 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'toast',
+    label: 'Toast',
+    description:
+      'Ephemeral, accessible notifications with auto-dismiss, swipe-to-dismiss, and an imperative useToast() hook.',
+    path: '/components/toast',
+    section: 'components',
+    component: ToastPage,
   },
 
   // Intelligence section

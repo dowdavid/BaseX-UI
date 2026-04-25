@@ -393,6 +393,43 @@
     border-color: var(--colorPrimary);
     background-color: var(--colorPrimary);
   }
+
+  /* Toast enter — Enter: 200ms ease-out */
+  .basex-toast-root {
+    opacity: 1;
+    transform: translate3d(var(--toast-swipe-movement-x, 0), var(--toast-swipe-movement-y, 0), 0);
+    transition:
+      opacity 200ms cubic-bezier(0, 0, 0.2, 1),
+      transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .basex-toast-root[data-starting-style] {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  /* Toast exit — Exit: 100ms ease-out */
+  .basex-toast-root[data-ending-style] {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition:
+      opacity 100ms cubic-bezier(0, 0, 0.2, 1),
+      transform 100ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  /* While swiping, follow the finger immediately */
+  .basex-toast-root[data-swiping] {
+    transition-duration: 0ms;
+  }
+
+  /* Reduced motion: opacity only, no slide */
+  @media (prefers-reduced-motion: reduce) {
+    .basex-toast-root {
+      transition: opacity 100ms linear;
+      transform: none !important;
+    }
+    .basex-toast-root[data-starting-style],
+    .basex-toast-root[data-ending-style] {
+      transform: none !important;
+    }
+  }
 }
 
 body {

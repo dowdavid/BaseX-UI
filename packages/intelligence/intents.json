@@ -534,6 +534,48 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "transient-feedback",
+      "component": "Toast",
+      "signals": [
+        "toast",
+        "snackbar",
+        "notification",
+        "saved",
+        "copied",
+        "success message",
+        "feedback"
+      ],
+      "reasoning": "Toast is the right component for short-lived, non-blocking feedback after a user action.",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Saved', description: 'Your changes were saved.' });"
+    },
+    {
+      "intent": "destructive-feedback",
+      "component": "Toast",
+      "signals": [
+        "error toast",
+        "failed",
+        "couldn’t save",
+        "destructive notification",
+        "warning toast"
+      ],
+      "reasoning": "type='error' upgrades the screen-reader announcement to assertive and applies destructive styling.",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Couldn’t save', description: 'Try again in a moment.', type: 'error', priority: 'high' });"
+    },
+    {
+      "intent": "undoable-action",
+      "component": "Toast",
+      "signals": ["undo", "undo toast", "undo delete", "revert", "with action"],
+      "reasoning": "Toast.Action is keyboard-reachable from anywhere via the F6 hotkey for one-tap reversal.",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Item archived', actionProps: { children: 'Undo', onClick: handleUndo } });"
+    },
+    {
+      "intent": "promise-feedback",
+      "component": "Toast",
+      "signals": ["loading toast", "saving", "uploading", "promise toast", "async toast"],
+      "reasoning": "useToast().promise() shows a loading toast that resolves to success or error automatically.",
+      "composition": "const toast = useToast();\n\ntoast.promise(saveDraft(), { loading: 'Saving…', success: 'Saved', error: 'Failed to save' });"
     }
   ],
   "antiPatterns": [
@@ -956,6 +998,30 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Toasts auto-dismiss and don’t demand acknowledgment. Use AlertDialog for confirmations the user must accept.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Persistent or critical errors that block the workflow",
+      "reasoning": "Toasts disappear. Use a Dialog or inline alert for blocking errors that demand action.",
+      "alternative": "Dialog or inline error message"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Long-form content, forms, or multi-step interactions",
+      "reasoning": "Toasts are intentionally compact and ephemeral. Use Dialog or Drawer for substantial content.",
+      "alternative": "Dialog or Drawer"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Information the user must read to continue",
+      "reasoning": "Auto-dismiss means the user can miss the message. Use Dialog so it isn’t auto-dismissed.",
+      "alternative": "Dialog"
     }
   ]
 }
