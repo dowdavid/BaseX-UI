@@ -393,6 +393,53 @@
     border-color: var(--colorPrimary);
     background-color: var(--colorPrimary);
   }
+
+  /* ScrollArea — hide native scrollbars on the viewport */
+  .basex-scroll-area-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ScrollArea scrollbar fade — State preset: 100ms ease-out */
+  .basex-scroll-area-scrollbar {
+    opacity: 0;
+    transition: opacity 100ms cubic-bezier(0, 0, 0.2, 1);
+    position: absolute;
+  }
+  .basex-scroll-area-scrollbar[data-orientation='vertical'] {
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .basex-scroll-area-scrollbar[data-orientation='horizontal'] {
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .basex-scroll-area-scrollbar[data-hovering],
+  .basex-scroll-area-scrollbar[data-scrolling] {
+    opacity: 1;
+  }
+  .basex-scroll-area-thumb[data-orientation='vertical'] {
+    height: var(--scroll-area-thumb-height);
+    width: 100%;
+  }
+  .basex-scroll-area-thumb[data-orientation='horizontal'] {
+    width: var(--scroll-area-thumb-width);
+    height: 100%;
+  }
+  .basex-scroll-area-corner {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .basex-scroll-area-scrollbar {
+      transition-duration: 0ms;
+    }
+  }
 }
 
 body {

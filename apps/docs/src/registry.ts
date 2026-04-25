@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { ScrollAreaPage } from './pages/ScrollAreaPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'scroll-area',
+    label: 'Scroll Area',
+    description: 'A bounded scroll region with custom-styled scrollbars overlaid on native scroll.',
+    path: '/components/scroll-area',
+    section: 'components',
+    component: ScrollAreaPage,
   },
 
   // Intelligence section

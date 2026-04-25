@@ -534,6 +534,27 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "custom-scroll-region",
+      "component": "ScrollArea",
+      "signals": ["scroll", "scrollable", "scrollbar", "custom scrollbar", "overflow", "long list", "scrollable container"],
+      "reasoning": "ScrollArea overlays a custom-styled scrollbar on top of native scroll, keeping all native behaviors (keyboard, touch, RTL, mouse wheel) while making the scrollbar match the design system.",
+      "composition": "<ScrollArea.Root style={{ height: 240 }}>\n  <ScrollArea.Viewport>\n    {items.map((item) => (\n      <div key={item.id}>{item.label}</div>\n    ))}\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"vertical\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "intent": "horizontal-scroll-row",
+      "component": "ScrollArea",
+      "signals": ["horizontal scroll", "carousel", "scrollable row", "tag list", "chip row", "horizontal overflow"],
+      "reasoning": "ScrollArea with a horizontal Scrollbar gives a clean horizontal scrolling row (chips, tags, thumbnails) with a styled scrollbar that fades in only when needed.",
+      "composition": "<ScrollArea.Root>\n  <ScrollArea.Viewport>\n    <div style={{ display: 'flex', gap: 8 }}>{tags}</div>\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"horizontal\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "intent": "scroll-region-in-dialog",
+      "component": "ScrollArea",
+      "signals": ["dialog scroll", "modal scroll", "long content", "scroll inside dialog"],
+      "reasoning": "Inside a Dialog or Drawer, ScrollArea provides consistent scrollbar styling that won't clash with the surrounding chrome and stays out of the way until needed.",
+      "composition": "<Dialog.Panel>\n  <ScrollArea.Root style={{ maxHeight: 320 }}>\n    <ScrollArea.Viewport>\n      {longContent}\n    </ScrollArea.Viewport>\n    <ScrollArea.Scrollbar orientation=\"vertical\">\n      <ScrollArea.Thumb />\n    </ScrollArea.Scrollbar>\n  </ScrollArea.Root>\n</Dialog.Panel>"
     }
   ],
   "antiPatterns": [
@@ -956,6 +977,24 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "ScrollArea",
+      "scenario": "The whole document or viewport scrolls",
+      "reasoning": "Use the browser's native scroll for full-page scrolling. ScrollArea is for a bounded region; using it on the document hijacks page scroll and breaks anchor links and accessibility heuristics.",
+      "alternative": "Native browser scroll (no component)"
+    },
+    {
+      "component": "ScrollArea",
+      "scenario": "Virtualized lists with thousands of items",
+      "reasoning": "ScrollArea wraps native scroll but doesn't virtualize. For very large lists, pair it with a virtualization library (TanStack Virtual, react-window) or skip it entirely — the custom scrollbar may interfere with item measurement.",
+      "alternative": "Virtualization library + native scroll"
+    },
+    {
+      "component": "ScrollArea",
+      "scenario": "Content that should grow with the page",
+      "reasoning": "ScrollArea is for fixed-size regions. If the container should expand to fit content, just use a regular div — no scrollbar is needed.",
+      "alternative": "Plain div"
     }
   ]
 }

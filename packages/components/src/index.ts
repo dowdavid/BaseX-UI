@@ -220,3 +220,12 @@ export type {
   RadioRootProps,
   RadioIndicatorProps,
 } from './radio';
+
+export { ScrollArea } from './scroll-area';
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaCornerProps,
+} from './scroll-area';
