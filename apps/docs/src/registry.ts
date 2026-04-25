@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { TooltipPage } from './pages/TooltipPage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'tooltip',
+    label: 'Tooltip',
+    description: 'A non-interactive label that appears on hover or focus.',
+    path: '/components/tooltip',
+    section: 'components',
+    component: TooltipPage,
   },
 
   // Intelligence section

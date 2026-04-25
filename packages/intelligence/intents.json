@@ -534,6 +534,33 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "label-icon-button",
+      "component": "Tooltip",
+      "signals": ["tooltip", "label icon button", "describe icon", "hover label", "icon hint"],
+      "reasoning": "Tooltip is the standard pattern for describing icon-only buttons or compact controls that lack a visible text label.",
+      "composition": "<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>⚙️</Tooltip.Trigger>\n    <Tooltip.Portal>\n      <Tooltip.Positioner>\n        <Tooltip.Popup>Settings</Tooltip.Popup>\n      </Tooltip.Positioner>\n    </Tooltip.Portal>\n  </Tooltip.Root>\n</Tooltip.Provider>"
+    },
+    {
+      "intent": "supplemental-hint",
+      "component": "Tooltip",
+      "signals": [
+        "hover hint",
+        "supplemental info",
+        "explain control",
+        "field hint",
+        "non-interactive tooltip"
+      ],
+      "reasoning": "Tooltip surfaces a short, non-interactive hint on hover or focus. Use only when the content is purely informational.",
+      "composition": "<Tooltip.Root>\n  <Tooltip.Trigger>Save</Tooltip.Trigger>\n  <Tooltip.Portal>\n    <Tooltip.Positioner>\n      <Tooltip.Popup>Saves your changes (⌘S)</Tooltip.Popup>\n    </Tooltip.Positioner>\n  </Tooltip.Portal>\n</Tooltip.Root>"
+    },
+    {
+      "intent": "shared-delay-group",
+      "component": "Tooltip",
+      "signals": ["toolbar tooltips", "tooltip group", "delay group", "row of icons"],
+      "reasoning": "Wrap a row of related triggers in Tooltip.Provider so moving between them skips the open delay after the first tooltip is shown.",
+      "composition": "<Tooltip.Provider delay={600}>\n  {items.map(item => (\n    <Tooltip.Root key={item.id}>\n      <Tooltip.Trigger>{item.icon}</Tooltip.Trigger>\n      <Tooltip.Portal>\n        <Tooltip.Positioner>\n          <Tooltip.Popup>{item.label}</Tooltip.Popup>\n        </Tooltip.Positioner>\n      </Tooltip.Portal>\n    </Tooltip.Root>\n  ))}\n</Tooltip.Provider>"
     }
   ],
   "antiPatterns": [
@@ -956,6 +983,30 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Interactive content (buttons, links, forms inside the popup)",
+      "reasoning": "Tooltip is non-interactive and will close on blur. Use Popover for floating panels that contain interactive content.",
+      "alternative": "Popover"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Critical information that users must read",
+      "reasoning": "Tooltips are hidden by default and inaccessible on touch without focus. Use inline text, Field description, or Alert for must-see content.",
+      "alternative": "Field.Description or inline text"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Rich previews of linked content",
+      "reasoning": "PreviewCard is the right pattern for hover previews of pages, profiles, or media.",
+      "alternative": "PreviewCard"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Disabled triggers that need a tooltip",
+      "reasoning": "Disabled buttons don't fire pointer events. Wrap the disabled control in a focusable span (tabIndex={0}, aria-disabled) and put Tooltip.Trigger on that wrapper.",
+      "alternative": "Wrap the disabled control in a focusable element"
     }
   ]
 }
