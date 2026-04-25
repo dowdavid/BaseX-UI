@@ -267,7 +267,8 @@ export const pages: PageEntry[] = [
   {
     id: 'tabs',
     label: 'Tabs',
-    description: 'Switch between sibling content panels with full keyboard support and an animated indicator.',
+    description:
+      'Switch between sibling content panels with full keyboard support and an animated indicator.',
     path: '/components/tabs',
     section: 'components',
     component: TabsPage,

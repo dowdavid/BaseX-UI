@@ -94,13 +94,13 @@ An accessible tab interface that organizes content into selectable panels. Built
 
 ## Keyboard
 
-| Key                                | Behavior                                                          |
-| ---------------------------------- | ----------------------------------------------------------------- |
-| `Tab`                              | Move focus into the tab list.                                     |
-| `ArrowLeft` / `ArrowRight`         | Move focus between tabs (horizontal). RTL-safe.                   |
-| `ArrowUp` / `ArrowDown`            | Move focus between tabs (vertical).                               |
-| `Home` / `End`                     | Move focus to the first/last tab.                                 |
-| `Enter` / `Space`                  | Activate the focused tab (required only with `manual` activation). |
+| Key                        | Behavior                                                           |
+| -------------------------- | ------------------------------------------------------------------ |
+| `Tab`                      | Move focus into the tab list.                                      |
+| `ArrowLeft` / `ArrowRight` | Move focus between tabs (horizontal). RTL-safe.                    |
+| `ArrowUp` / `ArrowDown`    | Move focus between tabs (vertical).                                |
+| `Home` / `End`             | Move focus to the first/last tab.                                  |
+| `Enter` / `Space`          | Activate the focused tab (required only with `manual` activation). |
 
 With `activationMode="automatic"` (default) tabs activate on focus. With `activationMode="manual"`, focus and activation are decoupled — preferred when panels contain forms.
 
@@ -120,63 +120,63 @@ The indicator transitions are wired through standard CSS transitions; consumers 
 
 ### Tabs.Root
 
-| Prop            | Type                                       | Default        | Description                                  |
-| --------------- | ------------------------------------------ | -------------- | -------------------------------------------- |
-| `value`         | `string \| number \| null`                 | --             | The active tab value (controlled).           |
-| `defaultValue`  | `string \| number \| null`                 | `0`            | The initially active tab (uncontrolled).     |
-| `onValueChange` | `(value, eventDetails) => void`            | --             | Callback when the active tab changes.        |
-| `orientation`   | `'horizontal' \| 'vertical'`               | `'horizontal'` | Layout flow direction.                       |
-| `sx`            | `StyleXStyles`                             | --             | StyleX styles for consumer overrides.        |
+| Prop            | Type                            | Default        | Description                              |
+| --------------- | ------------------------------- | -------------- | ---------------------------------------- |
+| `value`         | `string \| number \| null`      | --             | The active tab value (controlled).       |
+| `defaultValue`  | `string \| number \| null`      | `0`            | The initially active tab (uncontrolled). |
+| `onValueChange` | `(value, eventDetails) => void` | --             | Callback when the active tab changes.    |
+| `orientation`   | `'horizontal' \| 'vertical'`    | `'horizontal'` | Layout flow direction.                   |
+| `sx`            | `StyleXStyles`                  | --             | StyleX styles for consumer overrides.    |
 
 ### Tabs.List
 
-| Prop             | Type                          | Default       | Description                                                            |
-| ---------------- | ----------------------------- | ------------- | ---------------------------------------------------------------------- |
-| `activationMode` | `'automatic' \| 'manual'`     | `'automatic'` | Whether tabs activate on focus (`automatic`) or only on Enter/Space.   |
-| `loopFocus`      | `boolean`                     | `true`        | Whether arrow-key focus loops at the ends of the list.                 |
-| `sx`             | `StyleXStyles`                | --            | StyleX styles for consumer overrides.                                  |
+| Prop             | Type                      | Default       | Description                                                          |
+| ---------------- | ------------------------- | ------------- | -------------------------------------------------------------------- |
+| `activationMode` | `'automatic' \| 'manual'` | `'automatic'` | Whether tabs activate on focus (`automatic`) or only on Enter/Space. |
+| `loopFocus`      | `boolean`                 | `true`        | Whether arrow-key focus loops at the ends of the list.               |
+| `sx`             | `StyleXStyles`            | --            | StyleX styles for consumer overrides.                                |
 
 ### Tabs.Tab
 
-| Prop       | Type                | Default | Description                              |
-| ---------- | ------------------- | ------- | ---------------------------------------- |
-| `value`    | `string \| number`  | --      | Required. Identifies this tab.           |
-| `disabled` | `boolean`           | `false` | Whether the tab is disabled.             |
-| `sx`       | `StyleXStyles`      | --      | StyleX styles for consumer overrides.    |
+| Prop       | Type               | Default | Description                           |
+| ---------- | ------------------ | ------- | ------------------------------------- |
+| `value`    | `string \| number` | --      | Required. Identifies this tab.        |
+| `disabled` | `boolean`          | `false` | Whether the tab is disabled.          |
+| `sx`       | `StyleXStyles`     | --      | StyleX styles for consumer overrides. |
 
 #### Data attributes
 
-| Attribute              | Description                          |
-| ---------------------- | ------------------------------------ |
-| `data-selected`        | Present when the tab is active.      |
-| `data-disabled`        | Present when the tab is disabled.    |
-| `data-orientation`     | Reflects the orientation.            |
+| Attribute          | Description                       |
+| ------------------ | --------------------------------- |
+| `data-selected`    | Present when the tab is active.   |
+| `data-disabled`    | Present when the tab is disabled. |
+| `data-orientation` | Reflects the orientation.         |
 
 ### Tabs.Panel
 
-| Prop          | Type                | Default | Description                                       |
-| ------------- | ------------------- | ------- | ------------------------------------------------- |
-| `value`       | `string \| number`  | --      | Required. The tab value this panel belongs to.    |
-| `keepMounted` | `boolean`           | `false` | Keep the panel mounted in the DOM when hidden.    |
-| `sx`          | `StyleXStyles`      | --      | StyleX styles for consumer overrides.             |
+| Prop          | Type               | Default | Description                                    |
+| ------------- | ------------------ | ------- | ---------------------------------------------- |
+| `value`       | `string \| number` | --      | Required. The tab value this panel belongs to. |
+| `keepMounted` | `boolean`          | `false` | Keep the panel mounted in the DOM when hidden. |
+| `sx`          | `StyleXStyles`     | --      | StyleX styles for consumer overrides.          |
 
 ### Tabs.Indicator
 
-| Prop                    | Type           | Default | Description                                          |
-| ----------------------- | -------------- | ------- | ---------------------------------------------------- |
-| `renderBeforeHydration` | `boolean`      | `false` | Render before React hydrates to reduce SSR flicker.  |
-| `sx`                    | `StyleXStyles` | --      | StyleX styles for consumer overrides.                |
+| Prop                    | Type           | Default | Description                                         |
+| ----------------------- | -------------- | ------- | --------------------------------------------------- |
+| `renderBeforeHydration` | `boolean`      | `false` | Render before React hydrates to reduce SSR flicker. |
+| `sx`                    | `StyleXStyles` | --      | StyleX styles for consumer overrides.               |
 
 #### CSS Variables
 
 The Indicator reads positioning vars from Base UI:
 
-| Variable              | Description                                           |
-| --------------------- | ----------------------------------------------------- |
-| `--active-tab-left`   | Distance of active tab from the left of the list.     |
-| `--active-tab-top`    | Distance of active tab from the top of the list.     |
-| `--active-tab-width`  | Width of the active tab.                              |
-| `--active-tab-height` | Height of the active tab.                             |
+| Variable              | Description                                       |
+| --------------------- | ------------------------------------------------- |
+| `--active-tab-left`   | Distance of active tab from the left of the list. |
+| `--active-tab-top`    | Distance of active tab from the top of the list.  |
+| `--active-tab-width`  | Width of the active tab.                          |
+| `--active-tab-height` | Height of the active tab.                         |
 
 ## When to Use
 
