@@ -220,3 +220,6 @@ export type {
   RadioRootProps,
   RadioIndicatorProps,
 } from './radio';
+
+export { Toggle } from './toggle';
+export type { ToggleRootProps, ToggleVariant, ToggleSize } from './toggle';

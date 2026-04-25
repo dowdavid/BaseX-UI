@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { TogglePage } from './pages/TogglePage';
 
 export interface PageEntry {
   id: string;
@@ -262,6 +263,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'toggle',
+    label: 'Toggle',
+    description: 'A two-state button with aria-pressed semantics.',
+    path: '/components/toggle',
+    section: 'components',
+    component: TogglePage,
   },
 
   // Intelligence section
