@@ -220,3 +220,6 @@ export type {
   RadioRootProps,
   RadioIndicatorProps,
 } from './radio';
+
+export { Switch } from './switch';
+export type { SwitchRootProps, SwitchThumbProps } from './switch';
