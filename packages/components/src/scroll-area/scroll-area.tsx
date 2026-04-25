@@ -73,28 +73,38 @@ const styles = stylex.create({
 });
 
 // --- Types ---
-export interface ScrollAreaRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Root>, 'className'> {
+export interface ScrollAreaRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseScrollArea.Root>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ScrollAreaViewportProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Viewport>, 'className'> {
+export interface ScrollAreaViewportProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseScrollArea.Viewport>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ScrollAreaScrollbarProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Scrollbar>, 'className'> {
+export interface ScrollAreaScrollbarProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseScrollArea.Scrollbar>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ScrollAreaThumbProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Thumb>, 'className'> {
+export interface ScrollAreaThumbProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseScrollArea.Thumb>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface ScrollAreaCornerProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseScrollArea.Corner>, 'className'> {
+export interface ScrollAreaCornerProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseScrollArea.Corner>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 

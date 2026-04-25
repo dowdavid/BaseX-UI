@@ -138,18 +138,18 @@ Scrollbar fade and thumb sizing rely on Base UI data attributes and CSS variable
 
 ### Root
 
-| Prop                    | Type                                                                                  | Default | Description                                                |
-| ----------------------- | ------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------- |
-| `overflowEdgeThreshold` | `number \| { xStart?; xEnd?; yStart?; yEnd? }`                                        | `0`     | Pixel threshold before overflow-edge data attrs are applied |
-| `sx`                    | `StyleXStyles`                                                                        | —       | StyleX overrides                                           |
+| Prop                    | Type                                           | Default | Description                                                 |
+| ----------------------- | ---------------------------------------------- | ------- | ----------------------------------------------------------- |
+| `overflowEdgeThreshold` | `number \| { xStart?; xEnd?; yStart?; yEnd? }` | `0`     | Pixel threshold before overflow-edge data attrs are applied |
+| `sx`                    | `StyleXStyles`                                 | —       | StyleX overrides                                            |
 
 #### Data attributes
 
-| Attribute               | Description                                       |
-| ----------------------- | ------------------------------------------------- |
-| `data-scrolling`        | Present while the user is scrolling               |
-| `data-has-overflow-x`   | Present when content is wider than the viewport   |
-| `data-has-overflow-y`   | Present when content is taller than the viewport  |
+| Attribute               | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| `data-scrolling`        | Present while the user is scrolling                |
+| `data-has-overflow-x`   | Present when content is wider than the viewport    |
+| `data-has-overflow-y`   | Present when content is taller than the viewport   |
 | `data-overflow-x-start` | Present when there is overflow on the inline-start |
 | `data-overflow-x-end`   | Present when there is overflow on the inline-end   |
 | `data-overflow-y-start` | Present when there is overflow on the block-start  |
@@ -163,21 +163,21 @@ Scrollbar fade and thumb sizing rely on Base UI data attributes and CSS variable
 
 ### Scrollbar
 
-| Prop          | Type                          | Default      | Description                                                |
-| ------------- | ----------------------------- | ------------ | ---------------------------------------------------------- |
-| `orientation` | `'vertical' \| 'horizontal'`  | `'vertical'` | Whether the scrollbar controls vertical or horizontal scroll |
-| `keepMounted` | `boolean`                     | `false`      | Keep in the DOM when the viewport isn't scrollable          |
-| `sx`          | `StyleXStyles`                | —            | StyleX overrides                                           |
+| Prop          | Type                         | Default      | Description                                                  |
+| ------------- | ---------------------------- | ------------ | ------------------------------------------------------------ |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Whether the scrollbar controls vertical or horizontal scroll |
+| `keepMounted` | `boolean`                    | `false`      | Keep in the DOM when the viewport isn't scrollable           |
+| `sx`          | `StyleXStyles`               | —            | StyleX overrides                                             |
 
 #### Data attributes
 
-| Attribute             | Description                                |
-| --------------------- | ------------------------------------------ |
-| `data-orientation`    | `'horizontal'` or `'vertical'`             |
-| `data-hovering`       | Present when the pointer is over the area  |
-| `data-scrolling`      | Present while the user is scrolling        |
-| `data-has-overflow-x` | Present when content is wider              |
-| `data-has-overflow-y` | Present when content is taller             |
+| Attribute             | Description                               |
+| --------------------- | ----------------------------------------- |
+| `data-orientation`    | `'horizontal'` or `'vertical'`            |
+| `data-hovering`       | Present when the pointer is over the area |
+| `data-scrolling`      | Present while the user is scrolling       |
+| `data-has-overflow-x` | Present when content is wider             |
+| `data-has-overflow-y` | Present when content is taller            |
 
 ### Thumb
 
@@ -193,10 +193,10 @@ Scrollbar fade and thumb sizing rely on Base UI data attributes and CSS variable
 
 #### CSS variables
 
-| Variable                       | Description                              |
-| ------------------------------ | ---------------------------------------- |
-| `--scroll-area-thumb-height`   | The thumb height (vertical scrollbars)   |
-| `--scroll-area-thumb-width`    | The thumb width (horizontal scrollbars)  |
+| Variable                     | Description                             |
+| ---------------------------- | --------------------------------------- |
+| `--scroll-area-thumb-height` | The thumb height (vertical scrollbars)  |
+| `--scroll-area-thumb-width`  | The thumb width (horizontal scrollbars) |
 
 ### Corner
 
