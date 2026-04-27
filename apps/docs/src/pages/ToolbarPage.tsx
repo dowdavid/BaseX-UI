@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import { Toolbar } from '@basex-ui/components';
+import * as stylex from '@stylexjs/stylex';
+import { tokens } from '@basex-ui/tokens';
 import { Preview } from '../components/Preview';
+
+const styles = stylex.create({
+  saveSuccess: {
+    backgroundColor: tokens.colorSuccess,
+    color: tokens.colorSuccessContrast,
+  },
+});
+
+type SaveState = 'idle' | 'saving' | 'saved';
 
 export function ToolbarPage() {
   // Controlled multi-select formatting state — drives the pressed visual on
@@ -10,6 +21,18 @@ export function ToolbarPage() {
   // Controlled single-select alignment state — same purpose: drives pressed
   // visual on the toggle items.
   const [alignment, setAlignment] = useState<string[]>(['left']);
+
+  // Save button progress: idle -> saving -> saved -> idle.
+  const [saveState, setSaveState] = useState<SaveState>('idle');
+  const handleSave = () => {
+    if (saveState !== 'idle') return;
+    setSaveState('saving');
+    setTimeout(() => {
+      setSaveState('saved');
+      setTimeout(() => setSaveState('idle'), 1500);
+    }, 700);
+  };
+  const saveLabel = saveState === 'saving' ? 'Saving…' : saveState === 'saved' ? 'Saved ✓' : 'Save';
 
   return (
     <>
@@ -61,9 +84,11 @@ export function ToolbarPage() {
     <Toolbar.ToggleItem value="right">Right</Toolbar.ToggleItem>
   </Toolbar.ToggleGroup>
   <Toolbar.Separator />
-  <Toolbar.Button>Save</Toolbar.Button>
+  <Toolbar.Button onClick={handleSave} disabled={saveState !== 'idle'}>
+    {saveLabel}
+  </Toolbar.Button>
   <Toolbar.Separator />
-  <Toolbar.Link href="https://base-ui.com" target="_blank" rel="noreferrer">
+  <Toolbar.Link href="https://github.com/dowdavid/BaseX-UI" target="_blank" rel="noreferrer">
     Docs
   </Toolbar.Link>
 </Toolbar.Root>`}
@@ -75,9 +100,19 @@ export function ToolbarPage() {
             <Toolbar.ToggleItem value="right">Right</Toolbar.ToggleItem>
           </Toolbar.ToggleGroup>
           <Toolbar.Separator />
-          <Toolbar.Button>Save</Toolbar.Button>
+          <Toolbar.Button
+            onClick={handleSave}
+            disabled={saveState !== 'idle'}
+            sx={saveState === 'saved' ? styles.saveSuccess : undefined}
+          >
+            {saveLabel}
+          </Toolbar.Button>
           <Toolbar.Separator />
-          <Toolbar.Link href="https://base-ui.com" target="_blank" rel="noreferrer">
+          <Toolbar.Link
+            href="https://github.com/dowdavid/BaseX-UI"
+            target="_blank"
+            rel="noreferrer"
+          >
             Docs
           </Toolbar.Link>
         </Toolbar.Root>
