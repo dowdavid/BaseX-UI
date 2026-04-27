@@ -1,5 +1,14 @@
 # @basex-ui/components
 
+## 0.2.1
+
+### Patch Changes
+
+- 1983e5a: Re-publish the initial release. v0.2.0 partially published (only `@basex-ui/mcp-server` made it through before npm scope/auth issues blocked the rest); this patch bumps everything to v0.2.1 so the remaining 5 packages can land on npm under the same release.
+- Updated dependencies [1983e5a]
+  - @basex-ui/tokens@0.2.1
+  - @basex-ui/styles@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
