@@ -40,36 +40,35 @@ const styles = stylex.create({
     touchAction: 'none',
     userSelect: 'none',
     padding: '2px',
-    // Track always visible so the user can see total scroll length and
-    // current position at a glance. Theme-aware via tokens.
-    backgroundColor: tokens.colorBorderMuted,
-    // Thumb-fade animated in global CSS via [data-hovering]/[data-scrolling].
+    // No track fill at rest — match Base UI's restrained, elegant default.
+    // Thumb fade-in animated in global CSS via [data-hovering]/[data-scrolling].
+    backgroundColor: 'transparent',
   },
 
   scrollbarVertical: {
-    width: '12px',
+    width: '10px',
     height: '100%',
     flexDirection: 'column',
   },
 
   scrollbarHorizontal: {
-    height: '12px',
+    height: '10px',
     width: '100%',
     flexDirection: 'row',
   },
 
   thumb: {
     flex: 1,
-    // Idle thumb: one shade darker than the track (colorBorderMuted) for
-    // clear contrast. Hover: brighter (colorIcon) to confirm interactivity.
-    backgroundColor: tokens.colorBorder,
+    // Idle thumb uses colorIcon — neutral gray that adapts to theme.
+    // Faded via opacity in global CSS so it whispers at rest, speaks on hover.
+    backgroundColor: tokens.colorIcon,
     borderRadius: tokens.radiusSm,
     position: 'relative',
     transitionProperty: 'background-color',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
     ':hover': {
-      backgroundColor: tokens.colorIcon,
+      backgroundColor: tokens.colorText,
     },
   },
 
