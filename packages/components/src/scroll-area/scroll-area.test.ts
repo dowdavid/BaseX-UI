@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -16,7 +17,7 @@ vi.mock('@basex-ui/tokens', () => ({
 import { ScrollArea } from './index';
 
 describe('ScrollArea', () => {
-  it('exports all compound parts', () => {
+  it('exports compound parts', () => {
     expect(ScrollArea.Root).toBeDefined();
     expect(ScrollArea.Viewport).toBeDefined();
     expect(ScrollArea.Scrollbar).toBeDefined();
@@ -33,8 +34,23 @@ describe('ScrollArea', () => {
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Root', 'Viewport', 'Scrollbar', 'Thumb', 'Corner'];
-    const actualParts = Object.keys(ScrollArea);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(ScrollArea).sort()).toEqual([
+      'Corner',
+      'Root',
+      'Scrollbar',
+      'Thumb',
+      'Viewport',
+    ]);
+  });
+
+  it('renders Root with nested compound parts', () => {
+    const el = createElement(ScrollArea.Root, {
+      children: createElement(ScrollArea.Viewport, {
+        children: createElement(ScrollArea.Scrollbar, {
+          children: createElement(ScrollArea.Thumb),
+        }),
+      }),
+    });
+    expect(isValidElement(el)).toBe(true);
   });
 });

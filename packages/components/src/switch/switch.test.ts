@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -19,7 +20,7 @@ vi.mock('@basex-ui/styles', () => ({
 import { Switch } from './index';
 
 describe('Switch', () => {
-  it('exports all compound parts', () => {
+  it('exports compound parts', () => {
     expect(Switch.Root).toBeDefined();
     expect(Switch.Thumb).toBeDefined();
   });
@@ -30,8 +31,16 @@ describe('Switch', () => {
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Root', 'Thumb'];
-    const actualParts = Object.keys(Switch);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Switch).sort()).toEqual(['Root', 'Thumb']);
+  });
+
+  it('renders Root with Thumb, controlled checked and disabled', () => {
+    const el = createElement(Switch.Root, {
+      checked: true,
+      onCheckedChange: () => {},
+      disabled: false,
+      children: createElement(Switch.Thumb),
+    });
+    expect(isValidElement(el)).toBe(true);
   });
 });

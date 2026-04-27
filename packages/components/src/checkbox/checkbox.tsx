@@ -27,8 +27,8 @@ const styles = stylex.create({
   },
 
   checked: {
-    backgroundColor: tokens.colorPrimary,
-    borderColor: tokens.colorPrimary,
+    backgroundColor: tokens.colorText,
+    borderColor: tokens.colorText,
   },
 
   disabled: {
@@ -41,7 +41,7 @@ const styles = stylex.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: tokens.colorPrimaryContrast,
+    color: tokens.colorTextInverse,
   },
 });
 

@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -18,28 +19,23 @@ vi.mock('@basex-ui/styles', () => ({
 
 import { Field } from './index';
 
+const PARTS = ['Root', 'Label', 'Description', 'Error', 'Control', 'Validity'] as const;
+
 describe('Field', () => {
   it('exports all compound parts', () => {
-    expect(Field.Root).toBeDefined();
-    expect(Field.Label).toBeDefined();
-    expect(Field.Description).toBeDefined();
-    expect(Field.Error).toBeDefined();
-    expect(Field.Control).toBeDefined();
-    expect(Field.Validity).toBeDefined();
+    for (const p of PARTS) expect(Field[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    expect(Field.Root.displayName).toBe('Field.Root');
-    expect(Field.Label.displayName).toBe('Field.Label');
-    expect(Field.Description.displayName).toBe('Field.Description');
-    expect(Field.Error.displayName).toBe('Field.Error');
-    expect(Field.Control.displayName).toBe('Field.Control');
-    expect(Field.Validity.displayName).toBe('Field.Validity');
+    for (const p of PARTS) expect(Field[p].displayName).toBe(`Field.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Root', 'Label', 'Description', 'Error', 'Control', 'Validity'];
-    const actualParts = Object.keys(Field);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Field).sort()).toEqual([...PARTS].sort());
+  });
+
+  it('renders Root with name and disabled', () => {
+    const el = createElement(Field.Root, { name: 'email', disabled: false });
+    expect(isValidElement(el)).toBe(true);
   });
 });

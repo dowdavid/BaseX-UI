@@ -5,15 +5,24 @@
   "license": "MIT",
   "description": "AI intent resolution and animation presets",
   "keywords": [
+    "ui",
+    "component-library",
     "ai",
+    "agents",
     "intent-resolution",
     "animation",
+    "component-discovery",
+    "typescript",
     "basex-ui"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/daviddow/BaseX-UI.git",
+    "url": "https://github.com/dowdavid/BaseX-UI.git",
     "directory": "packages/intelligence"
+  },
+  "homepage": "https://github.com/dowdavid/BaseX-UI#readme",
+  "bugs": {
+    "url": "https://github.com/dowdavid/BaseX-UI/issues"
   },
   "sideEffects": false,
   "main": "./dist/index.js",

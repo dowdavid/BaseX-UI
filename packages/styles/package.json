@@ -5,14 +5,23 @@
   "license": "MIT",
   "description": "Theme definitions (light/dark) and utilities",
   "keywords": [
+    "ui",
+    "component-library",
     "themes",
     "stylex",
+    "css-in-js",
+    "react",
+    "typescript",
     "basex-ui"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/daviddow/BaseX-UI.git",
+    "url": "https://github.com/dowdavid/BaseX-UI.git",
     "directory": "packages/styles"
+  },
+  "homepage": "https://github.com/dowdavid/BaseX-UI#readme",
+  "bugs": {
+    "url": "https://github.com/dowdavid/BaseX-UI/issues"
   },
   "sideEffects": false,
   "main": "./dist/index.js",

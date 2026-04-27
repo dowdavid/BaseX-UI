@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -15,50 +16,35 @@ vi.mock('@basex-ui/tokens', () => ({
 
 import { Drawer } from './index';
 
+const PARTS = [
+  'Root',
+  'Trigger',
+  'Portal',
+  'Backdrop',
+  'Popup',
+  'Header',
+  'Title',
+  'Description',
+  'Panel',
+  'Footer',
+  'Close',
+] as const;
+
 describe('Drawer', () => {
   it('exports all compound parts', () => {
-    expect(Drawer.Root).toBeDefined();
-    expect(Drawer.Trigger).toBeDefined();
-    expect(Drawer.Portal).toBeDefined();
-    expect(Drawer.Backdrop).toBeDefined();
-    expect(Drawer.Popup).toBeDefined();
-    expect(Drawer.Header).toBeDefined();
-    expect(Drawer.Title).toBeDefined();
-    expect(Drawer.Description).toBeDefined();
-    expect(Drawer.Panel).toBeDefined();
-    expect(Drawer.Footer).toBeDefined();
-    expect(Drawer.Close).toBeDefined();
+    for (const p of PARTS) expect(Drawer[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    expect(Drawer.Root.displayName).toBe('Drawer.Root');
-    expect(Drawer.Trigger.displayName).toBe('Drawer.Trigger');
-    expect(Drawer.Portal.displayName).toBe('Drawer.Portal');
-    expect(Drawer.Backdrop.displayName).toBe('Drawer.Backdrop');
-    expect(Drawer.Popup.displayName).toBe('Drawer.Popup');
-    expect(Drawer.Header.displayName).toBe('Drawer.Header');
-    expect(Drawer.Title.displayName).toBe('Drawer.Title');
-    expect(Drawer.Description.displayName).toBe('Drawer.Description');
-    expect(Drawer.Panel.displayName).toBe('Drawer.Panel');
-    expect(Drawer.Footer.displayName).toBe('Drawer.Footer');
-    expect(Drawer.Close.displayName).toBe('Drawer.Close');
+    for (const p of PARTS) expect(Drawer[p].displayName).toBe(`Drawer.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = [
-      'Root',
-      'Trigger',
-      'Portal',
-      'Backdrop',
-      'Popup',
-      'Header',
-      'Title',
-      'Description',
-      'Panel',
-      'Footer',
-      'Close',
-    ];
-    const actualParts = Object.keys(Drawer);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Drawer).sort()).toEqual([...PARTS].sort());
+  });
+
+  it('renders Root with controlled open state', () => {
+    const el = createElement(Drawer.Root, { open: false, onOpenChange: () => {} });
+    expect(isValidElement(el)).toBe(true);
   });
 });

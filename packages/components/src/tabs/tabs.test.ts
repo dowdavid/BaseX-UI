@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -19,25 +20,33 @@ vi.mock('@basex-ui/styles', () => ({
 
 import { Tabs } from './index';
 
+const PARTS = ['Root', 'List', 'Tab', 'Panel', 'Indicator'] as const;
+
 describe('Tabs', () => {
   it('exports all compound parts', () => {
-    expect(Tabs.Root).toBeDefined();
-    expect(Tabs.List).toBeDefined();
-    expect(Tabs.Tab).toBeDefined();
-    expect(Tabs.Panel).toBeDefined();
-    expect(Tabs.Indicator).toBeDefined();
+    for (const p of PARTS) expect(Tabs[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    expect(Tabs.Root.displayName).toBe('Tabs.Root');
-    expect(Tabs.List.displayName).toBe('Tabs.List');
-    expect(Tabs.Tab.displayName).toBe('Tabs.Tab');
-    expect(Tabs.Panel.displayName).toBe('Tabs.Panel');
-    expect(Tabs.Indicator.displayName).toBe('Tabs.Indicator');
+    for (const p of PARTS) expect(Tabs[p].displayName).toBe(`Tabs.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Root', 'List', 'Tab', 'Panel', 'Indicator'];
-    expect(Object.keys(Tabs).sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Tabs).sort()).toEqual([...PARTS].sort());
+  });
+
+  it('renders nested compound structure', () => {
+    const el = createElement(Tabs.Root, {
+      defaultValue: 'a',
+      orientation: 'horizontal',
+      children: [
+        createElement(Tabs.List, {
+          key: 'l',
+          children: createElement(Tabs.Tab, { value: 'a', children: 'A' }),
+        }),
+        createElement(Tabs.Panel, { key: 'p', value: 'a', children: 'Content' }),
+      ],
+    });
+    expect(isValidElement(el)).toBe(true);
   });
 });

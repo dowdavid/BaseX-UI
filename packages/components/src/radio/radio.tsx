@@ -38,8 +38,8 @@ const styles = stylex.create({
   },
 
   rootChecked: {
-    borderColor: tokens.colorPrimary,
-    backgroundColor: tokens.colorPrimary,
+    borderColor: tokens.colorText,
+    backgroundColor: tokens.colorText,
   },
 
   rootDisabled: {

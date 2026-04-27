@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -19,30 +20,30 @@ vi.mock('@basex-ui/styles', () => ({
 
 import { Slider } from './index';
 
+const PARTS = ['Root', 'Label', 'Value', 'Control', 'Track', 'Indicator', 'Thumb'] as const;
+
 describe('Slider', () => {
   it('exports all compound parts', () => {
-    expect(Slider.Root).toBeDefined();
-    expect(Slider.Label).toBeDefined();
-    expect(Slider.Value).toBeDefined();
-    expect(Slider.Control).toBeDefined();
-    expect(Slider.Track).toBeDefined();
-    expect(Slider.Indicator).toBeDefined();
-    expect(Slider.Thumb).toBeDefined();
+    for (const p of PARTS) expect(Slider[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    expect(Slider.Root.displayName).toBe('Slider.Root');
-    expect(Slider.Label.displayName).toBe('Slider.Label');
-    expect(Slider.Value.displayName).toBe('Slider.Value');
-    expect(Slider.Control.displayName).toBe('Slider.Control');
-    expect(Slider.Track.displayName).toBe('Slider.Track');
-    expect(Slider.Indicator.displayName).toBe('Slider.Indicator');
-    expect(Slider.Thumb.displayName).toBe('Slider.Thumb');
+    for (const p of PARTS) expect(Slider[p].displayName).toBe(`Slider.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Root', 'Label', 'Value', 'Control', 'Track', 'Indicator', 'Thumb'];
-    const actualParts = Object.keys(Slider);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Slider).sort()).toEqual([...PARTS].sort());
+  });
+
+  it('renders Root with min, max, step, controlled value', () => {
+    const el = createElement(Slider.Root, {
+      min: 0,
+      max: 100,
+      step: 1,
+      value: 50,
+      onValueChange: () => {},
+      disabled: false,
+    });
+    expect(isValidElement(el)).toBe(true);
   });
 });

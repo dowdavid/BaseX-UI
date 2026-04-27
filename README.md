@@ -30,7 +30,7 @@ Most component libraries assume a human is reading the docs. BaseX UI ships with
 ## Quick Start
 
 ```bash
-pnpm add @basex-ui/components @basex-ui/tokens @basex-ui/styles
+pnpm add @basex-ui/components @basex-ui/tokens @basex-ui/styles @stylexjs/stylex react react-dom
 ```
 
 Or use the CLI:

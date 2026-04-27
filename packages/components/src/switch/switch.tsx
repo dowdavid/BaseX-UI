@@ -27,8 +27,8 @@ const styles = stylex.create({
   },
 
   checked: {
-    backgroundColor: tokens.colorPrimary,
-    borderColor: tokens.colorPrimary,
+    backgroundColor: tokens.colorText,
+    borderColor: tokens.colorText,
   },
 
   disabled: {

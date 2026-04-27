@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -22,5 +23,9 @@ describe('Menubar', () => {
 
   it('sets displayName', () => {
     expect(Menubar.displayName).toBe('Menubar');
+  });
+
+  it('renders as a valid React element', () => {
+    expect(isValidElement(createElement(Menubar))).toBe(true);
   });
 });

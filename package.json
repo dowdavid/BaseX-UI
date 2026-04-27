@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/daviddow/BaseX-UI.git"
+    "url": "https://github.com/dowdavid/BaseX-UI.git"
   },
   "packageManager": "pnpm@9.15.4",
   "engines": {
@@ -20,9 +20,13 @@
     "test:ci": "vitest run",
     "lint": "eslint packages/ apps/",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^9.39.3",

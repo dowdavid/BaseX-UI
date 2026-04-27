@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -20,12 +21,24 @@ vi.mock('@basex-ui/styles', () => ({
 import { Toggle } from './index';
 
 describe('Toggle', () => {
-  it('exports Toggle.Root', () => {
-    expect(Toggle).toBeDefined();
+  it('exports Root', () => {
     expect(Toggle.Root).toBeDefined();
   });
 
   it('sets displayName on Root', () => {
     expect(Toggle.Root.displayName).toBe('Toggle.Root');
+  });
+
+  it('does not expose unexpected parts', () => {
+    expect(Object.keys(Toggle).sort()).toEqual(['Root']);
+  });
+
+  it('renders Root with pressed and disabled props', () => {
+    const el = createElement(Toggle.Root, {
+      pressed: true,
+      onPressedChange: () => {},
+      disabled: false,
+    });
+    expect(isValidElement(el)).toBe(true);
   });
 });

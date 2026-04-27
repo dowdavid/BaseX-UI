@@ -8,7 +8,7 @@
 ## Setup
 
 ```bash
-git clone https://github.com/daviddow/BaseX-UI.git
+git clone https://github.com/dowdavid/BaseX-UI.git
 cd BaseX-UI
 pnpm install
 pnpm build
