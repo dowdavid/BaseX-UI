@@ -52,7 +52,7 @@ const styles = stylex.create({
     width: '6px',
     height: '6px',
     borderRadius: tokens.radiusFull,
-    backgroundColor: tokens.colorPrimaryContrast,
+    backgroundColor: tokens.colorTextInverse,
   },
 });
 
