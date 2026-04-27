@@ -19,7 +19,10 @@ const styles = stylex.create({
     color: tokens.colorText,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
@@ -71,7 +74,10 @@ const styles = stylex.create({
     color: tokens.colorText,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     cursor: 'pointer',
     userSelect: 'none',
@@ -86,7 +92,10 @@ const styles = stylex.create({
     color: tokens.colorDestructive,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorDestructiveMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorDestructiveMuted,
+      },
     },
   },
 
@@ -110,7 +119,10 @@ const styles = stylex.create({
     textDecoration: 'none',
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     cursor: 'pointer',
     transitionProperty: 'background-color, color',
@@ -194,7 +206,10 @@ const styles = stylex.create({
     color: tokens.colorText,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     cursor: 'pointer',
     userSelect: 'none',

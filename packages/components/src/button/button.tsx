@@ -39,7 +39,10 @@ const styles = stylex.create({
   variantSolid: {
     backgroundColor: {
       default: tokens.colorPrimary,
-      ':hover': tokens.colorPrimaryHover,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorPrimaryHover,
+      },
       ':active': tokens.colorPrimaryActive,
     },
     color: tokens.colorPrimaryContrast,
@@ -48,7 +51,10 @@ const styles = stylex.create({
   variantOutline: {
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     color: tokens.colorText,
     borderColor: tokens.colorBorder,
@@ -56,7 +62,10 @@ const styles = stylex.create({
   variantGhost: {
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     color: tokens.colorText,
     borderColor: 'transparent',
@@ -66,7 +75,10 @@ const styles = stylex.create({
   solidSecondary: {
     backgroundColor: {
       default: tokens.colorSecondary,
-      ':hover': tokens.colorSecondaryHover,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorSecondaryHover,
+      },
       ':active': tokens.colorSecondaryActive,
     },
     color: tokens.colorSecondaryContrast,
@@ -74,7 +86,10 @@ const styles = stylex.create({
   solidDestructive: {
     backgroundColor: {
       default: tokens.colorDestructive,
-      ':hover': tokens.colorDestructiveHover,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorDestructiveHover,
+      },
       ':active': tokens.colorDestructiveActive,
     },
     color: tokens.colorDestructiveContrast,
@@ -82,18 +97,27 @@ const styles = stylex.create({
   outlineDestructive: {
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorDestructiveMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorDestructiveMuted,
+      },
     },
     color: tokens.colorDestructive,
     borderColor: {
       default: tokens.colorBorder,
-      ':hover': tokens.colorDestructive,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorDestructive,
+      },
     },
   },
   ghostDestructive: {
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorDestructiveMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorDestructiveMuted,
+      },
     },
     color: tokens.colorDestructive,
   },

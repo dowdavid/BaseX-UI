@@ -1,0 +1,229 @@
+{
+  "name": "Tabs",
+  "description": "An accessible tab interface that organizes content into selectable panels. Built on Base UI Tabs with StyleX styling.",
+  "category": "navigation",
+  "baseComponent": "@base-ui/react/tabs",
+
+  "anatomy": "<Tabs.Root>\n  <Tabs.List>\n    <Tabs.Tab value=\"a\">Tab A</Tabs.Tab>\n    <Tabs.Tab value=\"b\">Tab B</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"a\">Panel A</Tabs.Panel>\n  <Tabs.Panel value=\"b\">Panel B</Tabs.Panel>\n</Tabs.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "The Tabs container. Provides state and orientation context.",
+      "props": {
+        "value": {
+          "type": "string | number | null",
+          "description": "The value of the currently active tab (controlled)."
+        },
+        "defaultValue": {
+          "type": "string | number | null",
+          "default": "0",
+          "description": "The initially active tab (uncontrolled)."
+        },
+        "onValueChange": {
+          "type": "(value, eventDetails) => void",
+          "description": "Callback when the active tab changes."
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "Layout flow direction. Affects keyboard nav and indicator orientation."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects the orientation of the tabs."
+      }
+    },
+    "List": {
+      "element": "div",
+      "description": "Container for the tab buttons. Renders with role=\"tablist\".",
+      "props": {
+        "activationMode": {
+          "type": "'automatic' | 'manual'",
+          "default": "automatic",
+          "description": "Whether tabs activate as they receive focus (automatic) or only on Enter/Space (manual)."
+        },
+        "loopFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether arrow-key focus loops at the ends of the list."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects the orientation."
+      }
+    },
+    "Tab": {
+      "element": "button",
+      "description": "An individual tab button. Renders with role=\"tab\" and is wired to its panel via aria-controls/aria-selected.",
+      "props": {
+        "value": {
+          "type": "string | number",
+          "required": true,
+          "description": "The value identifying this tab. Matches Tabs.Panel value."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the tab is disabled."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-selected": "Present when the tab is active.",
+        "data-disabled": "Present when the tab is disabled.",
+        "data-orientation": "Reflects the orientation."
+      }
+    },
+    "Panel": {
+      "element": "div",
+      "description": "The content panel for a tab. Renders with role=\"tabpanel\".",
+      "props": {
+        "value": {
+          "type": "string | number",
+          "required": true,
+          "description": "The value of the tab this panel belongs to."
+        },
+        "keepMounted": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep the panel mounted in the DOM when hidden."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects the orientation.",
+        "data-hidden": "Present when the panel is hidden."
+      }
+    },
+    "Indicator": {
+      "element": "span",
+      "description": "An animated visual indicator that aligns to the active tab. Reads --active-tab-left/-top/-width/-height CSS vars from Base UI.",
+      "props": {
+        "renderBeforeHydration": {
+          "type": "boolean",
+          "default": false,
+          "description": "Render before React hydrates to minimize SSR flicker."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects the orientation.",
+        "data-activation-direction": "left | right | up | down | none"
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorBorderMuted",
+    "colorFocusRing",
+    "space1",
+    "space1h",
+    "space2",
+    "space3",
+    "space4",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightTight",
+    "lineHeightNormal",
+    "radiusMd",
+    "radiusFull",
+    "borderWidthDefault",
+    "motionDurationFast",
+    "motionDurationNormal",
+    "motionEaseOut",
+    "motionEaseInOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "tabbed-content",
+      "signals": [
+        "tabs",
+        "tabbed",
+        "tab interface",
+        "switch between views",
+        "tabbed sections",
+        "panel switcher"
+      ],
+      "reasoning": "Tabs is the canonical component for switching between mutually exclusive content panels at the same level of hierarchy.",
+      "composition": "<Tabs.Root defaultValue=\"overview\">\n  <Tabs.List>\n    <Tabs.Tab value=\"overview\">Overview</Tabs.Tab>\n    <Tabs.Tab value=\"details\">Details</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"overview\">Overview content</Tabs.Panel>\n  <Tabs.Panel value=\"details\">Details content</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "settings-sections",
+      "signals": ["settings tabs", "preferences tabs", "vertical tabs", "side tabs"],
+      "reasoning": "Vertical Tabs work well for settings UIs where users move between configuration groups.",
+      "composition": "<Tabs.Root orientation=\"vertical\" defaultValue=\"profile\">\n  <Tabs.List>\n    <Tabs.Tab value=\"profile\">Profile</Tabs.Tab>\n    <Tabs.Tab value=\"account\">Account</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"profile\">Profile fields</Tabs.Panel>\n  <Tabs.Panel value=\"account\">Account fields</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "form-with-tabs",
+      "signals": ["multi-step form", "tabbed form", "form sections"],
+      "reasoning": "Use manual activation when tab content includes form controls, so screen readers don't trigger panel changes during arrow-key navigation.",
+      "composition": "<Tabs.Root defaultValue=\"step1\">\n  <Tabs.List activationMode=\"manual\">\n    <Tabs.Tab value=\"step1\">Step 1</Tabs.Tab>\n    <Tabs.Tab value=\"step2\">Step 2</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"step1\">{/* form fields */}</Tabs.Panel>\n  <Tabs.Panel value=\"step2\">{/* form fields */}</Tabs.Panel>\n</Tabs.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Sequential steps that must be completed in order",
+      "reasoning": "Tabs imply free navigation between siblings. For ordered flows, use a stepper or wizard pattern.",
+      "alternative": "Custom stepper"
+    },
+    {
+      "scenario": "Site-wide navigation between pages",
+      "reasoning": "Tabs are for content within a single view. Use NavigationMenu for top-level site nav.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "scenario": "Many sections (more than ~7) or long labels that wrap",
+      "reasoning": "Tab lists work best with a small number of short labels. Use Accordion or a sidebar nav for larger sets.",
+      "alternative": "Accordion"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic horizontal tabs with an animated indicator.",
+      "code": "<Tabs.Root defaultValue=\"overview\">\n  <Tabs.List>\n    <Tabs.Tab value=\"overview\">Overview</Tabs.Tab>\n    <Tabs.Tab value=\"details\">Details</Tabs.Tab>\n    <Tabs.Tab value=\"activity\">Activity</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"overview\">Overview content</Tabs.Panel>\n  <Tabs.Panel value=\"details\">Details content</Tabs.Panel>\n  <Tabs.Panel value=\"activity\">Activity content</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "name": "vertical",
+      "description": "Vertical tabs suitable for settings panels.",
+      "code": "<Tabs.Root orientation=\"vertical\" defaultValue=\"profile\">\n  <Tabs.List>\n    <Tabs.Tab value=\"profile\">Profile</Tabs.Tab>\n    <Tabs.Tab value=\"account\">Account</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"profile\">Profile fields</Tabs.Panel>\n  <Tabs.Panel value=\"account\">Account fields</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "name": "manual-activation",
+      "description": "Manual activation: focus moves with arrow keys, but Enter/Space is required to activate.",
+      "code": "<Tabs.Root defaultValue=\"a\">\n  <Tabs.List activationMode=\"manual\">\n    <Tabs.Tab value=\"a\">A</Tabs.Tab>\n    <Tabs.Tab value=\"b\">B</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"a\">A</Tabs.Panel>\n  <Tabs.Panel value=\"b\">B</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "name": "controlled",
+      "description": "Controlled tabs with external state.",
+      "code": "const [value, setValue] = useState('a');\n<Tabs.Root value={value} onValueChange={setValue}>\n  <Tabs.List>\n    <Tabs.Tab value=\"a\">A</Tabs.Tab>\n    <Tabs.Tab value=\"b\">B</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"a\">A</Tabs.Panel>\n  <Tabs.Panel value=\"b\">B</Tabs.Panel>\n</Tabs.Root>"
+    }
+  ]
+}

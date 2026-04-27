@@ -9,7 +9,8 @@ import type { StyleXStyles } from '@stylexjs/stylex';
 
 // --- Styles ---
 // Container styling mirrors Menubar (radius/border/padding/surface). Item
-// styling mirrors NavigationMenu's trigger/link visual contract for parity.
+// styling mirrors Toggle's outline/ghost contract so pressed items read with
+// the same filled-primary fidelity as a standalone Toggle.
 const styles = stylex.create({
   root: {
     display: 'flex',
@@ -36,23 +37,29 @@ const styles = stylex.create({
     cursor: 'default',
   },
 
-  // Item visuals: mirrors NavigationMenu trigger/link (ghost-by-default)
+  // Item visuals: ghost-by-default with a clear hover/active/focus contract.
+  // Hover guarded behind hover-capable pointer to prevent sticky hover on
+  // touch devices (matches the system-wide cleanup).
   item: {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     gap: tokens.space1h,
+    minHeight: '32px',
     paddingBlock: tokens.space2,
     paddingInline: tokens.space3,
     fontFamily: tokens.fontFamilySans,
     fontWeight: tokens.fontWeightMedium,
     fontSize: tokens.fontSizeSm,
     lineHeight: tokens.lineHeightTight,
-    color: tokens.colorTextMuted,
+    color: tokens.colorText,
     textDecoration: 'none',
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     borderWidth: 0,
     borderRadius: tokens.radiusMd,
@@ -60,22 +67,34 @@ const styles = stylex.create({
     userSelect: 'none',
     whiteSpace: 'nowrap',
     flexShrink: 0,
-    transitionProperty: 'background-color, color',
+    transitionProperty: 'background-color, color, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
+    transform: {
+      default: 'none',
+      ':active': 'scale(0.98)',
+    },
   },
 
-  // Pressed (toggle on) — parity with NavigationMenu triggerActive
+  // Pressed (toggle on) — filled primary, mirrors Toggle's pressed contract.
+  // Override hover so the pressed state stays unmistakable on hover.
   itemPressed: {
-    color: tokens.colorText,
-    backgroundColor: tokens.colorMuted,
+    color: tokens.colorPrimaryContrast,
+    backgroundColor: {
+      default: tokens.colorPrimary,
+      ':hover': {
+        default: tokens.colorPrimary,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorPrimaryHover,
+      },
+      ':active': tokens.colorPrimaryActive,
+    },
   },
 
-  // Disabled item — muted token contrast (per checklist)
+  // Disabled item — opacity matches Button/Toggle (0.64).
   itemDisabled: {
-    color: tokens.colorTextMuted,
-    backgroundColor: 'transparent',
+    opacity: 0.64,
     cursor: 'not-allowed',
+    pointerEvents: 'none',
   },
 
   // Group: thin transparent flex container, no extra chrome
@@ -107,16 +126,20 @@ const styles = stylex.create({
     flexShrink: 0,
   },
 
-  separatorHorizontal: {
+  // Inside a horizontal toolbar Base UI renders the separator with
+  // data-orientation="vertical" (it draws perpendicular to the toolbar axis).
+  // So when state.orientation === 'vertical' we want a 1px-wide vertical bar.
+  separatorVerticalLine: {
     width: tokens.borderWidthDefault,
     alignSelf: 'stretch',
-    marginBlock: tokens.space1,
+    marginInline: tokens.space1,
   },
 
-  separatorVertical: {
+  // Inside a vertical toolbar, separator is horizontal — a 1px-tall bar.
+  separatorHorizontalLine: {
     height: tokens.borderWidthDefault,
     alignSelf: 'stretch',
-    marginInline: tokens.space1,
+    marginBlock: tokens.space1,
   },
 });
 
@@ -232,7 +255,12 @@ const Separator = forwardRef<HTMLDivElement, ToolbarSeparatorProps>(({ sx, ...pr
     className={(state) =>
       stylex.props(
         styles.separator,
-        state.orientation === 'vertical' ? styles.separatorVertical : styles.separatorHorizontal,
+        // Base UI's ToolbarSeparator inverts orientation relative to the
+        // toolbar: a horizontal toolbar yields state.orientation === 'vertical'
+        // (the visible bar is a vertical line). Map to width/height accordingly.
+        state.orientation === 'vertical'
+          ? styles.separatorVerticalLine
+          : styles.separatorHorizontalLine,
         sx,
       ).className ?? ''
     }
@@ -267,7 +295,8 @@ ToggleGroup.displayName = 'Toolbar.ToggleGroup';
 const ToggleItem = forwardRef<HTMLButtonElement, ToolbarToggleItemProps>(
   ({ sx, ...props }, ref) => (
     // Render Base UI Toggle through Toolbar.Button so the Toolbar's roving
-    // tabindex composer registers it as a focusable item.
+    // tabindex composer registers it as a focusable item. The className
+    // callback is on BaseToggle so we receive `pressed` in state.
     <BaseToolbar.Button
       render={
         <BaseToggle
