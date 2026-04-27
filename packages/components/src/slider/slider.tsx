@@ -9,9 +9,10 @@ import type { StyleXStyles } from '@stylexjs/stylex';
 // Track height (8px) and indicator color come from Progress/Meter conventions
 // so the visual language stays unified across feedback + input range components.
 // Thumb size (20px) overhangs the 8px track on each side so the handle reads
-// as a clearly grabbable button. Filled with colorPrimary + shadowSm to lift
-// it off the track; the focus ring utility from @basex-ui/styles is reused
-// for keyboard focus parity.
+// as a clearly grabbable button. Filled with colorPrimary + shadowMd to lift
+// it off the track (shadowSm was too subtle when foreground = orange indicator
+// background); the focus ring utility from @basex-ui/styles is reused for
+// keyboard focus parity.
 const styles = stylex.create({
   root: {
     position: 'relative',
@@ -128,16 +129,16 @@ const styles = stylex.create({
     boxSizing: 'border-box',
     width: '20px',
     height: '20px',
-    backgroundColor: tokens.colorText,
+    backgroundColor: tokens.colorPrimary,
     borderRadius: tokens.radiusSm,
-    boxShadow: tokens.shadowSm,
+    boxShadow: tokens.shadowMd,
     cursor: 'grab',
     transitionProperty: 'box-shadow, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
     ':hover': {
       '@media (hover: hover) and (pointer: fine)': {
-        boxShadow: `${tokens.shadowSm}, 0 0 0 4px ${tokens.colorMuted}`,
+        boxShadow: `${tokens.shadowMd}, 0 0 0 4px ${tokens.colorMuted}`,
       },
     },
     ':active': {
