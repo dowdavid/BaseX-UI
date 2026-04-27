@@ -30,6 +30,7 @@ export default defineConfig({
     'src/scroll-area/index.ts',
     'src/separator/index.ts',
     'src/slider/index.ts',
+    'src/tabs/index.ts',
   ],
   format: ['esm'],
   dts: true,

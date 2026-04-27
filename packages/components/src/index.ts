@@ -248,3 +248,13 @@ export type {
 
 export { Switch } from './switch';
 export type { SwitchRootProps, SwitchThumbProps } from './switch';
+
+export { Tabs } from './tabs';
+export type {
+  TabsActivationMode,
+  TabsRootProps,
+  TabsListProps,
+  TabsTabProps,
+  TabsPanelProps,
+  TabsIndicatorProps,
+} from './tabs';

@@ -26,6 +26,7 @@ import scrollArea from '../../../../packages/components/src/scroll-area/scroll-a
 import separator from '../../../../packages/components/src/separator/separator.md?raw';
 import slider from '../../../../packages/components/src/slider/slider.md?raw';
 import switchDoc from '../../../../packages/components/src/switch/switch.md?raw';
+import tabs from '../../../../packages/components/src/tabs/tabs.md?raw';
 
 export const apiDocs: Record<string, string> = {
   accordion,
@@ -56,4 +57,5 @@ export const apiDocs: Record<string, string> = {
   separator,
   slider,
   switch: switchDoc,
+  tabs,
 };

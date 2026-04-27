@@ -28,6 +28,7 @@ import { ScrollAreaPage } from './pages/ScrollAreaPage';
 import { SeparatorPage } from './pages/SeparatorPage';
 import { SliderPage } from './pages/SliderPage';
 import { SwitchPage } from './pages/SwitchPage';
+import { TabsPage } from './pages/TabsPage';
 
 export interface PageEntry {
   id: string;
@@ -298,6 +299,15 @@ export const pages: PageEntry[] = [
     path: '/components/switch',
     section: 'components',
     component: SwitchPage,
+  },
+  {
+    id: 'tabs',
+    label: 'Tabs',
+    description:
+      'Switch between sibling content panels with full keyboard support and an animated indicator.',
+    path: '/components/tabs',
+    section: 'components',
+    component: TabsPage,
   },
 
   // Intelligence section
