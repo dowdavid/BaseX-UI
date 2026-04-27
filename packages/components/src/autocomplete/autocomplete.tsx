@@ -77,7 +77,10 @@ const styles = stylex.create({
     color: tokens.colorIcon,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     borderWidth: 0,
     borderRadius: tokens.radiusSm,

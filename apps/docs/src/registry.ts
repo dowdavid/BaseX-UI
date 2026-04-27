@@ -29,6 +29,7 @@ import { SeparatorPage } from './pages/SeparatorPage';
 import { SliderPage } from './pages/SliderPage';
 import { SwitchPage } from './pages/SwitchPage';
 import { TabsPage } from './pages/TabsPage';
+import { TogglePage } from './pages/TogglePage';
 
 export interface PageEntry {
   id: string;
@@ -308,6 +309,14 @@ export const pages: PageEntry[] = [
     path: '/components/tabs',
     section: 'components',
     component: TabsPage,
+  },
+  {
+    id: 'toggle',
+    label: 'Toggle',
+    description: 'A two-state button with aria-pressed semantics.',
+    path: '/components/toggle',
+    section: 'components',
+    component: TogglePage,
   },
 
   // Intelligence section

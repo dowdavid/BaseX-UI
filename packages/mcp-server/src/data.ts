@@ -43,6 +43,7 @@ import separatorManifest from '../../components/src/separator/manifest.json';
 import sliderManifest from '../../components/src/slider/manifest.json';
 import switchManifest from '../../components/src/switch/manifest.json';
 import tabsManifest from '../../components/src/tabs/manifest.json';
+import toggleManifest from '../../components/src/toggle/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -73,7 +74,8 @@ export type ComponentManifest =
   | typeof separatorManifest
   | typeof sliderManifest
   | typeof switchManifest
-  | typeof tabsManifest;
+  | typeof tabsManifest
+  | typeof toggleManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -105,6 +107,7 @@ const components = new Map<string, ComponentManifest>([
   ['slider', sliderManifest],
   ['switch', switchManifest],
   ['tabs', tabsManifest],
+  ['toggle', toggleManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -292,6 +295,11 @@ export function getComponentSetup(name: string): ComponentSetup | null {
     tabs: [
       { interaction: 'tab hover/focus color', preset: 'State' },
       { interaction: 'indicator slide to active tab', preset: 'Move' },
+    ],
+    toggle: [
+      { interaction: 'hover/focus/active color', preset: 'State' },
+      { interaction: 'pressed state flip', preset: 'State' },
+      { interaction: ':active scale', preset: 'State' },
     ],
   };
 

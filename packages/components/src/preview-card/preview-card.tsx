@@ -10,7 +10,10 @@ const styles = stylex.create({
     color: tokens.colorPrimary,
     textDecoration: {
       default: 'none',
-      ':hover': 'underline',
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': 'underline',
+      },
     },
     cursor: 'pointer',
     fontFamily: tokens.fontFamilySans,
