@@ -67,17 +67,24 @@ const styles = stylex.create({
   },
 
   // --- Pressed (on) state ---
-  // Filled primary, identical tokens to Button variant="solid".
+  // Mirrors Toolbar.ToggleItem: theme-inverting `colorText` fill +
+  // `colorTextInverse` foreground. Hover overrides hold the pressed state
+  // stable so the on-state never weakens on hover.
   pressed: {
     backgroundColor: {
-      default: tokens.colorPrimary,
+      default: tokens.colorText,
       ':hover': {
-        default: tokens.colorPrimary,
-        '@media (hover: hover) and (pointer: fine)': tokens.colorPrimaryHover,
+        default: tokens.colorText,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorText,
       },
-      ':active': tokens.colorPrimaryActive,
     },
-    color: tokens.colorPrimaryContrast,
+    color: {
+      default: tokens.colorTextInverse,
+      ':hover': {
+        default: tokens.colorTextInverse,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorTextInverse,
+      },
+    },
     borderColor: 'transparent',
   },
 
