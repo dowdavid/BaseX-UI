@@ -299,6 +299,7 @@ export function getComponentSetup(name: string): ComponentSetup | null {
     tooltip: [
       { interaction: 'popup scale/fade in', preset: 'Enter' },
       { interaction: 'popup scale/fade out', preset: 'Exit' },
+    ],
   };
 
   return {
