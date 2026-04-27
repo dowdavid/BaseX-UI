@@ -149,6 +149,10 @@
       "types": "./dist/toggle/index.d.ts",
       "import": "./dist/toggle/index.js"
     },
+    "./toggle-group": {
+      "types": "./dist/toggle-group/index.d.ts",
+      "import": "./dist/toggle-group/index.js"
+    },
     "./toolbar": {
       "types": "./dist/toolbar/index.d.ts",
       "import": "./dist/toolbar/index.js"

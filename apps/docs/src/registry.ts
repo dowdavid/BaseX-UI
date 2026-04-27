@@ -31,6 +31,7 @@ import { SliderPage } from './pages/SliderPage';
 import { SwitchPage } from './pages/SwitchPage';
 import { TabsPage } from './pages/TabsPage';
 import { TogglePage } from './pages/TogglePage';
+import { ToggleGroupPage } from './pages/ToggleGroupPage';
 import { ToolbarPage } from './pages/ToolbarPage';
 import { TooltipPage } from './pages/TooltipPage';
 
@@ -328,6 +329,14 @@ export const pages: PageEntry[] = [
     path: '/components/toggle',
     section: 'components',
     component: TogglePage,
+  },
+  {
+    id: 'toggle-group',
+    label: 'Toggle Group',
+    description: 'Single- or multi-select group of two-state toggle buttons with roving tabindex.',
+    path: '/components/toggle-group',
+    section: 'components',
+    component: ToggleGroupPage,
   },
   {
     id: 'toolbar',

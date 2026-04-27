@@ -41,14 +41,14 @@
 | 31  | Tabs            | `Tabs`           | Done   |              |
 | 32  | Toast           | `Toast`          | —      |              |
 | 33  | Toggle          | `Toggle`         | Done   |              |
-| 34  | Toggle Group    | `ToggleGroup`    | —      |              |
+| 34  | Toggle Group    | `ToggleGroup`    | Done   |              |
 | 35  | Toolbar         | `Toolbar`        | Done   |              |
 | 36  | Tooltip         | `Tooltip`        | Done   |              |
 
 ## Progress
 
-- **Done**: 33 / 36
-- **Next**: Toggle Group
+- **Done**: 34 / 36
+- **Next**: Toast
 
 ## How to Use This File
 

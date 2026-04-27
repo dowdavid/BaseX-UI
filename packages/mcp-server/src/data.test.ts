@@ -16,7 +16,8 @@ describe('listComponents', () => {
     expect(names).toContain('Tabs');
     expect(names).toContain('Select');
     expect(names).toContain('Toolbar');
-    expect(list).toHaveLength(33);
+    expect(names).toContain('ToggleGroup');
+    expect(list).toHaveLength(34);
   });
 });
 

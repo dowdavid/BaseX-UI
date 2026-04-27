@@ -45,6 +45,7 @@ import sliderManifest from '../../components/src/slider/manifest.json';
 import switchManifest from '../../components/src/switch/manifest.json';
 import tabsManifest from '../../components/src/tabs/manifest.json';
 import toggleManifest from '../../components/src/toggle/manifest.json';
+import toggleGroupManifest from '../../components/src/toggle-group/manifest.json';
 import toolbarManifest from '../../components/src/toolbar/manifest.json';
 import tooltipManifest from '../../components/src/tooltip/manifest.json';
 
@@ -80,6 +81,7 @@ export type ComponentManifest =
   | typeof switchManifest
   | typeof tabsManifest
   | typeof toggleManifest
+  | typeof toggleGroupManifest
   | typeof toolbarManifest
   | typeof tooltipManifest;
 
@@ -115,6 +117,7 @@ const components = new Map<string, ComponentManifest>([
   ['switch', switchManifest],
   ['tabs', tabsManifest],
   ['toggle', toggleManifest],
+  ['toggle-group', toggleGroupManifest],
   ['toolbar', toolbarManifest],
   ['tooltip', tooltipManifest],
 ] as [string, ComponentManifest][]);
@@ -315,6 +318,10 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'hover/focus/active color', preset: 'State' },
       { interaction: 'pressed state flip', preset: 'State' },
       { interaction: ':active scale', preset: 'State' },
+    ],
+    'toggle-group': [
+      { interaction: 'item hover/focus', preset: 'State' },
+      { interaction: 'pressed background transition', preset: 'State' },
     ],
     toolbar: [
       { interaction: 'item hover/focus background', preset: 'State' },
