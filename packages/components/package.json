@@ -125,6 +125,10 @@
       "types": "./dist/scroll-area/index.d.ts",
       "import": "./dist/scroll-area/index.js"
     },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "import": "./dist/select/index.js"
+    },
     "./separator": {
       "types": "./dist/separator/index.d.ts",
       "import": "./dist/separator/index.js"
@@ -132,6 +136,10 @@
     "./slider": {
       "types": "./dist/slider/index.d.ts",
       "import": "./dist/slider/index.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "import": "./dist/switch/index.js"
     },
     "./tabs": {
       "types": "./dist/tabs/index.d.ts",

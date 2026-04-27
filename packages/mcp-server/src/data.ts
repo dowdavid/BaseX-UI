@@ -39,6 +39,7 @@ import previewCardManifest from '../../components/src/preview-card/manifest.json
 import progressManifest from '../../components/src/progress/manifest.json';
 import radioManifest from '../../components/src/radio/manifest.json';
 import scrollAreaManifest from '../../components/src/scroll-area/manifest.json';
+import selectManifest from '../../components/src/select/manifest.json';
 import separatorManifest from '../../components/src/separator/manifest.json';
 import sliderManifest from '../../components/src/slider/manifest.json';
 import switchManifest from '../../components/src/switch/manifest.json';
@@ -73,6 +74,7 @@ export type ComponentManifest =
   | typeof progressManifest
   | typeof radioManifest
   | typeof scrollAreaManifest
+  | typeof selectManifest
   | typeof separatorManifest
   | typeof sliderManifest
   | typeof switchManifest
@@ -107,6 +109,7 @@ const components = new Map<string, ComponentManifest>([
   ['progress', progressManifest],
   ['radio', radioManifest],
   ['scroll-area', scrollAreaManifest],
+  ['select', selectManifest],
   ['separator', separatorManifest],
   ['slider', sliderManifest],
   ['switch', switchManifest],
@@ -290,6 +293,12 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'scrollbar fade in (hover/scroll)', preset: 'State' },
       { interaction: 'scrollbar fade out', preset: 'State' },
       { interaction: 'thumb hover color', preset: 'State' },
+    ],
+    select: [
+      { interaction: 'trigger hover/focus', preset: 'State' },
+      { interaction: 'popup fade/slide in', preset: 'Enter' },
+      { interaction: 'popup fade/slide out', preset: 'Exit' },
+      { interaction: 'item highlight', preset: 'State' },
     ],
     separator: [],
     slider: [

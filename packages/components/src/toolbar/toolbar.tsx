@@ -8,9 +8,10 @@ import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
 // --- Styles ---
-// Container styling mirrors Menubar (radius/border/padding/surface). Item
-// styling mirrors Toggle's outline/ghost contract so pressed items read with
-// the same filled-primary fidelity as a standalone Toggle.
+// Container styling mirrors Menubar (radius/border/padding/surface). Pressed
+// item state mirrors Tabs' active treatment (theme-inverting `colorText` fill
+// + `colorTextInverse` foreground) so the on-state reads as an unmistakable
+// filled block without leaning on `colorPrimary`.
 const styles = stylex.create({
   root: {
     display: 'flex',
@@ -76,17 +77,24 @@ const styles = stylex.create({
     },
   },
 
-  // Pressed (toggle on) — filled primary, mirrors Toggle's pressed contract.
-  // Override hover so the pressed state stays unmistakable on hover.
+  // Pressed (toggle on) — filled block, identical contract to Tabs' active
+  // tab: `colorText` background flips with theme, `colorTextInverse` keeps
+  // foreground legible. Hover is overridden so the pressed state never
+  // weakens on pointer hover.
   itemPressed: {
-    color: tokens.colorPrimaryContrast,
-    backgroundColor: {
-      default: tokens.colorPrimary,
+    color: {
+      default: tokens.colorTextInverse,
       ':hover': {
-        default: tokens.colorPrimary,
-        '@media (hover: hover) and (pointer: fine)': tokens.colorPrimaryHover,
+        default: tokens.colorTextInverse,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorTextInverse,
       },
-      ':active': tokens.colorPrimaryActive,
+    },
+    backgroundColor: {
+      default: tokens.colorText,
+      ':hover': {
+        default: tokens.colorText,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorText,
+      },
     },
   },
 
