@@ -254,6 +254,19 @@ export type {
 export { Separator } from './separator';
 export type { SeparatorRootProps } from './separator';
 
+export { Slider } from './slider';
+export type {
+  SliderSize,
+  SliderColor,
+  SliderRootProps,
+  SliderLabelProps,
+  SliderValueProps,
+  SliderControlProps,
+  SliderTrackProps,
+  SliderIndicatorProps,
+  SliderThumbProps,
+} from './slider';
+
 export { Switch } from './switch';
 export type { SwitchRootProps, SwitchThumbProps } from './switch';
 

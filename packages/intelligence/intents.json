@@ -49,14 +49,14 @@
       "intent": "show-hide-content",
       "component": "Accordion",
       "signals": ["show more", "reveal", "toggle content", "expandable", "progressive disclosure"],
-      "reasoning": "Accordion provides progressive disclosure — content is hidden by default and revealed on demand, reducing cognitive load.",
+      "reasoning": "Accordion provides progressive disclosure \u2014 content is hidden by default and revealed on demand, reducing cognitive load.",
       "composition": "<Accordion.Root>\n  <Accordion.Item value=\"details\">\n    <Accordion.Header>\n      <Accordion.Trigger>Show details</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Hidden content revealed on click</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
     },
     {
       "intent": "faq-list",
       "component": "Accordion",
       "signals": ["FAQ", "questions", "answers", "help", "Q&A", "knowledge base"],
-      "reasoning": "FAQ lists are a classic accordion pattern — each question is a trigger, each answer is a panel. Use single-open mode to keep focus.",
+      "reasoning": "FAQ lists are a classic accordion pattern \u2014 each question is a trigger, each answer is a panel. Use single-open mode to keep focus.",
       "composition": "<Accordion.Root>\n  <Accordion.Item value=\"q1\">\n    <Accordion.Header>\n      <Accordion.Trigger>How do I reset my password?</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Visit the settings page and click \"Reset Password\".</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
     },
     {
@@ -186,7 +186,7 @@
       "intent": "single-disclosure",
       "component": "Collapsible",
       "signals": ["show more", "reveal", "toggle content", "expandable", "disclosure"],
-      "reasoning": "Collapsible provides simple progressive disclosure — content is hidden by default and revealed on demand with an animated panel.",
+      "reasoning": "Collapsible provides simple progressive disclosure \u2014 content is hidden by default and revealed on demand with an animated panel.",
       "composition": "<Collapsible.Root>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Panel>Hidden content revealed on click</Collapsible.Panel>\n</Collapsible.Root>"
     },
     {
@@ -536,6 +536,42 @@
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
     },
     {
+      "intent": "select-numeric-value",
+      "signals": [
+        "slider",
+        "range input",
+        "pick a value",
+        "scrub",
+        "scrubber",
+        "volume",
+        "brightness"
+      ],
+      "reasoning": "Slider is the right control whenever the user is choosing a single number from a continuous range and rough position matters more than typing exact digits.",
+      "composition": "<Slider.Root defaultValue={50}>\n  <Slider.Label>Volume</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>",
+      "component": "Slider"
+    },
+    {
+      "intent": "select-range",
+      "signals": [
+        "range slider",
+        "min and max",
+        "price range",
+        "filter range",
+        "between values",
+        "two thumbs"
+      ],
+      "reasoning": "A multi-thumb Slider lets users pick a min/max bracket \u2014 the canonical range filter UI.",
+      "composition": "<Slider.Root defaultValue={[20, 80]}>\n  <Slider.Label>Price range</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb index={0} />\n      <Slider.Thumb index={1} />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>",
+      "component": "Slider"
+    },
+    {
+      "intent": "vertical-control",
+      "signals": ["vertical slider", "fader", "mixer", "vertical volume"],
+      "reasoning": "Vertical orientation is appropriate for fader-like controls (audio mixers, lighting).",
+      "composition": "<Slider.Root orientation=\"vertical\" defaultValue={50}>\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>",
+      "component": "Slider"
+    },
+    {
       "intent": "custom-scroll-region",
       "component": "ScrollArea",
       "signals": [
@@ -786,7 +822,7 @@
     {
       "component": "AlertDialog",
       "scenario": "A dismissible overlay that can be closed by clicking outside",
-      "reasoning": "AlertDialog cannot be dismissed by clicking outside — that's by design. Use Dialog if you want backdrop dismissal.",
+      "reasoning": "AlertDialog cannot be dismissed by clicking outside \u2014 that's by design. Use Dialog if you want backdrop dismissal.",
       "alternative": "Use Dialog from @base-ui/react/dialog."
     },
     {
@@ -876,7 +912,7 @@
     {
       "component": "Combobox",
       "scenario": "Free-form text input with suggestions",
-      "reasoning": "Use Autocomplete instead. Combobox requires selection from a predefined list — the value is a selection, not free text.",
+      "reasoning": "Use Autocomplete instead. Combobox requires selection from a predefined list \u2014 the value is a selection, not free text.",
       "alternative": "Autocomplete"
     },
     {
@@ -894,7 +930,7 @@
     {
       "component": "Autocomplete",
       "scenario": "User must select from a fixed set of options (no free text)",
-      "reasoning": "Use Select or Combobox instead. Autocomplete allows free-form text input — the value is the text itself, not a selection.",
+      "reasoning": "Use Select or Combobox instead. Autocomplete allows free-form text input \u2014 the value is the text itself, not a selection.",
       "alternative": "Use Select or Combobox."
     },
     {
@@ -930,7 +966,7 @@
     {
       "component": "Field",
       "scenario": "A standalone label without an input control",
-      "reasoning": "Use a plain <label> element. Field's value is in connecting label, control, and error — without a control it adds no benefit.",
+      "reasoning": "Use a plain <label> element. Field's value is in connecting label, control, and error \u2014 without a control it adds no benefit.",
       "alternative": "Plain <label> element"
     },
     {
@@ -1142,6 +1178,30 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "scenario": "User needs to enter a precise number",
+      "reasoning": "Sliders trade precision for visual position. For exact numeric input use Number Field.",
+      "alternative": "NumberField",
+      "component": "Slider"
+    },
+    {
+      "scenario": "Showing read-only progress or measurement",
+      "reasoning": "Slider is an input. For non-interactive value display use Progress (task progress) or Meter (scalar measurement).",
+      "alternative": "Progress or Meter",
+      "component": "Slider"
+    },
+    {
+      "scenario": "Choosing between a small set of discrete options",
+      "reasoning": "Sliders are for continuous ranges. For 2\u20137 discrete choices a Radio group or Toggle Group is clearer.",
+      "alternative": "Radio or ToggleGroup",
+      "component": "Slider"
+    },
+    {
+      "scenario": "On/off toggle",
+      "reasoning": "A two-state slider is unfamiliar. Use Switch for boolean toggles.",
+      "alternative": "Switch",
+      "component": "Slider"
     },
     {
       "component": "ScrollArea",

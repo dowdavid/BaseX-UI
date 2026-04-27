@@ -133,6 +133,10 @@
       "types": "./dist/separator/index.d.ts",
       "import": "./dist/separator/index.js"
     },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js"
+    },
     "./tabs": {
       "types": "./dist/tabs/index.d.ts",
       "import": "./dist/tabs/index.js"

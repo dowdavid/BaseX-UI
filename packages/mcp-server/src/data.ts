@@ -41,6 +41,7 @@ import radioManifest from '../../components/src/radio/manifest.json';
 import scrollAreaManifest from '../../components/src/scroll-area/manifest.json';
 import selectManifest from '../../components/src/select/manifest.json';
 import separatorManifest from '../../components/src/separator/manifest.json';
+import sliderManifest from '../../components/src/slider/manifest.json';
 import switchManifest from '../../components/src/switch/manifest.json';
 import tabsManifest from '../../components/src/tabs/manifest.json';
 import toggleManifest from '../../components/src/toggle/manifest.json';
@@ -74,6 +75,7 @@ export type ComponentManifest =
   | typeof scrollAreaManifest
   | typeof selectManifest
   | typeof separatorManifest
+  | typeof sliderManifest
   | typeof switchManifest
   | typeof tabsManifest
   | typeof toggleManifest
@@ -107,6 +109,7 @@ const components = new Map<string, ComponentManifest>([
   ['scroll-area', scrollAreaManifest],
   ['select', selectManifest],
   ['separator', separatorManifest],
+  ['slider', sliderManifest],
   ['switch', switchManifest],
   ['tabs', tabsManifest],
   ['toggle', toggleManifest],
@@ -295,6 +298,11 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'item highlight', preset: 'State' },
     ],
     separator: [],
+    slider: [
+      { interaction: 'thumb hover/focus ring', preset: 'State' },
+      { interaction: 'thumb drag (transform)', preset: 'Move' },
+      { interaction: 'indicator color transition', preset: 'State' },
+    ],
     switch: [{ interaction: 'thumb slide on toggle', preset: 'Move' }],
     tabs: [
       { interaction: 'tab hover/focus color', preset: 'State' },

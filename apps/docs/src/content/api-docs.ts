@@ -25,6 +25,7 @@ import radio from '../../../../packages/components/src/radio/radio.md?raw';
 import scrollArea from '../../../../packages/components/src/scroll-area/scroll-area.md?raw';
 import select from '../../../../packages/components/src/select/select.md?raw';
 import separator from '../../../../packages/components/src/separator/separator.md?raw';
+import slider from '../../../../packages/components/src/slider/slider.md?raw';
 import switchDoc from '../../../../packages/components/src/switch/switch.md?raw';
 import tabs from '../../../../packages/components/src/tabs/tabs.md?raw';
 import toggle from '../../../../packages/components/src/toggle/toggle.md?raw';
@@ -58,6 +59,7 @@ export const apiDocs: Record<string, string> = {
   'scroll-area': scrollArea,
   select,
   separator,
+  slider,
   switch: switchDoc,
   tabs,
   toggle,
