@@ -41,6 +41,7 @@ import radioManifest from '../../components/src/radio/manifest.json';
 import scrollAreaManifest from '../../components/src/scroll-area/manifest.json';
 import separatorManifest from '../../components/src/separator/manifest.json';
 import switchManifest from '../../components/src/switch/manifest.json';
+import tabsManifest from '../../components/src/tabs/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -69,7 +70,8 @@ export type ComponentManifest =
   | typeof radioManifest
   | typeof scrollAreaManifest
   | typeof separatorManifest
-  | typeof switchManifest;
+  | typeof switchManifest
+  | typeof tabsManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -99,6 +101,7 @@ const components = new Map<string, ComponentManifest>([
   ['scroll-area', scrollAreaManifest],
   ['separator', separatorManifest],
   ['switch', switchManifest],
+  ['tabs', tabsManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -278,6 +281,10 @@ export function getComponentSetup(name: string): ComponentSetup | null {
     ],
     separator: [],
     switch: [{ interaction: 'thumb slide on toggle', preset: 'Move' }],
+    tabs: [
+      { interaction: 'tab hover/focus color', preset: 'State' },
+      { interaction: 'indicator slide to active tab', preset: 'Move' },
+    ],
   };
 
   return {
