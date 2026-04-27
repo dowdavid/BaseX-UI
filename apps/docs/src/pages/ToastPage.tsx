@@ -22,7 +22,7 @@ function ToastViewport() {
               {t.title && <Toast.Title>{t.title}</Toast.Title>}
               {t.description && <Toast.Description>{t.description}</Toast.Description>}
             </Toast.Content>
-            {t.actionProps && <Toast.Action {...t.actionProps} />}
+            {t.actionProps && <Toast.Action />}
             <Toast.Close />
           </Toast.Root>
         ))}
