@@ -4,29 +4,35 @@ import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { Preview } from '../components/Preview';
 
-// Width is locked on transient buttons so the label changing
-// (e.g. "Save" → "Saving…" → "Saved ✓") doesn't reflow neighbors.
-// 96px fits the longest label across Save/Publish/Delete cycles
-// at the toolbar's current type scale; eyeballed, not a token.
-const TRANSIENT_MIN_WIDTH = '96px';
+// Width is fully locked on transient buttons so the label changing
+// (e.g. "Save" → "Saving…" → "Saved ✓") doesn't grow or reflow neighbors.
+// 120px fits the longest label ("Publishing…") across Save/Publish/Delete
+// cycles at the toolbar's current type scale with comfortable padding;
+// eyeballed, not a token. Uses fixed `width` (not `minWidth`) so longer
+// labels can't push past the lock.
+const TRANSIENT_WIDTH = '120px';
 
 const styles = stylex.create({
   transientAction: {
-    minWidth: TRANSIENT_MIN_WIDTH,
+    width: TRANSIENT_WIDTH,
+    boxSizing: 'border-box',
   },
   saveSuccess: {
-    minWidth: TRANSIENT_MIN_WIDTH,
+    width: TRANSIENT_WIDTH,
+    boxSizing: 'border-box',
     backgroundColor: tokens.colorSuccess,
     color: tokens.colorSuccessContrast,
   },
   // Mirrors the toolbar's "active tab" pressed treatment — neutral, not green/red.
   publishDone: {
-    minWidth: TRANSIENT_MIN_WIDTH,
+    width: TRANSIENT_WIDTH,
+    boxSizing: 'border-box',
     backgroundColor: tokens.colorText,
     color: tokens.colorTextInverse,
   },
   deleteDone: {
-    minWidth: TRANSIENT_MIN_WIDTH,
+    width: TRANSIENT_WIDTH,
+    boxSizing: 'border-box',
     backgroundColor: tokens.colorDestructive,
     color: tokens.colorDestructiveContrast,
   },
