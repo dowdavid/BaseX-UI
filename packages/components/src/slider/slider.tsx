@@ -126,37 +126,26 @@ const styles = stylex.create({
     boxSizing: 'border-box',
     width: '16px',
     height: '16px',
-    backgroundColor: tokens.colorBackground,
-    borderWidth: tokens.borderWidthDefault,
-    borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
+    backgroundColor: tokens.colorText,
     borderRadius: tokens.radiusSm,
-    boxShadow: tokens.shadowSm,
     cursor: 'grab',
-    transitionProperty: 'border-color, background-color, box-shadow, transform',
+    transitionProperty: 'box-shadow, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
     ':hover': {
-      backgroundColor: tokens.colorMuted,
-      borderColor: tokens.colorText,
+      boxShadow: `0 0 0 4px ${tokens.colorMuted}`,
     },
     ':active': {
       cursor: 'grabbing',
-      backgroundColor: tokens.colorMuted,
-      borderColor: tokens.colorText,
     },
   },
 
-  thumbSecondary: {
-    borderColor: tokens.colorBorder,
-  },
+  thumbSecondary: {},
 
-  thumbDestructive: {
-    borderColor: tokens.colorBorder,
-  },
+  thumbDestructive: {},
 
   thumbDisabled: {
-    borderColor: tokens.colorBorderMuted,
+    opacity: 0.5,
     cursor: 'not-allowed',
   },
 });
