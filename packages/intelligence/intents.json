@@ -631,6 +631,27 @@
       "signals": ["multi-step form", "tabbed form", "form sections"],
       "reasoning": "Use manual activation when tab content includes form controls, so screen readers don't trigger panel changes during arrow-key navigation.",
       "composition": "<Tabs.Root defaultValue=\"step1\">\n  <Tabs.List activationMode=\"manual\">\n    <Tabs.Tab value=\"step1\">Step 1</Tabs.Tab>\n    <Tabs.Tab value=\"step2\">Step 2</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"step1\">{/* form fields */}</Tabs.Panel>\n  <Tabs.Panel value=\"step2\">{/* form fields */}</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "binary-toggle-button",
+      "component": "Toggle",
+      "signals": ["toggle", "on/off", "press", "pressed", "two-state button", "aria-pressed"],
+      "reasoning": "Toggle is a button that announces its on/off state via aria-pressed. Use when a single button should flip between two states (e.g., bold formatting in a text editor).",
+      "composition": "<Toggle.Root aria-label=\"Bold\">B</Toggle.Root>"
+    },
+    {
+      "intent": "icon-toggle",
+      "component": "Toggle",
+      "signals": ["icon button toggle", "format toggle", "bookmark", "favorite", "pin", "mute"],
+      "reasoning": "Icon-only toggle is the standard pattern for editor formatting controls and stateful icon buttons. Always provide aria-label since there is no visible text.",
+      "composition": "<Toggle.Root aria-label=\"Bookmark\">\n  <BookmarkIcon aria-hidden=\"true\" />\n</Toggle.Root>"
+    },
+    {
+      "intent": "filter-chip",
+      "component": "Toggle",
+      "signals": ["filter", "tag", "chip", "facet", "include/exclude"],
+      "reasoning": "A pressed Toggle reads as an active filter chip and announces its state to assistive tech. Use ghost variant inside a Toolbar or filter bar to avoid stacking borders.",
+      "composition": "<Toggle.Root variant=\"ghost\">In stock</Toggle.Root>"
     }
   ],
   "antiPatterns": [
@@ -1107,6 +1128,30 @@
       "scenario": "Many sections (more than ~7) or long labels that wrap",
       "reasoning": "Tab lists work best with a small number of short labels. Use Accordion or a sidebar nav for larger sets.",
       "alternative": "Accordion"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "Settings change that takes effect immediately (e.g., dark mode)",
+      "reasoning": "Switch is the conventional control for an immediate on/off setting and is more easily recognized as a toggle by users.",
+      "alternative": "Switch"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "Selecting one of several options",
+      "reasoning": "Use ToggleGroup, RadioGroup, or Tabs — Toggle alone has no concept of mutual exclusion.",
+      "alternative": "ToggleGroup, RadioGroup, or Tabs"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "Triggering a one-off action",
+      "reasoning": "Toggle represents persistent state. Use Button for actions that fire and don't stay on.",
+      "alternative": "Button"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "A boolean that submits with a form",
+      "reasoning": "Use Checkbox — it integrates with form submission and is the conventional control for boolean form fields.",
+      "alternative": "Checkbox"
     }
   ]
 }

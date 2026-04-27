@@ -40,14 +40,14 @@
 | 30  | Switch          | `Switch`         | Done     |              |
 | 31  | Tabs            | `Tabs`           | Done     |              |
 | 32  | Toast           | `Toast`          | —        |              |
-| 33  | Toggle          | `Toggle`         | —        |              |
+| 33  | Toggle          | `Toggle`         | Done     |              |
 | 34  | Toggle Group    | `ToggleGroup`    | —        |              |
 | 35  | Toolbar         | `Toolbar`        | —        |              |
 | 36  | Tooltip         | `Tooltip`        | —        |              |
 
 ## Progress
 
-- **Done**: 29 / 36
+- **Done**: 30 / 36
 - **Next**: Select
 
 ## How to Use This File
