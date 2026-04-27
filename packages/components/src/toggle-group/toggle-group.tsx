@@ -26,45 +26,69 @@ const styles = stylex.create({
     flexDirection: 'column',
   },
 
-  // Item — mirrors Button's outline/ghost contract (height, padding, font, focus, transitions)
+  // Item — mirrors Toolbar.ToggleItem so the two primitives read identically.
+  // Off-state hover guarded behind hover-capable pointer to avoid sticky hover
+  // on touch devices. Border-radius is `radiusSm` (smaller than standalone
+  // Toggle's `radiusMd`) since these items live inside a tray.
   item: {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: tokens.space2,
-    height: '32px',
+    gap: tokens.space1h,
+    minHeight: '32px',
+    paddingBlock: tokens.space2,
     paddingInline: tokens.space3,
     fontFamily: tokens.fontFamilySans,
-    fontSize: tokens.fontSizeSm,
     fontWeight: tokens.fontWeightMedium,
+    fontSize: tokens.fontSizeSm,
     lineHeight: tokens.lineHeightTight,
     color: tokens.colorText,
+    textDecoration: 'none',
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorBackground,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
-    borderStyle: 'solid',
-    borderWidth: tokens.borderWidthDefault,
-    borderColor: 'transparent',
+    borderWidth: 0,
     borderRadius: tokens.radiusSm,
     cursor: 'pointer',
     userSelect: 'none',
     whiteSpace: 'nowrap',
     flexShrink: 0,
-    transitionProperty: 'background-color, color, border-color, box-shadow',
+    transitionProperty: 'background-color, color, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
+    transform: {
+      default: 'none',
+      ':active': 'scale(0.98)',
+    },
   },
+
+  // Pressed (on) — theme-inverting filled block. Hover overrides hold the
+  // pressed state stable so the on-state never weakens on hover.
   itemPressed: {
-    backgroundColor: tokens.colorBackground,
-    color: tokens.colorText,
-    borderColor: tokens.colorBorder,
+    color: {
+      default: tokens.colorTextInverse,
+      ':hover': {
+        default: tokens.colorTextInverse,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorTextInverse,
+      },
+    },
+    backgroundColor: {
+      default: tokens.colorText,
+      ':hover': {
+        default: tokens.colorText,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorText,
+      },
+    },
   },
+
   itemDisabled: {
-    color: tokens.colorTextMuted,
-    borderColor: tokens.colorBorderMuted,
+    opacity: 0.64,
+    pointerEvents: 'none',
     cursor: 'not-allowed',
-    backgroundColor: 'transparent',
   },
 });
 
