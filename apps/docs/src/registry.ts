@@ -25,6 +25,7 @@ import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
 import { SeparatorPage } from './pages/SeparatorPage';
+import { SwitchPage } from './pages/SwitchPage';
 
 export interface PageEntry {
   id: string;
@@ -271,6 +272,14 @@ export const pages: PageEntry[] = [
     path: '/components/separator',
     section: 'components',
     component: SeparatorPage,
+  },
+  {
+    id: 'switch',
+    label: 'Switch',
+    description: 'A toggle for binary settings that take effect immediately.',
+    path: '/components/switch',
+    section: 'components',
+    component: SwitchPage,
   },
 
   // Intelligence section

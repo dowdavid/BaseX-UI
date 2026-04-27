@@ -23,6 +23,7 @@ import previewCard from '../../../../packages/components/src/preview-card/previe
 import progress from '../../../../packages/components/src/progress/progress.md?raw';
 import radio from '../../../../packages/components/src/radio/radio.md?raw';
 import separator from '../../../../packages/components/src/separator/separator.md?raw';
+import switchDoc from '../../../../packages/components/src/switch/switch.md?raw';
 
 export const apiDocs: Record<string, string> = {
   accordion,
@@ -50,4 +51,5 @@ export const apiDocs: Record<string, string> = {
   progress,
   radio,
   separator,
+  switch: switchDoc,
 };

@@ -39,6 +39,7 @@ import previewCardManifest from '../../components/src/preview-card/manifest.json
 import progressManifest from '../../components/src/progress/manifest.json';
 import radioManifest from '../../components/src/radio/manifest.json';
 import separatorManifest from '../../components/src/separator/manifest.json';
+import switchManifest from '../../components/src/switch/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -65,7 +66,8 @@ export type ComponentManifest =
   | typeof previewCardManifest
   | typeof progressManifest
   | typeof radioManifest
-  | typeof separatorManifest;
+  | typeof separatorManifest
+  | typeof switchManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -93,6 +95,7 @@ const components = new Map<string, ComponentManifest>([
   ['progress', progressManifest],
   ['radio', radioManifest],
   ['separator', separatorManifest],
+  ['switch', switchManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -266,6 +269,7 @@ export function getComponentSetup(name: string): ComponentSetup | null {
     ],
     radio: [{ interaction: 'indicator appear/disappear', preset: 'State' }],
     separator: [],
+    switch: [{ interaction: 'thumb slide on toggle', preset: 'Move' }],
   };
 
   return {

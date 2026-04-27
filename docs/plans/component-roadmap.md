@@ -37,7 +37,7 @@
 | 27  | Select          | `Select`         | —        |              |
 | 28  | Separator       | `Separator`      | Done     |              |
 | 29  | Slider          | `Slider`         | —        |              |
-| 30  | Switch          | `Switch`         | —        |              |
+| 30  | Switch          | `Switch`         | Done     |              |
 | 31  | Tabs            | `Tabs`           | —        |              |
 | 32  | Toast           | `Toast`          | —        |              |
 | 33  | Toggle          | `Toggle`         | —        |              |
