@@ -123,28 +123,36 @@ const styles = stylex.create({
 
   thumb: {
     display: 'block',
+    boxSizing: 'border-box',
     width: '16px',
     height: '16px',
     backgroundColor: tokens.colorBackground,
-    borderWidth: tokens.borderWidthThick,
+    borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorPrimary,
-    borderRadius: tokens.radiusFull,
+    borderColor: tokens.colorBorder,
+    borderRadius: tokens.radiusSm,
+    boxShadow: tokens.shadowSm,
     cursor: 'grab',
-    transitionProperty: 'border-color, background-color, transform',
+    transitionProperty: 'border-color, background-color, box-shadow, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
+    ':hover': {
+      backgroundColor: tokens.colorMuted,
+      borderColor: tokens.colorText,
+    },
     ':active': {
       cursor: 'grabbing',
+      backgroundColor: tokens.colorMuted,
+      borderColor: tokens.colorText,
     },
   },
 
   thumbSecondary: {
-    borderColor: tokens.colorSecondary,
+    borderColor: tokens.colorBorder,
   },
 
   thumbDestructive: {
-    borderColor: tokens.colorDestructive,
+    borderColor: tokens.colorBorder,
   },
 
   thumbDisabled: {

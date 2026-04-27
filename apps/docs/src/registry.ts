@@ -24,7 +24,10 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { ScrollAreaPage } from './pages/ScrollAreaPage';
+import { SeparatorPage } from './pages/SeparatorPage';
 import { SliderPage } from './pages/SliderPage';
+import { SwitchPage } from './pages/SwitchPage';
 
 export interface PageEntry {
   id: string;
@@ -265,12 +268,36 @@ export const pages: PageEntry[] = [
     component: RadioPage,
   },
   {
+    id: 'scroll-area',
+    label: 'Scroll Area',
+    description: 'A bounded scroll region with custom-styled scrollbars overlaid on native scroll.',
+    path: '/components/scroll-area',
+    section: 'components',
+    component: ScrollAreaPage,
+  },
+  {
+    id: 'separator',
+    label: 'Separator',
+    description: 'A thin visual divider between content groups.',
+    path: '/components/separator',
+    section: 'components',
+    component: SeparatorPage,
+  },
+  {
     id: 'slider',
     label: 'Slider',
     description: 'A range input for picking a single value or a range from a continuous scale.',
     path: '/components/slider',
     section: 'components',
     component: SliderPage,
+  },
+  {
+    id: 'switch',
+    label: 'Switch',
+    description: 'A toggle for binary settings that take effect immediately.',
+    path: '/components/switch',
+    section: 'components',
+    component: SwitchPage,
   },
 
   // Intelligence section

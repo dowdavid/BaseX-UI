@@ -221,6 +221,18 @@ export type {
   RadioIndicatorProps,
 } from './radio';
 
+export { ScrollArea } from './scroll-area';
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaCornerProps,
+} from './scroll-area';
+
+export { Separator } from './separator';
+export type { SeparatorRootProps } from './separator';
+
 export { Slider } from './slider';
 export type {
   SliderSize,
@@ -233,3 +245,6 @@ export type {
   SliderIndicatorProps,
   SliderThumbProps,
 } from './slider';
+
+export { Switch } from './switch';
+export type { SwitchRootProps, SwitchThumbProps } from './switch';

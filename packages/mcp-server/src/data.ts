@@ -38,7 +38,10 @@ import popoverManifest from '../../components/src/popover/manifest.json';
 import previewCardManifest from '../../components/src/preview-card/manifest.json';
 import progressManifest from '../../components/src/progress/manifest.json';
 import radioManifest from '../../components/src/radio/manifest.json';
+import scrollAreaManifest from '../../components/src/scroll-area/manifest.json';
+import separatorManifest from '../../components/src/separator/manifest.json';
 import sliderManifest from '../../components/src/slider/manifest.json';
+import switchManifest from '../../components/src/switch/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -65,7 +68,10 @@ export type ComponentManifest =
   | typeof previewCardManifest
   | typeof progressManifest
   | typeof radioManifest
-  | typeof sliderManifest;
+  | typeof scrollAreaManifest
+  | typeof separatorManifest
+  | typeof sliderManifest
+  | typeof switchManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -92,7 +98,10 @@ const components = new Map<string, ComponentManifest>([
   ['preview-card', previewCardManifest],
   ['progress', progressManifest],
   ['radio', radioManifest],
+  ['scroll-area', scrollAreaManifest],
+  ['separator', separatorManifest],
   ['slider', sliderManifest],
+  ['switch', switchManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -265,11 +274,18 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'indeterminate animation', preset: 'Move' },
     ],
     radio: [{ interaction: 'indicator appear/disappear', preset: 'State' }],
+    'scroll-area': [
+      { interaction: 'scrollbar fade in (hover/scroll)', preset: 'State' },
+      { interaction: 'scrollbar fade out', preset: 'State' },
+      { interaction: 'thumb hover color', preset: 'State' },
+    ],
+    separator: [],
     slider: [
       { interaction: 'thumb hover/focus ring', preset: 'State' },
       { interaction: 'thumb drag (transform)', preset: 'Move' },
       { interaction: 'indicator color transition', preset: 'State' },
     ],
+    switch: [{ interaction: 'thumb slide on toggle', preset: 'Move' }],
   };
 
   return {
