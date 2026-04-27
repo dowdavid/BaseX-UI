@@ -49,14 +49,14 @@
       "intent": "show-hide-content",
       "component": "Accordion",
       "signals": ["show more", "reveal", "toggle content", "expandable", "progressive disclosure"],
-      "reasoning": "Accordion provides progressive disclosure — content is hidden by default and revealed on demand, reducing cognitive load.",
+      "reasoning": "Accordion provides progressive disclosure \u2014 content is hidden by default and revealed on demand, reducing cognitive load.",
       "composition": "<Accordion.Root>\n  <Accordion.Item value=\"details\">\n    <Accordion.Header>\n      <Accordion.Trigger>Show details</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Hidden content revealed on click</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
     },
     {
       "intent": "faq-list",
       "component": "Accordion",
       "signals": ["FAQ", "questions", "answers", "help", "Q&A", "knowledge base"],
-      "reasoning": "FAQ lists are a classic accordion pattern — each question is a trigger, each answer is a panel. Use single-open mode to keep focus.",
+      "reasoning": "FAQ lists are a classic accordion pattern \u2014 each question is a trigger, each answer is a panel. Use single-open mode to keep focus.",
       "composition": "<Accordion.Root>\n  <Accordion.Item value=\"q1\">\n    <Accordion.Header>\n      <Accordion.Trigger>How do I reset my password?</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Visit the settings page and click \"Reset Password\".</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
     },
     {
@@ -186,7 +186,7 @@
       "intent": "single-disclosure",
       "component": "Collapsible",
       "signals": ["show more", "reveal", "toggle content", "expandable", "disclosure"],
-      "reasoning": "Collapsible provides simple progressive disclosure — content is hidden by default and revealed on demand with an animated panel.",
+      "reasoning": "Collapsible provides simple progressive disclosure \u2014 content is hidden by default and revealed on demand with an animated panel.",
       "composition": "<Collapsible.Root>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Panel>Hidden content revealed on click</Collapsible.Panel>\n</Collapsible.Root>"
     },
     {
@@ -561,6 +561,256 @@
       ],
       "reasoning": "Multi-mode ToggleGroup fits formatting toolbars or tag/filter pickers where any combination of items can be pressed simultaneously.",
       "composition": "<ToggleGroup.Root type=\"multiple\" defaultValue={['bold']}>\n  <ToggleGroup.Item value=\"bold\">B</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"italic\">I</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"underline\">U</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    },
+    {
+      "intent": "action-toolbar",
+      "component": "Toolbar",
+      "signals": ["toolbar", "action bar", "command bar", "button bar", "icon bar"],
+      "reasoning": "Toolbar groups action buttons with WAI-ARIA roving tabindex, so a single Tab stop reaches the bar and arrow keys move between actions.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.Button>Save</Toolbar.Button>\n  <Toolbar.Button>Undo</Toolbar.Button>\n  <Toolbar.Button>Redo</Toolbar.Button>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "formatting-toolbar",
+      "component": "Toolbar",
+      "signals": ["formatting", "rich text", "wysiwyg", "bold italic underline", "editor toolbar"],
+      "reasoning": "ToggleGroup with multiple=true supports independent pressed states for bold/italic/underline-style controls.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.ToggleGroup multiple defaultValue={[]}>\n    <Toolbar.ToggleItem value=\"bold\">B</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"italic\">I</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"underline\">U</Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "alignment-toolbar",
+      "component": "Toolbar",
+      "signals": ["alignment", "align left right center", "single select toggle"],
+      "reasoning": "Single-select ToggleGroup (multiple=false) is ideal for mutually exclusive choices like text alignment.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.ToggleGroup defaultValue={[\"left\"]}>\n    <Toolbar.ToggleItem value=\"left\">Left</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"center\">Center</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"right\">Right</Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "vertical-toolbar",
+      "component": "Toolbar",
+      "signals": ["vertical toolbar", "side rail", "side toolbar", "tool palette"],
+      "reasoning": "orientation=\"vertical\" lays the toolbar out as a column and remaps arrow keys to Up/Down for focus traversal.",
+      "composition": "<Toolbar.Root orientation=\"vertical\">\n  <Toolbar.Button>Select</Toolbar.Button>\n  <Toolbar.Button>Move</Toolbar.Button>\n  <Toolbar.Separator />\n  <Toolbar.Button>Delete</Toolbar.Button>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "select-numeric-value",
+      "signals": [
+        "slider",
+        "range input",
+        "pick a value",
+        "scrub",
+        "scrubber",
+        "volume",
+        "brightness"
+      ],
+      "reasoning": "Slider is the right control whenever the user is choosing a single number from a continuous range and rough position matters more than typing exact digits.",
+      "composition": "<Slider.Root defaultValue={50}>\n  <Slider.Label>Volume</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>",
+      "component": "Slider"
+    },
+    {
+      "intent": "select-range",
+      "signals": [
+        "range slider",
+        "min and max",
+        "price range",
+        "filter range",
+        "between values",
+        "two thumbs"
+      ],
+      "reasoning": "A multi-thumb Slider lets users pick a min/max bracket \u2014 the canonical range filter UI.",
+      "composition": "<Slider.Root defaultValue={[20, 80]}>\n  <Slider.Label>Price range</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb index={0} />\n      <Slider.Thumb index={1} />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>",
+      "component": "Slider"
+    },
+    {
+      "intent": "vertical-control",
+      "signals": ["vertical slider", "fader", "mixer", "vertical volume"],
+      "reasoning": "Vertical orientation is appropriate for fader-like controls (audio mixers, lighting).",
+      "composition": "<Slider.Root orientation=\"vertical\" defaultValue={50}>\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>",
+      "component": "Slider"
+    },
+    {
+      "intent": "custom-scroll-region",
+      "component": "ScrollArea",
+      "signals": [
+        "scroll",
+        "scrollable",
+        "scrollbar",
+        "custom scrollbar",
+        "overflow",
+        "long list",
+        "scrollable container"
+      ],
+      "reasoning": "ScrollArea overlays a custom-styled scrollbar on top of native scroll, keeping all native behaviors (keyboard, touch, RTL, mouse wheel) while making the scrollbar match the design system.",
+      "composition": "<ScrollArea.Root style={{ height: 240 }}>\n  <ScrollArea.Viewport>\n    {items.map((item) => (\n      <div key={item.id}>{item.label}</div>\n    ))}\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"vertical\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "intent": "horizontal-scroll-row",
+      "component": "ScrollArea",
+      "signals": [
+        "horizontal scroll",
+        "carousel",
+        "scrollable row",
+        "tag list",
+        "chip row",
+        "horizontal overflow"
+      ],
+      "reasoning": "ScrollArea with a horizontal Scrollbar gives a clean horizontal scrolling row (chips, tags, thumbnails) with a styled scrollbar that fades in only when needed.",
+      "composition": "<ScrollArea.Root>\n  <ScrollArea.Viewport>\n    <div style={{ display: 'flex', gap: 8 }}>{tags}</div>\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"horizontal\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "intent": "scroll-region-in-dialog",
+      "component": "ScrollArea",
+      "signals": ["dialog scroll", "modal scroll", "long content", "scroll inside dialog"],
+      "reasoning": "Inside a Dialog or Drawer, ScrollArea provides consistent scrollbar styling that won't clash with the surrounding chrome and stays out of the way until needed.",
+      "composition": "<Dialog.Panel>\n  <ScrollArea.Root style={{ maxHeight: 320 }}>\n    <ScrollArea.Viewport>\n      {longContent}\n    </ScrollArea.Viewport>\n    <ScrollArea.Scrollbar orientation=\"vertical\">\n      <ScrollArea.Thumb />\n    </ScrollArea.Scrollbar>\n  </ScrollArea.Root>\n</Dialog.Panel>"
+    },
+    {
+      "intent": "single-value-select",
+      "component": "Select",
+      "signals": [
+        "select",
+        "dropdown",
+        "single select",
+        "pick one",
+        "choose one",
+        "select option",
+        "form select"
+      ],
+      "reasoning": "Select is the primary single-value dropdown for short-to-medium predefined option lists, with native keyboard typeahead and listbox ARIA. Use over Combobox when filter input adds friction.",
+      "composition": "<Select.Root defaultValue=\"a\">\n  <Select.Trigger>\n    <Select.Value placeholder=\"Choose...\" />\n    <Select.Icon />\n  </Select.Trigger>\n  <Select.Portal>\n    <Select.Positioner>\n      <Select.Popup>\n        <Select.Viewport>\n          <Select.Item value=\"a\"><Select.ItemIndicator /><Select.ItemText>Option A</Select.ItemText></Select.Item>\n        </Select.Viewport>\n      </Select.Popup>\n    </Select.Positioner>\n  </Select.Portal>\n</Select.Root>"
+    },
+    {
+      "intent": "form-select-field",
+      "component": "Select",
+      "signals": [
+        "select form field",
+        "select with label",
+        "form dropdown",
+        "labelled select",
+        "select inside field"
+      ],
+      "reasoning": "Compose Select inside Field for label, description, and error wiring. Use the `name` prop on Select.Root to submit the value with the form.",
+      "composition": "<Field.Root name=\"role\">\n  <Field.Label>Role</Field.Label>\n  <Select.Root name=\"role\">\n    <Select.Trigger><Select.Value placeholder=\"Pick a role\" /><Select.Icon /></Select.Trigger>\n    <Select.Portal><Select.Positioner><Select.Popup><Select.Viewport>\n      <Select.Item value=\"admin\"><Select.ItemIndicator /><Select.ItemText>Admin</Select.ItemText></Select.Item>\n    </Select.Viewport></Select.Popup></Select.Positioner></Select.Portal>\n  </Select.Root>\n</Field.Root>"
+    },
+    {
+      "intent": "grouped-options",
+      "component": "Select",
+      "signals": [
+        "grouped select",
+        "select with sections",
+        "categorized dropdown",
+        "select group label",
+        "select with separators"
+      ],
+      "reasoning": "Use Select.Group + Select.GroupLabel + Select.Separator for visually-organized option sets without losing keyboard navigation.",
+      "composition": "<Select.Root>\n  <Select.Trigger><Select.Value placeholder=\"Pick fruit\" /><Select.Icon /></Select.Trigger>\n  <Select.Portal><Select.Positioner><Select.Popup><Select.Viewport>\n    <Select.Group>\n      <Select.GroupLabel>Citrus</Select.GroupLabel>\n      <Select.Item value=\"orange\"><Select.ItemIndicator /><Select.ItemText>Orange</Select.ItemText></Select.Item>\n    </Select.Group>\n    <Select.Separator />\n    <Select.Group>\n      <Select.GroupLabel>Berries</Select.GroupLabel>\n      <Select.Item value=\"strawberry\"><Select.ItemIndicator /><Select.ItemText>Strawberry</Select.ItemText></Select.Item>\n    </Select.Group>\n  </Select.Viewport></Select.Popup></Select.Positioner></Select.Portal>\n</Select.Root>"
+    },
+    {
+      "intent": "section-divider",
+      "component": "Separator",
+      "signals": [
+        "divider",
+        "separator",
+        "horizontal rule",
+        "hr",
+        "section break",
+        "split content"
+      ],
+      "reasoning": "Separator is the canonical 1px divider for splitting content groups, settings sections, or list groups.",
+      "composition": "<Separator.Root />"
+    },
+    {
+      "intent": "vertical-divider",
+      "component": "Separator",
+      "signals": [
+        "vertical divider",
+        "inline separator",
+        "metadata separator",
+        "dot separator alternative"
+      ],
+      "reasoning": "Use orientation=\"vertical\" inside a flex row to separate inline metadata or toolbar groups.",
+      "composition": "<Separator.Root orientation=\"vertical\" />"
+    },
+    {
+      "intent": "decorative-divider",
+      "component": "Separator",
+      "signals": ["decorative line", "visual divider", "non-semantic separator"],
+      "reasoning": "When the divider is purely visual and adjacent content is already grouped semantically, mark it decorative so screen readers skip it.",
+      "composition": "<Separator.Root decorative />"
+    },
+    {
+      "intent": "tabbed-content",
+      "component": "Tabs",
+      "signals": [
+        "tabs",
+        "tabbed",
+        "tab interface",
+        "switch between views",
+        "tabbed sections",
+        "panel switcher"
+      ],
+      "reasoning": "Tabs is the canonical component for switching between mutually exclusive content panels at the same level of hierarchy.",
+      "composition": "<Tabs.Root defaultValue=\"overview\">\n  <Tabs.List>\n    <Tabs.Tab value=\"overview\">Overview</Tabs.Tab>\n    <Tabs.Tab value=\"details\">Details</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"overview\">Overview content</Tabs.Panel>\n  <Tabs.Panel value=\"details\">Details content</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "settings-sections",
+      "component": "Tabs",
+      "signals": ["settings tabs", "preferences tabs", "vertical tabs", "side tabs"],
+      "reasoning": "Vertical Tabs work well for settings UIs where users move between configuration groups.",
+      "composition": "<Tabs.Root orientation=\"vertical\" defaultValue=\"profile\">\n  <Tabs.List>\n    <Tabs.Tab value=\"profile\">Profile</Tabs.Tab>\n    <Tabs.Tab value=\"account\">Account</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"profile\">Profile fields</Tabs.Panel>\n  <Tabs.Panel value=\"account\">Account fields</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "form-with-tabs",
+      "component": "Tabs",
+      "signals": ["multi-step form", "tabbed form", "form sections"],
+      "reasoning": "Use manual activation when tab content includes form controls, so screen readers don't trigger panel changes during arrow-key navigation.",
+      "composition": "<Tabs.Root defaultValue=\"step1\">\n  <Tabs.List activationMode=\"manual\">\n    <Tabs.Tab value=\"step1\">Step 1</Tabs.Tab>\n    <Tabs.Tab value=\"step2\">Step 2</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"step1\">{/* form fields */}</Tabs.Panel>\n  <Tabs.Panel value=\"step2\">{/* form fields */}</Tabs.Panel>\n</Tabs.Root>"
+    },
+    {
+      "intent": "binary-toggle-button",
+      "component": "Toggle",
+      "signals": ["toggle", "on/off", "press", "pressed", "two-state button", "aria-pressed"],
+      "reasoning": "Toggle is a button that announces its on/off state via aria-pressed. Use when a single button should flip between two states (e.g., bold formatting in a text editor).",
+      "composition": "<Toggle.Root aria-label=\"Bold\">B</Toggle.Root>"
+    },
+    {
+      "intent": "icon-toggle",
+      "component": "Toggle",
+      "signals": ["icon button toggle", "format toggle", "bookmark", "favorite", "pin", "mute"],
+      "reasoning": "Icon-only toggle is the standard pattern for editor formatting controls and stateful icon buttons. Always provide aria-label since there is no visible text.",
+      "composition": "<Toggle.Root aria-label=\"Bookmark\">\n  <BookmarkIcon aria-hidden=\"true\" />\n</Toggle.Root>"
+    },
+    {
+      "intent": "filter-chip",
+      "component": "Toggle",
+      "signals": ["filter", "tag", "chip", "facet", "include/exclude"],
+      "reasoning": "A pressed Toggle reads as an active filter chip and announces its state to assistive tech. Use ghost variant inside a Toolbar or filter bar to avoid stacking borders.",
+      "composition": "<Toggle.Root variant=\"ghost\">In stock</Toggle.Root>"
+    },
+    {
+      "intent": "label-icon-button",
+      "component": "Tooltip",
+      "signals": ["tooltip", "label icon button", "describe icon", "hover label", "icon hint"],
+      "reasoning": "Tooltip is the standard pattern for describing icon-only buttons or compact controls that lack a visible text label.",
+      "composition": "<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>⚙️</Tooltip.Trigger>\n    <Tooltip.Portal>\n      <Tooltip.Positioner>\n        <Tooltip.Popup>Settings</Tooltip.Popup>\n      </Tooltip.Positioner>\n    </Tooltip.Portal>\n  </Tooltip.Root>\n</Tooltip.Provider>"
+    },
+    {
+      "intent": "supplemental-hint",
+      "component": "Tooltip",
+      "signals": [
+        "hover hint",
+        "supplemental info",
+        "explain control",
+        "field hint",
+        "non-interactive tooltip"
+      ],
+      "reasoning": "Tooltip surfaces a short, non-interactive hint on hover or focus. Use only when the content is purely informational.",
+      "composition": "<Tooltip.Root>\n  <Tooltip.Trigger>Save</Tooltip.Trigger>\n  <Tooltip.Portal>\n    <Tooltip.Positioner>\n      <Tooltip.Popup>Saves your changes (⌘S)</Tooltip.Popup>\n    </Tooltip.Positioner>\n  </Tooltip.Portal>\n</Tooltip.Root>"
+    },
+    {
+      "intent": "shared-delay-group",
+      "component": "Tooltip",
+      "signals": ["toolbar tooltips", "tooltip group", "delay group", "row of icons"],
+      "reasoning": "Wrap a row of related triggers in Tooltip.Provider so moving between them skips the open delay after the first tooltip is shown.",
+      "composition": "<Tooltip.Provider delay={600}>\n  {items.map(item => (\n    <Tooltip.Root key={item.id}>\n      <Tooltip.Trigger>{item.icon}</Tooltip.Trigger>\n      <Tooltip.Portal>\n        <Tooltip.Positioner>\n          <Tooltip.Popup>{item.label}</Tooltip.Popup>\n        </Tooltip.Positioner>\n      </Tooltip.Portal>\n    </Tooltip.Root>\n  ))}\n</Tooltip.Provider>"
     }
   ],
   "antiPatterns": [
@@ -627,7 +877,7 @@
     {
       "component": "AlertDialog",
       "scenario": "A dismissible overlay that can be closed by clicking outside",
-      "reasoning": "AlertDialog cannot be dismissed by clicking outside — that's by design. Use Dialog if you want backdrop dismissal.",
+      "reasoning": "AlertDialog cannot be dismissed by clicking outside \u2014 that's by design. Use Dialog if you want backdrop dismissal.",
       "alternative": "Use Dialog from @base-ui/react/dialog."
     },
     {
@@ -717,7 +967,7 @@
     {
       "component": "Combobox",
       "scenario": "Free-form text input with suggestions",
-      "reasoning": "Use Autocomplete instead. Combobox requires selection from a predefined list — the value is a selection, not free text.",
+      "reasoning": "Use Autocomplete instead. Combobox requires selection from a predefined list \u2014 the value is a selection, not free text.",
       "alternative": "Autocomplete"
     },
     {
@@ -735,7 +985,7 @@
     {
       "component": "Autocomplete",
       "scenario": "User must select from a fixed set of options (no free text)",
-      "reasoning": "Use Select or Combobox instead. Autocomplete allows free-form text input — the value is the text itself, not a selection.",
+      "reasoning": "Use Select or Combobox instead. Autocomplete allows free-form text input \u2014 the value is the text itself, not a selection.",
       "alternative": "Use Select or Combobox."
     },
     {
@@ -771,7 +1021,7 @@
     {
       "component": "Field",
       "scenario": "A standalone label without an input control",
-      "reasoning": "Use a plain <label> element. Field's value is in connecting label, control, and error — without a control it adds no benefit.",
+      "reasoning": "Use a plain <label> element. Field's value is in connecting label, control, and error \u2014 without a control it adds no benefit.",
       "alternative": "Plain <label> element"
     },
     {
@@ -1001,6 +1251,174 @@
       "scenario": "Form selection where the value is submitted as a form field",
       "reasoning": "Use Radio (single) or CheckboxGroup (multiple). ToggleGroup buttons don't participate in native form submission.",
       "alternative": "Radio or CheckboxGroup"
+    },
+    {
+      "component": "Toolbar",
+      "scenario": "A bar of dropdown menus (File, Edit, View)",
+      "reasoning": "Use Menubar — its keyboard model and menu popup integration are tuned for menu triggers, not action buttons.",
+      "alternative": "Menubar"
+    },
+    {
+      "component": "Toolbar",
+      "scenario": "Site-wide top navigation",
+      "reasoning": "Use NavigationMenu — toolbars are for in-app actions, not page-level navigation links.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "component": "Toolbar",
+      "scenario": "A standalone toggle button",
+      "reasoning": "If you need just one on/off button, the ToggleGroup wrapper is unnecessary overhead. Use Button with an aria-pressed pattern.",
+      "alternative": "Button"
+    },
+    {
+      "scenario": "User needs to enter a precise number",
+      "reasoning": "Sliders trade precision for visual position. For exact numeric input use Number Field.",
+      "alternative": "NumberField",
+      "component": "Slider"
+    },
+    {
+      "scenario": "Showing read-only progress or measurement",
+      "reasoning": "Slider is an input. For non-interactive value display use Progress (task progress) or Meter (scalar measurement).",
+      "alternative": "Progress or Meter",
+      "component": "Slider"
+    },
+    {
+      "scenario": "Choosing between a small set of discrete options",
+      "reasoning": "Sliders are for continuous ranges. For 2\u20137 discrete choices a Radio group or Toggle Group is clearer.",
+      "alternative": "Radio or ToggleGroup",
+      "component": "Slider"
+    },
+    {
+      "scenario": "On/off toggle",
+      "reasoning": "A two-state slider is unfamiliar. Use Switch for boolean toggles.",
+      "alternative": "Switch",
+      "component": "Slider"
+    },
+    {
+      "component": "ScrollArea",
+      "scenario": "The whole document or viewport scrolls",
+      "reasoning": "Use the browser's native scroll for full-page scrolling. ScrollArea is for a bounded region; using it on the document hijacks page scroll and breaks anchor links and accessibility heuristics.",
+      "alternative": "Native browser scroll (no component)"
+    },
+    {
+      "component": "ScrollArea",
+      "scenario": "Virtualized lists with thousands of items",
+      "reasoning": "ScrollArea wraps native scroll but doesn't virtualize. For very large lists, pair it with a virtualization library (TanStack Virtual, react-window) or skip it entirely — the custom scrollbar may interfere with item measurement.",
+      "alternative": "Virtualization library + native scroll"
+    },
+    {
+      "component": "ScrollArea",
+      "scenario": "Content that should grow with the page",
+      "reasoning": "ScrollArea is for fixed-size regions. If the container should expand to fit content, just use a regular div — no scrollbar is needed.",
+      "alternative": "Plain div"
+    },
+    {
+      "component": "Select",
+      "scenario": "Long lists where users need to search by typing arbitrary text",
+      "reasoning": "Select supports typeahead but assumes the list is browseable. Use Combobox to filter a long list as the user types.",
+      "alternative": "Combobox"
+    },
+    {
+      "component": "Select",
+      "scenario": "Multiple selections required",
+      "reasoning": "Select is a single-value primitive. Use Combobox with `multiple` for tag-style multi-select, or CheckboxGroup for an inline list.",
+      "alternative": "Combobox (multiple) or CheckboxGroup"
+    },
+    {
+      "component": "Select",
+      "scenario": "Free-form input with optional suggestions",
+      "reasoning": "Select forces a choice from a fixed list. Use Autocomplete when the user can submit any string.",
+      "alternative": "Autocomplete"
+    },
+    {
+      "component": "Select",
+      "scenario": "Two or three options that fit on one row",
+      "reasoning": "An inline RadioGroup or ToggleGroup is faster — no extra click, all options visible.",
+      "alternative": "Radio or ToggleGroup"
+    },
+    {
+      "component": "Separator",
+      "scenario": "Replacing a heading or section landmark",
+      "reasoning": "Separator is decoration, not structure. Use a heading or landmark for semantic grouping.",
+      "alternative": "h2, h3, or <section> with aria-labelledby"
+    },
+    {
+      "component": "Separator",
+      "scenario": "As a card or panel border",
+      "reasoning": "Containers should own their borders. Adding a Separator inside duplicates the visual.",
+      "alternative": "borderColor on the container"
+    },
+    {
+      "component": "Separator",
+      "scenario": "Inside a Menu or Toolbar",
+      "reasoning": "Those components ship their own Separator part wired to their roving focus and ARIA model.",
+      "alternative": "Menu.Separator or Toolbar.Separator"
+    },
+    {
+      "component": "Tabs",
+      "scenario": "Sequential steps that must be completed in order",
+      "reasoning": "Tabs imply free navigation between siblings. For ordered flows, use a stepper or wizard pattern.",
+      "alternative": "Custom stepper"
+    },
+    {
+      "component": "Tabs",
+      "scenario": "Site-wide navigation between pages",
+      "reasoning": "Tabs are for content within a single view. Use NavigationMenu for top-level site nav.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "component": "Tabs",
+      "scenario": "Many sections (more than ~7) or long labels that wrap",
+      "reasoning": "Tab lists work best with a small number of short labels. Use Accordion or a sidebar nav for larger sets.",
+      "alternative": "Accordion"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "Settings change that takes effect immediately (e.g., dark mode)",
+      "reasoning": "Switch is the conventional control for an immediate on/off setting and is more easily recognized as a toggle by users.",
+      "alternative": "Switch"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "Selecting one of several options",
+      "reasoning": "Use ToggleGroup, RadioGroup, or Tabs — Toggle alone has no concept of mutual exclusion.",
+      "alternative": "ToggleGroup, RadioGroup, or Tabs"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "Triggering a one-off action",
+      "reasoning": "Toggle represents persistent state. Use Button for actions that fire and don't stay on.",
+      "alternative": "Button"
+    },
+    {
+      "component": "Toggle",
+      "scenario": "A boolean that submits with a form",
+      "reasoning": "Use Checkbox — it integrates with form submission and is the conventional control for boolean form fields.",
+      "alternative": "Checkbox"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Interactive content (buttons, links, forms inside the popup)",
+      "reasoning": "Tooltip is non-interactive and will close on blur. Use Popover for floating panels that contain interactive content.",
+      "alternative": "Popover"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Critical information that users must read",
+      "reasoning": "Tooltips are hidden by default and inaccessible on touch without focus. Use inline text, Field description, or Alert for must-see content.",
+      "alternative": "Field.Description or inline text"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Rich previews of linked content",
+      "reasoning": "PreviewCard is the right pattern for hover previews of pages, profiles, or media.",
+      "alternative": "PreviewCard"
+    },
+    {
+      "component": "Tooltip",
+      "scenario": "Disabled triggers that need a tooltip",
+      "reasoning": "Disabled buttons don't fire pointer events. Wrap the disabled control in a focusable span (tabIndex={0}, aria-disabled) and put Tooltip.Trigger on that wrapper.",
+      "alternative": "Wrap the disabled control in a focusable element"
     }
   ]
 }

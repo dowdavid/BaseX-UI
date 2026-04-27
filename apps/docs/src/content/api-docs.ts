@@ -22,7 +22,16 @@ import popover from '../../../../packages/components/src/popover/popover.md?raw'
 import previewCard from '../../../../packages/components/src/preview-card/preview-card.md?raw';
 import progress from '../../../../packages/components/src/progress/progress.md?raw';
 import radio from '../../../../packages/components/src/radio/radio.md?raw';
+import scrollArea from '../../../../packages/components/src/scroll-area/scroll-area.md?raw';
+import select from '../../../../packages/components/src/select/select.md?raw';
+import separator from '../../../../packages/components/src/separator/separator.md?raw';
+import slider from '../../../../packages/components/src/slider/slider.md?raw';
+import switchDoc from '../../../../packages/components/src/switch/switch.md?raw';
+import tabs from '../../../../packages/components/src/tabs/tabs.md?raw';
+import toggle from '../../../../packages/components/src/toggle/toggle.md?raw';
 import toggleGroup from '../../../../packages/components/src/toggle-group/toggle-group.md?raw';
+import toolbar from '../../../../packages/components/src/toolbar/toolbar.md?raw';
+import tooltip from '../../../../packages/components/src/tooltip/tooltip.md?raw';
 
 export const apiDocs: Record<string, string> = {
   accordion,
@@ -49,5 +58,14 @@ export const apiDocs: Record<string, string> = {
   'preview-card': previewCard,
   progress,
   radio,
+  'scroll-area': scrollArea,
+  select,
+  separator,
+  slider,
+  switch: switchDoc,
+  tabs,
+  toggle,
   'toggle-group': toggleGroup,
+  toolbar,
+  tooltip,
 };

@@ -121,9 +121,45 @@
       "types": "./dist/radio/index.d.ts",
       "import": "./dist/radio/index.js"
     },
+    "./scroll-area": {
+      "types": "./dist/scroll-area/index.d.ts",
+      "import": "./dist/scroll-area/index.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "import": "./dist/select/index.js"
+    },
+    "./separator": {
+      "types": "./dist/separator/index.d.ts",
+      "import": "./dist/separator/index.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "import": "./dist/switch/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.js"
+    },
+    "./toggle": {
+      "types": "./dist/toggle/index.d.ts",
+      "import": "./dist/toggle/index.js"
+    },
     "./toggle-group": {
       "types": "./dist/toggle-group/index.d.ts",
       "import": "./dist/toggle-group/index.js"
+    },
+    "./toolbar": {
+      "types": "./dist/toolbar/index.d.ts",
+      "import": "./dist/toolbar/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js"
     }
   },
   "files": [
@@ -151,7 +187,9 @@
     "@stylexjs/babel-plugin": "^0.17.5",
     "@stylexjs/stylex": "^0.17.5",
     "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.7.0"
   }

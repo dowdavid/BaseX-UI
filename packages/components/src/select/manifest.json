@@ -1,0 +1,419 @@
+{
+  "name": "Select",
+  "description": "A native-feeling single-value dropdown. User clicks the trigger, picks one option from a list. Keyboard typeahead, listbox ARIA, alignItemWithTrigger positioning. Built on Base UI Select with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/select",
+
+  "anatomy": "<Select.Root>\n  <Select.Trigger>\n    <Select.Value placeholder=\"Select...\" />\n    <Select.Icon />\n  </Select.Trigger>\n  <Select.Portal>\n    <Select.Positioner>\n      <Select.ScrollUpButton />\n      <Select.Popup>\n        <Select.Viewport>\n          <Select.Item value=\"a\">\n            <Select.ItemIndicator />\n            <Select.ItemText>Option A</Select.ItemText>\n          </Select.Item>\n        </Select.Viewport>\n      </Select.Popup>\n      <Select.ScrollDownButton />\n    </Select.Positioner>\n  </Select.Portal>\n</Select.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "State container. Manages open state, value, keyboard navigation, and typeahead. Renders no DOM element.",
+      "props": {
+        "value": {
+          "type": "Value | null",
+          "description": "Controlled selected value."
+        },
+        "defaultValue": {
+          "type": "Value | null",
+          "description": "Initial selected value for uncontrolled mode."
+        },
+        "onValueChange": {
+          "type": "(value: Value | null, details: ChangeEventDetails) => void",
+          "description": "Callback fired when the selected value changes."
+        },
+        "open": {
+          "type": "boolean",
+          "description": "Controlled popup visibility."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initial popup state."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, details: ChangeEventDetails) => void",
+          "description": "Callback fired when the popup opens or closes."
+        },
+        "modal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether opening locks document scroll and disables outside pointer interaction."
+        },
+        "name": {
+          "type": "string",
+          "description": "Form field name. Renders a hidden input for native form submission."
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether a value must be chosen before form submission."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable all interactions."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Prevent the user from changing the selected value."
+        },
+        "items": {
+          "type": "Record<string, ReactNode> | { label, value }[]",
+          "description": "Optional item map. When supplied, Select.Value renders the matching label automatically."
+        },
+        "itemToStringLabel": {
+          "type": "(value: Value) => string",
+          "description": "Convert object values to a display string for the trigger."
+        },
+        "itemToStringValue": {
+          "type": "(value: Value) => string",
+          "description": "Convert object values to a string for form submission."
+        },
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Size of the trigger and dropdown items. Aligns with Combobox sizes (sm=32px, md=36px, lg=40px)."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "Button that opens the popup. Displays the selected value (or placeholder) plus an icon.",
+      "props": {
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable the trigger."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the popup is open.",
+        "data-disabled": "Present when the trigger is disabled.",
+        "data-readonly": "Present when readonly.",
+        "data-placeholder": "Present when no value is selected."
+      }
+    },
+    "Value": {
+      "element": "span",
+      "description": "Renders the label of the selected item (or the placeholder when empty). Accepts a children render fn for custom formatting.",
+      "props": {
+        "placeholder": {
+          "type": "ReactNode",
+          "description": "Shown when no value is selected."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Icon": {
+      "element": "span",
+      "description": "Decorative caret icon. Defaults to a Lucide ChevronDown sized to the current Select size.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the popup is open."
+      }
+    },
+    "Portal": {
+      "element": null,
+      "description": "Portals the popup into the body. Required wrapper around Positioner.",
+      "props": {},
+      "dataAttributes": {}
+    },
+    "Positioner": {
+      "element": "div",
+      "description": "Anchors and positions the popup relative to the trigger. Forwards Base UI's positioning props (side, align, alignItemWithTrigger, sideOffset).",
+      "props": {
+        "alignItemWithTrigger": {
+          "type": "boolean",
+          "default": true,
+          "description": "Overlap the trigger so the selected item's text aligns with the trigger's value text. Mouse input only."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-side": "Resolved side (top/bottom/left/right).",
+        "data-align": "Resolved alignment."
+      },
+      "cssVariables": {
+        "--anchor-width": "Width of the trigger.",
+        "--anchor-height": "Height of the trigger.",
+        "--available-height": "Available height for the popup.",
+        "--available-width": "Available width for the popup.",
+        "--transform-origin": "Computed transform origin for animations."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "The dropdown surface. Holds the Viewport (and optional scroll buttons).",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the popup is open.",
+        "data-closed": "Present when the popup is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation.",
+        "data-side": "Actual positioned side."
+      }
+    },
+    "Viewport": {
+      "element": "div",
+      "description": "Scrollable list region inside the popup. Wraps items, groups, and separators. Aliased to Base UI's Select.List.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Item": {
+      "element": "div",
+      "description": "A selectable option. Pass `value` to identify it; pass `label` to override the typeahead match string.",
+      "props": {
+        "value": {
+          "type": "any",
+          "required": true,
+          "description": "The item value used for selection."
+        },
+        "label": {
+          "type": "string",
+          "description": "Typeahead label. Defaults to the item's text content."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable this item."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-highlighted": "Present when the item is keyboard/pointer focused.",
+        "data-selected": "Present when the item is selected.",
+        "data-disabled": "Present when the item is disabled."
+      }
+    },
+    "ItemText": {
+      "element": "div",
+      "description": "Text label for an item. Used by Select.Value to render the trigger's label.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "ItemIndicator": {
+      "element": "span",
+      "description": "Checkmark shown when the item is selected. Always mounted (visibility hidden when not selected) to reserve indent space.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-selected": "Present when the parent item is selected."
+      }
+    },
+    "Group": {
+      "element": "div",
+      "description": "Groups related items under a label. Pair with Select.GroupLabel.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "GroupLabel": {
+      "element": "div",
+      "description": "Heading for a group of items. Uppercased, muted, wide-tracked.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Separator": {
+      "element": "div",
+      "description": "Visual divider between groups or items.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "ScrollUpButton": {
+      "element": "div",
+      "description": "Hover region at the top of the popup that scrolls the viewport up. Hidden on touch.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "ScrollDownButton": {
+      "element": "div",
+      "description": "Hover region at the bottom of the popup that scrolls the viewport down. Hidden on touch.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Popup fade and slide animation requires global CSS rules inside @layer priority1.",
+    "css": "@layer priority1 {\n  .basex-select-popup {\n    opacity: 1;\n    transform: translateY(0);\n    transition: opacity 150ms ease-out, transform 150ms ease-out;\n  }\n  .basex-select-popup[data-starting-style],\n  .basex-select-popup[data-ending-style] {\n    opacity: 0;\n    transform: translateY(-4px);\n  }\n  @media (prefers-reduced-motion: reduce) {\n    .basex-select-popup,\n    .basex-select-popup[data-starting-style],\n    .basex-select-popup[data-ending-style] {\n      transition: none;\n      transform: none;\n    }\n  }\n}"
+  },
+
+  "tokens": [
+    "colorBorder",
+    "colorBorderMuted",
+    "colorSurface",
+    "colorText",
+    "colorTextMuted",
+    "colorTextPlaceholder",
+    "colorMuted",
+    "colorIcon",
+    "colorPrimary",
+    "fontFamilySans",
+    "fontSizeXs",
+    "fontSizeSm",
+    "fontSizeMd",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "letterSpacingWide",
+    "radiusMd",
+    "radiusSm",
+    "shadowMd",
+    "borderWidthDefault",
+    "space1",
+    "space1h",
+    "space2",
+    "space2h",
+    "space3",
+    "space3h",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "single-value-select",
+      "signals": [
+        "select",
+        "dropdown",
+        "single select",
+        "pick one",
+        "choose one",
+        "select option",
+        "form select"
+      ],
+      "reasoning": "Select is the primary single-value dropdown for short-to-medium predefined option lists, with native keyboard typeahead and listbox ARIA. Use over Combobox when filter input adds friction.",
+      "composition": "<Select.Root defaultValue=\"a\">\n  <Select.Trigger>\n    <Select.Value placeholder=\"Choose...\" />\n    <Select.Icon />\n  </Select.Trigger>\n  <Select.Portal>\n    <Select.Positioner>\n      <Select.Popup>\n        <Select.Viewport>\n          <Select.Item value=\"a\">\n            <Select.ItemIndicator />\n            <Select.ItemText>Option A</Select.ItemText>\n          </Select.Item>\n        </Select.Viewport>\n      </Select.Popup>\n    </Select.Positioner>\n  </Select.Portal>\n</Select.Root>"
+    },
+    {
+      "intent": "form-select-field",
+      "signals": [
+        "select form field",
+        "select with label",
+        "form dropdown",
+        "labelled select",
+        "select inside field"
+      ],
+      "reasoning": "Compose Select inside Field for label, description, and error wiring. Use the `name` prop on Select.Root to submit the value with the form.",
+      "composition": "<Field.Root name=\"role\">\n  <Field.Label>Role</Field.Label>\n  <Select.Root name=\"role\">\n    <Select.Trigger>\n      <Select.Value placeholder=\"Pick a role\" />\n      <Select.Icon />\n    </Select.Trigger>\n    <Select.Portal>\n      <Select.Positioner>\n        <Select.Popup>\n          <Select.Viewport>\n            <Select.Item value=\"admin\"><Select.ItemIndicator /><Select.ItemText>Admin</Select.ItemText></Select.Item>\n          </Select.Viewport>\n        </Select.Popup>\n      </Select.Positioner>\n    </Select.Portal>\n  </Select.Root>\n</Field.Root>"
+    },
+    {
+      "intent": "grouped-options",
+      "signals": [
+        "grouped select",
+        "select with sections",
+        "categorized dropdown",
+        "select group label",
+        "select with separators"
+      ],
+      "reasoning": "Use Select.Group + Select.GroupLabel + Select.Separator for visually-organized option sets without losing keyboard navigation.",
+      "composition": "<Select.Root>\n  <Select.Trigger><Select.Value placeholder=\"Pick fruit\" /><Select.Icon /></Select.Trigger>\n  <Select.Portal><Select.Positioner><Select.Popup><Select.Viewport>\n    <Select.Group>\n      <Select.GroupLabel>Citrus</Select.GroupLabel>\n      <Select.Item value=\"orange\"><Select.ItemIndicator /><Select.ItemText>Orange</Select.ItemText></Select.Item>\n    </Select.Group>\n    <Select.Separator />\n    <Select.Group>\n      <Select.GroupLabel>Berries</Select.GroupLabel>\n      <Select.Item value=\"strawberry\"><Select.ItemIndicator /><Select.ItemText>Strawberry</Select.ItemText></Select.Item>\n    </Select.Group>\n  </Select.Viewport></Select.Popup></Select.Positioner></Select.Portal>\n</Select.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Long lists where users need to search by typing arbitrary text",
+      "reasoning": "Select supports typeahead but assumes the list is browseable. Use Combobox to filter a long list as the user types.",
+      "alternative": "Combobox"
+    },
+    {
+      "scenario": "Multiple selections required",
+      "reasoning": "Select is a single-value primitive. Use Combobox with `multiple` for tag-style multi-select, or CheckboxGroup for an inline list.",
+      "alternative": "Combobox (multiple) or CheckboxGroup"
+    },
+    {
+      "scenario": "Free-form input with optional suggestions",
+      "reasoning": "Select forces a choice from a fixed list. Use Autocomplete when the user can submit any string.",
+      "alternative": "Autocomplete"
+    },
+    {
+      "scenario": "Two or three options that fit on one row",
+      "reasoning": "An inline RadioGroup or ToggleGroup is faster — no extra click, all options visible.",
+      "alternative": "Radio or ToggleGroup"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Single-value select with placeholder and chevron icon",
+      "code": "<Select.Root>\n  <Select.Trigger>\n    <Select.Value placeholder=\"Pick a fruit\" />\n    <Select.Icon />\n  </Select.Trigger>\n  <Select.Portal>\n    <Select.Positioner>\n      <Select.Popup>\n        <Select.Viewport>\n          <Select.Item value=\"apple\"><Select.ItemIndicator /><Select.ItemText>Apple</Select.ItemText></Select.Item>\n          <Select.Item value=\"banana\"><Select.ItemIndicator /><Select.ItemText>Banana</Select.ItemText></Select.Item>\n          <Select.Item value=\"cherry\"><Select.ItemIndicator /><Select.ItemText>Cherry</Select.ItemText></Select.Item>\n        </Select.Viewport>\n      </Select.Popup>\n    </Select.Positioner>\n  </Select.Portal>\n</Select.Root>"
+    },
+    {
+      "name": "controlled",
+      "description": "Controlled value via state",
+      "code": "const [value, setValue] = useState<string | null>('apple');\n\n<Select.Root value={value} onValueChange={setValue}>\n  <Select.Trigger><Select.Value placeholder=\"Pick a fruit\" /><Select.Icon /></Select.Trigger>\n  <Select.Portal><Select.Positioner><Select.Popup><Select.Viewport>\n    <Select.Item value=\"apple\"><Select.ItemIndicator /><Select.ItemText>Apple</Select.ItemText></Select.Item>\n    <Select.Item value=\"banana\"><Select.ItemIndicator /><Select.ItemText>Banana</Select.ItemText></Select.Item>\n  </Select.Viewport></Select.Popup></Select.Positioner></Select.Portal>\n</Select.Root>"
+    },
+    {
+      "name": "grouped",
+      "description": "Grouped items with separators",
+      "code": "<Select.Root>\n  <Select.Trigger><Select.Value placeholder=\"Pick produce\" /><Select.Icon /></Select.Trigger>\n  <Select.Portal><Select.Positioner><Select.Popup><Select.Viewport>\n    <Select.Group>\n      <Select.GroupLabel>Fruit</Select.GroupLabel>\n      <Select.Item value=\"apple\"><Select.ItemIndicator /><Select.ItemText>Apple</Select.ItemText></Select.Item>\n    </Select.Group>\n    <Select.Separator />\n    <Select.Group>\n      <Select.GroupLabel>Vegetable</Select.GroupLabel>\n      <Select.Item value=\"carrot\"><Select.ItemIndicator /><Select.ItemText>Carrot</Select.ItemText></Select.Item>\n    </Select.Group>\n  </Select.Viewport></Select.Popup></Select.Positioner></Select.Portal>\n</Select.Root>"
+    }
+  ]
+}

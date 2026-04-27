@@ -77,7 +77,10 @@ const styles = stylex.create({
     color: tokens.colorIcon,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     borderWidth: 0,
     borderRadius: tokens.radiusSm,
@@ -162,7 +165,7 @@ const styles = stylex.create({
   // --- Item size axis ---
   itemSizeSm: {
     paddingBlock: tokens.space1,
-    paddingInline: tokens.space1h,
+    paddingInline: tokens.space2,
     fontSize: tokens.fontSizeXs,
     borderRadius: tokens.radiusSm,
   },
@@ -211,28 +214,40 @@ const styles = stylex.create({
     fontSize: tokens.fontSizeMd,
   },
 
+  group: {
+    display: 'flex',
+    flexDirection: 'column',
+    // Indent grouped items so they sit visually inside the group label.
+    paddingInlineStart: tokens.space2,
+  },
+
   groupLabel: {
     fontFamily: tokens.fontFamilySans,
     fontWeight: tokens.fontWeightMedium,
     color: tokens.colorTextMuted,
     textTransform: 'uppercase',
     letterSpacing: tokens.letterSpacingWide,
+    // Pull the label back so it aligns with the group's outer edge while items remain indented.
+    marginInlineStart: `calc(-1 * ${tokens.space2})`,
   },
 
   // --- GroupLabel size axis ---
   groupLabelSizeSm: {
     paddingBlock: tokens.space1,
-    paddingInline: tokens.space1h,
+    paddingInlineStart: tokens.space1h,
+    paddingInlineEnd: tokens.space1h,
     fontSize: tokens.fontSizeXs,
   },
   groupLabelSizeMd: {
     paddingBlock: tokens.space1h,
-    paddingInline: tokens.space2,
+    paddingInlineStart: tokens.space2,
+    paddingInlineEnd: tokens.space2,
     fontSize: tokens.fontSizeXs,
   },
   groupLabelSizeLg: {
     paddingBlock: tokens.space2,
-    paddingInline: tokens.space2h,
+    paddingInlineStart: tokens.space2h,
+    paddingInlineEnd: tokens.space2h,
     fontSize: tokens.fontSizeXs,
   },
 
@@ -431,7 +446,7 @@ const Group = forwardRef<HTMLDivElement, AutocompleteGroupProps>(({ sx, ...props
   <BaseAutocomplete.Group
     ref={ref}
     {...props}
-    className={sx ? (stylex.props(sx).className ?? '') : undefined}
+    className={stylex.props(styles.group, sx).className ?? ''}
   />
 ));
 Group.displayName = 'Autocomplete.Group';

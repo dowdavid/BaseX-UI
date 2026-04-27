@@ -24,6 +24,9 @@ export const lightTheme = stylex.createTheme(tokens, {
   colorDestructiveContrast: 'oklch(0.98 0 0)',
   colorDestructiveMuted: 'oklch(0.55 0.22 25 / 0.1)',
 
+  colorSuccess: 'oklch(0.65 0.17 145)',
+  colorSuccessContrast: 'oklch(0.98 0 0)',
+
   colorMuted: 'oklch(0.93 0.005 260)',
   colorMutedForeground: 'oklch(0.45 0.02 260)',
 
@@ -130,6 +133,10 @@ export const darkTheme = stylex.createTheme(tokens, {
   colorDestructiveActive: 'oklch(0.60 0.18 25)',
   colorDestructiveContrast: 'oklch(0.15 0 0)',
   colorDestructiveMuted: 'oklch(0.65 0.20 25 / 0.15)',
+
+  // Success — slightly brighter on dark backgrounds
+  colorSuccess: 'oklch(0.72 0.18 145)',
+  colorSuccessContrast: 'oklch(0.15 0 0)',
 
   // Muted
   colorMuted: 'oklch(0.25 0.01 260)',
