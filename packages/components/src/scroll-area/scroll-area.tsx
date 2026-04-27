@@ -40,28 +40,34 @@ const styles = stylex.create({
     touchAction: 'none',
     userSelect: 'none',
     padding: '2px',
-    backgroundColor: 'transparent',
-    // Fade & sizing are animated in global CSS.
+    // Track always visible so the user can see total scroll length and
+    // current position at a glance. Theme-aware via tokens.
+    backgroundColor: tokens.colorBorderMuted,
+    // Thumb-fade animated in global CSS via [data-hovering]/[data-scrolling].
   },
 
   scrollbarVertical: {
-    width: '10px',
+    width: '12px',
     height: '100%',
     flexDirection: 'column',
   },
 
   scrollbarHorizontal: {
-    height: '10px',
+    height: '12px',
     width: '100%',
     flexDirection: 'row',
   },
 
   thumb: {
     flex: 1,
+    // Idle thumb: one shade darker than the track (colorBorderMuted) for
+    // clear contrast. Hover: brighter (colorIcon) to confirm interactivity.
     backgroundColor: tokens.colorBorder,
     borderRadius: tokens.radiusSm,
     position: 'relative',
-    // Min hit-target via ::before on long content (matches Radix pattern)
+    transitionProperty: 'background-color',
+    transitionDuration: tokens.motionDurationFast,
+    transitionTimingFunction: tokens.motionEaseOut,
     ':hover': {
       backgroundColor: tokens.colorIcon,
     },
