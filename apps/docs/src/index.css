@@ -347,6 +347,30 @@
     transform: scale(0.95);
   }
 
+  /* Tooltip popup scale/fade animation — Enter: 150ms ease-out (matches Popover) */
+  .basex-tooltip-popup {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
+  }
+  .basex-tooltip-popup[data-starting-style],
+  .basex-tooltip-popup[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .basex-tooltip-popup {
+      transition: none;
+    }
+    .basex-tooltip-popup[data-starting-style],
+    .basex-tooltip-popup[data-ending-style] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   /* PreviewCard popup fade/slide animation — Enter: 200ms ease-out */
   .basex-preview-card-popup {
     opacity: 1;

@@ -32,6 +32,7 @@ export default defineConfig({
     'src/slider/index.ts',
     'src/tabs/index.ts',
     'src/toggle/index.ts',
+    'src/tooltip/index.ts',
   ],
   format: ['esm'],
   dts: true,

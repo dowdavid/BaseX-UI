@@ -261,3 +261,14 @@ export type {
 
 export { Toggle } from './toggle';
 export type { ToggleRootProps, ToggleVariant, ToggleSize } from './toggle';
+
+export { Tooltip } from './tooltip';
+export type {
+  TooltipProviderProps,
+  TooltipRootProps,
+  TooltipTriggerProps,
+  TooltipPortalProps,
+  TooltipPositionerProps,
+  TooltipPopupProps,
+  TooltipArrowProps,
+} from './tooltip';
