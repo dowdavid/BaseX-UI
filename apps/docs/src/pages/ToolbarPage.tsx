@@ -4,14 +4,61 @@ import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { Preview } from '../components/Preview';
 
+// Width is locked on transient buttons so the label changing
+// (e.g. "Save" → "Saving…" → "Saved ✓") doesn't reflow neighbors.
+// 96px fits the longest label across Save/Publish/Delete cycles
+// at the toolbar's current type scale; eyeballed, not a token.
+const TRANSIENT_MIN_WIDTH = '96px';
+
 const styles = stylex.create({
+  transientAction: {
+    minWidth: TRANSIENT_MIN_WIDTH,
+  },
   saveSuccess: {
+    minWidth: TRANSIENT_MIN_WIDTH,
     backgroundColor: tokens.colorSuccess,
     color: tokens.colorSuccessContrast,
   },
+  // Mirrors the toolbar's "active tab" pressed treatment — neutral, not green/red.
+  publishDone: {
+    minWidth: TRANSIENT_MIN_WIDTH,
+    backgroundColor: tokens.colorText,
+    color: tokens.colorTextInverse,
+  },
+  deleteDone: {
+    minWidth: TRANSIENT_MIN_WIDTH,
+    backgroundColor: tokens.colorDestructive,
+    color: tokens.colorDestructiveContrast,
+  },
 });
 
-type SaveState = 'idle' | 'saving' | 'saved';
+type TransientState = 'idle' | 'progressing' | 'done';
+
+/**
+ * Drives the idle → progressing → done → idle cycle for the Save / Publish /
+ * Delete demo buttons. Kept local to this docs page on purpose — these states
+ * are demo affordances, not a shared component primitive.
+ */
+function useTransientAction(
+  idleLabel: string,
+  progressingLabel: string,
+  doneLabel: string,
+  progressingMs = 700,
+  doneMs = 1500,
+) {
+  const [state, setState] = useState<TransientState>('idle');
+  const onClick = () => {
+    if (state !== 'idle') return;
+    setState('progressing');
+    setTimeout(() => {
+      setState('done');
+      setTimeout(() => setState('idle'), doneMs);
+    }, progressingMs);
+  };
+  const label =
+    state === 'progressing' ? progressingLabel : state === 'done' ? doneLabel : idleLabel;
+  return { state, label, onClick, isDone: state === 'done' };
+}
 
 export function ToolbarPage() {
   // Controlled multi-select formatting state — drives the pressed visual on
@@ -22,17 +69,9 @@ export function ToolbarPage() {
   // visual on the toggle items.
   const [alignment, setAlignment] = useState<string[]>(['left']);
 
-  // Save button progress: idle -> saving -> saved -> idle.
-  const [saveState, setSaveState] = useState<SaveState>('idle');
-  const handleSave = () => {
-    if (saveState !== 'idle') return;
-    setSaveState('saving');
-    setTimeout(() => {
-      setSaveState('saved');
-      setTimeout(() => setSaveState('idle'), 1500);
-    }, 700);
-  };
-  const saveLabel = saveState === 'saving' ? 'Saving…' : saveState === 'saved' ? 'Saved ✓' : 'Save';
+  const save = useTransientAction('Save', 'Saving…', 'Saved ✓');
+  const publish = useTransientAction('Publish', 'Publishing…', 'Published ✓');
+  const del = useTransientAction('Delete', 'Deleting…', 'Deleted ✓');
 
   return (
     <>
@@ -43,14 +82,22 @@ export function ToolbarPage() {
   <Toolbar.Button>Save</Toolbar.Button>
   <Toolbar.Button>Undo</Toolbar.Button>
   <Toolbar.Separator />
-  <Toolbar.Button>Publish</Toolbar.Button>
+  <Toolbar.Button onClick={handlePublish} disabled={publish.state !== 'idle'}>
+    {publish.label}
+  </Toolbar.Button>
 </Toolbar.Root>`}
       >
         <Toolbar.Root>
           <Toolbar.Button>Save</Toolbar.Button>
           <Toolbar.Button>Undo</Toolbar.Button>
           <Toolbar.Separator />
-          <Toolbar.Button>Publish</Toolbar.Button>
+          <Toolbar.Button
+            onClick={publish.onClick}
+            disabled={publish.state !== 'idle'}
+            sx={publish.isDone ? styles.publishDone : styles.transientAction}
+          >
+            {publish.label}
+          </Toolbar.Button>
         </Toolbar.Root>
       </Preview>
 
@@ -84,8 +131,8 @@ export function ToolbarPage() {
     <Toolbar.ToggleItem value="right">Right</Toolbar.ToggleItem>
   </Toolbar.ToggleGroup>
   <Toolbar.Separator />
-  <Toolbar.Button onClick={handleSave} disabled={saveState !== 'idle'}>
-    {saveLabel}
+  <Toolbar.Button onClick={handleSave} disabled={save.state !== 'idle'}>
+    {save.label}
   </Toolbar.Button>
   <Toolbar.Separator />
   <Toolbar.Link href="https://github.com/dowdavid/BaseX-UI" target="_blank" rel="noreferrer">
@@ -101,11 +148,11 @@ export function ToolbarPage() {
           </Toolbar.ToggleGroup>
           <Toolbar.Separator />
           <Toolbar.Button
-            onClick={handleSave}
-            disabled={saveState !== 'idle'}
-            sx={saveState === 'saved' ? styles.saveSuccess : undefined}
+            onClick={save.onClick}
+            disabled={save.state !== 'idle'}
+            sx={save.isDone ? styles.saveSuccess : styles.transientAction}
           >
-            {saveLabel}
+            {save.label}
           </Toolbar.Button>
           <Toolbar.Separator />
           <Toolbar.Link
@@ -125,14 +172,22 @@ export function ToolbarPage() {
   <Toolbar.Button>Select</Toolbar.Button>
   <Toolbar.Button>Move</Toolbar.Button>
   <Toolbar.Separator />
-  <Toolbar.Button>Delete</Toolbar.Button>
+  <Toolbar.Button onClick={handleDelete} disabled={del.state !== 'idle'}>
+    {del.label}
+  </Toolbar.Button>
 </Toolbar.Root>`}
       >
         <Toolbar.Root orientation="vertical">
           <Toolbar.Button>Select</Toolbar.Button>
           <Toolbar.Button>Move</Toolbar.Button>
           <Toolbar.Separator />
-          <Toolbar.Button>Delete</Toolbar.Button>
+          <Toolbar.Button
+            onClick={del.onClick}
+            disabled={del.state !== 'idle'}
+            sx={del.isDone ? styles.deleteDone : styles.transientAction}
+          >
+            {del.label}
+          </Toolbar.Button>
         </Toolbar.Root>
       </Preview>
     </>
