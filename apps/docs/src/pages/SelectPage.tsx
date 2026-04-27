@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { Select, Field, Form, Button } from '@basex-ui/components';
@@ -77,47 +76,7 @@ const pageStyles = stylex.create({
     gap: tokens.space2,
     justifyContent: 'flex-end',
   },
-  controlled: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: tokens.space2,
-    width: '100%',
-  },
-  controlledLabel: {
-    fontFamily: tokens.fontFamilyMono,
-    fontSize: tokens.fontSizeSm,
-    color: tokens.colorTextMuted,
-  },
 });
-
-function ControlledExample() {
-  const [value, setValue] = useState<string | null>('Banana');
-  return (
-    <div {...stylex.props(pageStyles.controlled)}>
-      <Select.Root value={value} onValueChange={setValue}>
-        <Select.Trigger>
-          <Select.Value placeholder="Pick a fruit" />
-          <Select.Icon />
-        </Select.Trigger>
-        <Select.Portal>
-          <Select.Positioner>
-            <Select.Popup>
-              <Select.Viewport>
-                {fruits.map((f) => (
-                  <Select.Item key={f} value={f}>
-                    <Select.ItemIndicator />
-                    <Select.ItemText>{f}</Select.ItemText>
-                  </Select.Item>
-                ))}
-              </Select.Viewport>
-            </Select.Popup>
-          </Select.Positioner>
-        </Select.Portal>
-      </Select.Root>
-      <span {...stylex.props(pageStyles.controlledLabel)}>Current value: {value ?? '(none)'}</span>
-    </div>
-  );
-}
 
 export function SelectPage() {
   return (
@@ -167,19 +126,6 @@ export function SelectPage() {
             </Select.Positioner>
           </Select.Portal>
         </Select.Root>
-      </Preview>
-
-      <Preview
-        title="Controlled"
-        description="Drive the value from React state via `value` and `onValueChange`."
-        constrained
-        code={`const [value, setValue] = useState<string | null>('Banana');
-
-<Select.Root value={value} onValueChange={setValue}>
-  ...
-</Select.Root>`}
-      >
-        <ControlledExample />
       </Preview>
 
       <Preview
