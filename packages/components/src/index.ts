@@ -230,6 +230,27 @@ export type {
   ScrollAreaCornerProps,
 } from './scroll-area';
 
+export { Select } from './select';
+export type {
+  SelectSize,
+  SelectRootProps,
+  SelectTriggerProps,
+  SelectValueProps,
+  SelectIconProps,
+  SelectPortalProps,
+  SelectPositionerProps,
+  SelectPopupProps,
+  SelectViewportProps,
+  SelectItemProps,
+  SelectItemTextProps,
+  SelectItemIndicatorProps,
+  SelectGroupProps,
+  SelectGroupLabelProps,
+  SelectSeparatorProps,
+  SelectScrollUpButtonProps,
+  SelectScrollDownButtonProps,
+} from './select';
+
 export { Separator } from './separator';
 export type { SeparatorRootProps } from './separator';
 

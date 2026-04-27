@@ -25,6 +25,7 @@ import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
 import { ScrollAreaPage } from './pages/ScrollAreaPage';
+import { SelectPage } from './pages/SelectPage';
 import { SeparatorPage } from './pages/SeparatorPage';
 import { SliderPage } from './pages/SliderPage';
 import { SwitchPage } from './pages/SwitchPage';
@@ -277,6 +278,14 @@ export const pages: PageEntry[] = [
     path: '/components/scroll-area',
     section: 'components',
     component: ScrollAreaPage,
+  },
+  {
+    id: 'select',
+    label: 'Select',
+    description: 'A native-feeling single-value dropdown with keyboard typeahead.',
+    path: '/components/select',
+    section: 'components',
+    component: SelectPage,
   },
   {
     id: 'separator',
