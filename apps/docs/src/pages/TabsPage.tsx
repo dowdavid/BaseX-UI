@@ -4,6 +4,8 @@ import { tokens } from '@basex-ui/tokens';
 import { Field, Input, Tabs } from '@basex-ui/components';
 import { Preview } from '../components/Preview';
 
+const MOBILE = '@media (max-width: 768px)' as const;
+
 const styles = stylex.create({
   panel: {
     paddingBlock: tokens.space3,
@@ -13,7 +15,7 @@ const styles = stylex.create({
     lineHeight: tokens.lineHeightNormal,
     // Lock the panel area so switching tabs with different content lengths
     // does not reflow the surrounding bounding box.
-    minWidth: '20rem',
+    minWidth: { default: '20rem', [MOBILE]: 0 },
     minHeight: '3rem',
   },
   formPanel: {
@@ -21,7 +23,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: tokens.space3,
-    minWidth: '20rem',
+    minWidth: { default: '20rem', [MOBILE]: 0 },
     minHeight: '8rem',
   },
 });

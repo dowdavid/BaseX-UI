@@ -35,6 +35,8 @@ export default defineConfig({
     'src/tabs/index.ts',
     'src/toast/index.ts',
     'src/toggle/index.ts',
+    'src/toggle-group/index.ts',
+    'src/toolbar/index.ts',
     'src/tooltip/index.ts',
   ],
   format: ['esm'],

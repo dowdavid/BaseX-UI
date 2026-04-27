@@ -1,0 +1,264 @@
+{
+  "name": "Toolbar",
+  "description": "A container for grouping action buttons, links, and toggle controls with shared keyboard navigation. Implements the WAI-ARIA toolbar pattern with roving tabindex. Built on Base UI Toolbar with StyleX styling.",
+  "category": "navigation",
+  "baseComponent": "@base-ui/react/toolbar",
+
+  "anatomy": "<Toolbar.Root>\n  <Toolbar.Button />\n  <Toolbar.Link />\n  <Toolbar.Separator />\n  <Toolbar.Group>\n    <Toolbar.Button />\n  </Toolbar.Group>\n  <Toolbar.ToggleGroup>\n    <Toolbar.ToggleItem />\n  </Toolbar.ToggleGroup>\n</Toolbar.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "The toolbar container. Renders role=\"toolbar\" with aria-orientation. Manages a roving tabindex across child items so only one item is in the tab order at a time; arrow keys move focus between items.",
+      "props": {
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "The orientation of the toolbar. Drives aria-orientation and the arrow-key axis (Left/Right for horizontal, Up/Down for vertical). RTL automatically inverts the horizontal axis."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the entire toolbar is disabled."
+        },
+        "loopFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether arrow-key navigation wraps from the last item back to the first."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "The orientation of the toolbar ('horizontal' or 'vertical').",
+        "data-disabled": "Present when the toolbar is disabled."
+      }
+    },
+    "Button": {
+      "element": "button",
+      "description": "A focusable action button registered with the toolbar's roving tabindex.",
+      "props": {
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the button is disabled."
+        },
+        "focusableWhenDisabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether a disabled button remains keyboard-focusable (recommended for toolbars per WAI-ARIA)."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the button is disabled."
+      }
+    },
+    "Link": {
+      "element": "a",
+      "description": "A focusable anchor registered with the toolbar's roving tabindex.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "The orientation of the parent toolbar."
+      }
+    },
+    "Group": {
+      "element": "div",
+      "description": "Visually groups related toolbar items. Renders role=\"group\".",
+      "props": {
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disables every item inside the group."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "The orientation of the parent toolbar.",
+        "data-disabled": "Present when the group is disabled."
+      }
+    },
+    "Separator": {
+      "element": "div",
+      "description": "An accessible separator between toolbar items. Renders role=\"separator\" with the correct orientation.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "The orientation of the separator (perpendicular to the toolbar)."
+      }
+    },
+    "ToggleGroup": {
+      "element": "div",
+      "description": "Groups a set of Toolbar.ToggleItem buttons sharing pressed state. Single- or multi-select.",
+      "props": {
+        "value": {
+          "type": "readonly string[]",
+          "description": "Controlled list of pressed item values."
+        },
+        "defaultValue": {
+          "type": "readonly string[]",
+          "description": "Uncontrolled initial pressed values."
+        },
+        "onValueChange": {
+          "type": "(value: string[], details) => void",
+          "description": "Fired when the pressed set changes."
+        },
+        "multiple": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true, multiple items can be pressed simultaneously."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disables every item in the group."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "The orientation of the toggle group.",
+        "data-multiple": "Present when multi-select is enabled.",
+        "data-disabled": "Present when the group is disabled."
+      }
+    },
+    "ToggleItem": {
+      "element": "button",
+      "description": "A two-state toggle button inside a Toolbar.ToggleGroup. Rendered through Toolbar.Button so it participates in the toolbar roving tabindex.",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Unique identifier used by the parent ToggleGroup to track pressed state."
+        },
+        "pressed": {
+          "type": "boolean",
+          "description": "Controlled pressed state."
+        },
+        "defaultPressed": {
+          "type": "boolean",
+          "default": false,
+          "description": "Uncontrolled initial pressed state."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the toggle is disabled."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-pressed": "Present when the toggle is pressed.",
+        "data-disabled": "Present when the toggle is disabled."
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorSurface",
+    "colorBorderMuted",
+    "colorMuted",
+    "colorText",
+    "colorTextMuted",
+    "space1",
+    "space1h",
+    "space2",
+    "space3",
+    "fontFamilySans",
+    "fontWeightMedium",
+    "fontSizeSm",
+    "lineHeightTight",
+    "radiusLg",
+    "radiusMd",
+    "borderWidthDefault",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "action-toolbar",
+      "signals": ["toolbar", "action bar", "command bar", "button bar", "icon bar"],
+      "reasoning": "Toolbar groups action buttons with WAI-ARIA roving tabindex, so a single Tab stop reaches the bar and arrow keys move between actions.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.Button>Save</Toolbar.Button>\n  <Toolbar.Button>Undo</Toolbar.Button>\n  <Toolbar.Button>Redo</Toolbar.Button>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "formatting-toolbar",
+      "signals": ["formatting", "rich text", "wysiwyg", "bold italic underline", "editor toolbar"],
+      "reasoning": "ToggleGroup with multiple=true supports independent pressed states for bold/italic/underline-style controls.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.ToggleGroup multiple defaultValue={[]}>\n    <Toolbar.ToggleItem value=\"bold\">B</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"italic\">I</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"underline\">U</Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "alignment-toolbar",
+      "signals": ["alignment", "align left right center", "single select toggle"],
+      "reasoning": "Single-select ToggleGroup (multiple=false) is ideal for mutually exclusive choices like text alignment.",
+      "composition": "<Toolbar.Root>\n  <Toolbar.ToggleGroup defaultValue={[\"left\"]}>\n    <Toolbar.ToggleItem value=\"left\">Left</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"center\">Center</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"right\">Right</Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n</Toolbar.Root>"
+    },
+    {
+      "intent": "vertical-toolbar",
+      "signals": ["vertical toolbar", "side rail", "side toolbar", "tool palette"],
+      "reasoning": "orientation=\"vertical\" lays the toolbar out as a column and remaps arrow keys to Up/Down for focus traversal.",
+      "composition": "<Toolbar.Root orientation=\"vertical\">\n  <Toolbar.Button>Select</Toolbar.Button>\n  <Toolbar.Button>Move</Toolbar.Button>\n  <Toolbar.Separator />\n  <Toolbar.Button>Delete</Toolbar.Button>\n</Toolbar.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "A bar of dropdown menus (File, Edit, View)",
+      "reasoning": "Use Menubar — its keyboard model and menu popup integration are tuned for menu triggers, not action buttons.",
+      "alternative": "Menubar"
+    },
+    {
+      "scenario": "Site-wide top navigation",
+      "reasoning": "Use NavigationMenu — toolbars are for in-app actions, not page-level navigation links.",
+      "alternative": "NavigationMenu"
+    },
+    {
+      "scenario": "A standalone toggle button",
+      "reasoning": "If you need just one on/off button, the ToggleGroup wrapper is unnecessary overhead. Use Button with an aria-pressed pattern.",
+      "alternative": "Button"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Action buttons with a separator",
+      "code": "<Toolbar.Root>\n  <Toolbar.Button>Save</Toolbar.Button>\n  <Toolbar.Button>Undo</Toolbar.Button>\n  <Toolbar.Separator />\n  <Toolbar.Button>Publish</Toolbar.Button>\n</Toolbar.Root>"
+    },
+    {
+      "name": "with-toggles",
+      "description": "Formatting toolbar with multi-select toggles",
+      "code": "<Toolbar.Root>\n  <Toolbar.ToggleGroup multiple defaultValue={[\"bold\"]}>\n    <Toolbar.ToggleItem value=\"bold\">B</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"italic\">I</Toolbar.ToggleItem>\n    <Toolbar.ToggleItem value=\"underline\">U</Toolbar.ToggleItem>\n  </Toolbar.ToggleGroup>\n  <Toolbar.Separator />\n  <Toolbar.Link href=\"#docs\">Docs</Toolbar.Link>\n</Toolbar.Root>"
+    },
+    {
+      "name": "vertical",
+      "description": "Vertical toolbar (tool palette)",
+      "code": "<Toolbar.Root orientation=\"vertical\">\n  <Toolbar.Button>Select</Toolbar.Button>\n  <Toolbar.Button>Move</Toolbar.Button>\n  <Toolbar.Separator />\n  <Toolbar.Button>Delete</Toolbar.Button>\n</Toolbar.Root>"
+    }
+  ]
+}

@@ -28,6 +28,10 @@ export const tokens = stylex.defineVars({
   colorDestructiveContrast: 'oklch(0.98 0 0)',
   colorDestructiveMuted: 'oklch(0.55 0.22 25 / 0.1)',
 
+  // Success palette
+  colorSuccess: 'oklch(0.65 0.17 145)',
+  colorSuccessContrast: 'oklch(0.98 0 0)',
+
   // Muted
   colorMuted: 'oklch(0.93 0.005 260)',
   colorMutedForeground: 'oklch(0.45 0.02 260)',
