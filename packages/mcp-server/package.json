@@ -1,6 +1,6 @@
 {
   "name": "@basex-ui/mcp-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "license": "MIT",
   "description": "MCP server for AI agent component discovery",
