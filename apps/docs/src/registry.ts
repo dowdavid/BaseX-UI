@@ -31,6 +31,7 @@ import { SliderPage } from './pages/SliderPage';
 import { SwitchPage } from './pages/SwitchPage';
 import { TabsPage } from './pages/TabsPage';
 import { TogglePage } from './pages/TogglePage';
+import { ToolbarPage } from './pages/ToolbarPage';
 import { TooltipPage } from './pages/TooltipPage';
 
 export interface PageEntry {
@@ -327,6 +328,15 @@ export const pages: PageEntry[] = [
     path: '/components/toggle',
     section: 'components',
     component: TogglePage,
+  },
+  {
+    id: 'toolbar',
+    label: 'Toolbar',
+    description:
+      'A container for action buttons, links, and toggles with WAI-ARIA roving tabindex.',
+    path: '/components/toolbar',
+    section: 'components',
+    component: ToolbarPage,
   },
   {
     id: 'tooltip',

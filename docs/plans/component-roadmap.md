@@ -42,13 +42,13 @@
 | 32  | Toast           | `Toast`          | —      |              |
 | 33  | Toggle          | `Toggle`         | Done   |              |
 | 34  | Toggle Group    | `ToggleGroup`    | —      |              |
-| 35  | Toolbar         | `Toolbar`        | —      |              |
+| 35  | Toolbar         | `Toolbar`        | Done   |              |
 | 36  | Tooltip         | `Tooltip`        | Done   |              |
 
 ## Progress
 
-- **Done**: 32 / 36
-- **Next**: Slider
+- **Done**: 33 / 36
+- **Next**: Toggle Group
 
 ## How to Use This File
 

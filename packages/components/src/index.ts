@@ -283,6 +283,17 @@ export type {
 export { Toggle } from './toggle';
 export type { ToggleRootProps, ToggleVariant, ToggleSize } from './toggle';
 
+export { Toolbar } from './toolbar';
+export type {
+  ToolbarRootProps,
+  ToolbarButtonProps,
+  ToolbarLinkProps,
+  ToolbarGroupProps,
+  ToolbarSeparatorProps,
+  ToolbarToggleGroupProps,
+  ToolbarToggleItemProps,
+} from './toolbar';
+
 export { Tooltip } from './tooltip';
 export type {
   TooltipProviderProps,

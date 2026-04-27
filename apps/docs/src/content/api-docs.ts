@@ -29,6 +29,7 @@ import slider from '../../../../packages/components/src/slider/slider.md?raw';
 import switchDoc from '../../../../packages/components/src/switch/switch.md?raw';
 import tabs from '../../../../packages/components/src/tabs/tabs.md?raw';
 import toggle from '../../../../packages/components/src/toggle/toggle.md?raw';
+import toolbar from '../../../../packages/components/src/toolbar/toolbar.md?raw';
 import tooltip from '../../../../packages/components/src/tooltip/tooltip.md?raw';
 
 export const apiDocs: Record<string, string> = {
@@ -63,5 +64,6 @@ export const apiDocs: Record<string, string> = {
   switch: switchDoc,
   tabs,
   toggle,
+  toolbar,
   tooltip,
 };
