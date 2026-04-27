@@ -9,9 +9,11 @@ import type { StyleXStyles } from '@stylexjs/stylex';
 // Track height (8px) and indicator color come from Progress/Meter conventions
 // so the visual language stays unified across feedback + input range components.
 // Thumb size (20px) overhangs the 8px track on each side so the handle reads
-// as a clearly grabbable button. Filled with colorPrimary + shadowMd to lift
-// it off the track (shadowSm was too subtle when foreground = orange indicator
-// background); the focus ring utility from @basex-ui/styles is reused for
+// as a clearly grabbable button. Filled with colorPrimary and defined by a
+// 1px inset edge in colorBorder (neutral grey) — this gives the thumb a crisp
+// outline against both the orange indicator AND the white page surface, where
+// shadowMd alone was too faint to register. shadowMd is layered underneath for
+// subtle elevation; the focus ring utility from @basex-ui/styles is reused for
 // keyboard focus parity.
 const styles = stylex.create({
   root: {
@@ -131,14 +133,14 @@ const styles = stylex.create({
     height: '20px',
     backgroundColor: tokens.colorPrimary,
     borderRadius: tokens.radiusSm,
-    boxShadow: tokens.shadowMd,
+    boxShadow: `inset 0 0 0 1px ${tokens.colorBorder}, ${tokens.shadowMd}`,
     cursor: 'grab',
     transitionProperty: 'box-shadow, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
     ':hover': {
       '@media (hover: hover) and (pointer: fine)': {
-        boxShadow: `${tokens.shadowMd}, 0 0 0 4px ${tokens.colorMuted}`,
+        boxShadow: `inset 0 0 0 1px ${tokens.colorBorder}, ${tokens.shadowMd}, 0 0 0 4px ${tokens.colorMuted}`,
       },
     },
     ':active': {
