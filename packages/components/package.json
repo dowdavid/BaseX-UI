@@ -5,17 +5,24 @@
   "license": "MIT",
   "description": "Accessible React components on Base UI + StyleX",
   "keywords": [
+    "ui",
+    "component-library",
     "react",
     "components",
     "base-ui",
     "stylex",
     "accessible",
+    "typescript",
     "basex-ui"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/daviddow/BaseX-UI.git",
+    "url": "https://github.com/dowdavid/BaseX-UI.git",
     "directory": "packages/components"
+  },
+  "homepage": "https://github.com/dowdavid/BaseX-UI#readme",
+  "bugs": {
+    "url": "https://github.com/dowdavid/BaseX-UI/issues"
   },
   "sideEffects": false,
   "main": "./dist/index.js",

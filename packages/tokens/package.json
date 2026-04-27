@@ -5,15 +5,23 @@
   "license": "MIT",
   "description": "Design tokens as StyleX variables",
   "keywords": [
+    "ui",
+    "component-library",
     "design-tokens",
     "stylex",
     "css-variables",
+    "react",
+    "typescript",
     "basex-ui"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/daviddow/BaseX-UI.git",
+    "url": "https://github.com/dowdavid/BaseX-UI.git",
     "directory": "packages/tokens"
+  },
+  "homepage": "https://github.com/dowdavid/BaseX-UI#readme",
+  "bugs": {
+    "url": "https://github.com/dowdavid/BaseX-UI/issues"
   },
   "sideEffects": false,
   "main": "./dist/index.js",
