@@ -6,6 +6,12 @@ import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
 // --- Styles ---
+//
+// Filled-block active state, squared corners (radiusSm = 0).
+// Active tab: solid fill in the foreground neutral (theme-aware) with the
+// inverse text color. Inactive tabs: bare muted text on the surrounding
+// surface, with a subtle hover tint. The result reads like Spotify's nav:
+// the active selection is unmistakable, and inactive tabs stay quiet.
 const styles = stylex.create({
   root: {
     display: 'flex',
@@ -27,18 +33,11 @@ const styles = stylex.create({
     gap: tokens.space1,
     padding: 0,
     margin: 0,
-    borderBottomWidth: tokens.borderWidthDefault,
-    borderBottomStyle: 'solid',
-    borderBottomColor: tokens.colorBorderMuted,
   },
 
   listVertical: {
     flexDirection: 'column',
     alignItems: 'stretch',
-    borderBottomWidth: 0,
-    borderInlineEndWidth: tokens.borderWidthDefault,
-    borderInlineEndStyle: 'solid',
-    borderInlineEndColor: tokens.colorBorderMuted,
   },
 
   tab: {
@@ -53,13 +52,16 @@ const styles = stylex.create({
     fontWeight: tokens.fontWeightMedium,
     fontSize: tokens.fontSizeSm,
     lineHeight: tokens.lineHeightTight,
-    color: tokens.colorTextMuted,
+    color: {
+      default: tokens.colorTextMuted,
+      ':hover': tokens.colorText,
+    },
     backgroundColor: {
       default: 'transparent',
       ':hover': tokens.colorMuted,
     },
     borderWidth: 0,
-    borderRadius: tokens.radiusMd,
+    borderRadius: tokens.radiusSm,
     cursor: 'pointer',
     userSelect: 'none',
     whiteSpace: 'nowrap',
@@ -68,16 +70,24 @@ const styles = stylex.create({
     transitionTimingFunction: tokens.motionEaseOut,
   },
 
+  // Active: filled block. Override hover so the active tab keeps its strong
+  // fill regardless of pointer state — the active state should never weaken.
   tabActive: {
-    color: tokens.colorText,
-    backgroundColor: 'transparent',
+    color: {
+      default: tokens.colorTextInverse,
+      ':hover': tokens.colorTextInverse,
+    },
+    backgroundColor: {
+      default: tokens.colorText,
+      ':hover': tokens.colorText,
+    },
   },
 
   tabDisabled: {
     color: tokens.colorTextMuted,
-    borderColor: tokens.colorBorderMuted,
-    cursor: 'not-allowed',
     backgroundColor: 'transparent',
+    cursor: 'not-allowed',
+    opacity: 0.5,
   },
 
   panel: {
@@ -88,51 +98,25 @@ const styles = stylex.create({
     lineHeight: tokens.lineHeightNormal,
   },
 
+  // Indicator: kept as a part of the public API for consumers, but visually
+  // a no-op — the active state is expressed through tabActive's filled block.
+  // Rendering it as `display: none` keeps `<Tabs.Indicator />` valid in JSX
+  // without painting a competing underline.
   indicator: {
-    position: 'absolute',
-    // Default: horizontal underline aligned to active tab
-    insetBlockEnd: 0,
-    insetInlineStart: 0,
-    height: '2px',
-    width: 'var(--active-tab-width, 0px)',
-    transform: 'translateX(var(--active-tab-left, 0px))',
-    backgroundColor: tokens.colorText,
-    borderRadius: tokens.radiusFull,
-    transitionProperty: 'transform, width, height, top',
-    transitionDuration: tokens.motionDurationNormal,
-    transitionTimingFunction: tokens.motionEaseInOut,
-    pointerEvents: 'none',
-  },
-
-  indicatorVertical: {
-    insetBlockStart: 0,
-    insetInlineEnd: 0,
-    insetInlineStart: 'auto',
-    insetBlockEnd: 'auto',
-    width: '2px',
-    height: 'var(--active-tab-height, 0px)',
-    transform: 'translateY(var(--active-tab-top, 0px))',
-  },
-
-  reducedMotion: {
-    transitionDuration: '0ms',
+    display: 'none',
   },
 });
 
 // --- Types ---
 export type TabsActivationMode = 'automatic' | 'manual';
 
-export interface TabsRootProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseTabs.Root>,
-  'className'
-> {
+export interface TabsRootProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Root>, 'className'> {
   sx?: StyleXStyles;
 }
 
-export interface TabsListProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseTabs.List>,
-  'className'
-> {
+export interface TabsListProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.List>, 'className'> {
   sx?: StyleXStyles;
   /**
    * Activation mode for the tabs.
@@ -142,24 +126,18 @@ export interface TabsListProps extends Omit<
   activationMode?: TabsActivationMode;
 }
 
-export interface TabsTabProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseTabs.Tab>,
-  'className'
-> {
+export interface TabsTabProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Tab>, 'className'> {
   sx?: StyleXStyles;
 }
 
-export interface TabsPanelProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseTabs.Panel>,
-  'className'
-> {
+export interface TabsPanelProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Panel>, 'className'> {
   sx?: StyleXStyles;
 }
 
-export interface TabsIndicatorProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseTabs.Indicator>,
-  'className'
-> {
+export interface TabsIndicatorProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Indicator>, 'className'> {
   sx?: StyleXStyles;
 }
 
@@ -231,14 +209,8 @@ const Indicator = forwardRef<HTMLSpanElement, TabsIndicatorProps>(({ sx, ...prop
   <BaseTabs.Indicator
     ref={ref}
     {...props}
-    className={(state) =>
-      `basex-tabs-indicator ${
-        stylex.props(
-          styles.indicator,
-          state.orientation === 'vertical' && styles.indicatorVertical,
-          sx,
-        ).className ?? ''
-      }`
+    className={() =>
+      `basex-tabs-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`
     }
   />
 ));

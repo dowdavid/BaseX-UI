@@ -28,7 +28,7 @@ export function TabsPage() {
     <>
       <Preview
         title="Basic"
-        description="Horizontal tabs with an animated indicator. Automatic activation: focus a tab and it activates."
+        description="Horizontal tabs with a filled-block active state. Automatic activation: focus a tab and it activates."
         code={`<Tabs.Root defaultValue="overview">
   <Tabs.List>
     <Tabs.Tab value="overview">Overview</Tabs.Tab>
@@ -62,7 +62,7 @@ export function TabsPage() {
 
       <Preview
         title="Vertical"
-        description="Vertical orientation with the indicator on the inline-end edge. Suitable for settings panels."
+        description="Vertical orientation, filled-block active state. Suitable for settings panels."
         code={`<Tabs.Root orientation="vertical" defaultValue="profile">
   <Tabs.List>
     <Tabs.Tab value="profile">Profile</Tabs.Tab>

@@ -20,7 +20,7 @@ An accessible tab interface that organizes content into selectable panels. Built
 - **List** -- The tab strip (`role="tablist"`).
 - **Tab** -- An individual tab button (`role="tab"`, with `aria-controls` / `aria-selected`).
 - **Panel** -- The content panel for a tab (`role="tabpanel"`).
-- **Indicator** -- An optional animated indicator that aligns to the active tab.
+- **Indicator** -- An optional active-tab indicator. BaseX UI's default styling expresses the active state through a filled block on the active tab itself, so `<Tabs.Indicator />` is a no-op visually unless you override its `sx`. Kept as part of the public API so consumers can opt into a custom indicator (e.g. underline) by overriding the `display: none` default.
 
 ## Examples
 
@@ -104,17 +104,13 @@ An accessible tab interface that organizes content into selectable panels. Built
 
 With `activationMode="automatic"` (default) tabs activate on focus. With `activationMode="manual"`, focus and activation are decoupled — preferred when panels contain forms.
 
-## Reduced motion
+## Visual style
 
-The indicator transitions are wired through standard CSS transitions; consumers can opt their app into `prefers-reduced-motion` overrides via the global stylesheet:
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  .basex-tabs-indicator {
-    transition-duration: 0ms !important;
-  }
-}
-```
+Active tabs render as a solid filled block in the foreground neutral
+(`colorText`) with the inverse text color (`colorTextInverse`). Inactive tabs
+are bare text in `colorTextMuted` on the surrounding surface, with a subtle
+`colorMuted` hover tint. Corners are squared (`radiusSm` = 0). The aim is a
+Spotify-style nav: the current selection is unmistakable, never subtle.
 
 ## API Reference
 
