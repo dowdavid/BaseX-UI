@@ -22,6 +22,7 @@ import popover from '../../../../packages/components/src/popover/popover.md?raw'
 import previewCard from '../../../../packages/components/src/preview-card/preview-card.md?raw';
 import progress from '../../../../packages/components/src/progress/progress.md?raw';
 import radio from '../../../../packages/components/src/radio/radio.md?raw';
+import scrollArea from '../../../../packages/components/src/scroll-area/scroll-area.md?raw';
 import separator from '../../../../packages/components/src/separator/separator.md?raw';
 import switchDoc from '../../../../packages/components/src/switch/switch.md?raw';
 
@@ -50,6 +51,7 @@ export const apiDocs: Record<string, string> = {
   'preview-card': previewCard,
   progress,
   radio,
+  'scroll-area': scrollArea,
   separator,
   switch: switchDoc,
 };

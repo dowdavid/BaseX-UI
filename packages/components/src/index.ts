@@ -221,6 +221,15 @@ export type {
   RadioIndicatorProps,
 } from './radio';
 
+export { ScrollArea } from './scroll-area';
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaCornerProps,
+} from './scroll-area';
+
 export { Separator } from './separator';
 export type { SeparatorRootProps } from './separator';
 

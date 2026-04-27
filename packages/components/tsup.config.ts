@@ -27,6 +27,7 @@ export default defineConfig({
     'src/preview-card/index.ts',
     'src/progress/index.ts',
     'src/radio/index.ts',
+    'src/scroll-area/index.ts',
     'src/separator/index.ts',
   ],
   format: ['esm'],

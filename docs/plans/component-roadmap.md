@@ -33,8 +33,8 @@
 | 23  | Preview Card    | `PreviewCard`    | Done     |              |
 | 24  | Progress        | `Progress`       | Done     |              |
 | 25  | Radio           | `Radio`          | Done     |              |
-| 26  | Scroll Area     | `ScrollArea`     | **Next** |              |
-| 27  | Select          | `Select`         | —        |              |
+| 26  | Scroll Area     | `ScrollArea`     | Done     |              |
+| 27  | Select          | `Select`         | **Next** |              |
 | 28  | Separator       | `Separator`      | Done     |              |
 | 29  | Slider          | `Slider`         | —        |              |
 | 30  | Switch          | `Switch`         | Done     |              |
@@ -47,8 +47,8 @@
 
 ## Progress
 
-- **Done**: 26 / 36
-- **Next**: Scroll Area
+- **Done**: 28 / 36
+- **Next**: Select
 
 ## How to Use This File
 
