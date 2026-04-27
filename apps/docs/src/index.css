@@ -494,147 +494,136 @@
     }
   }
 
-  /* Toast enter — Enter: 200ms ease-out */
-  .basex-toast-root {
-    opacity: 1;
-    transform: translate3d(var(--toast-swipe-movement-x, 0), var(--toast-swipe-movement-y, 0), 0);
-    transition:
-      opacity 200ms cubic-bezier(0, 0, 0.2, 1),
-      transform 200ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  .basex-toast-root[data-starting-style] {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-  }
-  /* Toast exit — Exit: 100ms ease-out */
-  .basex-toast-root[data-ending-style] {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-    transition:
-      opacity 100ms cubic-bezier(0, 0, 0.2, 1),
-      transform 100ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  /* While swiping, follow the finger immediately */
-  .basex-toast-root[data-swiping] {
-    transition-duration: 0ms;
-  }
+  /* ----------------------------------------------------------------------
+     Toast — single-layout-mode card stack.
 
-  /* Reduced motion: opacity only, no slide */
-  @media (prefers-reduced-motion: reduce) {
-    .basex-toast-root {
-      transition: opacity 100ms linear;
-      transform: none !important;
-    }
-    .basex-toast-root[data-starting-style],
-    .basex-toast-root[data-ending-style] {
-      transform: none !important;
-    }
-  }
+     Strategy: every Toast.Root is ALWAYS position: absolute, pinned to the
+     bottom-right of the viewport. State changes (collapsed vs expanded,
+     swipe gesture, enter, exit) are ALL driven by transform + opacity only,
+     so transitions interpolate smoothly between them — no layout-mode
+     switch can clobber the animation.
 
-  /* Card-stack depth: bottom-right anchored viewport. The newest toast
-     (index 0) is pinned to the bottom-right corner of the viewport with
-     position: absolute; older toasts peek out ABOVE/BEHIND it (translated
-     UP and scaled down). Because every toast is absolutely positioned to
-     the same anchor, the newest's screen coordinates never change when
-     new toasts arrive. On viewport hover/focus, Base UI sets data-expanded
-     on every Toast.Root — we switch the viewport back to a flex
-     column-reverse layout so toasts fan upward from the bottom anchor and
-     become individually readable. */
+     We compose three pieces inside a single transform:
+       1. Swipe gesture     — Base UI's --toast-swipe-movement-{x,y}
+       2. Stack offset (Y)  — collapsed: index * -12px
+                              expanded:  -1 * --toast-offset-y (Base UI
+                              measures natural offset top-down; we anchor
+                              bottom-up, hence the negation)
+       3. Stack scale       — collapsed: 1 - index * 0.05
+                              expanded:  1
+
+     One transition rule on transform + opacity carries every state change.
+     ---------------------------------------------------------------------- */
+
   .basex-toast-root {
-    /* Pin every toast to the bottom-right of the viewport. The newest
-       (index 0) sits at bottom: 0; right: 0 with no offset. Older toasts
-       translate UP by 12px per index and scale down ~5% per index so they
-       peek out from BEHIND the newest. transform-origin: bottom center so
-       scaling pivots toward the anchor. !important is required because
-       StyleX's atomic styles (unlayered) otherwise beat this @layer rule. */
-    --toast-peek-y: calc(var(--toast-index, 0) * -12px);
-    --toast-peek-scale: calc(1 - var(--toast-index, 0) * 0.05);
+    /* Stack position vars — re-pointed by [data-expanded]. */
+    --toast-stack-y: calc(var(--toast-index, 0) * -12px);
+    --toast-stack-scale: calc(1 - var(--toast-index, 0) * 0.05);
+
+    /* Layout: always absolute, anchored bottom-right. !important is required
+       because StyleX's atomic rules are unlayered and otherwise beat this. */
     position: absolute !important;
     bottom: 0 !important;
     right: 0 !important;
     left: 0 !important;
     top: auto !important;
     width: 100% !important;
+
     z-index: calc(1000 - var(--toast-index, 0));
+    transform-origin: bottom center;
+    opacity: 1;
+
+    /* Composite transform: swipe + stack offset, then stack scale. */
     transform: translate3d(
         var(--toast-swipe-movement-x, 0),
-        calc(var(--toast-swipe-movement-y, 0px) + var(--toast-peek-y)),
+        calc(var(--toast-swipe-movement-y, 0px) + var(--toast-stack-y)),
         0
       )
-      scale(var(--toast-peek-scale));
-    transform-origin: bottom center;
+      scale(var(--toast-stack-scale));
+
+    /* Single transition that handles enter, exit, expand, collapse,
+       index reflow, and the settle after a swipe release. */
+    transition:
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms cubic-bezier(0, 0, 0.2, 1);
   }
 
+  /* Enter — slide up from below. Stack scale is preserved so the toast
+     scales toward its resting peek size in one motion. */
+  .basex-toast-root[data-starting-style] {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(var(--toast-stack-scale, 1));
+  }
+
+  /* Exit — same gesture, faster. Override the duration only (not the
+     property list, so transform still composes). */
+  .basex-toast-root[data-ending-style] {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(var(--toast-stack-scale, 1));
+    transition:
+      transform 150ms cubic-bezier(0, 0, 0.2, 1),
+      opacity 150ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  /* While swiping, follow the finger with no smoothing. */
+  .basex-toast-root[data-swiping] {
+    transition-duration: 0ms;
+  }
+
+  /* Viewport — fixed height equal to frontmost toast + breathing room, so
+     the page never reflows when toasts arrive or leave. Expanded state
+     grows the viewport to fit the fanned stack. */
   .basex-toast-viewport {
-    /* Same StyleX layer issue — force fixed height so absolutely positioned
-       children have a stable frame and the page doesn't reflow as toasts
-       arrive. */
     height: calc(var(--toast-frontmost-height, 0px) + 16px) !important;
     min-height: calc(var(--toast-frontmost-height, 0px) + 16px);
     position: fixed;
+    transition: height 220ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Toasts beyond the visible stack fade out entirely. */
-  .basex-toast-root {
-    opacity: 1;
-  }
-  .basex-toast-root:nth-child(n + 4 of .basex-toast-root) {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* Subtle opacity fall-off for the visible peek-toasts. */
+  /* Subtle opacity fall-off for peek toasts. (Hidden 4th+ entirely.) */
   .basex-toast-root:nth-child(2 of .basex-toast-root) {
     opacity: 0.92;
   }
   .basex-toast-root:nth-child(3 of .basex-toast-root) {
     opacity: 0.82;
   }
+  .basex-toast-root:nth-child(n + 4 of .basex-toast-root) {
+    opacity: 0;
+    pointer-events: none;
+  }
 
-  /* Expanded: viewport is hovered or focused. Switch the viewport back to
-     a natural flex column-reverse so toasts fan UP from the bottom-right
-     anchor in their own rows. Toasts return to relative positioning so
-     normal flex flow drives their position; only the swipe gesture is
-     translated. */
+  /* Expanded — viewport hovered/focused. Re-point stack vars only;
+     layout (still absolute) does NOT change, so the transform smoothly
+     interpolates from peek to fanned positions.
+
+     --toast-offset-y is measured top-down by Base UI; we're anchored
+     bottom-up, so negate it. */
   .basex-toast-viewport:has(.basex-toast-root[data-expanded]) {
-    height: auto !important;
-    min-height: calc(var(--toast-frontmost-height, 0px) + 16px);
-    flex-direction: column-reverse !important;
-    /* Stylex sets gap: space2 — preserve via flex flow */
+    /* Grow to fit the fanned stack so hover stays bound to the viewport.
+       Each visible toast (up to 3) takes ~ frontmost-height + 16px gap. */
+    height: calc(var(--toast-frontmost-height, 0px) * 3 + 48px) !important;
+    min-height: calc(var(--toast-frontmost-height, 0px) * 3 + 48px);
   }
 
   .basex-toast-root[data-expanded] {
-    --toast-peek-scale: 1;
-    --toast-peek-y: 0px;
-    position: relative !important;
-    bottom: auto !important;
-    right: auto !important;
-    top: auto !important;
-    left: auto !important;
-    width: auto !important;
-    transform: translate3d(
-      var(--toast-swipe-movement-x, 0),
-      var(--toast-swipe-movement-y, 0),
-      0
-    ) !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    --toast-stack-y: calc(var(--toast-offset-y, 0px) * -1);
+    --toast-stack-scale: 1;
+    /* Restore full opacity and interaction on every fanned toast. */
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .basex-toast-root[data-expanded]:nth-child(2 of .basex-toast-root),
+  .basex-toast-root[data-expanded]:nth-child(3 of .basex-toast-root),
+  .basex-toast-root[data-expanded]:nth-child(n + 4 of .basex-toast-root) {
+    opacity: 1;
+    pointer-events: auto;
   }
 
-  /* Re-apply enter/exit overrides so they win over the stack transform. */
-  .basex-toast-root[data-starting-style] {
-    transform: translate3d(0, 16px, 0) scale(var(--toast-peek-scale, 1));
-  }
-  .basex-toast-root[data-ending-style] {
-    transform: translate3d(0, 16px, 0) scale(var(--toast-peek-scale, 1));
-  }
-
+  /* Reduced motion — keep the layout, drop the animation. */
   @media (prefers-reduced-motion: reduce) {
-    .basex-toast-root {
-      transform: none !important;
-    }
-    .basex-toast-root[data-expanded] {
-      transform: none !important;
+    .basex-toast-root,
+    .basex-toast-viewport {
+      transition: none !important;
     }
   }
 }
