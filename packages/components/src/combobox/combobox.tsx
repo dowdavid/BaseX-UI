@@ -101,7 +101,10 @@ const styles = stylex.create({
     color: tokens.colorIcon,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     borderWidth: 0,
     borderRadius: tokens.radiusSm,
@@ -246,7 +249,10 @@ const styles = stylex.create({
     padding: 0,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorBorderMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorBorderMuted,
+      },
     },
     transitionProperty: 'color, background-color',
     transitionDuration: tokens.motionDurationFast,

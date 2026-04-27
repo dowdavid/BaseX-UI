@@ -54,13 +54,19 @@ const styles = stylex.create({
     lineHeight: tokens.lineHeightTight,
     color: {
       default: tokens.colorTextMuted,
-      ':hover': tokens.colorText,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorText,
+      },
     },
     // Inactive tabs carry a faint fill so each trigger reads as a
     // clickable chip (Spotify-style nav). Hover bumps one notch.
     backgroundColor: {
       default: tokens.colorMuted,
-      ':hover': tokens.colorBorderMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorBorderMuted,
+      },
     },
     borderWidth: 0,
     borderRadius: tokens.radiusSm,
@@ -77,11 +83,17 @@ const styles = stylex.create({
   tabActive: {
     color: {
       default: tokens.colorTextInverse,
-      ':hover': tokens.colorTextInverse,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorTextInverse,
+      },
     },
     backgroundColor: {
       default: tokens.colorText,
-      ':hover': tokens.colorText,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorText,
+      },
     },
   },
 
