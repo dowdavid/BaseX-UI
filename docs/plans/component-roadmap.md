@@ -36,7 +36,7 @@
 | 26  | Scroll Area     | `ScrollArea`     | Done     |              |
 | 27  | Select          | `Select`         | **Next** |              |
 | 28  | Separator       | `Separator`      | Done     |              |
-| 29  | Slider          | `Slider`         | —        |              |
+| 29  | Slider          | `Slider`         | Done     |              |
 | 30  | Switch          | `Switch`         | Done     |              |
 | 31  | Tabs            | `Tabs`           | Done     |              |
 | 32  | Toast           | `Toast`          | —        |              |

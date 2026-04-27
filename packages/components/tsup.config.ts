@@ -29,6 +29,7 @@ export default defineConfig({
     'src/radio/index.ts',
     'src/scroll-area/index.ts',
     'src/separator/index.ts',
+    'src/slider/index.ts',
     'src/tabs/index.ts',
     'src/toggle/index.ts',
     'src/tooltip/index.ts',

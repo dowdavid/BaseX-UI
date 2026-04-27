@@ -26,6 +26,7 @@ import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
 import { ScrollAreaPage } from './pages/ScrollAreaPage';
 import { SeparatorPage } from './pages/SeparatorPage';
+import { SliderPage } from './pages/SliderPage';
 import { SwitchPage } from './pages/SwitchPage';
 import { TabsPage } from './pages/TabsPage';
 import { TogglePage } from './pages/TogglePage';
@@ -284,6 +285,14 @@ export const pages: PageEntry[] = [
     path: '/components/separator',
     section: 'components',
     component: SeparatorPage,
+  },
+  {
+    id: 'slider',
+    label: 'Slider',
+    description: 'A range input for picking a single value or a range from a continuous scale.',
+    path: '/components/slider',
+    section: 'components',
+    component: SliderPage,
   },
   {
     id: 'switch',
