@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Bookmark, Bold, Italic, Underline } from 'lucide-react';
 import { Toggle } from '@basex-ui/components';
@@ -12,22 +11,9 @@ const layoutStyles = stylex.create({
     gap: tokens.space2,
     flexWrap: 'wrap',
   },
-  status: {
-    fontFamily: tokens.fontFamilySans,
-    fontSize: tokens.fontSizeSm,
-    color: tokens.colorMutedForeground,
-  },
-  column: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: tokens.space3,
-    alignItems: 'flex-start',
-  },
 });
 
 export function TogglePage() {
-  const [pressed, setPressed] = useState(false);
-
   return (
     <>
       <Preview
@@ -36,23 +22,6 @@ export function TogglePage() {
         code={`<Toggle.Root>Bold</Toggle.Root>`}
       >
         <Toggle.Root>Bold</Toggle.Root>
-      </Preview>
-
-      <Preview
-        title="Controlled"
-        description="Drive the pressed state from React state."
-        code={`const [pressed, setPressed] = useState(false);
-
-<Toggle.Root pressed={pressed} onPressedChange={setPressed}>
-  Italic
-</Toggle.Root>`}
-      >
-        <div {...stylex.props(layoutStyles.row)}>
-          <Toggle.Root pressed={pressed} onPressedChange={setPressed}>
-            Italic
-          </Toggle.Root>
-          <span {...stylex.props(layoutStyles.status)}>pressed: {String(pressed)}</span>
-        </div>
       </Preview>
 
       <Preview
