@@ -73,7 +73,7 @@ const styles = stylex.create({
     height: '8px',
     backgroundColor: tokens.colorMuted,
     borderRadius: tokens.radiusFull,
-    overflow: 'hidden',
+    overflow: 'visible',
     ':is([data-orientation="vertical"])': {
       width: '8px',
       height: '100%',
@@ -128,7 +128,7 @@ const styles = stylex.create({
     boxSizing: 'border-box',
     width: '20px',
     height: '20px',
-    backgroundColor: tokens.colorPrimary,
+    backgroundColor: tokens.colorText,
     borderRadius: tokens.radiusSm,
     boxShadow: tokens.shadowSm,
     cursor: 'grab',
