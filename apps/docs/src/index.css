@@ -531,11 +531,13 @@
     }
   }
 
-  /* Card-stack depth: bottom-anchored viewport. Newest toast (index 0)
-     sits in front; older toasts peek out from behind, scaled down and
-     translated upward. On viewport hover/focus, Base UI sets data-expanded
-     on every Toast.Root and exposes --toast-offset-y so the stack
-     fans out vertically and becomes individually readable. */
+  /* Card-stack depth: top-anchored viewport. Newest toast (index 0)
+     sits in front at the anchor position; older toasts peek out below,
+     scaled down and translated downward, so the front card stays put
+     and the deck grows downward as new toasts arrive. On viewport
+     hover/focus, Base UI sets data-expanded on every Toast.Root and
+     exposes --toast-offset-y so the stack fans out vertically and
+     becomes individually readable. */
   .basex-toast-viewport {
     /* Reserve space so collapsed toasts don't shift the page; height of
        the front-most toast plus the small peek above it. */
@@ -544,10 +546,11 @@
 
   .basex-toast-root {
     /* Card stack: cancel the natural flex offset so all toasts collapse onto
-       the front-most position, then peek each older one up by ~12px and
+       the front-most position, then peek each older one DOWN by ~12px and
        shrink ~5%. transform-origin top-center keeps the top edge anchored
-       so the peek shows above the front toast. */
-    --toast-peek-y: calc(var(--toast-index, 0) * -12px);
+       so the front card's screen position doesn't shift when new toasts
+       arrive — older ones peek out below it. */
+    --toast-peek-y: calc(var(--toast-index, 0) * 12px);
     --toast-peek-scale: calc(1 - var(--toast-index, 0) * 0.05);
     z-index: calc(1000 - var(--toast-index, 0));
     transform: translate3d(
