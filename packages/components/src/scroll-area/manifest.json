@@ -1,0 +1,180 @@
+{
+  "name": "ScrollArea",
+  "description": "A scrollable region with custom-styled scrollbars overlaid on native scroll. Native scrolling, keyboard navigation, touch gestures, and RTL are preserved; only the scrollbar visuals are replaced. Scrollbars fade in on hover/scroll and respect prefers-reduced-motion. Built on Base UI ScrollArea with StyleX styling.",
+  "category": "layout",
+  "baseComponent": "@base-ui/react/scroll-area",
+
+  "anatomy": "<ScrollArea.Root>\n  <ScrollArea.Viewport>\n    {/* scrollable content */}\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"vertical\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n  <ScrollArea.Scrollbar orientation=\"horizontal\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n  <ScrollArea.Corner />\n</ScrollArea.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Outer container that establishes the scroll context. Positions Scrollbar and Corner absolutely over the viewport. Provides overflow state to children via data attributes.",
+      "props": {
+        "overflowEdgeThreshold": {
+          "type": "number | { xStart?: number; xEnd?: number; yStart?: number; yEnd?: number }",
+          "default": 0,
+          "description": "Pixel threshold before overflow-edge data attributes are applied. Useful for offsetting scroll indicators."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-scrolling": "Present while the user is scrolling.",
+        "data-has-overflow-x": "Present when content is wider than the viewport.",
+        "data-has-overflow-y": "Present when content is taller than the viewport.",
+        "data-overflow-x-start": "Present when there is overflow on the inline-start side.",
+        "data-overflow-x-end": "Present when there is overflow on the inline-end side.",
+        "data-overflow-y-start": "Present when there is overflow on the block-start side.",
+        "data-overflow-y-end": "Present when there is overflow on the block-end side."
+      }
+    },
+    "Viewport": {
+      "element": "div",
+      "description": "The actual scrollable container. Native scrollbars are visually hidden — Base UI's overlay scrollbars sit on top. Keyboard scrolling, RTL, and touch gestures use the native viewport.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Scrollbar": {
+      "element": "div",
+      "description": "A vertical or horizontal scrollbar track. Hidden by default; fades in on hover or while scrolling. Supports drag-to-scroll on the thumb.",
+      "props": {
+        "orientation": {
+          "type": "'vertical' | 'horizontal'",
+          "default": "vertical",
+          "description": "Whether the scrollbar controls vertical or horizontal scroll."
+        },
+        "keepMounted": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep in the DOM when the viewport isn't scrollable."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "'horizontal' or 'vertical'.",
+        "data-hovering": "Present when the pointer is over the scroll area.",
+        "data-scrolling": "Present while the user is scrolling.",
+        "data-has-overflow-x": "Present when content is wider than the viewport.",
+        "data-has-overflow-y": "Present when content is taller than the viewport."
+      }
+    },
+    "Thumb": {
+      "element": "div",
+      "description": "The draggable indicator showing scroll position and progress. Sized automatically to the visible-to-total content ratio.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-orientation": "'horizontal' or 'vertical'."
+      },
+      "cssVariables": {
+        "--scroll-area-thumb-height": "The thumb height (vertical scrollbars).",
+        "--scroll-area-thumb-width": "The thumb width (horizontal scrollbars)."
+      }
+    },
+    "Corner": {
+      "element": "div",
+      "description": "Small square that fills the intersection of horizontal and vertical scrollbars. Renders only when both scrollbars are present.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Scrollbar fade in/out is driven by data-hovering and data-scrolling on the Scrollbar part. StyleX cannot target data-attribute selectors, so this rule must live in a global stylesheet inside @layer priority1. Honors prefers-reduced-motion.",
+    "css": "@layer priority1 {\n  /* ScrollArea — hide native scrollbars on the viewport */\n  .basex-scroll-area-viewport::-webkit-scrollbar {\n    display: none;\n  }\n\n  /* ScrollArea scrollbar fade — State preset: 100ms ease-out */\n  .basex-scroll-area-scrollbar {\n    opacity: 0;\n    transition: opacity 100ms cubic-bezier(0, 0, 0.2, 1);\n    position: absolute;\n  }\n  .basex-scroll-area-scrollbar[data-orientation='vertical'] {\n    top: 0;\n    bottom: 0;\n    right: 0;\n  }\n  .basex-scroll-area-scrollbar[data-orientation='horizontal'] {\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n  .basex-scroll-area-scrollbar[data-hovering],\n  .basex-scroll-area-scrollbar[data-scrolling] {\n    opacity: 1;\n  }\n  .basex-scroll-area-thumb[data-orientation='vertical'] {\n    height: var(--scroll-area-thumb-height);\n    width: 100%;\n  }\n  .basex-scroll-area-thumb[data-orientation='horizontal'] {\n    width: var(--scroll-area-thumb-width);\n    height: 100%;\n  }\n  .basex-scroll-area-corner {\n    position: absolute;\n    right: 0;\n    bottom: 0;\n    width: 10px;\n    height: 10px;\n  }\n\n  @media (prefers-reduced-motion: reduce) {\n    .basex-scroll-area-scrollbar {\n      transition-duration: 0ms;\n    }\n  }\n}"
+  },
+
+  "tokens": ["colorBorder", "colorIcon", "radiusSm"],
+
+  "intents": [
+    {
+      "intent": "custom-scroll-region",
+      "signals": [
+        "scroll",
+        "scrollable",
+        "scrollbar",
+        "custom scrollbar",
+        "overflow",
+        "long list",
+        "scrollable container"
+      ],
+      "reasoning": "ScrollArea overlays a custom-styled scrollbar on top of native scroll, keeping all native behaviors (keyboard, touch, RTL, mouse wheel) while making the scrollbar match the design system.",
+      "composition": "<ScrollArea.Root style={{ height: 240 }}>\n  <ScrollArea.Viewport>\n    {items.map((item) => (\n      <div key={item.id}>{item.label}</div>\n    ))}\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"vertical\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "intent": "horizontal-scroll-row",
+      "signals": [
+        "horizontal scroll",
+        "carousel",
+        "scrollable row",
+        "tag list",
+        "chip row",
+        "horizontal overflow"
+      ],
+      "reasoning": "ScrollArea with a horizontal Scrollbar gives a clean horizontal scrolling row (chips, tags, thumbnails) with a styled scrollbar that fades in only when needed.",
+      "composition": "<ScrollArea.Root>\n  <ScrollArea.Viewport>\n    <div style={{ display: 'flex', gap: 8 }}>{tags}</div>\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"horizontal\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "intent": "scroll-region-in-dialog",
+      "signals": ["dialog scroll", "modal scroll", "long content", "scroll inside dialog"],
+      "reasoning": "Inside a Dialog or Drawer, ScrollArea provides consistent scrollbar styling that won't clash with the surrounding chrome and stays out of the way until needed.",
+      "composition": "<Dialog.Panel>\n  <ScrollArea.Root style={{ maxHeight: 320 }}>\n    <ScrollArea.Viewport>\n      {longContent}\n    </ScrollArea.Viewport>\n    <ScrollArea.Scrollbar orientation=\"vertical\">\n      <ScrollArea.Thumb />\n    </ScrollArea.Scrollbar>\n  </ScrollArea.Root>\n</Dialog.Panel>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "The whole document or viewport scrolls",
+      "reasoning": "Use the browser's native scroll for full-page scrolling. ScrollArea is for a bounded region; using it on the document hijacks page scroll and breaks anchor links and accessibility heuristics.",
+      "alternative": "Native browser scroll (no component)"
+    },
+    {
+      "scenario": "Virtualized lists with thousands of items",
+      "reasoning": "ScrollArea wraps native scroll but doesn't virtualize. For very large lists, pair it with a virtualization library (TanStack Virtual, react-window) or skip it entirely — the custom scrollbar may interfere with item measurement.",
+      "alternative": "Virtualization library + native scroll"
+    },
+    {
+      "scenario": "Content that should grow with the page",
+      "reasoning": "ScrollArea is for fixed-size regions. If the container should expand to fit content, just use a regular div — no scrollbar is needed.",
+      "alternative": "Plain div"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Vertical scroll with a styled scrollbar",
+      "code": "<ScrollArea.Root style={{ width: 240, height: 200 }}>\n  <ScrollArea.Viewport>\n    {Array.from({ length: 40 }).map((_, i) => (\n      <p key={i}>Line {i + 1}</p>\n    ))}\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"vertical\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "name": "horizontal",
+      "description": "Horizontal scrolling row of chips",
+      "code": "<ScrollArea.Root style={{ width: 320 }}>\n  <ScrollArea.Viewport>\n    <div style={{ display: 'flex', gap: 8, padding: 8 }}>\n      {chips}\n    </div>\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"horizontal\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n</ScrollArea.Root>"
+    },
+    {
+      "name": "both-axes",
+      "description": "Both vertical and horizontal scroll with a Corner",
+      "code": "<ScrollArea.Root style={{ width: 320, height: 200 }}>\n  <ScrollArea.Viewport>\n    <table>{rows}</table>\n  </ScrollArea.Viewport>\n  <ScrollArea.Scrollbar orientation=\"vertical\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n  <ScrollArea.Scrollbar orientation=\"horizontal\">\n    <ScrollArea.Thumb />\n  </ScrollArea.Scrollbar>\n  <ScrollArea.Corner />\n</ScrollArea.Root>"
+    }
+  ]
+}

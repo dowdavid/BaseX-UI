@@ -221,5 +221,30 @@ export type {
   RadioIndicatorProps,
 } from './radio';
 
+export { ScrollArea } from './scroll-area';
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaCornerProps,
+} from './scroll-area';
+
+export { Separator } from './separator';
+export type { SeparatorRootProps } from './separator';
+
+export { Switch } from './switch';
+export type { SwitchRootProps, SwitchThumbProps } from './switch';
+
+export { Tabs } from './tabs';
+export type {
+  TabsActivationMode,
+  TabsRootProps,
+  TabsListProps,
+  TabsTabProps,
+  TabsPanelProps,
+  TabsIndicatorProps,
+} from './tabs';
+
 export { Toggle } from './toggle';
 export type { ToggleRootProps, ToggleVariant, ToggleSize } from './toggle';
