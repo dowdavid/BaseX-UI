@@ -41,7 +41,13 @@ const styles = stylex.create({
   variantOutline: {
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      // Guard hover behind hover-capable pointer to prevent sticky hover on
+      // touch devices (a tap fires :hover and it persists until the next tap
+      // elsewhere). Touch users skip the hover style entirely.
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     color: tokens.colorText,
     borderColor: tokens.colorBorder,
@@ -51,7 +57,10 @@ const styles = stylex.create({
   variantGhost: {
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     color: tokens.colorText,
     borderColor: 'transparent',
@@ -62,7 +71,10 @@ const styles = stylex.create({
   pressed: {
     backgroundColor: {
       default: tokens.colorPrimary,
-      ':hover': tokens.colorPrimaryHover,
+      ':hover': {
+        default: tokens.colorPrimary,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorPrimaryHover,
+      },
       ':active': tokens.colorPrimaryActive,
     },
     color: tokens.colorPrimaryContrast,
