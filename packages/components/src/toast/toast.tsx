@@ -166,6 +166,14 @@ const styles = stylex.create({
 
   closeDestructive: {
     color: tokens.colorDestructiveContrast,
+    backgroundColor: {
+      default: 'transparent',
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorDestructiveHover,
+      },
+      ':active': tokens.colorDestructiveActive,
+    },
   },
 });
 
@@ -282,7 +290,14 @@ const Description = forwardRef<HTMLParagraphElement, ToastDescriptionProps>(
     <BaseToast.Description
       ref={ref}
       {...props}
-      className={stylex.props(styles.description, sx).className ?? ''}
+      className={(state) =>
+        stylex.props(
+          styles.description,
+          (state?.type === 'error' || state?.type === 'destructive') &&
+            styles.descriptionDestructive,
+          sx,
+        ).className ?? ''
+      }
     />
   ),
 );

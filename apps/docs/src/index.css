@@ -601,12 +601,12 @@
   .basex-toast-viewport:has(.basex-toast-root[data-expanded]) {
     /* Grow to fit the fanned stack so hover stays bound to the viewport.
        Each visible toast (up to 3) takes ~ frontmost-height + 16px gap. */
-    height: calc(var(--toast-frontmost-height, 0px) * 3 + 48px) !important;
-    min-height: calc(var(--toast-frontmost-height, 0px) * 3 + 48px);
+    height: calc(var(--toast-frontmost-height, 0px) * 3 + 66px) !important;
+    min-height: calc(var(--toast-frontmost-height, 0px) * 3 + 66px);
   }
 
   .basex-toast-root[data-expanded] {
-    --toast-stack-y: calc(var(--toast-offset-y, 0px) * -1);
+    --toast-stack-y: calc(var(--toast-offset-y, 0px) * -1 - var(--toast-index, 0) * 6px);
     --toast-stack-scale: 1;
     /* Restore full opacity and interaction on every fanned toast. */
     opacity: 1;
