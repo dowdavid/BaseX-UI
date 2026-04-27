@@ -534,6 +534,39 @@
       "signals": ["preference", "settings choice", "plan selection", "tier", "mode selector"],
       "reasoning": "Radio groups work well for preference or settings where users pick exactly one option from a small set.",
       "composition": "<Radio.Group defaultValue=\"standard\">\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"standard\"><Radio.Indicator /></Radio.Root>\n    Standard\n  </label>\n  <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n    <Radio.Root value=\"express\"><Radio.Indicator /></Radio.Root>\n    Express\n  </label>\n</Radio.Group>"
+    },
+    {
+      "intent": "section-divider",
+      "component": "Separator",
+      "signals": [
+        "divider",
+        "separator",
+        "horizontal rule",
+        "hr",
+        "section break",
+        "split content"
+      ],
+      "reasoning": "Separator is the canonical 1px divider for splitting content groups, settings sections, or list groups.",
+      "composition": "<Separator.Root />"
+    },
+    {
+      "intent": "vertical-divider",
+      "component": "Separator",
+      "signals": [
+        "vertical divider",
+        "inline separator",
+        "metadata separator",
+        "dot separator alternative"
+      ],
+      "reasoning": "Use orientation=\"vertical\" inside a flex row to separate inline metadata or toolbar groups.",
+      "composition": "<Separator.Root orientation=\"vertical\" />"
+    },
+    {
+      "intent": "decorative-divider",
+      "component": "Separator",
+      "signals": ["decorative line", "visual divider", "non-semantic separator"],
+      "reasoning": "When the divider is purely visual and adjacent content is already grouped semantically, mark it decorative so screen readers skip it.",
+      "composition": "<Separator.Root decorative />"
     }
   ],
   "antiPatterns": [
@@ -956,6 +989,24 @@
       "scenario": "Binary on/off toggle",
       "reasoning": "Use Switch for a single boolean toggle. Radio is for choosing between labeled options.",
       "alternative": "Switch"
+    },
+    {
+      "component": "Separator",
+      "scenario": "Replacing a heading or section landmark",
+      "reasoning": "Separator is decoration, not structure. Use a heading or landmark for semantic grouping.",
+      "alternative": "h2, h3, or <section> with aria-labelledby"
+    },
+    {
+      "component": "Separator",
+      "scenario": "As a card or panel border",
+      "reasoning": "Containers should own their borders. Adding a Separator inside duplicates the visual.",
+      "alternative": "borderColor on the container"
+    },
+    {
+      "component": "Separator",
+      "scenario": "Inside a Menu or Toolbar",
+      "reasoning": "Those components ship their own Separator part wired to their roving focus and ARIA model.",
+      "alternative": "Menu.Separator or Toolbar.Separator"
     }
   ]
 }

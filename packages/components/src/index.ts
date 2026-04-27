@@ -220,3 +220,6 @@ export type {
   RadioRootProps,
   RadioIndicatorProps,
 } from './radio';
+
+export { Separator } from './separator';
+export type { SeparatorRootProps } from './separator';
