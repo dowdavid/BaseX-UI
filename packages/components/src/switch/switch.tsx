@@ -17,7 +17,7 @@ const styles = stylex.create({
     borderRadius: tokens.radiusFull,
     borderWidth: tokens.borderWidthThick,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
+    borderColor: tokens.colorMuted,
     backgroundColor: tokens.colorMuted,
     cursor: 'pointer',
     flexShrink: 0,
