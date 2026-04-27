@@ -25,8 +25,11 @@ Scaffold a component into your project. Creates the component files in `src/comp
 ```bash
 npx basex-ui add button
 npx basex-ui add accordion
-npx basex-ui add dialog
 ```
+
+> **v0.1 scope:** `add` currently scaffolds **`button`** and **`accordion`**. The remaining 33 components are available as published packages via `pnpm add @basex-ui/components`. CLI scaffolding for every component is on the v0.2 roadmap. Run `basex-ui list` to see live status.
+
+Scaffolded components import from `@basex-ui/tokens`, `@basex-ui/styles`, and `@base-ui/react` — run `basex-ui init` first (or install those packages manually) before `basex-ui add`.
 
 If an `llms.txt` file exists in the project root, the CLI updates it with the new component's context. This keeps the LLM context file in sync with what's installed.
 
