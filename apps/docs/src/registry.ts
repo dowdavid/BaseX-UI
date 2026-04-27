@@ -24,6 +24,7 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { SeparatorPage } from './pages/SeparatorPage';
 import { SwitchPage } from './pages/SwitchPage';
 
 export interface PageEntry {
@@ -263,6 +264,14 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'separator',
+    label: 'Separator',
+    description: 'A thin visual divider between content groups.',
+    path: '/components/separator',
+    section: 'components',
+    component: SeparatorPage,
   },
   {
     id: 'switch',
