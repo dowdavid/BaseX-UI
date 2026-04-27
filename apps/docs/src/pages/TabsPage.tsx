@@ -11,13 +11,18 @@ const styles = stylex.create({
     fontFamily: tokens.fontFamilyMono,
     fontSize: tokens.fontSizeSm,
     lineHeight: tokens.lineHeightNormal,
+    // Lock the panel area so switching tabs with different content lengths
+    // does not reflow the surrounding bounding box.
+    minWidth: '20rem',
+    minHeight: '3rem',
   },
   formPanel: {
     paddingBlock: tokens.space3,
     display: 'flex',
     flexDirection: 'column',
     gap: tokens.space3,
-    minWidth: '16rem',
+    minWidth: '20rem',
+    minHeight: '8rem',
   },
 });
 

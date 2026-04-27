@@ -56,9 +56,11 @@ const styles = stylex.create({
       default: tokens.colorTextMuted,
       ':hover': tokens.colorText,
     },
+    // Inactive tabs carry a faint fill so each trigger reads as a
+    // clickable chip (Spotify-style nav). Hover bumps one notch.
     backgroundColor: {
-      default: 'transparent',
-      ':hover': tokens.colorMuted,
+      default: tokens.colorMuted,
+      ':hover': tokens.colorBorderMuted,
     },
     borderWidth: 0,
     borderRadius: tokens.radiusSm,
