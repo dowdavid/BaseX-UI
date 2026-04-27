@@ -8,8 +8,10 @@ import type { StyleXStyles } from '@stylexjs/stylex';
 // --- Styles ---
 // Track height (8px) and indicator color come from Progress/Meter conventions
 // so the visual language stays unified across feedback + input range components.
-// Thumb size (16px) matches Number Field button width minimums and the focus
-// ring utility from @basex-ui/styles is reused for keyboard focus parity.
+// Thumb size (20px) overhangs the 8px track on each side so the handle reads
+// as a clearly grabbable button. Filled with colorPrimary + shadowSm to lift
+// it off the track; the focus ring utility from @basex-ui/styles is reused
+// for keyboard focus parity.
 const styles = stylex.create({
   root: {
     position: 'relative',
@@ -124,16 +126,19 @@ const styles = stylex.create({
   thumb: {
     display: 'block',
     boxSizing: 'border-box',
-    width: '16px',
-    height: '16px',
-    backgroundColor: tokens.colorText,
+    width: '20px',
+    height: '20px',
+    backgroundColor: tokens.colorPrimary,
     borderRadius: tokens.radiusSm,
+    boxShadow: tokens.shadowSm,
     cursor: 'grab',
     transitionProperty: 'box-shadow, transform',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
     ':hover': {
-      boxShadow: `0 0 0 4px ${tokens.colorMuted}`,
+      '@media (hover: hover) and (pointer: fine)': {
+        boxShadow: `${tokens.shadowSm}, 0 0 0 4px ${tokens.colorMuted}`,
+      },
     },
     ':active': {
       cursor: 'grabbing',
