@@ -43,6 +43,7 @@ import separatorManifest from '../../components/src/separator/manifest.json';
 import switchManifest from '../../components/src/switch/manifest.json';
 import tabsManifest from '../../components/src/tabs/manifest.json';
 import toggleManifest from '../../components/src/toggle/manifest.json';
+import tooltipManifest from '../../components/src/tooltip/manifest.json';
 
 export type ComponentManifest =
   | typeof buttonManifest
@@ -73,7 +74,8 @@ export type ComponentManifest =
   | typeof separatorManifest
   | typeof switchManifest
   | typeof tabsManifest
-  | typeof toggleManifest;
+  | typeof toggleManifest
+  | typeof tooltipManifest;
 
 const components = new Map<string, ComponentManifest>([
   ['button', buttonManifest],
@@ -105,6 +107,7 @@ const components = new Map<string, ComponentManifest>([
   ['switch', switchManifest],
   ['tabs', tabsManifest],
   ['toggle', toggleManifest],
+  ['tooltip', tooltipManifest],
 ] as [string, ComponentManifest][]);
 
 // ---------------------------------------------------------------------------
@@ -292,6 +295,10 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'hover/focus/active color', preset: 'State' },
       { interaction: 'pressed state flip', preset: 'State' },
       { interaction: ':active scale', preset: 'State' },
+    ],
+    tooltip: [
+      { interaction: 'popup scale/fade in', preset: 'Enter' },
+      { interaction: 'popup scale/fade out', preset: 'Exit' },
     ],
   };
 

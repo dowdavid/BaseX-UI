@@ -136,6 +136,10 @@
     "./toggle": {
       "types": "./dist/toggle/index.d.ts",
       "import": "./dist/toggle/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.js"
     }
   },
   "files": [

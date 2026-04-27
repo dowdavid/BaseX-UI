@@ -29,6 +29,7 @@ import { SeparatorPage } from './pages/SeparatorPage';
 import { SwitchPage } from './pages/SwitchPage';
 import { TabsPage } from './pages/TabsPage';
 import { TogglePage } from './pages/TogglePage';
+import { TooltipPage } from './pages/TooltipPage';
 
 export interface PageEntry {
   id: string;
@@ -308,6 +309,14 @@ export const pages: PageEntry[] = [
     path: '/components/toggle',
     section: 'components',
     component: TogglePage,
+  },
+  {
+    id: 'tooltip',
+    label: 'Tooltip',
+    description: 'A non-interactive label that appears on hover or focus.',
+    path: '/components/tooltip',
+    section: 'components',
+    component: TooltipPage,
   },
 
   // Intelligence section

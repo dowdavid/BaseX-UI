@@ -14,7 +14,7 @@ describe('listComponents', () => {
     expect(names).toContain('Button');
     expect(names).toContain('Accordion');
     expect(names).toContain('Tabs');
-    expect(list).toHaveLength(29);
+    expect(list).toHaveLength(30);
   });
 });
 
