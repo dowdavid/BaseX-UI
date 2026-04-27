@@ -106,6 +106,7 @@ Copy from `_template/component.md` and fill in:
 - [ ] Use the `Preview` component from `../components/Preview` for every demo section
   - Each `Preview` gets a `title`, `description`, and the demo as children
   - Use `constrained` prop for full-width components (e.g. Accordion) to cap inner width
+  - Do not include a Controlled-state demo card. Controlled mode is documented in the component's markdown API doc.
 - [ ] Register in `apps/docs/src/App.tsx`: import, add to `pages` array with `id`, `label`, `description`, `component`
 - [ ] Add any required global CSS to `apps/docs/src/index.css`
 

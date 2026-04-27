@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Switch, Field, Form } from '@basex-ui/components';
 import { tokens } from '@basex-ui/tokens';
@@ -27,18 +26,6 @@ const pageStyles = stylex.create({
   },
 });
 
-function ControlledExample() {
-  const [checked, setChecked] = useState(false);
-  return (
-    <label {...stylex.props(pageStyles.label)}>
-      <Switch.Root checked={checked} onCheckedChange={setChecked}>
-        <Switch.Thumb />
-      </Switch.Root>
-      Dark mode {checked ? '(on)' : '(off)'}
-    </label>
-  );
-}
-
 export function SwitchPage() {
   return (
     <>
@@ -58,18 +45,6 @@ export function SwitchPage() {
           </Switch.Root>
           Enable notifications
         </label>
-      </Preview>
-
-      <Preview
-        title="Controlled"
-        description="Use checked + onCheckedChange to drive the switch from React state."
-        code={`const [checked, setChecked] = useState(false);
-
-<Switch.Root checked={checked} onCheckedChange={setChecked}>
-  <Switch.Thumb />
-</Switch.Root>`}
-      >
-        <ControlledExample />
       </Preview>
 
       <Preview
