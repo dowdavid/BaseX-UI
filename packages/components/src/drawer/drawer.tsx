@@ -107,7 +107,10 @@ const styles = stylex.create({
     cursor: 'pointer',
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     transitionProperty: 'background-color, color',
     transitionDuration: tokens.motionDurationFast,

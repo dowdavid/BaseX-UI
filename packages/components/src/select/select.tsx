@@ -108,6 +108,7 @@ const styles = stylex.create({
   },
 
   item: {
+    position: 'relative',
     display: 'flex',
     alignItems: 'center',
     fontFamily: tokens.fontFamilySans,
@@ -120,19 +121,22 @@ const styles = stylex.create({
 
   itemSizeSm: {
     paddingBlock: tokens.space1,
-    paddingInline: tokens.space1h,
+    paddingInlineStart: tokens.space2,
+    paddingInlineEnd: tokens.space6,
     fontSize: tokens.fontSizeXs,
     borderRadius: tokens.radiusSm,
   },
   itemSizeMd: {
     paddingBlock: tokens.space1h,
-    paddingInline: tokens.space2,
+    paddingInlineStart: tokens.space2,
+    paddingInlineEnd: tokens.space6,
     fontSize: tokens.fontSizeSm,
     borderRadius: tokens.radiusSm,
   },
   itemSizeLg: {
     paddingBlock: tokens.space2,
-    paddingInline: tokens.space2h,
+    paddingInlineStart: tokens.space2h,
+    paddingInlineEnd: tokens.space8,
     fontSize: tokens.fontSizeMd,
     borderRadius: tokens.radiusSm,
   },
@@ -159,6 +163,8 @@ const styles = stylex.create({
   },
 
   itemIndicator: {
+    position: 'absolute',
+    insetInlineEnd: tokens.space2,
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -173,17 +179,14 @@ const styles = stylex.create({
   itemIndicatorSizeSm: {
     width: '14px',
     height: '14px',
-    marginInlineEnd: tokens.space1,
   },
   itemIndicatorSizeMd: {
     width: '16px',
     height: '16px',
-    marginInlineEnd: tokens.space1h,
   },
   itemIndicatorSizeLg: {
     width: '18px',
     height: '18px',
-    marginInlineEnd: tokens.space2,
   },
 
   group: {

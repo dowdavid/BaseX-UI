@@ -70,7 +70,10 @@ const styles = stylex.create({
     border: 'none',
     backgroundColor: {
       default: tokens.colorMuted,
-      ':hover': tokens.colorBorderMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorBorderMuted,
+      },
       ':active': tokens.colorBorder,
     },
     color: tokens.colorIcon,
@@ -94,7 +97,10 @@ const styles = stylex.create({
     cursor: 'not-allowed',
     backgroundColor: {
       default: 'transparent',
-      ':hover': 'transparent',
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': 'transparent',
+      },
     },
   },
 

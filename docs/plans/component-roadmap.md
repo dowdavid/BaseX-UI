@@ -33,22 +33,22 @@
 | 23  | Preview Card    | `PreviewCard`    | Done     |              |
 | 24  | Progress        | `Progress`       | Done     |              |
 | 25  | Radio           | `Radio`          | Done     |              |
-| 26  | Scroll Area     | `ScrollArea`     | **Next** |              |
+| 26  | Scroll Area     | `ScrollArea`     | Done     |              |
 | 27  | Select          | `Select`         | Done     |              |
-| 28  | Separator       | `Separator`      | —        |              |
+| 28  | Separator       | `Separator`      | Done     |              |
 | 29  | Slider          | `Slider`         | —        |              |
-| 30  | Switch          | `Switch`         | —        |              |
-| 31  | Tabs            | `Tabs`           | —        |              |
+| 30  | Switch          | `Switch`         | Done     |              |
+| 31  | Tabs            | `Tabs`           | Done     |              |
 | 32  | Toast           | `Toast`          | —        |              |
-| 33  | Toggle          | `Toggle`         | —        |              |
+| 33  | Toggle          | `Toggle`         | Done     |              |
 | 34  | Toggle Group    | `ToggleGroup`    | —        |              |
 | 35  | Toolbar         | `Toolbar`        | —        |              |
-| 36  | Tooltip         | `Tooltip`        | —        |              |
+| 36  | Tooltip         | `Tooltip`        | Done     |              |
 
 ## Progress
 
-- **Done**: 26 / 36
-- **Next**: Scroll Area
+- **Done**: 32 / 36
+- **Next**: Slider
 
 ## How to Use This File
 

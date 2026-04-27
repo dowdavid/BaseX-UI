@@ -1,0 +1,231 @@
+{
+  "name": "Tooltip",
+  "description": "A small, non-interactive label that appears on hover or focus to describe a UI element. Built on Base UI Tooltip with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/tooltip",
+
+  "anatomy": "<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger />\n    <Tooltip.Portal>\n      <Tooltip.Positioner>\n        <Tooltip.Popup>\n          <Tooltip.Arrow />\n        </Tooltip.Popup>\n      </Tooltip.Positioner>\n    </Tooltip.Portal>\n  </Tooltip.Root>\n</Tooltip.Provider>",
+
+  "parts": {
+    "Provider": {
+      "element": null,
+      "description": "Coordinates a shared delay group across multiple sibling tooltips. Once one tooltip in the group has been shown, adjacent tooltips open instantly until the group times out.",
+      "props": {
+        "delay": {
+          "type": "number",
+          "default": 600,
+          "description": "Milliseconds to wait before opening any tooltip in the group."
+        },
+        "closeDelay": {
+          "type": "number",
+          "default": 0,
+          "description": "Milliseconds to wait before closing a tooltip in the group."
+        },
+        "timeout": {
+          "type": "number",
+          "default": 400,
+          "description": "If a tooltip closes within this window (ms), the next tooltip in the group opens instantly."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Root": {
+      "element": null,
+      "description": "Manages open state and provides context to child parts.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "description": "Callback fired when open state changes."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "The initial uncontrolled open state."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the tooltip is disabled (will not open)."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "The element the tooltip describes. Opens on hover and focus.",
+      "props": {
+        "delay": {
+          "type": "number",
+          "default": 600,
+          "description": "Per-trigger override of the open delay (ms). Inherits from Provider when unset."
+        },
+        "closeDelay": {
+          "type": "number",
+          "default": 0,
+          "description": "Per-trigger override of the close delay (ms)."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the tooltip is open."
+      }
+    },
+    "Portal": {
+      "element": null,
+      "description": "Renders tooltip content into a React portal.",
+      "props": {},
+      "dataAttributes": {}
+    },
+    "Positioner": {
+      "element": "div",
+      "description": "Positions the popup relative to the trigger using the same Base UI floating engine as Popover.",
+      "props": {
+        "side": {
+          "type": "'top' | 'bottom' | 'left' | 'right'",
+          "default": "top",
+          "description": "Preferred side of the trigger."
+        },
+        "alignment": {
+          "type": "'start' | 'center' | 'end'",
+          "default": "center",
+          "description": "Alignment along the side."
+        },
+        "sideOffset": {
+          "type": "number",
+          "default": 6,
+          "description": "Offset from the trigger in pixels."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Popup": {
+      "element": "div",
+      "description": "The floating tooltip label. Has role=\"tooltip\" and is wired to the trigger via aria-describedby by Base UI.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the tooltip is open.",
+        "data-starting-style": "Present during open animation.",
+        "data-ending-style": "Present during close animation."
+      }
+    },
+    "Arrow": {
+      "element": "div",
+      "description": "An arrow pointing from the popup to the trigger.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Tooltip popup scale/fade animation. Honors prefers-reduced-motion by removing the transform/opacity transition.",
+    "css": "@layer priority1 {\n  .basex-tooltip-popup {\n    opacity: 1;\n    transform: scale(1);\n    transition:\n      opacity 150ms ease-out,\n      transform 150ms ease-out;\n  }\n  .basex-tooltip-popup[data-starting-style],\n  .basex-tooltip-popup[data-ending-style] {\n    opacity: 0;\n    transform: scale(0.95);\n  }\n  @media (prefers-reduced-motion: reduce) {\n    .basex-tooltip-popup {\n      transition: none;\n    }\n    .basex-tooltip-popup[data-starting-style],\n    .basex-tooltip-popup[data-ending-style] {\n      opacity: 1;\n      transform: none;\n    }\n  }\n}"
+  },
+
+  "tokens": [
+    "colorSurfaceRaised",
+    "colorBorderMuted",
+    "colorText",
+    "fontFamilySans",
+    "fontSizeSm",
+    "lineHeightNormal",
+    "radiusLg",
+    "shadowLg",
+    "borderWidthDefault",
+    "space1",
+    "space2"
+  ],
+
+  "intents": [
+    {
+      "intent": "label-icon-button",
+      "signals": ["tooltip", "label icon button", "describe icon", "hover label", "icon hint"],
+      "reasoning": "Tooltip is the standard pattern for describing icon-only buttons or compact controls that lack a visible text label.",
+      "composition": "<Tooltip.Provider>\n  <Tooltip.Root>\n    <Tooltip.Trigger>⚙️</Tooltip.Trigger>\n    <Tooltip.Portal>\n      <Tooltip.Positioner>\n        <Tooltip.Popup>Settings</Tooltip.Popup>\n      </Tooltip.Positioner>\n    </Tooltip.Portal>\n  </Tooltip.Root>\n</Tooltip.Provider>"
+    },
+    {
+      "intent": "supplemental-hint",
+      "signals": [
+        "hover hint",
+        "supplemental info",
+        "explain control",
+        "field hint",
+        "non-interactive tooltip"
+      ],
+      "reasoning": "Tooltip surfaces a short, non-interactive hint on hover or focus. Use only when the content is purely informational.",
+      "composition": "<Tooltip.Root>\n  <Tooltip.Trigger>Save</Tooltip.Trigger>\n  <Tooltip.Portal>\n    <Tooltip.Positioner>\n      <Tooltip.Popup>Saves your changes (⌘S)</Tooltip.Popup>\n    </Tooltip.Positioner>\n  </Tooltip.Portal>\n</Tooltip.Root>"
+    },
+    {
+      "intent": "shared-delay-group",
+      "signals": ["toolbar tooltips", "tooltip group", "delay group", "row of icons"],
+      "reasoning": "Wrap a row of related triggers in Tooltip.Provider so moving between them skips the open delay after the first tooltip is shown.",
+      "composition": "<Tooltip.Provider delay={600}>\n  {items.map(item => (\n    <Tooltip.Root key={item.id}>\n      <Tooltip.Trigger>{item.icon}</Tooltip.Trigger>\n      <Tooltip.Portal>\n        <Tooltip.Positioner>\n          <Tooltip.Popup>{item.label}</Tooltip.Popup>\n        </Tooltip.Positioner>\n      </Tooltip.Portal>\n    </Tooltip.Root>\n  ))}\n</Tooltip.Provider>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Interactive content (buttons, links, forms inside the popup)",
+      "reasoning": "Tooltip is non-interactive and will close on blur. Use Popover for floating panels that contain interactive content.",
+      "alternative": "Popover"
+    },
+    {
+      "scenario": "Critical information that users must read",
+      "reasoning": "Tooltips are hidden by default and inaccessible on touch without focus. Use inline text, Field description, or Alert for must-see content.",
+      "alternative": "Field.Description or inline text"
+    },
+    {
+      "scenario": "Rich previews of linked content",
+      "reasoning": "PreviewCard is the right pattern for hover previews of pages, profiles, or media.",
+      "alternative": "PreviewCard"
+    },
+    {
+      "scenario": "Disabled triggers that need a tooltip",
+      "reasoning": "Disabled buttons don't fire pointer events. Wrap the disabled control in a focusable span (tabIndex={0}, aria-disabled) and put Tooltip.Trigger on that wrapper.",
+      "alternative": "Wrap the disabled control in a focusable element"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Tooltip on a button",
+      "code": "<Tooltip.Root>\n  <Tooltip.Trigger>Save</Tooltip.Trigger>\n  <Tooltip.Portal>\n    <Tooltip.Positioner>\n      <Tooltip.Popup>Saves your changes</Tooltip.Popup>\n    </Tooltip.Positioner>\n  </Tooltip.Portal>\n</Tooltip.Root>"
+    },
+    {
+      "name": "with-delay",
+      "description": "Tooltip with a custom delay",
+      "code": "<Tooltip.Root>\n  <Tooltip.Trigger delay={300}>Hover me</Tooltip.Trigger>\n  <Tooltip.Portal>\n    <Tooltip.Positioner>\n      <Tooltip.Popup>Opens after 300ms</Tooltip.Popup>\n    </Tooltip.Positioner>\n  </Tooltip.Portal>\n</Tooltip.Root>"
+    },
+    {
+      "name": "shared-delay-group",
+      "description": "Multiple tooltips sharing a delay group via Provider",
+      "code": "<Tooltip.Provider delay={600}>\n  <Tooltip.Root>\n    <Tooltip.Trigger>Bold</Tooltip.Trigger>\n    <Tooltip.Portal>\n      <Tooltip.Positioner>\n        <Tooltip.Popup>Bold (⌘B)</Tooltip.Popup>\n      </Tooltip.Positioner>\n    </Tooltip.Portal>\n  </Tooltip.Root>\n  <Tooltip.Root>\n    <Tooltip.Trigger>Italic</Tooltip.Trigger>\n    <Tooltip.Portal>\n      <Tooltip.Positioner>\n        <Tooltip.Popup>Italic (⌘I)</Tooltip.Popup>\n      </Tooltip.Positioner>\n    </Tooltip.Portal>\n  </Tooltip.Root>\n</Tooltip.Provider>"
+    },
+    {
+      "name": "with-arrow",
+      "description": "Tooltip with an arrow pointing to the trigger",
+      "code": "<Tooltip.Root>\n  <Tooltip.Trigger>Info</Tooltip.Trigger>\n  <Tooltip.Portal>\n    <Tooltip.Positioner sideOffset={8}>\n      <Tooltip.Popup>\n        <Tooltip.Arrow />\n        Helpful hint\n      </Tooltip.Popup>\n    </Tooltip.Positioner>\n  </Tooltip.Portal>\n</Tooltip.Root>"
+    }
+  ]
+}
