@@ -39,7 +39,10 @@ const styles = stylex.create({
     color: tokens.colorTextMuted,
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     borderWidth: 0,
     borderRadius: tokens.radiusMd,
@@ -67,7 +70,10 @@ const styles = stylex.create({
     textDecoration: 'none',
     backgroundColor: {
       default: 'transparent',
-      ':hover': tokens.colorMuted,
+      ':hover': {
+        default: null,
+        '@media (hover: hover) and (pointer: fine)': tokens.colorMuted,
+      },
     },
     borderRadius: tokens.radiusMd,
     cursor: 'pointer',

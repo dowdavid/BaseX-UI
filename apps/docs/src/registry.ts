@@ -24,6 +24,11 @@ import { PopoverPage } from './pages/PopoverPage';
 import { PreviewCardPage } from './pages/PreviewCardPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { RadioPage } from './pages/RadioPage';
+import { ScrollAreaPage } from './pages/ScrollAreaPage';
+import { SeparatorPage } from './pages/SeparatorPage';
+import { SwitchPage } from './pages/SwitchPage';
+import { TabsPage } from './pages/TabsPage';
+import { TogglePage } from './pages/TogglePage';
 import { TooltipPage } from './pages/TooltipPage';
 
 export interface PageEntry {
@@ -263,6 +268,47 @@ export const pages: PageEntry[] = [
     path: '/components/radio',
     section: 'components',
     component: RadioPage,
+  },
+  {
+    id: 'scroll-area',
+    label: 'Scroll Area',
+    description: 'A bounded scroll region with custom-styled scrollbars overlaid on native scroll.',
+    path: '/components/scroll-area',
+    section: 'components',
+    component: ScrollAreaPage,
+  },
+  {
+    id: 'separator',
+    label: 'Separator',
+    description: 'A thin visual divider between content groups.',
+    path: '/components/separator',
+    section: 'components',
+    component: SeparatorPage,
+  },
+  {
+    id: 'switch',
+    label: 'Switch',
+    description: 'A toggle for binary settings that take effect immediately.',
+    path: '/components/switch',
+    section: 'components',
+    component: SwitchPage,
+  },
+  {
+    id: 'tabs',
+    label: 'Tabs',
+    description:
+      'Switch between sibling content panels with full keyboard support and an animated indicator.',
+    path: '/components/tabs',
+    section: 'components',
+    component: TabsPage,
+  },
+  {
+    id: 'toggle',
+    label: 'Toggle',
+    description: 'A two-state button with aria-pressed semantics.',
+    path: '/components/toggle',
+    section: 'components',
+    component: TogglePage,
   },
   {
     id: 'tooltip',

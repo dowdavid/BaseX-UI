@@ -38,6 +38,11 @@ import popoverManifest from '../../components/src/popover/manifest.json';
 import previewCardManifest from '../../components/src/preview-card/manifest.json';
 import progressManifest from '../../components/src/progress/manifest.json';
 import radioManifest from '../../components/src/radio/manifest.json';
+import scrollAreaManifest from '../../components/src/scroll-area/manifest.json';
+import separatorManifest from '../../components/src/separator/manifest.json';
+import switchManifest from '../../components/src/switch/manifest.json';
+import tabsManifest from '../../components/src/tabs/manifest.json';
+import toggleManifest from '../../components/src/toggle/manifest.json';
 import tooltipManifest from '../../components/src/tooltip/manifest.json';
 
 export type ComponentManifest =
@@ -65,6 +70,11 @@ export type ComponentManifest =
   | typeof previewCardManifest
   | typeof progressManifest
   | typeof radioManifest
+  | typeof scrollAreaManifest
+  | typeof separatorManifest
+  | typeof switchManifest
+  | typeof tabsManifest
+  | typeof toggleManifest
   | typeof tooltipManifest;
 
 const components = new Map<string, ComponentManifest>([
@@ -92,6 +102,11 @@ const components = new Map<string, ComponentManifest>([
   ['preview-card', previewCardManifest],
   ['progress', progressManifest],
   ['radio', radioManifest],
+  ['scroll-area', scrollAreaManifest],
+  ['separator', separatorManifest],
+  ['switch', switchManifest],
+  ['tabs', tabsManifest],
+  ['toggle', toggleManifest],
   ['tooltip', tooltipManifest],
 ] as [string, ComponentManifest][]);
 
@@ -265,10 +280,25 @@ export function getComponentSetup(name: string): ComponentSetup | null {
       { interaction: 'indeterminate animation', preset: 'Move' },
     ],
     radio: [{ interaction: 'indicator appear/disappear', preset: 'State' }],
+    'scroll-area': [
+      { interaction: 'scrollbar fade in (hover/scroll)', preset: 'State' },
+      { interaction: 'scrollbar fade out', preset: 'State' },
+      { interaction: 'thumb hover color', preset: 'State' },
+    ],
+    separator: [],
+    switch: [{ interaction: 'thumb slide on toggle', preset: 'Move' }],
+    tabs: [
+      { interaction: 'tab hover/focus color', preset: 'State' },
+      { interaction: 'indicator slide to active tab', preset: 'Move' },
+    ],
+    toggle: [
+      { interaction: 'hover/focus/active color', preset: 'State' },
+      { interaction: 'pressed state flip', preset: 'State' },
+      { interaction: ':active scale', preset: 'State' },
+    ],
     tooltip: [
       { interaction: 'popup scale/fade in', preset: 'Enter' },
       { interaction: 'popup scale/fade out', preset: 'Exit' },
-    ],
   };
 
   return {
