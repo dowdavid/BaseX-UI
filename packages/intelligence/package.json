@@ -41,8 +41,7 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run build"
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "tsup": "^8.0.0",
