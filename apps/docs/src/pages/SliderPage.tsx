@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
 import { Slider, Field } from '@basex-ui/components';
@@ -26,8 +25,6 @@ const pageStyles = stylex.create({
 });
 
 export function SliderPage() {
-  const [value, setValue] = useState<number>(40);
-
   return (
     <>
       <Preview
@@ -46,37 +43,6 @@ export function SliderPage() {
       >
         <Slider.Root defaultValue={40}>
           <Slider.Label>Volume</Slider.Label>
-          <Slider.Control>
-            <Slider.Track>
-              <Slider.Indicator />
-              <Slider.Thumb />
-            </Slider.Track>
-          </Slider.Control>
-        </Slider.Root>
-      </Preview>
-
-      <Preview
-        title="Controlled with value"
-        description="Render the live value alongside the slider."
-        constrained
-        code={`const [value, setValue] = useState(40);
-
-<Slider.Root value={value} onValueChange={(v) => setValue(v as number)}>
-  <Slider.Label>Brightness</Slider.Label>
-  <Slider.Value />
-  <Slider.Control>
-    <Slider.Track>
-      <Slider.Indicator />
-      <Slider.Thumb />
-    </Slider.Track>
-  </Slider.Control>
-</Slider.Root>`}
-      >
-        <Slider.Root value={value} onValueChange={(v) => setValue(v as number)}>
-          <div {...stylex.props(pageStyles.row)}>
-            <Slider.Label>Brightness</Slider.Label>
-            <Slider.Value />
-          </div>
           <Slider.Control>
             <Slider.Track>
               <Slider.Indicator />
