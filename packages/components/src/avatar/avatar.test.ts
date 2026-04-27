@@ -18,45 +18,31 @@ vi.mock('@basex-ui/styles', () => ({
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { Select } from './index';
+import { Avatar } from './index';
 
-const PARTS = [
-  'Root',
-  'Trigger',
-  'Value',
-  'Icon',
-  'Portal',
-  'Positioner',
-  'Popup',
-  'Viewport',
-  'Item',
-  'ItemText',
-  'ItemIndicator',
-  'Group',
-  'GroupLabel',
-  'Separator',
-  'ScrollUpButton',
-  'ScrollDownButton',
-] as const;
-
-describe('Select', () => {
-  it('exports all compound parts', () => {
-    for (const p of PARTS) expect(Select[p]).toBeDefined();
+describe('Avatar', () => {
+  it('exports compound parts', () => {
+    expect(Avatar.Root).toBeDefined();
+    expect(Avatar.Image).toBeDefined();
+    expect(Avatar.Fallback).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    for (const p of PARTS) expect(Select[p].displayName).toBe(`Select.${p}`);
+    expect(Avatar.Root.displayName).toBe('Avatar.Root');
+    expect(Avatar.Image.displayName).toBe('Avatar.Image');
+    expect(Avatar.Fallback.displayName).toBe('Avatar.Fallback');
   });
 
   it('does not expose unexpected parts', () => {
-    expect(Object.keys(Select).sort()).toEqual([...PARTS].sort());
+    expect(Object.keys(Avatar).sort()).toEqual(['Fallback', 'Image', 'Root']);
   });
 
-  it('renders Root with controlled value, disabled', () => {
-    const el = createElement(Select.Root, {
-      value: 'a',
-      onValueChange: () => {},
-      disabled: false,
+  it('renders compound structure as valid React elements', () => {
+    const el = createElement(Avatar.Root, {
+      children: [
+        createElement(Avatar.Image, { key: 'i', src: '/x.png', alt: 'x' }),
+        createElement(Avatar.Fallback, { key: 'f', children: 'DD' }),
+      ],
     });
     expect(isValidElement(el)).toBe(true);
   });

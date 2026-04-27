@@ -15,42 +15,41 @@ vi.mock('@basex-ui/tokens', () => ({
 }));
 vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
-  capitalize: {},
+  capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { NavigationMenu } from './index';
+import { Popover } from './index';
 
 const PARTS = [
   'Root',
-  'List',
-  'Item',
   'Trigger',
-  'Content',
   'Portal',
   'Positioner',
   'Popup',
-  'Viewport',
-  'Backdrop',
-  'Link',
-  'Icon',
   'Arrow',
+  'Title',
+  'Description',
+  'Close',
 ] as const;
 
-describe('NavigationMenu', () => {
+describe('Popover', () => {
   it('exports all compound parts', () => {
-    for (const p of PARTS) expect(NavigationMenu[p]).toBeDefined();
+    for (const p of PARTS) expect(Popover[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    for (const p of PARTS) expect(NavigationMenu[p].displayName).toBe(`NavigationMenu.${p}`);
+    for (const p of PARTS) expect(Popover[p].displayName).toBe(`Popover.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    expect(Object.keys(NavigationMenu).sort()).toEqual([...PARTS].sort());
+    expect(Object.keys(Popover).sort()).toEqual([...PARTS].sort());
   });
 
-  it('renders Root with orientation', () => {
-    const el = createElement(NavigationMenu.Root, { orientation: 'horizontal' });
+  it('renders Root with controlled open state', () => {
+    const el = createElement(Popover.Root, {
+      open: false,
+      onOpenChange: () => {},
+    });
     expect(isValidElement(el)).toBe(true);
   });
 });

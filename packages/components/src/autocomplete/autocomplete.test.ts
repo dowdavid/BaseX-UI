@@ -15,42 +15,28 @@ vi.mock('@basex-ui/tokens', () => ({
 }));
 vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
-  capitalize: {},
+  capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { NavigationMenu } from './index';
+import { Autocomplete } from './index';
 
-const PARTS = [
-  'Root',
-  'List',
-  'Item',
-  'Trigger',
-  'Content',
-  'Portal',
-  'Positioner',
-  'Popup',
-  'Viewport',
-  'Backdrop',
-  'Link',
-  'Icon',
-  'Arrow',
-] as const;
+const PARTS = ['Root', 'Input', 'Popup', 'Item', 'Empty', 'Group', 'GroupLabel'] as const;
 
-describe('NavigationMenu', () => {
+describe('Autocomplete', () => {
   it('exports all compound parts', () => {
-    for (const p of PARTS) expect(NavigationMenu[p]).toBeDefined();
+    for (const p of PARTS) expect(Autocomplete[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    for (const p of PARTS) expect(NavigationMenu[p].displayName).toBe(`NavigationMenu.${p}`);
+    for (const p of PARTS) expect(Autocomplete[p].displayName).toBe(`Autocomplete.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    expect(Object.keys(NavigationMenu).sort()).toEqual([...PARTS].sort());
+    expect(Object.keys(Autocomplete).sort()).toEqual([...PARTS].sort());
   });
 
-  it('renders Root with orientation', () => {
-    const el = createElement(NavigationMenu.Root, { orientation: 'horizontal' });
+  it('renders Root as a valid React element', () => {
+    const el = createElement(Autocomplete.Root, { items: ['a', 'b'] });
     expect(isValidElement(el)).toBe(true);
   });
 });

@@ -18,45 +18,35 @@ vi.mock('@basex-ui/styles', () => ({
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { Select } from './index';
+import { Radio } from './index';
 
-const PARTS = [
-  'Root',
-  'Trigger',
-  'Value',
-  'Icon',
-  'Portal',
-  'Positioner',
-  'Popup',
-  'Viewport',
-  'Item',
-  'ItemText',
-  'ItemIndicator',
-  'Group',
-  'GroupLabel',
-  'Separator',
-  'ScrollUpButton',
-  'ScrollDownButton',
-] as const;
-
-describe('Select', () => {
-  it('exports all compound parts', () => {
-    for (const p of PARTS) expect(Select[p]).toBeDefined();
+describe('Radio', () => {
+  it('exports compound parts', () => {
+    expect(Radio.Group).toBeDefined();
+    expect(Radio.Root).toBeDefined();
+    expect(Radio.Indicator).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    for (const p of PARTS) expect(Select[p].displayName).toBe(`Select.${p}`);
+    expect(Radio.Group.displayName).toBe('Radio.Group');
+    expect(Radio.Root.displayName).toBe('Radio.Root');
+    expect(Radio.Indicator.displayName).toBe('Radio.Indicator');
   });
 
   it('does not expose unexpected parts', () => {
-    expect(Object.keys(Select).sort()).toEqual([...PARTS].sort());
+    expect(Object.keys(Radio).sort()).toEqual(['Group', 'Indicator', 'Root']);
   });
 
-  it('renders Root with controlled value, disabled', () => {
-    const el = createElement(Select.Root, {
+  it('renders Group with controlled value, orientation, and disabled', () => {
+    const el = createElement(Radio.Group, {
       value: 'a',
       onValueChange: () => {},
+      orientation: 'vertical',
       disabled: false,
+      children: createElement(Radio.Root, {
+        value: 'a',
+        children: createElement(Radio.Indicator),
+      }),
     });
     expect(isValidElement(el)).toBe(true);
   });

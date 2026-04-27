@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -16,7 +17,7 @@ vi.mock('@basex-ui/tokens', () => ({
 import { Meter } from './index';
 
 describe('Meter', () => {
-  it('exports all compound parts', () => {
+  it('exports compound parts', () => {
     expect(Meter.Root).toBeDefined();
     expect(Meter.Label).toBeDefined();
     expect(Meter.Track).toBeDefined();
@@ -33,8 +34,11 @@ describe('Meter', () => {
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Root', 'Label', 'Track', 'Indicator', 'Value'];
-    const actualParts = Object.keys(Meter);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Meter).sort()).toEqual(['Indicator', 'Label', 'Root', 'Track', 'Value']);
+  });
+
+  it('renders Root with value, min, and max props', () => {
+    const el = createElement(Meter.Root, { value: 50, min: 0, max: 100 });
+    expect(isValidElement(el)).toBe(true);
   });
 });

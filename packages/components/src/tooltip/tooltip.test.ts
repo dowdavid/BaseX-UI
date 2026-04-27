@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -19,30 +20,23 @@ vi.mock('@basex-ui/styles', () => ({
 
 import { Tooltip } from './index';
 
+const PARTS = ['Provider', 'Root', 'Trigger', 'Portal', 'Positioner', 'Popup', 'Arrow'] as const;
+
 describe('Tooltip', () => {
   it('exports all compound parts', () => {
-    expect(Tooltip.Provider).toBeDefined();
-    expect(Tooltip.Root).toBeDefined();
-    expect(Tooltip.Trigger).toBeDefined();
-    expect(Tooltip.Portal).toBeDefined();
-    expect(Tooltip.Positioner).toBeDefined();
-    expect(Tooltip.Popup).toBeDefined();
-    expect(Tooltip.Arrow).toBeDefined();
+    for (const p of PARTS) expect(Tooltip[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    expect(Tooltip.Provider.displayName).toBe('Tooltip.Provider');
-    expect(Tooltip.Root.displayName).toBe('Tooltip.Root');
-    expect(Tooltip.Trigger.displayName).toBe('Tooltip.Trigger');
-    expect(Tooltip.Portal.displayName).toBe('Tooltip.Portal');
-    expect(Tooltip.Positioner.displayName).toBe('Tooltip.Positioner');
-    expect(Tooltip.Popup.displayName).toBe('Tooltip.Popup');
-    expect(Tooltip.Arrow.displayName).toBe('Tooltip.Arrow');
+    for (const p of PARTS) expect(Tooltip[p].displayName).toBe(`Tooltip.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Provider', 'Root', 'Trigger', 'Portal', 'Positioner', 'Popup', 'Arrow'];
-    const actualParts = Object.keys(Tooltip);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Tooltip).sort()).toEqual([...PARTS].sort());
+  });
+
+  it('renders Root with controlled open state', () => {
+    const el = createElement(Tooltip.Root, { open: false, onOpenChange: () => {} });
+    expect(isValidElement(el)).toBe(true);
   });
 });

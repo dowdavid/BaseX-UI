@@ -18,23 +18,27 @@ vi.mock('@basex-ui/styles', () => ({
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { Form } from './index';
+import { CheckboxGroup } from './index';
 
-describe('Form', () => {
-  it('exports the Form component', () => {
-    expect(Form).toBeDefined();
+describe('CheckboxGroup', () => {
+  it('exports Root', () => {
+    expect(CheckboxGroup.Root).toBeDefined();
   });
 
   it('sets displayName', () => {
-    expect(Form.displayName).toBe('Form');
+    expect(CheckboxGroup.Root.displayName).toBe('CheckboxGroup.Root');
   });
 
-  it('renders as a valid React element', () => {
-    expect(isValidElement(createElement(Form, { onSubmit: () => {} }))).toBe(true);
+  it('does not expose unexpected parts', () => {
+    expect(Object.keys(CheckboxGroup).sort()).toEqual(['Root']);
   });
 
-  it('accepts errors prop for server validation', () => {
-    const el = createElement(Form, { errors: { email: 'Required' } });
+  it('renders Root with controlled value', () => {
+    const el = createElement(CheckboxGroup.Root, {
+      value: ['a'],
+      onValueChange: () => {},
+      disabled: false,
+    });
     expect(isValidElement(el)).toBe(true);
   });
 });

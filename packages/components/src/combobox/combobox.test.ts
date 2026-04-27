@@ -15,42 +15,38 @@ vi.mock('@basex-ui/tokens', () => ({
 }));
 vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
-  capitalize: {},
+  capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { NavigationMenu } from './index';
+import { Combobox } from './index';
 
 const PARTS = [
   'Root',
-  'List',
-  'Item',
-  'Trigger',
-  'Content',
-  'Portal',
-  'Positioner',
+  'Input',
   'Popup',
-  'Viewport',
-  'Backdrop',
-  'Link',
-  'Icon',
-  'Arrow',
+  'Item',
+  'ItemIndicator',
+  'Clear',
+  'Empty',
+  'Group',
+  'GroupLabel',
 ] as const;
 
-describe('NavigationMenu', () => {
+describe('Combobox', () => {
   it('exports all compound parts', () => {
-    for (const p of PARTS) expect(NavigationMenu[p]).toBeDefined();
+    for (const p of PARTS) expect(Combobox[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    for (const p of PARTS) expect(NavigationMenu[p].displayName).toBe(`NavigationMenu.${p}`);
+    for (const p of PARTS) expect(Combobox[p].displayName).toBe(`Combobox.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    expect(Object.keys(NavigationMenu).sort()).toEqual([...PARTS].sort());
+    expect(Object.keys(Combobox).sort()).toEqual([...PARTS].sort());
   });
 
-  it('renders Root with orientation', () => {
-    const el = createElement(NavigationMenu.Root, { orientation: 'horizontal' });
+  it('renders Root with items prop', () => {
+    const el = createElement(Combobox.Root, { items: ['a', 'b'] });
     expect(isValidElement(el)).toBe(true);
   });
 });

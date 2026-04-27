@@ -1,10 +1,12 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
     create: (s: Record<string, unknown>) => s,
     props: () => ({ className: '' }),
     defineVars: (v: Record<string, unknown>) => v,
+    createTheme: () => ({}),
   };
   return { default: m, ...m };
 });
@@ -15,7 +17,7 @@ vi.mock('@basex-ui/tokens', () => ({
 import { Fieldset } from './index';
 
 describe('Fieldset', () => {
-  it('exports all compound parts', () => {
+  it('exports compound parts', () => {
     expect(Fieldset.Root).toBeDefined();
     expect(Fieldset.Legend).toBeDefined();
   });
@@ -26,8 +28,14 @@ describe('Fieldset', () => {
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = ['Root', 'Legend'];
-    const actualParts = Object.keys(Fieldset);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Fieldset).sort()).toEqual(['Legend', 'Root']);
+  });
+
+  it('renders Root with Legend as a valid React element', () => {
+    const el = createElement(Fieldset.Root, {
+      disabled: false,
+      children: createElement(Fieldset.Legend, { children: 'Group' }),
+    });
+    expect(isValidElement(el)).toBe(true);
   });
 });

@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -15,48 +16,37 @@ vi.mock('@basex-ui/tokens', () => ({
 
 import { Toast, useToast } from './index';
 
+const PARTS = [
+  'Provider',
+  'Portal',
+  'Viewport',
+  'Root',
+  'Content',
+  'Title',
+  'Description',
+  'Action',
+  'Close',
+] as const;
+
 describe('Toast', () => {
   it('exports all compound parts', () => {
-    expect(Toast.Provider).toBeDefined();
-    expect(Toast.Portal).toBeDefined();
-    expect(Toast.Viewport).toBeDefined();
-    expect(Toast.Root).toBeDefined();
-    expect(Toast.Content).toBeDefined();
-    expect(Toast.Title).toBeDefined();
-    expect(Toast.Description).toBeDefined();
-    expect(Toast.Action).toBeDefined();
-    expect(Toast.Close).toBeDefined();
+    for (const p of PARTS) expect(Toast[p]).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    expect(Toast.Provider.displayName).toBe('Toast.Provider');
-    expect(Toast.Portal.displayName).toBe('Toast.Portal');
-    expect(Toast.Viewport.displayName).toBe('Toast.Viewport');
-    expect(Toast.Root.displayName).toBe('Toast.Root');
-    expect(Toast.Content.displayName).toBe('Toast.Content');
-    expect(Toast.Title.displayName).toBe('Toast.Title');
-    expect(Toast.Description.displayName).toBe('Toast.Description');
-    expect(Toast.Action.displayName).toBe('Toast.Action');
-    expect(Toast.Close.displayName).toBe('Toast.Close');
+    for (const p of PARTS) expect(Toast[p].displayName).toBe(`Toast.${p}`);
   });
 
   it('does not expose unexpected parts', () => {
-    const expectedParts = [
-      'Provider',
-      'Portal',
-      'Viewport',
-      'Root',
-      'Content',
-      'Title',
-      'Description',
-      'Action',
-      'Close',
-    ];
-    const actualParts = Object.keys(Toast);
-    expect(actualParts.sort()).toEqual(expectedParts.sort());
+    expect(Object.keys(Toast).sort()).toEqual([...PARTS].sort());
   });
 
-  it('exposes a useToast hook (re-export of Base UI useToastManager)', () => {
+  it('exports useToast hook', () => {
     expect(typeof useToast).toBe('function');
+  });
+
+  it('renders Provider as a valid React element', () => {
+    const el = createElement(Toast.Provider, { timeout: 5000 });
+    expect(isValidElement(el)).toBe(true);
   });
 });

@@ -1,4 +1,5 @@
 import { vi, describe, it, expect } from 'vitest';
+import { createElement, isValidElement } from 'react';
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -26,5 +27,16 @@ describe('Input', () => {
 
   it('sets displayName', () => {
     expect(Input.displayName).toBe('Input');
+  });
+
+  it('renders as a valid React element', () => {
+    expect(isValidElement(createElement(Input))).toBe(true);
+  });
+
+  it('accepts size, disabled, and value props', () => {
+    for (const size of ['sm', 'md', 'lg'] as const) {
+      const el = createElement(Input, { size, disabled: false, value: '', onChange: () => {} });
+      expect(isValidElement(el)).toBe(true);
+    }
   });
 });

@@ -18,45 +18,29 @@ vi.mock('@basex-ui/styles', () => ({
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { Select } from './index';
+import { Checkbox } from './index';
 
-const PARTS = [
-  'Root',
-  'Trigger',
-  'Value',
-  'Icon',
-  'Portal',
-  'Positioner',
-  'Popup',
-  'Viewport',
-  'Item',
-  'ItemText',
-  'ItemIndicator',
-  'Group',
-  'GroupLabel',
-  'Separator',
-  'ScrollUpButton',
-  'ScrollDownButton',
-] as const;
-
-describe('Select', () => {
-  it('exports all compound parts', () => {
-    for (const p of PARTS) expect(Select[p]).toBeDefined();
+describe('Checkbox', () => {
+  it('exports compound parts', () => {
+    expect(Checkbox.Root).toBeDefined();
+    expect(Checkbox.Indicator).toBeDefined();
   });
 
   it('sets displayName on all parts', () => {
-    for (const p of PARTS) expect(Select[p].displayName).toBe(`Select.${p}`);
+    expect(Checkbox.Root.displayName).toBe('Checkbox.Root');
+    expect(Checkbox.Indicator.displayName).toBe('Checkbox.Indicator');
   });
 
   it('does not expose unexpected parts', () => {
-    expect(Object.keys(Select).sort()).toEqual([...PARTS].sort());
+    expect(Object.keys(Checkbox).sort()).toEqual(['Indicator', 'Root']);
   });
 
-  it('renders Root with controlled value, disabled', () => {
-    const el = createElement(Select.Root, {
-      value: 'a',
-      onValueChange: () => {},
+  it('renders compound structure with checked, disabled, and controlled props', () => {
+    const el = createElement(Checkbox.Root, {
+      checked: true,
       disabled: false,
+      onCheckedChange: () => {},
+      children: createElement(Checkbox.Indicator),
     });
     expect(isValidElement(el)).toBe(true);
   });
