@@ -30,6 +30,7 @@ import { SeparatorPage } from './pages/SeparatorPage';
 import { SliderPage } from './pages/SliderPage';
 import { SwitchPage } from './pages/SwitchPage';
 import { TabsPage } from './pages/TabsPage';
+import { ToastPage } from './pages/ToastPage';
 import { TogglePage } from './pages/TogglePage';
 import { ToggleGroupPage } from './pages/ToggleGroupPage';
 import { ToolbarPage } from './pages/ToolbarPage';
@@ -321,6 +322,15 @@ export const pages: PageEntry[] = [
     path: '/components/tabs',
     section: 'components',
     component: TabsPage,
+  },
+  {
+    id: 'toast',
+    label: 'Toast',
+    description:
+      'Ephemeral, accessible notifications with auto-dismiss, swipe-to-dismiss, and an imperative useToast() hook.',
+    path: '/components/toast',
+    section: 'components',
+    component: ToastPage,
   },
   {
     id: 'toggle',

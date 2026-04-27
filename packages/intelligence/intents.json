@@ -765,6 +765,48 @@
       "composition": "<Tabs.Root defaultValue=\"step1\">\n  <Tabs.List activationMode=\"manual\">\n    <Tabs.Tab value=\"step1\">Step 1</Tabs.Tab>\n    <Tabs.Tab value=\"step2\">Step 2</Tabs.Tab>\n    <Tabs.Indicator />\n  </Tabs.List>\n  <Tabs.Panel value=\"step1\">{/* form fields */}</Tabs.Panel>\n  <Tabs.Panel value=\"step2\">{/* form fields */}</Tabs.Panel>\n</Tabs.Root>"
     },
     {
+      "intent": "transient-feedback",
+      "component": "Toast",
+      "signals": [
+        "toast",
+        "snackbar",
+        "notification",
+        "saved",
+        "copied",
+        "success message",
+        "feedback"
+      ],
+      "reasoning": "Toast is the right component for short-lived, non-blocking feedback after a user action.",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Saved', description: 'Your changes were saved.' });"
+    },
+    {
+      "intent": "destructive-feedback",
+      "component": "Toast",
+      "signals": [
+        "error toast",
+        "failed",
+        "couldn’t save",
+        "destructive notification",
+        "warning toast"
+      ],
+      "reasoning": "type='error' upgrades the screen-reader announcement to assertive and applies destructive styling.",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Couldn’t save', description: 'Try again in a moment.', type: 'error', priority: 'high' });"
+    },
+    {
+      "intent": "undoable-action",
+      "component": "Toast",
+      "signals": ["undo", "undo toast", "undo delete", "revert", "with action"],
+      "reasoning": "Toast.Action is keyboard-reachable from anywhere via the F6 hotkey for one-tap reversal.",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Item archived', actionProps: { children: 'Undo', onClick: handleUndo } });"
+    },
+    {
+      "intent": "promise-feedback",
+      "component": "Toast",
+      "signals": ["loading toast", "saving", "uploading", "promise toast", "async toast"],
+      "reasoning": "useToast().promise() shows a loading toast that resolves to success or error automatically.",
+      "composition": "const toast = useToast();\n\ntoast.promise(saveDraft(), { loading: 'Saving…', success: 'Saved', error: 'Failed to save' });"
+    },
+    {
       "intent": "binary-toggle-button",
       "component": "Toggle",
       "signals": ["toggle", "on/off", "press", "pressed", "two-state button", "aria-pressed"],
@@ -1371,6 +1413,30 @@
       "scenario": "Many sections (more than ~7) or long labels that wrap",
       "reasoning": "Tab lists work best with a small number of short labels. Use Accordion or a sidebar nav for larger sets.",
       "alternative": "Accordion"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Toasts auto-dismiss and don’t demand acknowledgment. Use AlertDialog for confirmations the user must accept.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Persistent or critical errors that block the workflow",
+      "reasoning": "Toasts disappear. Use a Dialog or inline alert for blocking errors that demand action.",
+      "alternative": "Dialog or inline error message"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Long-form content, forms, or multi-step interactions",
+      "reasoning": "Toasts are intentionally compact and ephemeral. Use Dialog or Drawer for substantial content.",
+      "alternative": "Dialog or Drawer"
+    },
+    {
+      "component": "Toast",
+      "scenario": "Information the user must read to continue",
+      "reasoning": "Auto-dismiss means the user can miss the message. Use Dialog so it isn’t auto-dismissed.",
+      "alternative": "Dialog"
     },
     {
       "component": "Toggle",

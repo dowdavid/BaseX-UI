@@ -280,6 +280,19 @@ export type {
   TabsIndicatorProps,
 } from './tabs';
 
+export { Toast, useToast } from './toast';
+export type {
+  ToastProviderProps,
+  ToastPortalProps,
+  ToastViewportProps,
+  ToastRootProps,
+  ToastContentProps,
+  ToastTitleProps,
+  ToastDescriptionProps,
+  ToastActionProps,
+  ToastCloseProps,
+} from './toast';
+
 export { Toggle } from './toggle';
 export type { ToggleRootProps, ToggleVariant, ToggleSize } from './toggle';
 

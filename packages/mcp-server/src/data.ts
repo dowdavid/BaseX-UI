@@ -44,6 +44,7 @@ import separatorManifest from '../../components/src/separator/manifest.json';
 import sliderManifest from '../../components/src/slider/manifest.json';
 import switchManifest from '../../components/src/switch/manifest.json';
 import tabsManifest from '../../components/src/tabs/manifest.json';
+import toastManifest from '../../components/src/toast/manifest.json';
 import toggleManifest from '../../components/src/toggle/manifest.json';
 import toggleGroupManifest from '../../components/src/toggle-group/manifest.json';
 import toolbarManifest from '../../components/src/toolbar/manifest.json';
@@ -80,6 +81,7 @@ export type ComponentManifest =
   | typeof sliderManifest
   | typeof switchManifest
   | typeof tabsManifest
+  | typeof toastManifest
   | typeof toggleManifest
   | typeof toggleGroupManifest
   | typeof toolbarManifest
@@ -116,6 +118,7 @@ const components = new Map<string, ComponentManifest>([
   ['slider', sliderManifest],
   ['switch', switchManifest],
   ['tabs', tabsManifest],
+  ['toast', toastManifest],
   ['toggle', toggleManifest],
   ['toggle-group', toggleGroupManifest],
   ['toolbar', toolbarManifest],
@@ -313,6 +316,12 @@ export function getComponentSetup(name: string): ComponentSetup | null {
     tabs: [
       { interaction: 'tab hover/focus color', preset: 'State' },
       { interaction: 'indicator slide to active tab', preset: 'Move' },
+    ],
+    toast: [
+      { interaction: 'toast fade/slide in', preset: 'Enter' },
+      { interaction: 'toast fade/slide out', preset: 'Exit' },
+      { interaction: 'swipe-to-dismiss tracking', preset: 'Move' },
+      { interaction: 'action/close button hover', preset: 'State' },
     ],
     toggle: [
       { interaction: 'hover/focus/active color', preset: 'State' },
