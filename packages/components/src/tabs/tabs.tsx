@@ -112,13 +112,17 @@ const styles = stylex.create({
 // --- Types ---
 export type TabsActivationMode = 'automatic' | 'manual';
 
-export interface TabsRootProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Root>, 'className'> {
+export interface TabsRootProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseTabs.Root>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface TabsListProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.List>, 'className'> {
+export interface TabsListProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseTabs.List>,
+  'className'
+> {
   sx?: StyleXStyles;
   /**
    * Activation mode for the tabs.
@@ -128,18 +132,24 @@ export interface TabsListProps
   activationMode?: TabsActivationMode;
 }
 
-export interface TabsTabProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Tab>, 'className'> {
+export interface TabsTabProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseTabs.Tab>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface TabsPanelProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Panel>, 'className'> {
+export interface TabsPanelProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseTabs.Panel>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
-export interface TabsIndicatorProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseTabs.Indicator>, 'className'> {
+export interface TabsIndicatorProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof BaseTabs.Indicator>,
+  'className'
+> {
   sx?: StyleXStyles;
 }
 
@@ -211,9 +221,7 @@ const Indicator = forwardRef<HTMLSpanElement, TabsIndicatorProps>(({ sx, ...prop
   <BaseTabs.Indicator
     ref={ref}
     {...props}
-    className={() =>
-      `basex-tabs-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`
-    }
+    className={() => `basex-tabs-indicator ${stylex.props(styles.indicator, sx).className ?? ''}`}
   />
 ));
 Indicator.displayName = 'Tabs.Indicator';
