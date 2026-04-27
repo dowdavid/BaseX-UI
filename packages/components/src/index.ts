@@ -221,6 +221,65 @@ export type {
   RadioIndicatorProps,
 } from './radio';
 
+export { ScrollArea } from './scroll-area';
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaCornerProps,
+} from './scroll-area';
+
+export { Select } from './select';
+export type {
+  SelectSize,
+  SelectRootProps,
+  SelectTriggerProps,
+  SelectValueProps,
+  SelectIconProps,
+  SelectPortalProps,
+  SelectPositionerProps,
+  SelectPopupProps,
+  SelectViewportProps,
+  SelectItemProps,
+  SelectItemTextProps,
+  SelectItemIndicatorProps,
+  SelectGroupProps,
+  SelectGroupLabelProps,
+  SelectSeparatorProps,
+  SelectScrollUpButtonProps,
+  SelectScrollDownButtonProps,
+} from './select';
+
+export { Separator } from './separator';
+export type { SeparatorRootProps } from './separator';
+
+export { Slider } from './slider';
+export type {
+  SliderSize,
+  SliderColor,
+  SliderRootProps,
+  SliderLabelProps,
+  SliderValueProps,
+  SliderControlProps,
+  SliderTrackProps,
+  SliderIndicatorProps,
+  SliderThumbProps,
+} from './slider';
+
+export { Switch } from './switch';
+export type { SwitchRootProps, SwitchThumbProps } from './switch';
+
+export { Tabs } from './tabs';
+export type {
+  TabsActivationMode,
+  TabsRootProps,
+  TabsListProps,
+  TabsTabProps,
+  TabsPanelProps,
+  TabsIndicatorProps,
+} from './tabs';
+
 export { Toast, useToast } from './toast';
 export type {
   ToastProviderProps,
@@ -233,3 +292,17 @@ export type {
   ToastActionProps,
   ToastCloseProps,
 } from './toast';
+
+export { Toggle } from './toggle';
+export type { ToggleRootProps, ToggleVariant, ToggleSize } from './toggle';
+
+export { Tooltip } from './tooltip';
+export type {
+  TooltipProviderProps,
+  TooltipRootProps,
+  TooltipTriggerProps,
+  TooltipPortalProps,
+  TooltipPositionerProps,
+  TooltipPopupProps,
+  TooltipArrowProps,
+} from './tooltip';

@@ -1,0 +1,154 @@
+{
+  "name": "Switch",
+  "description": "A control that toggles a setting on or off, taking effect immediately. Built on Base UI Switch with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/switch",
+
+  "anatomy": "<Switch.Root>\n  <Switch.Thumb />\n</Switch.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "button",
+      "description": "The switch track. Renders a <button role=\"switch\"> with a hidden <input> beside it for form integration.",
+      "props": {
+        "checked": {
+          "type": "boolean",
+          "description": "Whether the switch is currently active. Use for controlled mode."
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the switch is initially active. Use for uncontrolled mode."
+        },
+        "onCheckedChange": {
+          "type": "(checked: boolean, eventDetails: object) => void",
+          "description": "Callback fired when the switch is activated or deactivated."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the component should ignore user interaction."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the user should be unable to activate or deactivate the switch."
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the user must activate the switch before submitting a form."
+        },
+        "name": {
+          "type": "string",
+          "description": "Identifies the field when a form is submitted."
+        },
+        "value": {
+          "type": "string",
+          "default": "on",
+          "description": "The value submitted with the form when the switch is on."
+        },
+        "uncheckedValue": {
+          "type": "string",
+          "description": "The value submitted with the form when the switch is off."
+        },
+        "inputRef": {
+          "type": "Ref<HTMLInputElement>",
+          "description": "A ref to access the hidden <input> element."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-checked": "Present when the switch is on.",
+        "data-unchecked": "Present when the switch is off.",
+        "data-disabled": "Present when the switch is disabled.",
+        "data-readonly": "Present when the switch is read-only.",
+        "data-required": "Present when the switch is required."
+      }
+    },
+    "Thumb": {
+      "element": "span",
+      "description": "The movable part of the switch that slides between off and on positions.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-checked": "Present when the switch is on.",
+        "data-unchecked": "Present when the switch is off."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Reduced-motion support requires a global CSS rule. StyleX cannot target media queries on transitions across both root and thumb consistently, so consumers should add this rule for accessibility.",
+    "css": "@media (prefers-reduced-motion: reduce) {\n  .basex-switch-thumb,\n  .basex-switch-root {\n    transition: none !important;\n  }\n}"
+  },
+
+  "tokens": [
+    "colorPrimary",
+    "colorPrimaryContrast",
+    "colorBorder",
+    "colorMuted",
+    "colorFocusRing",
+    "radiusFull",
+    "borderWidthThick",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "toggle-setting",
+      "signals": ["switch", "toggle", "dark mode", "on/off", "enable", "disable", "setting"],
+      "reasoning": "Switch is the standard control for binary settings that take effect immediately, like dark mode or notification toggles.",
+      "composition": "<label>\n  <Switch.Root>\n    <Switch.Thumb />\n  </Switch.Root>\n  Dark mode\n</label>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Boolean option saved with a form (e.g., terms agreement)",
+      "reasoning": "Use Checkbox for boolean state that submits with a form rather than taking effect immediately.",
+      "alternative": "Checkbox"
+    },
+    {
+      "scenario": "Single selection from a group of mutually exclusive options",
+      "reasoning": "Switch is for a single binary state. Use Radio for picking one option from many.",
+      "alternative": "Radio"
+    },
+    {
+      "scenario": "Triggering an immediate action",
+      "reasoning": "Switch represents a state, not an action. Use Button for actions.",
+      "alternative": "Button"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic switch with a label",
+      "code": "<label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n  <Switch.Root>\n    <Switch.Thumb />\n  </Switch.Root>\n  Enable notifications\n</label>"
+    },
+    {
+      "name": "controlled",
+      "description": "Controlled switch with React state",
+      "code": "const [checked, setChecked] = useState(false);\n\n<Switch.Root checked={checked} onCheckedChange={setChecked}>\n  <Switch.Thumb />\n</Switch.Root>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled switch",
+      "code": "<Switch.Root disabled defaultChecked>\n  <Switch.Thumb />\n</Switch.Root>"
+    },
+    {
+      "name": "with-field",
+      "description": "Switch wrapped in a Field for label and description",
+      "code": "<Field.Root>\n  <Field.Label>Email notifications</Field.Label>\n  <Switch.Root name=\"notifications\">\n    <Switch.Thumb />\n  </Switch.Root>\n  <Field.Description>Receive a weekly digest.</Field.Description>\n</Field.Root>"
+    }
+  ]
+}

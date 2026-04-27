@@ -1,0 +1,20 @@
+export { Select } from './select';
+export type {
+  SelectSize,
+  SelectRootProps,
+  SelectTriggerProps,
+  SelectValueProps,
+  SelectIconProps,
+  SelectPortalProps,
+  SelectPositionerProps,
+  SelectPopupProps,
+  SelectViewportProps,
+  SelectItemProps,
+  SelectItemTextProps,
+  SelectItemIndicatorProps,
+  SelectGroupProps,
+  SelectGroupLabelProps,
+  SelectSeparatorProps,
+  SelectScrollUpButtonProps,
+  SelectScrollDownButtonProps,
+} from './select';
