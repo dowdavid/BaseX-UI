@@ -6,10 +6,13 @@ import { Preview } from '../components/Preview';
 
 // Width is fully locked on transient buttons so the label changing
 // (e.g. "Save" → "Saving…" → "Saved ✓") doesn't grow or reflow neighbors.
-// 120px fits the longest label ("Publishing…") across Save/Publish/Delete
-// cycles at the toolbar's current type scale with comfortable padding;
-// eyeballed, not a token. Uses fixed `width` (not `minWidth`) so longer
-// labels can't push past the lock.
+// One constant for ALL transient action buttons in the codebase
+// (Save / Undo / Publish / Delete) so siblings in the same toolbar share
+// a unified width — mismatched widths between neighbors look broken.
+// 120px fits the longest label ("Publishing…") across all four cycles at
+// the toolbar's current type scale with comfortable padding; eyeballed,
+// not a token. Uses fixed `width` (not `minWidth`) so longer labels can't
+// push past the lock.
 const TRANSIENT_WIDTH = '120px';
 
 const styles = stylex.create({
@@ -25,6 +28,14 @@ const styles = stylex.create({
   },
   // Mirrors the toolbar's "active tab" pressed treatment — neutral, not green/red.
   publishDone: {
+    width: TRANSIENT_WIDTH,
+    boxSizing: 'border-box',
+    backgroundColor: tokens.colorText,
+    color: tokens.colorTextInverse,
+  },
+  // Same neutral treatment as publishDone — Undo is a non-destructive,
+  // non-success action so it gets the neutral confirmed coloring.
+  undoDone: {
     width: TRANSIENT_WIDTH,
     boxSizing: 'border-box',
     backgroundColor: tokens.colorText,
@@ -76,6 +87,7 @@ export function ToolbarPage() {
   const [alignment, setAlignment] = useState<string[]>(['left']);
 
   const save = useTransientAction('Save', 'Saving…', 'Saved ✓');
+  const undo = useTransientAction('Undo', 'Undoing…', 'Undone ✓');
   const publish = useTransientAction('Publish', 'Publishing…', 'Published ✓');
   const del = useTransientAction('Delete', 'Deleting…', 'Deleted ✓');
 
@@ -85,8 +97,12 @@ export function ToolbarPage() {
         title="Basic toolbar"
         description="Action buttons with a separator. Tab once to enter the toolbar, then arrow keys move between items."
         code={`<Toolbar.Root>
-  <Toolbar.Button>Save</Toolbar.Button>
-  <Toolbar.Button>Undo</Toolbar.Button>
+  <Toolbar.Button onClick={handleSave} disabled={save.state !== 'idle'}>
+    {save.label}
+  </Toolbar.Button>
+  <Toolbar.Button onClick={handleUndo} disabled={undo.state !== 'idle'}>
+    {undo.label}
+  </Toolbar.Button>
   <Toolbar.Separator />
   <Toolbar.Button onClick={handlePublish} disabled={publish.state !== 'idle'}>
     {publish.label}
@@ -94,8 +110,20 @@ export function ToolbarPage() {
 </Toolbar.Root>`}
       >
         <Toolbar.Root>
-          <Toolbar.Button>Save</Toolbar.Button>
-          <Toolbar.Button>Undo</Toolbar.Button>
+          <Toolbar.Button
+            onClick={save.onClick}
+            disabled={save.state !== 'idle'}
+            sx={save.isDone ? styles.saveSuccess : styles.transientAction}
+          >
+            {save.label}
+          </Toolbar.Button>
+          <Toolbar.Button
+            onClick={undo.onClick}
+            disabled={undo.state !== 'idle'}
+            sx={undo.isDone ? styles.undoDone : styles.transientAction}
+          >
+            {undo.label}
+          </Toolbar.Button>
           <Toolbar.Separator />
           <Toolbar.Button
             onClick={publish.onClick}
