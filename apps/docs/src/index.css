@@ -530,6 +530,77 @@
       transform: none !important;
     }
   }
+
+  /* Card-stack depth: bottom-anchored viewport. Newest toast (index 0)
+     sits in front; older toasts peek out from behind, scaled down and
+     translated upward. On viewport hover/focus, Base UI sets data-expanded
+     on every Toast.Root and exposes --toast-offset-y so the stack
+     fans out vertically and becomes individually readable. */
+  .basex-toast-viewport {
+    /* Reserve space so collapsed toasts don't shift the page; height of
+       the front-most toast plus the small peek above it. */
+    min-height: calc(var(--toast-frontmost-height, 0px) + 16px);
+  }
+
+  .basex-toast-root {
+    /* Card stack: cancel the natural flex offset so all toasts collapse onto
+       the front-most position, then peek each older one up by ~12px and
+       shrink ~5%. transform-origin top-center keeps the top edge anchored
+       so the peek shows above the front toast. */
+    --toast-peek-y: calc(var(--toast-index, 0) * -12px);
+    --toast-peek-scale: calc(1 - var(--toast-index, 0) * 0.05);
+    z-index: calc(1000 - var(--toast-index, 0));
+    transform: translate3d(
+        var(--toast-swipe-movement-x, 0),
+        calc(var(--toast-swipe-movement-y, 0px) - var(--toast-offset-y, 0px) + var(--toast-peek-y)),
+        0
+      )
+      scale(var(--toast-peek-scale));
+    transform-origin: top center;
+  }
+
+  /* Toasts beyond the visible stack fade out entirely. */
+  .basex-toast-root {
+    opacity: 1;
+  }
+  .basex-toast-root:nth-child(n + 4 of .basex-toast-root) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Subtle opacity fall-off for the visible peek-toasts. */
+  .basex-toast-root:nth-child(2 of .basex-toast-root) {
+    opacity: 0.92;
+  }
+  .basex-toast-root:nth-child(3 of .basex-toast-root) {
+    opacity: 0.82;
+  }
+
+  /* Expanded: viewport is hovered or focused. Let the natural flex layout
+     show each toast in its own row — translate only the swipe gesture. */
+  .basex-toast-root[data-expanded] {
+    --toast-peek-scale: 1;
+    transform: translate3d(var(--toast-swipe-movement-x, 0), var(--toast-swipe-movement-y, 0), 0);
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Re-apply enter/exit overrides so they win over the stack transform. */
+  .basex-toast-root[data-starting-style] {
+    transform: translate3d(0, 16px, 0) scale(var(--toast-peek-scale, 1));
+  }
+  .basex-toast-root[data-ending-style] {
+    transform: translate3d(0, 16px, 0) scale(var(--toast-peek-scale, 1));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .basex-toast-root {
+      transform: none !important;
+    }
+    .basex-toast-root[data-expanded] {
+      transform: none !important;
+    }
+  }
 }
 
 body {

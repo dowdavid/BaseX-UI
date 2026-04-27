@@ -47,12 +47,11 @@ const styles = stylex.create({
 
   root: {
     position: 'relative',
-    display: 'grid',
-    gridTemplateColumns: '1fr auto',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: tokens.space3,
-    alignItems: 'start',
     padding: tokens.space4,
-    paddingRight: tokens.space6,
     borderRadius: tokens.radiusLg,
     backgroundColor: tokens.colorSurface,
     boxShadow: tokens.shadowLg,
@@ -76,6 +75,7 @@ const styles = stylex.create({
     flexDirection: 'column',
     gap: tokens.space1,
     minWidth: 0,
+    flex: 1,
   },
 
   title: {
@@ -105,6 +105,7 @@ const styles = stylex.create({
 
   action: {
     display: 'inline-flex',
+    flexShrink: 0,
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '32px',
@@ -141,10 +142,8 @@ const styles = stylex.create({
   },
 
   close: {
-    position: 'absolute',
-    top: tokens.space2,
-    right: tokens.space2,
-    display: 'flex',
+    display: 'inline-flex',
+    flexShrink: 0,
     alignItems: 'center',
     justifyContent: 'center',
     width: '32px',
