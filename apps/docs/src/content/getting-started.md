@@ -5,8 +5,10 @@ Base-X UI is a component library built on [Base UI](https://base-ui.com) (headle
 ## Installation
 
 ```bash
-pnpm add @basex-ui/components @basex-ui/tokens @basex-ui/styles @stylexjs/stylex
+pnpm add @basex-ui/components @basex-ui/tokens @basex-ui/styles @stylexjs/stylex react react-dom
 ```
+
+`react`, `react-dom`, and `@stylexjs/stylex` are peer dependencies — include them if your project doesn't already.
 
 ## Quick start
 
