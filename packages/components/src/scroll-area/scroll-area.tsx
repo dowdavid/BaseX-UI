@@ -58,9 +58,10 @@ const styles = stylex.create({
   },
 
   thumb: {
-    flex: 1,
-    // Idle thumb uses colorIcon — neutral gray that adapts to theme.
-    // Faded via opacity in global CSS so it whispers at rest, speaks on hover.
+    // No flex/sizing here — Base UI computes the thumb's width/height from the
+    // viewport-to-content ratio and applies it via inline style. Overriding
+    // with flex:1 or hardcoded sizes would stretch the thumb to fill the track
+    // and break proportional sizing. Theme styling only.
     backgroundColor: tokens.colorIcon,
     borderRadius: tokens.radiusSm,
     position: 'relative',

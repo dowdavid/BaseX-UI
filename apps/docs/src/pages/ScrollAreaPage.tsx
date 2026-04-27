@@ -48,11 +48,11 @@ const pageStyles = stylex.create({
     whiteSpace: 'nowrap',
   },
   bothInner: {
-    width: '600px',
-    height: '400px',
+    width: '1600px',
+    height: '1400px',
     padding: tokens.space3,
     display: 'grid',
-    gridTemplateColumns: 'repeat(8, 60px)',
+    gridTemplateColumns: 'repeat(24, 60px)',
     gap: tokens.space2,
   },
   cell: {
@@ -84,7 +84,7 @@ export function ScrollAreaPage() {
         description="A bounded region with custom-styled scrollbars. The scrollbar fades in on hover or while scrolling."
         code={`<ScrollArea.Root style={{ width: 240, height: 200 }}>
   <ScrollArea.Viewport>
-    {Array.from({ length: 40 }).map((_, i) => (
+    {Array.from({ length: 100 }).map((_, i) => (
       <p key={i}>Line {i + 1}</p>
     ))}
   </ScrollArea.Viewport>
@@ -96,7 +96,7 @@ export function ScrollAreaPage() {
         <ScrollArea.Root sx={pageStyles.verticalRoot}>
           <ScrollArea.Viewport>
             <div {...stylex.props(pageStyles.innerVertical)}>
-              {Array.from({ length: 40 }).map((_, i) => (
+              {Array.from({ length: 100 }).map((_, i) => (
                 <p key={i} {...stylex.props(pageStyles.line)}>
                   Line {i + 1}
                 </p>
@@ -114,7 +114,7 @@ export function ScrollAreaPage() {
         description="Both scrollbars and a corner where they intersect."
         code={`<ScrollArea.Root style={{ width: 320, height: 200 }}>
   <ScrollArea.Viewport>
-    <div style={{ width: 600, height: 400 }}>{cells}</div>
+    <div style={{ width: 1600, height: 1400 }}>{cells}</div>
   </ScrollArea.Viewport>
   <ScrollArea.Scrollbar orientation="vertical">
     <ScrollArea.Thumb />
@@ -128,7 +128,7 @@ export function ScrollAreaPage() {
         <ScrollArea.Root sx={pageStyles.bothRoot}>
           <ScrollArea.Viewport>
             <div {...stylex.props(pageStyles.bothInner)}>
-              {Array.from({ length: 80 }).map((_, i) => (
+              {Array.from({ length: 24 * 28 }).map((_, i) => (
                 <div key={i} {...stylex.props(pageStyles.cell)}>
                   {i + 1}
                 </div>
@@ -160,7 +160,7 @@ export function ScrollAreaPage() {
         <ScrollArea.Root sx={pageStyles.horizontalRoot}>
           <ScrollArea.Viewport>
             <div {...stylex.props(pageStyles.innerHorizontal)}>
-              {Array.from({ length: 20 }).map((_, i) => (
+              {Array.from({ length: 40 }).map((_, i) => (
                 <div key={i} {...stylex.props(pageStyles.chip)}>
                   Chip {i + 1}
                 </div>
@@ -206,7 +206,7 @@ export function ScrollAreaPage() {
               <ScrollArea.Root sx={pageStyles.verticalRoot}>
                 <ScrollArea.Viewport>
                   <div {...stylex.props(pageStyles.innerVertical)}>
-                    {Array.from({ length: 60 }).map((_, i) => (
+                    {Array.from({ length: 120 }).map((_, i) => (
                       <p key={i} {...stylex.props(pageStyles.line)}>
                         Line {i + 1}
                       </p>

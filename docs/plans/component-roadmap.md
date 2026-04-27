@@ -35,9 +35,9 @@
 | 25  | Radio           | `Radio`          | Done     |              |
 | 26  | Scroll Area     | `ScrollArea`     | Done     |              |
 | 27  | Select          | `Select`         | **Next** |              |
-| 28  | Separator       | `Separator`      | —        |              |
+| 28  | Separator       | `Separator`      | Done     |              |
 | 29  | Slider          | `Slider`         | —        |              |
-| 30  | Switch          | `Switch`         | —        |              |
+| 30  | Switch          | `Switch`         | Done     |              |
 | 31  | Tabs            | `Tabs`           | —        |              |
 | 32  | Toast           | `Toast`          | —        |              |
 | 33  | Toggle          | `Toggle`         | —        |              |
@@ -47,7 +47,7 @@
 
 ## Progress
 
-- **Done**: 26 / 36
+- **Done**: 28 / 36
 - **Next**: Select
 
 ## How to Use This File
