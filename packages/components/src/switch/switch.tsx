@@ -42,7 +42,7 @@ const styles = stylex.create({
     width: '10px',
     height: '10px',
     borderRadius: tokens.radiusFull,
-    backgroundColor: tokens.colorPrimaryContrast,
+    backgroundColor: tokens.colorTextInverse,
     transform: 'translateX(0)',
     transitionProperty: 'transform',
     transitionDuration: tokens.motionDurationFast,
