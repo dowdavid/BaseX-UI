@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Switch } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -16,8 +21,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: {},
 }));
-
-import { Switch } from './index';
 
 describe('Switch', () => {
   it('exports compound parts', () => {
@@ -42,5 +45,15 @@ describe('Switch', () => {
       children: createElement(Switch.Thumb),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Switch.Root aria-label="Enable notifications">
+        <Switch.Thumb />
+      </Switch.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

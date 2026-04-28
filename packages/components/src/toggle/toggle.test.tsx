@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Toggle } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Toggle } from './index';
 
 describe('Toggle', () => {
   it('exports Root', () => {
@@ -40,5 +43,11 @@ describe('Toggle', () => {
       disabled: false,
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(<Toggle.Root aria-label="Bold">B</Toggle.Root>);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

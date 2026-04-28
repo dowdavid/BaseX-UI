@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Radio } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Radio } from './index';
 
 describe('Radio', () => {
   it('exports compound parts', () => {
@@ -49,5 +52,22 @@ describe('Radio', () => {
       }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Radio.Group aria-label="Color">
+        <Radio.Root value="red">
+          <Radio.Indicator />
+          Red
+        </Radio.Root>
+        <Radio.Root value="blue">
+          <Radio.Indicator />
+          Blue
+        </Radio.Root>
+      </Radio.Group>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

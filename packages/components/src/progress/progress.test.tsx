@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Progress } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Progress } from './index';
 
 describe('Progress', () => {
   it('exports compound parts', () => {
@@ -44,5 +47,17 @@ describe('Progress', () => {
   it('renders Root with value, max, and indeterminate props', () => {
     expect(isValidElement(createElement(Progress.Root, { value: 50, max: 100 }))).toBe(true);
     expect(isValidElement(createElement(Progress.Root, { value: null }))).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Progress.Root value={50} max={100} aria-label="Upload progress">
+        <Progress.Track>
+          <Progress.Indicator />
+        </Progress.Track>
+      </Progress.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

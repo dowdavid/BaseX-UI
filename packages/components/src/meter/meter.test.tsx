@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Meter } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -13,8 +18,6 @@ vi.mock('@stylexjs/stylex', () => {
 vi.mock('@basex-ui/tokens', () => ({
   tokens: new Proxy({}, { get: (_, p) => `var(--${String(p)})` }),
 }));
-
-import { Meter } from './index';
 
 describe('Meter', () => {
   it('exports compound parts', () => {
@@ -40,5 +43,17 @@ describe('Meter', () => {
   it('renders Root with value, min, and max props', () => {
     const el = createElement(Meter.Root, { value: 50, min: 0, max: 100 });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Meter.Root value={50} min={0} max={100} aria-label="Storage used">
+        <Meter.Track>
+          <Meter.Indicator />
+        </Meter.Track>
+      </Meter.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

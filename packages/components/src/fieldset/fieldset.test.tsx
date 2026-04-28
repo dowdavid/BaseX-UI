@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Fieldset } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -13,8 +18,6 @@ vi.mock('@stylexjs/stylex', () => {
 vi.mock('@basex-ui/tokens', () => ({
   tokens: new Proxy({}, { get: (_, p) => `var(--${String(p)})` }),
 }));
-
-import { Fieldset } from './index';
 
 describe('Fieldset', () => {
   it('exports compound parts', () => {
@@ -37,5 +40,15 @@ describe('Fieldset', () => {
       children: createElement(Fieldset.Legend, { children: 'Group' }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Fieldset.Root>
+        <Fieldset.Legend>Personal info</Fieldset.Legend>
+      </Fieldset.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Collapsible } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Collapsible } from './index';
 
 describe('Collapsible', () => {
   it('exports compound parts', () => {
@@ -47,5 +50,16 @@ describe('Collapsible', () => {
       ],
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Collapsible.Root>
+        <Collapsible.Trigger>Toggle</Collapsible.Trigger>
+        <Collapsible.Panel>Content</Collapsible.Panel>
+      </Collapsible.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

@@ -2,6 +2,7 @@ import { vi, describe, it, expect } from 'vitest';
 import { createElement, isValidElement } from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
+import { Accordion } from './index';
 
 expect.extend(toHaveNoViolations);
 
@@ -21,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Accordion } from './index';
 
 describe('Accordion', () => {
   it('exports compound parts', () => {
@@ -71,5 +70,20 @@ describe('Accordion', () => {
       children: createElement(Accordion.Item, { value: 'a' }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Accordion.Root defaultValue={['item-1']}>
+        <Accordion.Item value="item-1">
+          <Accordion.Header>
+            <Accordion.Trigger>Question</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Panel>Answer</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

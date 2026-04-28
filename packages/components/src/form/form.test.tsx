@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Form } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -18,8 +23,6 @@ vi.mock('@basex-ui/styles', () => ({
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
-import { Form } from './index';
-
 describe('Form', () => {
   it('exports the Form component', () => {
     expect(Form).toBeDefined();
@@ -36,5 +39,11 @@ describe('Form', () => {
   it('accepts errors prop for server validation', () => {
     const el = createElement(Form, { errors: { email: 'Required' } });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(<Form onSubmit={() => {}} />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

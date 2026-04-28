@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
 import { createElement, isValidElement } from 'react';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+import { ToggleGroup } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { ToggleGroup } from './index';
 
 describe('ToggleGroup', () => {
   it('exports compound parts', () => {
@@ -61,5 +64,20 @@ describe('ToggleGroup', () => {
       children: createElement(ToggleGroup.Item, { value: 'a', children: 'A' }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <ToggleGroup.Root aria-label="Text formatting">
+        <ToggleGroup.Item value="bold" aria-label="Bold">
+          B
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="italic" aria-label="Italic">
+          I
+        </ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Slider } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s,
 }));
-
-import { Slider } from './index';
 
 const PARTS = ['Root', 'Label', 'Value', 'Control', 'Track', 'Indicator', 'Thumb'] as const;
 
@@ -45,5 +48,20 @@ describe('Slider', () => {
       disabled: false,
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <Slider.Root min={0} max={100} defaultValue={50}>
+        <Slider.Control>
+          <Slider.Track>
+            <Slider.Indicator />
+            <Slider.Thumb aria-label="Volume" />
+          </Slider.Track>
+        </Slider.Control>
+      </Slider.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

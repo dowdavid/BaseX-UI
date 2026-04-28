@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { NumberField } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { NumberField } from './index';
 
 describe('NumberField', () => {
   it('exports compound parts', () => {
@@ -57,5 +60,19 @@ describe('NumberField', () => {
       disabled: false,
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <NumberField.Root min={0} max={100}>
+        <NumberField.Group>
+          <NumberField.Decrement aria-label="Decrease" />
+          <NumberField.Input aria-label="Quantity" />
+          <NumberField.Increment aria-label="Increase" />
+        </NumberField.Group>
+      </NumberField.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });
