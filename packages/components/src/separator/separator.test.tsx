@@ -1,6 +1,11 @@
 import { vi, describe, it, expect } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+import { Separator } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -18,8 +23,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: {},
 }));
-
-import { Separator } from './index';
 
 describe('Separator', () => {
   it('exports Root part', () => {
@@ -49,5 +52,11 @@ describe('Separator', () => {
     const html = renderToStaticMarkup(createElement(Separator.Root, { decorative: true }));
     expect(html).toContain('role="none"');
     expect(html).not.toContain('aria-orientation');
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(<Separator.Root />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

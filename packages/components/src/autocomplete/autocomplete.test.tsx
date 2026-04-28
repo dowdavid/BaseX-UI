@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Autocomplete } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Autocomplete } from './index';
 
 const PARTS = ['Root', 'Input', 'Popup', 'Item', 'Empty', 'Group', 'GroupLabel'] as const;
 
@@ -38,5 +41,12 @@ describe('Autocomplete', () => {
   it('renders Root as a valid React element', () => {
     const el = createElement(Autocomplete.Root, { items: ['a', 'b'] });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders Root without a11y violations', async () => {
+    const { container } = render(<Autocomplete.Root items={['a', 'b']} />);
+    // axe: portal content not inspectable in jsdom — covered by browser axe run
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

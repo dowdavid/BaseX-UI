@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Input } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Input } from './index';
 
 describe('Input', () => {
   it('exports the Input component', () => {
@@ -38,5 +41,11 @@ describe('Input', () => {
       const el = createElement(Input, { size, disabled: false, value: '', onChange: () => {} });
       expect(isValidElement(el)).toBe(true);
     }
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(<Input aria-label="Search" />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

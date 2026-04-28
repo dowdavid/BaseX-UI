@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Menu } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -17,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: {},
 }));
-
-import { Menu } from './index';
 
 const PARTS = [
   'Root',
@@ -58,5 +61,12 @@ describe('Menu', () => {
   it('renders Root with controlled open state', () => {
     const el = createElement(Menu.Root, { open: false, onOpenChange: () => {} });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders Root without a11y violations', async () => {
+    const { container } = render(<Menu.Root />);
+    // axe: portal content not inspectable in jsdom — covered by browser axe run
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

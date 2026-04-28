@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { ScrollArea } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -13,8 +18,6 @@ vi.mock('@stylexjs/stylex', () => {
 vi.mock('@basex-ui/tokens', () => ({
   tokens: new Proxy({}, { get: (_, p) => `var(--${String(p)})` }),
 }));
-
-import { ScrollArea } from './index';
 
 describe('ScrollArea', () => {
   it('exports compound parts', () => {
@@ -52,5 +55,19 @@ describe('ScrollArea', () => {
       }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders without a11y violations', async () => {
+    const { container } = render(
+      <ScrollArea.Root>
+        <ScrollArea.Viewport>Scrollable content</ScrollArea.Viewport>
+        <ScrollArea.Scrollbar>
+          <ScrollArea.Thumb />
+        </ScrollArea.Scrollbar>
+        <ScrollArea.Corner />
+      </ScrollArea.Root>,
+    );
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

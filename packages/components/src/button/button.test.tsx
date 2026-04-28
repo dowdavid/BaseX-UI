@@ -2,6 +2,7 @@ import { vi, describe, it, expect } from 'vitest';
 import { createElement, isValidElement } from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
+import { Button } from './index';
 
 expect.extend(toHaveNoViolations);
 
@@ -21,8 +22,6 @@ vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
-
-import { Button } from './index';
 
 describe('Button', () => {
   it('exports the Button component', () => {

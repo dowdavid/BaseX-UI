@@ -1,5 +1,10 @@
 import { vi, describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
+import { Toast, useToast } from './index';
+
+expect.extend(toHaveNoViolations);
 
 vi.mock('@stylexjs/stylex', () => {
   const m = {
@@ -13,8 +18,6 @@ vi.mock('@stylexjs/stylex', () => {
 vi.mock('@basex-ui/tokens', () => ({
   tokens: new Proxy({}, { get: (_, p) => `var(--${String(p)})` }),
 }));
-
-import { Toast, useToast } from './index';
 
 const PARTS = [
   'Provider',
@@ -48,5 +51,12 @@ describe('Toast', () => {
   it('renders Provider as a valid React element', () => {
     const el = createElement(Toast.Provider, { timeout: 5000 });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('renders Provider without a11y violations', async () => {
+    const { container } = render(<Toast.Provider timeout={5000} />);
+    // axe: portal content not inspectable in jsdom — covered by browser axe run
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });
