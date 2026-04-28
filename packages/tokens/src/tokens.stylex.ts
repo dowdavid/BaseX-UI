@@ -27,10 +27,15 @@ export const tokens = stylex.defineVars({
   colorDestructiveActive: 'oklch(0.45 0.26 25)',
   colorDestructiveContrast: 'oklch(0.98 0 0)',
   colorDestructiveMuted: 'oklch(0.55 0.22 25 / 0.1)',
+  // Foreground variant for destructive text on neutral surfaces (menus, fields,
+  // ghost/outline buttons). Distinct from `colorDestructive` (used as bg fill).
+  colorDestructiveText: 'oklch(0.45 0.22 25)',
 
   // Success palette
   colorSuccess: 'oklch(0.65 0.17 145)',
   colorSuccessContrast: 'oklch(0.98 0 0)',
+  // Foreground variant for success text on neutral surfaces.
+  colorSuccessText: 'oklch(0.45 0.17 145)',
 
   // Muted
   colorMuted: 'oklch(0.93 0.005 260)',
@@ -45,8 +50,16 @@ export const tokens = stylex.defineVars({
   colorOverlay: 'oklch(0.15 0 0 / 0.6)',
 
   // Borders
-  colorBorder: 'oklch(0.85 0.01 260)',
-  colorBorderMuted: 'oklch(0.91 0.005 260)',
+  colorBorder: 'oklch(0.75 0.01 260)',
+  colorBorderMuted: 'oklch(0.85 0.01 260)',
+  // Stronger border for form-field outlines (input, select, checkbox unchecked,
+  // etc.) — needs WCAG 1.4.11 (3:1) against the surface.
+  colorBorderStrong: 'oklch(0.7 0.01 260)',
+  // Border for floating surfaces (popover, tooltip, menu, select listbox, etc.)
+  // — distinct from in-popup separators.
+  colorPopoverBorder: 'oklch(0.78 0.01 260)',
+  // Empty-track color for slider, progress, meter.
+  colorTrack: 'oklch(0.88 0.005 260)',
 
   // Text
   colorText: 'oklch(0.15 0.02 260)',
