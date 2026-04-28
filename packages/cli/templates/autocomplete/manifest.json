@@ -1,0 +1,295 @@
+{
+  "name": "Autocomplete",
+  "description": "A text input with a filterable suggestion dropdown. Built on Base UI Autocomplete with StyleX styling. Input-only style with built-in clear button.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/autocomplete",
+
+  "anatomy": "<Autocomplete.Root items={items}>\n  <Autocomplete.Input />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty />\n    <Autocomplete.Item />\n  </Autocomplete.Popup>\n</Autocomplete.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "State container. Manages filtering, open state, and keyboard navigation. Renders no DOM element.",
+      "props": {
+        "items": {
+          "type": "ItemValue[] | Group[]",
+          "required": true,
+          "description": "Items or grouped items to display in the suggestion list."
+        },
+        "value": {
+          "type": "string",
+          "description": "Controlled input value."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Initial input value for uncontrolled mode."
+        },
+        "onValueChange": {
+          "type": "(value: string, details: ChangeEventDetails) => void",
+          "description": "Callback fired when the input value changes."
+        },
+        "open": {
+          "type": "boolean",
+          "description": "Controlled popup visibility."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initial popup state."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, details: ChangeEventDetails) => void",
+          "description": "Callback fired when the popup opens or closes."
+        },
+        "mode": {
+          "type": "'list' | 'both' | 'inline' | 'none'",
+          "default": "list",
+          "description": "Filtering and inline autocompletion behavior."
+        },
+        "filter": {
+          "type": "(itemValue, query, itemToString?) => boolean",
+          "description": "Custom filter function. Built-in contains filter used by default."
+        },
+        "filteredItems": {
+          "type": "any[] | Group[]",
+          "description": "Externally filtered items (for async search). Bypasses built-in filter."
+        },
+        "autoHighlight": {
+          "type": "boolean | 'always'",
+          "default": false,
+          "description": "Auto-highlight the first matching item as user types."
+        },
+        "limit": {
+          "type": "number",
+          "default": -1,
+          "description": "Maximum number of visible items. -1 for unlimited."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable all interactions."
+        },
+        "name": {
+          "type": "string",
+          "description": "Form field name."
+        },
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Size of the input and dropdown items. Aligns with Button sizes (sm=32px, md=36px, lg=40px)."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Input": {
+      "element": "input",
+      "description": "Text input with built-in clear button. Clear button appears automatically when input has text.",
+      "props": {
+        "placeholder": {
+          "type": "string",
+          "description": "Placeholder text shown when input is empty."
+        },
+        "startAddon": {
+          "type": "ReactNode",
+          "description": "An icon or element positioned at the start of the input."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the suggestion popup is open.",
+        "data-disabled": "Present when the input is disabled.",
+        "data-readonly": "Present when the input is read-only.",
+        "data-required": "Present when the input is required.",
+        "data-focused": "Present when the input is focused.",
+        "data-filled": "Present when the input has a value."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "Dropdown containing suggestion items. Portal, Positioner, and List are internalized.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the popup is open.",
+        "data-closed": "Present when the popup is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation.",
+        "data-side": "Actual positioned side (top/bottom/left/right).",
+        "data-empty": "Present when no items match the filter."
+      },
+      "cssVariables": {
+        "--anchor-width": "Width of the input element.",
+        "--anchor-height": "Height of the input element.",
+        "--available-height": "Available height for the popup.",
+        "--available-width": "Available width for the popup.",
+        "--transform-origin": "Computed transform origin for animations."
+      }
+    },
+    "Item": {
+      "element": "div",
+      "description": "A single suggestion row in the dropdown.",
+      "props": {
+        "value": {
+          "type": "any",
+          "required": true,
+          "description": "The item value. Used for filtering and selection."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable this item."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-highlighted": "Present when the item has keyboard/pointer focus.",
+        "data-selected": "Present when the item matches the current input value.",
+        "data-disabled": "Present when the item is disabled."
+      }
+    },
+    "Empty": {
+      "element": "div",
+      "description": "Shown when no items match the current filter query.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Group": {
+      "element": "div",
+      "description": "Groups related items with a label.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "GroupLabel": {
+      "element": "div",
+      "description": "Heading for a group of items.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Popup fade and slide animation requires global CSS rules inside @layer priority1.",
+    "css": "@layer priority1 {\n  .basex-autocomplete-popup {\n    opacity: 1;\n    transform: translateY(0);\n    transition: opacity 150ms ease-out, transform 150ms ease-out;\n  }\n  .basex-autocomplete-popup[data-starting-style],\n  .basex-autocomplete-popup[data-ending-style] {\n    opacity: 0;\n    transform: translateY(-4px);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorBorder",
+    "colorBorderMuted",
+    "colorSurface",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorFocusRing",
+    "fontFamilySans",
+    "fontSizeXs",
+    "fontSizeSm",
+    "fontSizeMd",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "letterSpacingWide",
+    "radiusMd",
+    "radiusSm",
+    "shadowMd",
+    "borderWidthDefault",
+    "space1",
+    "space1h",
+    "space2",
+    "space2h",
+    "space3",
+    "space3h",
+    "space4",
+    "space8",
+    "space10",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "search-with-suggestions",
+      "signals": [
+        "search",
+        "autocomplete",
+        "search input",
+        "suggestion",
+        "typeahead",
+        "search box"
+      ],
+      "reasoning": "Autocomplete is the primary component for text inputs that show filtered suggestions as the user types.",
+      "composition": "<Autocomplete.Root items={items}>\n  <Autocomplete.Input placeholder=\"Search...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No results found.</Autocomplete.Empty>\n    {(item) => (\n      <Autocomplete.Item key={item.id} value={item}>\n        {item.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "intent": "command-palette",
+      "signals": ["command palette", "command menu", "quick actions", "spotlight", "cmd+k"],
+      "reasoning": "Autocomplete provides the text-input-with-filtered-list pattern used in command palettes. Combine with a Dialog for the overlay.",
+      "composition": "<Autocomplete.Root items={commands}>\n  <Autocomplete.Input placeholder=\"Type a command...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No commands found.</Autocomplete.Empty>\n    {(cmd) => (\n      <Autocomplete.Item key={cmd.id} value={cmd}>\n        {cmd.label}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "intent": "tag-search",
+      "signals": ["tag input", "label search", "category filter", "filter by tag"],
+      "reasoning": "Autocomplete works well for searching through and selecting from a list of tags or labels.",
+      "composition": "<Autocomplete.Root items={tags}>\n  <Autocomplete.Input placeholder=\"Search tags...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No tags found.</Autocomplete.Empty>\n    {(tag) => (\n      <Autocomplete.Item key={tag.id} value={tag}>\n        {tag.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "User must select from a fixed set of options (no free text)",
+      "reasoning": "Use Select or Combobox instead. Autocomplete allows free-form text input — the value is the text itself, not a selection.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "scenario": "Multiple selections needed (tags, chips)",
+      "reasoning": "Autocomplete does not support multiple selection. Use Combobox with multiple mode which provides Chips parts.",
+      "alternative": "Combobox"
+    },
+    {
+      "scenario": "Simple text input without suggestions",
+      "reasoning": "Use Input directly. Autocomplete adds overhead for the popup and filtering logic that is unnecessary without suggestions.",
+      "alternative": "Input"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic search with suggestions",
+      "code": "const fruits = [\n  { id: 1, value: 'Apple' },\n  { id: 2, value: 'Banana' },\n  { id: 3, value: 'Cherry' },\n];\n\n<Autocomplete.Root items={fruits}>\n  <Autocomplete.Input placeholder=\"Search fruits...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No fruits found.</Autocomplete.Empty>\n    {(fruit) => (\n      <Autocomplete.Item key={fruit.id} value={fruit}>\n        {fruit.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "name": "grouped",
+      "description": "Grouped suggestions with labels",
+      "code": "<Autocomplete.Root items={groupedItems}>\n  <Autocomplete.Input placeholder=\"Search produce...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No results.</Autocomplete.Empty>\n    {(group) => (\n      <Autocomplete.Group key={group.label}>\n        <Autocomplete.GroupLabel>{group.label}</Autocomplete.GroupLabel>\n        {group.items.map((item) => (\n          <Autocomplete.Item key={item.id} value={item}>\n            {item.value}\n          </Autocomplete.Item>\n        ))}\n      </Autocomplete.Group>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    },
+    {
+      "name": "auto-highlight",
+      "description": "First match auto-highlighted as user types",
+      "code": "<Autocomplete.Root items={items} autoHighlight>\n  <Autocomplete.Input placeholder=\"Start typing...\" />\n  <Autocomplete.Popup>\n    <Autocomplete.Empty>No results.</Autocomplete.Empty>\n    {(item) => (\n      <Autocomplete.Item key={item.id} value={item}>\n        {item.value}\n      </Autocomplete.Item>\n    )}\n  </Autocomplete.Popup>\n</Autocomplete.Root>"
+    }
+  ]
+}

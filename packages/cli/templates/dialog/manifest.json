@@ -1,0 +1,295 @@
+{
+  "name": "Dialog",
+  "description": "A general-purpose modal overlay for displaying content, forms, or interactive flows. Dismissible via backdrop click or Escape. Supports Header/Panel/Footer layout, scroll indicators, nested stacking, and an optional close button. Built on Base UI Dialog with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/dialog",
+
+  "anatomy": "<Dialog.Root>\n  <Dialog.Trigger />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <Dialog.Header>\n        <Dialog.Title />\n        <Dialog.Description />\n      </Dialog.Header>\n      <Dialog.Panel>\n        {/* scrollable content */}\n      </Dialog.Panel>\n      <Dialog.Footer>\n        <Dialog.Close />\n      </Dialog.Footer>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "State container. Renders no DOM element.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initial open state for uncontrolled mode."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, eventDetails: ChangeEventDetails) => void",
+          "description": "Callback fired when the dialog opens or closes."
+        },
+        "onOpenChangeComplete": {
+          "type": "(open: boolean) => void",
+          "description": "Callback fired after open/close animations complete."
+        },
+        "dismissible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the dialog closes on backdrop click or Escape key."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "Button that opens the dialog. Unstyled by default — use the render prop to swap in a styled Button.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element. Use to render a styled Button."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the dialog is open.",
+        "data-disabled": "Present when the trigger is disabled."
+      }
+    },
+    "Portal": {
+      "element": "div",
+      "description": "Renders children in a React portal outside the DOM tree.",
+      "props": {
+        "keepMounted": {
+          "type": "boolean",
+          "description": "Keep in DOM when closed. Pass true if you need exit animations and handle closed-state visibility in CSS."
+        },
+        "container": {
+          "type": "HTMLElement | ShadowRoot | RefObject",
+          "description": "Target parent element for the portal."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Backdrop": {
+      "element": "div",
+      "description": "Semi-transparent overlay behind the dialog. Clicking it closes the dialog (unless dismissible is false). Has fade animation via global CSS.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the dialog is open.",
+        "data-closed": "Present when the dialog is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "Centered card containing the dialog content. Viewport is wrapped internally for centering and scroll management. Includes an optional close button (X icon) in the top-right corner.",
+      "props": {
+        "showCloseButton": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show the X close button in the top-right corner."
+        },
+        "initialFocus": {
+          "type": "boolean | RefObject | () => HTMLElement",
+          "description": "Element to focus when the dialog opens."
+        },
+        "finalFocus": {
+          "type": "boolean | RefObject | () => HTMLElement",
+          "description": "Element to focus when the dialog closes."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the dialog is open.",
+        "data-closed": "Present when the dialog is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation.",
+        "data-nested": "Present when nested inside another dialog.",
+        "data-nested-dialog-open": "Present when a child dialog is open."
+      },
+      "cssVariables": {
+        "--nested-dialogs": "Count of nested open dialogs (integer)."
+      }
+    },
+    "Header": {
+      "element": "div",
+      "description": "Container for Title and Description. Provides consistent padding above the scrollable Panel. Custom part not in Base UI.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Title": {
+      "element": "h2",
+      "description": "Dialog heading. Automatically wired to aria-labelledby.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Description": {
+      "element": "p",
+      "description": "Dialog body text below the title. Automatically wired to aria-describedby.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Panel": {
+      "element": "div",
+      "description": "Scrollable content area between Header and Footer. Uses data attributes and inset box-shadow for scroll indicators. Custom part not in Base UI.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-scroll-top": "Present when content is scrolled away from the top (more content above).",
+        "data-scroll-bottom": "Present when there is more content below the visible area."
+      }
+    },
+    "Footer": {
+      "element": "div",
+      "description": "Flex row for action buttons (Cancel/Submit/Done). Custom part not in Base UI.",
+      "props": {
+        "variant": {
+          "type": "'default' | 'bordered'",
+          "default": "default",
+          "description": "Visual style. 'default' has no top border, 'bordered' adds a separator line."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Close": {
+      "element": "button",
+      "description": "Button that closes the dialog on click. Unstyled — use the render prop to swap in a styled Button.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element. Use to render a styled Button."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when disabled."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Backdrop fade, popup scale, nested stagger, and scroll indicator animations require global CSS rules inside @layer priority1. StyleX cannot target data-attribute selectors, so these rules must live in the consumer's global stylesheet.",
+    "css": "@layer priority1 {\n  /* Dialog backdrop fade animation — Enter: 200ms ease-out */\n  .basex-dialog-backdrop {\n    opacity: 1;\n    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-dialog-backdrop[data-starting-style],\n  .basex-dialog-backdrop[data-ending-style] {\n    opacity: 0;\n  }\n\n  /* Dialog popup scale/fade animation — Enter: 200ms ease-out */\n  .basex-dialog-popup {\n    opacity: 1;\n    transform: scale(1) translateY(0);\n    transition: opacity 200ms cubic-bezier(0, 0, 0.2, 1), transform 200ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-dialog-popup[data-starting-style],\n  .basex-dialog-popup[data-ending-style] {\n    opacity: 0;\n    transform: scale(0.95) translateY(0);\n  }\n\n  /* Nested dialog: parent recedes — Move: 200ms ease-in-out */\n  .basex-dialog-popup[data-nested-dialog-open] {\n    transform: scale(0.94) translateY(-8px);\n    opacity: 0.4;\n    pointer-events: none;\n    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);\n  }\n\n  /* Dialog panel scroll indicators — State: 100ms ease-out */\n  .basex-dialog-panel {\n    --_shadow-top: inset 0 8px 6px -6px transparent;\n    --_shadow-bottom: inset 0 -8px 6px -6px transparent;\n    box-shadow: var(--_shadow-top), var(--_shadow-bottom);\n    transition: box-shadow 100ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-dialog-panel[data-scroll-top] {\n    --_shadow-top: inset 0 8px 6px -6px oklch(0 0 0 / 0.08);\n  }\n  .basex-dialog-panel[data-scroll-bottom] {\n    --_shadow-bottom: inset 0 -8px 6px -6px oklch(0 0 0 / 0.08);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorOverlay",
+    "colorSurface",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorBorderMuted",
+    "fontFamilySans",
+    "fontSizeLg",
+    "fontSizeSm",
+    "fontWeightSemibold",
+    "lineHeightTight",
+    "lineHeightNormal",
+    "radiusLg",
+    "radiusSm",
+    "shadowLg",
+    "motionDurationFast",
+    "motionEaseOut",
+    "space1",
+    "space3",
+    "space4",
+    "space5",
+    "space6"
+  ],
+
+  "intents": [
+    {
+      "intent": "display-detail-overlay",
+      "signals": ["view details", "show info", "more info", "detail modal", "preview", "lightbox"],
+      "reasoning": "Dialog is the right component for displaying focused informational content in an overlay that the user can easily dismiss.",
+      "composition": "<Dialog.Root>\n  <Dialog.Trigger render={<Button variant=\"outline\">View details</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <Dialog.Header>\n        <Dialog.Title>Item details</Dialog.Title>\n        <Dialog.Description>Detail content here.</Dialog.Description>\n      </Dialog.Header>\n      <Dialog.Panel>\n        {/* detail content */}\n      </Dialog.Panel>\n      <Dialog.Footer>\n        <Dialog.Close render={<Button variant=\"ghost\">Close</Button>} />\n      </Dialog.Footer>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    },
+    {
+      "intent": "modal-form",
+      "signals": ["edit", "create", "new", "form modal", "edit profile", "add item", "compose"],
+      "reasoning": "Dialog provides modal focus for form interactions, preventing accidental clicks outside while the user is editing.",
+      "composition": "<Dialog.Root open={open} onOpenChange={setOpen}>\n  <Dialog.Trigger render={<Button>Edit</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>\n        <Dialog.Header>\n          <Dialog.Title>Edit item</Dialog.Title>\n          <Dialog.Description>Update the fields below.</Dialog.Description>\n        </Dialog.Header>\n        <Dialog.Panel>\n          {/* form fields */}\n        </Dialog.Panel>\n        <Dialog.Footer>\n          <Dialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n          <Button type=\"submit\">Save</Button>\n        </Dialog.Footer>\n      </form>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    },
+    {
+      "intent": "settings-panel",
+      "signals": ["settings", "preferences", "configuration", "options modal"],
+      "reasoning": "Dialog works well for focused settings interactions that benefit from modal isolation without the forced-acknowledgment behaviour of AlertDialog.",
+      "composition": "<Dialog.Root>\n  <Dialog.Trigger render={<Button variant=\"outline\">Settings</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <Dialog.Header>\n        <Dialog.Title>Settings</Dialog.Title>\n        <Dialog.Description>Configure your preferences.</Dialog.Description>\n      </Dialog.Header>\n      <Dialog.Panel>\n        {/* settings controls */}\n      </Dialog.Panel>\n      <Dialog.Footer>\n        <Dialog.Close render={<Button>Done</Button>} />\n      </Dialog.Footer>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Use AlertDialog instead. Dialog can be dismissed by clicking the backdrop, which is too easy to accidentally close for critical confirmations.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "scenario": "Non-critical transient feedback or status updates",
+      "reasoning": "Use Toast for ephemeral messages. Dialog demands too much attention for simple feedback.",
+      "alternative": "Toast"
+    },
+    {
+      "scenario": "Selecting from a list of options",
+      "reasoning": "Use Select or Combobox for option selection. Dialog is overweight for a simple pick-one interaction.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "scenario": "Content that should remain visible alongside the page",
+      "reasoning": "Dialog blocks the page behind an overlay. Use Collapsible or inline expansion for content that should coexist with the page.",
+      "alternative": "Collapsible"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "form",
+      "description": "Form dialog with scrollable content, submit and cancel",
+      "code": "const [open, setOpen] = useState(false);\n\n<Dialog.Root open={open} onOpenChange={setOpen}>\n  <Dialog.Trigger render={<Button>Edit profile</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>\n        <Dialog.Header>\n          <Dialog.Title>Edit profile</Dialog.Title>\n          <Dialog.Description>Update your display name and bio.</Dialog.Description>\n        </Dialog.Header>\n        <Dialog.Panel>\n          {/* form fields */}\n        </Dialog.Panel>\n        <Dialog.Footer>\n          <Dialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n          <Button type=\"submit\">Save</Button>\n        </Dialog.Footer>\n      </form>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    },
+    {
+      "name": "settings",
+      "description": "Controlled dialog with interactive content",
+      "code": "const [open, setOpen] = useState(false);\n\n<Dialog.Root open={open} onOpenChange={setOpen}>\n  <Dialog.Trigger render={<Button variant=\"outline\">Settings</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <Dialog.Header>\n        <Dialog.Title>Notification settings</Dialog.Title>\n        <Dialog.Description>Choose which notifications you receive.</Dialog.Description>\n      </Dialog.Header>\n      <Dialog.Panel>\n        <CheckboxGroup.Root>\n          {/* checkbox items */}\n        </CheckboxGroup.Root>\n      </Dialog.Panel>\n      <Dialog.Footer>\n        <Dialog.Close render={<Button>Done</Button>} />\n      </Dialog.Footer>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    },
+    {
+      "name": "nested",
+      "description": "Nested dialogs with stagger animation",
+      "code": "<Dialog.Root>\n  <Dialog.Trigger render={<Button>Open</Button>} />\n  <Dialog.Portal>\n    <Dialog.Backdrop />\n    <Dialog.Popup>\n      <Dialog.Header>\n        <Dialog.Title>Parent dialog</Dialog.Title>\n        <Dialog.Description>This dialog can open another dialog on top.</Dialog.Description>\n      </Dialog.Header>\n      <Dialog.Footer>\n        <Dialog.Close render={<Button variant=\"ghost\">Close</Button>} />\n        <Dialog.Root>\n          <Dialog.Trigger render={<Button variant=\"outline\">Open nested</Button>} />\n          <Dialog.Portal>\n            <Dialog.Backdrop />\n            <Dialog.Popup>\n              <Dialog.Header>\n                <Dialog.Title>Nested dialog</Dialog.Title>\n                <Dialog.Description>This is a nested dialog.</Dialog.Description>\n              </Dialog.Header>\n              <Dialog.Footer>\n                <Dialog.Close render={<Button>Close</Button>} />\n              </Dialog.Footer>\n            </Dialog.Popup>\n          </Dialog.Portal>\n        </Dialog.Root>\n      </Dialog.Footer>\n    </Dialog.Popup>\n  </Dialog.Portal>\n</Dialog.Root>"
+    }
+  ]
+}

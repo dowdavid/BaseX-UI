@@ -1,0 +1,179 @@
+{
+  "name": "ContextMenu",
+  "description": "A right-click (or long-press on touch) context menu, supporting items, checkbox items, radio items, submenus, and keyboard navigation. Built on Base UI ContextMenu with StyleX styling.",
+  "category": "navigation",
+  "baseComponent": "@base-ui/react/context-menu",
+
+  "anatomy": "<ContextMenu.Root>\n  <ContextMenu.Trigger />\n  <ContextMenu.Portal>\n    <ContextMenu.Positioner>\n      <ContextMenu.Popup>\n        <ContextMenu.Item />\n        <ContextMenu.Separator />\n      </ContextMenu.Popup>\n    </ContextMenu.Positioner>\n  </ContextMenu.Portal>\n</ContextMenu.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "Provides context menu state and context. Does not render a DOM element.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Whether the context menu is open (controlled)."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, event: Event) => void",
+          "description": "Callback when the context menu open state changes."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "div",
+      "description": "The area that opens the context menu on right-click or long press. Renders a div, not a button.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-pressed": "Present when the trigger has been activated.",
+        "data-disabled": "Present when the trigger is disabled."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "The context menu popup container. Contains the menu items.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the menu is open.",
+        "data-closed": "Present when the menu is closed.",
+        "data-starting-style": "Present on first render when opening for CSS transition.",
+        "data-ending-style": "Present when closing for CSS transition."
+      }
+    },
+    "Item": {
+      "element": "div",
+      "description": "A context menu item. Supports keyboard navigation and focus management.",
+      "props": {
+        "destructive": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the item represents a destructive action, styled with destructive colors."
+        },
+        "closeOnClick": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether clicking the item closes the menu."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-highlighted": "Present when the item is highlighted via keyboard or pointer.",
+        "data-disabled": "Present when the item is disabled."
+      }
+    },
+    "Separator": {
+      "element": "div",
+      "description": "A visual separator between context menu items.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Context menu popup enter/exit animations using Base UI data attributes.",
+    "css": ".basex-context-menu-popup {\n  opacity: 1;\n  transform: scale(1);\n  transition: opacity 150ms ease-out, transform 150ms ease-out;\n}\n.basex-context-menu-popup[data-starting-style],\n.basex-context-menu-popup[data-ending-style] {\n  opacity: 0;\n  transform: scale(0.95);\n}"
+  },
+
+  "tokens": [
+    "colorText",
+    "colorTextMuted",
+    "colorBorder",
+    "colorBorderMuted",
+    "colorMuted",
+    "colorSurface",
+    "colorDestructive",
+    "colorDestructiveMuted",
+    "colorFocusRing",
+    "space1",
+    "space1h",
+    "space2",
+    "space3",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontSizeXs",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "letterSpacingWide",
+    "radiusLg",
+    "borderWidthDefault",
+    "shadowLg",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "right-click-menu",
+      "signals": [
+        "context menu",
+        "right click menu",
+        "right-click menu",
+        "long press menu",
+        "secondary click",
+        "contextual actions"
+      ],
+      "reasoning": "ContextMenu is the primary component for right-click or long-press triggered menus. It handles the activation gesture, keyboard navigation, and ARIA attributes.",
+      "composition": "<ContextMenu.Root>\n  <ContextMenu.Trigger>Right-click here</ContextMenu.Trigger>\n  <ContextMenu.Portal>\n    <ContextMenu.Positioner>\n      <ContextMenu.Popup>\n        <ContextMenu.Item>Cut</ContextMenu.Item>\n        <ContextMenu.Item>Copy</ContextMenu.Item>\n        <ContextMenu.Item>Paste</ContextMenu.Item>\n        <ContextMenu.Separator />\n        <ContextMenu.Item destructive>Delete</ContextMenu.Item>\n      </ContextMenu.Popup>\n    </ContextMenu.Positioner>\n  </ContextMenu.Portal>\n</ContextMenu.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Menu triggered by a visible button",
+      "reasoning": "Use Menu instead. ContextMenu hides activation behind a right-click gesture that is not discoverable on its own.",
+      "alternative": "Menu"
+    },
+    {
+      "scenario": "Selecting a single value from a list (form input)",
+      "reasoning": "Use Select or Combobox for form value selection. ContextMenu is for actions, not form values.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "scenario": "The only way to access an action",
+      "reasoning": "Right-click is not discoverable. Always provide an alternative path (toolbar button, Menu) for any action exposed via ContextMenu.",
+      "alternative": "Toolbar or Menu in addition to ContextMenu"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic right-click context menu",
+      "code": "<ContextMenu.Root>\n  <ContextMenu.Trigger>Right-click here</ContextMenu.Trigger>\n  <ContextMenu.Portal>\n    <ContextMenu.Positioner>\n      <ContextMenu.Popup>\n        <ContextMenu.Item>Cut</ContextMenu.Item>\n        <ContextMenu.Item>Copy</ContextMenu.Item>\n        <ContextMenu.Item>Paste</ContextMenu.Item>\n        <ContextMenu.Separator />\n        <ContextMenu.Item destructive>Delete</ContextMenu.Item>\n      </ContextMenu.Popup>\n    </ContextMenu.Positioner>\n  </ContextMenu.Portal>\n</ContextMenu.Root>"
+    },
+    {
+      "name": "with-groups",
+      "description": "Context menu with labeled groups",
+      "code": "<ContextMenu.Root>\n  <ContextMenu.Trigger>Right-click here</ContextMenu.Trigger>\n  <ContextMenu.Portal>\n    <ContextMenu.Positioner>\n      <ContextMenu.Popup>\n        <ContextMenu.Group>\n          <ContextMenu.GroupLabel>Edit</ContextMenu.GroupLabel>\n          <ContextMenu.Item>Cut</ContextMenu.Item>\n          <ContextMenu.Item>Copy</ContextMenu.Item>\n        </ContextMenu.Group>\n        <ContextMenu.Separator />\n        <ContextMenu.Group>\n          <ContextMenu.GroupLabel>View</ContextMenu.GroupLabel>\n          <ContextMenu.Item>Zoom In</ContextMenu.Item>\n          <ContextMenu.Item>Zoom Out</ContextMenu.Item>\n        </ContextMenu.Group>\n      </ContextMenu.Popup>\n    </ContextMenu.Positioner>\n  </ContextMenu.Portal>\n</ContextMenu.Root>"
+    },
+    {
+      "name": "with-submenu",
+      "description": "Context menu with a nested submenu",
+      "code": "<ContextMenu.Root>\n  <ContextMenu.Trigger>Right-click here</ContextMenu.Trigger>\n  <ContextMenu.Portal>\n    <ContextMenu.Positioner>\n      <ContextMenu.Popup>\n        <ContextMenu.Item>Open</ContextMenu.Item>\n        <ContextMenu.SubmenuRoot>\n          <ContextMenu.SubmenuTrigger>Share</ContextMenu.SubmenuTrigger>\n          <ContextMenu.Portal>\n            <ContextMenu.Positioner>\n              <ContextMenu.Popup>\n                <ContextMenu.Item>Email</ContextMenu.Item>\n                <ContextMenu.Item>Copy Link</ContextMenu.Item>\n              </ContextMenu.Popup>\n            </ContextMenu.Positioner>\n          </ContextMenu.Portal>\n        </ContextMenu.SubmenuRoot>\n      </ContextMenu.Popup>\n    </ContextMenu.Positioner>\n  </ContextMenu.Portal>\n</ContextMenu.Root>"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "name": "Field",
+  "description": "A form field wrapper that connects a label, description, input control, and validation error message with proper accessibility attributes. Built on Base UI Field with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/field",
+
+  "anatomy": "<Field.Root>\n  <Field.Label />\n  <Field.Description />\n  <Field.Control />\n  <Field.Error />\n</Field.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Groups label, description, control, and error. Renders a flex-column container with space1 (4px) gap between parts (label → control, control → error, etc.).",
+      "props": {
+        "invalid": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the field is in an invalid state. When true, Error children are shown and Control receives invalid styling."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the entire field is disabled. Propagates to Control."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the field, used when submitting a form."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-valid": "Present when the field is valid.",
+        "data-invalid": "Present when the field is invalid.",
+        "data-dirty": "Present when the field value has been modified.",
+        "data-touched": "Present when the field has been focused and blurred."
+      }
+    },
+    "Label": {
+      "element": "label",
+      "description": "The label for the field. Automatically linked to Control via htmlFor.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-valid": "Present when the field is valid.",
+        "data-invalid": "Present when the field is invalid.",
+        "data-dirty": "Present when the field value has been modified.",
+        "data-touched": "Present when the field has been focused and blurred."
+      }
+    },
+    "Description": {
+      "element": "p",
+      "description": "Hint text displayed below the label. Linked to Control via aria-describedby.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-valid": "Present when the field is valid.",
+        "data-invalid": "Present when the field is invalid.",
+        "data-dirty": "Present when the field value has been modified.",
+        "data-touched": "Present when the field has been focused and blurred."
+      }
+    },
+    "Error": {
+      "element": "div",
+      "description": "Validation error message, shown when the field is invalid.",
+      "props": {
+        "match": {
+          "type": "keyof ValidityState | ((validity: ValidityState) => boolean)",
+          "description": "Match a specific ValidityState key (e.g., 'valueMissing', 'typeMismatch') or provide a custom function. Only shows the error when the matched condition is true."
+        },
+        "forceShow": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to show the error message regardless of the field's validity state."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-valid": "Present when the field is valid.",
+        "data-invalid": "Present when the field is invalid.",
+        "data-dirty": "Present when the field value has been modified.",
+        "data-touched": "Present when the field has been focused and blurred."
+      }
+    },
+    "Control": {
+      "element": "input",
+      "description": "The input control. Renders an <input> by default. Supports the render prop to swap the underlying element.",
+      "props": {
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Size of the control affecting height, padding, and font size. Matches Button sizes (sm=32px, md=36px, lg=40px)."
+        },
+        "render": {
+          "type": "React.ReactElement | ((props: object) => React.ReactElement)",
+          "description": "Swap the rendered element. Useful for rendering a <textarea> or custom input."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-valid": "Present when the field is valid.",
+        "data-invalid": "Present when the field is invalid.",
+        "data-dirty": "Present when the field value has been modified.",
+        "data-touched": "Present when the field has been focused and blurred.",
+        "data-disabled": "Present when the control is disabled."
+      }
+    },
+    "Validity": {
+      "element": null,
+      "description": "A render prop component that provides FieldValidityData (state, errors, value). Does not render any DOM element.",
+      "props": {
+        "children": {
+          "type": "(state: FieldValidityData) => React.ReactNode",
+          "description": "Render function receiving the current validity state, errors, and value."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorText",
+    "colorTextMuted",
+    "colorTextPlaceholder",
+    "colorDestructive",
+    "colorBorder",
+    "colorFocusRing",
+    "space1",
+    "space2h",
+    "space3",
+    "space3h",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontSizeMd",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "radiusMd",
+    "borderWidthDefault",
+    "colorSurface"
+  ],
+
+  "intents": [
+    {
+      "intent": "form-field",
+      "signals": ["form field", "input field", "text field", "form input", "field with label"],
+      "reasoning": "Field is the standard wrapper for any form input that needs a label, description, and validation. It connects all parts with proper accessibility attributes.",
+      "composition": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Field.Control type=\"email\" placeholder=\"you@example.com\" />\n  <Field.Error>Please enter a valid email address.</Field.Error>\n</Field.Root>"
+    },
+    {
+      "intent": "validated-input",
+      "signals": [
+        "validation",
+        "error message",
+        "required field",
+        "form validation",
+        "invalid input"
+      ],
+      "reasoning": "Field automatically handles native constraint validation and displays error messages matched to specific validity states.",
+      "composition": "<Field.Root>\n  <Field.Label>Username</Field.Label>\n  <Field.Control required minLength={3} />\n  <Field.Error match=\"valueMissing\">Username is required.</Field.Error>\n  <Field.Error match=\"tooShort\">Username must be at least 3 characters.</Field.Error>\n</Field.Root>"
+    },
+    {
+      "intent": "labeled-input",
+      "signals": [
+        "labeled input",
+        "accessible input",
+        "input with description",
+        "hint text",
+        "help text"
+      ],
+      "reasoning": "Field automatically links the label and description to the input via htmlFor and aria-describedby, ensuring full accessibility.",
+      "composition": "<Field.Root>\n  <Field.Label>Password</Field.Label>\n  <Field.Description>Must be at least 8 characters.</Field.Description>\n  <Field.Control type=\"password\" />\n</Field.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Standalone label without an input control",
+      "reasoning": "Field is designed to connect a label to a control. For standalone labels or headings, use a regular <label> or heading element.",
+      "alternative": "Use a plain <label> element or heading."
+    },
+    {
+      "scenario": "Complex multi-input groups (e.g., date with day/month/year fields)",
+      "reasoning": "Field wraps a single control. For groups of related inputs, use Fieldset which provides group-level labeling and validation.",
+      "alternative": "Use Fieldset to group multiple related inputs."
+    },
+    {
+      "scenario": "Non-form display of label-value pairs",
+      "reasoning": "Field includes form semantics and validation wiring that are unnecessary for read-only data display.",
+      "alternative": "Use a description list (<dl>) or custom layout component."
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic text field with a label",
+      "code": "<Field.Root>\n  <Field.Label>Name</Field.Label>\n  <Field.Control placeholder=\"Enter your name\" />\n</Field.Root>"
+    },
+    {
+      "name": "with-validation",
+      "description": "Field with native constraint validation and error messages",
+      "code": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Field.Control type=\"email\" required placeholder=\"you@example.com\" />\n  <Field.Error match=\"valueMissing\">Email is required.</Field.Error>\n  <Field.Error match=\"typeMismatch\">Please enter a valid email address.</Field.Error>\n</Field.Root>"
+    },
+    {
+      "name": "with-description",
+      "description": "Field with a description hint below the label",
+      "code": "<Field.Root>\n  <Field.Label>Password</Field.Label>\n  <Field.Description>Must be at least 8 characters long.</Field.Description>\n  <Field.Control type=\"password\" required minLength={8} />\n  <Field.Error match=\"valueMissing\">Password is required.</Field.Error>\n  <Field.Error match=\"tooShort\">Password must be at least 8 characters.</Field.Error>\n</Field.Root>"
+    }
+  ]
+}

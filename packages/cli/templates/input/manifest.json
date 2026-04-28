@@ -1,0 +1,120 @@
+{
+  "name": "Input",
+  "description": "A standalone styled text input that automatically integrates with Field for validation. Built on Base UI Input with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/input",
+
+  "anatomy": "<Input />",
+
+  "parts": {
+    "Root": {
+      "element": "input",
+      "description": "A native <input> element with StyleX styling. Automatically integrates with Field.Root for validation state when nested inside one.",
+      "props": {
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Size of the input affecting height, padding, and font size. Matches Button sizes (sm=32px, md=36px, lg=40px)."
+        },
+        "onValueChange": {
+          "type": "(value: string, event: React.ChangeEvent) => void",
+          "description": "Callback fired when the value changes. Use when controlled."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-valid": "Present when the field is valid.",
+        "data-invalid": "Present when the field is invalid.",
+        "data-dirty": "Present when the field value has been modified.",
+        "data-touched": "Present when the field has been focused and blurred.",
+        "data-filled": "Present when the input has a non-empty value.",
+        "data-focused": "Present when the input is focused.",
+        "data-disabled": "Present when the input is disabled."
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorText",
+    "colorTextPlaceholder",
+    "colorDestructive",
+    "colorBorder",
+    "colorFocusRing",
+    "space2h",
+    "space3",
+    "space3h",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontSizeMd",
+    "lineHeightNormal",
+    "radiusMd",
+    "borderWidthDefault"
+  ],
+
+  "intents": [
+    {
+      "intent": "text-input",
+      "signals": ["input", "text input", "text field", "type text", "enter text", "free text"],
+      "reasoning": "Input is the primary component for standalone text entry. Use when you need a simple text input without the full Field wrapper.",
+      "composition": "<Input placeholder=\"Enter text...\" />"
+    },
+    {
+      "intent": "input-with-field",
+      "signals": ["labeled input", "form input", "input with label", "input with validation"],
+      "reasoning": "Input automatically integrates with Field for label, description, and validation when nested inside Field.Root.",
+      "composition": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Input type=\"email\" placeholder=\"you@example.com\" />\n  <Field.Error />\n</Field.Root>"
+    },
+    {
+      "intent": "search-input",
+      "signals": ["search box", "search bar", "quick search", "filter input"],
+      "reasoning": "Input works well as a simple search box. For search with suggestions, use Autocomplete instead.",
+      "composition": "<Input type=\"search\" placeholder=\"Search...\" />"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Search input with filtered suggestion dropdown",
+      "reasoning": "Use Autocomplete which provides the popup and filtering logic.",
+      "alternative": "Autocomplete"
+    },
+    {
+      "scenario": "Selecting from a predefined list of options",
+      "reasoning": "Use Select or Combobox for option selection, not a free-text input.",
+      "alternative": "Select or Combobox"
+    },
+    {
+      "scenario": "Multi-line text entry",
+      "reasoning": "Input renders a single-line <input>. Use a <textarea> or Field.Control with render prop for multi-line.",
+      "alternative": "Use Field.Control with render={<textarea />}"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic text input",
+      "code": "<Input placeholder=\"Enter your name\" />"
+    },
+    {
+      "name": "sizes",
+      "description": "Size variations",
+      "code": "<>\n  <Input size=\"sm\" placeholder=\"Small\" />\n  <Input size=\"md\" placeholder=\"Medium\" />\n  <Input size=\"lg\" placeholder=\"Large\" />\n</>"
+    },
+    {
+      "name": "with-field",
+      "description": "Input inside a Field for label and validation",
+      "code": "<Field.Root>\n  <Field.Label>Email</Field.Label>\n  <Input type=\"email\" required placeholder=\"you@example.com\" />\n  <Field.Error match=\"typeMismatch\">Please enter a valid email.</Field.Error>\n</Field.Root>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled input",
+      "code": "<Input disabled value=\"Cannot edit\" />"
+    }
+  ]
+}

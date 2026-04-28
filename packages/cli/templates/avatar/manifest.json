@@ -1,0 +1,129 @@
+{
+  "name": "Avatar",
+  "description": "A circular image or fallback representing a user or entity. Built on Base UI Avatar with StyleX styling.",
+  "category": "data-display",
+  "baseComponent": "@base-ui/react/avatar",
+
+  "anatomy": "<Avatar.Root>\n  <Avatar.Image />\n  <Avatar.Fallback />\n</Avatar.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "span",
+      "description": "Outer container — a 40px circle with overflow hidden.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      }
+    },
+    "Image": {
+      "element": "img",
+      "description": "The avatar image. Hidden automatically when the image fails to load.",
+      "props": {
+        "src": {
+          "type": "string",
+          "description": "Image source URL."
+        },
+        "alt": {
+          "type": "string",
+          "description": "Alt text for the image."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      }
+    },
+    "Fallback": {
+      "element": "span",
+      "description": "Content displayed when no image is provided or the image fails to load. Typically initials or an icon.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "space10",
+    "radiusFull",
+    "colorMuted",
+    "colorMutedForeground",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightTight"
+  ],
+
+  "intents": [
+    {
+      "intent": "user-avatar",
+      "signals": ["avatar", "user photo", "profile picture", "user image", "profile pic"],
+      "reasoning": "Avatar displays a user's photo with automatic fallback to initials when the image is unavailable.",
+      "composition": "<Avatar.Root>\n  <Avatar.Image src=\"/photo.jpg\" alt=\"Jane Doe\" />\n  <Avatar.Fallback>JD</Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "intent": "initials-avatar",
+      "signals": ["initials", "name badge", "user initials", "letter avatar"],
+      "reasoning": "Avatar Fallback renders initials on a muted background when no image is available.",
+      "composition": "<Avatar.Root>\n  <Avatar.Fallback>AB</Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "intent": "icon-avatar",
+      "signals": ["icon avatar", "placeholder avatar", "default avatar", "anonymous avatar"],
+      "reasoning": "Avatar Fallback can render an icon SVG as a generic placeholder for anonymous or system users.",
+      "composition": "<Avatar.Root>\n  <Avatar.Fallback>\n    <UserIcon />\n  </Avatar.Fallback>\n</Avatar.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Displaying non-identity images (products, landscapes, thumbnails)",
+      "reasoning": "Avatar is semantically for identity. Use a plain <img> or a Card image for content images.",
+      "alternative": "img or Card"
+    },
+    {
+      "scenario": "Large hero or banner images",
+      "reasoning": "Avatar is 40px by default and circular. For large images use a dedicated hero/banner component.",
+      "alternative": "img with custom styling"
+    },
+    {
+      "scenario": "Selectable user lists or user pickers",
+      "reasoning": "Avatar is presentational only. Wrap it inside a Checkbox, Radio, or Listbox item for selectable lists.",
+      "alternative": "Checkbox, Radio, or Listbox with Avatar inside"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "image",
+      "description": "Avatar with a user photo",
+      "code": "<Avatar.Root>\n  <Avatar.Image src=\"/photo.jpg\" alt=\"Jane Doe\" />\n  <Avatar.Fallback>JD</Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "name": "initials",
+      "description": "Initials fallback when no image is provided",
+      "code": "<Avatar.Root>\n  <Avatar.Fallback>AB</Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "name": "icon",
+      "description": "Icon fallback for anonymous users",
+      "code": "<Avatar.Root>\n  <Avatar.Fallback>\n    <UserIcon />\n  </Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "name": "broken-image",
+      "description": "Broken image URL falls back automatically",
+      "code": "<Avatar.Root>\n  <Avatar.Image src=\"/broken.jpg\" alt=\"Missing\" />\n  <Avatar.Fallback>?</Avatar.Fallback>\n</Avatar.Root>"
+    },
+    {
+      "name": "custom-size",
+      "description": "Custom size via sx prop",
+      "code": "const lg = stylex.create({ avatar: { width: '64px', height: '64px' } });\n\n<Avatar.Root sx={lg.avatar}>\n  <Avatar.Image src=\"/photo.jpg\" alt=\"Jane Doe\" />\n  <Avatar.Fallback>JD</Avatar.Fallback>\n</Avatar.Root>"
+    }
+  ]
+}

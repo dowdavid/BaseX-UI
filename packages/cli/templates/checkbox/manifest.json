@@ -1,0 +1,171 @@
+{
+  "name": "Checkbox",
+  "description": "A control that allows the user to toggle between checked, unchecked, and optionally indeterminate states. Built on Base UI Checkbox with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/checkbox",
+
+  "anatomy": "<Checkbox.Root>\n  <Checkbox.Indicator />\n</Checkbox.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "span",
+      "description": "The checkbox itself — a 16px square with a hidden <input> beside it.",
+      "props": {
+        "checked": {
+          "type": "boolean",
+          "description": "Whether the checkbox is currently ticked. Use for controlled mode."
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the checkbox is initially ticked. Use for uncontrolled mode."
+        },
+        "onCheckedChange": {
+          "type": "(checked: boolean, eventDetails: object) => void",
+          "description": "Callback fired when the checkbox is ticked or unticked."
+        },
+        "indeterminate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the checkbox is in a mixed state: neither ticked nor unticked."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the component should ignore user interaction."
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the user must tick the checkbox before submitting a form."
+        },
+        "name": {
+          "type": "string",
+          "description": "Identifies the field when a form is submitted. Also registers the checkbox with a parent CheckboxGroup."
+        },
+        "parent": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true inside a CheckboxGroup, this checkbox auto-derives its checked/indeterminate state from children. Used for select-all patterns."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-checked": "Present when the checkbox is ticked.",
+        "data-unchecked": "Present when the checkbox is not ticked.",
+        "data-indeterminate": "Present when the checkbox is in a mixed state.",
+        "data-disabled": "Present when the checkbox is disabled.",
+        "data-required": "Present when the checkbox is required.",
+        "data-readonly": "Present when the checkbox is read-only."
+      }
+    },
+    "Indicator": {
+      "element": "span",
+      "description": "Visual indicator shown when the checkbox is checked or indeterminate. Renders a checkmark or dash icon. Uses keepMounted for enter/exit animation.",
+      "props": {
+        "keepMounted": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to keep the element in the DOM when unchecked. Defaults to true for animation support."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-checked": "Present when the checkbox is ticked.",
+        "data-unchecked": "Present when the checkbox is not ticked.",
+        "data-indeterminate": "Present when the checkbox is in a mixed state.",
+        "data-starting-style": "Present when the indicator is animating in.",
+        "data-ending-style": "Present when the indicator is animating out."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Indicator enter/exit animation requires global CSS rules inside @layer priority1. StyleX cannot target data-attribute selectors, so these rules must live in the consumer's global stylesheet.",
+    "css": "@layer priority1 {\n  .basex-checkbox-indicator {\n    opacity: 1;\n    transform: scale(1);\n    transition: opacity 100ms ease-out, transform 100ms ease-out;\n  }\n  .basex-checkbox-indicator[data-starting-style],\n  .basex-checkbox-indicator[data-ending-style] {\n    opacity: 0;\n    transform: scale(0.5);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorPrimary",
+    "colorPrimaryContrast",
+    "colorBorder",
+    "colorFocusRing",
+    "radiusSm",
+    "borderWidthThick",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "toggle-option",
+      "signals": ["checkbox", "check", "tick", "toggle", "opt-in", "opt-out", "preference"],
+      "reasoning": "Checkbox is the standard control for toggling a boolean option that is saved with a form.",
+      "composition": "<label>\n  <Checkbox.Root>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Enable notifications\n</label>"
+    },
+    {
+      "intent": "agree-to-terms",
+      "signals": ["terms", "conditions", "consent", "agree", "privacy policy", "GDPR"],
+      "reasoning": "A required checkbox is the standard UX pattern for explicit consent before form submission.",
+      "composition": "<label>\n  <Checkbox.Root required>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  I agree to the terms and conditions\n</label>"
+    },
+    {
+      "intent": "multi-select-list",
+      "signals": ["multi-select", "bulk select", "select all", "batch", "multiple items"],
+      "reasoning": "Multiple checkboxes let users select several items from a list. Combine with an indeterminate parent for 'select all'.",
+      "composition": "<label>\n  <Checkbox.Root>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Item 1\n</label>\n<label>\n  <Checkbox.Root>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Item 2\n</label>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Binary on/off toggle with immediate effect (e.g., dark mode)",
+      "reasoning": "Use Switch for settings that take effect immediately without a form submission step.",
+      "alternative": "Switch"
+    },
+    {
+      "scenario": "Single selection from a group of mutually exclusive options",
+      "reasoning": "Checkboxes allow multiple selections. Use Radio for single-select groups.",
+      "alternative": "Radio"
+    },
+    {
+      "scenario": "Triggering an immediate action",
+      "reasoning": "Checkbox represents a state, not an action. Use Button for actions.",
+      "alternative": "Button"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic checkbox with a label",
+      "code": "<label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>\n  <Checkbox.Root>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Accept terms\n</label>"
+    },
+    {
+      "name": "controlled",
+      "description": "Controlled checkbox with React state",
+      "code": "const [checked, setChecked] = useState(false);\n\n<Checkbox.Root checked={checked} onCheckedChange={setChecked}>\n  <Checkbox.Indicator />\n</Checkbox.Root>"
+    },
+    {
+      "name": "indeterminate",
+      "description": "Indeterminate state for parent checkboxes",
+      "code": "<Checkbox.Root indeterminate>\n  <Checkbox.Indicator />\n</Checkbox.Root>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled checkbox",
+      "code": "<Checkbox.Root disabled defaultChecked>\n  <Checkbox.Indicator />\n</Checkbox.Root>"
+    },
+    {
+      "name": "with-label",
+      "description": "Using a label element for accessibility",
+      "code": "<label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>\n  <Checkbox.Root defaultChecked>\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  Remember me\n</label>"
+    }
+  ]
+}

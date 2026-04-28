@@ -1,0 +1,88 @@
+{
+  "name": "Form",
+  "description": "An enhanced form element that provides server-side validation error management for Field components. Built on Base UI Form with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/form",
+  "anatomy": "<Form>\n  <Field.Root>\n    <Field.Label>Name</Field.Label>\n    <Field.Control />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>",
+  "parts": {
+    "Root": {
+      "element": "form",
+      "description": "Enhanced form element with server-side validation error management.",
+      "props": {
+        "errors": {
+          "type": "Record<string, string[] | null>",
+          "description": "Server-side validation errors keyed by field name. Passed to child Field.Error components automatically."
+        },
+        "validationMode": {
+          "type": "'onBlur' | 'onChange' | 'onSubmit'",
+          "default": "onSubmit",
+          "description": "Controls when validation occurs for child Field components."
+        },
+        "onFormSubmit": {
+          "type": "(event: FormEvent, formData: FormData) => void",
+          "description": "Enhanced submit handler that receives both the event and parsed FormData."
+        },
+        "onSubmit": {
+          "type": "FormEventHandler<HTMLFormElement>",
+          "description": "Standard form submit handler."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+  "cssRequirements": null,
+  "tokens": ["fontFamilySans", "space6"],
+  "intents": [
+    {
+      "intent": "form-with-validation",
+      "signals": ["form", "submit", "validation", "server errors", "form validation"],
+      "reasoning": "Form manages server-side validation errors and distributes them to child Field components automatically.",
+      "composition": "<Form errors={serverErrors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    },
+    {
+      "intent": "server-validated-form",
+      "signals": [
+        "server validation",
+        "API errors",
+        "backend errors",
+        "form errors",
+        "error display"
+      ],
+      "reasoning": "Form's errors prop accepts a record of server-side errors keyed by field name, automatically distributing them to matching Field.Error components.",
+      "composition": "const [errors, setErrors] = useState({});\nconst handleSubmit = async (e) => {\n  e.preventDefault();\n  const res = await submitToAPI(data);\n  if (res.errors) setErrors(res.errors);\n};\n\n<Form errors={errors} onSubmit={handleSubmit}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    }
+  ],
+  "avoidWhen": [
+    {
+      "scenario": "A form without server-side validation",
+      "reasoning": "If you only need client-side validation (HTML5 or custom), a plain <form> element works fine. Form adds value when you need to pipe server errors to Field components.",
+      "alternative": "Plain <form> element"
+    },
+    {
+      "scenario": "Non-form content layout",
+      "reasoning": "Form renders a <form> element. Don't use it as a generic flex-column layout container.",
+      "alternative": "A plain <div> with flex styling"
+    }
+  ],
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic form with submit handler",
+      "code": "<Form onSubmit={(e) => { e.preventDefault(); /* handle */ }}>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" required />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    },
+    {
+      "name": "server-errors",
+      "description": "Form with server-side error management",
+      "code": "const [errors, setErrors] = useState<Record<string, string[]>>({});\n\n<Form\n  errors={errors}\n  onSubmit={async (e) => {\n    e.preventDefault();\n    const res = await api.submit(formData);\n    if (res.errors) setErrors(res.errors);\n  }}\n>\n  <Field.Root name=\"email\">\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n    <Field.Error />\n  </Field.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    },
+    {
+      "name": "with-fieldsets",
+      "description": "Form with multiple fieldset groups",
+      "code": "<Form onSubmit={handleSubmit}>\n  <Fieldset.Root>\n    <Fieldset.Legend>Personal</Fieldset.Legend>\n    {/* fields */}\n  </Fieldset.Root>\n  <Fieldset.Root>\n    <Fieldset.Legend>Address</Fieldset.Legend>\n    {/* fields */}\n  </Fieldset.Root>\n  <Button type=\"submit\">Submit</Button>\n</Form>"
+    }
+  ]
+}
