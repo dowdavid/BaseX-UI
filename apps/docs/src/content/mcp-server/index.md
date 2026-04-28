@@ -48,7 +48,7 @@ Each step narrows the decision space. By step 3, the agent has everything it nee
 
 | Tool                    | Purpose                                          | Key input              |
 | ----------------------- | ------------------------------------------------ | ---------------------- |
-| `list_components`       | Browse all 35 components                         | —                      |
+| `list_components`       | Browse all 36 components                         | —                      |
 | `search_components`     | Fuzzy search by name/category/description        | `query`                |
 | `get_component`         | Full manifest with parts, props, examples        | `name`                 |
 | `get_component_example` | Usage examples, optionally by variant            | `name`, `variant?`     |

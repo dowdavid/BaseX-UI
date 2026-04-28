@@ -12,6 +12,9 @@ const styles = stylex.create({
     backgroundColor: tokens.colorOverlay,
   },
 
+  // Native overflow on the centered backdrop viewport — only triggers when
+  // the popup is taller than the viewport. ScrollArea here would wrap the
+  // entire fixed overlay and break centering. Per DESIGN.md exception clause.
   viewport: {
     position: 'fixed',
     inset: 0,

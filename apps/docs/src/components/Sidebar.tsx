@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { tokens } from '@basex-ui/tokens';
+import { ScrollArea } from '@basex-ui/components';
 import { Link, useLocation } from 'react-router';
 import { ChevronRight, Sun, Moon } from 'lucide-react';
 import Fuse from 'fuse.js';
@@ -15,15 +16,9 @@ const styles = stylex.create({
     borderRightWidth: '1px',
     borderRightStyle: 'solid',
     borderRightColor: tokens.colorBorderMuted,
-    padding: tokens.space4,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: tokens.space1,
     position: 'sticky',
     top: 0,
     height: '100vh',
-    overflowY: 'auto',
-    scrollbarGutter: 'stable',
     [MOBILE]: {
       position: 'fixed',
       top: 0,
@@ -35,6 +30,18 @@ const styles = stylex.create({
       transitionProperty: 'transform',
       transitionDuration: '200ms',
       transitionTimingFunction: 'ease-out',
+    },
+  },
+  scrollRoot: {
+    width: '100%',
+    height: '100%',
+  },
+  sidebarContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: tokens.space1,
+    padding: tokens.space4,
+    [MOBILE]: {
       paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 80px)',
     },
   },
@@ -215,85 +222,98 @@ export function Sidebar({ open, onClose, dark, onToggleTheme }: SidebarProps) {
 
   return (
     <nav {...stylex.props(styles.sidebar, open && styles.sidebarOpen)}>
-      <div {...stylex.props(styles.sidebarHeader)}>
-        <svg
-          {...stylex.props(styles.logoMark)}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="24" height="24" rx="6" fill="currentColor" />
-          <path
-            d="M6 8.5L12 5L18 8.5V15.5L12 19L6 15.5V8.5Z"
-            {...stylex.props(styles.logoInner)}
-            strokeWidth="1.5"
-            fill="none"
-          />
-          <path
-            d="M12 5V19M6 8.5L18 15.5M18 8.5L6 15.5"
-            {...stylex.props(styles.logoInner)}
-            strokeWidth="1.5"
-          />
-        </svg>
-        <div>
-          <div {...stylex.props(styles.logoText)}>Base-X UI</div>
-        </div>
-        <div {...stylex.props(styles.headerSpacer)} />
-        <button
-          {...stylex.props(styles.themeButton)}
-          onClick={onToggleTheme}
-          aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {dark ? (
-            <Sun {...stylex.props(styles.themeIcon)} />
-          ) : (
-            <Moon {...stylex.props(styles.themeIcon)} />
-          )}
-        </button>
-      </div>
-
-      <input
-        {...stylex.props(styles.searchInput)}
-        type="text"
-        placeholder="Search..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-
-      {sections.map((section) => {
-        const sectionPages = filtered.filter((p) => p.section === section.id);
-        if (sectionPages.length === 0) return null;
-
-        const isExpanded = isSearching || expanded[section.id] !== false;
-
-        return (
-          <div key={section.id}>
-            {section.label && (
-              <div
-                {...stylex.props(styles.sectionHeader)}
-                onClick={() => toggleSection(section.id)}
+      <ScrollArea.Root sx={styles.scrollRoot}>
+        <ScrollArea.Viewport>
+          <div {...stylex.props(styles.sidebarContent)}>
+            <div {...stylex.props(styles.sidebarHeader)}>
+              <svg
+                {...stylex.props(styles.logoMark)}
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
-                <span {...stylex.props(styles.sectionLabel)}>{section.label}</span>
-                <ChevronRight
-                  {...stylex.props(styles.chevron, isExpanded && styles.chevronExpanded)}
+                <rect width="24" height="24" rx="6" fill="currentColor" />
+                <path
+                  d="M6 8.5L12 5L18 8.5V15.5L12 19L6 15.5V8.5Z"
+                  {...stylex.props(styles.logoInner)}
+                  strokeWidth="1.5"
+                  fill="none"
                 />
+                <path
+                  d="M12 5V19M6 8.5L18 15.5M18 8.5L6 15.5"
+                  {...stylex.props(styles.logoInner)}
+                  strokeWidth="1.5"
+                />
+              </svg>
+              <div>
+                <div {...stylex.props(styles.logoText)}>Base-X UI</div>
               </div>
-            )}
-            {isExpanded &&
-              sectionPages.map((page) => (
-                <Link
-                  key={page.id}
-                  to={page.path}
-                  onClick={onClose}
-                  {...stylex.props(styles.navItem, isActive(page.path) && styles.navItemActive)}
-                >
-                  {page.label}
-                </Link>
-              ))}
+              <div {...stylex.props(styles.headerSpacer)} />
+              <button
+                {...stylex.props(styles.themeButton)}
+                onClick={onToggleTheme}
+                aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {dark ? (
+                  <Sun {...stylex.props(styles.themeIcon)} />
+                ) : (
+                  <Moon {...stylex.props(styles.themeIcon)} />
+                )}
+              </button>
+            </div>
+
+            <input
+              {...stylex.props(styles.searchInput)}
+              type="text"
+              placeholder="Search..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+
+            {sections.map((section) => {
+              const sectionPages = filtered.filter((p) => p.section === section.id);
+              if (sectionPages.length === 0) return null;
+
+              const isExpanded = isSearching || expanded[section.id] !== false;
+
+              return (
+                <div key={section.id}>
+                  {section.label && (
+                    <div
+                      {...stylex.props(styles.sectionHeader)}
+                      onClick={() => toggleSection(section.id)}
+                    >
+                      <span {...stylex.props(styles.sectionLabel)}>{section.label}</span>
+                      <ChevronRight
+                        {...stylex.props(styles.chevron, isExpanded && styles.chevronExpanded)}
+                      />
+                    </div>
+                  )}
+                  {isExpanded &&
+                    sectionPages.map((page) => (
+                      <Link
+                        key={page.id}
+                        to={page.path}
+                        onClick={onClose}
+                        {...stylex.props(
+                          styles.navItem,
+                          isActive(page.path) && styles.navItemActive,
+                        )}
+                      >
+                        {page.label}
+                      </Link>
+                    ))}
+                </div>
+              );
+            })}
+            <div {...stylex.props(styles.sidebarFooter)} />
           </div>
-        );
-      })}
-      <div {...stylex.props(styles.sidebarFooter)} />
+        </ScrollArea.Viewport>
+        <ScrollArea.Scrollbar>
+          <ScrollArea.Thumb />
+        </ScrollArea.Scrollbar>
+      </ScrollArea.Root>
     </nav>
   );
 }

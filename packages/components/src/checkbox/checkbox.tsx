@@ -89,9 +89,9 @@ const Indicator = forwardRef<HTMLSpanElement, CheckboxIndicatorProps>(({ sx, ...
     render={(renderProps, state) => (
       <span {...renderProps}>
         {state.indeterminate ? (
-          <Minus size={12} strokeWidth={3.5} />
+          <Minus size={12} strokeWidth={3.5} aria-hidden="true" />
         ) : state.checked ? (
-          <Check size={12} strokeWidth={3.5} />
+          <Check size={12} strokeWidth={3.5} aria-hidden="true" />
         ) : null}
       </span>
     )}

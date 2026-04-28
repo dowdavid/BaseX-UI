@@ -107,7 +107,7 @@ const Trigger = forwardRef<HTMLButtonElement, CollapsibleTriggerProps>(
       }
     >
       {children}
-      <ChevronDown size={16} {...stylex.props(styles.chevron)} />
+      <ChevronDown size={16} aria-hidden="true" {...stylex.props(styles.chevron)} />
     </BaseCollapsible.Trigger>
   ),
 );

@@ -4,7 +4,7 @@
 
 ## What This Is
 
-An AI-first, accessible React component library built on Base UI and styled with StyleX. Ships 35 components with machine-readable manifests, an intelligence layer for intent-based component resolution, an MCP server for AI agent discovery, and a CLI for scaffolding. The monorepo includes a Vite docs site with URL routing, sidebar search, markdown guide pages, and live component demos.
+An AI-first, accessible React component library built on Base UI and styled with StyleX. Ships 36 components with machine-readable manifests, an intelligence layer for intent-based component resolution, an MCP server for AI agent discovery, and a CLI for scaffolding. The monorepo includes a Vite docs site with URL routing, sidebar search, markdown guide pages, and live component demos.
 
 ## Stack
 
@@ -32,7 +32,7 @@ An AI-first, accessible React component library built on Base UI and styled with
 
 ```
 packages/
-  components/     35 styled Base UI wrappers with manifests
+  components/     36 styled Base UI wrappers with manifests
   styles/         lightTheme, darkTheme, focusRing, capitalize
   tokens/         StyleX design tokens, OKLCH color system, presets
   intelligence/   Intent resolution, anti-pattern detection, animation presets

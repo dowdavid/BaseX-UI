@@ -100,6 +100,9 @@ const styles = stylex.create({
     outline: 'none',
   },
 
+  // Native overflow on Select.List — Base UI's listbox manages its own focus
+  // and keyboard scroll. Wrapping in ScrollArea would intercept those gestures
+  // and break arrow-key navigation. Per DESIGN.md scroll exception clause.
   list: {
     maxHeight: 'min(var(--available-height), 18rem)',
     overflowY: 'auto',
@@ -169,7 +172,6 @@ const styles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
-    color: tokens.colorPrimary,
   },
 
   itemIndicatorHidden: {

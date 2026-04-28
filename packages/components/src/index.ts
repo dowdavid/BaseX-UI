@@ -80,6 +80,29 @@ export type {
   ComboboxGroupLabelProps,
 } from './combobox';
 
+export { ContextMenu } from './context-menu';
+export type {
+  ContextMenuRootProps,
+  ContextMenuTriggerProps,
+  ContextMenuPortalProps,
+  ContextMenuPositionerProps,
+  ContextMenuPopupProps,
+  ContextMenuItemProps,
+  ContextMenuLinkItemProps,
+  ContextMenuGroupProps,
+  ContextMenuGroupLabelProps,
+  ContextMenuSeparatorProps,
+  ContextMenuCheckboxItemProps,
+  ContextMenuCheckboxItemIndicatorProps,
+  ContextMenuRadioGroupProps,
+  ContextMenuRadioItemProps,
+  ContextMenuRadioItemIndicatorProps,
+  ContextMenuBackdropProps,
+  ContextMenuSubmenuRootProps,
+  ContextMenuSubmenuTriggerProps,
+  ContextMenuArrowProps,
+} from './context-menu';
+
 export { Drawer } from './drawer';
 export type {
   DrawerRootProps,

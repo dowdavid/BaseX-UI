@@ -140,6 +140,8 @@ const styles = stylex.create({
     position: 'relative',
   },
 
+  // Native overflow on NavigationMenu.Content — Base UI primitive manages
+  // focus and keyboard nav. Per DESIGN.md scroll exception clause.
   content: {
     padding: tokens.space3,
     maxHeight: 'calc(var(--available-height, 100vh) - 20px)',
@@ -390,7 +392,7 @@ const Icon = forwardRef<HTMLSpanElement, NavigationMenuIconProps>(
         ).className ?? ''
       }
     >
-      {children ?? <ChevronDown size={12} />}
+      {children ?? <ChevronDown size={12} aria-hidden="true" />}
     </BaseNavigationMenu.Icon>
   ),
 );

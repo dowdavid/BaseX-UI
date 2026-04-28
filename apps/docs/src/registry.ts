@@ -9,6 +9,7 @@ import { CheckboxPage } from './pages/CheckboxPage';
 import { CheckboxGroupPage } from './pages/CheckboxGroupPage';
 import { CollapsiblePage } from './pages/CollapsiblePage';
 import { ComboboxPage } from './pages/ComboboxPage';
+import { ContextMenuPage } from './pages/ContextMenuPage';
 import { DialogPage } from './pages/DialogPage';
 import { DrawerPage } from './pages/DrawerPage';
 import { FieldPage } from './pages/FieldPage';
@@ -153,6 +154,14 @@ export const pages: PageEntry[] = [
     path: '/components/combobox',
     section: 'components',
     component: ComboboxPage,
+  },
+  {
+    id: 'context-menu',
+    label: 'Context Menu',
+    description: 'A right-click or long-press menu with items, groups, and submenus.',
+    path: '/components/context-menu',
+    section: 'components',
+    component: ContextMenuPage,
   },
   {
     id: 'dialog',

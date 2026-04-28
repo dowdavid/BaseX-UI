@@ -30,6 +30,10 @@ const styles = stylex.create({
     backgroundColor: tokens.colorOverlay,
   },
 
+  // Native overflow on the fixed full-screen viewport — only used when the
+  // drawer popup overflows the screen edge. ScrollArea here would wrap the
+  // entire overlay and break the directional alignment. Per DESIGN.md
+  // exception clause.
   viewport: {
     position: 'fixed',
     inset: 0,
@@ -139,6 +143,10 @@ const styles = stylex.create({
     marginTop: tokens.space1,
   },
 
+  // Native overflow on Drawer.Panel — body content scroll. Tracked for
+  // follow-up to refactor onto ScrollArea (mirrors Dialog.Panel deferral —
+  // Panel exposes scroll attributes used by header/footer shadow effects).
+  // Per DESIGN.md exception clause.
   panel: {
     flex: 1,
     minHeight: 0,
@@ -299,7 +307,7 @@ const Popup = forwardRef<HTMLDivElement, DrawerPopupProps>(
         >
           {showCloseButton && (
             <BaseDrawer.Close {...stylex.props(styles.closeButton, focusRing)} aria-label="Close">
-              <X size={16} />
+              <X size={16} aria-hidden="true" />
             </BaseDrawer.Close>
           )}
           {children}

@@ -47,8 +47,8 @@ const styles = stylex.create({
     justifyContent: 'center',
     gap: tokens.space1h,
     minHeight: '32px',
-    paddingBlock: tokens.space2,
-    paddingInline: tokens.space3,
+    paddingBlock: tokens.space1h,
+    paddingInline: tokens.space2,
     fontFamily: tokens.fontFamilySans,
     fontWeight: tokens.fontWeightMedium,
     fontSize: tokens.fontSizeSm,
@@ -68,13 +68,6 @@ const styles = stylex.create({
     userSelect: 'none',
     whiteSpace: 'nowrap',
     flexShrink: 0,
-    transitionProperty: 'background-color, color, transform',
-    transitionDuration: tokens.motionDurationFast,
-    transitionTimingFunction: tokens.motionEaseOut,
-    transform: {
-      default: 'none',
-      ':active': 'scale(0.98)',
-    },
   },
 
   // Pressed (toggle on) — filled block, identical contract to Tabs' active
