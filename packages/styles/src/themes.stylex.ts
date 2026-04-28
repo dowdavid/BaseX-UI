@@ -23,9 +23,11 @@ export const lightTheme = stylex.createTheme(tokens, {
   colorDestructiveActive: 'oklch(0.45 0.26 25)',
   colorDestructiveContrast: 'oklch(0.98 0 0)',
   colorDestructiveMuted: 'oklch(0.55 0.22 25 / 0.1)',
+  colorDestructiveText: 'oklch(0.45 0.22 25)',
 
   colorSuccess: 'oklch(0.65 0.17 145)',
   colorSuccessContrast: 'oklch(0.98 0 0)',
+  colorSuccessText: 'oklch(0.45 0.17 145)',
 
   colorMuted: 'oklch(0.93 0.005 260)',
   colorMutedForeground: 'oklch(0.45 0.02 260)',
@@ -36,15 +38,19 @@ export const lightTheme = stylex.createTheme(tokens, {
 
   colorOverlay: 'oklch(0.15 0 0 / 0.6)',
 
-  colorBorder: 'oklch(0.85 0.01 260)',
-  colorBorderMuted: 'oklch(0.91 0.005 260)',
+  colorBorder: 'oklch(0.75 0.01 260)',
+  colorBorderMuted: 'oklch(0.85 0.01 260)',
+  colorBorderStrong: 'oklch(0.7 0.01 260)',
+  colorPopoverBorder: 'oklch(0.78 0.01 260)',
+  colorTrack: 'oklch(0.88 0.005 260)',
 
   colorText: 'oklch(0.15 0.02 260)',
   colorTextMuted: 'oklch(0.45 0.02 260)',
+  colorIcon: 'oklch(0.6 0.01 260)',
   colorTextPlaceholder: 'oklch(0.62 0.01 260)',
   colorTextInverse: 'oklch(0.98 0 0)',
 
-  colorFocusRing: 'oklch(0.7 0 0)',
+  colorFocusRing: 'oklch(0.55 0 0)',
   colorBackground: '#ffffff',
 
   space1: '4px',
@@ -133,10 +139,13 @@ export const darkTheme = stylex.createTheme(tokens, {
   colorDestructiveActive: 'oklch(0.60 0.18 25)',
   colorDestructiveContrast: 'oklch(0.15 0 0)',
   colorDestructiveMuted: 'oklch(0.65 0.20 25 / 0.15)',
+  // Lifted destructive text for AA (4.5:1) on dark surfaces.
+  colorDestructiveText: 'oklch(0.78 0.18 25)',
 
   // Success — slightly brighter on dark backgrounds
   colorSuccess: 'oklch(0.72 0.18 145)',
   colorSuccessContrast: 'oklch(0.15 0 0)',
+  colorSuccessText: 'oklch(0.78 0.15 145)',
 
   // Muted
   colorMuted: 'oklch(0.25 0.01 260)',
@@ -150,18 +159,23 @@ export const darkTheme = stylex.createTheme(tokens, {
   // Overlay — darker backdrop
   colorOverlay: 'oklch(0.05 0 0 / 0.8)',
 
-  // Borders — subtle on dark
-  colorBorder: 'oklch(0.35 0.01 260)',
-  colorBorderMuted: 'oklch(0.28 0.005 260)',
+  // Borders — bumped for AA non-text contrast (1.4.11)
+  colorBorder: 'oklch(0.42 0.01 260)',
+  colorBorderMuted: 'oklch(0.36 0.01 260)',
+  colorBorderStrong: 'oklch(0.5 0.01 260)',
+  colorPopoverBorder: 'oklch(0.40 0.01 260)',
+  colorTrack: 'oklch(0.30 0.01 260)',
 
   // Text — light on dark
   colorText: 'oklch(0.93 0.005 260)',
   colorTextMuted: 'oklch(0.65 0.02 260)',
+  // Formalize the L=0.6 coincidence — explicit per-theme override.
+  colorIcon: 'oklch(0.65 0.01 260)',
   colorTextPlaceholder: 'oklch(0.48 0.01 260)',
   colorTextInverse: 'oklch(0.15 0.02 260)',
 
   // Focus — lighter neutral for dark backgrounds
-  colorFocusRing: 'oklch(0.55 0 0)',
+  colorFocusRing: 'oklch(0.65 0 0)',
 
   // Background
   colorBackground: 'oklch(0.16 0.01 260)',

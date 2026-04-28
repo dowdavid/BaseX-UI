@@ -33,7 +33,7 @@ const styles = stylex.create({
   error: {
     fontSize: tokens.fontSizeSm,
     fontFamily: tokens.fontFamilySans,
-    color: tokens.colorDestructive,
+    color: tokens.colorDestructiveText,
     lineHeight: tokens.lineHeightNormal,
   },
 
@@ -44,7 +44,7 @@ const styles = stylex.create({
     backgroundColor: 'transparent',
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
+    borderColor: tokens.colorBorderStrong,
     borderRadius: tokens.radiusMd,
     lineHeight: tokens.lineHeightNormal,
     '::placeholder': {

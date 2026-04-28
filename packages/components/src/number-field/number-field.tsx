@@ -18,7 +18,7 @@ const styles = stylex.create({
     alignItems: 'stretch',
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
+    borderColor: tokens.colorBorderStrong,
     borderRadius: tokens.radiusMd,
     overflow: 'hidden',
     backgroundColor: tokens.colorBackground,

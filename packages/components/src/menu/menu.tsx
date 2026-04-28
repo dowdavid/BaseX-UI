@@ -54,7 +54,7 @@ const styles = stylex.create({
     backgroundColor: tokens.colorSurface,
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: tokens.colorPopoverBorder,
     borderRadius: tokens.radiusLg,
     paddingBlock: tokens.space1,
     boxShadow: tokens.shadowLg,
@@ -89,7 +89,7 @@ const styles = stylex.create({
   },
 
   itemDestructive: {
-    color: tokens.colorDestructive,
+    color: tokens.colorDestructiveText,
     backgroundColor: {
       default: 'transparent',
       ':hover': {
@@ -133,7 +133,7 @@ const styles = stylex.create({
 
   separator: {
     height: '1px',
-    backgroundColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorBorder,
     marginBlock: tokens.space1,
   },
 

@@ -106,7 +106,7 @@ const styles = stylex.create({
   arrow: {
     width: '12px',
     height: '8px',
-    backgroundColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorPopoverBorder,
     clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
     position: 'relative',
     '::after': {
@@ -129,7 +129,7 @@ const styles = stylex.create({
     backgroundColor: tokens.colorSurface,
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: tokens.colorPopoverBorder,
     borderRadius: tokens.radiusLg,
     boxShadow: tokens.shadowLg,
     // visible (not hidden) so nested Positioner popups can render outside parent popup bounds

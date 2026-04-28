@@ -9,7 +9,7 @@ const styles = stylex.create({
   horizontal: {
     width: '100%',
     height: '1px',
-    backgroundColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorBorder,
     flexShrink: 0,
     border: 0,
   },
@@ -17,7 +17,7 @@ const styles = stylex.create({
     width: '1px',
     height: '100%',
     alignSelf: 'stretch',
-    backgroundColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorBorder,
     flexShrink: 0,
     border: 0,
   },

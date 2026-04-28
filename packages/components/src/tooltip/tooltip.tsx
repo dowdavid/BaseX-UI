@@ -5,22 +5,24 @@ import { forwardRef } from 'react';
 import type { StyleXStyles } from '@stylexjs/stylex';
 
 // --- Styles ---
-// Matches Popover content treatment so they read as a family. Same surface,
-// border, radius, shadow, and motion tokens — only padding and maxWidth are
-// tighter because tooltips host short, non-interactive text.
+// Linear-style invert: tooltip surface flips per theme via the colorText /
+// colorTextInverse pair. In light mode, colorText is dark → dark tooltip on
+// white page. In dark mode, colorText is light → light tooltip on dark page.
+// This makes tooltips visually distinct from popovers (which stay surface-tinted)
+// in both themes without needing CSS conditionals.
 const styles = stylex.create({
   popup: {
-    backgroundColor: tokens.colorSurfaceRaised,
+    backgroundColor: tokens.colorText,
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: 'transparent',
     borderRadius: tokens.radiusLg,
     paddingBlock: tokens.space1,
     paddingInline: tokens.space2,
     boxShadow: tokens.shadowLg,
     fontFamily: tokens.fontFamilySans,
     fontSize: tokens.fontSizeSm,
-    color: tokens.colorText,
+    color: tokens.colorTextInverse,
     lineHeight: tokens.lineHeightNormal,
     maxWidth: '240px',
     outline: 'none',
@@ -29,7 +31,7 @@ const styles = stylex.create({
   arrow: {
     width: '12px',
     height: '8px',
-    backgroundColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorText,
     clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
     position: 'relative',
     '::after': {
@@ -39,7 +41,7 @@ const styles = stylex.create({
       left: '1px',
       right: '1px',
       bottom: 0,
-      backgroundColor: tokens.colorSurfaceRaised,
+      backgroundColor: tokens.colorText,
       clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
     },
   },

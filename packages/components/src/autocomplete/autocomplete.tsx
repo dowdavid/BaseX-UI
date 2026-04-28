@@ -24,7 +24,7 @@ const styles = stylex.create({
     backgroundColor: 'transparent',
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
+    borderColor: tokens.colorBorderStrong,
     '::placeholder': {
       color: tokens.colorTextPlaceholder,
     },
@@ -138,7 +138,7 @@ const styles = stylex.create({
     backgroundColor: tokens.colorSurface,
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: tokens.colorPopoverBorder,
     borderRadius: tokens.radiusMd,
     boxShadow: tokens.shadowMd,
     overflow: 'hidden',

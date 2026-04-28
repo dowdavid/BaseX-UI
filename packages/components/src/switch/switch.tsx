@@ -17,8 +17,8 @@ const styles = stylex.create({
     borderRadius: tokens.radiusFull,
     borderWidth: tokens.borderWidthThick,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
-    backgroundColor: tokens.colorBorder,
+    borderColor: tokens.colorBorderStrong,
+    backgroundColor: tokens.colorBorderStrong,
     cursor: 'pointer',
     flexShrink: 0,
     transitionProperty: 'background-color, border-color',
@@ -42,15 +42,19 @@ const styles = stylex.create({
     width: '10px',
     height: '10px',
     borderRadius: tokens.radiusFull,
-    backgroundColor: tokens.colorTextInverse,
+    // Unchecked thumb sits on the colorBorderStrong track — using colorText
+    // gives a strong dark-on-mid (light) and light-on-mid (dark) contrast.
+    backgroundColor: tokens.colorText,
     transform: 'translateX(0)',
-    transitionProperty: 'transform',
+    transitionProperty: 'transform, background-color',
     transitionDuration: tokens.motionDurationFast,
     transitionTimingFunction: tokens.motionEaseOut,
   },
 
   thumbChecked: {
     transform: 'translateX(14px)',
+    // Checked thumb sits on the colorText track — invert to stay readable.
+    backgroundColor: tokens.colorTextInverse,
   },
 });
 

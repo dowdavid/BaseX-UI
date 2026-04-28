@@ -102,7 +102,7 @@ const styles = stylex.create({
         '@media (hover: hover) and (pointer: fine)': tokens.colorDestructiveMuted,
       },
     },
-    color: tokens.colorDestructive,
+    color: tokens.colorDestructiveText,
     borderColor: {
       default: tokens.colorBorder,
       ':hover': {
@@ -119,7 +119,7 @@ const styles = stylex.create({
         '@media (hover: hover) and (pointer: fine)': tokens.colorDestructiveMuted,
       },
     },
-    color: tokens.colorDestructive,
+    color: tokens.colorDestructiveText,
   },
 
   // --- Size axis ---

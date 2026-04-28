@@ -13,7 +13,7 @@ const styles = stylex.create({
     fontFamily: tokens.fontFamilySans,
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: tokens.colorBorder,
     borderRadius: tokens.radiusLg,
     paddingBlock: tokens.space1,
     paddingInline: tokens.space1,
