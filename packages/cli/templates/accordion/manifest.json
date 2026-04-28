@@ -1,0 +1,207 @@
+{
+  "name": "Accordion",
+  "description": "A set of collapsible panels with headings for progressive content disclosure. Built on Base UI Accordion with StyleX styling.",
+  "category": "layout",
+  "baseComponent": "@base-ui/react/accordion",
+
+  "anatomy": "<Accordion.Root>\n  <Accordion.Item>\n    <Accordion.Header>\n      <Accordion.Trigger />\n    </Accordion.Header>\n    <Accordion.Panel />\n  </Accordion.Item>\n</Accordion.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Container that groups all accordion items.",
+      "props": {
+        "value": {
+          "type": "string[]",
+          "description": "Controlled value of expanded items. Each value corresponds to an Item's value prop."
+        },
+        "defaultValue": {
+          "type": "string[]",
+          "description": "Initial expanded items for uncontrolled mode."
+        },
+        "onValueChange": {
+          "type": "(value: string[]) => void",
+          "description": "Callback fired when items expand or collapse."
+        },
+        "multiple": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow multiple panels to be open simultaneously."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable all accordion items. Can also be set per-item."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the accordion is disabled."
+      }
+    },
+    "Item": {
+      "element": "div",
+      "description": "Groups a header with its collapsible panel.",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Unique value identifying this item."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable this item."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the item's panel is expanded.",
+        "data-disabled": "Present when the item is disabled.",
+        "data-index": "Position number of the item."
+      }
+    },
+    "Header": {
+      "element": "h3",
+      "description": "Heading wrapper for accessibility. Renders a heading element around the trigger.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the parent item's panel is expanded.",
+        "data-disabled": "Present when the parent item is disabled."
+      }
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "Button that toggles the panel open and closed. Includes a built-in chevron icon that rotates on open.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the parent item's panel is expanded.",
+        "data-disabled": "Present when the parent item is disabled."
+      }
+    },
+    "Panel": {
+      "element": "div",
+      "description": "Collapsible content area with animated height transition. Uses keepMounted internally for smooth close animation.",
+      "props": {
+        "keepMounted": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to keep the element in the DOM while closed. Defaults to true for animation support."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the panel is expanded.",
+        "data-starting-style": "Present when the panel is animating open.",
+        "data-ending-style": "Present when the panel is animating closed."
+      },
+      "cssVariables": {
+        "--accordion-panel-height": "The panel's content height, set by Base UI. Used for expand/collapse animation."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Panel height animation requires global CSS rules inside @layer priority1. StyleX cannot target data-attribute selectors, so these rules must live in the consumer's global stylesheet.",
+    "css": "@layer priority1 {\n  .basex-accordion-panel {\n    height: var(--accordion-panel-height);\n    overflow: hidden;\n    transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n  }\n  .basex-accordion-panel[data-starting-style],\n  .basex-accordion-panel[data-ending-style] {\n    height: 0;\n  }\n}"
+  },
+
+  "tokens": [
+    "colorBorder",
+    "colorText",
+    "colorTextMuted",
+    "colorFocusRing",
+    "space4",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "radiusMd",
+    "borderWidthDefault",
+    "motionDurationFast",
+    "motionDurationNormal",
+    "motionEaseOut",
+    "motionEaseInOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "collapsible-sections",
+      "signals": ["accordion", "collapse", "expand", "sections", "FAQ", "collapsible"],
+      "reasoning": "Accordion is the primary component for organizing content into collapsible sections.",
+      "composition": "<Accordion.Root>\n  <Accordion.Item value=\"section-1\">\n    <Accordion.Header>\n      <Accordion.Trigger>Section Title</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Content here</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "intent": "show-hide-content",
+      "signals": ["show more", "reveal", "toggle content", "expandable", "progressive disclosure"],
+      "reasoning": "Accordion provides progressive disclosure — content is hidden by default and revealed on demand.",
+      "composition": "<Accordion.Root>\n  <Accordion.Item value=\"details\">\n    <Accordion.Header>\n      <Accordion.Trigger>Show details</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Hidden content revealed on click</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "intent": "faq-list",
+      "signals": ["FAQ", "questions", "answers", "help", "Q&A", "knowledge base"],
+      "reasoning": "FAQ lists are a classic accordion pattern — each question is a trigger, each answer is a panel.",
+      "composition": "<Accordion.Root>\n  <Accordion.Item value=\"q1\">\n    <Accordion.Header>\n      <Accordion.Trigger>How do I reset my password?</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Visit the settings page and click \"Reset Password\".</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Switching between views or content panels",
+      "reasoning": "Use Tabs instead. Accordion reveals content in place; Tabs switch between distinct views.",
+      "alternative": "Tabs"
+    },
+    {
+      "scenario": "A single collapsible section with no siblings",
+      "reasoning": "Use Collapsible directly. Accordion is for groups of related collapsible sections.",
+      "alternative": "Collapsible"
+    },
+    {
+      "scenario": "Sequential step-by-step flow or wizard",
+      "reasoning": "Accordion doesn't communicate sequential progress or completion state.",
+      "alternative": "Stepper"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic single-open accordion",
+      "code": "<Accordion.Root>\n  <Accordion.Item value=\"item-1\">\n    <Accordion.Header>\n      <Accordion.Trigger>Section 1</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Content for section 1</Accordion.Panel>\n  </Accordion.Item>\n  <Accordion.Item value=\"item-2\">\n    <Accordion.Header>\n      <Accordion.Trigger>Section 2</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Content for section 2</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "name": "multiple",
+      "description": "Multiple panels open simultaneously",
+      "code": "<Accordion.Root multiple>\n  <Accordion.Item value=\"item-1\">\n    <Accordion.Header>\n      <Accordion.Trigger>Section 1</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Content for section 1</Accordion.Panel>\n  </Accordion.Item>\n  <Accordion.Item value=\"item-2\">\n    <Accordion.Header>\n      <Accordion.Trigger>Section 2</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>Content for section 2</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled accordion item",
+      "code": "<Accordion.Root>\n  <Accordion.Item value=\"item-1\">\n    <Accordion.Header>\n      <Accordion.Trigger>Enabled</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>This section works</Accordion.Panel>\n  </Accordion.Item>\n  <Accordion.Item value=\"item-2\" disabled>\n    <Accordion.Header>\n      <Accordion.Trigger>Disabled</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>This section is disabled</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    },
+    {
+      "name": "default-expanded",
+      "description": "Accordion with a panel open by default",
+      "code": "<Accordion.Root defaultValue={[\"item-1\"]}>\n  <Accordion.Item value=\"item-1\">\n    <Accordion.Header>\n      <Accordion.Trigger>Open by default</Accordion.Trigger>\n    </Accordion.Header>\n    <Accordion.Panel>This panel starts open</Accordion.Panel>\n  </Accordion.Item>\n</Accordion.Root>"
+    }
+  ]
+}

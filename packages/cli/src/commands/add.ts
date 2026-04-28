@@ -1,9 +1,25 @@
 import * as p from '@clack/prompts';
-import { writeFile, mkdir, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { writeFile, mkdir, readFile, readdir } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
 import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
-// Available components registry
+// Resolve the templates directory relative to this file.
+// At runtime from compiled dist/commands/add.js: ../../templates → packages/cli/templates/
+// In Vitest (source src/commands/add.ts): ../../templates → packages/cli/templates/
+function getTemplatesDir(): string {
+  const url = import.meta.url;
+  if (url.startsWith('file:')) {
+    return fileURLToPath(new URL('../../templates', url));
+  }
+  // Vitest jsdom environment: import.meta.url may be http://localhost/...
+  // Fall back to resolving from process.cwd() using the package structure.
+  // The templates/ directory is always at the same level as src/ or dist/.
+  return resolve(process.cwd(), 'packages/cli/templates');
+}
+
+// Available components registry — all 36 components.
+// Descriptions sourced from each component's manifest.json.
 const COMPONENTS: Record<
   string,
   {
@@ -11,18 +27,272 @@ const COMPONENTS: Record<
     description: string;
     files: string[];
     dependencies: string[];
+    requiresPortal?: boolean;
   }
 > = {
+  accordion: {
+    name: 'Accordion',
+    description:
+      'A set of collapsible panels with headings for progressive content disclosure. Built on Base UI Accordion with StyleX styling.',
+    files: ['accordion.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  'alert-dialog': {
+    name: 'AlertDialog',
+    description:
+      'A modal dialog that requires explicit user acknowledgment. Used for destructive or irreversible actions. Built on Base UI AlertDialog with StyleX styling.',
+    files: ['alert-dialog.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  autocomplete: {
+    name: 'Autocomplete',
+    description:
+      'A text input with a filterable suggestion dropdown. Built on Base UI Autocomplete with StyleX styling. Input-only style with built-in clear button.',
+    files: ['autocomplete.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  avatar: {
+    name: 'Avatar',
+    description:
+      'A circular image or fallback representing a user or entity. Built on Base UI Avatar with StyleX styling.',
+    files: ['avatar.tsx', 'index.ts'],
+    dependencies: [],
+  },
   button: {
     name: 'Button',
-    description: 'A styled button for triggering actions.',
+    description:
+      'A styled button component for triggering actions. Built on Base UI Button with StyleX styling.',
     files: ['button.tsx', 'index.ts'],
     dependencies: [],
   },
-  accordion: {
-    name: 'Accordion',
-    description: 'Collapsible panels for progressive content disclosure.',
-    files: ['accordion.tsx', 'index.ts'],
+  checkbox: {
+    name: 'Checkbox',
+    description:
+      'A control that allows the user to toggle between checked, unchecked, and optionally indeterminate states. Built on Base UI Checkbox with StyleX styling.',
+    files: ['checkbox.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  'checkbox-group': {
+    name: 'CheckboxGroup',
+    description:
+      'A container that provides shared state to a series of checkboxes, managing a value array of checked item names. Supports a parent checkbox for select-all behavior. Built on Base UI CheckboxGroup with StyleX styling.',
+    files: ['checkbox-group.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  collapsible: {
+    name: 'Collapsible',
+    description:
+      'A single collapsible section with a trigger button and an animated content panel. Built on Base UI Collapsible with StyleX styling.',
+    files: ['collapsible.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  combobox: {
+    name: 'Combobox',
+    description:
+      'A searchable select dropdown. Users must pick from a predefined list, with optional multi-select. Built on Base UI Combobox with StyleX styling.',
+    files: ['combobox.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  'context-menu': {
+    name: 'ContextMenu',
+    description:
+      'A right-click (or long-press on touch) context menu, supporting items, checkbox items, radio items, submenus, and keyboard navigation. Built on Base UI ContextMenu with StyleX styling.',
+    files: ['context-menu.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  dialog: {
+    name: 'Dialog',
+    description:
+      'A general-purpose modal overlay for displaying content, forms, or interactive flows. Dismissible via backdrop click or Escape. Supports Header/Panel/Footer layout, scroll indicators, nested stacking, and an optional close button. Built on Base UI Dialog with StyleX styling.',
+    files: ['dialog.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  drawer: {
+    name: 'Drawer',
+    description:
+      'A slide-out panel anchored to a screen edge for supplementary content, navigation, or forms. Supports swipe-to-dismiss, snap points, and nested drawers. Built on Base UI Drawer with StyleX styling.',
+    files: ['drawer.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  field: {
+    name: 'Field',
+    description:
+      'A form field wrapper that connects a label, description, input control, and validation error message with proper accessibility attributes. Built on Base UI Field with StyleX styling.',
+    files: ['field.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  fieldset: {
+    name: 'Fieldset',
+    description:
+      'A semantic grouping container for related form fields with an accessible legend. Built on Base UI Fieldset with StyleX styling.',
+    files: ['fieldset.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  form: {
+    name: 'Form',
+    description:
+      'An enhanced form element that provides server-side validation error management for Field components. Built on Base UI Form with StyleX styling.',
+    files: ['form.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  input: {
+    name: 'Input',
+    description:
+      'A standalone styled text input that automatically integrates with Field for validation. Built on Base UI Input with StyleX styling.',
+    files: ['input.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  menu: {
+    name: 'Menu',
+    description:
+      'A dropdown menu triggered by a button, supporting items, checkbox items, radio items, submenus, and keyboard navigation. Built on Base UI Menu with StyleX styling.',
+    files: ['menu.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  menubar: {
+    name: 'Menubar',
+    description:
+      'A horizontal container for multiple menus, providing keyboard navigation between menu triggers. Built on Base UI Menubar with StyleX styling.',
+    files: ['menubar.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  meter: {
+    name: 'Meter',
+    description:
+      'A visual indicator showing a scalar value within a known range. Built on Base UI Meter with StyleX styling.',
+    files: ['meter.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  'navigation-menu': {
+    name: 'NavigationMenu',
+    description:
+      'A site navigation component with hover-triggered dropdown content panels. Built on Base UI NavigationMenu with StyleX styling.',
+    files: ['navigation-menu.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  'number-field': {
+    name: 'NumberField',
+    description:
+      'A numeric input with increment and decrement buttons. Built on Base UI NumberField with StyleX styling.',
+    files: ['number-field.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  popover: {
+    name: 'Popover',
+    description:
+      'A floating content panel that appears next to a trigger element. Built on Base UI Popover with StyleX styling.',
+    files: ['popover.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  'preview-card': {
+    name: 'PreviewCard',
+    description:
+      'A hover-triggered card that shows a preview of linked content. Built on Base UI PreviewCard with StyleX styling.',
+    files: ['preview-card.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  progress: {
+    name: 'Progress',
+    description:
+      'A progress bar showing determinate or indeterminate task completion. Built on Base UI Progress with StyleX styling.',
+    files: ['progress.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  radio: {
+    name: 'Radio',
+    description:
+      'A radio button group for single-select choices. Built on Base UI Radio and RadioGroup with StyleX styling.',
+    files: ['radio.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  'scroll-area': {
+    name: 'ScrollArea',
+    description:
+      'A scrollable region with custom-styled scrollbars overlaid on native scroll. Native scrolling, keyboard navigation, touch gestures, and RTL are preserved; only the scrollbar visuals are replaced. Scrollbars fade in on hover/scroll and respect prefers-reduced-motion. Built on Base UI ScrollArea with StyleX styling.',
+    files: ['scroll-area.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  select: {
+    name: 'Select',
+    description:
+      'A native-feeling single-value dropdown. User clicks the trigger, picks one option from a list. Keyboard typeahead, listbox ARIA, alignItemWithTrigger positioning. Built on Base UI Select with StyleX styling.',
+    files: ['select.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  separator: {
+    name: 'Separator',
+    description:
+      'A thin visual divider between content groups. Built on Base UI Separator with StyleX styling.',
+    files: ['separator.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  slider: {
+    name: 'Slider',
+    description:
+      'An accessible range input that lets users pick a single value or a range from a continuous scale. Built on Base UI Slider with StyleX styling.',
+    files: ['slider.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  switch: {
+    name: 'Switch',
+    description:
+      'A control that toggles a setting on or off, taking effect immediately. Built on Base UI Switch with StyleX styling.',
+    files: ['switch.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  tabs: {
+    name: 'Tabs',
+    description:
+      'An accessible tab interface that organizes content into selectable panels. Built on Base UI Tabs with StyleX styling.',
+    files: ['tabs.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  toast: {
+    name: 'Toast',
+    description:
+      "Ephemeral, accessible notification messages. Auto-dismiss with pause-on-hover/focus, swipe-to-dismiss on touch, queue stacking, screen-reader announcements (polite by default, urgent for type='error'), and respects prefers-reduced-motion. Imperative API via the useToast() hook. Built on Base UI Toast with StyleX styling.",
+    files: ['toast.tsx', 'index.ts'],
+    dependencies: [],
+    requiresPortal: true,
+  },
+  toggle: {
+    name: 'Toggle',
+    description:
+      'A two-state button that can be on or off. Communicates pressed state to assistive technology via aria-pressed. Built on Base UI Toggle with StyleX styling that mirrors Button.',
+    files: ['toggle.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  'toggle-group': {
+    name: 'ToggleGroup',
+    description:
+      'A group of two-state toggle buttons. Supports single-select (radiogroup semantics) and multi-select (group semantics) modes with roving tabindex keyboard navigation. Built on Base UI ToggleGroup with StyleX styling.',
+    files: ['toggle-group.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  toolbar: {
+    name: 'Toolbar',
+    description:
+      'A container for grouping action buttons, links, and toggle controls with shared keyboard navigation. Implements the WAI-ARIA toolbar pattern with roving tabindex. Built on Base UI Toolbar with StyleX styling.',
+    files: ['toolbar.tsx', 'index.ts'],
+    dependencies: [],
+  },
+  tooltip: {
+    name: 'Tooltip',
+    description:
+      'A small, non-interactive label that appears on hover or focus to describe a UI element. Built on Base UI Tooltip with StyleX styling.',
+    files: ['tooltip.tsx', 'index.ts'],
     dependencies: [],
   },
 };
@@ -68,7 +338,7 @@ export async function runAdd(args: string[]) {
   try {
     await mkdir(targetDir, { recursive: true });
 
-    // Scaffold component files
+    // Scaffold component files from bundled templates
     await scaffoldComponent(componentName, targetDir);
 
     // Update intents.json if it exists
@@ -85,793 +355,115 @@ export async function runAdd(args: string[]) {
 
   p.log.success(`Added ${component.name} to src/components/ui/${componentName}/`);
   p.log.info(`Import: import { ${component.name} } from './components/ui/${componentName}';`);
+
+  // Print portal note
+  if (component.requiresPortal) {
+    p.log.warn(
+      "This component uses portals. Add `import '@basex-ui/styles/themes'` and apply a theme class to `<html>` for correct rendering.",
+    );
+  }
+
+  // Print CSS requirements if present (read from the manifest that was just scaffolded)
+  await printCssRequirements(targetDir, componentName);
+
   p.outro('');
 }
 
 async function scaffoldComponent(name: string, targetDir: string) {
-  if (name === 'button') {
-    await writeFile(join(targetDir, 'button.tsx'), getButtonSource());
-    await writeFile(
-      join(targetDir, 'index.ts'),
-      `export { Button } from './button';\nexport type { ButtonProps, ButtonVariant, ButtonColor, ButtonSize } from './button';\n`,
+  const templateDir = join(getTemplatesDir(), name);
+
+  // Read all files in the template directory — no hardcoded filenames
+  let files: string[];
+  try {
+    files = await readdir(templateDir);
+  } catch {
+    throw new Error(
+      `Template directory not found for "${name}". Run \`pnpm build\` in the CLI package to regenerate templates.`,
     );
-    await writeFile(join(targetDir, 'manifest.json'), getButtonManifest());
-    await writeFile(join(targetDir, 'button.md'), getButtonDocs());
-  } else if (name === 'accordion') {
-    await writeFile(join(targetDir, 'accordion.tsx'), getAccordionSource());
-    await writeFile(
-      join(targetDir, 'index.ts'),
-      `export { Accordion } from './accordion';\nexport type {\n  AccordionRootProps,\n  AccordionItemProps,\n  AccordionHeaderProps,\n  AccordionTriggerProps,\n  AccordionPanelProps,\n} from './accordion';\n`,
-    );
-    await writeFile(join(targetDir, 'manifest.json'), getAccordionManifest());
-    await writeFile(join(targetDir, 'accordion.md'), getAccordionDocs());
+  }
+
+  for (const file of files) {
+    const content = await readFile(join(templateDir, file), 'utf8');
+    await writeFile(join(targetDir, file), content, 'utf8');
   }
 }
 
-async function updateIntents(cwd: string, _componentName: string) {
+async function printCssRequirements(targetDir: string, _name: string) {
+  const manifestPath = join(targetDir, 'manifest.json');
+  if (!existsSync(manifestPath)) return;
+
+  try {
+    const raw = await readFile(manifestPath, 'utf8');
+    const manifest = JSON.parse(raw) as {
+      cssRequirements?: { description?: string; css?: string } | null;
+    };
+
+    if (manifest.cssRequirements?.css) {
+      p.log.warn('CSS required — add the following to your global stylesheet manually:');
+      p.log.message(manifest.cssRequirements.css);
+      if (manifest.cssRequirements.description) {
+        p.log.info(manifest.cssRequirements.description);
+      }
+    }
+  } catch {
+    // Ignore parse errors — non-fatal
+  }
+}
+
+async function updateIntents(cwd: string, componentName: string) {
   const intentsPath = join(cwd, 'src/components/intents.json');
   if (!existsSync(intentsPath)) return;
 
+  const templateManifestPath = join(getTemplatesDir(), componentName, 'manifest.json');
+  if (!existsSync(templateManifestPath)) return;
+
   try {
-    const raw = await readFile(intentsPath, 'utf8');
-    const data = JSON.parse(raw);
-    // In a full implementation, merge component-specific intents
-    // For now, just ensure the file is valid
-    await writeFile(intentsPath, JSON.stringify(data, null, 2) + '\n');
+    const [manifestRaw, intentsRaw] = await Promise.all([
+      readFile(templateManifestPath, 'utf8'),
+      readFile(intentsPath, 'utf8'),
+    ]);
+
+    const manifest = JSON.parse(manifestRaw) as { intents?: Array<{ intent: string }> };
+    const newIntents: Array<{ intent: string }> = manifest.intents ?? [];
+
+    if (newIntents.length === 0) return;
+
+    const existing = JSON.parse(intentsRaw) as Array<{ intent: string }>;
+    const existingKeys = new Set(existing.map((i) => i.intent));
+
+    // Merge — dedup by intent field
+    const merged = [...existing, ...newIntents.filter((i) => !existingKeys.has(i.intent))];
+
+    await writeFile(intentsPath, JSON.stringify(merged, null, 2) + '\n', 'utf8');
   } catch {
-    // Ignore parse errors
+    // Ignore parse errors — non-fatal
   }
 }
 
-async function updateLlmsTxt(cwd: string, _componentName: string) {
+async function updateLlmsTxt(cwd: string, componentName: string) {
   const llmsPath = join(cwd, 'llms.txt');
   if (!existsSync(llmsPath)) return;
-  // In a full implementation, append component docs to llms.txt
-}
 
-function getButtonSource(): string {
-  return `import { Button as BaseButton } from '@base-ui/react/button';
-import * as stylex from '@stylexjs/stylex';
-import { tokens } from '@basex-ui/tokens';
-import { capitalize } from '@basex-ui/styles';
-import { forwardRef } from 'react';
-import type { StyleXStyles } from '@stylexjs/stylex';
+  const mdPath = join(getTemplatesDir(), componentName, `${componentName}.md`);
+  if (!existsSync(mdPath)) return;
 
-// --- Styles ---
-const styles = stylex.create({
-  root: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: tokens.space2,
-    fontFamily: tokens.fontFamilySans,
-    fontWeight: tokens.fontWeightMedium,
-    lineHeight: tokens.lineHeightTight,
-    borderStyle: 'solid',
-    borderWidth: tokens.borderWidthDefault,
-    borderColor: 'transparent',
-    borderRadius: tokens.radiusMd,
-    cursor: 'pointer',
-    userSelect: 'none',
-    whiteSpace: 'nowrap',
-    flexShrink: 0,
-    textDecoration: 'none',
-    transitionProperty: 'background-color, color, border-color, box-shadow, opacity, transform',
-    transitionDuration: tokens.motionDurationFast,
-    transitionTimingFunction: tokens.motionEaseOut,
-    transform: {
-      default: 'none',
-      ':active': 'scale(0.98)',
-    },
-    outline: {
-      default: 'none',
-      ':focus-visible': \`2px solid \${tokens.colorFocusRing}\`,
-    },
-    outlineOffset: '2px',
-  },
+  try {
+    const [llmsContent, mdContent] = await Promise.all([
+      readFile(llmsPath, 'utf8'),
+      readFile(mdPath, 'utf8'),
+    ]);
 
-  // --- Variant axis (shape/fill) ---
-  variantSolid: {
-    backgroundColor: {
-      default: tokens.colorPrimary,
-      ':hover': tokens.colorPrimaryHover,
-      ':active': tokens.colorPrimaryActive,
-    },
-    color: tokens.colorPrimaryContrast,
-    borderColor: 'transparent',
-  },
-  variantOutline: {
-    backgroundColor: {
-      default: 'transparent',
-      ':hover': tokens.colorMuted,
-    },
-    color: tokens.colorText,
-    borderColor: tokens.colorBorder,
-  },
-  variantGhost: {
-    backgroundColor: {
-      default: 'transparent',
-      ':hover': tokens.colorMuted,
-    },
-    color: tokens.colorText,
-    borderColor: 'transparent',
-  },
+    // Derive a display name from the component name (e.g. "navigation-menu" → "NavigationMenu")
+    const displayName = componentName
+      .split('-')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join('');
 
-  // --- Compound: variant + color ---
-  solidSecondary: {
-    backgroundColor: {
-      default: tokens.colorSecondary,
-      ':hover': tokens.colorSecondaryHover,
-      ':active': tokens.colorSecondaryActive,
-    },
-    color: tokens.colorSecondaryContrast,
-  },
-  solidDestructive: {
-    backgroundColor: {
-      default: tokens.colorDestructive,
-      ':hover': tokens.colorDestructiveHover,
-      ':active': tokens.colorDestructiveActive,
-    },
-    color: tokens.colorDestructiveContrast,
-  },
-  outlineDestructive: {
-    backgroundColor: {
-      default: 'transparent',
-      ':hover': tokens.colorDestructiveMuted,
-    },
-    color: tokens.colorDestructive,
-    borderColor: {
-      default: tokens.colorBorder,
-      ':hover': tokens.colorDestructive,
-    },
-  },
-  ghostDestructive: {
-    backgroundColor: {
-      default: 'transparent',
-      ':hover': tokens.colorDestructiveMuted,
-    },
-    color: tokens.colorDestructive,
-  },
+    const header = `\n## ${displayName}\n\n`;
+    const updated = llmsContent + header + mdContent;
 
-  // --- Size axis ---
-  sizeSm: {
-    height: '32px',
-    paddingInline: tokens.space2h,
-    fontSize: tokens.fontSizeSm,
-    gap: tokens.space1h,
-  },
-  sizeMd: {
-    height: '36px',
-    paddingInline: tokens.space3,
-    fontSize: tokens.fontSizeSm,
-  },
-  sizeLg: {
-    height: '40px',
-    paddingInline: tokens.space3h,
-    fontSize: tokens.fontSizeMd,
-  },
-
-  // --- Disabled state (applied conditionally via Base UI state) ---
-  disabled: {
-    opacity: 0.64,
-    pointerEvents: 'none',
-    cursor: 'default',
-  },
-});
-
-// --- Types ---
-export type ButtonVariant = 'solid' | 'outline' | 'ghost';
-export type ButtonColor = 'default' | 'secondary' | 'destructive';
-export type ButtonSize = 'sm' | 'md' | 'lg';
-
-export interface ButtonProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof BaseButton>, 'className'> {
-  variant?: ButtonVariant;
-  color?: ButtonColor;
-  size?: ButtonSize;
-  sx?: StyleXStyles;
-  children?: React.ReactNode;
-}
-
-// --- Compound style lookup ---
-type CompoundKey = \\\`\\\${ButtonVariant}_\\\${ButtonColor}\\\`;
-const compoundStyles: Partial<Record<CompoundKey, keyof typeof styles>> = {
-  solid_secondary: 'solidSecondary',
-  solid_destructive: 'solidDestructive',
-  outline_destructive: 'outlineDestructive',
-  ghost_destructive: 'ghostDestructive',
-};
-
-// --- Component ---
-export const Button = forwardRef<HTMLElement, ButtonProps>(
-  (
-    { variant = 'solid', color = 'default', size = 'md', sx, ...props },
-    ref,
-  ) => {
-    const variantKey = \\\`variant\\\${capitalize(variant)}\\\` as const;
-    const sizeKey = \\\`size\\\${capitalize(size)}\\\` as const;
-    const compoundKey: CompoundKey = \\\`\\\${variant}_\\\${color}\\\`;
-    const compoundStyleKey = compoundStyles[compoundKey];
-
-    return (
-      <BaseButton
-        ref={ref}
-        {...props}
-        className={(state) =>
-          stylex.props(
-            styles.root,
-            styles[variantKey],
-            compoundStyleKey != null && styles[compoundStyleKey],
-            styles[sizeKey],
-            state.disabled && styles.disabled,
-            sx,
-          ).className ?? ''
-        }
-      />
-    );
-  },
-);
-
-Button.displayName = 'Button';
-`;
-}
-
-function getButtonManifest(): string {
-  return (
-    JSON.stringify(
-      {
-        name: 'Button',
-        description:
-          'A styled button component for triggering actions. Built on Base UI Button with StyleX styling.',
-        category: 'actions',
-        baseComponent: '@base-ui/react/button',
-        anatomy: '<Button />',
-        parts: {
-          Root: {
-            element: 'button',
-            description:
-              'The button element. Renders a <button> with StyleX styling and Base UI state management.',
-            props: {
-              variant: {
-                type: "'solid' | 'outline' | 'ghost'",
-                default: 'solid',
-                description: 'Visual style of the button.',
-              },
-              color: {
-                type: "'default' | 'secondary' | 'destructive'",
-                default: 'default',
-                description: 'Color palette applied to the button.',
-              },
-              size: {
-                type: "'sm' | 'md' | 'lg'",
-                default: 'md',
-                description: 'Size of the button affecting height, padding, and font size.',
-              },
-              sx: { type: 'StyleXStyles', description: 'StyleX styles for consumer overrides.' },
-              disabled: {
-                type: 'boolean',
-                default: false,
-                description: 'Whether the button is disabled.',
-              },
-              focusableWhenDisabled: {
-                type: 'boolean',
-                default: false,
-                description: 'Whether the button remains focusable when disabled.',
-              },
-            },
-            dataAttributes: {
-              'data-disabled': 'Present when the button is disabled.',
-            },
-          },
-        },
-        cssRequirements: null,
-        variants: {
-          variant: ['solid', 'outline', 'ghost'],
-          color: ['default', 'secondary', 'destructive'],
-          size: ['sm', 'md', 'lg'],
-        },
-        intents: [
-          { intent: 'trigger-action', signals: ['button', 'click', 'submit', 'action'] },
-          { intent: 'destructive-action', signals: ['delete', 'remove', 'destroy', 'danger'] },
-        ],
-        avoidWhen: [
-          { scenario: 'Navigation', alternative: 'Use Link component' },
-          { scenario: 'Toggle state', alternative: 'Use Toggle or Switch' },
-        ],
-      },
-      null,
-      2,
-    ) + '\n'
-  );
-}
-
-function getButtonDocs(): string {
-  return `# Button
-
-A styled button component for triggering actions. Built on Base UI Button with StyleX styling.
-
-## Import
-\`\`\`tsx
-import { Button } from './components/ui/button';
-\`\`\`
-
-## Anatomy
-\`\`\`tsx
-<Button />
-\`\`\`
-
-## API Reference
-
-### Root
-
-The button element. Renders a \`<button>\`.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | 'solid' \\| 'outline' \\| 'ghost' | 'solid' | Visual style |
-| color | 'default' \\| 'secondary' \\| 'destructive' | 'default' | Color palette |
-| size | 'sm' \\| 'md' \\| 'lg' | 'md' | Button size |
-| sx | StyleXStyles | — | Style overrides |
-| disabled | boolean | false | Disables the button |
-| focusableWhenDisabled | boolean | false | Keep focusable when disabled |
-
-| Attribute | Description |
-|-----------|-------------|
-| data-disabled | Present when the button is disabled |
-
-## When to Use
-- Triggering actions (submit, save, confirm)
-- Primary calls-to-action
-- Destructive actions with \`color="destructive"\`
-
-## When NOT to Use
-- Navigation — use Link
-- Toggling state — use Toggle/Switch
-- Opening menus — use Menu.Trigger
-`;
-}
-
-function getAccordionSource(): string {
-  return `import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
-import * as stylex from '@stylexjs/stylex';
-import { tokens } from '@basex-ui/tokens';
-import { forwardRef } from 'react';
-import type { StyleXStyles } from '@stylexjs/stylex';
-
-// --- Chevron Icon ---
-function ChevronIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M4 6L8 10L12 6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-// --- Styles ---
-const styles = stylex.create({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-  },
-
-  item: {
-    borderBottomWidth: tokens.borderWidthDefault,
-    borderBottomStyle: 'solid',
-    borderBottomColor: tokens.colorBorder,
-  },
-
-  header: {
-    display: 'flex',
-    margin: 0,
-  },
-
-  trigger: {
-    display: 'flex',
-    flex: 1,
-    alignItems: 'start',
-    justifyContent: 'space-between',
-    gap: tokens.space4,
-    paddingBlock: tokens.space4,
-    fontFamily: tokens.fontFamilySans,
-    fontWeight: tokens.fontWeightMedium,
-    fontSize: tokens.fontSizeSm,
-    lineHeight: tokens.lineHeightNormal,
-    color: tokens.colorText,
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderRadius: tokens.radiusMd,
-    cursor: 'pointer',
-    textAlign: 'start',
-    transitionProperty: 'all',
-    transitionDuration: tokens.motionDurationFast,
-    transitionTimingFunction: tokens.motionEaseOut,
-    outline: {
-      default: 'none',
-      ':focus-visible': \\\`3px solid \\\${tokens.colorFocusRing}\\\`,
-    },
-  },
-
-  chevron: {
-    flexShrink: 0,
-    width: '16px',
-    height: '16px',
-    opacity: 0.8,
-    transform: 'translateY(2px) rotate(var(--accordion-chevron-rotation, 0deg))',
-    transitionProperty: 'transform',
-    transitionDuration: tokens.motionDurationNormal,
-    transitionTimingFunction: tokens.motionEaseInOut,
-  },
-
-  panel: {
-    fontSize: tokens.fontSizeSm,
-    color: tokens.colorTextMuted,
-  },
-  panelContent: {
-    paddingTop: 0,
-    paddingBottom: tokens.space4,
-    paddingInline: 0,
-  },
-
-  disabled: {
-    opacity: 0.64,
-    pointerEvents: 'none',
-    cursor: 'default',
-  },
-});
-
-// --- Types ---
-export interface AccordionRootProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Root>,
-    'className'
-  > {
-  sx?: StyleXStyles;
-}
-
-export interface AccordionItemProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Item>,
-    'className'
-  > {
-  sx?: StyleXStyles;
-}
-
-export interface AccordionHeaderProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Header>,
-    'className'
-  > {
-  sx?: StyleXStyles;
-}
-
-export interface AccordionTriggerProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Trigger>,
-    'className'
-  > {
-  sx?: StyleXStyles;
-}
-
-export interface AccordionPanelProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof BaseAccordion.Panel>,
-    'className'
-  > {
-  sx?: StyleXStyles;
-}
-
-// --- Components ---
-
-const Root = forwardRef<HTMLDivElement, AccordionRootProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAccordion.Root
-      ref={ref}
-      {...props}
-      className={(state) =>
-        stylex.props(
-          styles.root,
-          state.disabled && styles.disabled,
-          sx,
-        ).className ?? ''
-      }
-    />
-  ),
-);
-Root.displayName = 'Accordion.Root';
-
-const Item = forwardRef<HTMLDivElement, AccordionItemProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAccordion.Item
-      ref={ref}
-      {...props}
-      className={(state) =>
-        stylex.props(
-          styles.item,
-          state.disabled && styles.disabled,
-          sx,
-        ).className ?? ''
-      }
-    />
-  ),
-);
-Item.displayName = 'Accordion.Item';
-
-const Header = forwardRef<HTMLHeadingElement, AccordionHeaderProps>(
-  ({ sx, ...props }, ref) => (
-    <BaseAccordion.Header
-      ref={ref}
-      {...props}
-      className={stylex.props(styles.header, sx).className ?? ''}
-    />
-  ),
-);
-Header.displayName = 'Accordion.Header';
-
-const Trigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
-  ({ children, sx, ...props }, ref) => (
-    <BaseAccordion.Trigger
-      ref={ref}
-      {...props}
-      className={(state) =>
-        stylex.props(
-          styles.trigger,
-          state.disabled && styles.disabled,
-          sx,
-        ).className ?? ''
-      }
-      style={(state) => ({
-        '--accordion-chevron-rotation': state.open ? '180deg' : '0deg',
-      } as React.CSSProperties)}
-    >
-      {children}
-      <ChevronIcon {...stylex.props(styles.chevron)} />
-    </BaseAccordion.Trigger>
-  ),
-);
-Trigger.displayName = 'Accordion.Trigger';
-
-const Panel = forwardRef<HTMLDivElement, AccordionPanelProps>(
-  ({ children, sx, ...props }, ref) => (
-    <BaseAccordion.Panel
-      keepMounted
-      ref={ref}
-      {...props}
-      className={() =>
-        \\\`basex-accordion-panel \\\${stylex.props(styles.panel, sx).className ?? ''}\\\`
-      }
-    >
-      <div {...stylex.props(styles.panelContent)}>{children}</div>
-    </BaseAccordion.Panel>
-  ),
-);
-Panel.displayName = 'Accordion.Panel';
-
-// --- Public API ---
-export const Accordion = { Root, Item, Header, Trigger, Panel };
-`;
-}
-
-function getAccordionManifest(): string {
-  return (
-    JSON.stringify(
-      {
-        name: 'Accordion',
-        description:
-          'A set of collapsible panels with headings for progressive content disclosure.',
-        category: 'layout',
-        baseComponent: '@base-ui/react/accordion',
-        anatomy:
-          '<Accordion.Root>\n  <Accordion.Item>\n    <Accordion.Header>\n      <Accordion.Trigger />\n    </Accordion.Header>\n    <Accordion.Panel />\n  </Accordion.Item>\n</Accordion.Root>',
-        parts: {
-          Root: {
-            element: 'div',
-            description: 'Container that groups all accordion items.',
-            props: {
-              value: { type: 'string[]', description: 'Controlled value of expanded items.' },
-              defaultValue: {
-                type: 'string[]',
-                description: 'Initial expanded items for uncontrolled mode.',
-              },
-              onValueChange: {
-                type: '(value: string[]) => void',
-                description: 'Callback fired when items expand or collapse.',
-              },
-              multiple: {
-                type: 'boolean',
-                default: false,
-                description: 'Allow multiple panels open simultaneously.',
-              },
-              disabled: {
-                type: 'boolean',
-                default: false,
-                description: 'Disable all accordion items.',
-              },
-              sx: { type: 'StyleXStyles', description: 'StyleX styles for consumer overrides.' },
-            },
-            dataAttributes: { 'data-disabled': 'Present when the accordion is disabled.' },
-          },
-          Item: {
-            element: 'div',
-            description: 'Groups a header with its collapsible panel.',
-            props: {
-              value: {
-                type: 'string',
-                required: true,
-                description: 'Unique value identifying this item.',
-              },
-              disabled: { type: 'boolean', default: false, description: 'Disable this item.' },
-              sx: { type: 'StyleXStyles', description: 'StyleX styles for consumer overrides.' },
-            },
-            dataAttributes: {
-              'data-open': 'Present when the panel is expanded.',
-              'data-disabled': 'Present when the item is disabled.',
-              'data-index': 'Position number of the item.',
-            },
-          },
-          Header: {
-            element: 'h3',
-            description: 'Heading wrapper for accessibility.',
-            props: {
-              sx: { type: 'StyleXStyles', description: 'StyleX styles for consumer overrides.' },
-            },
-            dataAttributes: {
-              'data-open': 'Present when the parent item is expanded.',
-              'data-disabled': 'Present when the parent item is disabled.',
-            },
-          },
-          Trigger: {
-            element: 'button',
-            description: 'Button that toggles the panel open and closed.',
-            props: {
-              sx: { type: 'StyleXStyles', description: 'StyleX styles for consumer overrides.' },
-            },
-            dataAttributes: {
-              'data-open': 'Present when the parent item is expanded.',
-              'data-disabled': 'Present when the parent item is disabled.',
-            },
-          },
-          Panel: {
-            element: 'div',
-            description: 'Collapsible content area with animated height transition.',
-            props: {
-              keepMounted: {
-                type: 'boolean',
-                default: true,
-                description: 'Keep element in DOM while closed (for animation).',
-              },
-              sx: { type: 'StyleXStyles', description: 'StyleX styles for consumer overrides.' },
-            },
-            dataAttributes: {
-              'data-open': 'Present when the panel is expanded.',
-              'data-starting-style': 'Present when animating open.',
-              'data-ending-style': 'Present when animating closed.',
-            },
-          },
-        },
-        cssRequirements: {
-          description: 'Panel height animation requires global CSS rules inside @layer priority1.',
-          css: '@layer priority1 {\n  .basex-accordion-panel {\n    height: var(--accordion-panel-height);\n    overflow: hidden;\n    transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n  }\n  .basex-accordion-panel[data-starting-style],\n  .basex-accordion-panel[data-ending-style] {\n    height: 0;\n  }\n}',
-        },
-        intents: [
-          {
-            intent: 'collapsible-sections',
-            signals: ['accordion', 'collapse', 'expand', 'sections', 'FAQ', 'collapsible'],
-          },
-          {
-            intent: 'show-hide-content',
-            signals: ['show more', 'reveal', 'toggle content', 'expandable'],
-          },
-        ],
-        avoidWhen: [
-          { scenario: 'Switching between views', alternative: 'Use Tabs' },
-          { scenario: 'Single collapsible section', alternative: 'Use Collapsible' },
-          { scenario: 'Step-by-step wizard', alternative: 'Use Stepper' },
-        ],
-      },
-      null,
-      2,
-    ) + '\n'
-  );
-}
-
-function getAccordionDocs(): string {
-  return `# Accordion
-
-A set of collapsible panels for progressive content disclosure.
-
-## Import
-\`\`\`tsx
-import { Accordion } from './components/ui/accordion';
-\`\`\`
-
-## Anatomy
-\`\`\`tsx
-<Accordion.Root>
-  <Accordion.Item>
-    <Accordion.Header>
-      <Accordion.Trigger />
-    </Accordion.Header>
-    <Accordion.Panel />
-  </Accordion.Item>
-</Accordion.Root>
-\`\`\`
-
-## CSS Requirements
-
-Panel height animation requires global CSS inside \`@layer priority1\`:
-
-\`\`\`css
-@layer priority1 {
-  .basex-accordion-panel {
-    height: var(--accordion-panel-height);
-    overflow: hidden;
-    transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    await writeFile(llmsPath, updated, 'utf8');
+  } catch {
+    // Ignore read/write errors — non-fatal
   }
-  .basex-accordion-panel[data-starting-style],
-  .basex-accordion-panel[data-ending-style] {
-    height: 0;
-  }
-}
-\`\`\`
-
-## API Reference
-
-### Root
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| multiple | boolean | false | Allow multiple panels open |
-| disabled | boolean | false | Disable all items |
-| value | string[] | — | Controlled expanded items |
-| defaultValue | string[] | — | Initial expanded items |
-| onValueChange | (value: string[]) => void | — | Change callback |
-| sx | StyleXStyles | — | Style overrides |
-
-### Item
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | string | **required** | Unique item identifier |
-| disabled | boolean | false | Disable this item |
-| sx | StyleXStyles | — | Style overrides |
-
-### Header
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| sx | StyleXStyles | — | Style overrides |
-
-### Trigger
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| sx | StyleXStyles | — | Style overrides |
-
-### Panel
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| keepMounted | boolean | true | Keep in DOM while closed |
-| sx | StyleXStyles | — | Style overrides |
-
-## When to Use
-- Collapsible sections (settings, sidebars)
-- FAQ lists
-- Progressive disclosure
-
-## When NOT to Use
-- Switching between views — use Tabs
-- Single collapsible section — use Collapsible
-- Step-by-step wizard — use Stepper
-`;
 }

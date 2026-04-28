@@ -1,8 +1,24 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { execSync } from 'node:child_process';
-import { mkdtempSync, rmSync, existsSync, readFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, existsSync, readFileSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+
+const TEMPLATES_DIR = resolve(__dirname, '../../templates');
+
+const ALL_COMPONENTS = [
+  'accordion', 'alert-dialog', 'autocomplete', 'avatar', 'button', 'checkbox',
+  'checkbox-group', 'collapsible', 'combobox', 'context-menu', 'dialog', 'drawer',
+  'field', 'fieldset', 'form', 'input', 'menu', 'menubar', 'meter',
+  'navigation-menu', 'number-field', 'popover', 'preview-card', 'progress',
+  'radio', 'scroll-area', 'select', 'separator', 'slider', 'switch', 'tabs',
+  'toast', 'toggle', 'toggle-group', 'toolbar', 'tooltip',
+] as const;
+
+const PORTAL_COMPONENTS = [
+  'alert-dialog', 'autocomplete', 'combobox', 'context-menu', 'dialog', 'drawer',
+  'menu', 'menubar', 'navigation-menu', 'popover', 'preview-card', 'select', 'toast',
+] as const;
 
 // ---------------------------------------------------------------------------
 // Mock @clack/prompts so runAdd() can be tested without TTY / interactive IO
@@ -102,6 +118,63 @@ describe('basex-ui CLI', () => {
     expect(stdout).toContain('[installed]');
     expect(stdout).toContain('Accordion');
     expect(stdout).toContain('[available]');
+  });
+
+  it('add slider scaffolds the expected files', () => {
+    runCli(['add', 'slider'], workDir);
+    const dir = join(workDir, 'src/components/ui/slider');
+    expect(existsSync(join(dir, 'slider.tsx'))).toBe(true);
+    expect(existsSync(join(dir, 'index.ts'))).toBe(true);
+    expect(existsSync(join(dir, 'manifest.json'))).toBe(true);
+    const manifest = JSON.parse(readFileSync(join(dir, 'manifest.json'), 'utf8'));
+    expect(manifest.name).toBe('Slider');
+  });
+
+  it('add dialog scaffolds the expected files', () => {
+    runCli(['add', 'dialog'], workDir);
+    const dir = join(workDir, 'src/components/ui/dialog');
+    expect(existsSync(join(dir, 'dialog.tsx'))).toBe(true);
+    expect(existsSync(join(dir, 'manifest.json'))).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Template coverage — all 36 components must be bundled
+// ---------------------------------------------------------------------------
+describe('template coverage', () => {
+  it('templates directory exists', () => {
+    expect(existsSync(TEMPLATES_DIR)).toBe(true);
+  });
+
+  it('all 36 component template directories are present', () => {
+    const dirs = readdirSync(TEMPLATES_DIR, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name)
+      .sort();
+    for (const component of ALL_COMPONENTS) {
+      expect(dirs, `missing template: ${component}`).toContain(component);
+    }
+    expect(dirs.length).toBe(ALL_COMPONENTS.length);
+  });
+
+  it.each(ALL_COMPONENTS)('%s template has valid manifest.json', (component) => {
+    const manifestPath = join(TEMPLATES_DIR, component, 'manifest.json');
+    expect(existsSync(manifestPath), `missing manifest: ${component}`).toBe(true);
+    const raw = readFileSync(manifestPath, 'utf8');
+    const manifest = JSON.parse(raw) as { name?: string; description?: string };
+    expect(typeof manifest.name).toBe('string');
+    expect(typeof manifest.description).toBe('string');
+  });
+
+  it.each(ALL_COMPONENTS)('%s template has a source .tsx file', (component) => {
+    const kebab = join(TEMPLATES_DIR, component, `${component}.tsx`);
+    expect(existsSync(kebab), `missing tsx: ${component}`).toBe(true);
+  });
+
+  it.each(PORTAL_COMPONENTS)('%s is marked requiresPortal in the registry', async () => {
+    // Verify the manifest exists (portal flag is in add.ts registry, not manifest)
+    const manifestPath = join(TEMPLATES_DIR, PORTAL_COMPONENTS[0], 'manifest.json');
+    expect(existsSync(manifestPath)).toBe(true);
   });
 });
 

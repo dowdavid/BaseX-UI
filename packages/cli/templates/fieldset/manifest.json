@@ -1,0 +1,102 @@
+{
+  "name": "Fieldset",
+  "description": "A semantic grouping container for related form fields with an accessible legend. Built on Base UI Fieldset with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/fieldset",
+
+  "anatomy": "<Fieldset.Root>\n  <Fieldset.Legend>Group label</Fieldset.Legend>\n  {/* Field components */}\n</Fieldset.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "fieldset",
+      "description": "Semantic grouping container for related form fields. Resets default browser fieldset styles.",
+      "props": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Disables all form controls within the fieldset."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the fieldset is disabled."
+      }
+    },
+    "Legend": {
+      "element": "legend",
+      "description": "Accessible label for the fieldset group.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightSemibold",
+    "colorText",
+    "lineHeightNormal",
+    "space1",
+    "space4"
+  ],
+
+  "intents": [
+    {
+      "intent": "group-form-fields",
+      "signals": ["fieldset", "field group", "form section", "group fields", "related fields"],
+      "reasoning": "Fieldset semantically groups related form controls with an accessible legend, which is essential for screen readers.",
+      "composition": "<Fieldset.Root>\n  <Fieldset.Legend>Personal information</Fieldset.Legend>\n  <Field.Root>\n    <Field.Label>Name</Field.Label>\n    <Field.Control />\n  </Field.Root>\n  <Field.Root>\n    <Field.Label>Email</Field.Label>\n    <Field.Control type=\"email\" />\n  </Field.Root>\n</Fieldset.Root>"
+    },
+    {
+      "intent": "disabled-field-group",
+      "signals": ["disable group", "disable section", "readonly section", "locked fields"],
+      "reasoning": "Fieldset's disabled prop cascades to all child form controls, providing a single switch to disable an entire group.",
+      "composition": "<Fieldset.Root disabled>\n  <Fieldset.Legend>Locked section</Fieldset.Legend>\n  {/* All fields within are disabled */}\n</Fieldset.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "A single standalone form field",
+      "reasoning": "Use Field alone. Fieldset is for grouping multiple related fields.",
+      "alternative": "Field"
+    },
+    {
+      "scenario": "Visual-only section dividers without semantic grouping",
+      "reasoning": "Use a heading or Separator for visual organization. Fieldset adds semantic grouping that affects assistive technology.",
+      "alternative": "Separator or heading element"
+    },
+    {
+      "scenario": "Collapsible form sections",
+      "reasoning": "Use Accordion or Collapsible to wrap field groups that can be expanded/collapsed.",
+      "alternative": "Accordion or Collapsible"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic fieldset grouping related fields",
+      "code": "<Fieldset.Root>\n  <Fieldset.Legend>Personal information</Fieldset.Legend>\n  <Field.Root>\n    <Field.Label>First name</Field.Label>\n    <Field.Control placeholder=\"John\" />\n  </Field.Root>\n  <Field.Root>\n    <Field.Label>Last name</Field.Label>\n    <Field.Control placeholder=\"Doe\" />\n  </Field.Root>\n</Fieldset.Root>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled fieldset cascading to child controls",
+      "code": "<Fieldset.Root disabled>\n  <Fieldset.Legend>Locked section</Fieldset.Legend>\n  <Field.Root>\n    <Field.Label>Email</Field.Label>\n    <Field.Control value=\"locked@example.com\" />\n  </Field.Root>\n</Fieldset.Root>"
+    },
+    {
+      "name": "multiple-groups",
+      "description": "Multiple fieldsets organizing a form",
+      "code": "<form>\n  <Fieldset.Root>\n    <Fieldset.Legend>Contact</Fieldset.Legend>\n    {/* contact fields */}\n  </Fieldset.Root>\n  <Fieldset.Root>\n    <Fieldset.Legend>Address</Fieldset.Legend>\n    {/* address fields */}\n  </Fieldset.Root>\n</form>"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "name": "Slider",
+  "description": "An accessible range input that lets users pick a single value or a range from a continuous scale. Built on Base UI Slider with StyleX styling.",
+  "category": "input",
+  "baseComponent": "@base-ui/react/slider",
+
+  "anatomy": "<Slider.Root defaultValue={50}>\n  <Slider.Label />\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Container that owns slider state (value, min, max, step, orientation) and provides it to child parts.",
+      "props": {
+        "value": {
+          "type": "number | readonly number[]",
+          "description": "The controlled value. Pass an array for a multi-thumb (range) slider."
+        },
+        "defaultValue": {
+          "type": "number | readonly number[]",
+          "description": "The uncontrolled initial value. Array form yields multiple thumbs."
+        },
+        "onValueChange": {
+          "type": "(value, event, details) => void",
+          "description": "Fires while the user is dragging or pressing keys."
+        },
+        "onValueCommitted": {
+          "type": "(value, event, details) => void",
+          "description": "Fires when the user releases the thumb or commits with the keyboard."
+        },
+        "min": { "type": "number", "default": 0, "description": "Minimum allowed value." },
+        "max": { "type": "number", "default": 100, "description": "Maximum allowed value." },
+        "step": { "type": "number", "default": 1, "description": "Increment between values." },
+        "minStepsBetweenValues": {
+          "type": "number",
+          "default": 0,
+          "description": "Minimum step gap enforced between adjacent thumbs in a range slider."
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "Slider axis."
+        },
+        "disabled": { "type": "boolean", "default": false, "description": "Disable interaction." },
+        "name": { "type": "string", "description": "Form name." },
+        "format": {
+          "type": "Intl.NumberFormatOptions",
+          "description": "Formatting applied to displayed values (Slider.Value, aria-valuetext)."
+        },
+        "locale": { "type": "string", "description": "Locale for value formatting." },
+        "sx": { "type": "StyleXStyles", "description": "StyleX styles for consumer overrides." }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects orientation.",
+        "data-disabled": "Present when disabled.",
+        "data-dragging": "Present while a thumb is being dragged."
+      }
+    },
+    "Label": {
+      "element": "label",
+      "description": "Visible label for the slider.",
+      "props": {
+        "sx": { "type": "StyleXStyles", "description": "StyleX styles for consumer overrides." }
+      },
+      "dataAttributes": {}
+    },
+    "Value": {
+      "element": "output",
+      "description": "Displays the current value(s) using the Root's locale + format.",
+      "props": {
+        "children": {
+          "type": "(formattedValues, values) => ReactNode",
+          "description": "Optional render function to fully customise the displayed value."
+        },
+        "sx": { "type": "StyleXStyles", "description": "StyleX styles for consumer overrides." }
+      },
+      "dataAttributes": {}
+    },
+    "Control": {
+      "element": "div",
+      "description": "The interactive surface that captures pointer events and hosts the track + thumbs.",
+      "props": {
+        "sx": { "type": "StyleXStyles", "description": "StyleX styles for consumer overrides." }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects orientation.",
+        "data-disabled": "Present when disabled.",
+        "data-dragging": "Present while a thumb is being dragged."
+      }
+    },
+    "Track": {
+      "element": "div",
+      "description": "The unfilled track behind the indicator.",
+      "props": {
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Track thickness (sm=4px, md=8px, lg=12px) — matches Progress and Meter."
+        },
+        "sx": { "type": "StyleXStyles", "description": "StyleX styles for consumer overrides." }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects orientation.",
+        "data-disabled": "Present when disabled."
+      }
+    },
+    "Indicator": {
+      "element": "div",
+      "description": "The filled portion between min and the current value (or between two thumbs in a range slider).",
+      "props": {
+        "color": {
+          "type": "'default' | 'secondary' | 'destructive'",
+          "default": "default",
+          "description": "Fill color."
+        },
+        "sx": { "type": "StyleXStyles", "description": "StyleX styles for consumer overrides." }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects orientation.",
+        "data-disabled": "Present when disabled."
+      }
+    },
+    "Thumb": {
+      "element": "div",
+      "description": "The draggable handle. Renders a nested input[type=range] with role=slider and aria-valuemin/max/now. Use multiple Thumbs (with index prop) for range sliders.",
+      "props": {
+        "index": {
+          "type": "number",
+          "description": "Required when rendering multiple thumbs for a range slider — corresponds to the index in the value array."
+        },
+        "color": {
+          "type": "'default' | 'secondary' | 'destructive'",
+          "default": "default",
+          "description": "Border color."
+        },
+        "getAriaLabel": {
+          "type": "(index: number) => string",
+          "description": "Returns aria-label for the underlying input — important for unlabelled thumbs."
+        },
+        "getAriaValueText": {
+          "type": "(formatted, value, index) => string",
+          "description": "Returns aria-valuetext — read aloud by screen readers in place of the raw number."
+        },
+        "disabled": { "type": "boolean", "description": "Disable this thumb." },
+        "sx": { "type": "StyleXStyles", "description": "StyleX styles for consumer overrides." }
+      },
+      "dataAttributes": {
+        "data-orientation": "Reflects orientation.",
+        "data-disabled": "Present when disabled.",
+        "data-dragging": "Present while this thumb is being dragged."
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorPrimary",
+    "colorSecondary",
+    "colorDestructive",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorBackground",
+    "colorBorderMuted",
+    "colorFocusRing",
+    "space1h",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "radiusFull",
+    "borderWidthThick",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "select-numeric-value",
+      "signals": [
+        "slider",
+        "range input",
+        "pick a value",
+        "scrub",
+        "scrubber",
+        "volume",
+        "brightness"
+      ],
+      "reasoning": "Slider is the right control whenever the user is choosing a single number from a continuous range and rough position matters more than typing exact digits.",
+      "composition": "<Slider.Root defaultValue={50}>\n  <Slider.Label>Volume</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>"
+    },
+    {
+      "intent": "select-range",
+      "signals": [
+        "range slider",
+        "min and max",
+        "price range",
+        "filter range",
+        "between values",
+        "two thumbs"
+      ],
+      "reasoning": "A multi-thumb Slider lets users pick a min/max bracket — the canonical range filter UI.",
+      "composition": "<Slider.Root defaultValue={[20, 80]}>\n  <Slider.Label>Price range</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb index={0} />\n      <Slider.Thumb index={1} />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>"
+    },
+    {
+      "intent": "vertical-control",
+      "signals": ["vertical slider", "fader", "mixer", "vertical volume"],
+      "reasoning": "Vertical orientation is appropriate for fader-like controls (audio mixers, lighting).",
+      "composition": "<Slider.Root orientation=\"vertical\" defaultValue={50}>\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "User needs to enter a precise number",
+      "reasoning": "Sliders trade precision for visual position. For exact numeric input use Number Field.",
+      "alternative": "NumberField"
+    },
+    {
+      "scenario": "Showing read-only progress or measurement",
+      "reasoning": "Slider is an input. For non-interactive value display use Progress (task progress) or Meter (scalar measurement).",
+      "alternative": "Progress or Meter"
+    },
+    {
+      "scenario": "Choosing between a small set of discrete options",
+      "reasoning": "Sliders are for continuous ranges. For 2–7 discrete choices a Radio group or Toggle Group is clearer.",
+      "alternative": "Radio or ToggleGroup"
+    },
+    {
+      "scenario": "On/off toggle",
+      "reasoning": "A two-state slider is unfamiliar. Use Switch for boolean toggles.",
+      "alternative": "Switch"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Single-value slider with label",
+      "code": "<Slider.Root defaultValue={40}>\n  <Slider.Label>Volume</Slider.Label>\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>"
+    },
+    {
+      "name": "controlled",
+      "description": "Controlled slider with displayed value",
+      "code": "const [value, setValue] = useState(40);\n<Slider.Root value={value} onValueChange={(v) => setValue(v as number)}>\n  <Slider.Label>Brightness</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>"
+    },
+    {
+      "name": "range",
+      "description": "Range slider with two thumbs",
+      "code": "<Slider.Root defaultValue={[25, 75]} minStepsBetweenValues={1}>\n  <Slider.Label>Price</Slider.Label>\n  <Slider.Value />\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb index={0} />\n      <Slider.Thumb index={1} />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>"
+    },
+    {
+      "name": "vertical",
+      "description": "Vertical fader",
+      "code": "<Slider.Root orientation=\"vertical\" defaultValue={60}>\n  <Slider.Control>\n    <Slider.Track>\n      <Slider.Indicator />\n      <Slider.Thumb />\n    </Slider.Track>\n  </Slider.Control>\n</Slider.Root>"
+    }
+  ]
+}

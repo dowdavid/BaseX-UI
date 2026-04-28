@@ -1,0 +1,219 @@
+{
+  "name": "Popover",
+  "description": "A floating content panel that appears next to a trigger element. Built on Base UI Popover with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/popover",
+
+  "anatomy": "<Popover.Root>\n  <Popover.Trigger />\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        <Popover.Arrow />\n        <Popover.Title />\n        <Popover.Description />\n        <Popover.Close />\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "Manages open state and provides context to child parts.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "description": "Callback fired when open state changes."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "The initial uncontrolled open state."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "The element that toggles the popover.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the popover is open."
+      }
+    },
+    "Portal": {
+      "element": null,
+      "description": "Renders popover content into a React portal.",
+      "props": {},
+      "dataAttributes": {}
+    },
+    "Positioner": {
+      "element": "div",
+      "description": "Positions the popup relative to the trigger.",
+      "props": {
+        "side": {
+          "type": "'top' | 'bottom' | 'left' | 'right'",
+          "default": "bottom",
+          "description": "Preferred side of the trigger."
+        },
+        "alignment": {
+          "type": "'start' | 'center' | 'end'",
+          "default": "center",
+          "description": "Alignment along the side."
+        },
+        "sideOffset": {
+          "type": "number",
+          "default": 8,
+          "description": "Offset from the trigger in pixels."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Popup": {
+      "element": "div",
+      "description": "The floating content container.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the popover is open.",
+        "data-starting-style": "Present during open animation.",
+        "data-ending-style": "Present during close animation."
+      }
+    },
+    "Arrow": {
+      "element": "div",
+      "description": "An arrow pointing from the popup to the trigger.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Title": {
+      "element": "h2",
+      "description": "An accessible title for the popover.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Description": {
+      "element": "p",
+      "description": "A description providing additional context.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Close": {
+      "element": "button",
+      "description": "A button that closes the popover.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Popover popup scale/fade animation.",
+    "css": "@layer priority1 {\n  .basex-popover-popup {\n    opacity: 1;\n    transform: scale(1);\n    transition:\n      opacity 150ms ease-out,\n      transform 150ms ease-out;\n  }\n  .basex-popover-popup[data-starting-style],\n  .basex-popover-popup[data-ending-style] {\n    opacity: 0;\n    transform: scale(0.95);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorSurfaceRaised",
+    "colorBorderMuted",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontSizeMd",
+    "fontWeightSemibold",
+    "lineHeightNormal",
+    "radiusLg",
+    "radiusSm",
+    "shadowLg",
+    "borderWidthDefault",
+    "space1",
+    "space2",
+    "space4",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "interactive-popup",
+      "signals": [
+        "popover",
+        "tooltip with interaction",
+        "info popup",
+        "contextual help",
+        "detail popup"
+      ],
+      "reasoning": "Popover provides a floating panel that can contain interactive content like forms, buttons, or rich text.",
+      "composition": "<Popover.Root>\n  <Popover.Trigger>Open</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        <Popover.Title>Info</Popover.Title>\n        <Popover.Description>Additional details here.</Popover.Description>\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
+    },
+    {
+      "intent": "contextual-actions",
+      "signals": ["action popover", "quick actions", "inline actions", "context popup"],
+      "reasoning": "Popover can host small action panels or contextual controls near their trigger.",
+      "composition": "<Popover.Root>\n  <Popover.Trigger>Actions</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        <Popover.Close />\n        {/* action content */}\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Simple tooltips with no interactivity",
+      "reasoning": "Use Tooltip for non-interactive hover text. Popover is for content that users interact with.",
+      "alternative": "Tooltip"
+    },
+    {
+      "scenario": "Full forms or complex workflows",
+      "reasoning": "Use Dialog for modal workflows. Popover is for lightweight contextual content.",
+      "alternative": "Dialog"
+    },
+    {
+      "scenario": "Navigation dropdown menus",
+      "reasoning": "Use NavigationMenu or Menu for structured navigation. Popover is for arbitrary content.",
+      "alternative": "NavigationMenu or Menu"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic popover with text content",
+      "code": "<Popover.Root>\n  <Popover.Trigger>Info</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        This is a popover with some content.\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
+    },
+    {
+      "name": "with-title",
+      "description": "Popover with title and description",
+      "code": "<Popover.Root>\n  <Popover.Trigger>Details</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner>\n      <Popover.Popup>\n        <Popover.Title>Settings</Popover.Title>\n        <Popover.Description>Configure your preferences here.</Popover.Description>\n        <Popover.Close />\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
+    },
+    {
+      "name": "with-arrow",
+      "description": "Popover with an arrow pointing to the trigger",
+      "code": "<Popover.Root>\n  <Popover.Trigger>Hover me</Popover.Trigger>\n  <Popover.Portal>\n    <Popover.Positioner sideOffset={8}>\n      <Popover.Popup>\n        <Popover.Arrow />\n        Content with arrow.\n      </Popover.Popup>\n    </Popover.Positioner>\n  </Popover.Portal>\n</Popover.Root>"
+    }
+  ]
+}

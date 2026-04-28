@@ -1,0 +1,105 @@
+{
+  "name": "CheckboxGroup",
+  "description": "A container that provides shared state to a series of checkboxes, managing a value array of checked item names. Supports a parent checkbox for select-all behavior. Built on Base UI CheckboxGroup with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/checkbox-group",
+
+  "anatomy": "<CheckboxGroup.Root>\n  <Checkbox.Root name=\"a\">\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n  <Checkbox.Root name=\"b\">\n    <Checkbox.Indicator />\n  </Checkbox.Root>\n</CheckboxGroup.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "The group container — renders a <div> that provides CheckboxGroupContext to child Checkbox.Root components.",
+      "props": {
+        "value": {
+          "type": "string[]",
+          "description": "Names of the checkboxes that should be ticked. Use for controlled mode."
+        },
+        "defaultValue": {
+          "type": "string[]",
+          "description": "Names of the checkboxes that should be initially ticked. Use for uncontrolled mode."
+        },
+        "onValueChange": {
+          "type": "(value: string[], eventDetails: object) => void",
+          "description": "Callback fired when a checkbox in the group is ticked or unticked."
+        },
+        "allValues": {
+          "type": "string[]",
+          "description": "Names of all checkboxes in the group. Required when using a parent checkbox for select-all behavior."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether all checkboxes in the group should ignore user interaction."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the group is disabled."
+      }
+    }
+  },
+
+  "tokens": ["space3"],
+
+  "intents": [
+    {
+      "intent": "grouped-checkboxes",
+      "signals": [
+        "checkbox group",
+        "multiple checkboxes",
+        "checkbox list",
+        "grouped options",
+        "multi-select form"
+      ],
+      "reasoning": "CheckboxGroup manages shared state across multiple checkboxes, tracking which items are selected via a value array.",
+      "composition": "<CheckboxGroup.Root defaultValue={['a']}>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option A\n  </label>\n  <label>\n    <Checkbox.Root name=\"b\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option B\n  </label>\n</CheckboxGroup.Root>"
+    },
+    {
+      "intent": "select-all-pattern",
+      "signals": [
+        "select all",
+        "check all",
+        "parent checkbox",
+        "indeterminate parent",
+        "bulk select"
+      ],
+      "reasoning": "A parent checkbox inside a controlled CheckboxGroup auto-derives its checked/indeterminate state from children, providing a native select-all pattern. The group MUST be controlled (value + onValueChange) for the parent checkbox to work.",
+      "composition": "const [value, setValue] = useState<string[]>([]);\n\n<CheckboxGroup.Root allValues={['a', 'b', 'c']} value={value} onValueChange={setValue}>\n  <label>\n    <Checkbox.Root parent>\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Select all\n  </label>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Option A\n  </label>\n</CheckboxGroup.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "A single standalone checkbox",
+      "reasoning": "Use Checkbox alone. CheckboxGroup adds overhead for managing a value array that isn't needed for a single toggle.",
+      "alternative": "Checkbox"
+    },
+    {
+      "scenario": "Mutually exclusive options where only one can be selected",
+      "reasoning": "Checkboxes allow multiple selections. Use Radio or RadioGroup for single-select.",
+      "alternative": "Radio"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic-group",
+      "description": "Basic checkbox group with shared state",
+      "code": "<CheckboxGroup.Root defaultValue={['notifications']}>\n  <label>\n    <Checkbox.Root name=\"notifications\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Notifications\n  </label>\n  <label>\n    <Checkbox.Root name=\"newsletter\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Newsletter\n  </label>\n</CheckboxGroup.Root>"
+    },
+    {
+      "name": "select-all",
+      "description": "Parent checkbox for select-all behavior (requires controlled state)",
+      "code": "const [value, setValue] = useState<string[]>([]);\n\n<CheckboxGroup.Root allValues={['a', 'b', 'c']} value={value} onValueChange={setValue}>\n  <label>\n    <Checkbox.Root parent>\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Select all\n  </label>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Item A\n  </label>\n  <label>\n    <Checkbox.Root name=\"b\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Item B\n  </label>\n  <label>\n    <Checkbox.Root name=\"c\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Item C\n  </label>\n</CheckboxGroup.Root>"
+    },
+    {
+      "name": "disabled-group",
+      "description": "Entire group disabled",
+      "code": "<CheckboxGroup.Root disabled defaultValue={['a']}>\n  <label>\n    <Checkbox.Root name=\"a\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Item A (checked)\n  </label>\n  <label>\n    <Checkbox.Root name=\"b\">\n      <Checkbox.Indicator />\n    </Checkbox.Root>\n    Item B\n  </label>\n</CheckboxGroup.Root>"
+    }
+  ]
+}

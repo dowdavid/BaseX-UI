@@ -1,0 +1,175 @@
+{
+  "name": "ToggleGroup",
+  "description": "A group of two-state toggle buttons. Supports single-select (radiogroup semantics) and multi-select (group semantics) modes with roving tabindex keyboard navigation. Built on Base UI ToggleGroup with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/toggle-group",
+
+  "anatomy": "<ToggleGroup.Root type=\"single\" defaultValue=\"a\">\n  <ToggleGroup.Item value=\"a\">A</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"b\">B</ToggleGroup.Item>\n</ToggleGroup.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Container that manages pressed state across child items. Renders role=\"radiogroup\" in single mode and role=\"group\" in multiple mode.",
+      "props": {
+        "type": {
+          "type": "'single' | 'multiple'",
+          "default": "single",
+          "description": "Selection mode. 'single' allows one or zero pressed items; 'multiple' allows any combination."
+        },
+        "value": {
+          "type": "string | null | string[]",
+          "description": "Controlled pressed value. String (or null) for single mode; array for multiple."
+        },
+        "defaultValue": {
+          "type": "string | null | string[]",
+          "description": "Uncontrolled initial pressed value."
+        },
+        "onValueChange": {
+          "type": "(value: string | null) => void  ·  (value: string[]) => void",
+          "description": "Callback fired when the pressed value changes. Signature depends on type."
+        },
+        "orientation": {
+          "type": "'horizontal' | 'vertical'",
+          "default": "horizontal",
+          "description": "Layout direction. Determines whether ArrowLeft/Right or ArrowUp/Down move focus."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether all items in the group should ignore user interaction."
+        },
+        "loopFocus": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether arrow-key focus loops at the ends of the group."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the group is disabled.",
+        "data-orientation": "'horizontal' or 'vertical'.",
+        "data-multiple": "Present when type is 'multiple'."
+      }
+    },
+    "Item": {
+      "element": "button",
+      "description": "An individual two-state toggle button inside the group. Currently implemented inline; will be refactored to import the standalone Toggle primitive once the parallel Toggle PR lands.",
+      "props": {
+        "value": {
+          "type": "string",
+          "required": true,
+          "description": "Unique value identifying this item within the group."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this individual item should ignore user interaction."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-pressed": "Present when the item is pressed.",
+        "data-unpressed": "Present when the item is not pressed.",
+        "data-disabled": "Present when the item is disabled."
+      }
+    }
+  },
+
+  "cssRequirements": null,
+
+  "tokens": [
+    "colorText",
+    "colorTextMuted",
+    "colorBackground",
+    "colorMuted",
+    "colorBorder",
+    "colorBorderMuted",
+    "space1",
+    "space2",
+    "space3",
+    "radiusSm",
+    "radiusMd",
+    "borderWidthDefault",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightTight",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "single-select-toggle-group",
+      "signals": [
+        "toggle group",
+        "segmented control",
+        "view switcher",
+        "single select toggle",
+        "exclusive toggle",
+        "alignment picker"
+      ],
+      "reasoning": "Single-mode ToggleGroup is ideal for mutually exclusive views (e.g. list vs grid), alignment pickers, or tabs-like switchers where one item is pressed at a time. Exposes radiogroup semantics for AT.",
+      "composition": "<ToggleGroup.Root type=\"single\" defaultValue=\"left\">\n  <ToggleGroup.Item value=\"left\">Left</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"center\">Center</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"right\">Right</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    },
+    {
+      "intent": "multi-select-toggle-group",
+      "signals": [
+        "formatting toolbar",
+        "bold italic underline",
+        "multi-select toggles",
+        "tag picker",
+        "filter chips"
+      ],
+      "reasoning": "Multi-mode ToggleGroup fits formatting toolbars or tag/filter pickers where any combination of items can be pressed simultaneously.",
+      "composition": "<ToggleGroup.Root type=\"multiple\" defaultValue={['bold']}>\n  <ToggleGroup.Item value=\"bold\">B</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"italic\">I</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"underline\">U</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "A single standalone on/off button",
+      "reasoning": "Use Toggle directly. ToggleGroup adds shared-state overhead for a single item.",
+      "alternative": "Toggle"
+    },
+    {
+      "scenario": "Navigation between page-level views with associated content panels",
+      "reasoning": "Use Tabs. Tabs ties triggers to panels and exposes the correct ARIA relationship; ToggleGroup is for stateful buttons without panels.",
+      "alternative": "Tabs"
+    },
+    {
+      "scenario": "Form selection where the value is submitted as a form field",
+      "reasoning": "Use Radio (single) or CheckboxGroup (multiple). ToggleGroup buttons don't participate in native form submission.",
+      "alternative": "Radio or CheckboxGroup"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "single-basic",
+      "description": "Single-select toggle group (segmented control)",
+      "code": "<ToggleGroup.Root type=\"single\" defaultValue=\"list\">\n  <ToggleGroup.Item value=\"list\">List</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"grid\">Grid</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"board\">Board</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    },
+    {
+      "name": "multiple-formatting",
+      "description": "Multi-select formatting toolbar",
+      "code": "<ToggleGroup.Root type=\"multiple\" defaultValue={['bold']}>\n  <ToggleGroup.Item value=\"bold\">B</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"italic\">I</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"underline\">U</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    },
+    {
+      "name": "vertical",
+      "description": "Vertical orientation",
+      "code": "<ToggleGroup.Root type=\"single\" orientation=\"vertical\" defaultValue=\"a\">\n  <ToggleGroup.Item value=\"a\">A</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"b\">B</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"c\">C</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    },
+    {
+      "name": "controlled",
+      "description": "Controlled single-select",
+      "code": "const [view, setView] = useState<string | null>('list');\n\n<ToggleGroup.Root type=\"single\" value={view} onValueChange={setView}>\n  <ToggleGroup.Item value=\"list\">List</ToggleGroup.Item>\n  <ToggleGroup.Item value=\"grid\">Grid</ToggleGroup.Item>\n</ToggleGroup.Root>"
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "name": "AlertDialog",
+  "description": "A modal dialog that requires explicit user acknowledgment. Used for destructive or irreversible actions. Built on Base UI AlertDialog with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/alert-dialog",
+
+  "anatomy": "<AlertDialog.Root>\n  <AlertDialog.Trigger />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title />\n      <AlertDialog.Description />\n      <AlertDialog.Actions>\n        <AlertDialog.Close />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "State container. Renders no DOM element.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initial open state for uncontrolled mode."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, eventDetails: ChangeEventDetails) => void",
+          "description": "Callback fired when the dialog opens or closes."
+        },
+        "onOpenChangeComplete": {
+          "type": "(open: boolean) => void",
+          "description": "Callback fired after open/close animations complete."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "Button that opens the dialog. Unstyled by default — use the render prop to swap in a styled Button.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element. Use to render a styled Button."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-popup-open": "Present when the dialog is open.",
+        "data-disabled": "Present when the trigger is disabled."
+      }
+    },
+    "Portal": {
+      "element": "div",
+      "description": "Renders children in a React portal outside the DOM tree.",
+      "props": {
+        "keepMounted": {
+          "type": "boolean",
+          "default": true,
+          "description": "Keep in DOM when closed. Defaults to true for exit animations."
+        },
+        "container": {
+          "type": "HTMLElement | ShadowRoot | RefObject",
+          "description": "Target parent element for the portal."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Backdrop": {
+      "element": "div",
+      "description": "Semi-transparent overlay behind the dialog. Has fade animation via global CSS.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the dialog is open.",
+        "data-closed": "Present when the dialog is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "Centered card containing the dialog content. Viewport is wrapped internally for centering and scroll management.",
+      "props": {
+        "initialFocus": {
+          "type": "boolean | RefObject | () => HTMLElement",
+          "description": "Element to focus when the dialog opens."
+        },
+        "finalFocus": {
+          "type": "boolean | RefObject | () => HTMLElement",
+          "description": "Element to focus when the dialog closes."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the dialog is open.",
+        "data-closed": "Present when the dialog is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation.",
+        "data-nested": "Present when nested inside another dialog.",
+        "data-nested-dialog-open": "Present when a child dialog is open."
+      },
+      "cssVariables": {
+        "--nested-dialogs": "Count of nested open dialogs (integer)."
+      }
+    },
+    "Title": {
+      "element": "h2",
+      "description": "Dialog heading. Automatically wired to aria-labelledby.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Description": {
+      "element": "p",
+      "description": "Dialog body text. Automatically wired to aria-describedby.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Actions": {
+      "element": "div",
+      "description": "Flex row for action buttons (Cancel/Confirm). Custom part not in Base UI.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Close": {
+      "element": "button",
+      "description": "Button that closes the dialog on click. Used for both Cancel and Confirm actions. Unstyled — use the render prop to swap in a styled Button.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element. Use to render a styled Button."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when disabled."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Backdrop fade and popup scale animations require global CSS rules inside @layer priority1. StyleX cannot target data-attribute selectors, so these rules must live in the consumer's global stylesheet.",
+    "css": "@layer priority1 {\n  .basex-alert-dialog-backdrop {\n    opacity: 1;\n    transition: opacity 150ms ease-out;\n  }\n  .basex-alert-dialog-backdrop[data-starting-style],\n  .basex-alert-dialog-backdrop[data-ending-style] {\n    opacity: 0;\n  }\n\n  .basex-alert-dialog-popup {\n    opacity: 1;\n    transform: scale(1);\n    transition: opacity 150ms ease-out, transform 150ms ease-out;\n  }\n  .basex-alert-dialog-popup[data-starting-style],\n  .basex-alert-dialog-popup[data-ending-style] {\n    opacity: 0;\n    transform: scale(0.95);\n  }\n}"
+  },
+
+  "tokens": [
+    "colorOverlay",
+    "colorSurface",
+    "colorText",
+    "colorTextMuted",
+    "fontFamilySans",
+    "fontSizeLg",
+    "fontSizeSm",
+    "fontWeightSemibold",
+    "lineHeightTight",
+    "lineHeightNormal",
+    "radiusLg",
+    "shadowLg",
+    "space2",
+    "space3",
+    "space4",
+    "space6"
+  ],
+
+  "intents": [
+    {
+      "intent": "confirm-destructive-action",
+      "signals": [
+        "confirm delete",
+        "are you sure",
+        "destructive confirmation",
+        "delete confirmation",
+        "irreversible action"
+      ],
+      "reasoning": "AlertDialog is the correct component when a destructive or irreversible action requires explicit user confirmation before proceeding.",
+      "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"outline\" color=\"destructive\">Delete</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Delete this item?</AlertDialog.Title>\n      <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Delete</Button>} onClick={handleDelete} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    },
+    {
+      "intent": "blocking-confirmation",
+      "signals": ["confirm", "acknowledge", "consent", "agree", "terms", "accept terms"],
+      "reasoning": "AlertDialog blocks interaction until the user explicitly acknowledges or confirms. Use when skipping or ignoring the prompt is not acceptable.",
+      "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button>Continue</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Accept terms?</AlertDialog.Title>\n      <AlertDialog.Description>You must accept before continuing.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button>Accept</Button>} onClick={handleAccept} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    },
+    {
+      "intent": "discard-unsaved-changes",
+      "signals": ["unsaved changes", "discard", "leave page", "lose changes", "abandon"],
+      "reasoning": "AlertDialog prevents accidental data loss by forcing the user to confirm before discarding unsaved work.",
+      "composition": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"ghost\">Leave</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Discard changes?</AlertDialog.Title>\n      <AlertDialog.Description>You have unsaved changes that will be lost.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Keep editing</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Discard</Button>} onClick={handleDiscard} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Displaying informational content or forms",
+      "reasoning": "Use Dialog instead. AlertDialog is for confirmations requiring acknowledgment, not general content display.",
+      "alternative": "Dialog"
+    },
+    {
+      "scenario": "Non-critical notifications or status updates",
+      "reasoning": "Use Toast for transient messages. AlertDialog blocks all interaction and is too disruptive for non-critical feedback.",
+      "alternative": "Toast"
+    },
+    {
+      "scenario": "Simple yes/no questions that are easily reversible",
+      "reasoning": "If the action is easily undone, an AlertDialog adds unnecessary friction. Prefer an inline undo pattern or a Toast with an undo button.",
+      "alternative": "Toast with undo action"
+    },
+    {
+      "scenario": "A dismissible overlay that can be closed by clicking outside",
+      "reasoning": "AlertDialog cannot be dismissed by clicking outside — that's by design. Use Dialog if you want backdrop dismissal.",
+      "alternative": "Dialog"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic delete confirmation",
+      "code": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"outline\" color=\"destructive\">Delete</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Delete this item?</AlertDialog.Title>\n      <AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Delete</Button>} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    },
+    {
+      "name": "controlled",
+      "description": "Controlled open state with callback",
+      "code": "const [open, setOpen] = useState(false);\n\n<AlertDialog.Root open={open} onOpenChange={setOpen}>\n  <AlertDialog.Trigger render={<Button color=\"destructive\">Remove account</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Remove your account?</AlertDialog.Title>\n      <AlertDialog.Description>All data will be permanently deleted.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Cancel</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Remove</Button>} onClick={handleRemove} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    },
+    {
+      "name": "discard-changes",
+      "description": "Unsaved changes warning",
+      "code": "<AlertDialog.Root>\n  <AlertDialog.Trigger render={<Button variant=\"ghost\">Leave page</Button>} />\n  <AlertDialog.Portal>\n    <AlertDialog.Backdrop />\n    <AlertDialog.Popup>\n      <AlertDialog.Title>Discard changes?</AlertDialog.Title>\n      <AlertDialog.Description>You have unsaved changes that will be lost.</AlertDialog.Description>\n      <AlertDialog.Actions>\n        <AlertDialog.Close render={<Button variant=\"ghost\">Keep editing</Button>} />\n        <AlertDialog.Close render={<Button color=\"destructive\">Discard</Button>} />\n      </AlertDialog.Actions>\n    </AlertDialog.Popup>\n  </AlertDialog.Portal>\n</AlertDialog.Root>"
+    }
+  ]
+}

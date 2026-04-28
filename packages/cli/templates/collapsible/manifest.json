@@ -1,0 +1,153 @@
+{
+  "name": "Collapsible",
+  "description": "A single collapsible section with a trigger button and an animated content panel. Built on Base UI Collapsible with StyleX styling.",
+  "category": "layout",
+  "baseComponent": "@base-ui/react/collapsible",
+
+  "anatomy": "<Collapsible.Root>\n  <Collapsible.Trigger />\n  <Collapsible.Panel />\n</Collapsible.Root>",
+
+  "parts": {
+    "Root": {
+      "element": "div",
+      "description": "Container that manages open/closed state.",
+      "props": {
+        "open": {
+          "type": "boolean",
+          "description": "Controlled open state."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initial open state for uncontrolled mode."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean) => void",
+          "description": "Callback fired when the open state changes."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable the collapsible."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the collapsible is disabled."
+      }
+    },
+    "Trigger": {
+      "element": "button",
+      "description": "Button that toggles the panel open and closed. Includes a built-in chevron icon that rotates on open.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-panel-open": "Present when the panel is expanded.",
+        "data-disabled": "Present when the collapsible is disabled."
+      }
+    },
+    "Panel": {
+      "element": "div",
+      "description": "Collapsible content area with animated height transition. Uses keepMounted internally for smooth close animation.",
+      "props": {
+        "keepMounted": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to keep the element in the DOM while closed. Defaults to true for animation support."
+        },
+        "hiddenUntilFound": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the panel can be found by the browser's built-in page search."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the panel is expanded.",
+        "data-starting-style": "Present when the panel is animating open.",
+        "data-ending-style": "Present when the panel is animating closed."
+      },
+      "cssVariables": {
+        "--collapsible-panel-height": "The panel's content height, set by Base UI. Used for expand/collapse animation.",
+        "--collapsible-panel-width": "The panel's content width, set by Base UI."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Panel height animation requires global CSS rules inside @layer priority1. StyleX cannot target data-attribute selectors, so these rules must live in the consumer's global stylesheet.",
+    "css": "@layer priority1 {\n  .basex-collapsible-panel {\n    height: var(--collapsible-panel-height);\n    overflow: hidden;\n    transition: height 200ms cubic-bezier(0.4, 0, 0.2, 1);\n  }\n  .basex-collapsible-panel[data-starting-style],\n  .basex-collapsible-panel[data-ending-style] {\n    height: 0;\n  }\n}"
+  },
+
+  "tokens": [
+    "colorText",
+    "colorTextMuted",
+    "colorFocusRing",
+    "space1",
+    "space2",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "radiusMd",
+    "motionDurationFast",
+    "motionDurationNormal",
+    "motionEaseOut",
+    "motionEaseInOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "collapsible-section",
+      "signals": ["collapsible", "collapse", "expand", "toggle section", "show/hide"],
+      "reasoning": "Collapsible is the primary component for a single collapsible section with a trigger and animated panel.",
+      "composition": "<Collapsible.Root>\n  <Collapsible.Trigger>Toggle section</Collapsible.Trigger>\n  <Collapsible.Panel>Content here</Collapsible.Panel>\n</Collapsible.Root>"
+    },
+    {
+      "intent": "single-disclosure",
+      "signals": ["show more", "reveal", "toggle content", "expandable", "disclosure"],
+      "reasoning": "Collapsible provides simple progressive disclosure — content is hidden by default and revealed on demand.",
+      "composition": "<Collapsible.Root>\n  <Collapsible.Trigger>Show details</Collapsible.Trigger>\n  <Collapsible.Panel>Hidden content revealed on click</Collapsible.Panel>\n</Collapsible.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Multiple collapsible sections that belong together",
+      "reasoning": "Use Accordion instead. Accordion manages a group of collapsible sections with proper keyboard navigation and optional single-open behavior.",
+      "alternative": "Accordion"
+    },
+    {
+      "scenario": "Switching between views or content panels",
+      "reasoning": "Use Tabs instead. Collapsible reveals content in place; Tabs switch between distinct views.",
+      "alternative": "Tabs"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic collapsible section",
+      "code": "<Collapsible.Root>\n  <Collapsible.Trigger>Toggle content</Collapsible.Trigger>\n  <Collapsible.Panel>Collapsible content here</Collapsible.Panel>\n</Collapsible.Root>"
+    },
+    {
+      "name": "default-open",
+      "description": "Collapsible that starts expanded",
+      "code": "<Collapsible.Root defaultOpen>\n  <Collapsible.Trigger>Details (open)</Collapsible.Trigger>\n  <Collapsible.Panel>This panel starts open</Collapsible.Panel>\n</Collapsible.Root>"
+    },
+    {
+      "name": "disabled",
+      "description": "Disabled collapsible",
+      "code": "<Collapsible.Root disabled>\n  <Collapsible.Trigger>Cannot toggle</Collapsible.Trigger>\n  <Collapsible.Panel>This panel cannot be opened</Collapsible.Panel>\n</Collapsible.Root>"
+    }
+  ]
+}

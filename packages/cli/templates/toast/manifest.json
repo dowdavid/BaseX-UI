@@ -1,0 +1,280 @@
+{
+  "name": "Toast",
+  "description": "Ephemeral, accessible notification messages. Auto-dismiss with pause-on-hover/focus, swipe-to-dismiss on touch, queue stacking, screen-reader announcements (polite by default, urgent for type='error'), and respects prefers-reduced-motion. Imperative API via the useToast() hook. Built on Base UI Toast with StyleX styling.",
+  "category": "feedback",
+  "baseComponent": "@base-ui/react/toast",
+
+  "anatomy": "<Toast.Provider>\n  {/* app content; call useToast().add(...) anywhere inside */}\n  <Toast.Portal>\n    <Toast.Viewport>\n      {useToast().toasts.map((t) => (\n        <Toast.Root key={t.id} toast={t}>\n          <Toast.Content>\n            <Toast.Title />\n            <Toast.Description />\n          </Toast.Content>\n          <Toast.Action />\n          <Toast.Close />\n        </Toast.Root>\n      ))}\n    </Toast.Viewport>\n  </Toast.Portal>\n</Toast.Provider>",
+
+  "parts": {
+    "Provider": {
+      "element": null,
+      "description": "Owns the toast queue, timers, and announcement state. Mount once near the app root. Renders no DOM element.",
+      "props": {
+        "timeout": {
+          "type": "number",
+          "default": 5000,
+          "description": "Default auto-dismiss duration (ms). 0 disables auto-dismiss."
+        },
+        "limit": {
+          "type": "number",
+          "default": 3,
+          "description": "Maximum number of visible toasts. Older toasts are evicted when exceeded."
+        },
+        "toastManager": {
+          "type": "ToastManager",
+          "description": "Optional global manager (created via createToastManager) for adding toasts outside React."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Portal": {
+      "element": "div",
+      "description": "Renders the viewport in a React portal outside the DOM tree.",
+      "props": {
+        "container": {
+          "type": "HTMLElement | ShadowRoot | RefObject",
+          "description": "Target parent element for the portal."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Viewport": {
+      "element": "div",
+      "description": "Container region that holds all rendered toasts. Manages focus (F6) and stacking. Pause-on-hover/focus is wired here.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-expanded": "Present when the user has expanded the toast stack (focus/hover)."
+      }
+    },
+    "Root": {
+      "element": "div",
+      "description": "Wraps a single toast. Sets role='status' (or 'alert' for high priority), aria-live, swipe gesture, and transition data attributes. Receives the queued ToastObject via the `toast` prop.",
+      "props": {
+        "toast": {
+          "type": "ToastObject",
+          "required": true,
+          "description": "The toast object yielded by useToast().toasts.map(...)."
+        },
+        "swipeDirection": {
+          "type": "'up' | 'down' | 'left' | 'right' | array",
+          "default": "['down', 'right']",
+          "description": "Direction(s) the toast can be swiped to dismiss."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides. Destructive styling auto-applies when toast.type is 'error' or 'destructive'."
+        }
+      },
+      "dataAttributes": {
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation.",
+        "data-expanded": "Present when the stack is expanded.",
+        "data-limited": "Present when the toast was evicted by `limit`.",
+        "data-swiping": "Present while the user is swiping.",
+        "data-swipe-direction": "The active swipe direction.",
+        "data-type": "Mirrors the toast.type string for variant styling."
+      },
+      "cssVariables": {
+        "--toast-swipe-movement-x": "Active swipe x-offset (px).",
+        "--toast-swipe-movement-y": "Active swipe y-offset (px).",
+        "--toast-index": "Stacked z-index of this toast.",
+        "--toast-offset-y": "Stacking y-offset for collapsed stack."
+      }
+    },
+    "Content": {
+      "element": "div",
+      "description": "Container for Title and Description. Provides consistent vertical rhythm.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Title": {
+      "element": "h2",
+      "description": "Toast heading. Wired automatically to the toast labelling for screen readers.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-type": "Mirrors the toast.type string."
+      }
+    },
+    "Description": {
+      "element": "p",
+      "description": "Body copy below the title.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Action": {
+      "element": "button",
+      "description": "Optional action button (e.g. 'Undo'). Keyboard-reachable via the viewport's F6 hotkey without stealing focus.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element. Use to render a styled Button."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-type": "Mirrors the toast.type string."
+      }
+    },
+    "Close": {
+      "element": "button",
+      "description": "Dismisses the toast. Renders an X icon by default with aria-label='Close notification'.",
+      "props": {
+        "render": {
+          "type": "ReactElement | (props, state) => ReactElement",
+          "description": "Replace the underlying element."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-type": "Mirrors the toast.type string."
+      }
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Toast enter/exit fade+slide and swipe-reactive transform live in global CSS. StyleX cannot target Base UI data attributes, so these rules belong in the consumer's global stylesheet inside @layer priority1.",
+    "css": "@layer priority1 {\n  /* Toast enter — Enter: 200ms ease-out */\n  .basex-toast-root {\n    opacity: 1;\n    transform: translate3d(var(--toast-swipe-movement-x, 0), var(--toast-swipe-movement-y, 0), 0);\n    transition:\n      opacity 200ms cubic-bezier(0, 0, 0.2, 1),\n      transform 200ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  .basex-toast-root[data-starting-style] {\n    opacity: 0;\n    transform: translate3d(0, 16px, 0);\n  }\n  /* Toast exit — Exit: 100ms ease-out */\n  .basex-toast-root[data-ending-style] {\n    opacity: 0;\n    transform: translate3d(0, 16px, 0);\n    transition:\n      opacity 100ms cubic-bezier(0, 0, 0.2, 1),\n      transform 100ms cubic-bezier(0, 0, 0.2, 1);\n  }\n  /* While swiping, follow the finger immediately */\n  .basex-toast-root[data-swiping] {\n    transition-duration: 0ms;\n  }\n\n  /* Reduced motion: opacity only */\n  @media (prefers-reduced-motion: reduce) {\n    .basex-toast-root {\n      transition: opacity 100ms linear;\n      transform: none !important;\n    }\n    .basex-toast-root[data-starting-style],\n    .basex-toast-root[data-ending-style] {\n      transform: none !important;\n    }\n  }\n}"
+  },
+
+  "tokens": [
+    "colorSurface",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorBorder",
+    "colorBorderMuted",
+    "colorIcon",
+    "colorDestructive",
+    "colorDestructiveContrast",
+    "fontFamilySans",
+    "fontSizeSm",
+    "fontWeightMedium",
+    "fontWeightSemibold",
+    "lineHeightTight",
+    "lineHeightNormal",
+    "radiusLg",
+    "radiusSm",
+    "shadowLg",
+    "motionDurationFast",
+    "motionEaseOut",
+    "space1",
+    "space2",
+    "space3",
+    "space4",
+    "space6"
+  ],
+
+  "intents": [
+    {
+      "intent": "transient-feedback",
+      "signals": [
+        "toast",
+        "snackbar",
+        "notification",
+        "saved",
+        "copied",
+        "success message",
+        "feedback"
+      ],
+      "reasoning": "Toast is the right component for short-lived, non-blocking feedback after a user action (saved, copied, sent).",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Saved', description: 'Your changes were saved.' });"
+    },
+    {
+      "intent": "destructive-feedback",
+      "signals": [
+        "error toast",
+        "failed",
+        "couldn’t save",
+        "destructive notification",
+        "warning toast"
+      ],
+      "reasoning": "type='error' upgrades the announcement to assertive and applies destructive styling without blocking the user.",
+      "composition": "const { add } = useToast();\n\nadd({ title: 'Couldn’t save', description: 'Try again in a moment.', type: 'error' });"
+    },
+    {
+      "intent": "undoable-action",
+      "signals": ["undo", "undo toast", "undo delete", "revert", "with action"],
+      "reasoning": "Toast.Action provides a keyboard-reachable hotspot (F6 from anywhere) for one-tap reversal of recent changes.",
+      "composition": "const { add } = useToast();\n\nadd({\n  title: 'Item archived',\n  actionProps: { children: 'Undo', onClick: handleUndo },\n});"
+    },
+    {
+      "intent": "promise-feedback",
+      "signals": ["loading toast", "saving", "uploading", "promise toast", "async toast"],
+      "reasoning": "useToast().promise() shows a loading toast that resolves to success or error automatically.",
+      "composition": "const toast = useToast();\n\ntoast.promise(saveDraft(), {\n  loading: 'Saving…',\n  success: 'Saved',\n  error: 'Failed to save',\n});"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Confirming destructive or irreversible actions",
+      "reasoning": "Toasts auto-dismiss and don’t demand acknowledgment. Use AlertDialog for confirmations the user must accept.",
+      "alternative": "AlertDialog"
+    },
+    {
+      "scenario": "Persistent or critical errors that block the workflow",
+      "reasoning": "Toasts disappear. Use an inline alert or Dialog for blocking errors or required action.",
+      "alternative": "Dialog or inline error message"
+    },
+    {
+      "scenario": "Long-form content, forms, or multi-step interactions",
+      "reasoning": "Toasts are intentionally compact and ephemeral. Use Dialog or Drawer for substantial content.",
+      "alternative": "Dialog or Drawer"
+    },
+    {
+      "scenario": "Information the user must read to continue",
+      "reasoning": "Auto-dismiss means the user can miss the message. Use Dialog or inline alert for required reading.",
+      "alternative": "Dialog"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Polite info toast with title and description",
+      "code": "function SaveButton() {\n  const { add } = useToast();\n  return (\n    <Button onClick={() => add({ title: 'Saved', description: 'Your changes were saved.' })}>\n      Save\n    </Button>\n  );\n}"
+    },
+    {
+      "name": "with-action",
+      "description": "Toast with an Undo action",
+      "code": "function ArchiveButton() {\n  const { add } = useToast();\n  return (\n    <Button onClick={() =>\n      add({\n        title: 'Item archived',\n        actionProps: { children: 'Undo', onClick: () => restore() },\n      })\n    }>Archive</Button>\n  );\n}"
+    },
+    {
+      "name": "destructive",
+      "description": "Error toast (assertive announcement, destructive styling)",
+      "code": "const { add } = useToast();\n\nadd({\n  title: 'Couldn’t save',\n  description: 'Try again in a moment.',\n  type: 'error',\n  priority: 'high',\n});"
+    },
+    {
+      "name": "provider-setup",
+      "description": "Mount the provider, portal, viewport, and a styled root once near the app root",
+      "code": "function ToastViewport() {\n  const { toasts } = useToast();\n  return (\n    <Toast.Portal>\n      <Toast.Viewport>\n        {toasts.map((t) => (\n          <Toast.Root key={t.id} toast={t}>\n            <Toast.Content>\n              <Toast.Title>{t.title}</Toast.Title>\n              {t.description && <Toast.Description>{t.description}</Toast.Description>}\n            </Toast.Content>\n            {t.actionProps && <Toast.Action {...t.actionProps} />}\n            <Toast.Close />\n          </Toast.Root>\n        ))}\n      </Toast.Viewport>\n    </Toast.Portal>\n  );\n}\n\nfunction App() {\n  return (\n    <Toast.Provider>\n      <YourAppContent />\n      <ToastViewport />\n    </Toast.Provider>\n  );\n}"
+    }
+  ]
+}

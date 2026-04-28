@@ -1,0 +1,337 @@
+{
+  "name": "Combobox",
+  "description": "A searchable select dropdown. Users must pick from a predefined list, with optional multi-select. Built on Base UI Combobox with StyleX styling.",
+  "category": "forms",
+  "baseComponent": "@base-ui/react/combobox",
+
+  "anatomy": "<Combobox.Root items={items}>\n  <Combobox.Input placeholder=\"Select...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>",
+
+  "parts": {
+    "Root": {
+      "element": null,
+      "description": "State container. Manages filtering, open state, value, and keyboard navigation. Renders no DOM element.",
+      "props": {
+        "items": {
+          "type": "ItemValue[] | Group[]",
+          "required": true,
+          "description": "Items or grouped items to display in the dropdown list."
+        },
+        "value": {
+          "type": "Value | Value[] | null",
+          "description": "Controlled selected value."
+        },
+        "defaultValue": {
+          "type": "Value | Value[] | null",
+          "description": "Initial selected value for uncontrolled mode."
+        },
+        "onValueChange": {
+          "type": "(value: Value | Value[] | null, details: ChangeEventDetails) => void",
+          "description": "Callback fired when the selected value changes."
+        },
+        "multiple": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow multiple items to be selected."
+        },
+        "open": {
+          "type": "boolean",
+          "description": "Controlled popup visibility."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Initial popup state."
+        },
+        "onOpenChange": {
+          "type": "(open: boolean, details: ChangeEventDetails) => void",
+          "description": "Callback fired when the popup opens or closes."
+        },
+        "onInputValueChange": {
+          "type": "(inputValue: string, details: ChangeEventDetails) => void",
+          "description": "Callback fired when the search input value changes."
+        },
+        "filter": {
+          "type": "(itemValue, query, itemToString?) => boolean",
+          "description": "Custom filter function. Built-in contains filter used by default."
+        },
+        "filteredItems": {
+          "type": "any[] | Group[]",
+          "description": "Externally filtered items (for async search). Bypasses built-in filter."
+        },
+        "autoHighlight": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-highlight the first matching item as user types."
+        },
+        "limit": {
+          "type": "number",
+          "default": -1,
+          "description": "Maximum number of visible items. -1 for unlimited."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable all interactions."
+        },
+        "name": {
+          "type": "string",
+          "description": "Form field name."
+        },
+        "size": {
+          "type": "'sm' | 'md' | 'lg'",
+          "default": "md",
+          "description": "Size of the trigger, input, and dropdown items. Aligns with Button sizes (sm=32px, md=36px, lg=40px)."
+        },
+        "getItemLabel": {
+          "type": "(item: unknown) => string",
+          "description": "Convert an item to its display label for pills. Defaults to item.label, then item.value, then String(item)."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Input": {
+      "element": "input",
+      "description": "Main searchable input that opens the dropdown and filters items. Includes a built-in chevron icon (when empty) and clear button (when a value is selected).",
+      "props": {
+        "placeholder": {
+          "type": "string",
+          "description": "Placeholder text shown when no value is selected."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-disabled": "Present when the input is disabled."
+      }
+    },
+    "Popup": {
+      "element": "div",
+      "description": "Dropdown containing the item list. Portal, Positioner, and List are internalized.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-open": "Present when the popup is open.",
+        "data-closed": "Present when the popup is closed.",
+        "data-starting-style": "Present during entrance animation.",
+        "data-ending-style": "Present during exit animation.",
+        "data-side": "Actual positioned side (top/bottom/left/right).",
+        "data-empty": "Present when no items match the filter."
+      },
+      "cssVariables": {
+        "--anchor-width": "Width of the trigger element.",
+        "--anchor-height": "Height of the trigger element.",
+        "--available-height": "Available height for the popup.",
+        "--available-width": "Available width for the popup.",
+        "--transform-origin": "Computed transform origin for animations."
+      }
+    },
+    "Item": {
+      "element": "div",
+      "description": "A single selectable option in the dropdown.",
+      "props": {
+        "value": {
+          "type": "any",
+          "required": true,
+          "description": "The item value. Used for selection and filtering."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable this item."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-highlighted": "Present when the item has keyboard/pointer focus.",
+        "data-selected": "Present when the item is currently selected.",
+        "data-disabled": "Present when the item is disabled."
+      }
+    },
+    "ItemIndicator": {
+      "element": "span",
+      "description": "Checkmark icon shown when an item is selected. Renders a Check icon by default.",
+      "props": {
+        "keepMounted": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep in DOM when not selected (for animations)."
+        },
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {
+        "data-selected": "Present when the parent item is selected."
+      }
+    },
+    "Clear": {
+      "element": "button",
+      "description": "Button to reset the selection. Built into Input by default; also available standalone.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Empty": {
+      "element": "div",
+      "description": "Shown when no items match the current filter query.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "Group": {
+      "element": "div",
+      "description": "Groups related items with a label.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    },
+    "GroupLabel": {
+      "element": "div",
+      "description": "Heading for a group of items.",
+      "props": {
+        "sx": {
+          "type": "StyleXStyles",
+          "description": "StyleX styles for consumer overrides."
+        }
+      },
+      "dataAttributes": {}
+    }
+  },
+
+  "cssRequirements": {
+    "description": "Popup fade and slide animation requires global CSS rules inside @layer priority1.",
+    "css": "@layer priority1 {\n  .basex-combobox-popup {\n    opacity: 1;\n    transform: translateY(0);\n    transition: opacity 150ms ease-out, transform 150ms ease-out;\n  }\n  .basex-combobox-popup[data-starting-style],\n  .basex-combobox-popup[data-ending-style] {\n    opacity: 0;\n    transform: translateY(-4px);\n  }\n  .basex-combobox-group + .basex-combobox-group {\n    border-top: 1px solid oklch(0.87 0 0 / 0.5);\n    margin-top: 8px;\n    padding-top: 8px;\n  }\n}"
+  },
+
+  "tokens": [
+    "colorBorder",
+    "colorBorderMuted",
+    "colorSurface",
+    "colorText",
+    "colorTextMuted",
+    "colorMuted",
+    "colorPrimary",
+    "colorFocusRing",
+    "fontFamilySans",
+    "fontSizeXs",
+    "fontSizeSm",
+    "fontSizeMd",
+    "fontWeightMedium",
+    "lineHeightNormal",
+    "letterSpacingWide",
+    "radiusMd",
+    "radiusSm",
+    "shadowMd",
+    "borderWidthDefault",
+    "space1",
+    "space1h",
+    "space2",
+    "space2h",
+    "space3",
+    "space3h",
+    "space4",
+    "space8",
+    "space10",
+    "motionDurationFast",
+    "motionEaseOut"
+  ],
+
+  "intents": [
+    {
+      "intent": "searchable-select",
+      "signals": [
+        "searchable select",
+        "filterable select",
+        "select with search",
+        "searchable dropdown",
+        "combobox",
+        "pick from list"
+      ],
+      "reasoning": "Combobox is the primary component for selecting from a predefined list with the ability to search/filter options.",
+      "composition": "<Combobox.Root items={items}>\n  <Combobox.Input placeholder=\"Select...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results found.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    },
+    {
+      "intent": "filterable-dropdown",
+      "signals": [
+        "filterable dropdown",
+        "dropdown with filter",
+        "dropdown search",
+        "type to filter",
+        "filter options"
+      ],
+      "reasoning": "Combobox provides a dropdown that filters options as the user types, ideal for long option lists.",
+      "composition": "<Combobox.Root items={options}>\n  <Combobox.Input placeholder=\"Choose...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No options.</Combobox.Empty>\n    {(option) => (\n      <Combobox.Item key={option.id} value={option}>\n        <Combobox.ItemIndicator />\n        {option.label}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    },
+    {
+      "intent": "multi-select-picker",
+      "signals": [
+        "multi-select",
+        "multi select dropdown",
+        "pick multiple",
+        "select multiple",
+        "multi picker",
+        "multiple selection"
+      ],
+      "reasoning": "Combobox with multiple mode allows selecting several items from a list with checkmark indicators.",
+      "composition": "<Combobox.Root items={items} multiple>\n  <Combobox.Input placeholder=\"Select items...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results.</Combobox.Empty>\n    {(item) => (\n      <Combobox.Item key={item.id} value={item}>\n        <Combobox.ItemIndicator />\n        {item.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    }
+  ],
+
+  "avoidWhen": [
+    {
+      "scenario": "Free-form text input with suggestions",
+      "reasoning": "Use Autocomplete instead. Combobox requires selection from a predefined list — the value is a selection, not free text.",
+      "alternative": "Autocomplete"
+    },
+    {
+      "scenario": "Short fixed list of options (5 or fewer)",
+      "reasoning": "Use Select for small lists where search is unnecessary overhead. Combobox adds complexity with its filter input.",
+      "alternative": "Select"
+    },
+    {
+      "scenario": "Simple text input without suggestions",
+      "reasoning": "Use Input directly. Combobox is for selecting from options, not free-form text entry.",
+      "alternative": "Input"
+    }
+  ],
+
+  "examples": [
+    {
+      "name": "basic",
+      "description": "Basic searchable select",
+      "code": "const fruits = [\n  { id: 1, value: 'Apple' },\n  { id: 2, value: 'Banana' },\n  { id: 3, value: 'Cherry' },\n];\n\n<Combobox.Root items={fruits}>\n  <Combobox.Input placeholder=\"Select a fruit...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No fruits found.</Combobox.Empty>\n    {(fruit) => (\n      <Combobox.Item key={fruit.id} value={fruit}>\n        <Combobox.ItemIndicator />\n        {fruit.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    },
+    {
+      "name": "multi-select",
+      "description": "Multiple selection with checkmark indicators",
+      "code": "<Combobox.Root items={fruits} multiple>\n  <Combobox.Input placeholder=\"Select fruits...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results.</Combobox.Empty>\n    {(fruit) => (\n      <Combobox.Item key={fruit.id} value={fruit}>\n        <Combobox.ItemIndicator />\n        {fruit.value}\n      </Combobox.Item>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    },
+    {
+      "name": "grouped",
+      "description": "Items organized under labeled groups",
+      "code": "<Combobox.Root items={groupedItems}>\n  <Combobox.Input placeholder=\"Select produce...\" />\n  <Combobox.Popup>\n    <Combobox.Empty>No results.</Combobox.Empty>\n    {(group) => (\n      <Combobox.Group key={group.label}>\n        <Combobox.GroupLabel>{group.label}</Combobox.GroupLabel>\n        {group.items.map((item) => (\n          <Combobox.Item key={item.id} value={item}>\n            <Combobox.ItemIndicator />\n            {item.value}\n          </Combobox.Item>\n        ))}\n      </Combobox.Group>\n    )}\n  </Combobox.Popup>\n</Combobox.Root>"
+    }
+  ]
+}
