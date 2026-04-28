@@ -18,6 +18,9 @@ vi.mock('@stylexjs/stylex', () => {
 vi.mock('@basex-ui/tokens', () => ({
   tokens: new Proxy({}, { get: (_, p) => `var(--${String(p)})` }),
 }));
+vi.mock('lucide-react', () => ({
+  X: () => null,
+}));
 
 const PARTS = [
   'Provider',
@@ -52,6 +55,9 @@ describe('Toast', () => {
     const el = createElement(Toast.Provider, { timeout: 5000 });
     expect(isValidElement(el)).toBe(true);
   });
+
+  // interaction: Toast.Close requires full Portal/Viewport/Root stack which doesn't
+  // render in jsdom — covered by browser testing
 
   it('renders Provider without a11y violations', async () => {
     const { container } = render(<Toast.Provider timeout={5000} />);

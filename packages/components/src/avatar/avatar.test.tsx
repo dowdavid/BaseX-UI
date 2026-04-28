@@ -50,6 +50,8 @@ describe('Avatar', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  // interaction: Avatar has no user interaction — display-only component
+
   it('renders without a11y violations', async () => {
     const { container } = render(
       <Avatar.Root>

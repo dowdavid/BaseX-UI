@@ -43,6 +43,8 @@ describe('Autocomplete', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  // interaction: Autocomplete popup is portal-based — covered by browser testing
+
   it('renders Root without a11y violations', async () => {
     const { container } = render(<Autocomplete.Root items={['a', 'b']} />);
     // axe: portal content not inspectable in jsdom — covered by browser axe run

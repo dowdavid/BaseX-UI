@@ -1,6 +1,7 @@
 import { vi, describe, it, expect } from 'vitest';
 import { createElement, isValidElement } from 'react';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { Accordion } from './index';
 
@@ -70,6 +71,24 @@ describe('Accordion', () => {
       children: createElement(Accordion.Item, { value: 'a' }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click trigger opens panel (aria-expanded)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <Accordion.Root>
+        <Accordion.Item value="item-1">
+          <Accordion.Header>
+            <Accordion.Trigger>Question</Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Panel>Answer</Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    );
+    const trigger = getByRole('button', { name: 'Question' });
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await user.click(trigger);
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
   });
 
   it('renders without a11y violations', async () => {

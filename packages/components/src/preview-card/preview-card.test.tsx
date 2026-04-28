@@ -46,6 +46,8 @@ describe('PreviewCard', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  // interaction: hover/portal — covered by browser testing
+
   it('renders Root without a11y violations', async () => {
     const { container } = render(<PreviewCard.Root open={false} onOpenChange={() => {}} />);
     // axe: portal content not inspectable in jsdom — covered by browser axe run

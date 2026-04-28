@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Slider } from './index';
@@ -48,6 +49,25 @@ describe('Slider', () => {
       disabled: false,
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('ArrowRight key on thumb increases value (aria-valuenow)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <Slider.Root min={0} max={100} defaultValue={50}>
+        <Slider.Control>
+          <Slider.Track>
+            <Slider.Indicator />
+            <Slider.Thumb aria-label="Volume" />
+          </Slider.Track>
+        </Slider.Control>
+      </Slider.Root>,
+    );
+    const thumb = getByRole('slider', { name: 'Volume' });
+    expect(thumb).toHaveAttribute('aria-valuenow', '50');
+    thumb.focus();
+    await user.keyboard('{ArrowRight}');
+    expect(Number(thumb.getAttribute('aria-valuenow'))).toBeGreaterThan(50);
   });
 
   it('renders without a11y violations', async () => {

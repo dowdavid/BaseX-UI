@@ -49,6 +49,8 @@ describe('Progress', () => {
     expect(isValidElement(createElement(Progress.Root, { value: null }))).toBe(true);
   });
 
+  // interaction: Progress has no user interaction — display-only component
+
   it('renders without a11y violations', async () => {
     const { container } = render(
       <Progress.Root value={50} max={100} aria-label="Upload progress">

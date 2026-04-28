@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { NumberField } from './index';
@@ -60,6 +61,23 @@ describe('NumberField', () => {
       disabled: false,
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click increment button increases value', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <NumberField.Root defaultValue={5} min={0} max={100}>
+        <NumberField.Group>
+          <NumberField.Decrement aria-label="Decrease" />
+          <NumberField.Input aria-label="Quantity" />
+          <NumberField.Increment aria-label="Increase" />
+        </NumberField.Group>
+      </NumberField.Root>,
+    );
+    const input = getByRole('textbox', { name: 'Quantity' });
+    expect(Number((input as HTMLInputElement).value)).toBe(5);
+    await user.click(getByRole('button', { name: 'Increase' }));
+    expect(Number((input as HTMLInputElement).value)).toBe(6);
   });
 
   it('renders without a11y violations', async () => {

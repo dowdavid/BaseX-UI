@@ -1,6 +1,7 @@
 import { vi, describe, it, expect } from 'vitest';
 import { createElement, isValidElement } from 'react';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { ToggleGroup } from './index';
 
@@ -64,6 +65,28 @@ describe('ToggleGroup', () => {
       children: createElement(ToggleGroup.Item, { value: 'a', children: 'A' }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click item sets pressed; single mode — only one pressed at a time', async () => {
+    const user = userEvent.setup();
+    const { getAllByRole } = render(
+      <ToggleGroup.Root aria-label="Text formatting">
+        <ToggleGroup.Item value="bold" aria-label="Bold">
+          B
+        </ToggleGroup.Item>
+        <ToggleGroup.Item value="italic" aria-label="Italic">
+          I
+        </ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    );
+    const buttons = getAllByRole('button');
+    // Click Bold
+    await user.click(buttons[0]);
+    expect(buttons[0]).toHaveAttribute('aria-pressed', 'true');
+    // Click Italic — Bold should be deselected in single mode
+    await user.click(buttons[1]);
+    expect(buttons[1]).toHaveAttribute('aria-pressed', 'true');
+    expect(buttons[0]).toHaveAttribute('aria-pressed', 'false');
   });
 
   it('renders without a11y violations', async () => {

@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Input } from './index';
@@ -41,6 +42,20 @@ describe('Input', () => {
       const el = createElement(Input, { size, disabled: false, value: '', onChange: () => {} });
       expect(isValidElement(el)).toBe(true);
     }
+  });
+
+  it('typing updates value and focus/blur events fire', async () => {
+    const user = userEvent.setup();
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+    const { getByRole } = render(<Input aria-label="Search" onFocus={onFocus} onBlur={onBlur} />);
+    const input = getByRole('textbox', { name: 'Search' });
+    await user.click(input);
+    expect(onFocus).toHaveBeenCalledOnce();
+    await user.type(input, 'hello');
+    expect(input).toHaveValue('hello');
+    await user.tab();
+    expect(onBlur).toHaveBeenCalled();
   });
 
   it('renders without a11y violations', async () => {
