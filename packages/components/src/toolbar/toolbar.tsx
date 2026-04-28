@@ -68,9 +68,6 @@ const styles = stylex.create({
     userSelect: 'none',
     whiteSpace: 'nowrap',
     flexShrink: 0,
-    transitionProperty: 'background-color, color',
-    transitionDuration: tokens.motionDurationFast,
-    transitionTimingFunction: tokens.motionEaseOut,
   },
 
   // Pressed (toggle on) — filled block, identical contract to Tabs' active
