@@ -45,6 +45,8 @@ describe('Meter', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  // interaction: Meter has no user interaction — display-only component
+
   it('renders without a11y violations', async () => {
     const { container } = render(
       <Meter.Root value={50} min={0} max={100} aria-label="Storage used">

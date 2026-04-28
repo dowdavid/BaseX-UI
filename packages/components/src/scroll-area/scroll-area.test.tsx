@@ -57,6 +57,8 @@ describe('ScrollArea', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  // interaction: scroll events are not reliably testable in jsdom — covered by browser testing
+
   it('renders without a11y violations', async () => {
     const { container } = render(
       <ScrollArea.Root>

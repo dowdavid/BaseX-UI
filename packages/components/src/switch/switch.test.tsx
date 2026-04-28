@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Switch } from './index';
@@ -45,6 +46,19 @@ describe('Switch', () => {
       children: createElement(Switch.Thumb),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click toggles checked state (aria-checked)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <Switch.Root aria-label="Enable notifications">
+        <Switch.Thumb />
+      </Switch.Root>,
+    );
+    const switchEl = getByRole('switch', { name: 'Enable notifications' });
+    expect(switchEl).toHaveAttribute('aria-checked', 'false');
+    await user.click(switchEl);
+    expect(switchEl).toHaveAttribute('aria-checked', 'true');
   });
 
   it('renders without a11y violations', async () => {

@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Form } from './index';
@@ -39,6 +40,18 @@ describe('Form', () => {
   it('accepts errors prop for server validation', () => {
     const el = createElement(Form, { errors: { email: 'Required' } });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('submit button triggers onSubmit', async () => {
+    const user = userEvent.setup();
+    const onSubmit = vi.fn((e: React.FormEvent) => e.preventDefault());
+    const { getByRole } = render(
+      <Form onSubmit={onSubmit}>
+        <button type="submit">Send</button>
+      </Form>,
+    );
+    await user.click(getByRole('button', { name: 'Send' }));
+    expect(onSubmit).toHaveBeenCalledOnce();
   });
 
   it('renders without a11y violations', async () => {

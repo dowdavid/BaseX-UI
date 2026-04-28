@@ -42,6 +42,17 @@ describe('Fieldset', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  it('disabled fieldset root carries data-disabled attribute', () => {
+    const { container } = render(
+      <Fieldset.Root disabled>
+        <Fieldset.Legend>Contact</Fieldset.Legend>
+      </Fieldset.Root>,
+    );
+    // Base UI exposes disabled state via data-disabled on the root element
+    const fieldset = container.firstChild as HTMLElement;
+    expect(fieldset).toHaveAttribute('data-disabled');
+  });
+
   it('renders without a11y violations', async () => {
     const { container } = render(
       <Fieldset.Root>

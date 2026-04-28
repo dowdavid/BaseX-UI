@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Toolbar } from './index';
@@ -49,6 +50,22 @@ describe('Toolbar', () => {
   it('renders Root with orientation and disabled props', () => {
     const el = createElement(Toolbar.Root, { orientation: 'horizontal', disabled: false });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('keyboard arrow moves focus between toolbar buttons (roving tabindex)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <Toolbar.Root aria-label="Text editing tools">
+        <Toolbar.Button>Bold</Toolbar.Button>
+        <Toolbar.Button>Italic</Toolbar.Button>
+      </Toolbar.Root>,
+    );
+    const boldBtn = getByRole('button', { name: 'Bold' });
+    const italicBtn = getByRole('button', { name: 'Italic' });
+    boldBtn.focus();
+    expect(boldBtn).toHaveFocus();
+    await user.keyboard('{ArrowRight}');
+    expect(italicBtn).toHaveFocus();
   });
 
   it('renders without a11y violations', async () => {

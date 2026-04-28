@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Tabs } from './index';
@@ -51,6 +52,27 @@ describe('Tabs', () => {
       ],
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click tab makes its panel visible (aria-selected)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <Tabs.Root defaultValue="tab1">
+        <Tabs.List>
+          <Tabs.Tab value="tab1">Tab 1</Tabs.Tab>
+          <Tabs.Tab value="tab2">Tab 2</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="tab1">Panel 1</Tabs.Panel>
+        <Tabs.Panel value="tab2">Panel 2</Tabs.Panel>
+      </Tabs.Root>,
+    );
+    const tab1 = getByRole('tab', { name: 'Tab 1' });
+    const tab2 = getByRole('tab', { name: 'Tab 2' });
+    expect(tab1).toHaveAttribute('aria-selected', 'true');
+    expect(tab2).toHaveAttribute('aria-selected', 'false');
+    await user.click(tab2);
+    expect(tab2).toHaveAttribute('aria-selected', 'true');
+    expect(tab1).toHaveAttribute('aria-selected', 'false');
   });
 
   it('renders without a11y violations', async () => {

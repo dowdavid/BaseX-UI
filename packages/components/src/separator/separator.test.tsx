@@ -54,6 +54,8 @@ describe('Separator', () => {
     expect(html).not.toContain('aria-orientation');
   });
 
+  // interaction: Separator has no user interaction — display-only component
+
   it('renders without a11y violations', async () => {
     const { container } = render(<Separator.Root />);
     const results = await axe(container);

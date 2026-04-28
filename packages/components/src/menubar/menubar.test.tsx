@@ -32,6 +32,8 @@ describe('Menubar', () => {
     expect(isValidElement(createElement(Menubar))).toBe(true);
   });
 
+  // interaction: portal — covered by browser testing
+
   it('renders without a11y violations', async () => {
     const { container } = render(<Menubar aria-label="Navigation" />);
     const results = await axe(container);

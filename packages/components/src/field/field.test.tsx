@@ -1,6 +1,7 @@
 import { vi, describe, it, expect } from 'vitest';
 import { createElement, isValidElement } from 'react';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { Field } from './index';
 
@@ -40,6 +41,21 @@ describe('Field', () => {
   it('renders Root with name and disabled', () => {
     const el = createElement(Field.Root, { name: 'email', disabled: false });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('label is associated with control via htmlFor/id (aria-labelledby)', async () => {
+    const user = userEvent.setup();
+    const { getByLabelText } = render(
+      <Field.Root name="email">
+        <Field.Label>Email</Field.Label>
+        <Field.Control type="email" />
+      </Field.Root>,
+    );
+    // getByLabelText verifies the label<->input association
+    const input = getByLabelText('Email');
+    expect(input).toBeInTheDocument();
+    await user.click(input);
+    expect(input).toHaveFocus();
   });
 
   it('renders without a11y violations', async () => {

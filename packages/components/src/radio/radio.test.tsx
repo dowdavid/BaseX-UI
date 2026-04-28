@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Radio } from './index';
@@ -52,6 +53,24 @@ describe('Radio', () => {
       }),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click radio item becomes checked (aria-checked)', async () => {
+    const user = userEvent.setup();
+    const { getAllByRole } = render(
+      <Radio.Group aria-label="Color">
+        <Radio.Root value="red" aria-label="Red">
+          <Radio.Indicator />
+        </Radio.Root>
+        <Radio.Root value="blue" aria-label="Blue">
+          <Radio.Indicator />
+        </Radio.Root>
+      </Radio.Group>,
+    );
+    const radios = getAllByRole('radio');
+    expect(radios[0]).toHaveAttribute('aria-checked', 'false');
+    await user.click(radios[0]);
+    expect(radios[0]).toHaveAttribute('aria-checked', 'true');
   });
 
   it('renders without a11y violations', async () => {

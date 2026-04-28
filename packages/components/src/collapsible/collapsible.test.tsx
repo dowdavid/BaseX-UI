@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Collapsible } from './index';
@@ -21,6 +22,9 @@ vi.mock('@basex-ui/tokens', () => ({
 vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
+}));
+vi.mock('lucide-react', () => ({
+  ChevronDown: () => null,
 }));
 
 describe('Collapsible', () => {
@@ -50,6 +54,20 @@ describe('Collapsible', () => {
       ],
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click trigger opens the panel (aria-expanded)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <Collapsible.Root>
+        <Collapsible.Trigger>Toggle</Collapsible.Trigger>
+        <Collapsible.Panel>Content</Collapsible.Panel>
+      </Collapsible.Root>,
+    );
+    const trigger = getByRole('button', { name: 'Toggle' });
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await user.click(trigger);
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
   });
 
   it('renders without a11y violations', async () => {

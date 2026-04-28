@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Toggle } from './index';
@@ -43,6 +44,15 @@ describe('Toggle', () => {
       disabled: false,
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click toggles pressed state (aria-pressed)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(<Toggle.Root aria-label="Bold">B</Toggle.Root>);
+    const button = getByRole('button', { name: 'Bold' });
+    expect(button).toHaveAttribute('aria-pressed', 'false');
+    await user.click(button);
+    expect(button).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('renders without a11y violations', async () => {

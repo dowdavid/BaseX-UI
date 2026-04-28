@@ -57,6 +57,8 @@ describe('NavigationMenu', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  // interaction: portal — covered by browser testing
+
   it('renders Root without a11y violations', async () => {
     const { container } = render(<NavigationMenu.Root aria-label="Main navigation" />);
     // axe: portal content not inspectable in jsdom — covered by browser axe run

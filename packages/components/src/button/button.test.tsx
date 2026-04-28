@@ -1,6 +1,7 @@
 import { vi, describe, it, expect } from 'vitest';
 import { createElement, isValidElement } from 'react';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { Button } from './index';
 
@@ -52,6 +53,28 @@ describe('Button', () => {
   it('accepts disabled prop', () => {
     const el = createElement(Button, { disabled: true, children: 'x' });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click calls onClick handler', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const { getByRole } = render(<Button onClick={onClick}>Click me</Button>);
+    await user.click(getByRole('button', { name: 'Click me' }));
+    expect(onClick).toHaveBeenCalledOnce();
+  });
+
+  it('disabled button does not call onClick', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const { getAllByRole } = render(
+      <Button disabled onClick={onClick}>
+        Disabled
+      </Button>,
+    );
+    // Base UI may render multiple button elements; click the first one
+    const buttons = getAllByRole('button', { name: 'Disabled' });
+    await user.click(buttons[0]);
+    expect(onClick).not.toHaveBeenCalled();
   });
 
   it('renders without a11y violations', async () => {

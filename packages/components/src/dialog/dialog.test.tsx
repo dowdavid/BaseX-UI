@@ -58,6 +58,8 @@ describe('Dialog', () => {
     expect(isValidElement(el)).toBe(true);
   });
 
+  // interaction: portal — covered by browser testing
+
   it('renders Root without a11y violations', async () => {
     const { container } = render(<Dialog.Root open={false} onOpenChange={() => {}} />);
     // axe: portal content not inspectable in jsdom — covered by browser axe run

@@ -1,5 +1,6 @@
 import { vi, describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { createElement, isValidElement } from 'react';
 import { Checkbox } from './index';
@@ -21,6 +22,10 @@ vi.mock('@basex-ui/tokens', () => ({
 vi.mock('@basex-ui/styles', () => ({
   focusRing: {},
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
+}));
+vi.mock('lucide-react', () => ({
+  Check: () => null,
+  Minus: () => null,
 }));
 
 describe('Checkbox', () => {
@@ -46,6 +51,19 @@ describe('Checkbox', () => {
       children: createElement(Checkbox.Indicator),
     });
     expect(isValidElement(el)).toBe(true);
+  });
+
+  it('click toggles checked state (aria-checked)', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(
+      <Checkbox.Root aria-label="Accept terms">
+        <Checkbox.Indicator />
+      </Checkbox.Root>,
+    );
+    const checkbox = getByRole('checkbox', { name: 'Accept terms' });
+    expect(checkbox).toHaveAttribute('aria-checked', 'false');
+    await user.click(checkbox);
+    expect(checkbox).toHaveAttribute('aria-checked', 'true');
   });
 
   it('renders without a11y violations', async () => {
