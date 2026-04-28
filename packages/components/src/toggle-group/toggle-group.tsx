@@ -86,7 +86,7 @@ const styles = stylex.create({
   },
 
   itemDisabled: {
-    opacity: 0.64,
+    color: tokens.colorTextMuted,
     pointerEvents: 'none',
     cursor: 'not-allowed',
   },

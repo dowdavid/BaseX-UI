@@ -26,7 +26,7 @@ const styles = stylex.create({
   },
 
   disabled: {
-    opacity: 0.64,
+    color: tokens.colorTextMuted,
     pointerEvents: 'none',
   },
 
