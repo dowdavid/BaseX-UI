@@ -28,6 +28,9 @@ const styles = stylex.create({
   popup: {
     position: 'relative',
     backgroundColor: tokens.colorSurface,
+    borderWidth: tokens.borderWidthDefault,
+    borderStyle: 'solid',
+    borderColor: tokens.colorPopoverBorder,
     borderRadius: tokens.radiusLg,
     boxShadow: tokens.shadowLg,
     maxWidth: '28rem',
