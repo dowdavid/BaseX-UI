@@ -65,6 +65,9 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: tokens.colorSurface,
+    borderWidth: tokens.borderWidthDefault,
+    borderStyle: 'solid',
+    borderColor: tokens.colorPopoverBorder,
     boxShadow: tokens.shadowLg,
   },
 
