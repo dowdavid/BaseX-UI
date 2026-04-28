@@ -334,7 +334,7 @@ const styles = stylex.create({
   },
 
   itemDisabled: {
-    opacity: 0.5,
+    color: tokens.colorTextMuted,
     pointerEvents: 'none',
     cursor: 'default',
   },
@@ -426,7 +426,7 @@ const styles = stylex.create({
   },
 
   disabled: {
-    opacity: 0.64,
+    color: tokens.colorTextMuted,
     pointerEvents: 'none',
     cursor: 'default',
   },

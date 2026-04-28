@@ -32,7 +32,8 @@ const styles = stylex.create({
   },
 
   disabled: {
-    opacity: 0.64,
+    color: tokens.colorTextMuted,
+    borderColor: tokens.colorBorderMuted,
     pointerEvents: 'none',
     cursor: 'default',
   },

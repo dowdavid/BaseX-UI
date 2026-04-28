@@ -142,7 +142,9 @@ const styles = stylex.create({
 
   // --- Disabled state (applied conditionally via Base UI state) ---
   disabled: {
-    opacity: 0.64,
+    color: tokens.colorTextMuted,
+    borderColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorMuted,
     pointerEvents: 'none',
     cursor: 'default',
   },

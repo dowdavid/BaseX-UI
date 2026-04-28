@@ -33,7 +33,7 @@ const styles = stylex.create({
   },
 
   disabled: {
-    opacity: 0.64,
+    color: tokens.colorTextMuted,
     pointerEvents: 'none',
     cursor: 'default',
   },
@@ -91,9 +91,9 @@ const styles = stylex.create({
     },
   },
 
-  // Disabled item — opacity matches Button/Toggle (0.64).
+  // Disabled item — use muted color tokens per DESIGN.md disabled state rule.
   itemDisabled: {
-    opacity: 0.64,
+    color: tokens.colorTextMuted,
     cursor: 'not-allowed',
     pointerEvents: 'none',
   },

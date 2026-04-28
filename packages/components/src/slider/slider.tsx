@@ -153,7 +153,7 @@ const styles = stylex.create({
   thumbDestructive: {},
 
   thumbDisabled: {
-    opacity: 0.5,
+    backgroundColor: tokens.colorMuted,
     cursor: 'not-allowed',
   },
 });

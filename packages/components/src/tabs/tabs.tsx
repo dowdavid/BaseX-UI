@@ -101,7 +101,6 @@ const styles = stylex.create({
     color: tokens.colorTextMuted,
     backgroundColor: 'transparent',
     cursor: 'not-allowed',
-    opacity: 0.5,
   },
 
   panel: {
