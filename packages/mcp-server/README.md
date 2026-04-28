@@ -29,7 +29,7 @@ The server runs over stdio. No HTTP, no API keys.
 
 | Tool                    | Purpose                                          |
 | ----------------------- | ------------------------------------------------ |
-| `list_components`       | Browse all 35 components                         |
+| `list_components`       | Browse all 36 components                         |
 | `search_components`     | Fuzzy search by name/category/description        |
 | `get_component`         | Full manifest with parts, props, examples        |
 | `get_component_example` | Usage examples, optionally by variant            |

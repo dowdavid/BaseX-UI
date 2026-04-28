@@ -8,7 +8,7 @@ Initial public release.
 
 ### `@basex-ui/components`
 
-- 35 accessible React components built on [Base UI](https://base-ui.com) and styled with [StyleX](https://stylexjs.com): Accordion, AlertDialog, Autocomplete, Avatar, Button, Checkbox, CheckboxGroup, Collapsible, Combobox, Dialog, Drawer, Field, Fieldset, Form, Input, Menu, Menubar, Meter, NavigationMenu, NumberField, Popover, PreviewCard, Progress, Radio, ScrollArea, Select, Separator, Slider, Switch, Tabs, Toast, Toggle, ToggleGroup, Toolbar, Tooltip.
+- 36 accessible React components built on [Base UI](https://base-ui.com) and styled with [StyleX](https://stylexjs.com): Accordion, AlertDialog, Autocomplete, Avatar, Button, Checkbox, CheckboxGroup, Collapsible, Combobox, ContextMenu, Dialog, Drawer, Field, Fieldset, Form, Input, Menu, Menubar, Meter, NavigationMenu, NumberField, Popover, PreviewCard, Progress, Radio, ScrollArea, Select, Separator, Slider, Switch, Tabs, Toast, Toggle, ToggleGroup, Toolbar, Tooltip.
 - Compound component pattern across the library (e.g. `Dialog.Root`, `Dialog.Trigger`, `Dialog.Popup`).
 - `sx` prop on every component for StyleX overrides.
 - Subpath imports per component (`@basex-ui/components/button`).
