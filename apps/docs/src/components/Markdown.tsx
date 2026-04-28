@@ -162,15 +162,18 @@ function CodeBlock({ language, code }: { language?: string; code: string }) {
 
   useEffect(() => {
     let cancelled = false;
-    import('shiki').then(({ codeToHtml }) => {
-      codeToHtml(trimmed, {
-        lang: language || 'tsx',
-        theme: dark ? 'github-dark-default' : 'github-light-default',
-      })
-        .then((result) => {
-          if (!cancelled) setHtml(result);
-        })
-        .catch(() => {});
+    import('../lib/highlighter').then(({ getHighlighter, normalizeLang }) => {
+      getHighlighter().then((hl) => {
+        if (cancelled) return;
+        try {
+          setHtml(hl.codeToHtml(trimmed, {
+            lang: normalizeLang(language),
+            theme: dark ? 'github-dark-default' : 'github-light-default',
+          }));
+        } catch {
+          // unknown lang — leave plain text fallback
+        }
+      }).catch(() => {});
     });
     return () => {
       cancelled = true;
