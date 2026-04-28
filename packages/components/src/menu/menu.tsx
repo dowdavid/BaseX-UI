@@ -164,7 +164,6 @@ const styles = stylex.create({
     width: '16px',
     height: '16px',
     flexShrink: 0,
-    color: tokens.colorPrimary,
   },
 
   radioItem: {
@@ -183,7 +182,6 @@ const styles = stylex.create({
     width: '16px',
     height: '16px',
     flexShrink: 0,
-    color: tokens.colorPrimary,
   },
 
   backdrop: {

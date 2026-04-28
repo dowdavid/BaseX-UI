@@ -42,7 +42,7 @@ const styles = stylex.create({
 
   indicator: {
     height: '100%',
-    backgroundColor: tokens.colorPrimary,
+    backgroundColor: tokens.colorText,
     borderRadius: tokens.radiusFull,
     transitionProperty: 'width',
     transitionDuration: tokens.motionDurationNormal,

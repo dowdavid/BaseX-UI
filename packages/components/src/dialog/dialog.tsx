@@ -14,6 +14,10 @@ const styles = stylex.create({
     backgroundColor: tokens.colorOverlay,
   },
 
+  // Native overflow on the centered backdrop viewport — only triggers when the
+  // dialog popup itself is taller than the viewport, where the scrollbar lives
+  // on the page-level backdrop. ScrollArea here would wrap the entire fixed
+  // overlay and break the centered layout. Per DESIGN.md exception clause.
   viewport: {
     position: 'fixed',
     inset: 0,
@@ -82,6 +86,11 @@ const styles = stylex.create({
     marginTop: tokens.space1,
   },
 
+  // Native overflow on Dialog.Panel — the Panel relies on its own scroll
+  // event + ResizeObserver to set data-scroll-top/-bottom attributes for
+  // sticky shadow effects. Routing through ScrollArea would put the scroller
+  // on the inner Viewport and break that wiring. Tracked for follow-up
+  // (refactor onto ScrollArea + viewport ref). Per DESIGN.md exception clause.
   panel: {
     flex: 1,
     minHeight: 0,
@@ -207,7 +216,7 @@ const Popup = forwardRef<HTMLDivElement, DialogPopupProps>(
       >
         {showCloseButton && (
           <BaseDialog.Close {...stylex.props(styles.closeButton, focusRing)} aria-label="Close">
-            <X size={16} />
+            <X size={16} aria-hidden="true" />
           </BaseDialog.Close>
         )}
         {children}

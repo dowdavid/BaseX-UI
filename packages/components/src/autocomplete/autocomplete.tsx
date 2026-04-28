@@ -145,6 +145,8 @@ const styles = stylex.create({
     padding: 0,
   },
 
+  // Native overflow on Autocomplete.List — Base UI's listbox manages its own
+  // focus + arrow-key scroll. Per DESIGN.md scroll exception clause.
   list: {
     maxHeight: '10rem',
     overflowY: 'auto',
@@ -367,7 +369,7 @@ const Input = forwardRef<HTMLInputElement, AutocompleteInputProps>(
           }
         />
         <BaseAutocomplete.Clear {...stylex.props(styles.clearButton, styles[clearKey], focusRing)}>
-          <X size={iconSize} />
+          <X size={iconSize} aria-hidden="true" />
         </BaseAutocomplete.Clear>
       </div>
     );

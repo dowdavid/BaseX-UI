@@ -281,6 +281,9 @@ const styles = stylex.create({
     padding: 0,
   },
 
+  // Native overflow on Combobox.List — Base UI's listbox manages its own
+  // focus + arrow-key scroll. Wrapping in ScrollArea would break that.
+  // Per DESIGN.md scroll exception clause.
   list: {
     maxHeight: '10rem',
     overflowY: 'auto',
@@ -344,7 +347,6 @@ const styles = stylex.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
-    color: tokens.colorPrimary,
   },
 
   itemIndicatorHidden: {
@@ -679,7 +681,7 @@ const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(({ sx, ...props }
         />
         {selectedValues.length === 0 && (
           <span {...stylex.props(styles.endIcon, styles[multiEndKey])}>
-            <ChevronDown size={chevronIconSize[size]} />
+            <ChevronDown size={chevronIconSize[size]} aria-hidden="true" />
           </span>
         )}
       </div>
@@ -709,11 +711,11 @@ const Input = forwardRef<HTMLInputElement, ComboboxInputProps>(({ sx, ...props }
       />
       {hasValue ? (
         <BaseCombobox.Clear {...stylex.props(styles.clearButton, styles[endKey], focusRing)}>
-          <X size={clearSz} />
+          <X size={clearSz} aria-hidden="true" />
         </BaseCombobox.Clear>
       ) : (
         <span {...stylex.props(styles.endIcon, styles[endKey])}>
-          <ChevronDown size={chevronSz} />
+          <ChevronDown size={chevronSz} aria-hidden="true" />
         </span>
       )}
     </div>
@@ -791,7 +793,7 @@ const ItemIndicator = forwardRef<HTMLSpanElement, ComboboxItemIndicatorProps>(
           ).className ?? ''
         }
       >
-        {children ?? <Check size={iconSz} />}
+        {children ?? <Check size={iconSz} aria-hidden="true" />}
       </BaseCombobox.ItemIndicator>
     );
   },
@@ -809,7 +811,7 @@ const Clear = forwardRef<HTMLButtonElement, ComboboxClearProps>(
         {...props}
         {...stylex.props(styles.clearButton, styles[clearKey], sx)}
       >
-        {children ?? <X size={iconSz} />}
+        {children ?? <X size={iconSz} aria-hidden="true" />}
       </BaseCombobox.Clear>
     );
   },
