@@ -30,7 +30,7 @@ const styles = stylex.create({
     width: '100%',
     height: '100%',
     backgroundColor: tokens.colorMuted,
-    color: tokens.colorMutedForeground,
+    color: tokens.colorText,
     fontFamily: tokens.fontFamilySans,
     fontSize: tokens.fontSizeSm,
     fontWeight: tokens.fontWeightMedium,
