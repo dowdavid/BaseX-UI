@@ -22,7 +22,7 @@ const styles = stylex.create({
     backgroundColor: 'transparent',
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
+    borderColor: tokens.colorBorderStrong,
     cursor: 'pointer',
     userSelect: 'none',
     textAlign: 'start',
@@ -92,7 +92,7 @@ const styles = stylex.create({
     backgroundColor: tokens.colorSurface,
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: tokens.colorPopoverBorder,
     borderRadius: tokens.radiusMd,
     boxShadow: tokens.shadowMd,
     overflow: 'hidden',
@@ -227,7 +227,7 @@ const styles = stylex.create({
 
   separator: {
     height: '1px',
-    backgroundColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorBorder,
     marginBlock: tokens.space1,
     marginInline: tokens.space1,
   },

@@ -23,7 +23,7 @@ const styles = stylex.create({
     backgroundColor: tokens.colorSurfaceRaised,
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: tokens.colorPopoverBorder,
     borderRadius: tokens.radiusLg,
     padding: tokens.space3,
     boxShadow: tokens.shadowLg,
@@ -38,7 +38,7 @@ const styles = stylex.create({
   arrow: {
     width: '12px',
     height: '8px',
-    backgroundColor: tokens.colorBorderMuted,
+    backgroundColor: tokens.colorPopoverBorder,
     clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
     position: 'relative',
     '::after': {

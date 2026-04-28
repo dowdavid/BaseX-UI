@@ -74,7 +74,7 @@ const styles = stylex.create({
     position: 'relative',
     width: '100%',
     height: '8px',
-    backgroundColor: tokens.colorMuted,
+    backgroundColor: tokens.colorTrack,
     borderRadius: tokens.radiusFull,
     overflow: 'visible',
     ':is([data-orientation="vertical"])': {

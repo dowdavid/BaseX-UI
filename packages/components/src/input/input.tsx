@@ -14,7 +14,7 @@ const styles = stylex.create({
     backgroundColor: 'transparent',
     borderWidth: tokens.borderWidthDefault,
     borderStyle: 'solid',
-    borderColor: tokens.colorBorder,
+    borderColor: tokens.colorBorderStrong,
     borderRadius: tokens.radiusMd,
     lineHeight: tokens.lineHeightNormal,
     '::placeholder': {

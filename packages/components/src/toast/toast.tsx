@@ -57,7 +57,7 @@ const styles = stylex.create({
     boxShadow: tokens.shadowLg,
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: tokens.colorBorderMuted,
+    borderColor: tokens.colorPopoverBorder,
     pointerEvents: 'auto',
     fontFamily: tokens.fontFamilySans,
     touchAction: 'none',
