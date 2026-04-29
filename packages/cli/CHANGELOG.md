@@ -1,5 +1,16 @@
 # @basex-ui/cli
 
+## 0.3.0
+
+### Minor Changes
+
+- Interaction tests for all 36 components, CLI expansion to full component set, Shiki perf optimization, a11y contrast pass, and code quality cleanup.
+
+### Patch Changes
+
+- Updated dependencies
+  - @basex-ui/tokens@0.3.0
+
 ## 0.2.1
 
 ### Patch Changes

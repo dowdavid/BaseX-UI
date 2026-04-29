@@ -32,7 +32,10 @@ export async function runList() {
   let templateDirs: string[] = [];
   try {
     const entries = await readdir(templatesDir, { withFileTypes: true });
-    templateDirs = entries.filter((e) => e.isDirectory()).map((e) => e.name).sort();
+    templateDirs = entries
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name)
+      .sort();
   } catch {
     p.log.error('Templates directory not found. Run `pnpm build` in the CLI package first.');
     p.outro('');
@@ -47,7 +50,8 @@ export async function runList() {
         const raw = await readFile(join(templatesDir, slug, 'manifest.json'), 'utf8');
         const manifest = JSON.parse(raw) as { name?: string; description?: string };
         if (manifest.name) name = manifest.name;
-        if (manifest.description) description = manifest.description.split('.')[0] ?? manifest.description;
+        if (manifest.description)
+          description = manifest.description.split('.')[0] ?? manifest.description;
       } catch {
         // fall back to slug
       }

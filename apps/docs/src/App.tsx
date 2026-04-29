@@ -228,7 +228,7 @@ export function App() {
       el.className = '';
       el.style.cssText = '';
     };
-  }, [dark]);
+  }, [theme]);
 
   return (
     <ThemeProvider value={dark}>

@@ -90,17 +90,21 @@ export function CodeToggle({ code }: CodeToggleProps) {
   useEffect(() => {
     let cancelled = false;
     import('../lib/highlighter').then(({ getHighlighter }) => {
-      getHighlighter().then((hl) => {
-        if (cancelled) return;
-        try {
-          setHtml(hl.codeToHtml(trimmed, {
-            lang: 'tsx',
-            theme: dark ? 'github-dark-default' : 'github-light-default',
-          }));
-        } catch {
-          // leave plain text fallback
-        }
-      }).catch(() => {});
+      getHighlighter()
+        .then((hl) => {
+          if (cancelled) return;
+          try {
+            setHtml(
+              hl.codeToHtml(trimmed, {
+                lang: 'tsx',
+                theme: dark ? 'github-dark-default' : 'github-light-default',
+              }),
+            );
+          } catch {
+            // leave plain text fallback
+          }
+        })
+        .catch(() => {});
     });
     return () => {
       cancelled = true;

@@ -1,6 +1,6 @@
 {
   "name": "@basex-ui/styles",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "type": "module",
   "license": "MIT",
   "description": "Theme definitions (light/dark) and utilities",

@@ -1,5 +1,11 @@
 # @basex-ui/intelligence
 
+## 0.3.0
+
+### Minor Changes
+
+- Interaction tests for all 36 components, CLI expansion to full component set, Shiki perf optimization, a11y contrast pass, and code quality cleanup.
+
 ## 0.2.1
 
 ### Patch Changes

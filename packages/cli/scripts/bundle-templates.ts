@@ -6,19 +6,19 @@
  * Triggered automatically by "prebuild" and "predev" npm scripts.
  */
 
-import { readdir, mkdir, copyFile, rm, stat } from "fs/promises";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { readdir, mkdir, copyFile, rm, stat } from 'fs/promises';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Resolve paths relative to packages/cli/
-const CLI_ROOT = join(__dirname, "..");
-const COMPONENTS_SRC = join(CLI_ROOT, "../../packages/components/src");
-const TEMPLATES_OUT = join(CLI_ROOT, "templates");
+const CLI_ROOT = join(__dirname, '..');
+const COMPONENTS_SRC = join(CLI_ROOT, '../../packages/components/src');
+const TEMPLATES_OUT = join(CLI_ROOT, 'templates');
 
 // Entries in packages/components/src/ that are not component directories
-const SKIP = new Set(["_template", "index.ts", "test-setup.ts"]);
+const SKIP = new Set(['_template', 'index.ts', 'test-setup.ts']);
 
 async function isDirectory(path: string): Promise<boolean> {
   try {
@@ -68,12 +68,7 @@ async function main() {
     await mkdir(destDir, { recursive: true });
 
     // Files to copy for each component
-    const filesToCopy = [
-      `${name}.tsx`,
-      "index.ts",
-      "manifest.json",
-      `${name}.md`,
-    ];
+    const filesToCopy = [`${name}.tsx`, 'index.ts', 'manifest.json', `${name}.md`];
 
     const copied: string[] = [];
     for (const file of filesToCopy) {
@@ -81,13 +76,13 @@ async function main() {
       if (didCopy) copied.push(file);
     }
 
-    console.log(`  ${name}: ${copied.join(", ")}`);
+    console.log(`  ${name}: ${copied.join(', ')}`);
   }
 
   console.log(`Done. Templates written to packages/cli/templates/`);
 }
 
 main().catch((err) => {
-  console.error("bundle-templates failed:", err);
+  console.error('bundle-templates failed:', err);
   process.exit(1);
 });
