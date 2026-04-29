@@ -5,6 +5,6 @@
     <path d="M20 28.3L40 16.7L60 28.3V51.7L40 63.3L20 51.7V28.3Z" stroke="#0a0a0a" stroke-width="3" fill="none"/>
     <path d="M40 16.7V63.3M20 28.3L60 51.7M60 28.3L20 51.7" stroke="#0a0a0a" stroke-width="3"/>
   </g>
-  <text x="600" y="360" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="48" fill="#e5e5e5" letter-spacing="2">Base-X UI</text>
-  <text x="600" y="405" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="400" font-size="22" fill="#a3a3a3">AI-first React component library</text>
+  <text x="600" y="360" text-anchor="middle" font-family="'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-weight="700" font-size="48" fill="#e5e5e5" letter-spacing="2">BASE-X UI</text>
+  <text x="600" y="405" text-anchor="middle" font-family="'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-weight="400" font-size="22" fill="#a3a3a3">AI-first React component library</text>
 </svg>
