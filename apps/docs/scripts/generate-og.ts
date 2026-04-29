@@ -68,13 +68,13 @@ const LOGO_RADIUS = 40;
 const LOGO_STROKE = 6;
 
 async function loadFonts() {
-  const geist = require.resolve('@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff');
+  const geist = require.resolve('@fontsource/geist-mono/files/geist-mono-latin-400-normal.woff');
   const geistBold =
-    require.resolve('@fontsource/geist-sans/files/geist-sans-latin-700-normal.woff');
+    require.resolve('@fontsource/geist-mono/files/geist-mono-latin-700-normal.woff');
   const [regular, bold] = await Promise.all([readFile(geist), readFile(geistBold)]);
   return [
-    { name: 'Geist', data: regular, weight: 400 as const, style: 'normal' as const },
-    { name: 'Geist', data: bold, weight: 700 as const, style: 'normal' as const },
+    { name: 'Geist Mono', data: regular, weight: 400 as const, style: 'normal' as const },
+    { name: 'Geist Mono', data: bold, weight: 700 as const, style: 'normal' as const },
   ];
 }
 
@@ -144,12 +144,12 @@ function Card(label: string) {
                 props: {
                   style: {
                     color: MUTED,
-                    fontFamily: 'Geist',
+                    fontFamily: 'Geist Mono',
                     fontSize: 28,
                     fontWeight: 400,
                     letterSpacing: 1,
                   },
-                  children: 'Base-X UI',
+                  children: 'BASE-X UI',
                 },
               },
             ],
@@ -166,7 +166,7 @@ function Card(label: string) {
                 props: {
                   style: {
                     color: MUTED,
-                    fontFamily: 'Geist',
+                    fontFamily: 'Geist Mono',
                     fontSize: 28,
                     fontWeight: 400,
                     letterSpacing: 2,
@@ -180,7 +180,7 @@ function Card(label: string) {
                 props: {
                   style: {
                     color: FG,
-                    fontFamily: 'Geist',
+                    fontFamily: 'Geist Mono',
                     fontSize: 128,
                     fontWeight: 700,
                     letterSpacing: -2,
